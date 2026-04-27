@@ -439,6 +439,93 @@
     .about-stats { grid-template-columns: 1fr 1fr; }
   }
 
+
+  /* PRODUCTS SECTION */
+  .product-card {
+    display: grid; grid-template-columns: 1fr 280px;
+    gap: 32px; align-items: start;
+    background: var(--bg2); border-radius: 20px;
+    padding: 36px; text-decoration: none; color: var(--text);
+    margin-bottom: 12px;
+    transition: transform 0.3s cubic-bezier(.25,.46,.45,.94), box-shadow 0.3s;
+    border: 1px solid var(--border);
+  }
+  .product-card:hover {
+    transform: scale(1.005);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+  }
+  .product-card-soon {
+    grid-template-columns: 1fr;
+    opacity: 0.45; pointer-events: none;
+    border-style: dashed;
+  }
+  .product-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+    background: #1a1917; color: #fff;
+    padding: 4px 12px; border-radius: 100px; margin-bottom: 14px;
+  }
+  .product-badge-soon {
+    background: var(--tag-bg); color: var(--text-muted);
+  }
+  .product-title {
+    font-size: clamp(20px, 3vw, 26px); font-weight: 700;
+    letter-spacing: -0.03em; margin-bottom: 10px; line-height: 1.2;
+  }
+  .product-desc {
+    font-size: 14px; color: var(--text-muted);
+    line-height: 1.7; margin-bottom: 20px; max-width: 480px;
+  }
+  .product-features {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;
+  }
+  .product-feature {
+    font-size: 12px; font-weight: 600; color: #16a34a;
+    background: #f0fdf4; border: 1px solid #bbf7d0;
+    padding: 4px 12px; border-radius: 100px;
+  }
+  .product-price-row {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .product-price-old {
+    font-size: 16px; color: var(--text-light);
+    text-decoration: line-through;
+  }
+  .product-price-new {
+    font-size: 28px; font-weight: 700;
+    letter-spacing: -0.03em; color: var(--text);
+  }
+  .product-cta-inline {
+    font-size: 13px; font-weight: 700;
+    color: var(--accent); margin-left: 8px;
+  }
+  .product-modules {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 20px;
+  }
+  .product-module-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .product-module-grid {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .product-module-grid span {
+    font-size: 12px; color: var(--text);
+    padding: 6px 10px; background: var(--bg2);
+    border-radius: 8px; font-weight: 500;
+  }
+  .product-module-star {
+    background: #fffbf0 !important;
+    color: #d97706 !important; font-weight: 700 !important;
+  }
+
+  @media (max-width: 768px) {
+    .product-card { grid-template-columns: 1fr; }
+    .product-card-right { display: none; }
+  }
+
   footer {
     padding: 40px 24px; text-align: center;
     font-size: 13px; color: var(--text-light); letter-spacing: -0.01em;
@@ -562,6 +649,57 @@
       <div class="card-footer"><span class="card-soon-label">Скоро</span></div>
     </div>
   </div>
+</section>
+
+
+<div class="divider"></div>
+
+<!-- PRODUCTS -->
+<section class="section" id="products">
+  <div class="section-eyebrow">Продукты</div>
+  <div class="section-title">Авторские методы и системы</div>
+
+  <a href="./arkhitektor/" class="product-card">
+    <div class="product-card-left">
+      <div class="product-badge">⭐ Флагман</div>
+      <div class="product-title">Архитектор смыслов</div>
+      <div class="product-desc">Оцифрованный метод Анастасии Лушниковой: вытащи из своего опыта смыслы-детонаторы, которые заставляют клиентов писать «куда платить?». Пошаговая система из 11 разделов.</div>
+      <div class="product-features">
+        <span class="product-feature">✓ 15 минут на запуск</span>
+        <span class="product-feature">✓ Любая ниша</span>
+        <span class="product-feature">✓ Работает с бесплатным ИИ</span>
+        <span class="product-feature">✓ Гарантия возврата</span>
+      </div>
+      <div class="product-price-row">
+        <span class="product-price-old">2 900 ₽</span>
+        <span class="product-price-new">490 ₽</span>
+        <span class="product-cta-inline">Узнать подробнее →</span>
+      </div>
+    </div>
+    <div class="product-card-right">
+      <div class="product-modules">
+        <div class="product-module-label">11 разделов внутри</div>
+        <div class="product-module-grid">
+          <span>01 Сегмент</span><span>02 Вопросы 3 ночи</span>
+          <span>03 Боли</span><span>04 Страхи</span>
+          <span>05 Ошибки</span><span>06 Возражения</span>
+          <span>07 Мечты</span><span>08 Сарказм</span>
+          <span>09 Магниты</span><span>10 Ценности</span>
+          <span class="product-module-star">★ Смысловой кристалл</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <!-- SOON PRODUCT -->
+  <div class="product-card product-card-soon">
+    <div class="product-card-left">
+      <div class="product-badge product-badge-soon">Скоро</div>
+      <div class="product-title" style="color:var(--text-muted);">Следующий продукт</div>
+      <div class="product-desc">Новые инструменты в разработке. Следите за обновлениями в Telegram.</div>
+    </div>
+  </div>
+
 </section>
 
 <div class="divider"></div>
