@@ -280,18 +280,36 @@
     overflow: hidden;
   }
 
-  /* gradient divider */
-  .gradient-divider {
-    height: 2px;
-    background: linear-gradient(90deg,
-      transparent 0%,
-      #e8e6df 20%,
-      #2563eb 50%,
-      #e8e6df 80%,
-      transparent 100%
-    );
-    opacity: 0.6;
+
+  /* WAVE DIVIDER */
+  .wave-divider {
+    background: var(--bg);
+    padding: 8px 0;
+    overflow: hidden;
   }
+  .wave-divider svg {
+    width: 100%; height: 40px; display: block;
+  }
+  .wave-path {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: waveDraw 2.5s ease forwards, wavePulse 4s ease-in-out 2.5s infinite;
+  }
+  @keyframes waveDraw {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes wavePulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* ABOUT INNER DIVIDER */
+  .about-inner-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent);
+    margin: 20px 0;
+  }
+
 
   /* dot grid pattern */
   .stats-strip::before {
@@ -322,7 +340,7 @@
     padding: 16px;
   }
   .stat-num {
-    font-size: clamp(52px, 7vw, 80px);
+    font-size: clamp(28px, 5vw, 80px);
     font-weight: 800;
     letter-spacing: -0.05em; color: var(--text);
     line-height: 1; margin-bottom: 10px;
@@ -523,6 +541,24 @@
   }
   .soon-tg-btn:hover { background: #1d4ed8; }
 
+  /* SOON HEADER */
+  .soon-header {
+    display: flex; align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+  }
+  .soon-tg-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    color: #fff; background: #2563eb;
+    padding: 10px 20px; border-radius: 100px;
+    text-decoration: none; white-space: nowrap;
+    transition: background 0.15s; flex-shrink: 0;
+    margin-bottom: 24px;
+  }
+  .soon-tg-btn:hover { background: #1d4ed8; }
+
   /* PRODUCTS SECTION */
   .product-card {
     display: grid; grid-template-columns: 1fr 280px;
@@ -677,7 +713,20 @@
   </div>
 </section>
 
-<div class="gradient-divider"></div>
+<div class="wave-divider">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="wave-path" d="M0,20 C100,20 150,8 200,20 C250,32 300,20 400,20 C500,20 550,8 600,20 C650,32 700,20 800,20 C900,20 950,8 1000,20 C1050,32 1100,20 1200,20" fill="none" stroke="url(#waveGrad)" stroke-width="1.5" stroke-linecap="round"/>
+    <defs>
+      <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#f7f6f2;stop-opacity:1"/>
+        <stop offset="20%" style="stop-color:#2563eb;stop-opacity:0.3"/>
+        <stop offset="50%" style="stop-color:#2563eb;stop-opacity:0.7"/>
+        <stop offset="80%" style="stop-color:#7c3aed;stop-opacity:0.3"/>
+        <stop offset="100%" style="stop-color:#f7f6f2;stop-opacity:1"/>
+      </linearGradient>
+    </defs>
+  </svg>
+</div>
 <div class="stats-strip">
   <div class="stats-inner">
     <div class="stat">
@@ -722,26 +771,35 @@
     </div>
   </a>
 
-  <div class="section-eyebrow" style="margin-top:56px; margin-bottom:8px">Скоро</div>
-  <div class="section-title" style="margin-bottom:24px">В работе</div>
+  <div class="soon-header">
+    <div>
+      <div class="section-eyebrow" style="margin-top:56px; margin-bottom:8px">Готовится к выходу</div>
+      <div class="section-title" style="margin-bottom:4px">Материалы, которые уже ждут</div>
+      <p style="font-size:14px;color:var(--text-muted);margin-bottom:24px;">Подпишитесь на Telegram — там выйдут первыми</p>
+    </div>
+    <a href="https://t.me/target_school1" target="_blank" class="soon-tg-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      Не пропустить
+    </a>
+  </div>
 
   <div class="cards-grid">
     <div class="card soon">
       <div class="card-eyebrow">Промпты</div>
-      <div class="card-title">11 промптов для сторис, которые греют аудиторию</div>
-      <div class="card-desc">Система прогрева через истории — без навязчивости.</div>
-      <div class="card-footer"><span class="card-soon-label">Скоро</span></div>
+      <div class="card-title">20 промптов для маркетинга, которые заменят SMM-специалиста</div>
+      <div class="card-desc">Контент-план, посты, сторис, ответы на комменты — всё через ИИ за 15 минут в день.</div>
+      <div class="card-footer"><span class="card-soon-label">🔥 Выходит первым</span></div>
     </div>
     <div class="card soon">
-      <div class="card-eyebrow">Контент</div>
-      <div class="card-title">Как писать посты, которые покупают, а не лайкают</div>
-      <div class="card-desc">Разбор структуры поста-смысла на реальных примерах.</div>
+      <div class="card-eyebrow">Таргетинг</div>
+      <div class="card-title">Таргетированная реклама в 2026: что работает, а что сливает бюджет</div>
+      <div class="card-desc">17 лет практики и сотни запусков. Покажу что изменилось и как настраивать сейчас.</div>
       <div class="card-footer"><span class="card-soon-label">Скоро</span></div>
     </div>
     <div class="card soon">
       <div class="card-eyebrow">AI-маркетинг</div>
-      <div class="card-title">Как я строю AI-продукты без технического бэкграунда</div>
-      <div class="card-desc">Честный рассказ про путь от идеи до запуска.</div>
+      <div class="card-title">Как я строю AI-продукты без кода — и зарабатываю на этом</div>
+      <div class="card-desc">Честно про vibe coding, ошибки, первые продажи и то, что никто не говорит вслух.</div>
       <div class="card-footer"><span class="card-soon-label">Скоро</span></div>
     </div>
   </div>
@@ -854,6 +912,7 @@
         </div>
       </div>
 
+      <div class="about-inner-divider"></div>
       <!-- LINKS -->
       <div class="about-links">
         <a href="https://t.me/target_school1" target="_blank" class="about-link">
