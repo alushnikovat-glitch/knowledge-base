@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Словарь маркетолога 2026 — База знаний Анастасии Лушниковой</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108790481', 'ym');
+    ym(108790481, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108790481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --border: #e8e6df;
+    --text: #1a1917;
+    --text-muted: #6b6860;
+    --text-light: #a8a29e;
+    --accent: #2563eb;
+    --accent-light: #eff4ff;
+    --tag-bg: #f0ede6;
+    --dark: #1a1917;
+    --warning-bg: #fffbf0;
+    --warning-border: #fde68a;
+    --success-bg: #f0fdf4;
+    --success-border: #bbf7d0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(247,246,242,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+  }
+
+  .nav-inner {
+    max-width: 860px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-brand {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* PAGE */
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* META */
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .meta-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-light);
+    flex-shrink: 0;
+  }
+
+  /* H1 */
+  h1 {
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 28px; }
+  }
+
+  /* TAGS */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 36px;
+  }
+
+  .tag {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--tag-bg);
+    padding: 5px 12px;
+    border-radius: 100px;
+  }
+
+  /* INTRO CARD */
+  .intro-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+  }
+
+  .intro-card p {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  .intro-card p + p { margin-top: 12px; }
+
+  /* HINT */
+  .hint {
+    background: var(--accent-light);
+    border: 1px solid #bfdbfe;
+    border-radius: 14px;
+    padding: 18px 24px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .hint-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .hint p {
+    font-size: 14px;
+    color: #1e40af;
+    line-height: 1.65;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  /* SECTION DIVIDER */
+  .block-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 44px 0 20px;
+  }
+
+  .block-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--tag-bg);
+    padding: 4px 14px;
+    border-radius: 100px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .block-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* TERM GRID */
+  .term-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  @media (max-width: 600px) {
+    .term-grid { grid-template-columns: 1fr; }
+  }
+
+  .term-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    transition: border-color 0.15s;
+  }
+
+  .term-card:hover { border-color: #d0ccc3; }
+
+  .term-abbr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .term-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .term-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* AI TERMS — special styling */
+  .term-card.ai {
+    background: linear-gradient(135deg, #fafafa 0%, #f0f4ff 100%);
+    border-color: #c7d7fe;
+  }
+
+  .term-card.ai .term-abbr { color: #4f46e5; }
+
+  /* SLANG TERMS */
+  .slang-list {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .slang-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .slang-item:last-child { border-bottom: none; }
+
+  .slang-word {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    min-width: 120px;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+
+  .slang-def {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* TABLE */
+  .cheat-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+
+  .cheat-table th {
+    background: var(--tag-bg);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 12px 20px;
+    text-align: left;
+  }
+
+  .cheat-table td {
+    padding: 14px 20px;
+    font-size: 14px;
+    border-top: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .cheat-table td:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    width: 35%;
+  }
+
+  .cheat-table td:last-child {
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* PRODUCT BLOCK */
+  .product-block {
+    background: var(--warning-bg);
+    border: 1.5px solid var(--warning-border);
+    border-radius: 20px;
+    padding: 36px 40px;
+    margin: 52px 0 0;
+  }
+
+  @media (max-width: 600px) {
+    .product-block { padding: 28px 24px; }
+  }
+
+  .product-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #92400e;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .product-title {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .product-desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .product-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .benefit-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #d97706;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .guarantee {
+    background: var(--success-bg);
+    border: 1px solid var(--success-border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #15803d;
+    font-weight: 600;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-dark {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--dark);
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px 28px;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .btn-dark:hover { opacity: 0.85; }
+
+  /* FOOTER */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    margin-top: 72px;
+    padding: 56px 24px 40px;
+  }
+
+  .footer-inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .footer-title {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .footer-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    line-height: 1.6;
+    max-width: 520px;
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: 500px) {
+    .social-grid { grid-template-columns: 1fr; }
+  }
+
+  .social-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    text-decoration: none;
+    transition: border-color 0.15s;
+  }
+
+  .social-card:hover { border-color: #c5c0b8; }
+
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .social-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .social-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .tg-banner {
+    background: linear-gradient(135deg, #1a1917 0%, #2d2b28 100%);
+    border-radius: 16px;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .tg-banner-text {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .tg-banner-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 4px;
+  }
+
+  .btn-tg {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #2563eb;
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 22px;
+    border-radius: 100px;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+
+  .btn-tg:hover { background: #1d4ed8; }
+
+  .copyright {
+    font-size: 12px;
+    color: var(--text-light);
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="../">Анастасия Лушникова</a>
+    <div class="nav-links">
+      <a href="https://t.me/target_school1" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://www.instagram.com/target_school" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank" rel="noopener">Написать</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE -->
+<div class="page">
+
+  <!-- META -->
+  <div class="meta">
+    <span>апрель 2026</span>
+    <span class="meta-dot"></span>
+    <span>7 мин чтения</span>
+    <span class="meta-dot"></span>
+    <span>Автор: Анастасия Лушникова</span>
+  </div>
+
+  <!-- H1 -->
+  <h1>Словарь маркетолога 2026: от KPI до GEO</h1>
+
+  <!-- TAGS -->
+  <div class="tags">
+    <span class="tag">AI-маркетинг</span>
+    <span class="tag">Инструменты</span>
+    <span class="tag">Стратегия</span>
+    <span class="tag">Контент</span>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro-card">
+    <p>Когда люди только приходят в онлайн или осваивают новую профессию, их накрывает поток незнакомых слов. CTR, УТП, B2B, A/B-тесты, воронки, трафик. Кажется, что все вокруг говорят на другом языке.</p>
+    <p>Мы в школе всегда готовили такой словарь — просто чтобы людям было легче. А сейчас ещё добавился AI-маркетинг, нейросети, промпты, промптинжиниринг. Слов стало больше. Словарь стал нужнее.</p>
+    <p>Вот он.</p>
+  </div>
+
+  <!-- HINT -->
+  <div class="hint">
+    <div class="hint-icon">💡</div>
+    <p>Сохрани страницу в закладки. Словарь удобно открывать прямо с планёрки или во время работы с клиентом — всё на одном экране, без лишнего.</p>
+  </div>
+
+  <!-- BLOCK 1 -->
+  <div class="block-header">
+    <div class="block-label">Блок 1</div>
+    <div class="block-line"></div>
+  </div>
+  <h2 style="font-size:22px;font-weight:800;letter-spacing:-0.02em;margin-bottom:16px;color:var(--text);">Основные метрики</h2>
+  <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px;">Без этих аббревиатур не обходится ни один отчёт.</p>
+
+  <div class="term-grid">
+    <div class="term-card">
+      <span class="term-abbr">KPI</span>
+      <div class="term-name">Key Performance Indicators</div>
+      <div class="term-desc">Ключевые показатели эффективности. Те цифры, по которым судят, молодец вы или нет.</div>
+    </div>
+    <div class="term-card">
+      <span class="term-abbr">ROI / ROMI</span>
+      <div class="term-name">Return on Investment</div>
+      <div class="term-desc">Окупаемость. Вложили 100 рублей в рекламу, заработали 500 — маркетинг здоров.</div>
+    </div>
+    <div class="term-card">
+      <span class="term-abbr">CPA</span>
+      <div class="term-name">Cost Per Action</div>
+      <div class="term-desc">Цена за конкретное действие: покупку, регистрацию, звонок.</div>
+    </div>
+    <div class="term-card">
+      <span class="term-abbr">LTV</span>
+      <div class="term-name">Lifetime Value</div>
+      <div class="term-desc">Сколько денег принесёт клиент за всё время «дружбы» с брендом. Один из самых важных показателей прямо сейчас.</div>
+    </div>
+    <div class="term-card">
+      <span class="term-abbr">CAC</span>
+      <div class="term-name">Customer Acquisition Cost</div>
+      <div class="term-desc">Стоимость привлечения одного нового клиента.</div>
+    </div>
+  </div>
+
+  <!-- BLOCK 2 -->
+  <div class="block-header">
+    <div class="block-label">Блок 2</div>
+    <div class="block-line"></div>
+  </div>
+  <h2 style="font-size:22px;font-weight:800;letter-spacing:-0.02em;margin-bottom:16px;color:var(--text);">Интернет-маркетинг и трафик</h2>
+  <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px;">То, чем живёт специалист по продвижению в сети.</p>
+
+  <div class="term-grid">
+    <div class="term-card">
+      <span class="term-abbr">CJM</span>
+      <div class="term-name">Customer Journey Map</div>
+      <div class="term-desc">Карта пути клиента. Визуализация всех касаний с брендом — от первого баннера до покупки.</div>
+    </div>
+    <div class="term-card">
+      <span class="term-abbr">Lead</span>
+      <div class="term-name">Лид</div>
+      <div class="term-desc">Потенциальный клиент, который оставил свои контакты.</div>
+    </div>
+    <div class="term-card">
+      <span class="term-abbr">Retargeting</span>
+      <div class="term-name">Ретаргетинг</div>
+      <div class="term-desc">«Преследование» рекламой тех, кто уже был на сайте, но ничего не купил.</div>
+    </div>
+    <div class="term-card">
+      <span class="term-abbr">SEO</span>
+      <div class="term-name">Search Engine Optimization</div>
+      <div class="term-desc">Оптимизация сайта, чтобы Google и Яндекс показывали его на первой странице.</div>
+    </div>
+    <div class="term-card">
+      <span class="term-abbr">SMM</span>
+      <div class="term-name">Social Media Marketing</div>
+      <div class="term-desc">Продвижение бренда в соцсетях и мессенджерах.</div>
+    </div>
+  </div>
+
+  <!-- BLOCK 3 -->
+  <div class="block-header">
+    <div class="block-label">Блок 3</div>
+    <div class="block-line"></div>
+  </div>
+  <h2 style="font-size:22px;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px;color:var(--text);">AI-словарь маркетолога</h2>
+  <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px;">Термины, которые вошли в обиход совсем недавно, но уже стали обязательными.</p>
+
+  <div class="term-grid">
+    <div class="term-card ai">
+      <span class="term-abbr">Prompt</span>
+      <div class="term-name">Промпт</div>
+      <div class="term-desc">Чёткое текстовое задание для нейросети: Claude, Gemini, Midjourney. Чем точнее промпт, тем лучше результат.</div>
+    </div>
+    <div class="term-card ai">
+      <span class="term-abbr">GEO</span>
+      <div class="term-name">Generative Engine Optimization</div>
+      <div class="term-desc">Новое SEO. Оптимизация контента так, чтобы нейросети рекомендовали именно ваш бренд в чат-ботах.</div>
+    </div>
+    <div class="term-card ai">
+      <span class="term-abbr">Hallucination</span>
+      <div class="term-name">Галлюцинация ИИ</div>
+      <div class="term-desc">Когда нейросеть уверенно выдаёт выдуманные факты за реальные. Задача маркетолога — проверять.</div>
+    </div>
+    <div class="term-card ai">
+      <span class="term-abbr">Zero-Party Data</span>
+      <div class="term-name">Данные от пользователя</div>
+      <div class="term-desc">Данные, которыми клиенты делятся добровольно — через опросы и тесты. В эпоху приватности это новая нефть.</div>
+    </div>
+    <div class="term-card ai">
+      <span class="term-abbr">Synthetic Content</span>
+      <div class="term-name">Синтетический контент</div>
+      <div class="term-desc">Текст, фото или видео, полностью созданные искусственным интеллектом без участия человека.</div>
+    </div>
+  </div>
+
+  <!-- BLOCK 4 -->
+  <div class="block-header">
+    <div class="block-label">Блок 4</div>
+    <div class="block-line"></div>
+  </div>
+  <h2 style="font-size:22px;font-weight:800;letter-spacing:-0.02em;margin-bottom:16px;color:var(--text);">Сленг для «своих»</h2>
+
+  <div class="slang-list">
+    <div class="slang-item">
+      <div class="slang-word">Оффер</div>
+      <div class="slang-def">Конкретное торговое предложение. «Купи один — получи второй в подарок» — это оффер.</div>
+    </div>
+    <div class="slang-item">
+      <div class="slang-word">Лидмагнит</div>
+      <div class="slang-def">Бесплатная полезность — чек-лист, гайд, словарь — которую отдают в обмен на контакт.</div>
+    </div>
+    <div class="slang-item">
+      <div class="slang-word">Прогрев</div>
+      <div class="slang-def">Серия контента, которая постепенно убеждает сомневающегося человека стать покупателем.</div>
+    </div>
+    <div class="slang-item">
+      <div class="slang-word">УТП</div>
+      <div class="slang-def">Уникальное торговое предложение. То, чем вы отличаетесь от конкурентов — и почему выбирают вас.</div>
+    </div>
+  </div>
+
+  <!-- CHEAT TABLE -->
+  <div class="block-header">
+    <div class="block-label">Шпаргалка</div>
+    <div class="block-line"></div>
+  </div>
+  <h2 style="font-size:22px;font-weight:800;letter-spacing:-0.02em;margin-bottom:16px;color:var(--text);">Быстрый перевод</h2>
+
+  <table class="cheat-table">
+    <thead>
+      <tr>
+        <th>Термин</th>
+        <th>На простом языке</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>B2B / B2C</td>
+        <td>Бизнес для бизнеса (заводы, агентства) или бизнес для людей (магазины, школы).</td>
+      </tr>
+      <tr>
+        <td>Conversion</td>
+        <td>Процент посетителей, которые превратились в покупателей.</td>
+      </tr>
+      <tr>
+        <td>A/B тест</td>
+        <td>Сравнение двух вариантов — например, красной и синей кнопки — чтобы понять, какая работает лучше.</td>
+      </tr>
+      <tr>
+        <td>Native Ad</td>
+        <td>Реклама, которая выглядит как обычный пост и не раздражает пользователя.</td>
+      </tr>
+      <tr>
+        <td>Funnel</td>
+        <td>Воронка продаж. Путь от «увидел рекламу» до «купил».</td>
+      </tr>
+      <tr>
+        <td>CTR</td>
+        <td>Кликабельность. Процент людей, которые кликнули по баннеру или ссылке.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- PRODUCT BLOCK -->
+  <div class="product-block">
+    <span class="product-eyebrow">Фундамент смыслового маркетинга</span>
+    <div class="product-title">Архитектор смыслов</div>
+    <p class="product-desc">Пошаговый алгоритм выявления смыслов, на базе которых выстраивается вся контент-стратегия. Не обучение. Инструмент. Тот фундамент, без которого любой контент — просто слова.</p>
+    <div class="product-benefits">
+      <div class="benefit">
+        <div class="benefit-dot"></div>
+        <span>Находите смыслы, которые цепляют именно вашу аудиторию — не абстрактную, а конкретную</span>
+      </div>
+      <div class="benefit">
+        <div class="benefit-dot"></div>
+        <span>Выстраиваете контент-стратегию не из «надо постить», а из понимания, что и зачем</span>
+      </div>
+      <div class="benefit">
+        <div class="benefit-dot"></div>
+        <span>Перестаёте зависеть от вдохновения — алгоритм работает каждый раз</span>
+      </div>
+      <div class="benefit">
+        <div class="benefit-dot"></div>
+        <span>AI помогает оформить то, что вы уже поняли про свой продукт и своих людей</span>
+      </div>
+    </div>
+    <div class="guarantee">
+      <span>✓</span>
+      <span>Это фундамент. Один раз выстроить — и контент перестаёт быть мукой</span>
+    </div>
+    <a class="btn-dark" href="https://app.lava.top/products/e09d7eec-f025-4686-96d7-5425f2973859" target="_blank" rel="noopener">
+      Познакомиться с алгоритмом →
+    </a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">Понравился материал?</div>
+    <p class="footer-sub">Подписывайтесь на каналы — там ещё больше про AI-маркетинг, смыслы и продажи без выгорания.</p>
+
+    <div class="social-grid">
+      <a class="social-card" href="https://t.me/target_school1" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#e8f0fe;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#2563eb"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </div>
+        <div>
+          <div class="social-name">Telegram канал</div>
+          <div class="social-desc">Промпты и кейсы каждый день</div>
+        </div>
+      </a>
+
+      <a class="social-card" href="https://www.instagram.com/target_school" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#fce7f3;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#db2777" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#db2777" stroke="none"/></svg>
+        </div>
+        <div>
+          <div class="social-name">Instagram</div>
+          <div class="social-desc">Визуальные гайды и stories</div>
+        </div>
+      </a>
+
+      <a class="social-card" href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#dcfce7;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#16a34a"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        </div>
+        <div>
+          <div class="social-name">Написать Анастасии</div>
+          <div class="social-desc">Личное сообщение в WhatsApp</div>
+        </div>
+      </a>
+
+      <a class="social-card" href="https://t.me/ailav_bot" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#fef3c7;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#d97706" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div>
+          <div class="social-name">Служба заботы</div>
+          <div class="social-desc">Техподдержка и вопросы</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="tg-banner">
+      <div>
+        <div class="tg-banner-text">Хотите больше материалов?</div>
+        <div class="tg-banner-sub">Подписывайтесь — новые гайды выходят каждую неделю</div>
+      </div>
+      <a class="btn-tg" href="https://t.me/target_school1" target="_blank" rel="noopener">
+        Подписаться на Telegram →
+      </a>
+    </div>
+
+    <div class="copyright">© 2026 Анастасия Лушникова. Все права защищены.</div>
+  </div>
+</footer>
+
+</body>
+</html>
