@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как создать сайт бесплатно за один день: GitHub + Vercel + Claude</title>
+<meta name="description" content="Пошаговая инструкция как создать профессиональный сайт бесплатно с помощью Claude, GitHub и Vercel. Без программиста и дизайнера.">
+<meta name="author" content="Анастасия Лушникова">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://anastasialushnikova.com/how-to-create-site/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://anastasialushnikova.com/how-to-create-site/">
+<meta property="og:title" content="Как создать сайт бесплатно за один день — Анастасия Лушникова">
+<meta property="og:description" content="Пошаговая инструкция: GitHub + Vercel + Claude. Без программиста, без денег, за один день.">
+<meta property="og:locale" content="ru_RU">
+<meta name="yandex-verification" content="8f5109780ec84f8e" />
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108790481', 'ym');
+    ym(108790481, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108790481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f2; --surface: #fff; --border: #e8e6df;
+  --text: #1a1917; --muted: #6b6860; --light: #a8a29e;
+  --accent: #2563eb; --accent-light: #eff4ff;
+  --tag: #f0ede6; --dark: #1a1917;
+  --ok-bg: #f0fdf4; --ok-brd: #bbf7d0;
+  --warn-bg: #fffbf0; --warn-brd: #fde68a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(247,246,242,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  height: 52px; display: flex; align-items: center; padding: 0 24px;
+}
+.nav-in { max-width: 860px; margin: 0 auto; width: 100%; display: flex; align-items: center; justify-content: space-between; }
+.nav-brand { font-size: 14px; font-weight: 700; color: var(--text); text-decoration: none; }
+.nav-back { font-size: 13px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+.nav-back:hover { color: var(--text); }
+
+/* PAGE */
+.page { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+
+/* META */
+.meta { display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--muted); margin-bottom: 24px; flex-wrap: wrap; }
+.meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+
+/* TITLE */
+h1 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; }
+
+/* TAGS */
+.tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+.tag { font-size: 12px; font-weight: 600; color: var(--muted); background: var(--tag); padding: 5px 12px; border-radius: 100px; }
+
+/* INTRO */
+.intro { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; margin-bottom: 40px; font-size: 15px; line-height: 1.75; color: var(--muted); }
+.intro strong { color: var(--text); }
+
+/* TOOLS GRID */
+.tools-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 40px; }
+.tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+.tool-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+.tool-name { font-size: 16px; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.02em; }
+.tool-url { font-size: 12px; color: var(--accent); margin-bottom: 10px; font-family: 'JetBrains Mono', monospace; }
+.tool-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* STEP */
+.step-block { margin-bottom: 48px; }
+.step-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.step-num-badge {
+  width: 48px; height: 48px; border-radius: 14px;
+  background: var(--dark); color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.step-title { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+.step-body { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 20px; }
+.step-body p { margin-bottom: 12px; }
+.step-body strong { color: var(--text); }
+
+/* NUMBERED LIST */
+.step-list { list-style: none; counter-reset: steps; display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.step-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 14px; color: var(--text); line-height: 1.6; }
+.step-list li::before {
+  counter-increment: steps;
+  content: counter(steps);
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--accent-light); color: var(--accent);
+  font-size: 11px; font-weight: 700; font-family: 'JetBrains Mono', monospace;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+
+/* CODE PROMPT */
+.prompt-box {
+  background: var(--dark); border-radius: 14px;
+  padding: 20px 24px; margin-bottom: 20px;
+}
+.prompt-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6b6880; margin-bottom: 10px; }
+.prompt-text { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #e2e8f0; line-height: 1.75; white-space: pre-wrap; }
+.prompt-text .hl { color: #7dd3fc; }
+
+/* SCREENSHOT PLACEHOLDER */
+.screenshot {
+  border: 1.5px dashed var(--border); border-radius: 14px;
+  background: var(--surface); overflow: hidden; margin-bottom: 20px;
+}
+.screenshot-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--light); text-align: center; padding: 10px;
+  background: var(--tag); border-bottom: 1px solid var(--border);
+}
+
+/* UI MOCKUP */
+.ui-mockup { padding: 20px 24px; }
+.ui-topbar { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.ui-dot { width: 10px; height: 10px; border-radius: 50%; }
+.ui-url { flex: 1; background: var(--tag); border-radius: 6px; padding: 6px 12px; font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+.ui-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: #fff; font-size: 12px; font-weight: 700; font-family: 'Manrope', sans-serif; padding: 7px 16px; border-radius: 8px; border: none; cursor: default; }
+.ui-btn.green { background: #16a34a; }
+.ui-btn.gray { background: var(--tag); color: var(--muted); }
+.ui-input { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; font-size: 13px; color: var(--text); font-family: 'Manrope', sans-serif; width: 100%; margin-bottom: 10px; }
+.ui-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+.ui-label { font-size: 12px; font-weight: 600; color: var(--muted); min-width: 80px; }
+.ui-radio { display: flex; gap: 12px; }
+.ui-radio-item { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.ui-radio-dot { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; }
+.ui-radio-dot.active { border-color: var(--accent); background: var(--accent); }
+.ui-radio-dot.active::after { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #fff; }
+.ui-section-title { font-size: 18px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.02em; }
+.ui-file-drop { border: 1.5px dashed var(--border); border-radius: 10px; padding: 24px; text-align: center; background: var(--bg); margin-bottom: 12px; }
+.ui-file-icon { font-size: 28px; margin-bottom: 8px; }
+.ui-file-text { font-size: 13px; color: var(--muted); }
+.ui-file-text strong { color: var(--accent); }
+.ui-repo-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; }
+.ui-repo-name { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.ui-check { width: 20px; height: 20px; border-radius: 50%; background: var(--ok-bg); border: 1.5px solid var(--ok-brd); display: flex; align-items: center; justify-content: center; }
+.ui-deploy-block { background: var(--dark); border-radius: 12px; padding: 20px; text-align: center; }
+.ui-deploy-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.ui-deploy-sub { font-size: 12px; color: #6b6880; margin-bottom: 16px; }
+.ui-link-box { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 16px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #7dd3fc; text-align: center; }
+.ui-dns-row { display: grid; grid-template-columns: 60px 60px 1fr; gap: 8px; margin-bottom: 6px; align-items: center; }
+.ui-dns-type { background: var(--accent-light); color: var(--accent); font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; }
+.ui-dns-name { font-size: 12px; font-family: 'JetBrains Mono', monospace; color: var(--muted); }
+.ui-dns-val { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* TIP BOX */
+.tip { display: flex; gap: 12px; background: var(--accent-light); border: 1px solid #dbeafe; border-radius: 12px; padding: 14px 16px; margin-bottom: 20px; font-size: 13px; color: #1e40af; line-height: 1.6; }
+.tip svg { flex-shrink: 0; margin-top: 1px; }
+.warn { background: var(--warn-bg); border-color: var(--warn-brd); color: #92400e; }
+
+/* PRICE TABLE */
+.price-table { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.price-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+.price-card.free { border-color: var(--ok-brd); background: var(--ok-bg); }
+.price-tool { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.price-val { font-size: 22px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 4px; }
+.price-val.green { color: #16a34a; }
+.price-note { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* RESULT STRIP */
+.result-strip { background: var(--dark); border-radius: 20px; padding: 36px 40px; margin-bottom: 40px; }
+.result-title { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.02em; margin-bottom: 20px; }
+.result-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.result-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #c8c5be; }
+.result-item svg { flex-shrink: 0; color: #16a34a; }
+
+/* DIVIDER */
+.divider { height: 1px; background: var(--border); margin: 40px 0; }
+
+/* FOOTER SOCIAL */
+.footer-social { margin-top: 56px; }
+.footer-social-title { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 6px; }
+.footer-social-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+.social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.social-card { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 20px; text-decoration: none; color: var(--text); transition: box-shadow 0.15s; }
+.social-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+.soc-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.soc-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+.soc-desc { font-size: 12px; color: var(--muted); }
+.tg-banner { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; text-align: center; margin-bottom: 32px; }
+.tg-banner-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.tg-banner-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+.tg-btn { display: inline-flex; align-items: center; gap: 8px; background: #2563eb; color: #fff; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; padding: 12px 24px; border-radius: 10px; text-decoration: none; }
+footer { text-align: center; font-size: 13px; color: var(--light); padding: 0 24px 40px; }
+
+@media (max-width: 640px) {
+  .tools-grid { grid-template-columns: 1fr; }
+  .price-table { grid-template-columns: 1fr; }
+  .result-list { grid-template-columns: 1fr; }
+  .social-grid { grid-template-columns: 1fr; }
+  .ui-dns-row { grid-template-columns: 50px 40px 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="../" class="nav-back">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      База знаний
+    </a>
+    <a href="../" class="nav-brand">Анастасия Лушникова</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="meta">
+    <span>апрель 2026</span>
+    <span class="meta-dot"></span>
+    <span>8 мин чтения</span>
+    <span class="meta-dot"></span>
+    <span>Автор: Анастасия Лушникова</span>
+  </div>
+
+  <h1>Как создать сайт бесплатно за один день: GitHub + Vercel + Claude</h1>
+
+  <div class="tags">
+    <span class="tag">Инструменты</span>
+    <span class="tag">AI-маркетинг</span>
+    <span class="tag">Vibe coding</span>
+    <span class="tag">Сайт бесплатно</span>
+  </div>
+
+  <div class="intro">
+    Я основатель школы маркетинга Target School, 17 лет в интернет-маркетинге. Всё это время я зависела от разработчиков для каждого технического шага.<br><br>
+    В апреле 2026 года я создала полноценный сайт с нуля <strong>за один день</strong>. С главной страницей, лендингом продукта, блогом, SEO и аналитикой. <strong>Стоимость — 0 рублей.</strong><br><br>
+    Вот точная инструкция как это повторить.
+  </div>
+
+  <!-- TOOLS -->
+  <div class="step-header">
+    <div class="step-num-badge" style="background:var(--accent);">🛠</div>
+    <div class="step-title">Три инструмента. Все бесплатные.</div>
+  </div>
+
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-num">01</div>
+      <div class="tool-name">Claude</div>
+      <div class="tool-url">claude.ai</div>
+      <div class="tool-desc">Пишет весь код по вашим словам. Не нужно знать программирование — просто объясняете что хотите.</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-num">02</div>
+      <div class="tool-name">GitHub</div>
+      <div class="tool-url">github.com</div>
+      <div class="tool-desc">Хранит файлы вашего сайта. Представьте это как папку в интернете, которая всегда доступна.</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-num">03</div>
+      <div class="tool-name">Vercel</div>
+      <div class="tool-url">vercel.com</div>
+      <div class="tool-desc">Берёт файлы из GitHub и публикует их как живой сайт. Автоматически, за 30 секунд.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- STEP 1 -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-num-badge">01</div>
+      <div class="step-title">Создайте аккаунты</div>
+    </div>
+    <div class="step-body">
+      <p>Начнём с регистрации во всех трёх сервисах. Это займёт 10 минут.</p>
+    </div>
+
+    <div class="screenshot">
+      <div class="screenshot-label">GitHub — регистрация</div>
+      <div class="ui-mockup">
+        <div class="ui-topbar">
+          <div class="ui-dot" style="background:#ff5f57"></div>
+          <div class="ui-dot" style="background:#febc2e"></div>
+          <div class="ui-dot" style="background:#28c840"></div>
+          <div class="ui-url">github.com/signup</div>
+        </div>
+        <div class="ui-section-title" style="font-size:16px;margin-bottom:16px;">Создайте аккаунт GitHub</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Email</div>
+        <div class="ui-input" style="color:var(--muted);">your@email.com</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Придумайте логин (username)</div>
+        <div class="ui-input" style="color:var(--muted);">your-username</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Пароль</div>
+        <div class="ui-input" style="color:var(--muted);">••••••••</div>
+        <div class="ui-btn" style="width:100%;justify-content:center;border-radius:8px;padding:10px;">Создать аккаунт</div>
+      </div>
+    </div>
+
+    <div class="tip">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span><strong>Важно:</strong> на Vercel регистрируйтесь через кнопку «Continue with GitHub» — так Vercel автоматически увидит все ваши репозитории.</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- STEP 2 -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-num-badge">02</div>
+      <div class="step-title">Создайте репозиторий на GitHub</div>
+    </div>
+    <div class="step-body">
+      <p>Репозиторий — это папка для файлов вашего сайта на GitHub.</p>
+    </div>
+
+    <div class="screenshot">
+      <div class="screenshot-label">GitHub — создание репозитория</div>
+      <div class="ui-mockup">
+        <div class="ui-topbar">
+          <div class="ui-dot" style="background:#ff5f57"></div>
+          <div class="ui-dot" style="background:#febc2e"></div>
+          <div class="ui-dot" style="background:#28c840"></div>
+          <div class="ui-url">github.com/new</div>
+        </div>
+        <div class="ui-section-title" style="font-size:15px;margin-bottom:12px;">Новый репозиторий</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Repository name</div>
+        <div class="ui-input" style="color:var(--text);">my-site</div>
+        <div class="ui-row" style="margin-top:12px;">
+          <div class="ui-label">Видимость</div>
+          <div class="ui-radio">
+            <div class="ui-radio-item">
+              <div class="ui-radio-dot active"></div>
+              <span style="font-size:12px;">Public</span>
+            </div>
+            <div class="ui-radio-item">
+              <div class="ui-radio-dot"></div>
+              <span style="font-size:12px;">Private</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:16px;">
+          <div class="ui-btn" style="border-radius:8px;">Create repository</div>
+        </div>
+      </div>
+    </div>
+
+    <ol class="step-list">
+      <li>Зайдите на github.com под своим аккаунтом</li>
+      <li>Нажмите зелёную кнопку <strong>New</strong> в левом углу или знак <strong>+</strong> вверху справа</li>
+      <li>В поле Repository name напишите название: например <code style="background:var(--tag);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;">my-site</code></li>
+      <li>Выберите <strong>Public</strong> — это обязательно для бесплатного хостинга</li>
+      <li>Нажмите <strong>Create repository</strong></li>
+    </ol>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- STEP 3 -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-num-badge">03</div>
+      <div class="step-title">Создайте страницу через Claude</div>
+    </div>
+    <div class="step-body">
+      <p>Это главный шаг. Вы просто разговариваете с нейросетью как с человеком.</p>
+      <p>Откройте claude.ai и напишите примерно так:</p>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-label">Пример запроса к Claude</div>
+      <div class="prompt-text">Создай главную страницу сайта для <span class="hl">[ваша профессия]</span>.
+Я <span class="hl">[ваше имя]</span>, <span class="hl">[что вы делаете]</span>.
+Стиль минималистичный, современный.
+
+Нужны:
+— шапка с навигацией
+— героблок с заголовком и кнопкой
+— раздел обо мне с цифрами
+— футер со ссылками на соцсети
+
+Сделай готовый HTML-файл.</div>
+    </div>
+
+    <div class="tip">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span><strong>Как уточнять результат:</strong> «Поменяй шрифт на более элегантный» / «Сделай фон потеплее» / «На мобильном выглядит плохо — исправь» / «Добавь блок с услугами». Говорите как с человеком — технические термины не нужны.</span>
+    </div>
+
+    <div class="tip warn">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span>Когда результат устроит — скачайте файл. Переименуйте его в <strong>index.html</strong> — именно это имя GitHub распознаёт как главную страницу.</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- STEP 4 -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-num-badge">04</div>
+      <div class="step-title">Загрузите файл на GitHub</div>
+    </div>
+
+    <div class="screenshot">
+      <div class="screenshot-label">GitHub — загрузка файла</div>
+      <div class="ui-mockup">
+        <div class="ui-topbar">
+          <div class="ui-dot" style="background:#ff5f57"></div>
+          <div class="ui-dot" style="background:#febc2e"></div>
+          <div class="ui-dot" style="background:#28c840"></div>
+          <div class="ui-url">github.com / my-site</div>
+          <div class="ui-btn" style="font-size:11px;padding:5px 12px;">Add file ▾</div>
+        </div>
+        <div class="ui-file-drop">
+          <div class="ui-file-icon">📄</div>
+          <div class="ui-file-text">Перетащите <strong>index.html</strong> сюда<br><span style="font-size:11px;color:var(--light);">или нажмите для выбора файла</span></div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;">
+          <div class="ui-btn green" style="font-size:12px;padding:8px 16px;border-radius:8px;">Commit changes</div>
+        </div>
+      </div>
+    </div>
+
+    <ol class="step-list">
+      <li>Зайдите в ваш репозиторий на GitHub</li>
+      <li>Нажмите <strong>Add file → Upload files</strong></li>
+      <li>Перетащите файл <code style="background:var(--tag);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;">index.html</code> в окно</li>
+      <li>Нажмите зелёную кнопку <strong>Commit changes</strong></li>
+    </ol>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- STEP 5 -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-num-badge">05</div>
+      <div class="step-title">Опубликуйте сайт через Vercel</div>
+    </div>
+    <div class="step-body">
+      <p>Это самый быстрый шаг. 30 секунд — и сайт живой.</p>
+    </div>
+
+    <div class="screenshot">
+      <div class="screenshot-label">Vercel — деплой проекта</div>
+      <div class="ui-mockup">
+        <div class="ui-topbar">
+          <div class="ui-dot" style="background:#ff5f57"></div>
+          <div class="ui-dot" style="background:#febc2e"></div>
+          <div class="ui-dot" style="background:#28c840"></div>
+          <div class="ui-url">vercel.com/new</div>
+        </div>
+        <div style="margin-bottom:12px;font-size:13px;font-weight:600;color:var(--muted);">Выберите репозиторий</div>
+        <div class="ui-repo-item">
+          <div class="ui-repo-name">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            my-site
+          </div>
+          <div class="ui-btn" style="font-size:11px;padding:5px 14px;">Import</div>
+        </div>
+        <div class="ui-deploy-block" style="margin-top:16px;">
+          <div class="ui-deploy-title">Готово к публикации</div>
+          <div class="ui-deploy-sub">Настройки менять не нужно</div>
+          <div class="ui-btn" style="font-size:13px;padding:10px 28px;border-radius:10px;margin:0 auto;display:inline-flex;">🚀 Deploy</div>
+          <div style="margin-top:16px;">
+            <div class="ui-link-box">my-site.vercel.app ✓</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ol class="step-list">
+      <li>Зайдите на vercel.com</li>
+      <li>Нажмите <strong>Add New → Project</strong></li>
+      <li>Найдите в списке ваш репозиторий — нажмите <strong>Import</strong></li>
+      <li>Ничего не меняйте в настройках</li>
+      <li>Нажмите <strong>Deploy</strong></li>
+    </ol>
+
+    <div class="tip">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span><strong>Магия системы:</strong> теперь каждый раз когда вы загружаете новый файл на GitHub — Vercel автоматически обновляет сайт. Без дополнительных действий.</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- STEP 6 -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-num-badge">06</div>
+      <div class="step-title">Подключите свой домен</div>
+    </div>
+    <div class="step-body">
+      <p>Если у вас есть свой домен — подключить его просто. Если нет — сайт уже работает на адресе Vercel.</p>
+    </div>
+
+    <div class="screenshot">
+      <div class="screenshot-label">Cloudflare DNS — добавление записей</div>
+      <div class="ui-mockup">
+        <div class="ui-topbar">
+          <div class="ui-dot" style="background:#ff5f57"></div>
+          <div class="ui-dot" style="background:#febc2e"></div>
+          <div class="ui-dot" style="background:#28c840"></div>
+          <div class="ui-url">dash.cloudflare.com → DNS → Records</div>
+        </div>
+        <div style="font-size:12px;font-weight:600;color:var(--muted);margin-bottom:10px;">DNS Records</div>
+        <div class="ui-dns-row" style="font-size:11px;font-weight:700;color:var(--light);margin-bottom:8px;">
+          <span>Type</span><span>Name</span><span>Content</span>
+        </div>
+        <div class="ui-dns-row">
+          <div class="ui-dns-type">CNAME</div>
+          <div class="ui-dns-name">@</div>
+          <div class="ui-dns-val">cname.vercel-dns.com</div>
+        </div>
+        <div class="ui-dns-row">
+          <div class="ui-dns-type">CNAME</div>
+          <div class="ui-dns-name">www</div>
+          <div class="ui-dns-val">cname.vercel-dns.com</div>
+        </div>
+        <div style="margin-top:12px;">
+          <div class="ui-btn" style="font-size:11px;padding:6px 14px;border-radius:7px;">+ Add record</div>
+        </div>
+      </div>
+    </div>
+
+    <ol class="step-list">
+      <li>В Vercel: Settings → Domains → введите ваш домен → Add</li>
+      <li>Vercel покажет DNS-записи которые нужно добавить</li>
+      <li>Зайдите к регистратору домена (Cloudflare, Namecheap, reg.ru)</li>
+      <li>Добавьте указанные записи в раздел DNS</li>
+      <li>Подождите 5-10 минут — домен подключён</li>
+    </ol>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- STEP 7 -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-num-badge">07</div>
+      <div class="step-title">Добавьте новые страницы блога</div>
+    </div>
+    <div class="step-body">
+      <p>Каждая новая страница — это просто новая папка в репозитории.</p>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-label">Запрос к Claude для новой страницы</div>
+      <div class="prompt-text">Создай страницу статьи в том же стиле что и главная.
+Тема: <span class="hl">[название статьи]</span>
+Теги: <span class="hl">[теги]</span>
+Время чтения: <span class="hl">[минуты]</span>
+Контент: <span class="hl">[текст статьи]</span></div>
+    </div>
+
+    <ol class="step-list">
+      <li>Попросите Claude создать страницу — получите HTML-файл</li>
+      <li>На GitHub нажмите <strong>Add file → Create new file</strong></li>
+      <li>В поле имени напишите: <code style="background:var(--tag);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;">название-папки/index.html</code></li>
+      <li>Как только напишете <code style="background:var(--tag);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;">/</code> — GitHub сам создаст папку</li>
+      <li>Вставьте код от Claude → <strong>Commit changes</strong></li>
+    </ol>
+
+    <div class="tip">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>Страница будет доступна по адресу: <strong>ваш-сайт.com/название-папки</strong></span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- STEP 8 -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-num-badge">08</div>
+      <div class="step-title">Настройте SEO и аналитику</div>
+    </div>
+    <div class="step-body">
+      <p>Чтобы сайт находили в Google и Яндексе — попросите Claude добавить нужные элементы одним запросом.</p>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-label">Запрос к Claude</div>
+      <div class="prompt-text">Добавь в мой index.html:
+— мета-теги title и description для SEO
+— Open Graph теги для красивых карточек в соцсетях
+— Яндекс.Метрику с кодом: <span class="hl">[код счётчика]</span>
+
+Вот мой файл: <span class="hl">[вставьте код]</span></div>
+    </div>
+
+    <ol class="step-list">
+      <li>Зарегистрируйтесь на metrika.yandex.ru — создайте счётчик</li>
+      <li>Попросите Claude добавить код метрики во все страницы</li>
+      <li>Попросите Claude создать <code style="background:var(--tag);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;">sitemap.xml</code> и <code style="background:var(--tag);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;">robots.txt</code></li>
+      <li>Загрузите все файлы в корень репозитория на GitHub</li>
+      <li>Зарегистрируйте сайт в Google Search Console и Яндекс.Вебмастере</li>
+    </ol>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PRICE -->
+  <div class="step-header">
+    <div class="step-num-badge" style="background:var(--accent);">💰</div>
+    <div class="step-title">Сколько это стоит</div>
+  </div>
+
+  <div class="price-table">
+    <div class="price-card free">
+      <div class="price-tool">GitHub</div>
+      <div class="price-val green">0 ₽</div>
+      <div class="price-note">Бесплатно для публичных репозиториев</div>
+    </div>
+    <div class="price-card free">
+      <div class="price-tool">Vercel</div>
+      <div class="price-val green">0 ₽</div>
+      <div class="price-note">Бесплатно до 100 GB трафика в месяц</div>
+    </div>
+    <div class="price-card free">
+      <div class="price-tool">Claude</div>
+      <div class="price-val green">0 ₽</div>
+      <div class="price-note">Бесплатный план достаточен для старта</div>
+    </div>
+    <div class="price-card">
+      <div class="price-tool">Домен</div>
+      <div class="price-val">500–2000 ₽</div>
+      <div class="price-note">В год. Единственная платная часть.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- RESULT -->
+  <div class="result-strip">
+    <div class="result-title">Что я получила за один день</div>
+    <div class="result-list">
+      <div class="result-item">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Главная с анимацией и плавающим шаром
+      </div>
+      <div class="result-item">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Страница с 15 промптами для продаж
+      </div>
+      <div class="result-item">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Полноценный лендинг продукта
+      </div>
+      <div class="result-item">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Блок «Об авторе» с фото и регалиями
+      </div>
+      <div class="result-item">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Единый дизайн и футер на всех страницах
+      </div>
+      <div class="result-item">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        SEO, аналитика, свой домен
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER SOCIAL -->
+  <div class="footer-social">
+    <div class="footer-social-title">Понравился материал?</div>
+    <div class="footer-social-sub">Подписывайтесь на каналы — там ещё больше про AI-маркетинг, смыслы и продажи без выгорания</div>
+    <div class="social-grid">
+      <a href="https://t.me/target_school1" target="_blank" class="social-card">
+        <div class="soc-icon" style="background:#e8f0fe;color:#2563eb;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </div>
+        <div><div class="soc-name">Telegram канал</div><div class="soc-desc">Промпты и кейсы каждый день</div></div>
+      </a>
+      <a href="https://www.instagram.com/target_school" target="_blank" class="social-card">
+        <div class="soc-icon" style="background:#fce7f3;color:#db2777;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <div><div class="soc-name">Instagram</div><div class="soc-desc">Визуальные гайды и stories</div></div>
+      </a>
+      <a href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank" class="social-card">
+        <div class="soc-icon" style="background:#dcfce7;color:#16a34a;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        </div>
+        <div><div class="soc-name">Написать Анастасии</div><div class="soc-desc">Личное сообщение в WhatsApp</div></div>
+      </a>
+      <a href="https://t.me/ailav_bot" target="_blank" class="social-card">
+        <div class="soc-icon" style="background:#fef3c7;color:#d97706;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div><div class="soc-name">Служба заботы</div><div class="soc-desc">Техподдержка и вопросы</div></div>
+      </a>
+    </div>
+    <div class="tg-banner">
+      <div class="tg-banner-title">Хотите больше материалов?</div>
+      <div class="tg-banner-sub">Новые подборки выходят в Telegram — присоединяйтесь</div>
+      <a href="https://t.me/target_school1" target="_blank" class="tg-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.277-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Подписаться на Telegram
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<footer>© 2026 Анастасия Лушникова. Все права защищены.</footer>
+
+</body>
+</html>
