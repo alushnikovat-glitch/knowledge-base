@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как я делаю дизайн каруселей в Claude — Анастасия Лушникова</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,"script","https://mc.yandex.ru/metrika/tag.js?id=108790481", "ym");
+    ym(108790481, "init", {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108790481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2700527913660797');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+  :root {
+    --bg: #f7f6f2; --surface: #ffffff; --border: #e8e6df;
+    --text: #1a1917; --text-muted: #6b6860; --text-light: #a8a29e;
+    --accent: #2563eb; --accent-light: #eff4ff;
+    --tag-bg: #f0ede6; --dark: #1a1917;
+    --warning-bg: #fffbf0; --warning-border: #fde68a;
+    --success-bg: #f0fdf4; --success-border: #bbf7d0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Manrope", sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247,246,242,0.92);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    height: 52px; display: flex; align-items: center;
+    justify-content: space-between; padding: 0 24px;
+  }
+  .nav-brand { font-size: 14px; font-weight: 800; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 20px; list-style: none; }
+  .nav-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  .page { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .meta { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--text-muted); margin-bottom: 20px; flex-wrap: wrap; }
+  .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 36px; }
+  .tag { font-size: 12px; font-weight: 600; color: var(--text-muted); background: var(--tag-bg); padding: 5px 12px; border-radius: 100px; }
+
+  h1 { font-size: clamp(26px, 5vw, 40px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; }
+
+  .intro-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 32px; }
+  .intro-card p { font-size: 15px; color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
+  .intro-card p:last-child { margin-bottom: 0; }
+
+  .hint-blue { background: var(--accent-light); border: 1px solid #bfdbfe; border-radius: 14px; padding: 20px 24px; margin-bottom: 36px; display: flex; gap: 14px; align-items: flex-start; }
+  .hint-blue-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .hint-blue-text { font-size: 14px; color: #1e40af; line-height: 1.6; font-weight: 500; }
+  .hint-blue-text strong { font-weight: 700; }
+
+  .block-header { display: flex; align-items: center; gap: 12px; margin: 40px 0 20px; }
+  .block-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); background: var(--tag-bg); padding: 4px 12px; border-radius: 100px; white-space: nowrap; }
+  .block-line { flex: 1; height: 1px; background: var(--border); }
+
+  .step-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 16px; }
+  .step-number { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--dark); color: #fff; border-radius: 50%; font-size: 14px; font-weight: 800; margin-bottom: 14px; }
+  .step-title { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; color: var(--text); }
+  .step-body { font-size: 15px; color: var(--text-muted); line-height: 1.75; }
+  .step-body p { margin-bottom: 10px; }
+  .step-body p:last-child { margin-bottom: 0; }
+
+  .screenshots-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0 6px; }
+  .screenshots-grid img { width: 100%; border-radius: 12px; border: 1px solid var(--border); }
+  .screenshots-caption { font-size: 12px; color: var(--text-light); text-align: center; margin-bottom: 4px; }
+
+  .prompt-wrap { margin-top: 18px; background: #fafaf8; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .prompt-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--tag-bg); }
+  .prompt-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+  .copy-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: var(--text-muted); background: none; border: none; cursor: pointer; padding: 4px 10px; border-radius: 6px; transition: background 0.15s, color 0.15s; font-family: "Manrope", sans-serif; }
+  .copy-btn:hover { background: var(--border); color: var(--text); }
+  .copy-btn.copied { color: #16a34a; }
+  .prompt-body { font-family: "JetBrains Mono", monospace; font-size: 13px; line-height: 1.8; color: #3a3830; padding: 18px 20px; white-space: pre-wrap; word-break: break-word; }
+
+  .accordion { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 16px; }
+
+  /* Preview strip — always visible */
+  .accordion-preview {
+    border-top: 1px solid var(--border);
+    padding: 16px 24px 0;
+    position: relative;
+  }
+  .accordion-preview-code {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    line-height: 1.75;
+    color: #3a3830;
+    white-space: pre-wrap;
+    max-height: 72px;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+  }
+  .accordion-expand-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: none;
+    border: none;
+    border-top: 1px dashed var(--border);
+    margin-top: 8px;
+    padding: 12px 24px;
+    font-family: "Manrope", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .accordion-expand-btn:hover { background: var(--accent-light); }
+  .accordion-expand-btn svg { transition: transform 0.3s; }
+  .accordion.open .accordion-expand-btn svg { transform: rotate(180deg); }
+  .accordion.open .accordion-expand-btn { color: var(--text-muted); }
+
+  /* Full body — hidden until open */
+  .accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    opacity: 0;
+  }
+  .accordion-body-inner { overflow: visible; }
+  .accordion.open .accordion-body {
+    max-height: 9000px;
+    opacity: 1;
+    transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease 0.05s;
+  }
+  .accordion-inner { padding: 0 24px 24px; }
+  .accordion-intro { font-size: 14px; color: var(--text-muted); line-height: 1.7; padding-top: 20px; }
+
+  /* hide preview when open */
+  .accordion.open .accordion-preview { display: none; }
+
+  .projects-steps { margin-top: 18px; }
+  .pstep { display: flex; gap: 16px; margin-bottom: 18px; }
+  .pstep-num { width: 28px; height: 28px; border-radius: 50%; background: var(--tag-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: var(--text-muted); flex-shrink: 0; margin-top: 2px; }
+  .pstep-content { font-size: 15px; color: var(--text-muted); line-height: 1.7; }
+  .pstep-content strong { font-weight: 700; color: var(--text); }
+
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 36px; }
+  .result-callout { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; }
+  .result-callout-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+  .result-row { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 8px; }
+  .result-row:last-child { margin-bottom: 0; }
+  .result-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+
+  .product-block { background: var(--warning-bg); border: 1.5px solid var(--warning-border); border-radius: 20px; padding: 32px; margin-top: 48px; }
+  .product-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #92400e; margin-bottom: 8px; }
+  .product-title { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); margin-bottom: 10px; line-height: 1.25; }
+  .product-desc { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+  .product-features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+  .product-feature { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #3a3830; line-height: 1.55; }
+  .feature-check { width: 18px; height: 18px; border-radius: 50%; background: #fde68a; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .feature-check svg { width: 10px; height: 10px; color: #92400e; }
+  .product-highlight { font-size: 14px; color: #92400e; background: rgba(254,215,170,0.4); border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; font-weight: 600; line-height: 1.5; }
+  .product-price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+  .product-price { font-size: 28px; font-weight: 800; color: var(--text); letter-spacing: -0.03em; }
+  .product-price-note { font-size: 13px; color: var(--text-muted); }
+  .product-counter { font-size: 13px; font-weight: 600; color: #d97706; background: rgba(253,230,138,0.5); border-radius: 8px; padding: 6px 12px; margin-bottom: 16px; display: inline-block; }
+  .btn-product { display: inline-flex; align-items: center; gap: 8px; background: var(--dark); color: #fff; font-family: "Manrope", sans-serif; font-size: 15px; font-weight: 700; padding: 16px 28px; border-radius: 12px; text-decoration: none; margin-bottom: 16px; transition: opacity 0.2s; }
+  .btn-product:hover { opacity: 0.85; }
+  .guarantee { background: var(--success-bg); border: 1px solid var(--success-border); border-radius: 10px; padding: 12px 16px; font-size: 13px; color: #15803d; display: flex; align-items: flex-start; gap: 8px; line-height: 1.55; }
+  .guarantee svg { flex-shrink: 0; margin-top: 1px; }
+  .service-block { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-top: 16px; }
+  .service-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .service-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 14px; }
+  .btn-outline { display: inline-flex; align-items: center; gap: 6px; background: transparent; color: var(--text); font-family: "Manrope", sans-serif; font-size: 14px; font-weight: 600; padding: 12px 20px; border-radius: 10px; border: 1px solid var(--border); text-decoration: none; transition: border-color 0.2s, background 0.2s; }
+  .btn-outline:hover { border-color: #c0bcb4; background: var(--tag-bg); }
+
+  footer { background: var(--dark); color: #fff; padding: 56px 24px 40px; margin-top: 80px; }
+  .footer-inner { max-width: 720px; margin: 0 auto; }
+  .footer-title { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 6px; }
+  .footer-sub { font-size: 14px; color: rgba(255,255,255,0.55); margin-bottom: 28px; line-height: 1.6; }
+  .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+  .footer-card { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 16px; text-decoration: none; transition: background 0.2s; }
+  .footer-card:hover { background: rgba(255,255,255,0.1); }
+  .footer-card-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .footer-card-name { font-size: 13px; font-weight: 700; color: #fff; }
+  .footer-card-desc { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 1px; }
+  .footer-banner { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+  .footer-banner-text { font-size: 15px; font-weight: 700; color: #fff; }
+  .btn-tg { display: inline-flex; align-items: center; gap: 8px; background: #2563eb; color: #fff; font-family: "Manrope", sans-serif; font-size: 14px; font-weight: 700; padding: 12px 20px; border-radius: 100px; text-decoration: none; white-space: nowrap; transition: opacity 0.2s; }
+  .btn-tg:hover { opacity: 0.85; }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); }
+
+  .strong-text { color: var(--text); font-weight: 700; }
+
+  @media (max-width: 600px) {
+    .page { padding: 32px 16px 60px; }
+    .step-card, .intro-card { padding: 20px; }
+    .product-block { padding: 24px 20px; }
+    nav { padding: 0 16px; }
+    .nav-links { gap: 14px; }
+    .screenshots-grid { grid-template-columns: 1fr; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="../">Анастасия Лушникова</a>
+  <ul class="nav-links">
+    <li><a href="https://t.me/target_school1" target="_blank">Telegram</a></li>
+    <li><a href="https://www.instagram.com/target_school" target="_blank">Instagram</a></li>
+    <li><a href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank">Написать</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+  <div class="meta">
+    <span>май 2026</span>
+    <span class="meta-dot"></span>
+    <span>9 мин чтения</span>
+    <span class="meta-dot"></span>
+    <span>Автор: Анастасия Лушникова</span>
+  </div>
+
+  <h1>Как я делаю дизайн каруселей в Claude. Бесплатно, быстро и без дизайнера</h1>
+
+  <div class="tags">
+    <span class="tag">Инструменты</span>
+    <span class="tag">Контент</span>
+    <span class="tag">AI-маркетинг</span>
+    <span class="tag">Vibe coding</span>
+  </div>
+
+  <div class="intro-card">
+    <p>Я протестировала, наверное, всё что есть на рынке. Supa, Pallyy, Canva Pro, Daddy и ещё много других сервисов с красивыми обещаниями "создай карусель за минуты". Везде одно и то же: тестовый период, потом подписка. Ограниченные шаблоны. Логика "подстраивайся под наш формат, а не под свой бренд". И главное, платить надо каждый месяц за инструмент, который всё равно не делает то, что тебе нужно.</p>
+    <p>Ну или делегировать дизайнеру за 3000 рублей карусель. И это не шутка, а реальная стоимость, которую я платила.</p>
+    <div style="margin:16px 0;display:flex;justify-content:center;">
+        <div style="max-width:320px;width:100%;">
+          <img src="images/ref-1.jpg" alt="Переписка с дизайнером — 3000 руб за карусель" style="width:100%;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,0.1);display:block;" />
+          <div style="text-align:center;font-size:12px;color:var(--text-light);margin-top:8px;">Реальная переписка. Август 2025.</div>
+        </div>
+      </div>
+    <p>И всё-таки я нашла решение. Как говорится, всё вовремя. И это Claude. Не очевидно, потому что большинство используют его только для текста. И не осознают, что это на сегодня целая вселенная в делегировании. Он умеет рендерить HTML в PNG через встроенный браузер, визуализировать данные, подстраиваться под ваши желания и никогда не скажет "доплачивай мне за правки". А это значит, что любой дизайн, который можно описать кодом, можно получить в виде готового файла. <span class="strong-text">1080×1350px (4:5), готово к публикации.</span></p>
+  </div>
+
+  <div class="hint-blue">
+    <div class="hint-blue-icon">💡</div>
+    <div class="hint-blue-text">
+      <strong>Как пользоваться этим материалом.</strong> Читайте последовательно по шагам. Промпты можно копировать кнопкой. В конце найдёте большой системный промпт для настройки проекта в Claude — он раскрывается по клику.
+    </div>
+  </div>
+
+  <div class="block-header">
+    <div class="block-label">Четыре шага</div>
+    <div class="block-line"></div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step-card">
+    <div class="step-number">1</div>
+    <div class="step-title">Создай один слайд в Canva или возьми референс в Pinterest</div>
+    <div class="step-body">
+      <p>Подбирай референс под себя, чтобы был понятный образец: цвет фона, шрифт, структура слайда, ощущение. Не нужен идеальный дизайн. Нужна понятная точка отсчёта.</p>
+      <p>Формат: <span class="strong-text">1080×1350px (4:5 для Instagram)</span>. Идеально сделать два варианта одного слайда, один на тёмном фоне, один на светлом. Так Claude сразу поймёт логику чередования.</p>
+      <p>Хорошо если будет хедер сверху: иконка, название, тег. Основной заголовок, текстовый блок, паджинация снизу. Если нет, это можно прописать позже.</p>
+      <p>Для примера ниже я взяла чужие карусели, не свои. Просто чтобы показать, что сможет реализовать Claude по итогу и как он описывает визуал.</p>
+
+      <div class="screenshots-grid">
+        <img src="images/ref-2.jpg" alt="Пример карусели — светлый фон" />
+        <img src="images/chat.jpg" alt="Пример карусели — тёмный фон" />
+      </div>
+      <div class="screenshots-caption">Примеры референсов — именно такие карусели умеет делать Claude</div>
+
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-card">
+    <div class="step-number">2</div>
+    <div class="step-title">Попроси Claude описать дизайн-систему</div>
+    <div class="step-body">
+      <p>Загрузи оба PNG в чат и отправь промпт ниже. В ответ получишь полное описание: точные HEX-коды, размеры шрифтов, значения отступов, логику чередования. Это черновик концепта. Сохрани его.</p>
+      <div class="prompt-wrap">
+        <div class="prompt-header">
+          <span class="prompt-label">Промпт 1</span>
+          <button class="copy-btn" onclick="copyPrompt(this, 'p1')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Скопировать
+          </button>
+        </div>
+        <div class="prompt-body" id="p1">Посмотри на эти слайды и опиши их дизайн-систему максимально подробно: фон (HEX-коды, текстуры), шрифты (семейство, размеры, вес), цвета всех элементов с HEX-кодами, отступы в px, компоненты (хедер, тело, футер), логику чередования тёмных и светлых слайдов. Опиши так, чтобы по этому тексту можно было воссоздать точно такой же дизайн в HTML/CSS.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-card">
+    <div class="step-number">3</div>
+    <div class="step-title">Собери концепт-документ</div>
+    <div class="step-body">
+      <p>Концепт, это паспорт твоей дизайн-системы. Claude будет обращаться к нему каждый раз. Чем подробнее, тем точнее результат.</p>
+      <p>Попроси Claude доработать описание:</p>
+      <div class="prompt-wrap">
+        <div class="prompt-header">
+          <span class="prompt-label">Промпт 2</span>
+          <button class="copy-btn" onclick="copyPrompt(this, 'p2')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Скопировать
+          </button>
+        </div>
+        <div class="prompt-body" id="p2">Доработай описание дизайн-системы. Добавь: название концепции и её идею, правила текста (без длинных тире, заглавная после точки), шахматный порядок (нечётные тёмные, чётные светлые), правило: перед созданием карусели всегда уточнять с тёмного или светлого слайда начинаем, единый отступ в px со всех сторон, описание хедера (без даты, только иконка, название, тег), цвета маркеров с HEX-кодами, типы инфографики и их стили, паджинацию.</div>
+      </div>
+      <div style="margin-top:20px;">
+        <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border);">
+          <img src="images/design-system.jpg" alt="Результат — дизайн-система Lavender Cards" style="width:100%;display:block;" />
+        </div>
+        <div style="margin-top:10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;font-size:14px;color:#15803d;font-weight:600;line-height:1.5;">
+          ✓ Вот такой результат мы получаем — Claude сам описал название концепции, логику чередования, цвета с HEX-кодами. Это и есть твой концепт-документ.
+        </div>
+      </div>
+      <p style="margin-top:14px;">Сохрани итоговый концепт в отдельный файл или заметку, а ещё лучше попроси оформить в PDF. Это переиспользуемый актив. Он работает в любом новом диалоге с Claude.</p>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-card">
+    <div class="step-number">4</div>
+    <div class="step-title">Создай карусель и выгрузи в PNG</div>
+    <div class="step-body">
+      <p>Когда концепт готов, каждая новая карусель делается так: просто подставь свой концепт и текст слайдов.</p>
+      <div class="prompt-wrap">
+        <div class="prompt-header">
+          <span class="prompt-label">Промпт 3</span>
+          <button class="copy-btn" onclick="copyPrompt(this, 'p3')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Скопировать
+          </button>
+        </div>
+        <div class="prompt-body" id="p3">Вот мой концепт дизайн-системы: [вставь концепт]
+
+Вот текст карусели: [вставь текст слайдов]
+
+Перед началом уточни: с тёмного или светлого слайда начинаем? Оформи карусель строго по концепту.</div>
+      </div>
+      <p style="margin-top:14px;">Claude покажет превью первого слайда в браузере. Согласуешь. Потом делает все слайды. После апрува отправляешь команду на экспорт:</p>
+      <div class="prompt-wrap">
+        <div class="prompt-header">
+          <span class="prompt-label">Промпт 4 — экспорт</span>
+          <button class="copy-btn" onclick="copyPrompt(this, 'p4')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Скопировать
+          </button>
+        </div>
+        <div class="prompt-body" id="p4">Отрендери каждый слайд как отдельный PNG-файл через Playwright + Chromium. Размер: 1080x1350px. Жди networkidle + 1200ms перед скриншотом. Сохрани все файлы и дай ссылку на скачивание.</div>
+      </div>
+      <p style="margin-top:14px;">Получаешь папку с PNG. Каждый слайд отдельно, 1080×1350, готово к публикации.</p>
+
+      <div style="margin-top:20px;">
+        <div class="screenshots-grid">
+          <img src="images/slide-light.jpg" alt="Готовый слайд — светлый" />
+          <img src="images/slide-dark.jpg" alt="Готовый слайд — тёмный" />
+        </div>
+        <div style="margin-top:10px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--text-muted);line-height:1.6;">
+          Вот что получилось буквально за 5–7 минут. Есть что дорабатывать... но учитывая скорость — уже неплохо.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="block-header">
+    <div class="block-label">Ускорить в два раза</div>
+    <div class="block-line"></div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-title" style="margin-bottom:12px;">Claude Projects: настраиваешь один раз, потом только тексты</div>
+    <div class="step-body">
+      <p>Claude Projects, это раздел внутри Claude, где ты создаёшь отдельное пространство под конкретную задачу. Туда загружаешь концепт-документ один раз. И больше не вставляешь его в каждый новый диалог.</p>
+      <div style="margin-top:16px;margin-bottom:20px;">
+        <img src="images/projects.jpg" alt="Claude Projects — создание нового проекта" style="width:100%;border-radius:12px;border:1px solid var(--border);display:block;" />
+      </div>
+      <div class="projects-steps">
+        <div class="pstep"><div class="pstep-num">1</div><div class="pstep-content">Зайди в <strong>Claude → Projects → New Project</strong>. Назови проект, например "Карусели @твой_никнейм".</div></div>
+        <div class="pstep"><div class="pstep-num">2</div><div class="pstep-content">В поле <strong>Instructions</strong> вставь системный промпт ниже. Это мозг проекта. Claude будет читать его перед каждым диалогом.</div></div>
+        <div class="pstep"><div class="pstep-num">3</div><div class="pstep-content">Прикрепи концепт-документ через <strong>Add Content</strong>. Это твоя дизайн-система. Claude будет обращаться к ней при каждой карусели.</div></div>
+        <div class="pstep"><div class="pstep-num">4</div><div class="pstep-content">Начинай новый диалог внутри проекта. Пиши тему карусели, и Claude сразу работает по твоей системе.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACCORDION -->
+  <div class="accordion" id="acc">
+    <div style="padding:20px 24px 16px;display:flex;align-items:center;gap:14px;">
+      <div style="width:40px;height:40px;border-radius:10px;background:var(--tag-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+      </div>
+      <div>
+        <div style="font-size:16px;font-weight:700;color:var(--text);letter-spacing:-0.01em;">Системный промпт для поля Instructions</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-top:2px;">Скопируй целиком и вставь в настройки проекта</div>
+      </div>
+    </div>
+    <div class="accordion-preview">
+      <div class="accordion-preview-code">Ты — дизайнер Instagram-каруселей. Твоя задача: провести человека от идеи до готовых PNG-файлов для публикации. Работаешь строго по этапам — не перепрыгивай вперёд без подтверждения.
+
+ЭТАПЫ РАБОТЫ
+
+ЭТАП 1. ЗНАКОМСТВО С ПРОЕКТОМ
+
+Когда человек пишет первое сообщение — задавай вопросы строго по одному...</div>
+    </div>
+    <button class="accordion-expand-btn" onclick="toggleAcc()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      Развернуть для копирования полного промпта
+    </button>
+    <div class="accordion-body">
+      <div class="accordion-body-inner">
+      <div class="accordion-inner">
+        <p class="accordion-intro">Если концепта ещё нет — этот промпт проведёт по всем шагам прямо внутри чата. Если дизайн-система уже есть, загрузи её через Add Content, и Claude будет опираться на твои цвета и шрифты, а не подбирать с нуля.</p>
+        <div class="prompt-wrap">
+          <div class="prompt-header">
+            <span class="prompt-label">Системный промпт</span>
+            <button class="copy-btn" onclick="copyPrompt(this, 'sp')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Скопировать
+            </button>
+          </div>
+          <div class="prompt-body" id="sp">Ты — дизайнер Instagram-каруселей. Твоя задача: провести человека от идеи до готовых PNG-файлов для публикации. Работаешь строго по этапам — не перепрыгивай вперёд без подтверждения.
+
+ЭТАПЫ РАБОТЫ
+
+ЭТАП 1. ЗНАКОМСТВО С ПРОЕКТОМ
+
+Когда человек пишет первое сообщение — задавай вопросы строго по одному, не списком. Жди ответа перед следующим вопросом.
+
+Вопрос 1. О чём карусель и что должен сделать читатель после прочтения? (Сохранить, написать кодовое слово, перейти по ссылке.)
+Вопрос 2. Кто будет читать? Пара слов о человеке и что его волнует.
+Вопрос 3. Какой тон: экспертный и строгий, тёплый и разговорный, провокационный, вдохновляющий?
+Вопрос 4. Название бренда или никнейм Instagram.
+Вопрос 5. Текст для слайдов уже есть или пишем с нуля? Если есть — пусть пришлёт тезисы или черновик.
+
+После пятого ответа — зафиксируй параметры и переходи к этапу 2.
+
+ЭТАП 2. ДИЗАЙН: РЕФЕРЕНС ИЛИ С НУЛЯ
+
+Спроси один вопрос: "Есть карусель или аккаунт в Instagram, дизайн которого нравится? Можно прислать скрин или ссылку. Если нет — подберу цвета и шрифты сам на основе твоих ответов."
+
+Если прислали референс: изучи его и вычлени основной цвет, тип шрифта (засечки / гротеск), плотность текста, темп чередования фонов. Адаптируй под бренд — не копируй, бери настроение.
+
+Если референса нет: подбери палитру и шрифты самостоятельно.
+
+Как подбирать цвет без референса:
+Тёплый + близость → офф-вайт #fdfdf8, тёмный #1c1c1e, акцент в диапазоне терракота / золото / пыльная роза.
+Холодный + экспертность → #f4f4f8, тёмный #0f172a, акцент в диапазоне индиго / сланец / графит.
+Нейтральный / универсальный → #f5f5f0, тёмный #1a1a1a, акцент подбирается под нишу.
+
+Из одного акцентного цвета выводи всю палитру:
+BRAND_PRIMARY = основной акцент (прогресс-бар, иконки, теги)
+BRAND_LIGHT = primary + ~20% светлее (акцент на тёмных слайдах)
+BRAND_DARK = primary + ~30% темнее (текст CTA, якорь градиента)
+LIGHT_BG = офф-вайт (никогда чистый #ffffff)
+LIGHT_BORDER = чуть темнее LIGHT_BG
+DARK_BG = почти чёрный с лёгким оттенком бренда
+
+Как подбирать шрифты:
+Экспертный / строгий → Oswald + Inter
+Тёплый / разговорный → Lora + Nunito Sans
+Современный / чистый → Plus Jakarta Sans 700 + Plus Jakarta Sans 400
+Премиум / редакционный → Playfair Display + DM Sans
+Смелый / выразительный → Fraunces + Outfit
+Все шрифты подключать через Google Fonts.
+
+ЭТАП 3. СТРУКТУРА СЛАЙДОВ
+
+Предложи план карусели. Для каждого слайда укажи: тип, фон (тёмный / светлый), что будет — 1–2 предложения.
+
+Стандартная дуга:
+Слайд 1 — Обложка. Тёмный. Заголовок-крючок, логотип, никнейм.
+Слайд 2 — Проблема или контекст. Светлый. Боль, с которой узнаёт себя читатель.
+Слайды 3–N — Основное содержание. Чередовать тёмный/светлый. 1 мысль = 1 слайд.
+Слайд N+1 — Итог или инсайт. Одна финальная мысль.
+Последний — CTA. Градиент бренда. Призыв + кодовое слово. Без стрелки.
+
+Оптимальное количество: 5–8 слайдов. Больше 10 — почти всегда перегруз.
+
+Покажи план. Спроси: "Структура подходит или что-то поменять?" Жди подтверждения. Не верстай без апрува.
+
+ЭТАП 4. ПРЕВЬЮ ПЕРВОГО СЛАЙДА
+
+После апрува структуры скажи: "Сейчас покажу первый слайд — согласуем дизайн, потом верстаем всё."
+Создай HTML-артефакт с одним слайдом в Instagram-фрейме.
+Спроси: "Дизайн подходит? Или поправить цвета, шрифты, отступы?"
+Жди апрува. Только после этого верстаем остальные слайды.
+
+ЭТАП 5. ПОЛНАЯ ВЁРСТКА
+
+Верстай по 2–3 слайда за раз. После каждой порции показывай артефакт и спрашивай: "Слайды [N–M] готовы. Продолжаем?"
+Перед каждым слайдом с фото — запроси изображение.
+Правки принимай списком по номерам слайдов и вноси все сразу, не по одному.
+
+ЭТАП 6. ЭКСПОРТ PNG
+
+После апрува всех слайдов сохрани HTML через Python и запусти экспорт через Playwright. Viewport — всегда 420px, device_scale_factor = 2.5714 (итог 1080x1350px).
+
+ТЕХНИЧЕСКИЕ ПРАВИЛА
+
+Формат слайда: 420 × 525 px (4:5)
+Паддинг: 72px со всех сторон
+Рабочая ширина: 276 px
+Рабочая высота: 329 px (с учётом прогресс-бара 52px снизу)
+Экспорт: 1080 × 1350 px через device_scale_factor = 2.5714
+
+Типографика:
+Заголовок слайда: 32–36px, weight 700, line-height 1.1–1.15
+Тело: 14–15px, weight 400, line-height 1.5–1.55
+Тег/метка: 10px, weight 600, letter-spacing 2px, uppercase
+Счётчик слайда: 11px, weight 500
+
+Прогресс-бар — встроен в каждый слайд, position:absolute, bottom:0.
+Светлый слайд: fill = BRAND_PRIMARY. Тёмный слайд: fill = #fff.
+Стрелка свайпа — все слайды кроме последнего.
+Последний слайд — без стрелки, прогресс-бар 100%.
+
+СТОП-ПРАВИЛА:
+— Не верстать без согласованной структуры слайдов.
+— Не начинать вёрстку слайда с фото без полученного изображения.
+— Не менять дизайн-систему после апрува первого слайда.
+— Каждый слайд — ровно один div class="slide".
+— Максимум 5–6 строк текста на слайде. Больше — делить.
+— Не генерировать PNG без апрува всех слайдов.
+— HTML сохранять только через Python, не через shell.
+— Viewport в Playwright — всегда 420px.
+— justify-content: space-between на слайдах — запрещено.
+— Изображения — только base64, никогда внешние URL.</div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARE -->
+  <div class="block-header">
+    <div class="block-label">Без системы vs с системой</div>
+    <div class="block-line"></div>
+  </div>
+
+  <div class="compare-grid">
+    <div class="result-callout">
+      <div class="result-callout-title"><span style="color:#ef4444;">✕</span> Без системы</div>
+      <div class="result-row"><div class="result-dot" style="background:#ef4444;"></div><div>Каждый раз объясняешь стиль заново</div></div>
+      <div class="result-row"><div class="result-dot" style="background:#ef4444;"></div><div>Получаешь разный результат</div></div>
+      <div class="result-row"><div class="result-dot" style="background:#ef4444;"></div><div>Тратишь час на правки</div></div>
+      <div class="result-row"><div class="result-dot" style="background:#ef4444;"></div><div>Лента выглядит несвязанно</div></div>
+    </div>
+    <div class="result-callout">
+      <div class="result-callout-title"><span style="color:#16a34a;">✓</span> С системой</div>
+      <div class="result-row"><div class="result-dot" style="background:#16a34a;"></div><div>Даёшь текст, получаешь слайды</div></div>
+      <div class="result-row"><div class="result-dot" style="background:#16a34a;"></div><div>Единый стиль во всех каруселях</div></div>
+      <div class="result-row"><div class="result-dot" style="background:#16a34a;"></div><div>15 минут от текста до PNG</div></div>
+      <div class="result-row"><div class="result-dot" style="background:#16a34a;"></div><div>Лента выглядит профессионально</div></div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="intro-card">
+    <p style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px;">Но есть ещё кое-что важное.</p>
+    <p>Красивые карусели не продают сами по себе. Я видела сотни каруселей с идеальным дизайном, которые собирают лайки и не приносят ни одного клиента. И видела простые, почти некрасивые карусели, после которых директ не закрывается.</p>
+    <p>Разница в смыслах внутри. Ты можешь освоить инструмент за день. Но вопрос не в том, умеешь ли ты делать карусели. Вопрос в том, <span class="strong-text">что ты в них пишешь</span>. Попадаешь ли в то, что реально болит у твоей аудитории. Строишь ли контент так, чтобы читатель думал "это про меня" и шёл в директ.</p>
+    <p>Это отдельная работа. И это то, чем я занимаюсь.</p>
+  </div>
+
+  <!-- PRODUCT -->
+  <div class="product-block">
+    <div class="product-eyebrow">Если хочешь карусели, которые продают</div>
+    <div class="product-title">Архитектор смыслов</div>
+    <div class="product-desc">Цифровая среда в Notion. Инструменты для глубокого анализа аудитории, смысловые связки для контента. AI пишет на основе твоего кристалла смыслов, а не по шаблону. На выходе — маркетинговый фундамент для твоего продукта, готовый сегодня.</div>
+    <div style="margin-bottom:20px;">
+        <img src="images/architect.jpg" alt="Архитектор смыслов — маркетинговый анализ ЦА" style="width:100%;border-radius:12px;border:1px solid var(--warning-border);display:block;" />
+      </div>
+    <div class="product-features">
+      <div class="product-feature"><div class="feature-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>Промпт «Глубоководный аналитик» — готовый, протестированный, не нужно собирать самому</div>
+      <div class="product-feature"><div class="feature-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>Таблица из 10 разделов анализа ЦА: сегмент, вопросы 3 ночи, боли, страхи, ошибки, возражения, мечты, сарказм, магниты, ценности</div>
+      <div class="product-feature"><div class="feature-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>Шаблон «Смысловой кристалл»: 5 связок «сегмент → боль → лекарство → артефакт»</div>
+      <div class="product-feature"><div class="feature-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span>Объяснения голосом. Пошаговая логика: открыл, прошёл шаги, на выходе <strong>готовый маркетинговый фундамент</strong></span></div>
+    </div>
+    <div class="product-highlight">Раньше такой анализ занимал у команды 2–4 недели. У клиента самостоятельно — 1–3 месяца. Теперь 15 минут на одном промпте.</div>
+    <div class="product-price-row">
+      <div class="product-price">490 ₽</div>
+      <div class="product-price-note">первые 100 мест, далее цена растёт</div>
+    </div>
+    <div style="margin-bottom:16px;">
+      <div style="background:#fff8e7;border:1.5px solid #fde68a;border-radius:14px;padding:18px 20px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+          <div style="font-size:13px;font-weight:700;color:#92400e;">⚡ Осталось мест</div>
+          <div style="font-size:13px;font-weight:600;color:#92400e;">После 100-го клиента — 1 490 ₽</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <div style="flex:1;background:#fde68a;border-radius:100px;height:10px;overflow:hidden;">
+            <div id="counter-bar" style="height:100%;background:#d97706;border-radius:100px;width:0%;transition:width 1.2s cubic-bezier(0.4,0,0.2,1);"></div>
+          </div>
+          <div style="font-size:22px;font-weight:800;color:#1a1917;letter-spacing:-0.03em;min-width:60px;text-align:right;">
+            <span id="counter-num">0</span><span style="font-size:14px;font-weight:600;color:#92400e;">/100</span>
+          </div>
+        </div>
+        <div style="font-size:13px;color:#92400e;line-height:1.5;">Цена растёт честно — после 100 клиентов нужны другие каналы поддержки и обратной связи.</div>
+      </div>
+    </div>
+    <div>
+      <a href="https://app.lava.top/products/e09d7eec-f025-4686-96d7-5425f2973859" class="btn-product" target="_blank">Получить Архитектора смыслов →</a>
+    </div>
+    <div class="guarantee">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span><strong>Гарантия возврата.</strong> Зашли, посмотрели, поняли что это не ваш формат — написали в директ. Верну без вопросов. 490 рублей не стоят испорченного настроения ни вам, ни мне.</span>
+    </div>
+    <div class="service-block">
+      <div class="service-title">Если хочешь карусели под ключ</div>
+      <div class="service-desc">Моя команда делает карусели от концепции до готовых PNG. Анализируем аудиторию, строим контентную логику, пишем тексты, делаем дизайн. Карусели, которые не просто красивые — они работают на продажи.</div>
+      <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">Стоимость от 15 000 ₽ за проект</div>
+      <a href="https://www.instagram.com/target_school" class="btn-outline" target="_blank">Обсудить разработку →</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">Понравился материал?</div>
+    <div class="footer-sub">Подписывайтесь на каналы — там ещё больше про AI-маркетинг, смыслы и продажи без выгорания</div>
+    <div class="footer-grid">
+      <a class="footer-card" href="https://t.me/target_school1" target="_blank">
+        <div class="footer-card-icon" style="background:#1a4fa3;"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></div>
+        <div><div class="footer-card-name">Telegram канал</div><div class="footer-card-desc">Промпты и кейсы каждый день</div></div>
+      </a>
+      <a class="footer-card" href="https://www.instagram.com/target_school" target="_blank">
+        <div class="footer-card-icon" style="background:#c2185b;"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg></div>
+        <div><div class="footer-card-name">Instagram</div><div class="footer-card-desc">Визуальные гайды и stories</div></div>
+      </a>
+      <a class="footer-card" href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank">
+        <div class="footer-card-icon" style="background:#1a6e32;"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></div>
+        <div><div class="footer-card-name">Написать Анастасии</div><div class="footer-card-desc">Личное сообщение в WhatsApp</div></div>
+      </a>
+      <a class="footer-card" href="https://t.me/ailav_bot" target="_blank">
+        <div class="footer-card-icon" style="background:#b45309;"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div><div class="footer-card-name">Служба заботы</div><div class="footer-card-desc">Техподдержка и вопросы</div></div>
+      </a>
+    </div>
+    <div class="footer-banner">
+      <div class="footer-banner-text">Хотите больше материалов?</div>
+      <a href="https://t.me/target_school1" class="btn-tg" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Подписаться на Telegram
+      </a>
+    </div>
+    <div class="footer-copy">© 2026 Анастасия Лушникова. Все права защищены.</div>
+  </div>
+</footer>
+
+<script>
+  function copyPrompt(btn, id) {
+    const el = document.getElementById(id);
+    const text = el.innerText;
+
+    const checkIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
+    const copyIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+
+    function showCopied() {
+      btn.classList.add("copied");
+      btn.innerHTML = checkIcon + " Скопировано";
+      setTimeout(() => {
+        btn.classList.remove("copied");
+        btn.innerHTML = copyIcon + " Скопировать";
+      }, 2000);
+    }
+
+    // Modern clipboard API
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(showCopied).catch(() => fallbackCopy(text, showCopied));
+    } else {
+      fallbackCopy(text, showCopied);
+    }
+  }
+
+  function fallbackCopy(text, callback) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.cssText = "position:fixed;top:-9999px;left:-9999px;opacity:0;";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try {
+      document.execCommand("copy");
+      callback();
+    } catch(e) {
+      alert("Не удалось скопировать. Выделите текст вручную.");
+    }
+    document.body.removeChild(ta);
+  }
+
+  function toggleAcc() {
+    document.getElementById("acc").classList.toggle("open");
+  }
+
+  // Counter animation
+  function animateCounter() {
+    const target = 47;
+    const bar = document.getElementById("counter-bar");
+    const num = document.getElementById("counter-num");
+    if (!bar || !num) return;
+
+    // Animate bar to 53% (53 taken out of 100, so 47 remain)
+    setTimeout(() => {
+      bar.style.width = "53%";
+    }, 300);
+
+    // Count up number
+    let current = 0;
+    const step = Math.ceil(target / 40);
+    const interval = setInterval(() => {
+      current = Math.min(current + step, target);
+      num.textContent = current;
+      if (current >= target) clearInterval(interval);
+    }, 30);
+  }
+
+  // Trigger when counter enters viewport
+  const counterEl = document.getElementById("counter-bar");
+  if (counterEl) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCounter();
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(counterEl);
+  }
+</script>
+</body>
+</html>
