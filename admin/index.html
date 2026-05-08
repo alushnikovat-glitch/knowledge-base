@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Экосистема смыслов</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #f0ece4; color: #1a1a1a; font-size: 14px; display: flex; min-height: 100vh; }
+
+/* TOP NAV */
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #f5f3ef; color: #1a1a1a; font-size: 14px; display: block; min-height: 100vh; }
+
+.sidebar { display: none; }
+
+.topnav-wrapper {
+  background: #fff;
+  border-bottom: 1px solid #e8e3db;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+.topnav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 28px 10px;
+  border-bottom: 1px solid #f0ece4;
+}
+.topnav-logo { font-size: 13px; font-weight: 700; color: #1a1a1a; letter-spacing: -0.01em; }
+.topnav-logo span { color: #C8A96E; }
+.topnav-sub { font-size: 11px; color: #aaa; font-style: italic; margin-top: 1px; }
+
+.topnav-groups { display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; padding: 0 20px; }
+.topnav-groups::-webkit-scrollbar { display: none; }
+
+.topnav-group { display: flex; flex-direction: column; border-right: 1px solid #f0ece4; min-width: fit-content; }
+.topnav-group:last-child { border-right: none; }
+.topnav-group-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #bbb;
+  padding: 8px 14px 4px;
+}
+.topnav-items { display: flex; gap: 0; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px 9px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #666;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+.nav-item:hover { color: #1a1a1a; background: #faf8f4; }
+.nav-item.active { color: #1B3A8C; border-bottom-color: #C8A96E; font-weight: 600; background: #f5f3ff; }
+.nav-num { font-size: 9px; color: #ccc; }
+.nav-item.active .nav-num { color: #C8A96E; }
+
+/* MAIN */
+.main { margin-left: 0; flex: 1; min-height: 100vh; }
+.topbar { display: none; }
+.content { padding: 24px 32px 48px; max-width: 1200px; margin: 0 auto; }
+
+/* MOBILE HAMBURGER */
+.mob-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 22px;
+  color: #555;
+  line-height: 1;
+}
+
+@media (max-width: 700px) {
+  .topnav-header { padding: 10px 16px 8px; }
+  .mob-menu-btn { display: block; }
+
+  .topnav-groups {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: #fff;
+    border-top: 1px solid #f0ece4;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    padding: 8px 0 16px;
+    max-height: 72vh;
+    overflow-y: auto;
+    z-index: 200;
+  }
+  .topnav-groups.mob-open { display: flex; }
+  .topnav-wrapper { position: sticky; top: 0; z-index: 100; }
+
+  .topnav-group {
+    flex-direction: column;
+    border-right: none;
+    border-bottom: 1px solid #f5f2ee;
+    min-width: unset;
+    width: 100%;
+  }
+  .topnav-group:last-child { border-bottom: none; }
+  .topnav-group-label { padding: 10px 16px 4px; }
+  .topnav-items { flex-wrap: wrap; }
+  .nav-item {
+    font-size: 13px;
+    padding: 8px 16px;
+    border-bottom: none;
+    border-left: 2px solid transparent;
+    width: 50%;
+  }
+  .nav-item.active { border-bottom: none; border-left-color: #C8A96E; background: #f5f3ff; }
+
+  .content { padding: 16px 14px 48px; }
+
+  /* Tables to card layout */
+  table, thead, tbody, th, td, tr { display: block; }
+  thead { display: none; }
+  tbody tr {
+    background: #fff;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 12px 14px;
+    border: none;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  tbody tr:nth-child(even) { background: #fff; }
+  td { padding: 4px 0; border: none !important; font-size: 13px; background: transparent !important; }
+  td:first-child { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #C8A96E; border: none; margin-bottom: 2px; }
+  td:nth-child(3) { color: #666; font-style: italic; }
+  td:nth-child(4) { color: #444; border-left: none !important; font-style: italic; font-size: 12px; margin-top: 4px; padding-top: 6px; border-top: 1px solid #f0ece4 !important; }
+
+  /* All 3-col grids to 1 col */
+  .fn-cols, .mol-body, .sense-analysis, .voice-analysis, .vd-grid-3 { grid-template-columns: 1fr; }
+
+  /* Home grid 2 col */
+  .home-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .home-card { padding: 12px 10px; }
+  .home-card .hc-num { font-size: 18px; }
+  .home-card .hc-title { font-size: 12px; }
+
+  /* DNA tabs */
+  .dna-tabs { flex-wrap: wrap; }
+  .dna-tab { font-size: 11px; padding: 6px 11px; }
+
+  /* Funnel */
+  .fn-inner { gap: 8px; padding: 10px 12px; }
+  .fn-title { font-size: 13px; }
+  .fn-price { font-size: 12px; }
+  .fn-tag { min-width: 60px; font-size: 9px; }
+
+  /* VD */
+  .vd-block-head { padding: 14px 16px; }
+  .vd-block-body { padding: 14px 16px 18px; }
+  .vd-block-title { font-size: 14px; }
+
+  .section-title { font-size: 15px; }
+  .kr-num { font-size: 20px; width: 28px; min-width: 28px; }
+  .mol-head { flex-wrap: wrap; gap: 6px; }
+  .mol-title { font-size: 13px; }
+}
+
+
+/* SECTION */
+.section { display: none; }
+.section.active { display: block; }
+
+/* SHARED */
+.tip-box { background: #fff; border-left: 4px solid #C8A96E; border-radius: 0 6px 6px 0; padding: 14px 18px; margin-bottom: 20px; font-size: 13px; color: #555; line-height: 1.6; }
+.tip-box strong { color: #1B3A8C; }
+.section-title { font-size: 16px; font-weight: 700; color: #1B3A8C; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #1B3A8C; }
+
+table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+thead tr { background: #111827; }
+thead th { padding: 11px 14px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: #C8A96E; }
+thead th:first-child { width: 130px; }
+tbody tr { border-bottom: 1px solid #ece8e0; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:nth-child(even) { background: #faf8f4; }
+tbody tr:hover { background: #f0ecff; }
+td { padding: 13px 14px; vertical-align: top; line-height: 1.58; font-size: 13px; }
+td:first-child { font-weight: 600; color: #1B3A8C; border-right: 2px solid #e8e2d8; font-size: 12px; }
+td:nth-child(3) { color: #555; font-style: italic; }
+td:nth-child(4) { color: #444; background: #fdfaf5; border-left: 3px solid #C8A96E; font-style: italic; font-size: 12px; }
+
+/* HOME */
+.home-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 8px; }
+.home-card { background: #fff; border-radius: 6px; padding: 16px 14px; border-left: 4px solid #1B3A8C; cursor: pointer; transition: all 0.15s; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.home-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.home-card .hc-num { font-size: 22px; font-weight: 700; color: #e0d4b8; }
+.home-card .hc-title { font-size: 13px; font-weight: 600; color: #1B3A8C; margin: 4px 0 2px; }
+.home-card .hc-sub { font-size: 11px; color: #999; }
+.kr-num { text-align: center; font-size: 26px; font-weight: 700; color: #e0d4b8; width: 40px; min-width: 40px; }
+.tag { display: inline-block; padding: 2px 7px; border-radius: 3px; font-size: 10px; font-weight: 600; margin-bottom: 5px; }
+.tag-f { background: #fef2f2; color: #B91C1C; border: 1px solid #fecaca; }
+.tag-p { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+.drug-word { font-size: 15px; font-weight: 700; color: #1B3A8C; font-style: italic; display: block; margin-bottom: 5px; }
+.art-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #166534; display: block; margin-bottom: 4px; }
+
+/* FUNNEL */
+.fn-level { border-radius: 8px; overflow: hidden; cursor: pointer; margin: 0 auto 4px; transition: filter 0.15s; }
+.fn-level:hover { filter: brightness(0.96); }
+.fn-inner { display: flex; align-items: center; gap: 12px; padding: 13px 18px; }
+.fn-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; min-width: 76px; text-align: center; white-space: nowrap; }
+.fn-title { font-size: 14px; font-weight: 600; flex: 1; }
+.fn-price { font-size: 13px; font-weight: 600; white-space: nowrap; }
+.fn-arr { font-size: 13px; opacity: 0.45; transition: transform 0.2s; display: inline-block; }
+.fn-arr.open { transform: rotate(180deg); }
+.fn-detail { display: none; background: #fff; border: 0.5px solid #e8e2d8; border-radius: 0 0 8px 8px; padding: 16px 18px; margin-top: -4px; margin-bottom: 4px; }
+.fn-detail.open { display: block; }
+.fn-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.fn-col-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: #999; margin-bottom: 5px; }
+.fn-col-body { font-size: 12px; color: #555; line-height: 1.65; }
+.fn-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.fn-badge { font-size: 10px; padding: 2px 7px; border-radius: 3px; border: 0.5px solid #e0dbd0; color: #777; background: #faf8f4; }
+.fn-price-box { background: #f8f6f2; border-radius: 6px; padding: 10px 12px; margin-top: 10px; }
+.fn-price-main { font-size: 20px; font-weight: 700; }
+.fn-price-note { font-size: 11px; color: #999; margin-top: 3px; line-height: 1.5; }
+.fn-status { font-size: 11px; color: #999; margin-top: 8px; display: flex; align-items: center; gap: 5px; }
+.fn-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+.fn-dot-live { background: #3B6D11; }
+.fn-dot-idea { background: #534AB7; }
+.fn-arrow-down { text-align: center; font-size: 18px; color: #ccc; line-height: 1; margin: 2px 0; }
+.lv0 { background: #E6F1FB; } .lv0 .fn-tag { background: #B5D4F4; color: #0C447C; } .lv0 .fn-title, .lv0 .fn-price { color: #0C447C; }
+.lv1 { background: #FAEEDA; } .lv1 .fn-tag { background: #FAC775; color: #633806; } .lv1 .fn-title, .lv1 .fn-price { color: #633806; }
+.lv2 { background: #EAF3DE; border: 2px solid #639922; } .lv2 .fn-tag { background: #C0DD97; color: #27500A; } .lv2 .fn-title, .lv2 .fn-price { color: #27500A; }
+.lv3 { background: #EEEDFE; } .lv3 .fn-tag { background: #CECBF6; color: #26215C; } .lv3 .fn-title, .lv3 .fn-price { color: #26215C; }
+
+/* DNA */
+.dna-tabs { display: flex; gap: 4px; margin-bottom: 20px; }
+.dna-tab { padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1.5px solid transparent; transition: all 0.15s; background: #f0ece4; color: #888; }
+.dna-tab.active { background: #1c1c1e; color: #C8A96E; border-color: #C8A96E; }
+.dna-pane { display: none; }
+.dna-pane.active { display: block; }
+.mol-card { background: #fff; border-radius: 8px; border: 0.5px solid #e8e2d8; margin-bottom: 12px; overflow: hidden; }
+.mol-head { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 0.5px solid #f0ece4; }
+.mol-num { font-size: 18px; font-weight: 700; color: #e8e2d8; min-width: 28px; }
+.mol-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; padding: 3px 8px; border-radius: 4px; }
+.mol-title { font-size: 14px; font-weight: 600; color: #1a1a1a; flex: 1; }
+.mol-body { padding: 14px 18px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.mol-col-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: #bbb; margin-bottom: 5px; }
+.mol-col-body { font-size: 12px; color: #555; line-height: 1.65; }
+.mol-example { font-size: 12px; color: #1B3A8C; background: #EEF4FF; border-radius: 5px; padding: 8px 10px; margin-top: 6px; line-height: 1.6; font-style: italic; }
+.sense-card { background: #fff; border-radius: 8px; border: 0.5px solid #e8e2d8; margin-bottom: 16px; overflow: hidden; }
+.sense-raw { padding: 16px 18px; font-size: 14px; line-height: 1.7; color: #1a1a1a; border-bottom: 0.5px solid #f0ece4; background: #fdfaf5; font-style: italic; }
+.sense-src { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: #C8A96E; display: block; margin-bottom: 8px; font-style: normal; }
+.sense-analysis { padding: 16px 18px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.sense-col-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: #bbb; margin-bottom: 5px; }
+.sense-col-body { font-size: 12px; color: #555; line-height: 1.65; }
+.sense-hook { font-size: 12px; color: #166534; background: #EAF3DE; border-radius: 5px; padding: 8px 10px; margin-top: 6px; line-height: 1.6; }
+.sense-tag { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 3px; margin: 2px 2px 0 0; font-weight: 600; }
+.add-box { background: #f8f6f2; border: 1.5px dashed #d8d2c8; border-radius: 8px; padding: 18px 20px; text-align: center; color: #bbb; font-size: 13px; margin-top: 8px; }
+.add-box strong { color: #888; display: block; margin-bottom: 4px; }
+
+/* VOICES */
+.voice-card { background: #fff; border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+.voice-body { font-size: 15px; color: #1a1a1a; line-height: 1.65; font-style: italic; padding: 16px 18px; }
+.voice-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 10px; }
+.voice-analysis { padding: 14px 18px; border-top: 0.5px solid #f0ece4; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.v-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: #bbb; margin-bottom: 5px; }
+.v-body { font-size: 12px; color: #555; line-height: 1.65; }
+.v-hook { font-size: 12px; color: #1B3A8C; background: #EEF4FF; border-radius: 5px; padding: 8px 10px; margin-top: 6px; line-height: 1.6; }
+.patterns-grid { background: #1c1c1e; border-radius: 8px; padding: 20px 22px; margin-top: 20px; }
+.pat-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: #C8A96E; margin-bottom: 14px; }
+
+/* VALUE DOC - scoped */
+.vd-wrap { max-width: 860px; margin: 0 auto; padding: 20px 0 48px; }
+.vd-hero { background: #111827; color: #fff; padding: 40px 32px 36px; border-radius: 8px; margin-bottom: 24px; }
+.vd-hero-label { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #C8A96E; margin-bottom: 12px; }
+.vd-hero h1 { font-size: 22px; font-weight: 700; line-height: 1.35; margin-bottom: 10px; }
+.vd-hero p { font-size: 13px; color: #aaa; line-height: 1.65; }
+.vd-block { background: #fff; border-radius: 10px; margin-bottom: 14px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.vd-block-head { display: flex; align-items: flex-start; gap: 14px; padding: 18px 22px; cursor: pointer; border-bottom: 1.5px solid transparent; transition: background 0.15s; }
+.vd-block-head:hover { background: #faf8f4; }
+.vd-block-head.open { border-bottom-color: #e8e2d8; }
+.vd-block-num { font-size: 13px; font-weight: 700; color: #e0d4b8; min-width: 28px; padding-top: 2px; }
+.vd-block-meta { flex: 1; }
+.vd-block-tag { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; padding: 2px 8px; border-radius: 3px; display: inline-block; margin-bottom: 5px; }
+.vd-block-title { font-size: 15px; font-weight: 700; color: #1a1a1a; margin-bottom: 3px; line-height: 1.3; }
+.vd-block-sub { font-size: 12px; color: #999; }
+.vd-block-arr { font-size: 13px; color: #ccc; transition: transform 0.2s; padding-top: 4px; }
+.vd-block-arr.open { transform: rotate(180deg); }
+.vd-block-body { display: none; padding: 18px 22px 22px; }
+.vd-block-body.open { display: block; }
+.vd-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.vd-col-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #bbb; margin-bottom: 5px; }
+.vd-col-body { font-size: 13px; color: #444; line-height: 1.65; }
+.vd-without-box { background: #fff5f5; border-left: 3px solid #f87171; border-radius: 0 6px 6px 0; padding: 11px 13px; font-size: 13px; color: #7f1d1d; line-height: 1.65; margin-top: 12px; }
+.vd-without-box strong { display: block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: #f87171; margin-bottom: 3px; }
+.vd-result-box { background: #f0faf0; border-left: 3px solid #4ade80; border-radius: 0 6px 6px 0; padding: 11px 13px; font-size: 13px; color: #14532d; line-height: 1.65; margin-top: 8px; }
+.vd-result-box strong { display: block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: #4ade80; margin-bottom: 3px; }
+.vd-questions { margin-top: 12px; padding-top: 12px; border-top: 1px solid #f0ece4; }
+.vd-questions-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #C8A96E; margin-bottom: 6px; }
+.vd-q-item { font-size: 13px; color: #555; padding: 3px 0 3px 13px; position: relative; line-height: 1.55; }
+.vd-q-item::before { content: '→'; position: absolute; left: 0; color: #C8A96E; font-size: 11px; top: 4px; }
+.vd-section-divider { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #999; padding: 20px 0 8px; border-bottom: 1px solid #e8e2d8; margin-bottom: 14px; }
+.vd-bottom-cta { background: #111827; border-radius: 10px; padding: 28px 24px; text-align: center; margin-top: 28px; }
+.vd-bottom-cta h3 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px; line-height: 1.35; }
+.vd-bottom-cta p { font-size: 13px; color: #888; line-height: 1.65; }
+.vd-gold { color: #C8A96E; font-weight: 600; }
+
+</style>
+</head>
+<body>
+
+<nav class="sidebar"></nav>
+
+<div class="topnav-wrapper">
+  <div class="topnav-header">
+    <div>
+      <div class="topnav-logo">Архитектор <span>смыслов</span></div>
+      <div class="topnav-sub">Экосистема ЦА</div>
+    </div>
+    <button class="mob-menu-btn" onclick="toggleMobMenu()" id="mobBtn" aria-label="Меню">☰</button>
+  </div>
+  <div class="topnav-groups">
+
+    <div class="topnav-group">
+      <div class="topnav-group-label">Навигация</div>
+      <div class="topnav-items">
+        <div class="nav-item active" onclick="go('home')"><span class="nav-num">⌂</span> Главная</div>
+      </div>
+    </div>
+
+    <div class="topnav-group">
+      <div class="topnav-group-label">Анализ аудитории</div>
+      <div class="topnav-items">
+        <div class="nav-item" onclick="go('seg')"><span class="nav-num">01</span> Сегмент</div>
+        <div class="nav-item" onclick="go('q')"><span class="nav-num">02</span> Вопросы 3 ночи</div>
+        <div class="nav-item" onclick="go('pain')"><span class="nav-num">03</span> Боли</div>
+        <div class="nav-item" onclick="go('fear')"><span class="nav-num">04</span> Страхи</div>
+        <div class="nav-item" onclick="go('err')"><span class="nav-num">05</span> Ошибки</div>
+        <div class="nav-item" onclick="go('obj')"><span class="nav-num">06</span> Возражения</div>
+        <div class="nav-item" onclick="go('dream')"><span class="nav-num">07</span> Мечты</div>
+        <div class="nav-item" onclick="go('sar')"><span class="nav-num">08</span> Сарказм</div>
+        <div class="nav-item" onclick="go('mag')"><span class="nav-num">09</span> Магниты</div>
+        <div class="nav-item" onclick="go('val')"><span class="nav-num">10</span> Ценности</div>
+      </div>
+    </div>
+
+    <div class="topnav-group">
+      <div class="topnav-group-label">Стратегия</div>
+      <div class="topnav-items">
+        <div class="nav-item" onclick="go('kr')"><span class="nav-num">★</span> Кристалл</div>
+        <div class="nav-item" onclick="go('crisis')"><span class="nav-num">⚡</span> Кризис</div>
+        <div class="nav-item" onclick="go('comp')"><span class="nav-num">⚔</span> Конкуренты</div>
+        <div class="nav-item" onclick="go('entry')"><span class="nav-num">🚪</span> Точка входа</div>
+      </div>
+    </div>
+
+    <div class="topnav-group">
+      <div class="topnav-group-label">Живые данные</div>
+      <div class="topnav-items">
+        <div class="nav-item" onclick="go('dna')"><span class="nav-num">✦</span> ДНК голоса</div>
+        <div class="nav-item" onclick="go('voices')"><span class="nav-num">🔥</span> Голос аудитории</div>
+      </div>
+    </div>
+
+    <div class="topnav-group">
+      <div class="topnav-group-label">Продукты</div>
+      <div class="topnav-items">
+        <div class="nav-item" onclick="go('lineup')"><span class="nav-num">💎</span> Линейка</div>
+      </div>
+    </div>
+
+    <div class="topnav-group">
+      <div class="topnav-group-label">Документация</div>
+      <div class="topnav-items">
+        <div class="nav-item" onclick="go('valuedoc')"><span class="nav-num">📄</span> Что транслировать</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="main">
+  <div class="topbar" id="topbar">
+    <h2 id="topbar-title">Главная</h2>
+    <p id="topbar-sub">Все инструменты в одном месте</p>
+  </div>
+  <div class="content">
+
+    <!-- HOME -->
+    <div class="section active" id="home">
+      <div class="tip-box"><strong>Как пользоваться каждый день.</strong> Пишешь пост — открываешь 03 Боли + 09 Магниты. Готовишься к запуску — 04 Страхи + 06 Возражения + ★ Кристалл. Ищешь идею — 02 Вопросы 3 ночи + 07 Мечты. Всё связано, всё здесь.</div>
+      <div class="home-grid">
+        <div class="home-card" onclick="go('seg')"><div class="hc-num">01</div><div class="hc-title">Сегмент</div><div class="hc-sub">Портрет и потенциал ЦА</div></div>
+        <div class="home-card" onclick="go('q')"><div class="hc-num">02</div><div class="hc-title">Вопросы 3 ночи</div><div class="hc-sub">Что гуглят в отчаянии</div></div>
+        <div class="home-card" onclick="go('pain')"><div class="hc-num">03</div><div class="hc-title">Боли</div><div class="hc-sub">10 сильнейших болей</div></div>
+        <div class="home-card" onclick="go('fear')"><div class="hc-num">04</div><div class="hc-title">Страхи</div><div class="hc-sub">Что блокирует покупку</div></div>
+        <div class="home-card" onclick="go('err')"><div class="hc-num">05</div><div class="hc-title">Ошибки</div><div class="hc-sub">Что делают не так</div></div>
+        <div class="home-card" onclick="go('obj')"><div class="hc-num">06</div><div class="hc-title">Возражения</div><div class="hc-sub">+ закрытие через метафору</div></div>
+        <div class="home-card" onclick="go('dream')"><div class="hc-num">07</div><div class="hc-title">Мечты</div><div class="hc-sub">Глубинные желания</div></div>
+        <div class="home-card" onclick="go('sar')"><div class="hc-num">08</div><div class="hc-title">Сарказм</div><div class="hc-sub">На что реагируют живо</div></div>
+        <div class="home-card" onclick="go('mag')"><div class="hc-num">09</div><div class="hc-title">Магниты</div><div class="hc-sub">Смыслы-крючки для контента</div></div>
+        <div class="home-card" onclick="go('val')"><div class="hc-num">10</div><div class="hc-title">Ценности</div><div class="hc-sub">Триггеры и ценности ЦА</div></div>
+        <div class="home-card" onclick="go('kr')" style="border-left-color:#C8A96E"><div class="hc-num" style="color:#C8A96E">★</div><div class="hc-title" style="color:#C8A96E">Смысловой кристалл</div><div class="hc-sub">5 мощных связок</div></div>
+        <div class="home-card" onclick="go('crisis')" style="border-left-color:#e57373"><div class="hc-num" style="color:#e57373">⚡</div><div class="hc-title" style="color:#c0392b">Смыслы в кризис</div><div class="hc-sub">Продажи когда всё рушится</div></div>
+        <div class="home-card" onclick="go('dna')" style="border-left-color:#C8A96E"><div class="hc-num" style="color:#C8A96E">✦</div><div class="hc-title" style="color:#8B6914">ДНК голоса</div><div class="hc-sub">Молекулы и банк смыслов</div></div>
+        <div class="home-card" onclick="go('voices')" style="border-left-color:#f87171"><div class="hc-num" style="color:#f87171">🔥</div><div class="hc-title" style="color:#c0392b">Голос аудитории</div><div class="hc-sub">Живые фразы из комментариев</div></div>
+        <div class="home-card" onclick="go('lineup')" style="border-left-color:#4ade80"><div class="hc-num" style="color:#4ade80">💎</div><div class="hc-title" style="color:#166534">Продуктовая линейка</div><div class="hc-sub">Воронка от 0 до 35 000 руб</div></div>
+        <div class="home-card" onclick="go('valuedoc')" style="border-left-color:#a78bfa"><div class="hc-num" style="color:#a78bfa">📄</div><div class="hc-title" style="color:#5B21B6">Что транслировать в блоге</div><div class="hc-sub">Ценность каждого раздела</div></div>
+      </div>
+    </div>
+
+    <!-- 01 СЕГМЕНТ -->
+    <div class="section" id="seg">
+      <div class="section-title">01 — Ключевой сегмент</div>
+      <table><thead><tr><th>Категория</th><th>Суть</th><th>Смысловой перевод</th><th>Метафора</th></tr></thead><tbody>
+        <tr><td>Портрет</td><td>Эксперт 30–45 лет с реальным опытом, но без системного онлайн-дохода</td><td>Знает много, зарабатывает мало. Внутри — «я заслуживаю большего», но непонятно как</td><td>Шеф-повар, который готовит гениально дома — но ресторана всё нет</td></tr>
+        <tr><td>Ситуация сейчас</td><td>Работает на износ офлайн / в найме / на фрилансе без потолка дохода и свободы</td><td>Продаёт время час за час, устала физически и морально, чувствует ловушку</td><td>Белка в колесе, которая уже знает, что колесо — не дорога</td></tr>
+        <tr><td>Денежный потенциал</td><td>Готовы платить за конкретику, экономящую месяцы попыток</td><td>Не хотят теорию. Хотят шаблон + уверенность, что это работает</td><td>Не покупают лопату — покупают яму нужного размера, уже готовую</td></tr>
+      </tbody></table>
+
+      <div style="margin-top:28px">
+        <div class="section-title" style="margin-top:0">Сегменты ЦА — кто эти люди</div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:4px">
+
+          <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);border-top:3px solid #6B8CDE">
+            <div style="padding:16px 18px 12px;border-bottom:1px solid #f0ece4">
+              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6B8CDE;margin-bottom:6px">Сегмент А</div>
+              <div style="font-size:15px;font-weight:700;color:#1a1a1a;line-height:1.3">«Хочу начать, но страшно»</div>
+              <div style="font-size:12px;color:#999;margin-top:3px">Россия или другая страна. Блог — идея, не реальность</div>
+            </div>
+            <div style="padding:14px 18px">
+              <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#bbb;margin-bottom:8px">Что происходит внутри</div>
+              <div style="font-size:13px;color:#444;line-height:1.65;margin-bottom:10px">Видит других, которые зарабатывают через блог. Хочет так же. Начинает изучать — и замирает. Страх провала сильнее желания попробовать. Нет рядом никого, кто прошёл это и говорит «у тебя получится».</div>
+              <div style="background:#EEF4FF;border-radius:6px;padding:10px 12px;font-size:12px;color:#1B3A8C;line-height:1.6;font-style:italic">«Я хочу начать вести блог и зарабатывать, но боюсь, что не получится. А вдруг я стартану — и опозорюсь?»</div>
+              <div style="margin-top:10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#bbb;margin-bottom:6px">Глубинная мечта</div>
+              <div style="font-size:12px;color:#555;line-height:1.6">Свобода выбора: где жить, как работать, сколько зарабатывать. Путешествовать. Видеть мир. Не зависеть от одного источника дохода.</div>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);border-top:3px solid #C8A96E">
+            <div style="padding:16px 18px 12px;border-bottom:1px solid #f0ece4">
+              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#C8A96E;margin-bottom:6px">Сегмент Б</div>
+              <div style="font-size:15px;font-weight:700;color:#1a1a1a;line-height:1.3">«Уже публикую, но системы нет»</div>
+              <div style="font-size:12px;color:#999;margin-top:3px">Что-то делает. Результата нет. Запутался</div>
+            </div>
+            <div style="padding:14px 18px">
+              <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#bbb;margin-bottom:8px">Что происходит внутри</div>
+              <div style="font-size:13px;color:#444;line-height:1.65;margin-bottom:10px">Посты выходят, но хаотично. Иногда есть реакция, иногда тишина. Денег на SMM-специалиста или стратега нет. Пробовал курсы — там всё понятно на обучении и непонятно что делать потом. Устал делать без результата.</div>
+              <div style="background:#FEF9EC;border-radius:6px;padding:10px 12px;font-size:12px;color:#8B6914;line-height:1.6;font-style:italic">«Пишу уже полгода. Лайки есть. Денег нет. Не понимаю, что я делаю не так. Нанять специалиста не могу — дорого.»</div>
+              <div style="margin-top:10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#bbb;margin-bottom:6px">Глубинная мечта</div>
+              <div style="font-size:12px;color:#555;line-height:1.6">Чтобы блог наконец начал давать деньги. Не миллионы — просто стабильно. Чтобы усилия конвертировались в результат.</div>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);border-top:3px solid #7DBFA0">
+            <div style="padding:16px 18px 12px;border-bottom:1px solid #f0ece4">
+              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#7DBFA0;margin-bottom:6px">Сегмент В</div>
+              <div style="font-size:15px;font-weight:700;color:#1a1a1a;line-height:1.3">«Хочу уехать или уже уехал»</div>
+              <div style="font-size:12px;color:#999;margin-top:3px">Переезд как контекст. Онлайн-доход как необходимость</div>
+            </div>
+            <div style="padding:14px 18px">
+              <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#bbb;margin-bottom:8px">Что происходит внутри</div>
+              <div style="font-size:13px;color:#444;line-height:1.65;margin-bottom:10px">Думает о переезде или уже переехал. Понимает: офлайн-доход в новой стране не сразу. Нужен доход, который едет с тобой. Блог и онлайн-продукты, это не мечта, а практическая задача. Но как — непонятно.</div>
+              <div style="background:#EDFAF4;border-radius:6px;padding:10px 12px;font-size:12px;color:#166534;line-height:1.6;font-style:italic">«Я хочу уехать и работать удалённо. Но у меня нет онлайн-дохода, который бы это позволил. Хочу разобраться как его выстроить.»</div>
+              <div style="margin-top:10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#bbb;margin-bottom:6px">Глубинная мечта</div>
+              <div style="font-size:12px;color:#555;line-height:1.6">Дать детям лучшее образование и среду. Больше путешествовать. Проводить время с семьёй, не в офисе. Ощущение, что жизнь строится осознанно.</div>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);border-top:3px solid #c084fc">
+            <div style="padding:16px 18px 12px;border-bottom:1px solid #f0ece4">
+              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#c084fc;margin-bottom:6px">Сегмент Г</div>
+              <div style="font-size:15px;font-weight:700;color:#1a1a1a;line-height:1.3">«Хочу больше времени на семью»</div>
+              <div style="font-size:12px;color:#999;margin-top:3px">Работа отнимает главное. Ищет другую модель</div>
+            </div>
+            <div style="padding:14px 18px">
+              <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#bbb;margin-bottom:8px">Что происходит внутри</div>
+              <div style="font-size:13px;color:#444;line-height:1.65;margin-bottom:10px">Дети растут, а она работает. Хочет присутствовать в их жизни, а не только зарабатывать. Онлайн-доход кажется выходом: сам выбираешь когда и сколько. Но как построить его без потери дохода и без того чтобы тратить всё свободное время на блог.</div>
+              <div style="background:#FAF5FF;border-radius:6px;padding:10px 12px;font-size:12px;color:#6B21A8;line-height:1.6;font-style:italic">«Я хочу зарабатывать и при этом быть мамой, а не только специалистом. Хочу сама решать свой график.»</div>
+              <div style="margin-top:10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#bbb;margin-bottom:6px">Глубинная мечта</div>
+              <div style="font-size:12px;color:#555;line-height:1.6">Встречать детей из школы. Ездить в отпуск когда хочется, не когда разрешили. Доход, который не требует постоянного присутствия.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="background:#1a1a1a;border-radius:8px;padding:16px 20px;margin-top:16px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px">
+          <div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#555;margin-bottom:6px">Что объединяет всех</div>
+            <div style="font-size:12px;color:#aaa;line-height:1.65">Хотят доход, который не привязан к месту и работодателю. Блог как инструмент свободы.</div>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#555;margin-bottom:6px">Общий страх</div>
+            <div style="font-size:12px;color:#aaa;line-height:1.65">Стартануть и облажаться. Вложить время — и снова ничего. Быть осуждённой теми, кто увидит попытку.</div>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#555;margin-bottom:6px">Общий барьер</div>
+            <div style="font-size:12px;color:#aaa;line-height:1.65">Нет поддержки рядом. Нет денег на специалистов. Нет системы — только отдельные попытки.</div>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#555;margin-bottom:6px">Почему покупают</div>
+            <div style="font-size:12px;color:#aaa;line-height:1.65">Ищут систему, которую можно внедрить самой. Без команды. Без большого бюджета. С результатом.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 02 ВОПРОСЫ -->
+    <div class="section" id="q">
+      <div class="section-title">02 — Вопросы-паразиты (3 часа ночи)</div>
+      <table><thead><tr><th>Категория</th><th>Суть</th><th>Смысловой перевод</th><th>Метафора</th></tr></thead><tbody>
+        <tr><td>Вопрос #1</td><td>Почему другие запускаются с нуля и зарабатывают, а я с опытом — нет?</td><td>Ощущение несправедливости. Сомнение в собственной ценности</td><td>Видит чужой урожай и не понимает, почему её семена не прорастают</td></tr>
+        <tr><td>Вопрос #2</td><td>С чего начать — с блога, продукта, упаковки, трафика?</td><td>Паралич от выбора. Всё кажется одинаково важным и непонятным</td><td>Стоит перед шведским столом голодная, но не может выбрать тарелку</td></tr>
+        <tr><td>Вопрос #3</td><td>Как сформулировать что делаю, чтобы люди сразу понимали ценность?</td><td>Страдает от размытого позиционирования. Объясняет долго — не покупают</td><td>Продаёт бриллиант, завёрнутый в газету</td></tr>
+        <tr><td>Вопрос #4</td><td>Как продавать, не чувствуя себя навязчивой?</td><td>Конфликт: хочу деньги, но продажи кажутся стыдными</td><td>Умеет готовить, но стыдно вывесить меню</td></tr>
+        <tr><td>Вопрос #5</td><td>У меня маленькая аудитория — можно ли зарабатывать?</td><td>Не верит, что 500 подписчиков — это достаточно</td><td>Думает, что нужна армия — но выигрывают и спецназом</td></tr>
+        <tr><td>Вопрос #6</td><td>Почему контент не покупают, хотя лайкают и пишут «полезно»?</td><td>Разрыв между реакцией и конверсией разрушает мотивацию</td><td>Дарит подарки, но никто не платит за то же самое</td></tr>
+        <tr><td>Вопрос #7</td><td>Как понять, что ниша прибыльная, а не я придумываю?</td><td>Боится вложиться и облажаться перед собой</td><td>Роет колодец вслепую — не знает, есть ли вода</td></tr>
+        <tr><td>Вопрос #8</td><td>Что делать, если не умею снимать рилсы / монтировать?</td><td>Техническая тревога маскирует страх: «меня не примут»</td><td>Не идёт на вечеринку, потому что не знает, что надеть</td></tr>
+        <tr><td>Вопрос #9</td><td>Как не выгореть, если уже на пределе?</td><td>Усталость + страх ещё одной попытки без результата</td><td>Хочет завести машину, но бензина нет</td></tr>
+        <tr><td>Вопрос #10</td><td>Когда придёт моя очередь? Столько вложила — где отдача?</td><td>Боль инвестиций без результата. «Я что-то делаю не так»</td><td>Поливала цветок годами, а он не цветёт</td></tr>
+      </tbody></table>
+    </div>
+
+    <!-- 03 БОЛИ -->
+    <div class="section" id="pain">
+      <div class="section-title">03 — Сильнейшие боли</div>
+      <table><thead><tr><th>Категория</th><th>Суть</th><th>Смысловой перевод</th><th>Метафора</th></tr></thead><tbody>
+        <tr><td>Боль #1</td><td>У них не получается объяснить что делают, чтобы сразу хотелось купить</td><td>Слишком много знают — говорят слишком сложно</td><td>Карта сокровищ без X-метки: есть, но куда идти — непонятно</td></tr>
+        <tr><td>Боль #2</td><td>Их бесит что пишут посты каждый день, а продаж нет</td><td>Контент без смыслов = работа вхолостую</td><td>Кричит в лес. Эхо есть, заказов нет</td></tr>
+        <tr><td>Боль #3</td><td>У них не получается сделать первый мини-продукт</td><td>Паралич первого шага. Идей миллион — довести одну невозможно</td><td>Хочет испечь торт, но застряла на выборе рецепта</td></tr>
+        <tr><td>Боль #4</td><td>Их бесит что менее опытные зарабатывают больше</td><td>Опыт есть, признания нет. Несправедливость видна каждый день</td><td>Стажёр продаёт идеи директора и получает бонус</td></tr>
+        <tr><td>Боль #5</td><td>У них не получается выстроить систему: сегодня деньги есть, завтра нет</td><td>Нет повторяемости. Каждый месяц с нуля</td><td>Охотится каждый день, вместо того чтобы построить ферму</td></tr>
+        <tr><td>Боль #6</td><td>Их бесит что курсов куплено много, а применить негде</td><td>Информационное переедание без переваривания</td><td>Шкаф с книгами по плаванию, но в воду не входит</td></tr>
+        <tr><td>Боль #7</td><td>Как сделать так, чтобы продукт продавался без постоянного присутствия</td><td>Хотят пассивный доход, но не знают как без выгорания</td><td>Хочет, чтобы магазин работал пока спит — а пока сидит за кассой сама</td></tr>
+        <tr><td>Боль #8</td><td>У них не получается удержать аудиторию — подписываются и уходят</td><td>Контент есть, связи с людьми — нет</td><td>Вечеринка, где гости пришли, поели и ушли не познакомившись</td></tr>
+        <tr><td>Боль #9</td><td>Их бесит что приходится оправдывать цену и скидывать</td><td>Низкое позиционирование = постоянное давление на цену</td><td>Продаёт Ferrari по цене «девятки», потому что описание неубедительное</td></tr>
+        <tr><td>Боль #10</td><td>Как найти нишу и не распыляться на всё подряд</td><td>Делают всё — не выделяются ни в чём</td><td>Швейцарский нож против скальпеля: скальпель берут на операцию</td></tr>
+      </tbody></table>
+    </div>
+
+    <!-- 04 СТРАХИ -->
+    <div class="section" id="fear">
+      <div class="section-title">04 — Страхи-блокираторы</div>
+      <table><thead><tr><th>Категория</th><th>Суть</th><th>Смысловой перевод</th><th>Метафора</th></tr></thead><tbody>
+        <tr><td>Страх #1</td><td>Вложу деньги — опять не получится, и убедится что неспособна</td><td>Страх не потерять деньги, а потерять веру в себя</td><td>Не боится разбиться — боится убедиться, что не умеет летать</td></tr>
+        <tr><td>Страх #2</td><td>Люди увидят что пытается продавать и осудят</td><td>Страх публичной неудачи</td><td>Боится открыть ресторан, потому что соседи видели как сожгла яичницу</td></tr>
+        <tr><td>Страх #3</td><td>Я не эксперт достаточного уровня — кто я такая?</td><td>Синдром самозванца. Планка «достаточно» всегда выше</td><td>Ждёт диплома профессора, чтобы объяснить первокурснику задачу</td></tr>
+        <tr><td>Страх #4</td><td>Нет времени на ещё один проект — и так всё горит</td><td>За этим — страх, что приоритет изменится и старое рухнет</td><td>Отказывается от лифта, потому что привыкла ходить по лестнице</td></tr>
+        <tr><td>Страх #5</td><td>Идею украдут или кто-то делает лучше</td><td>Страх сравнения — и проигрыша в нём</td><td>Не открывает кафе, потому что McDonald's уже существует</td></tr>
+        <tr><td>Страх #6</td><td>Я не умею в технологии: воронки, боты, лендинги</td><td>Техфобия = отговорка. Страшно стать видимой</td><td>Отказывается от машины, потому что не знает как работает двигатель</td></tr>
+        <tr><td>Страх #7</td><td>Что если продукт не купят — докажет что меня не ценят</td><td>Самооценка завязана на результат продаж</td><td>Пишет роман и боится отдать читателю</td></tr>
+        <tr><td>Страх #8</td><td>Онлайн-рынок перегрет — поезд ушёл</td><td>Страх опоздания как рационализация бездействия</td><td>Думает, что магазины уже все заняты, раз есть Amazon</td></tr>
+        <tr><td>Страх #9</td><td>Не смогу поддерживать качество при потоке клиентов</td><td>Парадоксальный страх успеха</td><td>Не сажает огород, потому что боится не справиться с урожаем</td></tr>
+        <tr><td>Страх #10</td><td>Придётся показывать себя — лицо, голос, жизнь</td><td>Страх потери анонимности. Публичность = уязвимость</td><td>Хочет петь, но просит выключить свет на сцене</td></tr>
+      </tbody></table>
+    </div>
+
+    <!-- 05 ОШИБКИ -->
+    <div class="section" id="err">
+      <div class="section-title">05 — Ошибки</div>
+      <table><thead><tr><th>Категория</th><th>Суть</th><th>Смысловой перевод</th><th>Метафора</th></tr></thead><tbody>
+        <tr><td>Ошибка #1</td><td>Сначала делают продукт — потом думают кому продать</td><td>Влюбляются в идею, а не в клиента</td><td>Строят дом, потом ищут где поставить — земля не та</td></tr>
+        <tr><td>Ошибка #2</td><td>Пишут контент «о себе» вместо «про боль клиента»</td><td>Личный бренд = рассказывать о себе — ошибочная установка</td><td>Говорит о том, какая хорошая повариха, а гость голоден</td></tr>
+        <tr><td>Ошибка #3</td><td>Снижают цену вместо того, чтобы усилить ценность</td><td>Конкурируют стоимостью там, где надо конкурировать смыслом</td><td>Вместо улучшения упаковки — клеит скидку 50% поверх</td></tr>
+        <tr><td>Ошибка #4</td><td>Покупают ещё один курс вместо внедрения предыдущего</td><td>Учёба как прокрастинация</td><td>Читает карты вместо того, чтобы выйти в дорогу</td></tr>
+        <tr><td>Ошибка #5</td><td>Продают «что они делают» вместо «что получит клиент»</td><td>Язык процесса вместо языка результата</td><td>Продаёт дрель, а не дырку нужного диаметра</td></tr>
+        <tr><td>Ошибка #6</td><td>Пытаются быть для всех — и не резонируют ни с кем</td><td>Широкое позиционирование = нулевое притяжение</td><td>Хочет дружить со всем городом — нет ни одного близкого</td></tr>
+        <tr><td>Ошибка #7</td><td>Запускают без прогрева — и удивляются холодным продажам</td><td>Продают незнакомцам как знакомым</td><td>Делает предложение руки и сердца на первом свидании</td></tr>
+        <tr><td>Ошибка #8</td><td>Не собирают обратную связь и не итерируют продукт</td><td>Делают из головы, не из рынка</td><td>Готовит по своему вкусу, не спрашивая что хочет гость</td></tr>
+        <tr><td>Ошибка #9</td><td>Откладывают старт до «идеального момента»</td><td>Перфекционизм — это страх в костюме профессионализма</td><td>Ждёт пока стихнет ветер — а ветер и есть возможность</td></tr>
+        <tr><td>Ошибка #10</td><td>Работают в одиночку и не строят сообщество</td><td>Аудитория = актив. Без неё каждый запуск с нуля</td><td>Открывает ресторан на новом месте без постоянных гостей</td></tr>
+      </tbody></table>
+    </div>
+
+    <!-- 06 ВОЗРАЖЕНИЯ -->
+    <div class="section" id="obj">
+      <div class="section-title">06 — Возражения и закрытие</div>
+      <table><thead><tr><th>Категория</th><th>Суть</th><th>Смысловой перевод</th><th>Закрытие через метафору</th></tr></thead><tbody>
+        <tr><td>«Дорого»</td><td>Слишком большая сумма прямо сейчас</td><td>Не видит пути от покупки к деньгам</td><td>«Бесплатный сыр — только в мышеловке. Этот продукт — ключ от кладовки»</td></tr>
+        <tr><td>«Нет времени»</td><td>Завал, не смогу внедрить</td><td>«Боюсь снова вложиться и не сделать»</td><td>«Мини-продукт — 2 часа в неделю. Меньше, чем сериал»</td></tr>
+        <tr><td>«Уже покупала»</td><td>Была плохая попытка — зачем снова?</td><td>Прошлый опыт не сработал</td><td>«Ела невкусный борщ — это не значит, что борщ плохой. Важен рецепт»</td></tr>
+        <tr><td>«Подумаю»</td><td>Не готова решить прямо сейчас</td><td>Нет доверия или понимания ценности</td><td>«Думать лучше с инструментом в руках, чем без него»</td></tr>
+        <tr><td>«Мне рано»</td><td>Ещё не накопила достаточно знаний</td><td>Синдром самозванца + перфекционизм</td><td>«Первый блин учат делать в 5 лет — не в кулинарном колледже»</td></tr>
+        <tr><td>«Мало аудитории»</td><td>Нет смысла запускать</td><td>100 тёплых больше 10 000 равнодушных — не понимает</td><td>«Спецназ из 12 человек делает то, что не под силу армии в тысячу»</td></tr>
+        <tr><td>«Рынок полон»</td><td>Конкуренция огромная</td><td>Страх сравнения и проигрыша</td><td>«В 2000 году казалось, что поисковиков хватает. Потом пришёл Google»</td></tr>
+        <tr><td>«Не умею продавать»</td><td>Продажи — это не моё</td><td>Продажи = агрессия и манипуляция в её голове</td><td>«Продажа — это сказать другу: есть лекарство от твоей головной боли»</td></tr>
+        <tr><td>«Нужна поддержка»</td><td>Без куратора не получится</td><td>Не доверяет своей дисциплине</td><td>«Мини-продукт — это GPS. Едешь сама, маршрут уже построен»</td></tr>
+        <tr><td>«Есть YouTube»</td><td>Зачем платить, есть бесплатное</td><td>Не видит разницы между информацией и системой</td><td>«YouTube научит разбирать двигатель. Но вы хотите ехать, а не разбирать»</td></tr>
+      </tbody></table>
+    </div>
+
+    <!-- 07 МЕЧТЫ -->
+    <div class="section" id="dream">
+      <div class="section-title">07 — Глобальные мечты</div>
+      <table><thead><tr><th>Категория</th><th>Суть</th><th>Смысловой перевод</th><th>Метафора</th></tr></thead><tbody>
+        <tr><td>Мечта #1</td><td>Проснуться и увидеть оплаты — пока спала, деньги пришли</td><td>Пассивный доход как символ свободы</td><td>Сад, который плодоносит пока ты отдыхаешь</td></tr>
+        <tr><td>Мечта #2</td><td>Быть экспертом, к которому приходят сами</td><td>Репутация работает вместо холодного трафика</td><td>Не искать клиентов — чтобы находили её</td></tr>
+        <tr><td>Мечта #3</td><td>Работать 4 часа и зарабатывать как раньше за 10</td><td>Квантовый скачок эффективности</td><td>Из почасовой оплаты — в ценность за результат</td></tr>
+        <tr><td>Мечта #4</td><td>Чёткое позиционирование — знаю кто я и что предлагаю</td><td>Ясность и уверенность</td><td>Найти главу книги, которую писала годами</td></tr>
+        <tr><td>Мечта #5</td><td>Путешествовать и работать из любой точки мира</td><td>Физическая свобода = подтверждение, что модель работает</td><td>Ноутбук + Wi-Fi + любое побережье = офис мечты</td></tr>
+        <tr><td>Мечта #6</td><td>Продуктовая линейка, продающаяся без её участия</td><td>Система, а не ручное управление</td><td>Из самозанятого — в владельца бизнеса</td></tr>
+        <tr><td>Мечта #7</td><td>Стать голосом темы — той, кого цитируют</td><td>Влияние важнее денег. Идеи живут дольше</td><td>Из ученика — в того, кого цитируют ученики</td></tr>
+        <tr><td>Мечта #8</td><td>Выйти из гонки «всегда быть на связи»</td><td>Психологическая свобода. Право жить без тревоги</td><td>Из режима пожарника — в режим архитектора</td></tr>
+        <tr><td>Мечта #9</td><td>Видеть, как меняются жизни после её продукта</td><td>Смысловая мотивация. След важнее денег</td><td>Не продаёт уроки — даёт людям крылья</td></tr>
+        <tr><td>Мечта #10</td><td>Доказать себе, что она смогла</td><td>Внутренний триггер самоуважения</td><td>Квантовый скачок — это для себя в зеркале, не для Инстаграма</td></tr>
+      </tbody></table>
+    </div>
+
+    <!-- 08 САРКАЗМ -->
+    <div class="section" id="sar">
+      <div class="section-title">08 — Сарказм и юмор</div>
+      <table><thead><tr><th>Категория</th><th>Суть</th><th>Смысловой перевод</th><th>Метафора</th></tr></thead><tbody>
+        <tr><td>Сарказм #1</td><td>«Ещё один вебинар про миллион с нуля за 3 недели»</td><td>Устали от хайпа. Хотят честность и реальные цифры</td><td>Реагируют на «без волшебства, только система и смыслы»</td></tr>
+        <tr><td>Сарказм #2</td><td>«Написала пост с душой — 3 лайка»</td><td>Горькая ирония про алгоритмы vs качество</td><td>Подкалывают реальность — и хотят выход из неё</td></tr>
+        <tr><td>Сарказм #3</td><td>«Прошла 14 курсов. Теперь знаю всё — и продаю на 0»</td><td>Самоирония про информационное переедание</td><td>Юмор = признание + облегчение. После — готовы слушать решение</td></tr>
+        <tr><td>Сарказм #4</td><td>«Аудитория сказала "полезно!" — деньги не пришли»</td><td>Разрыв между лайками и продажами</td><td>«Полезно» — это хорошая новость без конверта</td></tr>
+      </tbody></table>
+    </div>
+
+    <!-- 09 МАГНИТЫ -->
+    <div class="section" id="mag">
+      <div class="section-title">09 — Смысловые магниты</div>
+      <table><thead><tr><th>Категория</th><th>Суть</th><th>Смысловой перевод</th><th>Метафора</th></tr></thead><tbody>
+        <tr><td>Магнит #1</td><td>«Как продавать без блога-миллионника»</td><td>Снимает барьер «нет аудитории = нет продаж»</td><td>Размер не главное — главное точность попадания в смысл</td></tr>
+        <tr><td>Магнит #2</td><td>«Мини-продукт за выходные — реально ли?»</td><td>Конкретный горизонт снижает страх</td><td>«За выходные» — это про реальность действия, а не скорость</td></tr>
+        <tr><td>Магнит #3</td><td>«Почему умные зарабатывают меньше простых блогеров»</td><td>Бьёт в болевую точку несправедливости</td><td>Называет то, о чём думают, но не говорят</td></tr>
+        <tr><td>Магнит #4</td><td>«Одна фраза, которая изменила мои продажи»</td><td>Простой инсайт с большим эффектом</td><td>Ключ, а не инструкция на 200 страниц</td></tr>
+        <tr><td>Магнит #5</td><td>«Как перестать объяснять и начать продавать»</td><td>Усталость от оправданий и сложных объяснений</td><td>Переход от «объяснителя» к «продавцу смыслов»</td></tr>
+        <tr><td>Магнит #6</td><td>«Почему ваш контент не продаёт — и как исправить»</td><td>Диагноз + обещание быстрого лечения</td><td>Говорит то, что чувствуют, и даёт надежду</td></tr>
+        <tr><td>Магнит #7</td><td>«От выгорания к 200к через один мини-продукт»</td><td>Личный кейс = доказательство</td><td>Не продаёт курс — показывает живой результат</td></tr>
+        <tr><td>Магнит #8</td><td>«3 смысла, которые продают без скидок»</td><td>Конкретика + избавление от дискомфорта продаж</td><td>Продажи без давления — мечта любого эксперта</td></tr>
+        <tr><td>Магнит #9</td><td>«Я перестала быть полезным экспертом — и продажи выросли»</td><td>Контринтуитивный инсайт. Ломает привычную модель</td><td>Парадокс, который хочется разгадать</td></tr>
+        <tr><td>Магнит #10</td><td>«Позиционирование за 15 минут: формула, которая работает»</td><td>Скорость + конкретность = привлекательность для занятых</td><td>Быстро = уважение ко времени. Работает = уважение к интеллекту</td></tr>
+      </tbody></table>
+    </div>
+
+    <!-- 10 ЦЕННОСТИ -->
+    <div class="section" id="val">
+      <div class="section-title">10 — Ценности и триггеры</div>
+      <table><thead><tr><th>Категория</th><th>Суть</th><th>Смысловой перевод</th><th>Метафора</th></tr></thead><tbody>
+        <tr><td>Свобода</td><td>Делать по-своему, в своём темпе, без начальника</td><td>Базовая потребность их модели жизни</td><td>Платят не за продукт — за ощущение, что они сами решают</td></tr>
+        <tr><td>Честность</td><td>Без розовых очков — реальная картина</td><td>Устали от обещаний и хайпа</td><td>«Скажи правду, даже если неудобная» — их запрос к эксперту</td></tr>
+        <tr><td>Рост без потери себя</td><td>Монетизация без предательства ценностей</td><td>Не хотят продавать душу ради денег</td><td>Заработать, не став кем-то другим — ключевое условие</td></tr>
+        <tr><td>Конкретность</td><td>Дай инструмент, а не теорию</td><td>Покупают ощущение движения вперёд</td><td>Каждая покупка = подтверждение правильного пути</td></tr>
+        <tr><td>Признание</td><td>Хочу, чтобы меня видели и ценили как эксперта</td><td>Деньги важны, но признание — ещё важнее</td><td>«Я хочу, чтобы обо мне говорили в своей нише»</td></tr>
+        <tr><td>Триг: соц. доказательство</td><td>«Она такая же — и у неё получилось»</td><td>Доверяют тем, кто прошёл похожий путь</td><td>«Она сделала — значит я тоже смогу» — главный механизм конверсии</td></tr>
+        <tr><td>Триг: личная история</td><td>Рассказ от первого лица с трансформацией</td><td>История вовлекает, факты убеждают</td><td>Не статистика — живой человек с живым опытом</td></tr>
+        <tr><td>Триг: простота</td><td>«Это сделаю даже я»</td><td>Уважение к времени и интеллекту</td><td>«Она говорит с умным человеком как с умным»</td></tr>
+        <tr><td>Триг: быстрый результат</td><td>Горизонт: неделя, выходные, один пост</td><td>Дай первую победу быстро — останутся надолго</td><td>Не обещай марафон — пообещай первый шаг с результатом</td></tr>
+        <tr><td>Триг: антигуру</td><td>Без понтов и «миллион за 3 дня»</td><td>Устали от инфоцыган. Хотят честного человека рядом</td><td>«Такая же как я, только уже разобралась»</td></tr>
+      </tbody></table>
+    </div>
+
+    <!-- КРИСТАЛЛ -->
+    <div class="section" id="kr">
+      <div class="section-title">★ Смысловой кристалл — 5 мощных связок</div>
+      <table><thead><tr><th style="width:36px">#</th><th style="width:16%">Сегмент</th><th style="width:24%">Боль / Скрытый страх</th><th style="width:24%">Смысл-лекарство</th><th>Твёрдый артефакт</th></tr></thead><tbody>
+        <tr><td class="kr-num">01</td><td><strong>Эксперт с опытом, без продаж</strong></td><td><span class="tag tag-f">скрытый страх</span><br>«Я делаю всё правильно — и всё равно не покупают. Значит, дело во мне.»</td><td><span class="drug-word">«Опора»</span>Проблема не в тебе — в упаковке смысла. Экспертиза есть. Нужен переводчик между твоей головой и болью клиента.</td><td><span class="art-label">Показать в контенте</span>До/после одного оффера. Результат: 0 продаж → 3 за 48 часов без рекламы.</td></tr>
+        <tr><td class="kr-num">02</td><td><strong>Эксперт-«объяснятель»</strong></td><td><span class="tag tag-p">боль</span><br>«Я отдаю бесплатно всё лучшее — а продаж нет.»</td><td><span class="drug-word">«Точка невозврата»</span>Полезный контент греет. Продаёт смысл, попавший точно в боль.</td><td><span class="art-label">Показать в контенте</span>Скриншот поста с 3 лайками vs пост-смысл с 12 продажами.</td></tr>
+        <tr><td class="kr-num">03</td><td><strong>Эксперт в параличе старта</strong></td><td><span class="tag tag-f">скрытый страх</span><br>«Если запущу — и не купят, это конец.»</td><td><span class="drug-word">«Фундамент»</span>Мини-продукт — это зонд. Он проверяет спрос, а не тебя как личность.</td><td><span class="art-label">Показать в контенте</span>Реальный первый мини-продукт: кривой, простой, без дизайна. И цифры.</td></tr>
+        <tr><td class="kr-num">04</td><td><strong>Эксперт с синдромом самозванца</strong></td><td><span class="tag tag-f">скрытый страх</span><br>«Кто я такая, чтобы продавать знания?»</td><td><span class="drug-word">«Маяк»</span>Тебе не нужно знать больше всех. Нужно знать больше тех, кому помогаешь.</td><td><span class="art-label">Показать в контенте</span>«Я боялась запускать. Вот что сделала вместо этого.» + результат клиента.</td></tr>
+        <tr><td class="kr-num">05</td><td><strong>Эксперт на маленькой аудитории</strong></td><td><span class="tag tag-p">боль</span><br>«У меня нет охватов — нет смысла запускать.»</td><td><span class="drug-word">«Точка сборки»</span>Размер — не валюта. Температура — валюта. 200 тёплых дают больше, чем 20 000 случайных.</td><td><span class="art-label">Показать в контенте</span>Кейс: запуск на 600 подписчиков — X продаж за 3 дня.</td></tr>
+      </tbody></table>
+    </div>
+
+    <!-- КРИЗИС -->
+    <div class="section" id="crisis">
+      <div class="section-title">⚡ Смыслы в кризис</div>
+      <div class="tip-box">Когда в стране кризис — обычный маркетинг не работает. Этот блок: что говорить, как позиционировать продукт, когда покупать страшно.</div>
+      <table><thead><tr><th style="width:20%">Состояние ЦА</th><th style="width:25%">Что происходит внутри</th><th style="width:28%">Смысл-опора</th><th>Артефакт для контента</th></tr></thead><tbody>
+        <tr><td>«Всё рушится, зачем платить»</td><td>Мозг в режиме выживания. Любая трата кажется роскошью.</td><td><span class="drug-word">«Якорь»</span>Кризис — момент, когда те, кто вложился в себя, обгоняют всех остальных.</td><td>«Последний кризис я пережила именно потому, что вложилась в X.»</td></tr>
+        <tr><td>«Хочу уехать. Строить здесь бессмысленно»</td><td>Горизонт планирования сжался. Зачем вкладываться в то, что бросишь?</td><td><span class="drug-word">«Портативность»</span>Всё, что строишь онлайн, едет с тобой.</td><td>«Я живу в Вьетнаме. Мои клиенты в России, Казахстане, Израиле.»</td></tr>
+        <tr><td>«Денег нет, не до курсов»</td><td>Покупку обучения воспринимает как расход, а не вложение.</td><td><span class="drug-word">«Рентабельность»</span>Один клиент, которого ты поняла благодаря смыслам, окупает продукт.</td><td>Математика: стоимость продукта vs минимальный чек клиента.</td></tr>
+        <tr><td>«Опускаются руки. Устала бороться»</td><td>Эмоциональное истощение. Ищет поддержку и смысл двигаться.</td><td><span class="drug-word">«Маленький шаг»</span>Один оффер. Один понятный пост. Один человек, который написал «это про меня».</td><td>«Я тоже устала. Вот что сделала, когда совсем не было сил.»</td></tr>
+        <tr><td>«Сейчас не до этого. Позже»</td><td>Откладывание как защита. Кризис стал удобным объяснением.</td><td><span class="drug-word">«Окно»</span>Стабильности не будет — это новая норма. Конкуренции сейчас меньше — все ждут.</td><td>«Я начала в сложный момент. Все говорили: зачем.»</td></tr>
+        <tr><td>«Люди сейчас экономят. Кто купит»</td><td>Эксперт проецирует свой страх на аудиторию.</td><td><span class="drug-word">«Сегментация»</span>Всегда есть люди, которые покупают. В кризис они покупают осознаннее.</td><td>Продажи в «нехороший» период: скриншот, дата, цифра.</td></tr>
+        <tr><td>«Всё равно ничего не изменится»</td><td>Выученная беспомощность.</td><td><span class="drug-word">«Радиус контроля»</span>Ты не можешь изменить страну. Ты можешь изменить своё уравнение.</td><td>«Я перестала следить за новостями. Начала следить за своими цифрами.»</td></tr>
+      </tbody></table>
+    </div>
+
+    <!-- КОНКУРЕНТЫ -->
+    <div class="section" id="comp">
+      <div class="section-title">⚔ Конкуренты и сравнения</div>
+      <div class="tip-box">Твоя ЦА сравнивает тебя, даже если ты её об этом не просишь. Управляй критериями выбора.</div>
+      <table><thead><tr><th style="width:20%">Тип конкурента</th><th style="width:25%">Что предлагает</th><th style="width:27%">Где проигрывает</th><th>Твой смысловой ответ</th></tr></thead><tbody>
+        <tr><td><strong>Большие продюсерские курсы</strong></td><td>Структура, коммьюнити, название в резюме.</td><td>Клиент теряется в потоке. Выходит с тетрадью, а не с продуктом.</td><td><span class="drug-word">«Персональная карта»</span>Инструмент под твою нишу, твою аудиторию, твой продукт.</td></tr>
+        <tr><td><strong>Бесплатный контент</strong></td><td>YouTube, Telegram, подкасты. Всегда доступно.</td><td>Нет системы — есть фрагменты. Бесплатное не создаёт ответственности.</td><td><span class="drug-word">«Система vs контент»</span>YouTube объяснит что такое смыслы. Архитектор даёт готовые связки.</td></tr>
+        <tr><td><strong>Эксперты по копирайтингу</strong></td><td>Формулы, шаблоны текстов, практика написания.</td><td>Учат как писать, а не что писать. Форма без содержания.</td><td><span class="drug-word">«Сначала смысл, потом слова»</span>Красивый текст без точного смысла — пустышка.</td></tr>
+        <tr><td><strong>Таргетологи и SMM</strong></td><td>Продвижение, охваты, реклама.</td><td>Трафик без смысла сливается. Конверсии нет — оффер размытый.</td><td><span class="drug-word">«Фундамент до трафика»</span>Реклама усиливает то, что есть. Если смысла нет — усиливает пустоту.</td></tr>
+        <tr><td><strong>Наставники-эксперты</strong></td><td>Личный доступ, кастомизация, высокий чек.</td><td>Дорого. Зависимость от расписания наставника.</td><td><span class="drug-word">«Инструмент без зависимости»</span>Доступен в любое время, работает в твоём темпе.</td></tr>
+        <tr><td><strong>Нейросети напрямую</strong></td><td>ChatGPT, Claude. Бесплатно или дёшево.</td><td>Не знает нишу и контекст. Клиент не знает, какие вопросы задавать.</td><td><span class="drug-word">«Правильный вопрос»</span>Архитектор смыслов — это уже готовые промпты, заточенные под маркетинг.</td></tr>
+      </tbody></table>
+    </div>
+
+    <!-- ТОЧКА ВХОДА -->
+    <div class="section" id="entry">
+      <div class="section-title">🚪 Точка входа</div>
+      <div class="tip-box">Карта того, как человек впервые попадает в твой мир и что происходит дальше.</div>
+      <table><thead><tr><th style="width:18%">Канал входа</th><th style="width:22%">Что видит первым</th><th style="width:27%">Его состояние</th><th>Первый смысл</th></tr></thead><tbody>
+        <tr><td><strong>Instagram — пост или карусель</strong></td><td>Заголовок слайда или первые две строки поста. 1,5 секунды на решение.</td><td>Скроллит лениво. Готов уйти в любой момент.</td><td><span class="drug-word">«Узнавание»</span>Первое слово попадает в боль настолько точно, что человек думает: «откуда она знает».</td></tr>
+        <tr><td><strong>Instagram — профиль</strong></td><td>Фото, имя, одна строка описания. 5–8 секунд на решение.</td><td>Оценивает: «она для меня?»</td><td><span class="drug-word">«Позиционирование за одну строку»</span>Кому помогаешь и что меняется после тебя.</td></tr>
+        <tr><td><strong>Рекомендация / сарафан</strong></td><td>Чаще всего сразу в профиль или Директ. Уже с кредитом доверия.</td><td>Теплее обычного. Ожидания выше.</td><td><span class="drug-word">«Оправдать доверие»</span>Личная история с конкретным результатом.</td></tr>
+        <tr><td><strong>Telegram</strong></td><td>Описание канала и первый пост.</td><td>Осознанный. Готов читать дольше.</td><td><span class="drug-word">«Глубина»</span>Закреп: кто ты, кому помогаешь, почему стоит остаться.</td></tr>
+        <tr><td><strong>Лид-магнит</strong></td><td>Содержимое бесплатного продукта.</td><td>Скептицизм: «посмотрим насколько полезно».</td><td><span class="drug-word">«Первая победа»</span>Один конкретный результат за 10 минут.</td></tr>
+        <tr><td><strong>Директ — кодовое слово</strong></td><td>Твой ответ. Именно он определяет — будет покупка или нет.</td><td>Тёплый. Сделал активное действие.</td><td><span class="drug-word">«Скорость + человечность»</span>Ответь быстро. Не скрипт. Одно предложение + ссылка.</td></tr>
+        <tr><td><strong>Страница продукта</strong></td><td>Первый экран лендинга.</td><td>Заинтересован, но скептицизм вернулся.</td><td><span class="drug-word">«Ясность без давления»</span>Что это, для кого, что изменится. Без «миллион за месяц».</td></tr>
+      </tbody></table>
+    </div>
+
+    <!-- ДНК ГОЛОСА -->
+    <div class="section" id="dna">
+      <div class="section-title">✦ ДНК голоса и смыслы Анастасии</div>
+      <div class="tip-box"><strong>Как работает этот раздел.</strong> Ты добавляешь сырые мысли. Claude разбирает их на молекулы: голосовые паттерны и смысловые ядра. Первые вшиваются в контент чтобы звучать как ты. Вторые — чтобы говорить о том, во что ты веришь.</div>
+
+      <div class="dna-tabs">
+        <div class="dna-tab active" onclick="dnaSwitch(this,'dna-voice')">ДНК голоса — молекулы</div>
+        <div class="dna-tab" onclick="dnaSwitch(this,'dna-sense')">Банк смыслов</div>
+      </div>
+
+      <div class="dna-pane active" id="dna-voice">
+        <div class="tip-box" style="margin-bottom:16px">Голосовые молекулы — это про то, <em>как именно устроен твой способ говорить</em>. Структура мысли, ритм предложения, отношение к читателю.</div>
+
+        <div class="mol-card">
+          <div class="mol-head">
+            <div class="mol-num">01</div>
+            <span class="mol-label" style="background:#E6F1FB;color:#0C447C">Структура мысли</span>
+            <div class="mol-title">Факт → позиция → разрешение выбрать</div>
+          </div>
+          <div class="mol-body">
+            <div><div class="mol-col-label">Молекула</div><div class="mol-col-body">Анастасия не убеждает — она констатирует факт, занимает позицию и отдаёт выбор читателю. Нет давления, нет манипуляции. Есть уверенность и уважение.</div></div>
+            <div><div class="mol-col-label">Откуда вычленено</div><div class="mol-col-body">«Можете сделать сами, можете получить систему и делегировать. Можете заказать у меня, выбор за вами. Но то что без этого — всё остальное шелуха — это факт.»</div></div>
+            <div><div class="mol-col-label">Как вшивать в контент</div><div class="mol-col-body">Заканчивать блок тремя вариантами действия + финальный факт без восклицательного знака.</div><div class="mol-example">«Можете внедрить сами. Можете делегировать. Можете прийти ко мне. Но без фундамента — всё остальное декорация.»</div></div>
+          </div>
+        </div>
+
+        <div class="mol-card">
+          <div class="mol-head">
+            <div class="mol-num">02</div>
+            <span class="mol-label" style="background:#EAF3DE;color:#27500A">Тон</span>
+            <div class="mol-title">Эксперт без пьедестала — говорит прямо, не свысока</div>
+          </div>
+          <div class="mol-body">
+            <div><div class="mol-col-label">Молекула</div><div class="mol-col-body">Нет менторства, нет «я знаю — вы не знаете». Есть наблюдение, которым делится человек, прошедший это сам.</div></div>
+            <div><div class="mol-col-label">Откуда вычленено</div><div class="mol-col-body">«Я настоятельно рекомендую» — звучит как совет близкого человека, а не директива. «Это факт» — не «я так считаю», а наблюдение из опыта.</div></div>
+            <div><div class="mol-col-label">Как вшивать в контент</div><div class="mol-col-body">Не «вы должны» — а «я видела». Не «это работает» — а «у меня это сработало так».</div><div class="mol-example">«Я видела сотни аккаунтов с идеальным дизайном и нулевыми продажами. Причина всегда одна.»</div></div>
+          </div>
+        </div>
+
+        <div class="mol-card">
+          <div class="mol-head">
+            <div class="mol-num">03</div>
+            <span class="mol-label" style="background:#FAEEDA;color:#633806">Ритм</span>
+            <div class="mol-title">Короткое после длинного — удар в конце</div>
+          </div>
+          <div class="mol-body">
+            <div><div class="mol-col-label">Молекула</div><div class="mol-col-body">Длинное объяснение — короткий итог. Итог звучит как приговор. Читатель замедляется именно там, где нужно.</div></div>
+            <div><div class="mol-col-label">Откуда вычленено</div><div class="mol-col-body">«Вы можете бесконечно создавать безликий контент… Человек даже кликнет… но дальше просто уйдёт. [длинно] → Всё остальное шелуха. [коротко]»</div></div>
+            <div><div class="mol-col-label">Как вшивать в контент</div><div class="mol-col-body">Каждый смысловой блок — длинный разбор + одно финальное предложение из 4–7 слов без союзов.</div><div class="mol-example">«Таргет приведёт людей. Смыслы оставят их. Без второго первое — слив бюджета.»</div></div>
+          </div>
+        </div>
+
+        <div class="mol-card">
+          <div class="mol-head">
+            <div class="mol-num">04</div>
+            <span class="mol-label" style="background:#EEEDFE;color:#26215C">Позиция</span>
+            <div class="mol-title">Фундамент важнее инструмента — всегда</div>
+          </div>
+          <div class="mol-body">
+            <div><div class="mol-col-label">Молекула</div><div class="mol-col-body">В любой теме Анастасия возвращается к основанию. Инструменты вторичны. Смыслы, фундамент, понимание — первичны. Это мировоззрение, а не приём.</div></div>
+            <div><div class="mol-col-label">Откуда вычленено</div><div class="mol-col-body">«Таргет и реклама без смыслов в блоге не работает» — это убеждение из 17 лет практики, а не тактический совет.</div></div>
+            <div><div class="mol-col-label">Как вшивать в контент</div><div class="mol-col-body">В любом посте про инструмент — сначала обозначить фундамент. Иначе — пустой совет.</div><div class="mol-example">«Хэштеги — не стратегия. Хэштеги работают только если есть смысл, за которым стоит идти.»</div></div>
+          </div>
+        </div>
+
+        <div class="mol-card">
+          <div class="mol-head">
+            <div class="mol-num">05</div>
+            <span class="mol-label" style="background:#FAECE7;color:#993C1D">Пересечение</span>
+            <div class="mol-title">Таргет × смыслы — её уникальный угол</div>
+          </div>
+          <div class="mol-body">
+            <div><div class="mol-col-label">Молекула</div><div class="mol-col-body">Анастасия — единственный человек в нише, кто говорит про смыслы с бэкграундом таргетолога. Редкое пересечение, дающее угол, недоступный другим.</div></div>
+            <div><div class="mol-col-label">Откуда вычленено</div><div class="mol-col-body">«По сколько у меня была школа таргета, мне важно выстраивать фундамент и пересечение» — она сама называет это своим обязательным углом.</div></div>
+            <div><div class="mol-col-label">Как вшивать в контент</div><div class="mol-col-body">Регулярно возвращать к пересечению. «Я знаю как устроена реклама изнутри, поэтому говорю про смыслы иначе».</div><div class="mol-example">«Я 17 лет настраивала рекламу. Трафик — это усилитель. Он усиливает то, что уже есть. Если смыслов нет — усиливает пустоту.»</div></div>
+          </div>
+        </div>
+
+        <div class="add-box">
+          <strong>Добавить новую молекулу</strong>
+          Скинь текст или мысль — Claude вычленит паттерн и добавит карточку
+        </div>
+      </div>
+
+      <div class="dna-pane" id="dna-sense">
+        <div class="tip-box" style="margin-bottom:16px">Банк смыслов — это убеждения из опыта. Каждый смысл — точка зрения, которую Анастасия готова отстаивать. Именно из них растёт контент, который продаёт без продажи.</div>
+
+        <div class="sense-card">
+          <div class="sense-raw">
+            <span class="sense-src">Смысл #1 — Сырой текст Анастасии</span>
+            «Таргет и реклама без смыслов в блоге и контенте не работает. Вы можете бесконечно создавать безликий контент, рекламные креативы и объявления. Человек даже кликнет на таргет и перейдёт, но дальше он просто уйдёт. Поэтому я настоятельно рекомендую Архитектор смыслов как фундамент. Можете сделать сами, можете получить систему и делегировать. Можете заказать у меня, выбор за вами. Но то что без этого, всё остальное шелуха — это факт.»
+          </div>
+          <div class="sense-analysis">
+            <div>
+              <div class="sense-col-label">Ядро смысла</div>
+              <div class="sense-col-body">Трафик — усилитель, а не источник. Он умножает то, что уже есть. Если в основе пустота — он умножает пустоту. Смыслы первичны, инструменты вторичны. Всегда.</div>
+              <div style="margin-top:8px">
+                <span class="sense-tag" style="background:#E6F1FB;color:#0C447C">Убеждение</span>
+                <span class="sense-tag" style="background:#EAF3DE;color:#27500A">Из опыта</span>
+                <span class="sense-tag" style="background:#FAEEDA;color:#633806">Позиция</span>
+              </div>
+            </div>
+            <div>
+              <div class="sense-col-label">Молекулы голоса здесь</div>
+              <div class="sense-col-body">Три варианта + выбор читателя (молекула 01). Короткий финал после длинного разбора (молекула 03). Фундамент важнее инструмента (молекула 04). Пересечение таргет × смыслы (молекула 05).</div>
+            </div>
+            <div>
+              <div class="sense-col-label">Контентные крючки</div>
+              <div class="sense-hook">«Таргет приведёт. Смыслы оставят. Без второго — первое это слив.»</div>
+              <div class="sense-hook" style="margin-top:6px">«Человек кликнул на рекламу. Зашёл. Ушёл. Знакомо? Дело не в таргете.»</div>
+              <div class="sense-hook" style="margin-top:6px">«Безликий контент не лечится бюджетом. Он лечится смыслом.»</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="add-box">
+          <strong>Добавить новый смысл</strong>
+          Напиши мысль как она есть — без редактуры. Claude разберёт на ядро, молекулы и крючки
+        </div>
+      </div>
+    </div>
+
+    <!-- ГОЛОС АУДИТОРИИ -->
+    <div class="section" id="voices">
+      <div class="section-title">🔥 Голос аудитории — живые фразы из комментариев</div>
+      <div class="tip-box"><strong>Зачем этот раздел.</strong> Это дословные слова людей. Используй их в заголовках постов, первых строках каруселей, офферах. Когда человек читает свою собственную фразу — он останавливается.</div>
+
+      <div style="display:grid;gap:12px;margin-bottom:28px">
+        <div class="voice-card" style="border-left:4px solid #e57373">
+          <div class="voice-body">
+            <div class="voice-label" style="color:#e57373">Усталость от алгоритмов</div>
+            «Я больше не хочу вести блог в инстаграме. Заебали эти ваши постоянные новые алгоритмы. Как правильно, как неправильно. Я ПРОСТО ХОЧУ ВЫКЛАДЫВАТЬ ТО, ЧТО МНЕ НРАВИТСЯ. А не то, что должно залетать.»
+          </div>
+          <div class="voice-analysis">
+            <div><div class="v-label">Что за этим стоит</div><div class="v-body">Потеря авторства над своим контентом. Хочет выражать себя и быть услышанной. Боль про <strong>свободу vs алгоритм</strong>.</div></div>
+            <div><div class="v-label">Глубинная потребность</div><div class="v-body">Хочет, чтобы правила игры не противоречили тому, кто она есть. Система контента — это не клетка, а язык. Его можно выучить, не теряя себя.</div></div>
+            <div><div class="v-label">Крючок для контента</div><div class="v-hook">«Что если алгоритм — это просто язык. И его можно выучить, не теряя себя.»</div></div>
+          </div>
+        </div>
+
+        <div class="voice-card" style="border-left:4px solid #fb923c">
+          <div class="voice-body">
+            <div class="voice-label" style="color:#fb923c">Невидимость — работа в пустоту</div>
+            «Пишу много, а как будто никто не видит. Никакой реакции — ни положительной, ни отрицательной. Делаю, делаю — всё в пустоту.»
+          </div>
+          <div class="voice-analysis">
+            <div><div class="v-label">Что за этим стоит</div><div class="v-body">Контент без отклика разрушает мотивацию быстрее всего. Не понимает что именно не так. Боль про <strong>видимость и обратную связь</strong>.</div></div>
+            <div><div class="v-label">Глубинная потребность</div><div class="v-body">Хочет быть услышанной. Контент — это коммуникация, а не монолог. Не знает, пишет ли для нужного человека.</div></div>
+            <div><div class="v-label">Крючок для контента</div><div class="v-hook">«Пишешь — а в ответ тишина. Скорее всего проблема не в количестве постов. Проблема в том, для кого ты пишешь.»</div></div>
+          </div>
+        </div>
+
+        <div class="voice-card" style="border-left:4px solid #a78bfa">
+          <div class="voice-body">
+            <div class="voice-label" style="color:#a78bfa">Паралич идей</div>
+            «Устала просыпаться с мыслью: а что сегодня вообще писать?»
+          </div>
+          <div class="voice-analysis">
+            <div><div class="v-label">Что за этим стоит</div><div class="v-body">Нет системы — есть ежедневный стресс. Контент воспринимается как обязательство. Генерирует темы из головы, а не из болей аудитории.</div></div>
+            <div><div class="v-label">Глубинная потребность</div><div class="v-body">Хочет предсказуемости. Ежедневная генерация идей — это стресс, а не творчество. Когда непонятно что писать — значит непонятно кому и зачем.</div></div>
+            <div><div class="v-label">Крючок для контента</div><div class="v-hook">«Когда знаешь 10 болей своей аудитории — идеи для постов никогда не заканчиваются. Открываешь список и берёшь следующую.»</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#1c1c1e;border-radius:8px;padding:20px 22px;">
+        <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.09em;color:#C8A96E;margin-bottom:12px">Как пополнять раздел</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+          <div><div style="font-size:11px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">Где искать</div><div style="font-size:12px;line-height:1.65;color:#aaa">Комментарии у конкурентов в Instagram и Telegram. Ответы под рилсами на тему «устала вести блог». Отзывы на похожие продукты.</div></div>
+          <div><div style="font-size:11px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">Что фиксировать</div><div style="font-size:12px;line-height:1.65;color:#aaa">Дословную фразу без редактуры. Эмоцию, с которой написано. Сколько лайков у комментария — это сигнал что боль общая.</div></div>
+          <div><div style="font-size:11px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">Как использовать</div><div style="font-size:12px;line-height:1.65;color:#aaa">Первая строка поста — цитата как будто ты сама так думала. Заголовок карусели — дословная фраза. В оффере — «если ты узнала себя» + решение.</div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px">
+        <div class="section-title">Паттерны — что объединяет эти боли</div>
+        <table><thead><tr><th>Паттерн</th><th>Как звучит у людей</th><th>Глубинная потребность</th><th>Твой ответ через продукт</th></tr></thead><tbody>
+          <tr><td>Потеря смысла</td><td>«Больше не хочу вести блог», «всё в пустоту»</td><td>Хочет видеть связь между усилием и результатом.</td><td>Смысловой кристалл даёт понимание: этот пост — для этого человека — с этой болью.</td></tr>
+          <tr><td>Конфликт с системой</td><td>«Хочу писать как хочу я», «схуяли я должна соответствовать»</td><td>Свобода самовыражения без потери охватов.</td><td>Архитектор смыслов — это про что писать, а не про как упаковывать.</td></tr>
+          <tr><td>Пустота отклика</td><td>«Никакой реакции», «пишу много — никто не видит»</td><td>Хочет быть услышанной. Контент — это коммуникация.</td><td>Когда пишешь про боль конкретного человека — он отвечает.</td></tr>
+          <tr><td>Хаос без системы</td><td>«Что сегодня вообще писать», «устала придумывать»</td><td>Хочет предсказуемости. Генерация идей — это стресс.</td><td>10 болей аудитории = 10 готовых тем. Система заменяет вдохновение.</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+
+    <!-- ПРОДУКТОВАЯ ЛИНЕЙКА -->
+    <div class="section" id="lineup">
+      <div class="section-title">💎 Продуктовая линейка</div>
+      <div class="tip-box"><strong>Логика линейки.</strong> Человек не покупает сразу дорогое у незнакомого. Сначала берёт бесплатное — проверяет доверие. Потом платит небольшую сумму — снимает барьер. И только потом готов к основному продукту.</div>
+
+      <div style="font-size:12px;font-weight:600;color:#1B3A8C;text-transform:uppercase;letter-spacing:0.09em;margin-bottom:16px">Визуальная воронка — нажми на уровень</div>
+
+      <div class="fn-level lv0" style="max-width:100%" onclick="fnToggle('fl0','fa0')">
+        <div class="fn-inner">
+          <span class="fn-tag">Лид-магнит</span>
+          <span class="fn-title">Бесплатный подарок — первое доверие</span>
+          <span class="fn-price">0 руб</span>
+          <span class="fn-arr" id="fa0">▾</span>
+        </div>
+      </div>
+      <div class="fn-detail" id="fl0">
+        <div class="fn-cols">
+          <div><div class="fn-col-label">Что это</div><div class="fn-col-body">Бесплатный контент за подписку или кодовое слово в Директ. Первый шаг в воронку.</div><div class="fn-badges"><span class="fn-badge">PDF 1 стр.</span><span class="fn-badge">Мини-разбор голосом</span><span class="fn-badge">Квиз 5 вопросов</span></div></div>
+          <div><div class="fn-col-label">Методология</div><div class="fn-col-body">Лид-магнит — не «полезный гайд». Это первая победа. Человек применяет за 10 минут и думает: «работает». После — он уже покупатель психологически. Один хороший лид-магнит работает годами.</div></div>
+          <div><div class="fn-col-label">Почему важно сделать</div><div class="fn-col-body">Без лид-магнита каждый запуск — к холодной аудитории. С ним — база людей, которые уже сделали шаг навстречу.</div><div class="fn-price-box"><div class="fn-price-main" style="color:#0C447C">0 руб</div><div class="fn-price-note">Бесплатно для клиента. 2–3 часа работы один раз.</div></div></div>
+        </div>
+      </div>
+
+      <div class="fn-arrow-down">↓</div>
+
+      <div class="fn-level lv1" style="max-width:96%" onclick="fnToggle('fl1','fa1')">
+        <div class="fn-inner">
+          <span class="fn-tag">Трипваер</span>
+          <span class="fn-title">Смысловой стартер — первая покупка</span>
+          <span class="fn-price">990 руб</span>
+          <span class="fn-arr" id="fa1">▾</span>
+        </div>
+      </div>
+      <div class="fn-detail" id="fl1">
+        <div class="fn-cols">
+          <div><div class="fn-col-label">Что внутри</div><div class="fn-col-body">Первые 3 раздела Архитектора смыслов: Сегмент, Вопросы 3 ночи, Боли. Промпты для Claude. Результат за 30 минут.</div><div class="fn-badges"><span class="fn-badge">PDF + промпты</span><span class="fn-badge">Самостоятельно</span><span class="fn-badge">30 мин</span></div></div>
+          <div><div class="fn-col-label">Методология</div><div class="fn-col-body">Трипваер — переход через психологический порог. Человек платит небольшую сумму и получает настоящий результат. После этого купить основной продукт — логично, а не страшно.</div></div>
+          <div><div class="fn-col-label">Почему именно 990</div><div class="fn-col-body">Ниже 500 руб — воспринимается как «бесплатное в обёртке». Выше 2 000 — нужно думать. 990 руб — мгновенное решение. Можно автоматизировать полностью.</div><div class="fn-price-box"><div class="fn-price-main" style="color:#633806">990 руб</div><div class="fn-price-note">Автоматическая доставка. Без участия Анастасии.</div></div></div>
+        </div>
+      </div>
+
+      <div class="fn-arrow-down">↓</div>
+
+      <div class="fn-level lv2" style="max-width:90%" onclick="fnToggle('fl2','fa2')">
+        <div class="fn-inner">
+          <span class="fn-tag">Основной</span>
+          <span class="fn-title"><span class="fn-dot fn-dot-live"></span> Архитектор смыслов</span>
+          <span class="fn-price">490 руб</span>
+          <span class="fn-arr" id="fa2">▾</span>
+        </div>
+      </div>
+      <div class="fn-detail" id="fl2">
+        <div class="fn-cols">
+          <div><div class="fn-col-label">Что внутри</div><div class="fn-col-body">Пошаговая система 11 разделов с промптами. Полный анализ аудитории + Смысловой кристалл. Готовый дашборд-артефакт в Claude. Инструкция по рабочей области.</div><div class="fn-badges"><span class="fn-badge">11 разделов</span><span class="fn-badge">Готовые промпты</span><span class="fn-badge">Метод, не курс</span><span class="fn-badge">Артефакт-дашборд</span></div></div>
+          <div><div class="fn-col-label">Методология</div><div class="fn-col-body">Не информация — инструмент. Человек идёт по шагам, прогоняет промпты через Claude и получает готовый маркетинговый фундамент под свою нишу. Делается один раз, используется годами.</div></div>
+          <div><div class="fn-col-label">Ценовое замечание</div><div class="fn-col-body">490 руб — цена запуска и сбора отзывов. После первых 20–30 продаж логично поднять до 1 900–2 900 руб.</div><div class="fn-price-box"><div class="fn-price-main" style="color:#27500A">490 руб</div><div class="fn-price-note">Цена запуска. Рост-цена: 1 900–2 900 руб после отзывов.</div></div><div class="fn-status"><span class="fn-dot fn-dot-live"></span>Реализован и продаётся</div></div>
+        </div>
+      </div>
+
+      <div class="fn-arrow-down">↓</div>
+
+      <div class="fn-level lv3" style="max-width:82%" onclick="fnToggle('fl3','fa3')">
+        <div class="fn-inner">
+          <span class="fn-tag">Под ключ</span>
+          <span class="fn-title"><span class="fn-dot fn-dot-idea"></span> Архитектор смыслов от Анастасии</span>
+          <span class="fn-price">35 000 руб</span>
+          <span class="fn-arr" id="fa3">▾</span>
+        </div>
+      </div>
+      <div class="fn-detail" id="fl3">
+        <div class="fn-cols">
+          <div><div class="fn-col-label">Что внутри</div><div class="fn-col-body">Анастасия проводит полный анализ по методу. Интервью 30 мин. Анализ ниши и аудитории. Смысловой кристалл + рекомендации по контенту. Созвон на сдачу работы.</div><div class="fn-badges"><span class="fn-badge">Анастасия делает сама</span><span class="fn-badge">Готовый документ</span><span class="fn-badge">Созвон на сдачу</span></div></div>
+          <div><div class="fn-col-label">Методология</div><div class="fn-col-body">Клиент не погружается в процесс. Приходит с нишей — уходит с фундаментом. Документ сразу можно отдать таргетологу, копирайтеру, SMM. Это актив, не консультация.</div></div>
+          <div><div class="fn-col-label">Почему 35 000</div><div class="fn-col-body">Стратсессия у маркетолога уровня «смыслы» — от 15 000 руб/час. Здесь клиент получает готовый продукт-документ с бессрочным использованием.</div><div class="fn-price-box"><div class="fn-price-main" style="color:#26215C">35 000 руб</div><div class="fn-price-note">Без скидок. Ценность обоснована результатом, не часами.</div></div><div class="fn-status"><span class="fn-dot fn-dot-idea"></span>Идея — следующий шаг к реализации</div></div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:16px;margin-top:18px;font-size:11px;color:#999;align-items:center">
+        <span><span class="fn-dot fn-dot-live" style="display:inline-block;margin-right:4px;vertical-align:middle"></span>Реализован</span>
+        <span><span class="fn-dot fn-dot-idea" style="display:inline-block;margin-right:4px;vertical-align:middle"></span>Идея / в разработке</span>
+        <span style="margin-left:auto">Воронка сужается — чем выше чек, тем уже аудитория</span>
+      </div>
+    </div>
+
+
+    <!-- ЗАЧЕМ АРХИТЕКТОР СМЫСЛОВ -->
+    <div class="section" id="valuedoc">
+<div class="vd-hero">
+  <div class="vd-hero-label">Архитектор смыслов — ценность для клиента</div>
+  <h1>Зачем мне этот документ и почему без него не работает ничего остального</h1>
+  <p>Каждый раздел системы закрывает конкретный вопрос. Ни один не декоративный. Разбираем по порядку — что это даёт тебе и твоему продукту.</p>
+</div>
+
+<div class="vd-wrap">
+
+  <div class="vd-section-divider">Блок 1 — Анализ аудитории</div>
+
+  <!-- 01 СЕГМЕНТ -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">01</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#E6F1FB;color:#0C447C">Анализ аудитории</span>
+        <div class="vd-block-title">Сегмент — портрет и потенциал ЦА</div>
+        <div class="vd-block-sub">Кто твой клиент на самом деле — и почему это не «все, кому интересно»</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">Большинство экспертов описывают свою аудиторию размыто: «женщины 25–45, которые хотят развиваться». Это не портрет — это толпа. Раздел даёт точный срез: кто этот человек, в какой ситуации он находится прямо сейчас, что его останавливает, сколько он готов заплатить и за что именно.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Ты перестаёшь писать «для всех» и начинаешь писать для одного конкретного человека. Твой оффер звучит не как реклама, а как разговор с кем-то, кто тебя понимает. Каждый пост, каждый заголовок, каждое слово в продающем тексте попадает точно.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Почему у меня покупают мало?» — потому что ты обращаешься к слишком широкой аудитории. Чем уже и точнее портрет — тем выше конверсия. Это математика, не магия.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>Ты создаёшь контент и продукты вслепую. Угадываешь, что нужно клиенту. Иногда попадаешь — чаще нет. Каждый запуск — лотерея.</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Ты знаешь своего клиента лучше, чем он сам себя знает. Пишешь — он думает: «она читает мои мысли». Это и есть механизм продажи через контент.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">Кому я продаю и кто реально готов платить?</div>
+        <div class="vd-q-item">Почему мой оффер не работает на широкую аудиторию?</div>
+        <div class="vd-q-item">Как говорить так, чтобы клиент сразу узнавал себя?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 ВОПРОСЫ 3 НОЧИ -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">02</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#E6F1FB;color:#0C447C">Анализ аудитории</span>
+        <div class="vd-block-title">Вопросы 3 ночи — что гуглят в отчаянии</div>
+        <div class="vd-block-sub">Мысли, которые не дают спать. Именно они превращаются в покупку</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">Люди покупают не когда им «интересно» — они покупают когда больно терпеть. Вопросы 3 ночи — это то, что крутится в голове у клиента в самый уязвимый момент. Когда ты называешь этот вопрос вслух — человек останавливается. Он не ожидал, что кто-то знает.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Даёт готовые темы для постов, которые цепляют с первой строки. Помогает строить заголовки каруселей, первые фразы сторис, крючки в рилсах. Это не «полезный контент» — это контент, который попадает в нерв.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Почему люди читают, лайкают — но не покупают?» Потому что контент был про что-то интересное, а не про то, что болит ночью. Боль продаёт. Интерес — нет.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>Пишешь про то, что сама считаешь важным. Это может быть ценно — но мимо момента, когда клиент готов купить. Контент остаётся в категории «полезно», а не «мне это нужно прямо сейчас».</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Твой первый абзац — это мысль клиента, которую он не решался произнести вслух. Он читает и думает: «это про меня». С этого начинается доверие. А доверие конвертируется в деньги.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">О чём писать, чтобы люди реально реагировали?</div>
+        <div class="vd-q-item">Как найти темы, которые продают, а не просто собирают лайки?</div>
+        <div class="vd-q-item">Почему мой контент не вызывает желания купить?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 БОЛИ -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">03</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#E6F1FB;color:#0C447C">Анализ аудитории</span>
+        <div class="vd-block-title">Боли — 10 сильнейших точек напряжения</div>
+        <div class="vd-block-sub">Не просто «что болит» — а почему именно это мешает жить и работать</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">Боль — это не жалоба. Это незакрытая задача, за решение которой платят. Когда ты точно называешь боль клиента — он чувствует: ты понимаешь его ситуацию изнутри. Это доверие, которое не купишь рекламой.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Каждая из 10 болей — готовая тема для поста, карусели или рилса. Это твой контент-план на месяц без единого дня «не знаю что писать». Плюс — основа для офферов и продающих текстов: ты не придумываешь слова, ты используешь язык клиента.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Что писать сегодня?» — вот ответ. 10 болей = 10 тем минимум. Каждую можно раскрыть с разных углов. Контент-план перестаёт быть стрессом и становится системой.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>Пишешь то, что сама считаешь важным. Тратишь время и энергию на контент, который клиент пролистывает. Потому что он не узнаёт в нём свою боль.</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Открываешь список, берёшь боль №4, пишешь пост — и получаешь комментарий «это прямо про меня». Так работает контент, построенный на реальных данных, а не на догадках.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">Откуда брать темы для постов каждый день?</div>
+        <div class="vd-q-item">Как писать так, чтобы клиент узнавал себя?</div>
+        <div class="vd-q-item">Почему моя аудитория не реагирует на контент?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 СТРАХИ -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">04</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#E6F1FB;color:#0C447C">Анализ аудитории</span>
+        <div class="vd-block-title">Страхи — что блокирует покупку</div>
+        <div class="vd-block-sub">Человек хочет купить — но что-то останавливает. Вот что именно</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">Страхи — это то, что стоит между желанием и покупкой. Клиент уже хочет — но не покупает. Значит, что-то его останавливает. Если ты не знаешь что именно — ты не можешь это снять. Раздел даёт список из 10 реальных блокираторов с расшифровкой, что за ними стоит.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Ты строишь контент, который снимает страхи ещё до продажи. Человек читает твои посты — и его сомнения рассеиваются сами. К моменту, когда ты делаешь оффер, он уже почти готов. Это и есть прогрев через смыслы.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Почему люди говорят "интересно" — и не покупают?» Потому что есть невысказанный страх. Ты его не видишь — он не уходит. Когда ты его называешь и снимаешь в контенте — конверсия растёт без давления.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>Делаешь запуск, получаешь «подумаю», «дорого», «не сейчас» — и не понимаешь почему. Снижаешь цену. Добавляешь скидки. Это не решение — это симптом отсутствия работы со страхами.</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Твой контент планомерно разбирает каждый страх. Клиент приходит к покупке уже без возражений — потому что ты ответила на них заранее. Продажа происходит естественно.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">Почему у меня смотрят, но не покупают?</div>
+        <div class="vd-q-item">Как снять возражения ещё до продажи?</div>
+        <div class="vd-q-item">Как сделать так, чтобы к оферу приходили уже готовые?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 ОШИБКИ -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">05</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#E6F1FB;color:#0C447C">Анализ аудитории</span>
+        <div class="vd-block-title">Ошибки — что делают не так, пока пытаются сами</div>
+        <div class="vd-block-sub">Самый недооценённый тип контента. И самый продающий</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">Контент про ошибки работает по двум причинам. Первая: человек узнаёт себя и чувствует — «она понимает, через что я прохожу». Вторая: ты показываешь, что без правильного подхода попытки не работают. Это аргумент в пользу твоего решения — без единого слова о продаже.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Даёт готовые темы для экспертного контента с высоким вовлечением. «5 ошибок, которые ты совершаешь в контенте» — это формат, который читают до конца. Потому что каждый боится, что он в этом списке.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Как показать экспертность, не хвастаясь?» — через разбор ошибок. Ты не говоришь «я крутая». Ты показываешь, что понимаешь ситуацию изнутри. Это убеждает сильнее любого резюме.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>Публикуешь «полезные советы», которые теряются в ленте. Человек читает, благодарит и идёт делать то же самое неправильно. Связи между твоим контентом и его проблемой — нет.</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Клиент читает про ошибку, которую сам совершает прямо сейчас — и понимает: нужна система. Переход к твоему продукту становится логичным следующим шагом, а не продажей.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">Как писать экспертный контент, который не выглядит как хвастовство?</div>
+        <div class="vd-q-item">Как показать ценность продукта без прямой рекламы?</div>
+        <div class="vd-q-item">Откуда брать темы, которые реально читают?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 ВОЗРАЖЕНИЯ -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">06</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#E6F1FB;color:#0C447C">Анализ аудитории</span>
+        <div class="vd-block-title">Возражения — почему не покупают и как закрыть</div>
+        <div class="vd-block-sub">«Дорого», «подумаю», «не сейчас» — за каждым стоит конкретный страх с конкретным ответом</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">Возражение — это не отказ. Это запрос на аргумент. Когда человек говорит «дорого» — он на самом деле говорит «я не вижу, как это окупится». Раздел даёт список всех реальных возражений твоей аудитории и метафорические ответы на каждое — без манипуляций, без давления.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Ты встраиваешь ответы на возражения в обычный контент — задолго до продажи. Пост про «почему я не даю скидки» снимает «дорого» без переговоров. Пост про «маленькую аудиторию» снимает «у меня мало подписчиков, мне рано». Работает на автопилоте.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Почему мне пишут "подумаю" и исчезают?» Потому что возражение осталось невысказанным. Ты не дала аргумент в нужный момент. Этот раздел — заготовленный арсенал ответов под рукой.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>Каждый разговор в Директ — переговоры с нуля. Снижаешь цену, даёшь бонусы, устаёшь объяснять одно и то же. Это потеря времени и энергии при каждой продаже.</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Клиент приходит в Директ с уже закрытыми возражениями — он читал твой контент. Остаётся только сказать «да». Продажа без давления — это и есть цель.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">Как отвечать на «дорого» не снижая цену?</div>
+        <div class="vd-q-item">Почему люди уходят думать и не возвращаются?</div>
+        <div class="vd-q-item">Как продавать без ощущения, что давишь?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 МЕЧТЫ -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">07</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#E6F1FB;color:#0C447C">Анализ аудитории</span>
+        <div class="vd-block-title">Мечты — глубинные желания аудитории</div>
+        <div class="vd-block-sub">Люди покупают не продукт. Они покупают версию себя, которую хотят получить</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">Продукт решает проблему. Но покупают — мечту. Человек платит не за «11 разделов с промптами» — он платит за ощущение, что наконец разобрался, что его аудитории нужно, и теперь продажи пойдут. Раздел показывает, какую именно мечту закрывает твой продукт.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Ты переформулируешь оффер с языка функций на язык результата. Не «система из 11 разделов» — а «ты будешь знать свою аудиторию глубже, чем она сама». Это меняет всё: как звучит пост, как выглядит лендинг, что ты говоришь в Директе.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Как описать продукт так, чтобы хотелось купить?» — через мечту, а не через функцию. Человек покупает ощущение будущего. Дай ему увидеть это будущее в твоём описании.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>Описываешь продукт через то, что в нём есть: «уроки, материалы, таблицы». Клиент видит объём работы — и не видит, зачем это ему. Продаёшь дрель, а не дырку.</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Твой оффер говорит на языке результата. Клиент читает и видит себя после покупки — с ясностью, с системой, с продажами. Желание купить появляется само.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">Как описать продукт так, чтобы хотелось купить?</div>
+        <div class="vd-q-item">Почему мой оффер не цепляет, хотя продукт хороший?</div>
+        <div class="vd-q-item">На что делать акцент в продающем тексте?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 САРКАЗМ -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">08</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#E6F1FB;color:#0C447C">Анализ аудитории</span>
+        <div class="vd-block-title">Сарказм — на что реагируют живо и с болью</div>
+        <div class="vd-block-sub">Юмор, самоирония и острые фразы — это не развлечение. Это инструмент вовлечения</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">Саркастический контент — самый вирусный. Когда человек смеётся над собой — он делится. «Прошла 14 курсов. Продаю на ноль» — это пост, который репостят, потому что каждый видит себя. Раздел даёт готовые углы для такого контента в твоей нише.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Разнообразие контента без потери смысла. Экспертный пост → саркастический пост → личная история → снова экспертный. Такой ритм удерживает аудиторию лучше, чем бесконечная польза. Плюс: саркастический пост снимает напряжение и повышает доверие.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Как разнообразить контент и не потерять экспертность?» Сарказм — это легальный способ быть живой, не теряя статус. Когда эксперт умеет смеяться над темой — ей доверяют больше.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>Контент становится монотонным. Одни советы, одни списки. Аудитория устаёт и перестаёт реагировать — не потому что неинтересно, а потому что предсказуемо.</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Знаешь, на какие острые темы можно «наступить» в контенте — и получить волну отклика. Не потому что скандал, а потому что попала в нерв честно и с юмором.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">Как разнообразить контент и остаться экспертом?</div>
+        <div class="vd-q-item">Почему мои посты не вызывают реакцию и не репостят?</div>
+        <div class="vd-q-item">Как быть живой в блоге, а не только полезной?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09 МАГНИТЫ -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">09</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#E6F1FB;color:#0C447C">Анализ аудитории</span>
+        <div class="vd-block-title">Магниты — смыслы-крючки для контента</div>
+        <div class="vd-block-sub">Готовые заголовки и идеи, которые останавливают скролл</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">Магнит — это смысловой крючок, который заставляет человека остановиться и прочитать дальше. Первые два слова поста, заголовок карусели, тема рилса. Большинство экспертов теряют аудиторию не из-за плохого контента — а из-за слабого входа. Раздел даёт 10 готовых крючков под твою нишу.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Перестаёшь думать над заголовками с нуля. Берёшь магнит из списка, адаптируешь под тему — и готово. Каждый магнит уже протестирован логикой: он попадает в боль, страх или мечту. Охваты растут не потому что алгоритм, а потому что люди дочитывают.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Почему на мой контент мало просмотров?» Чаще всего — слабый первый экран. Человек не остановился, не прочитал, алгоритм не показал дальше. Магниты решают эту задачу на входе.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>Пишешь хороший текст с плохим заголовком. Его не читают — не потому что неинтересно, а потому что не зашли. Труд вхолостую.</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Каждый пост начинается с крючка, который уже попадает в нерв. Человек останавливается, читает, реагирует. Охваты и вовлечённость растут как следствие — не как цель.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">Как писать заголовки, которые заставляют читать дальше?</div>
+        <div class="vd-q-item">Почему у меня мало просмотров при хорошем контенте?</div>
+        <div class="vd-q-item">Откуда брать идеи, которые реально цепляют?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 ЦЕННОСТИ -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">10</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#E6F1FB;color:#0C447C">Анализ аудитории</span>
+        <div class="vd-block-title">Ценности и триггеры — что цепляет глубже всего</div>
+        <div class="vd-block-sub">Не про что человек думает — а во что он верит. Именно это управляет решением о покупке</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">Ценности — это фильтр, через который человек оценивает всё: твой контент, твой продукт, тебя как эксперта. Когда твои ценности совпадают с ценностями аудитории — возникает притяжение. Это и есть личный бренд на глубинном уровне. Раздел показывает, что важно именно твоей аудитории.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Ты знаешь, какие триггеры включают желание купить: социальное доказательство, личная история, простота, антигуру-позиция. Встраиваешь их в контент осознанно — не случайно. Каждый пост работает на нескольких уровнях одновременно.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Почему один и тот же контент у другого эксперта собирает тысячи, а у меня — нет?» Потому что тот эксперт попадает в ценности аудитории. Не случайно — системно. Этот раздел даёт карту ценностей твоих клиентов.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>Пишешь правильные вещи — но не попадаешь в резонанс. Аудитория не против тебя. Она просто не чувствует «своего человека». Без совпадения ценностей — нет притяжения.</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Знаешь точно: эта аудитория ценит честность, конкретику и отсутствие понтов. Выстраиваешь голос и контент именно под это — и становишься «своей» без объяснений.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">Как стать «своим» экспертом для аудитории?</div>
+        <div class="vd-q-item">Какие триггеры реально влияют на решение купить?</div>
+        <div class="vd-q-item">Почему мой контент не вызывает лояльности?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vd-section-divider">Блок 2 — Стратегия</div>
+
+  <!-- КРИСТАЛЛ -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">★</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#FEF9EC;color:#8B6914">Стратегия</span>
+        <div class="vd-block-title">Смысловой кристалл — 5 мощных связок</div>
+        <div class="vd-block-sub">Сердце системы. Здесь всё собирается в единую стратегию продаж</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">Кристалл — это не таблица. Это готовая архитектура продаж. Каждая связка: конкретный сегмент аудитории → его скрытый страх → смысл-лекарство → что показать в контенте. 5 таких связок покрывают 90% ситуаций, в которых находятся твои клиенты. Ты больше не придумываешь — ты используешь систему.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Это фундамент, который можно передать ассистенту, копирайтеру, таргетологу — и они будут работать с твоими смыслами, а не придумывать с нуля. Это база для запуска, для рекламных объявлений, для сценариев рилсов. Один раз сделал — работает везде.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Как выстроить стратегию контента, которая ведёт к продажам?» — вот она. Открываешь кристалл, берёшь связку, пишешь пост. Каждый пост встроен в логику: от боли к решению к продукту.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>Публикуешь контент хаотично. Иногда попадаешь — иногда нет. Нет понимания, какой пост к чему ведёт и как это складывается в продажу. Результат непредсказуем.</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Каждый пост — звено в цепи. Ты знаешь: этот пост снимает страх №3, этот показывает мечту №1, этот закрывает возражение «дорого». Контент работает как система, а не как случайные попытки.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">Как выстроить контент-стратегию, которая реально продаёт?</div>
+        <div class="vd-q-item">Как делегировать контент и не потерять смыслы?</div>
+        <div class="vd-q-item">Как сделать так, чтобы каждый пост работал на продажу?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- КРИЗИС -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">⚡</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#FEF2F2;color:#991B1B">Стратегия</span>
+        <div class="vd-block-title">Смыслы в кризис — продажи когда всё рушится</div>
+        <div class="vd-block-sub">Отдельный блок для турбулентных времён. Потому что обычный маркетинг тогда не работает</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">Кризис меняет логику покупки. Человек не перестаёт покупать — он покупает иначе: осознаннее, требовательнее к ценности, с большим количеством сомнений. Если ты не знаешь, как говорить с аудиторией в этот момент — теряешь продажи. Раздел даёт 7 состояний и смысл-опору для каждого.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Ты не замолкаешь в кризис и не переходишь в режим «сочувствую, не продаю». Продолжаешь — но с другим углом. Человек в кризисе нуждается в опоре и решении ещё больше, чем в спокойное время. Этот раздел показывает, как продавать честно и уместно.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Как продавать когда вокруг всё нестабильно и неловко продавать?» — вот как. Не замалчивая реальность, а говоря о ней с позиции решения. Это и есть честный маркетинг в сложное время.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>При малейшей турбулентности замолкаешь или переходишь в «поддержку». Продажи падают. Потом сложно восстановиться — аудитория привыкла к молчанию.</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Знаешь что говорить в любой ситуации. Продажи не останавливаются — меняется угол. Аудитория видит: она продолжает работать, значит это работает. Это само по себе доверие.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">Как продавать в кризис, не выглядя бесчувственно?</div>
+        <div class="vd-q-item">Что говорить аудитории когда всё нестабильно?</div>
+        <div class="vd-q-item">Почему мои продажи падают в сложные периоды?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- КОНКУРЕНТЫ -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">⚔</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#F5F3FF;color:#5B21B6">Стратегия</span>
+        <div class="vd-block-title">Конкуренты — как управлять выбором клиента</div>
+        <div class="vd-block-sub">Тебя сравнивают каждый день. Вопрос — по каким критериям. Ты управляешь этим или нет</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">Клиент всегда сравнивает. Даже если не говорит об этом. Он смотрит тебя — и трёх других. Если ты не знаешь, с кем тебя сравнивают и по каким критериям — ты не можешь управлять этим выбором. Раздел показывает реальных конкурентов и твой смысловой ответ на каждого.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Ты строишь контент, который управляет критериями сравнения. Не «я лучше других» — а «вот почему важен именно этот критерий». Клиент начинает оценивать по твоим правилам. Это позиционирование через смыслы, а не через атаку на конкурентов.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Как выделиться на фоне конкурентов, не принижая их?» — через смысловое позиционирование. Объясняешь разницу между подходами — клиент сам приходит к выводу, кто ему подходит.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>Клиент выбирает по цене — потому что ты не дала ему другого критерия. Побеждает тот, кто дешевле. Это проигрышная позиция для эксперта с реальной ценностью.</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Знаешь, что говорить о бесплатных альтернативах, о курсах, о нейросетях напрямую. Клиент понимает разницу и выбирает тебя — не потому что ты убедила, а потому что сам пришёл к этому выводу.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">Как выделиться когда рынок переполнен?</div>
+        <div class="vd-q-item">Почему выбирают дешевле, хотя у меня лучше?</div>
+        <div class="vd-q-item">Как отвечать на «а зачем платить, есть бесплатное»?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ТОЧКА ВХОДА -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">🚪</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#ECFEFF;color:#155E75">Стратегия</span>
+        <div class="vd-block-title">Точка входа — маршрут от незнакомца до покупки</div>
+        <div class="vd-block-sub">На каждом касании человек принимает решение: остаться или уйти. Ты знаешь, что он видит?</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">Большинство экспертов думают о контенте — и не думают о маршруте. Человек зашёл в профиль, посмотрел, ушёл. Почему? Потому что на каждой точке входа есть момент принятия решения. Раздел показывает, что видит человек в каждой точке и что он должен почувствовать, чтобы сделать следующий шаг.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Ты выстраиваешь путь клиента от первого поста до покупки. Каждая точка — пост, профиль, шапка, Директ, лендинг — работает как этап, а не как отдельный элемент. Это и есть воронка на уровне смыслов, а не технических схем.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Почему люди заходят в профиль и уходят?» Потому что шапка, первые посты или описание не дают ответа на главный вопрос: «она для меня?». Раздел показывает, что именно должно быть на каждом шаге.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>Каждая точка существует отдельно. Хороший пост — слабый профиль. Хороший профиль — нет следующего шага. Человек теряется и уходит. Ты не знаешь где именно.</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Видишь весь маршрут клиента. Знаешь, что исправить в шапке, что добавить в Директ, как встроить первый оффер. Каждая точка ведёт к следующей. Воронка работает без напоминаний.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">Почему люди заходят в профиль и не подписываются?</div>
+        <div class="vd-q-item">Как выстроить путь клиента от поста до покупки?</div>
+        <div class="vd-q-item">Что должна видеть аудитория на каждом этапе?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vd-section-divider">Блок 3 — Живые данные и голос</div>
+
+  <!-- ДНК -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">✦</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#FEF9EC;color:#8B6914">Живые данные</span>
+        <div class="vd-block-title">ДНК голоса — молекулы твоего стиля</div>
+        <div class="vd-block-sub">Как звучать как ты — даже когда пишет ИИ или ассистент</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">ИИ пишет много и быстро — но без ДНК голоса пишет не тобой. Получается «правильно» но не «твоё». Раздел фиксирует твои уникальные паттерны: как ты строишь мысль, какой ритм у твоих предложений, как ты заканчиваешь блоки, какую позицию занимаешь. Это нельзя угадать — это нужно зафиксировать.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Claude или любой ИИ с этим разделом пишет твоим голосом, а не усреднённым. Ассистент понимает, как ты думаешь — и воспроизводит это. Делегирование контента без потери личного бренда. Это инструмент масштабирования без выгорания.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Как делегировать контент и не потерять себя?» — вот как. ДНК голоса — это инструкция для любого, кто пишет от твоего имени. Ты один раз описываешь — дальше система работает без тебя.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>Даёшь задание ИИ или ассистенту — получаешь «правильный» текст, который не звучит как ты. Переписываешь руками. Теряешь время, которое хотела сэкономить.</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Один промпт с ДНК голоса — и контент звучит как ты написала сама. Аудитория не замечает разницы. Ты тратишь время на стратегию, а не на правку каждого слова.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">Как сделать так, чтобы ИИ писал моим голосом?</div>
+        <div class="vd-q-item">Как делегировать контент без потери личного бренда?</div>
+        <div class="vd-q-item">Почему тексты от ИИ звучат не как я?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ГОЛОС АУДИТОРИИ -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">🔥</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#FFF1F2;color:#9F1239">Живые данные</span>
+        <div class="vd-block-title">Голос аудитории — живые фразы из комментариев</div>
+        <div class="vd-block-sub">Лучший копирайтинг — это слова самого клиента. Дословно</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">Когда человек читает свою собственную фразу в чужом тексте — он останавливается. Не потому что красиво написано. Потому что это его слова. Раздел собирает дословные высказывания из комментариев, разбирает что за ними стоит и превращает в готовые крючки для контента.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Даёт живой язык для постов — без выдумывания. Ты не пишешь «многие испытывают трудности с ведением блога» — ты пишешь «устала просыпаться с мыслью: что сегодня вообще писать?». Второе цепляет в 10 раз сильнее. Первое — нет.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Как писать так, чтобы люди говорили "это прямо про меня"?» — использовать их же слова. Это не трюк. Это уважение к реальному опыту аудитории. И самый сильный инструмент вовлечения.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>Пишешь про боли — но в «профессиональных» формулировках. Клиент понимает о чём, но не чувствует «это я». Разрыв между текстом и его жизнью остаётся.</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Первая строка поста — это фраза, которую клиент сам думал вчера. Он не прокручивает дальше. Он читает. Это и есть захват внимания без кликбейта.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">Как писать так, чтобы люди узнавали себя?</div>
+        <div class="vd-q-item">Где брать живые формулировки для контента?</div>
+        <div class="vd-q-item">Почему мои тексты звучат «правильно» но не трогают?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vd-section-divider">Блок 4 — Продукты</div>
+
+  <!-- ЛИНЕЙКА -->
+  <div class="vd-block">
+    <div class="vd-block-head" onclick="vdToggle(this)">
+      <div class="vd-block-num">💎</div>
+      <div class="vd-block-meta">
+        <span class="vd-block-tag" style="background:#F0FDF4;color:#166534">Продукты</span>
+        <div class="vd-block-title">Продуктовая линейка — воронка от 0 до 35 000 руб</div>
+        <div class="vd-block-sub">Один человек — четыре точки входа. Каждая следующая — логичный шаг, а не новая продажа</div>
+      </div>
+      <div class="vd-block-arr">▾</div>
+    </div>
+    <div class="vd-block-body">
+      <div class="vd-grid-3">
+        <div>
+          <div class="vd-col-label">Зачем это тебе</div>
+          <div class="vd-col-body">Один продукт — одна точка продажи. Или купил, или нет. Линейка — это система, где каждый уровень ведёт к следующему. Человек начинает с бесплатного, делает первую покупку за 990, потом покупает основной продукт — и всё это естественно, без давления. Раздел показывает логику этой цепочки и что предлагать на каждом шаге.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Какие задачи закрывает</div>
+          <div class="vd-col-body">Перестаёшь продавать «в лоб» дорогой продукт холодной аудитории. Строишь путь доверия: сначала дать ценность, потом предложить платное. Конверсия растёт не потому что ты лучше продаёшь — а потому что человек уже знает, что ты даёшь результат.</div>
+        </div>
+        <div>
+          <div class="vd-col-label">Что закрывает вопрос</div>
+          <div class="vd-col-body">«Почему у меня покупают мало при хорошем продукте?» Потому что нет перехода от незнакомца к покупателю. Линейка строит этот переход шаг за шагом. Люди покупают тех, кому доверяют. Доверие строится через опыт маленьких побед.</div>
+        </div>
+      </div>
+      <div class="vd-without-box"><strong>Без этого</strong>Предлагаешь основной продукт сразу — большинство говорит «нет». Снижаешь цену. Даёшь скидки. Теряешь в позиционировании. Круг замыкается.</div>
+      <div class="vd-result-box"><strong>С этим разделом</strong>Человек проходит путь: бесплатное → 990 руб → основной продукт. К моменту покупки основного он уже знает, что ты даёшь результат. Решение принимается легко.</div>
+      <div class="vd-questions">
+        <div class="vd-questions-label">Закрывает вопросы</div>
+        <div class="vd-q-item">Как продавать дорогой продукт без давления и скидок?</div>
+        <div class="vd-q-item">Как выстроить путь клиента от подписчика до покупателя?</div>
+        <div class="vd-q-item">Почему у меня не покупают даже когда нравится контент?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vd-bottom-cta">
+    <h3>Это не документ — это фундамент.<br>Всё остальное строится на нём.</h3>
+    <p>Таргет, реклама, рилсы, посты, коллаборации — всё это инструменты. Они работают, только когда есть смыслы. <span class="vd-gold">Без фундамента всё остальное — шелуха. Это факт.</span></p>
+  </div>
+
+</div>
+
+<script>
+function toggle(head) {
+  var body = head.nextElementSibling;
+  var arr = head.querySelector('.block-arr');
+  var isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  head.classList.toggle('open', !isOpen);
+  arr.classList.toggle('open', !isOpen);
+}
+
+function vdToggle(head) {
+  var body = head.nextElementSibling;
+  var arr = head.querySelector('.vd-block-arr');
+  var isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  head.classList.toggle('open', !isOpen);
+  arr.classList.toggle('open', !isOpen);
+}
+
+</script>
+    </div>
+
+  </div>
+</div>
+
+<script>
+var titles = {
+  home:   {t:'Главная', s:'Все инструменты в одном месте'},
+  seg:    {t:'01 — Ключевой сегмент', s:'Портрет и потенциал целевой аудитории'},
+  q:      {t:'02 — Вопросы 3 ночи', s:'Что гуглят в отчаянии и не могут отпустить'},
+  pain:   {t:'03 — Сильнейшие боли', s:'10 болей, с которых начинается продажа'},
+  fear:   {t:'04 — Страхи-блокираторы', s:'Что мешает купить — даже когда хочется'},
+  err:    {t:'05 — Ошибки', s:'Что делают не так, пока пытаются сами'},
+  obj:    {t:'06 — Возражения', s:'Почему не покупают — и как закрыть через метафору'},
+  dream:  {t:'07 — Глобальные мечты', s:'Что держат в глубине души'},
+  sar:    {t:'08 — Сарказм и юмор', s:'На что реагируют мгновенно и с болью'},
+  mag:    {t:'09 — Смысловые магниты', s:'Крючки для контента, которые цепляют сразу'},
+  val:    {t:'10 — Ценности и триггеры', s:'Что цепляет сильнее всего'},
+  kr:     {t:'★ Смысловой кристалл', s:'5 мощных связок: сегмент → боль → лекарство → артефакт'},
+  crisis: {t:'⚡ Смыслы в кризис', s:'Опора для продаж когда всё рушится'},
+  comp:   {t:'⚔ Конкуренты и сравнения', s:'Как управлять выбором клиента без атаки на других'},
+  entry:  {t:'🚪 Точка входа', s:'Первое касание и маршрут от незнакомца до покупки'},
+  dna:    {t:'✦ ДНК голоса и смыслы', s:'Голос Анастасии Лушниковой — молекулы и банк смыслов'},
+  voices: {t:'🔥 Голос аудитории', s:'Живые фразы из комментариев — дословно, без редактуры'},
+  lineup: {t:'💎 Продуктовая линейка', s:'Лид-магниты · Трипваер · Основной продукт · Услуга под ключ'},
+  valuedoc: {t:'📄 Что транслировать в блоге: зачем архитектор', s:'Ценность каждого раздела — для тебя и твоего продукта'}
+};
+
+function go(id) {
+  document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  var el = document.querySelector('[onclick="go(\''+id+'\')"]');
+  if (el) el.classList.add('active');
+  var info = titles[id] || {t:id, s:''};
+  document.getElementById('topbar-title').textContent = info.t;
+  document.getElementById('topbar-sub').textContent = info.s;
+  window.scrollTo(0,0);
+}
+
+function dnaSwitch(tab, paneId) {
+  document.querySelectorAll('.dna-tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.dna-pane').forEach(function(p){ p.classList.remove('active'); });
+  tab.classList.add('active');
+  document.getElementById(paneId).classList.add('active');
+}
+
+function fnToggle(detailId, arrowId) {
+  var d = document.getElementById(detailId);
+  var a = document.getElementById(arrowId);
+  d.classList.toggle('open');
+  a.classList.toggle('open');
+}
+
+function toggleMobMenu() {
+  var groups = document.querySelector('.topnav-groups');
+  var btn = document.getElementById('mobBtn');
+  var isOpen = groups.classList.toggle('mob-open');
+  btn.textContent = isOpen ? '✕' : '☰';
+}
+
+// Close menu when nav item clicked on mobile
+document.querySelectorAll('.nav-item').forEach(function(item) {
+  item.addEventListener('click', function() {
+    var groups = document.querySelector('.topnav-groups');
+    var btn = document.getElementById('mobBtn');
+    if (groups.classList.contains('mob-open')) {
+      groups.classList.remove('mob-open');
+      btn.textContent = '☰';
+    }
+  });
+});
+</script>
+</body>
+</html>
