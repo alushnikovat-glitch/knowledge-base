@@ -661,58 +661,51 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
   </div>
 
   <!-- DIAGRAM: сравнение -->
-  <div class="diagram-wrap">
-    <svg width="100%" viewBox="0 0 680 320" role="img" xmlns="http://www.w3.org/2000/svg">
-      <title>Контент о себе vs контент о клиенте</title>
-      <desc>Сравнение двух подходов: что происходит и какой результат даёт каждый</desc>
-      <defs>
-        <marker id="arr1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M2 1L8 5L2 9" fill="none" stroke="#a8a29e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </marker>
-      </defs>
-      <!-- Left: о себе -->
-      <rect x="30" y="40" width="290" height="50" rx="10" fill="#fce7f3" stroke="#f9a8d4" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#9d174d" x="175" y="62" text-anchor="middle" dominant-baseline="central">Контент о себе</text>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#be185d" x="175" y="80" text-anchor="middle" dominant-baseline="central">«Я эксперт. Смотрите на мой результат»</text>
-
-      <rect x="30" y="112" width="290" height="46" rx="8" fill="#f7f6f2" stroke="#e8e6df" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="175" y="130" text-anchor="middle" dominant-baseline="central">Читатель: «ну да, интересно»</text>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="175" y="148" text-anchor="middle" dominant-baseline="central">— и листает дальше</text>
-
-      <line x1="175" y1="158" x2="175" y2="186" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr1)"/>
-
-      <rect x="30" y="186" width="290" height="46" rx="8" fill="#f7f6f2" stroke="#e8e6df" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="175" y="204" text-anchor="middle" dominant-baseline="central">3 000 просмотров.</text>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="175" y="220" text-anchor="middle" dominant-baseline="central">Ноль продаж</text>
-
-      <line x1="175" y1="232" x2="175" y2="258" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr1)"/>
-
-      <rect x="60" y="258" width="230" height="38" rx="8" fill="#fce7f3" stroke="#f9a8d4" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#9d174d" x="175" y="277" text-anchor="middle" dominant-baseline="central">Тишина в продажах</text>
-
-      <!-- Divider -->
-      <line x1="340" y1="28" x2="340" y2="308" stroke="#e8e6df" stroke-width="0.5" stroke-dasharray="4 3"/>
-
-      <!-- Right: о клиенте -->
-      <rect x="360" y="40" width="290" height="50" rx="10" fill="#d1fae5" stroke="#6ee7b7" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#065f46" x="505" y="62" text-anchor="middle" dominant-baseline="central">Контент о клиенте</text>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#047857" x="505" y="80" text-anchor="middle" dominant-baseline="central">«Это про тебя. Это твоя боль»</text>
-
-      <rect x="360" y="112" width="290" height="46" rx="8" fill="#f7f6f2" stroke="#e8e6df" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="505" y="130" text-anchor="middle" dominant-baseline="central">Читатель: «это про меня»</text>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="505" y="148" text-anchor="middle" dominant-baseline="central">— останавливается</text>
-
-      <line x1="505" y1="158" x2="505" y2="186" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr1)"/>
-
-      <rect x="360" y="186" width="290" height="46" rx="8" fill="#f7f6f2" stroke="#e8e6df" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="505" y="204" text-anchor="middle" dominant-baseline="central">Один пост с точным фундаментом</text>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="505" y="220" text-anchor="middle" dominant-baseline="central">продаёт больше, чем месяц без него</text>
-
-      <line x1="505" y1="232" x2="505" y2="258" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr1)"/>
-
-      <rect x="390" y="258" width="230" height="38" rx="8" fill="#d1fae5" stroke="#6ee7b7" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#065f46" x="505" y="277" text-anchor="middle" dominant-baseline="central">Продажи</text>
-    </svg>
+  <div class="diagram-wrap" style="padding: 20px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+      <!-- Левая колонка -->
+      <div style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
+        <div style="width:100%; background:#fce7f3; border:1px solid #f9a8d4; border-radius:10px; padding:12px 14px; text-align:center;">
+          <div style="font-size:14px; font-weight:700; color:#9d174d; margin-bottom:4px;">Контент о себе</div>
+          <div style="font-size:13px; color:#be185d;">«Я эксперт. Смотрите на мой результат»</div>
+        </div>
+        <div style="color:#a8a29e; font-size:18px; line-height:1;">↓</div>
+        <div style="width:100%; background:#f7f6f2; border:1px solid #e8e6df; border-radius:8px; padding:10px 14px; text-align:center;">
+          <div style="font-size:13px; color:#6b6860;">Читатель: «ну да, интересно»</div>
+          <div style="font-size:13px; color:#6b6860;">— и листает дальше</div>
+        </div>
+        <div style="color:#a8a29e; font-size:18px; line-height:1;">↓</div>
+        <div style="width:100%; background:#f7f6f2; border:1px solid #e8e6df; border-radius:8px; padding:10px 14px; text-align:center;">
+          <div style="font-size:13px; color:#6b6860;">3 000 просмотров.</div>
+          <div style="font-size:13px; color:#6b6860;">Ноль продаж</div>
+        </div>
+        <div style="color:#a8a29e; font-size:18px; line-height:1;">↓</div>
+        <div style="width:100%; background:#fce7f3; border:1px solid #f9a8d4; border-radius:8px; padding:10px 14px; text-align:center;">
+          <div style="font-size:14px; font-weight:700; color:#9d174d;">Тишина в продажах</div>
+        </div>
+      </div>
+      <!-- Правая колонка -->
+      <div style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
+        <div style="width:100%; background:#d1fae5; border:1px solid #6ee7b7; border-radius:10px; padding:12px 14px; text-align:center;">
+          <div style="font-size:14px; font-weight:700; color:#065f46; margin-bottom:4px;">Контент о клиенте</div>
+          <div style="font-size:13px; color:#047857;">«Это про тебя. Это твоя боль»</div>
+        </div>
+        <div style="color:#a8a29e; font-size:18px; line-height:1;">↓</div>
+        <div style="width:100%; background:#f7f6f2; border:1px solid #e8e6df; border-radius:8px; padding:10px 14px; text-align:center;">
+          <div style="font-size:13px; color:#6b6860;">Читатель: «это про меня»</div>
+          <div style="font-size:13px; color:#6b6860;">— останавливается</div>
+        </div>
+        <div style="color:#a8a29e; font-size:18px; line-height:1;">↓</div>
+        <div style="width:100%; background:#f7f6f2; border:1px solid #e8e6df; border-radius:8px; padding:10px 14px; text-align:center;">
+          <div style="font-size:13px; color:#6b6860;">Один пост с точным фундаментом</div>
+          <div style="font-size:13px; color:#6b6860;">продаёт больше месяца без него</div>
+        </div>
+        <div style="color:#a8a29e; font-size:18px; line-height:1;">↓</div>
+        <div style="width:100%; background:#d1fae5; border:1px solid #6ee7b7; border-radius:8px; padding:10px 14px; text-align:center;">
+          <div style="font-size:14px; font-weight:700; color:#065f46;">Продажи</div>
+        </div>
+      </div>
+    </div>
     <div class="diagram-caption">Два сценария. Разница — только в фундаменте.</div>
   </div>
 
@@ -775,118 +768,92 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
   <p class="body-text" style="margin-bottom: 28px;">Шаги конкретные. Каждый из них без фундамента работает хуже или не работает вообще.</p>
 
   <!-- DIAGRAM: смысловой кристалл -->
-  <div class="diagram-wrap">
-    <svg width="100%" viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg">
-      <title>Смысловой кристалл</title>
-      <desc>Схема: из аудитории через боль и смысл-лекарство к артефакту и офферу</desc>
-      <defs>
-        <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M2 1L8 5L2 9" fill="none" stroke="#a8a29e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </marker>
-      </defs>
-
-      <!-- Labels top -->
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#a8a29e" x="340" y="22" text-anchor="middle">из фундамента рождается всё</text>
-      <text font-family="Manrope,sans-serif" font-size="15" font-weight="700" fill="#1a1917" x="340" y="50" text-anchor="middle">Смысловой кристалл</text>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="340" y="70" text-anchor="middle">5 связок, которые приносят 80% продаж</text>
-
-      <!-- Аудитория -->
-      <rect x="20" y="100" width="104" height="56" rx="8" fill="#f0ede6" stroke="#d4cfc5" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="13" font-weight="700" fill="#1a1917" x="72" y="122" text-anchor="middle" dominant-baseline="central">Аудитория</text>
-      <text font-family="Manrope,sans-serif" font-size="11" fill="#6b6860" x="72" y="140" text-anchor="middle" dominant-baseline="central">Кто это?</text>
-
-      <line x1="124" y1="128" x2="146" y2="128" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr2)"/>
-
-      <!-- Боль -->
-      <rect x="146" y="86" width="118" height="84" rx="8" fill="#fce7f3" stroke="#f9a8d4" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="13" font-weight="700" fill="#9d174d" x="205" y="116" text-anchor="middle" dominant-baseline="central">Боль</text>
-      <text font-family="Manrope,sans-serif" font-size="11" fill="#be185d" x="205" y="133" text-anchor="middle" dominant-baseline="central">Что болит</text>
-      <text font-family="Manrope,sans-serif" font-size="11" fill="#be185d" x="205" y="149" text-anchor="middle" dominant-baseline="central">в 3 ночи</text>
-
-      <line x1="264" y1="128" x2="286" y2="128" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr2)"/>
-
-      <!-- Смысл-лекарство -->
-      <rect x="286" y="86" width="120" height="84" rx="8" fill="#d1fae5" stroke="#6ee7b7" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="13" font-weight="700" fill="#065f46" x="346" y="112" text-anchor="middle" dominant-baseline="central">Смысл-</text>
-      <text font-family="Manrope,sans-serif" font-size="13" font-weight="700" fill="#065f46" x="346" y="128" text-anchor="middle" dominant-baseline="central">лекарство</text>
-      <text font-family="Manrope,sans-serif" font-size="11" fill="#047857" x="346" y="148" text-anchor="middle" dominant-baseline="central">Как я помогаю</text>
-
-      <line x1="406" y1="128" x2="428" y2="128" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr2)"/>
-
-      <!-- Артефакт -->
-      <rect x="428" y="86" width="110" height="84" rx="8" fill="#dbeafe" stroke="#93c5fd" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="13" font-weight="700" fill="#1e3a8a" x="483" y="116" text-anchor="middle" dominant-baseline="central">Артефакт</text>
-      <text font-family="Manrope,sans-serif" font-size="11" fill="#1d4ed8" x="483" y="133" text-anchor="middle" dominant-baseline="central">Конкретный</text>
-      <text font-family="Manrope,sans-serif" font-size="11" fill="#1d4ed8" x="483" y="149" text-anchor="middle" dominant-baseline="central">результат</text>
-
-      <line x1="538" y1="128" x2="556" y2="128" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr2)"/>
-
-      <!-- Оффер -->
-      <rect x="556" y="100" width="104" height="56" rx="8" fill="#fef3c7" stroke="#fcd34d" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="13" font-weight="700" fill="#78350f" x="608" y="122" text-anchor="middle" dominant-baseline="central">Оффер</text>
-      <text font-family="Manrope,sans-serif" font-size="11" fill="#92400e" x="608" y="140" text-anchor="middle" dominant-baseline="central">Продаёт</text>
-
-      <!-- Пример -->
-      <rect x="20" y="204" width="640" height="76" rx="10" fill="none" stroke="#e8e6df" stroke-width="0.5" stroke-dasharray="4 3"/>
-      <text font-family="Manrope,sans-serif" font-size="12" font-weight="700" fill="#1a1917" x="40" y="224">Пример: нутрициолог</text>
-      <text font-family="Manrope,sans-serif" font-size="11" fill="#6b6860" x="40" y="244">Боль: «знаю что надо, но каждый раз всё заново» → Лекарство: «система, которую не надо держать в голове»</text>
-      <text font-family="Manrope,sans-serif" font-size="11" fill="#6b6860" x="40" y="264">Артефакт: чек-лист на неделю за 10 мин → Оффер пишется за 5 минут и попадает точно</text>
-    </svg>
-    <div class="diagram-caption">Нажми на любой блок — он ведёт дальше по логике</div>
+  <div class="diagram-wrap" style="padding: 20px 16px;">
+    <div style="text-align:center; margin-bottom:16px;">
+      <div style="font-size:12px; color:#a8a29e; margin-bottom:4px;">из фундамента рождается всё</div>
+      <div style="font-size:16px; font-weight:800; color:#1a1917; letter-spacing:-0.02em; margin-bottom:4px;">Смысловой кристалл</div>
+      <div style="font-size:13px; color:#6b6860;">5 связок, которые приносят 80% продаж</div>
+    </div>
+    <!-- Блоки цепочки — на мобильном вертикально, на десктопе горизонтально -->
+    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:6px; margin-bottom:16px;">
+      <div style="background:#f0ede6; border:1px solid #d4cfc5; border-radius:10px; padding:10px 14px; text-align:center; min-width:80px;">
+        <div style="font-size:13px; font-weight:700; color:#1a1917;">Аудитория</div>
+        <div style="font-size:12px; color:#6b6860;">Кто это?</div>
+      </div>
+      <div style="font-size:20px; color:#a8a29e; font-weight:300;">→</div>
+      <div style="background:#fce7f3; border:1px solid #f9a8d4; border-radius:10px; padding:10px 14px; text-align:center; min-width:80px;">
+        <div style="font-size:13px; font-weight:700; color:#9d174d;">Боль</div>
+        <div style="font-size:12px; color:#be185d;">Что болит</div>
+        <div style="font-size:12px; color:#be185d;">в 3 ночи</div>
+      </div>
+      <div style="font-size:20px; color:#a8a29e; font-weight:300;">→</div>
+      <div style="background:#d1fae5; border:1px solid #6ee7b7; border-radius:10px; padding:10px 14px; text-align:center; min-width:90px;">
+        <div style="font-size:13px; font-weight:700; color:#065f46;">Смысл-</div>
+        <div style="font-size:13px; font-weight:700; color:#065f46;">лекарство</div>
+        <div style="font-size:12px; color:#047857;">Как помогаю</div>
+      </div>
+      <div style="font-size:20px; color:#a8a29e; font-weight:300;">→</div>
+      <div style="background:#dbeafe; border:1px solid #93c5fd; border-radius:10px; padding:10px 14px; text-align:center; min-width:80px;">
+        <div style="font-size:13px; font-weight:700; color:#1e3a8a;">Артефакт</div>
+        <div style="font-size:12px; color:#1d4ed8;">Конкретный</div>
+        <div style="font-size:12px; color:#1d4ed8;">результат</div>
+      </div>
+      <div style="font-size:20px; color:#a8a29e; font-weight:300;">→</div>
+      <div style="background:#fef3c7; border:1px solid #fcd34d; border-radius:10px; padding:10px 14px; text-align:center; min-width:80px;">
+        <div style="font-size:13px; font-weight:700; color:#78350f;">Оффер</div>
+        <div style="font-size:12px; color:#92400e;">Продаёт</div>
+      </div>
+    </div>
+    <!-- Пример -->
+    <div style="border:1px dashed #e8e6df; border-radius:10px; padding:14px 16px;">
+      <div style="font-size:12px; font-weight:700; color:#1a1917; margin-bottom:6px;">Пример: нутрициолог</div>
+      <div style="font-size:13px; color:#6b6860; line-height:1.6;">Боль: «знаю что надо, но каждый раз всё заново» → Лекарство: «система, которую не надо держать в голове» → Артефакт: чек-лист на неделю за 10 мин → Оффер пишется за 5 минут</div>
+    </div>
+    <div class="diagram-caption">5 связок — из них рождается весь контент и оффер</div>
   </div>
 
   <!-- DIAGRAM: дорожная карта -->
-  <div class="diagram-wrap">
-    <svg width="100%" viewBox="0 0 680 480" role="img" xmlns="http://www.w3.org/2000/svg">
-      <title>Дорожная карта к 250 000 рублей</title>
-      <desc>Шесть шагов от фундамента до масштаба</desc>
-      <defs>
-        <marker id="arr3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M2 1L8 5L2 9" fill="none" stroke="#a8a29e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </marker>
-      </defs>
-
-      <!-- Step 0 — highlighted amber -->
-      <rect x="30" y="16" width="600" height="62" rx="10" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
-      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#78350f" x="60" y="41" dominant-baseline="central">Шаг 0 — фундамент</text>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#92400e" x="60" y="61" dominant-baseline="central">Анализ аудитории. Смысловой кристалл. Делается один раз, до всего остального</text>
-      <text font-family="Manrope,sans-serif" font-size="11" font-weight="700" fill="#b45309" x="616" y="47" text-anchor="end" dominant-baseline="central">⬅ начать тут</text>
-
-      <line x1="330" y1="78" x2="330" y2="100" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr3)"/>
-
+  <div class="diagram-wrap" style="padding: 16px;">
+    <div style="display:flex; flex-direction:column; gap:6px;">
+      <!-- Step 0 -->
+      <div style="background:#fef3c7; border:1.5px solid #fcd34d; border-radius:10px; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:14px; font-weight:800; color:#78350f; margin-bottom:3px;">Шаг 0 — фундамент</div>
+          <div style="font-size:13px; color:#92400e;">Анализ аудитории. Смысловой кристалл. Делается один раз, до всего остального</div>
+        </div>
+        <div style="font-size:12px; font-weight:700; color:#b45309; white-space:nowrap;">⬅ начать тут</div>
+      </div>
+      <div style="text-align:center; color:#a8a29e; font-size:16px; line-height:1;">↓</div>
       <!-- Step 1 -->
-      <rect x="30" y="100" width="600" height="54" rx="10" fill="#d1fae5" stroke="#6ee7b7" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#065f46" x="60" y="122" dominant-baseline="central">Шаг 1 — мини-продукт</text>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#047857" x="60" y="140" dominant-baseline="central">Гайд, шаблон, мини-курс. Одна проблема, одно решение. Цена 490–3000 ₽</text>
-
-      <line x1="330" y1="154" x2="330" y2="174" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr3)"/>
-
+      <div style="background:#d1fae5; border:1px solid #6ee7b7; border-radius:10px; padding:14px 16px;">
+        <div style="font-size:14px; font-weight:700; color:#065f46; margin-bottom:3px;">Шаг 1 — мини-продукт</div>
+        <div style="font-size:13px; color:#047857;">Гайд, шаблон, мини-курс. Одна проблема, одно решение. Цена 490–3000 ₽</div>
+      </div>
+      <div style="text-align:center; color:#a8a29e; font-size:16px; line-height:1;">↓</div>
       <!-- Step 2 -->
-      <rect x="30" y="174" width="600" height="54" rx="10" fill="#d1fae5" stroke="#6ee7b7" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#065f46" x="60" y="196" dominant-baseline="central">Шаг 2 — оффер</text>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#047857" x="60" y="214" dominant-baseline="central">Одно предложение: кому, что и зачем. Когда есть фундамент — пишется сам</text>
-
-      <line x1="330" y1="228" x2="330" y2="248" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr3)"/>
-
+      <div style="background:#d1fae5; border:1px solid #6ee7b7; border-radius:10px; padding:14px 16px;">
+        <div style="font-size:14px; font-weight:700; color:#065f46; margin-bottom:3px;">Шаг 2 — оффер</div>
+        <div style="font-size:13px; color:#047857;">Одно предложение: кому, что и зачем. Когда есть фундамент — пишется сам</div>
+      </div>
+      <div style="text-align:center; color:#a8a29e; font-size:16px; line-height:1;">↓</div>
       <!-- Step 3 -->
-      <rect x="30" y="248" width="600" height="54" rx="10" fill="#d1fae5" stroke="#6ee7b7" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#065f46" x="60" y="270" dominant-baseline="central">Шаг 3 — первые продажи</text>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#047857" x="60" y="288" dominant-baseline="central">Сторис, пост, прямые сообщения. Цель — 10 продаж для проверки</text>
-
-      <line x1="330" y1="302" x2="330" y2="322" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr3)"/>
-
+      <div style="background:#d1fae5; border:1px solid #6ee7b7; border-radius:10px; padding:14px 16px;">
+        <div style="font-size:14px; font-weight:700; color:#065f46; margin-bottom:3px;">Шаг 3 — первые продажи</div>
+        <div style="font-size:13px; color:#047857;">Сторис, пост, прямые сообщения. Цель — 10 продаж для проверки</div>
+      </div>
+      <div style="text-align:center; color:#a8a29e; font-size:16px; line-height:1;">↓</div>
       <!-- Step 4 -->
-      <rect x="30" y="322" width="600" height="54" rx="10" fill="#d1fae5" stroke="#6ee7b7" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#065f46" x="60" y="344" dominant-baseline="central">Шаг 4 — контент, который продаёт</text>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#047857" x="60" y="362" dominant-baseline="central">Каждый пост — одна боль из карты. Без вдохновения, без «о чём писать»</text>
-
-      <line x1="330" y1="376" x2="330" y2="396" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr3)"/>
-
+      <div style="background:#d1fae5; border:1px solid #6ee7b7; border-radius:10px; padding:14px 16px;">
+        <div style="font-size:14px; font-weight:700; color:#065f46; margin-bottom:3px;">Шаг 4 — контент, который продаёт</div>
+        <div style="font-size:13px; color:#047857;">Каждый пост — одна боль из карты. Без вдохновения, без «о чём писать»</div>
+      </div>
+      <div style="text-align:center; color:#a8a29e; font-size:16px; line-height:1;">↓</div>
       <!-- Step 5 -->
-      <rect x="30" y="396" width="600" height="54" rx="10" fill="#ede9fe" stroke="#c4b5fd" stroke-width="0.5"/>
-      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#4c1d95" x="60" y="418" dominant-baseline="central">Шаг 5 — масштаб</text>
-      <text font-family="Manrope,sans-serif" font-size="12" fill="#5b21b6" x="60" y="436" dominant-baseline="central">Таргет усиливает то, что уже работает. Подключать только после шагов 1–4</text>
-    </svg>
+      <div style="background:#ede9fe; border:1px solid #c4b5fd; border-radius:10px; padding:14px 16px;">
+        <div style="font-size:14px; font-weight:700; color:#4c1d95; margin-bottom:3px;">Шаг 5 — масштаб</div>
+        <div style="font-size:13px; color:#5b21b6;">Таргет усиливает то, что уже работает. Подключать только после шагов 1–4</div>
+      </div>
+    </div>
     <div class="diagram-caption">Каждый шаг без фундамента работает хуже или не работает вообще</div>
   </div>
 
