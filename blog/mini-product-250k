@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как с помощью Claude создать мини-продукт и продать его на первые 250 000 рублей — Анастасия Лушникова</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108790481', 'ym');
+    ym(108790481, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108790481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2700527913660797');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --border: #e8e6df;
+    --text: #1a1917;
+    --text-muted: #6b6860;
+    --text-light: #a8a29e;
+    --accent: #2563eb;
+    --accent-light: #eff4ff;
+    --tag-bg: #f0ede6;
+    --dark: #1a1917;
+    --warning-bg: #fffbf0;
+    --warning-border: #fde68a;
+    --success-bg: #f0fdf4;
+    --success-border: #bbf7d0;
+    --success-text: #15803d;
+    --var-bg: #fef9c3;
+    --var-text: #854d0e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(247,246,242,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* PAGE */
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 52px 24px 80px;
+  }
+
+  /* META */
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .meta-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+
+  /* TAGS */
+  .tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+  .tag {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--tag-bg);
+    padding: 5px 12px;
+    border-radius: 100px;
+  }
+
+  /* H1 */
+  h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+
+  /* SECTION DIVIDER */
+  .block-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 48px 0 24px;
+  }
+  .block-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--border);
+    padding: 4px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .block-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* INTRO CARD */
+  .intro-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 28px;
+  }
+  .intro-card p {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 14px;
+  }
+  .intro-card p:last-child { margin-bottom: 0; }
+  .intro-card strong { color: var(--text); font-weight: 700; }
+
+  /* HINT BLUE */
+  .hint-blue {
+    background: var(--accent-light);
+    border: 1px solid #bfdbfe;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .hint-blue-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .hint-blue-text {
+    font-size: 14px;
+    color: #1e40af;
+    line-height: 1.65;
+  }
+  .hint-blue-text strong { color: #1e3a8a; font-weight: 700; }
+
+  /* BODY TEXT */
+  .body-text {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .body-text strong { color: var(--text); font-weight: 700; }
+
+  /* STEP CARDS */
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .step-number {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 10px;
+  }
+  .step-title {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.25;
+  }
+  .step-subtitle {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 16px;
+  }
+  .step-card p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+  .step-card p:last-child { margin-bottom: 0; }
+  .step-card strong { color: var(--text); font-weight: 700; }
+
+  /* EXAMPLE BLOCK */
+  .example-block {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .example-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 8px;
+  }
+
+  /* MATH TABLE */
+  .math-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 24px 0;
+  }
+  @media (max-width: 600px) {
+    .math-grid { grid-template-columns: 1fr; }
+  }
+  .math-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+  }
+  .math-price {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .math-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .math-result {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .math-label {
+    font-size: 11px;
+    color: var(--text-light);
+  }
+
+  /* PRODUCT BLOCK */
+  .product-block {
+    background: var(--warning-bg);
+    border: 1.5px solid var(--warning-border);
+    border-radius: 20px;
+    padding: 36px;
+    margin: 48px 0;
+  }
+  .product-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #92400e;
+    margin-bottom: 12px;
+  }
+  .product-title {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .product-desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .product-features {
+    list-style: none;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .product-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .feature-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    background: var(--success-bg);
+    border: 1px solid var(--success-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .feature-check svg { color: var(--success-text); }
+
+  .product-guarantee {
+    background: var(--success-bg);
+    border: 1px solid var(--success-border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--success-text);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .btn-product {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--dark);
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px 28px;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: opacity 0.15s;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .btn-product:hover { opacity: 0.88; }
+
+  .product-meta {
+    font-size: 12px;
+    color: var(--text-light);
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  /* HIGHLIGHT INLINE */
+  .highlight-block {
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .highlight-block p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 0;
+  }
+  .highlight-block strong { color: var(--text); }
+
+  /* FOOTER */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    margin-top: 80px;
+    padding: 56px 24px 32px;
+  }
+  .footer-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .footer-title {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .footer-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 32px;
+    max-width: 520px;
+  }
+  .social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  @media (max-width: 520px) {
+    .social-grid { grid-template-columns: 1fr; }
+  }
+  .social-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .social-card:hover {
+    border-color: #d1cfc9;
+    background: #f0ede6;
+  }
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .social-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .social-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  .footer-banner {
+    background: var(--dark);
+    border-radius: 16px;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .footer-banner-text {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .footer-banner-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 3px;
+  }
+  .btn-tg {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #2563eb;
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 100px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+  .btn-tg:hover { opacity: 0.88; }
+  .footer-copy {
+    font-size: 12px;
+    color: var(--text-light);
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  /* DIAGRAMS */
+  .diagram-wrap {
+    margin: 28px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 8px;
+    overflow: hidden;
+  }
+  .diagram-wrap svg { display: block; width: 100%; height: auto; }
+  .diagram-caption {
+    font-size: 12px;
+    color: var(--text-light);
+    text-align: center;
+    padding: 8px 16px 4px;
+    font-style: italic;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .page { padding: 36px 16px 60px; }
+    .intro-card, .step-card { padding: 22px 20px; }
+    .product-block { padding: 24px 20px; }
+    nav { padding: 0 16px; }
+    .nav-links { gap: 16px; }
+    .nav-links a { font-size: 12px; }
+    .footer-banner { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="../">Анастасия Лушникова</a>
+  <div class="nav-links">
+    <a href="https://t.me/target_school1" target="_blank" rel="noopener">Telegram</a>
+    <a href="https://www.instagram.com/target_school" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank" rel="noopener">Написать</a>
+  </div>
+</nav>
+
+<!-- PAGE -->
+<div class="page">
+
+  <!-- META -->
+  <div class="meta">
+    <span>май 2026</span>
+    <span class="meta-dot"></span>
+    <span>12 мин чтения</span>
+    <span class="meta-dot"></span>
+    <span>Автор: Анастасия Лушникова</span>
+  </div>
+
+  <!-- H1 -->
+  <h1>Как в 2026 с помощью Claude создать мини-продукт и продать его на первые 250 000 рублей</h1>
+
+  <!-- TAGS -->
+  <div class="tags">
+    <span class="tag">AI-маркетинг</span>
+    <span class="tag">Продажи</span>
+    <span class="tag">Стратегия</span>
+    <span class="tag">Инструменты</span>
+    <span class="tag">Авторский метод</span>
+  </div>
+
+  <!-- INTRO CARD -->
+  <div class="intro-card">
+    <p>Я сама через это прошла. Снимала, писала, запускала. И долго не понимала, почему не работает.</p>
+    <p>Ты уже что-то делаешь. Снимаешь рилсы, ведёшь блог, публикуешь контент. Может, даже создала продукт. Просмотры есть, продаж нет. Пишешь каждый день, покупают единицы. Запустила — тишина.</p>
+    <p>И думаешь: надо снимать больше. Монтировать лучше. Найти правильный формат.</p>
+    <p><strong>Дело не в формате. И не в алгоритмах.</strong></p>
+  </div>
+
+  <!-- HINT -->
+  <div class="hint-blue">
+    <div class="hint-blue-icon">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+    </div>
+    <div class="hint-blue-text">
+      <strong>Как читать эту статью.</strong> Можно просто прочитать. Можно сразу применять: после каждого шага остановись и сделай его по своей нише. Дорожная карта рабочая — результат зависит от того, сделаешь ли ты шаг 0.
+    </div>
+  </div>
+
+  <!-- BLOCK: ПОЧЕМУ -->
+  <div class="block-header">
+    <span class="block-label">Главная причина</span>
+    <div class="block-line"></div>
+  </div>
+
+  <p class="body-text">Я видела это тысячи раз. В таргете, в запусках, в разборах студентов школы. Один и тот же сценарий.</p>
+  <p class="body-text">Человек работает. Снимает рилс, тема кажется полезной, набирает 3000 просмотров. Ноль продаж. Снимает ещё. Снова ноль. Начинает думать: алгоритмы, не та аудитория, не то время.</p>
+  <p class="body-text">Или пишет посты каждый день. Тебя читают. Говорят «спасибо, очень полезно». Но когда появляется оффер — тишина.</p>
+  <p class="body-text">Или создаёт продукт. Вроде всё правильно. Выложила. Одна продажа, подруге. Думает: продукт плохой, надо переделать.</p>
+
+  <div class="highlight-block">
+    <p><strong>Контент говорит о тебе. А должен говорить о человеке, который его читает.</strong> Точно в его боль. Его словами. В момент, когда он это чувствует. Рилсы, Claude, таргет — всё работает в пустоту, если под контентом нет основания.</p>
+  </div>
+
+  <!-- DIAGRAM: сравнение -->
+  <div class="diagram-wrap">
+    <svg width="100%" viewBox="0 0 680 320" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Контент о себе vs контент о клиенте</title>
+      <desc>Сравнение двух подходов: что происходит и какой результат даёт каждый</desc>
+      <defs>
+        <marker id="arr1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#a8a29e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <!-- Left: о себе -->
+      <rect x="30" y="40" width="290" height="50" rx="10" fill="#fce7f3" stroke="#f9a8d4" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#9d174d" x="175" y="62" text-anchor="middle" dominant-baseline="central">Контент о себе</text>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#be185d" x="175" y="80" text-anchor="middle" dominant-baseline="central">«Я эксперт. Смотрите на мой результат»</text>
+
+      <rect x="30" y="112" width="290" height="46" rx="8" fill="#f7f6f2" stroke="#e8e6df" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="175" y="130" text-anchor="middle" dominant-baseline="central">Читатель: «ну да, интересно»</text>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="175" y="148" text-anchor="middle" dominant-baseline="central">— и листает дальше</text>
+
+      <line x1="175" y1="158" x2="175" y2="186" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr1)"/>
+
+      <rect x="30" y="186" width="290" height="46" rx="8" fill="#f7f6f2" stroke="#e8e6df" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="175" y="204" text-anchor="middle" dominant-baseline="central">3 000 просмотров.</text>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="175" y="220" text-anchor="middle" dominant-baseline="central">Ноль продаж</text>
+
+      <line x1="175" y1="232" x2="175" y2="258" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr1)"/>
+
+      <rect x="60" y="258" width="230" height="38" rx="8" fill="#fce7f3" stroke="#f9a8d4" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#9d174d" x="175" y="277" text-anchor="middle" dominant-baseline="central">Тишина в продажах</text>
+
+      <!-- Divider -->
+      <line x1="340" y1="28" x2="340" y2="308" stroke="#e8e6df" stroke-width="0.5" stroke-dasharray="4 3"/>
+
+      <!-- Right: о клиенте -->
+      <rect x="360" y="40" width="290" height="50" rx="10" fill="#d1fae5" stroke="#6ee7b7" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#065f46" x="505" y="62" text-anchor="middle" dominant-baseline="central">Контент о клиенте</text>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#047857" x="505" y="80" text-anchor="middle" dominant-baseline="central">«Это про тебя. Это твоя боль»</text>
+
+      <rect x="360" y="112" width="290" height="46" rx="8" fill="#f7f6f2" stroke="#e8e6df" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="505" y="130" text-anchor="middle" dominant-baseline="central">Читатель: «это про меня»</text>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="505" y="148" text-anchor="middle" dominant-baseline="central">— останавливается</text>
+
+      <line x1="505" y1="158" x2="505" y2="186" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr1)"/>
+
+      <rect x="360" y="186" width="290" height="46" rx="8" fill="#f7f6f2" stroke="#e8e6df" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="505" y="204" text-anchor="middle" dominant-baseline="central">Один пост с точным фундаментом</text>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="505" y="220" text-anchor="middle" dominant-baseline="central">продаёт больше, чем месяц без него</text>
+
+      <line x1="505" y1="232" x2="505" y2="258" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr1)"/>
+
+      <rect x="390" y="258" width="230" height="38" rx="8" fill="#d1fae5" stroke="#6ee7b7" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#065f46" x="505" y="277" text-anchor="middle" dominant-baseline="central">Продажи</text>
+    </svg>
+    <div class="diagram-caption">Два сценария. Разница — только в фундаменте.</div>
+  </div>
+
+  <!-- BLOCK: ФУНДАМЕНТ -->
+  <div class="block-header">
+    <span class="block-label">Почему нужен фундамент</span>
+    <div class="block-line"></div>
+  </div>
+
+  <p class="body-text">Я в маркетинге 17 лет. Сначала таргет: видела какие смыслы конвертируют, а какие сливают бюджет. Потом запуски, где разница между «оффер попал» и «оффер не попал» измерялась миллионами. Потом школа на 4000 студентов.</p>
+  <p class="body-text">Вывод один и тот же: работает точность, а не объём.</p>
+  <p class="body-text"><strong>Фундамент</strong> — это когда ты знаешь кто твой клиент, что у него болит прямо сейчас, какими словами он это называет и почему купит у тебя. Не примерно. Не «женщины 30–45, которые хотят зарабатывать онлайн». До фраз, которые он пишет в поиске в три часа ночи.</p>
+  <p class="body-text">Без этого ты пишешь посты, которые кажутся тебе полезными. Читатель листает и думает «ну да, интересно» — и уходит. Потому что не почувствовал: это про меня.</p>
+  <p class="body-text">Один пост с точным фундаментом продаёт больше, чем месяц контента без него.</p>
+  <p class="body-text">Раньше такой анализ занимал недели. Десятки интервью, анкеты, месяцы переписок. Сейчас есть Claude и один правильный промпт.</p>
+
+  <!-- PRODUCT BLOCK 1 -->
+  <div class="product-block">
+    <div class="product-eyebrow">Шаг 0 — до продукта, до рилсов, до таргета</div>
+    <div class="product-title">Архитектор смыслов</div>
+    <div class="product-desc">Авторские глубинные промпты, которые докапываются до искренних мотивов покупки. Тех, о которых сам клиент не скажет на кастдеве. Кастдев отнимает недели: созвоны, расшифровки, анализ. Здесь ты вскапываешь ту же суть за 20–30 минут.</div>
+    <ul class="product-features">
+      <li>
+        <span class="feature-check"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        Таблица с 10 разделами: боли, страхи, что гуглят в 3 ночи, возражения, триггеры
+      </li>
+      <li>
+        <span class="feature-check"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        Смысловой кристалл: 5 связок, которые приносят 80% продаж
+      </li>
+      <li>
+        <span class="feature-check"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        Рабочая среда в Claude: настраиваешь один раз, пользуешься каждый день
+      </li>
+    </ul>
+
+    <!-- SCREENSHOT 1 -->
+    <div style="margin: 4px 0 20px; border-radius: 12px; overflow: hidden; border: 1px solid #fde68a; box-shadow: 0 2px 12px rgba(0,0,0,0.07);">
+      <img src="screenshot-table.jpg" alt="Таблица маркетингового анализа целевой аудитории — 10 разделов внутри Архитектора смыслов" style="width: 100%; display: block;">
+      <div style="background: #fffbf0; padding: 10px 16px; font-size: 12px; color: #92400e; font-family: 'Manrope', sans-serif; border-top: 1px solid #fde68a;">
+        Так выглядит таблица внутри — раздел «Вопросы 3 ночи». Всего 10 таких разделов.
+      </div>
+    </div>
+
+    <div class="product-guarantee">
+      Первые 100 мест по цене 490 руб. После цена вырастет. Первая версия продаётся по стартовой цене запуска.
+    </div>
+    <a class="btn-product" href="https://app.lava.top/products/e09d7eec-f025-4686-96d7-5425f2973859" target="_blank" rel="noopener">
+      Забрать Архитектор смыслов →
+    </a>
+    <div class="product-meta">490 рублей · Мгновенный доступ · Один клиент окупает с первой продажи</div>
+  </div>
+
+  <!-- ROADMAP -->
+  <div class="block-header">
+    <span class="block-label">Дорожная карта к 250 000 ₽</span>
+    <div class="block-line"></div>
+  </div>
+
+  <p class="body-text" style="margin-bottom: 28px;">Шаги конкретные. Каждый из них без фундамента работает хуже или не работает вообще.</p>
+
+  <!-- DIAGRAM: смысловой кристалл -->
+  <div class="diagram-wrap">
+    <svg width="100%" viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Смысловой кристалл</title>
+      <desc>Схема: из аудитории через боль и смысл-лекарство к артефакту и офферу</desc>
+      <defs>
+        <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#a8a29e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <!-- Labels top -->
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#a8a29e" x="340" y="22" text-anchor="middle">из фундамента рождается всё</text>
+      <text font-family="Manrope,sans-serif" font-size="15" font-weight="700" fill="#1a1917" x="340" y="50" text-anchor="middle">Смысловой кристалл</text>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#6b6860" x="340" y="70" text-anchor="middle">5 связок, которые приносят 80% продаж</text>
+
+      <!-- Аудитория -->
+      <rect x="20" y="100" width="104" height="56" rx="8" fill="#f0ede6" stroke="#d4cfc5" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="13" font-weight="700" fill="#1a1917" x="72" y="122" text-anchor="middle" dominant-baseline="central">Аудитория</text>
+      <text font-family="Manrope,sans-serif" font-size="11" fill="#6b6860" x="72" y="140" text-anchor="middle" dominant-baseline="central">Кто это?</text>
+
+      <line x1="124" y1="128" x2="146" y2="128" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr2)"/>
+
+      <!-- Боль -->
+      <rect x="146" y="86" width="118" height="84" rx="8" fill="#fce7f3" stroke="#f9a8d4" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="13" font-weight="700" fill="#9d174d" x="205" y="116" text-anchor="middle" dominant-baseline="central">Боль</text>
+      <text font-family="Manrope,sans-serif" font-size="11" fill="#be185d" x="205" y="133" text-anchor="middle" dominant-baseline="central">Что болит</text>
+      <text font-family="Manrope,sans-serif" font-size="11" fill="#be185d" x="205" y="149" text-anchor="middle" dominant-baseline="central">в 3 ночи</text>
+
+      <line x1="264" y1="128" x2="286" y2="128" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr2)"/>
+
+      <!-- Смысл-лекарство -->
+      <rect x="286" y="86" width="120" height="84" rx="8" fill="#d1fae5" stroke="#6ee7b7" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="13" font-weight="700" fill="#065f46" x="346" y="112" text-anchor="middle" dominant-baseline="central">Смысл-</text>
+      <text font-family="Manrope,sans-serif" font-size="13" font-weight="700" fill="#065f46" x="346" y="128" text-anchor="middle" dominant-baseline="central">лекарство</text>
+      <text font-family="Manrope,sans-serif" font-size="11" fill="#047857" x="346" y="148" text-anchor="middle" dominant-baseline="central">Как я помогаю</text>
+
+      <line x1="406" y1="128" x2="428" y2="128" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr2)"/>
+
+      <!-- Артефакт -->
+      <rect x="428" y="86" width="110" height="84" rx="8" fill="#dbeafe" stroke="#93c5fd" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="13" font-weight="700" fill="#1e3a8a" x="483" y="116" text-anchor="middle" dominant-baseline="central">Артефакт</text>
+      <text font-family="Manrope,sans-serif" font-size="11" fill="#1d4ed8" x="483" y="133" text-anchor="middle" dominant-baseline="central">Конкретный</text>
+      <text font-family="Manrope,sans-serif" font-size="11" fill="#1d4ed8" x="483" y="149" text-anchor="middle" dominant-baseline="central">результат</text>
+
+      <line x1="538" y1="128" x2="556" y2="128" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr2)"/>
+
+      <!-- Оффер -->
+      <rect x="556" y="100" width="104" height="56" rx="8" fill="#fef3c7" stroke="#fcd34d" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="13" font-weight="700" fill="#78350f" x="608" y="122" text-anchor="middle" dominant-baseline="central">Оффер</text>
+      <text font-family="Manrope,sans-serif" font-size="11" fill="#92400e" x="608" y="140" text-anchor="middle" dominant-baseline="central">Продаёт</text>
+
+      <!-- Пример -->
+      <rect x="20" y="204" width="640" height="76" rx="10" fill="none" stroke="#e8e6df" stroke-width="0.5" stroke-dasharray="4 3"/>
+      <text font-family="Manrope,sans-serif" font-size="12" font-weight="700" fill="#1a1917" x="40" y="224">Пример: нутрициолог</text>
+      <text font-family="Manrope,sans-serif" font-size="11" fill="#6b6860" x="40" y="244">Боль: «знаю что надо, но каждый раз всё заново» → Лекарство: «система, которую не надо держать в голове»</text>
+      <text font-family="Manrope,sans-serif" font-size="11" fill="#6b6860" x="40" y="264">Артефакт: чек-лист на неделю за 10 мин → Оффер пишется за 5 минут и попадает точно</text>
+    </svg>
+    <div class="diagram-caption">Нажми на любой блок — он ведёт дальше по логике</div>
+  </div>
+
+  <!-- DIAGRAM: дорожная карта -->
+  <div class="diagram-wrap">
+    <svg width="100%" viewBox="0 0 680 480" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Дорожная карта к 250 000 рублей</title>
+      <desc>Шесть шагов от фундамента до масштаба</desc>
+      <defs>
+        <marker id="arr3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#a8a29e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <!-- Step 0 — highlighted amber -->
+      <rect x="30" y="16" width="600" height="62" rx="10" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#78350f" x="60" y="41" dominant-baseline="central">Шаг 0 — фундамент</text>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#92400e" x="60" y="61" dominant-baseline="central">Анализ аудитории. Смысловой кристалл. Делается один раз, до всего остального</text>
+      <text font-family="Manrope,sans-serif" font-size="11" font-weight="700" fill="#b45309" x="616" y="47" text-anchor="end" dominant-baseline="central">⬅ начать тут</text>
+
+      <line x1="330" y1="78" x2="330" y2="100" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr3)"/>
+
+      <!-- Step 1 -->
+      <rect x="30" y="100" width="600" height="54" rx="10" fill="#d1fae5" stroke="#6ee7b7" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#065f46" x="60" y="122" dominant-baseline="central">Шаг 1 — мини-продукт</text>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#047857" x="60" y="140" dominant-baseline="central">Гайд, шаблон, мини-курс. Одна проблема, одно решение. Цена 490–3000 ₽</text>
+
+      <line x1="330" y1="154" x2="330" y2="174" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr3)"/>
+
+      <!-- Step 2 -->
+      <rect x="30" y="174" width="600" height="54" rx="10" fill="#d1fae5" stroke="#6ee7b7" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#065f46" x="60" y="196" dominant-baseline="central">Шаг 2 — оффер</text>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#047857" x="60" y="214" dominant-baseline="central">Одно предложение: кому, что и зачем. Когда есть фундамент — пишется сам</text>
+
+      <line x1="330" y1="228" x2="330" y2="248" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr3)"/>
+
+      <!-- Step 3 -->
+      <rect x="30" y="248" width="600" height="54" rx="10" fill="#d1fae5" stroke="#6ee7b7" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#065f46" x="60" y="270" dominant-baseline="central">Шаг 3 — первые продажи</text>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#047857" x="60" y="288" dominant-baseline="central">Сторис, пост, прямые сообщения. Цель — 10 продаж для проверки</text>
+
+      <line x1="330" y1="302" x2="330" y2="322" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr3)"/>
+
+      <!-- Step 4 -->
+      <rect x="30" y="322" width="600" height="54" rx="10" fill="#d1fae5" stroke="#6ee7b7" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#065f46" x="60" y="344" dominant-baseline="central">Шаг 4 — контент, который продаёт</text>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#047857" x="60" y="362" dominant-baseline="central">Каждый пост — одна боль из карты. Без вдохновения, без «о чём писать»</text>
+
+      <line x1="330" y1="376" x2="330" y2="396" stroke="#a8a29e" stroke-width="1" marker-end="url(#arr3)"/>
+
+      <!-- Step 5 -->
+      <rect x="30" y="396" width="600" height="54" rx="10" fill="#ede9fe" stroke="#c4b5fd" stroke-width="0.5"/>
+      <text font-family="Manrope,sans-serif" font-size="14" font-weight="700" fill="#4c1d95" x="60" y="418" dominant-baseline="central">Шаг 5 — масштаб</text>
+      <text font-family="Manrope,sans-serif" font-size="12" fill="#5b21b6" x="60" y="436" dominant-baseline="central">Таргет усиливает то, что уже работает. Подключать только после шагов 1–4</text>
+    </svg>
+    <div class="diagram-caption">Каждый шаг без фундамента работает хуже или не работает вообще</div>
+  </div>
+
+  <!-- STEP 0 -->
+  <div class="step-card">
+    <div class="step-number">Шаг 0</div>
+    <div class="step-title">Фундамент</div>
+    <div class="step-subtitle">Прежде чем делать продукт</div>
+    <p>Без этого шага все остальные превращаются в теорию. Читаешь, киваешь, пробуешь — и снова тишина в продажах.</p>
+    <p>Промпт «Глубоководный аналитик» в Claude даёт таблицу с 10 разделами по твоей аудитории. Из неё выбираешь 5 ключевых связок: сегмент, боль, смысл-лекарство, артефакт. Это смысловой кристалл. Из него рождается всё остальное.</p>
+    <div class="example-block">
+      <div class="example-label">Пример</div>
+      Ниша: нутрициолог. Боль из таблицы: «знаю что надо делать, но каждый раз всё заново». Смысл-лекарство: «система питания, которую не надо держать в голове». Артефакт: чек-лист на неделю за 10 минут. Оффер пишется за пять минут. И он попадает.
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step-card">
+    <div class="step-number">Шаг 1</div>
+    <div class="step-title">Мини-продукт</div>
+    <div class="step-subtitle">Одна проблема. Одно решение.</div>
+    <p>Гайд, мини-курс, шаблон, закрытый канал, разбор, инструкция. Формат выбираешь под нишу.</p>
+    <p>Люди покупают не PDF и не видеоуроки. Они покупают быстрый результат. «Как сделать X не допустив ошибку Y.»</p>
+    <p>Цена от 490 до 3000 рублей. В этом диапазоне решение о покупке принимается за секунды.</p>
+    <p>Claude помогает создать продукт быстро. Дашь размытое задание — получишь размытый продукт. <strong>Дашь точную карту аудитории — получишь текст, который попадает в боль.</strong></p>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-card">
+    <div class="step-number">Шаг 2</div>
+    <div class="step-title">Оффер</div>
+    <div class="step-subtitle">Одно предложение, которое объясняет кому, что и зачем</div>
+    <div class="example-block">
+      <div class="example-label">Пример оффера</div>
+      Гайд по контенту для экспертов.<br>
+      Система за 15 минут, которая показывает о чём писать, чтобы подписчики покупали, а не просто читали.
+    </div>
+    <p style="margin-top: 16px;">Когда знаешь точно что болит у твоей аудитории, оффер пишется сам. Когда не знаешь — пишешь про себя, а не про них.</p>
+
+    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+      <p style="font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px;">Прямо здесь и сейчас</p>
+      <p>Такое ощущение, как будто знаешь всё о своём продукте, но объяснить что это и кому — выходит размыто. Говоришь одно, клиент слышит другое.</p>
+      <p><strong>Проверь прямо сейчас.</strong> Ты можешь написать оффер своего продукта за 2 минуты. Одним предложением. Так чтобы человек сразу понял: это про меня.</p>
+      <p>Если нет — дело в фундаменте.</p>
+    </div>
+  </div>
+
+  <!-- PRODUCT BLOCK 2 (mid-article) -->
+  <div class="product-block" style="margin: 32px 0;">
+    <div class="product-eyebrow">«Архитектор смыслов» вытаскивает нужные слова</div>
+    <div class="product-title" style="font-size: 20px;">Из карты аудитории, а не из головы</div>
+    <div class="product-desc" style="margin-bottom: 16px;">Авторские глубинные промпты, которые докапываются до искренних мотивов покупки. Кастдев отнимает недели. Здесь та же глубина за 20–30 минут.</div>
+
+    <!-- SCREENSHOT 2 -->
+    <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden; border: 1px solid #fde68a; box-shadow: 0 2px 12px rgba(0,0,0,0.07);">
+      <img src="screenshot-crystal.jpg" alt="Смысловой кристалл — 5 связок: сегмент, боль, смысл-лекарство, артефакт" style="width: 100%; display: block;">
+      <div style="background: #fffbf0; padding: 10px 16px; font-size: 12px; color: #92400e; font-family: 'Manrope', sans-serif; border-top: 1px solid #fde68a;">
+        Смысловой кристалл — 5 связок, из которых пишется оффер и весь контент
+      </div>
+    </div>
+
+    <a class="btn-product" href="https://app.lava.top/products/e09d7eec-f025-4686-96d7-5425f2973859" target="_blank" rel="noopener">
+      Забрать Архитектор смыслов за 490 руб. →
+    </a>
+    <div class="product-meta">Первые 100 мест по стартовой цене · Мгновенный доступ</div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-card">
+    <div class="step-number">Шаг 3</div>
+    <div class="step-title">Первые продажи</div>
+    <div class="step-subtitle">Сначала по своей аудитории, потом таргет</div>
+    <p>Одна сторис с оффером. Один пост. Прямое сообщение тем, кто уже спрашивал про эту тему.</p>
+    <p>Цель — первые 10 продаж. Чтобы убедиться что продукт работает и собрать первые отзывы.</p>
+    <div class="example-block">
+      <div class="example-label">Логика проверки</div>
+      Из 10 человек купили 3–4, продукт рабочий — масштабируй. Купил один — смотришь на оффер или на фундамент. Возвращаешься на шаг 0.
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-card">
+    <div class="step-number">Шаг 4</div>
+    <div class="step-title">Контент, который продаёт</div>
+    <div class="step-subtitle">Каждый пост работает на продажу, а не на охваты</div>
+    <p>Каждый рилс — одна боль из карты аудитории. Один смысл. Один призыв.</p>
+    <p>Когда есть смысловой кристалл, идеи для контента не заканчиваются. Открываешь таблицу, берёшь боль, пишешь пост. Сегодня. Без вдохновения. Без «о чём бы написать».</p>
+    <p><strong>Здесь большинство и застревает.</strong> Снимать умеют. Просто не знают о чём снимать так, чтобы покупали.</p>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step-card">
+    <div class="step-number">Шаг 5</div>
+    <div class="step-title">Масштаб</div>
+    <div class="step-subtitle">Продукт работает — подключай таргет</div>
+    <p>Таргет без фундамента — это платить за то, чтобы больше людей прошло мимо.</p>
+    <p>С фундаментом знаешь какой крючок использовать в рекламе. Какую боль. Какое обещание. Таргет усиливает то что уже работает.</p>
+  </div>
+
+  <!-- MATH -->
+  <div class="block-header">
+    <span class="block-label">Математика 250 000 ₽</span>
+    <div class="block-line"></div>
+  </div>
+
+  <p class="body-text">Цифры реальные. Но только если под продуктом есть основание.</p>
+
+  <div class="math-grid">
+    <div class="math-card">
+      <div class="math-price">2 000 ₽</div>
+      <div class="math-desc">Гайд<br>125 продаж · 2–3 месяца</div>
+      <div class="math-result">250 000 ₽</div>
+    </div>
+    <div class="math-card">
+      <div class="math-price">15 000 ₽</div>
+      <div class="math-desc">Консультация<br>17 клиентов · 1–1.5 месяца</div>
+      <div class="math-result">255 000 ₽</div>
+    </div>
+    <div class="math-card">
+      <div class="math-price">5 000 ₽</div>
+      <div class="math-desc">Мини-курс<br>50 продаж · запуск + таргет</div>
+      <div class="math-result">250 000 ₽</div>
+    </div>
+  </div>
+
+  <p class="body-text">Без фундамента те же инструменты дают другие цифры. Ноль продаж из 3000 просмотров. Один покупатель из месяца контента.</p>
+
+  <!-- WHY NOW -->
+  <div class="block-header">
+    <span class="block-label">Почему сейчас</span>
+    <div class="block-line"></div>
+  </div>
+
+  <p class="body-text">В 2022 году закрылся Instagram. Весь бизнес школы нужно было перестраивать за месяцы. Я прошла это сама.</p>
+  <p class="body-text">И до этого — 2014-й, 2020-й. Каждый раз выживали те, у кого был фундамент. Те кто понимал кому помогает и как об этом говорить так чтобы покупали. Не те у кого было больше подписчиков.</p>
+  <p class="body-text">В 2026 году рынок переполнен контентом. Алгоритмы меняются каждый месяц. Трафик дорожает. Единственное что не устаревает — точное попадание в смысл. В боль. В момент когда человек думает «это про меня».</p>
+
+  <div class="highlight-block">
+    <p>Стабильности не будет. Это новая норма. <strong>Зарабатывают те, кто говорит точно.</strong></p>
+  </div>
+
+  <!-- FINAL PRODUCT BLOCK -->
+  <div class="product-block">
+    <div class="product-eyebrow">Не запускай продукт пока не сделаешь этот шаг</div>
+    <div class="product-title">Архитектор смыслов</div>
+    <div class="product-desc">Фундамент. Один раз. Правильно.<br>Раньше на это уходили недели, теперь несколько часов.</div>
+    <ul class="product-features">
+      <li>
+        <span class="feature-check"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        Промпт «Глубоководный аналитик» — включён
+      </li>
+      <li>
+        <span class="feature-check"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        Таблица анализа аудитории, 10 разделов — включена
+      </li>
+      <li>
+        <span class="feature-check"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        Смысловой кристалл, 5 связок — включён
+      </li>
+      <li>
+        <span class="feature-check"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        Рабочая среда в Claude — включена
+      </li>
+      <li>
+        <span class="feature-check"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        Пошаговые инструкции с голосом — включены
+      </li>
+    </ul>
+
+    <!-- SCREENSHOT 3 -->
+    <div style="margin: 4px 0 20px; border-radius: 12px; overflow: hidden; border: 1px solid #fde68a; box-shadow: 0 2px 12px rgba(0,0,0,0.07);">
+      <img src="screenshot-prompt.jpg" alt="Промпт Глубоководный аналитик — доступен внутри Архитектора смыслов" style="width: 100%; display: block;">
+      <div style="background: #fffbf0; padding: 10px 16px; font-size: 12px; color: #92400e; font-family: 'Manrope', sans-serif; border-top: 1px solid #fde68a;">
+        Промпт «Глубоководный аналитик» — открываешь, вставляешь нишу, получаешь таблицу за 20 минут
+      </div>
+    </div>
+
+    <div class="product-guarantee">
+      Ценность системы в разы выше цены. Сейчас: <strong>490 рублей</strong>
+    </div>
+    <a class="btn-product" href="https://app.lava.top/products/e09d7eec-f025-4686-96d7-5425f2973859" target="_blank" rel="noopener">
+      Забрать Архитектор смыслов за 490 руб. →
+    </a>
+    <div class="product-meta">Первые 100 мест по стартовой цене · Мгновенный доступ · Один клиент окупает с первой продажи</div>
+  </div>
+
+</div><!-- /page -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">Понравился материал?</div>
+    <div class="footer-subtitle">Подписывайтесь на каналы — там ещё больше про AI-маркетинг, смыслы и продажи без выгорания</div>
+
+    <div class="social-grid">
+      <a class="social-card" href="https://t.me/target_school1" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#e8f0fe;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#2563eb"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </div>
+        <div>
+          <div class="social-name">Telegram канал</div>
+          <div class="social-desc">Промпты и кейсы каждый день</div>
+        </div>
+      </a>
+      <a class="social-card" href="https://www.instagram.com/target_school" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#fce7f3;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#db2777" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#db2777" stroke="none"/></svg>
+        </div>
+        <div>
+          <div class="social-name">Instagram</div>
+          <div class="social-desc">Визуальные гайды и stories</div>
+        </div>
+      </a>
+      <a class="social-card" href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#dcfce7;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#16a34a"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        </div>
+        <div>
+          <div class="social-name">Написать Анастасии</div>
+          <div class="social-desc">Личное сообщение в WhatsApp</div>
+        </div>
+      </a>
+      <a class="social-card" href="https://t.me/ailav_bot" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#fef3c7;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#d97706" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div>
+          <div class="social-name">Служба заботы</div>
+          <div class="social-desc">Техподдержка и вопросы</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="footer-banner">
+      <div>
+        <div class="footer-banner-text">Хотите больше материалов?</div>
+        <div class="footer-banner-sub">Каждый день — промпты, кейсы, инсайты про AI-маркетинг</div>
+      </div>
+      <a class="btn-tg" href="https://t.me/target_school1" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Подписаться на Telegram
+      </a>
+    </div>
+
+    <div class="footer-copy">© 2026 Анастасия Лушникова. Все права защищены.</div>
+  </div>
+</footer>
+
+</body>
+</html>
