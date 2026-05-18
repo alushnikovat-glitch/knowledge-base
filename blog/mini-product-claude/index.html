@@ -587,9 +587,192 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     .nav-links a { font-size: 12px; }
     .footer-banner { padding: 20px; }
   }
+
+  /* PROGRESS BAR */
+  #read-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--accent);
+    z-index: 200;
+    transition: width 0.1s linear;
+  }
+
+  /* HOOK BLOCK — первый экран */
+  .hook-block {
+    background: linear-gradient(135deg, #1a1917 0%, #2d2b27 100%);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 32px;
+    color: #fff;
+  }
+  .hook-promise {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 14px;
+  }
+  .hook-title {
+    font-size: clamp(20px, 4vw, 26px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  .hook-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .hook-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+  }
+  .hook-step-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    flex-shrink: 0;
+  }
+  .hook-meta {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* QUIZ — интерактивная проверка */
+  .quiz-block {
+    background: var(--surface);
+    border: 1.5px solid var(--accent);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin: 24px 0;
+  }
+  .quiz-question {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .quiz-textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--bg);
+    resize: vertical;
+    min-height: 80px;
+    outline: none;
+    transition: border-color 0.15s;
+    margin-bottom: 12px;
+  }
+  .quiz-textarea:focus { border-color: var(--accent); }
+  .quiz-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 22px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .quiz-btn:hover { opacity: 0.88; }
+  .quiz-result {
+    display: none;
+    margin-top: 16px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .quiz-result.weak {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    color: #9a3412;
+  }
+  .quiz-result.ok {
+    background: var(--success-bg);
+    border: 1px solid var(--success-border);
+    color: var(--success-text);
+  }
+
+  /* STICKY CTA */
+  #sticky-cta {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 150;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+  }
+  #sticky-cta.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  #sticky-cta a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--dark);
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 13px 20px;
+    border-radius: 100px;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    transition: opacity 0.15s;
+  }
+  #sticky-cta a:hover { opacity: 0.88; }
+  @media (max-width: 600px) {
+    #sticky-cta { bottom: 16px; right: 12px; left: 12px; }
+    #sticky-cta a { justify-content: center; }
+  }
 </style>
 </head>
 <body>
+
+<!-- PROGRESS BAR -->
+<div id="read-progress"></div>
+
+<!-- STICKY CTA -->
+<div id="sticky-cta">
+  <a href="https://app.lava.top/products/e09d7eec-f025-4686-96d7-5425f2973859" target="_blank" rel="noopener">
+    Архитектор смыслов — 490 ₽ →
+  </a>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -623,6 +806,31 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     <span class="tag">Стратегия</span>
     <span class="tag">Инструменты</span>
     <span class="tag">Авторский метод</span>
+  </div>
+
+  <!-- HOOK BLOCK — мост между креативом и статьёй -->
+  <div class="hook-block">
+    <div class="hook-promise">Пошаговая инструкция</div>
+    <div class="hook-title">Что именно ты получишь, прочитав эту статью до конца</div>
+    <div class="hook-steps">
+      <div class="hook-step">
+        <div class="hook-step-num">1</div>
+        <span>Поймёшь, почему контент есть, а продаж нет — и как это исправить за один шаг</span>
+      </div>
+      <div class="hook-step">
+        <div class="hook-step-num">2</div>
+        <span>Получишь дорожную карту мини-продукта: от идеи до первых 10 продаж</span>
+      </div>
+      <div class="hook-step">
+        <div class="hook-step-num">3</div>
+        <span>Проверишь свой оффер прямо в статье — и увидишь, где он проваливается</span>
+      </div>
+      <div class="hook-step">
+        <div class="hook-step-num">4</div>
+        <span>Узнаешь, как Claude делает за 20 минут то, на что раньше уходили недели</span>
+      </div>
+    </div>
+    <div class="hook-meta">Читается за 12 минут · Применяется сразу · Работает в любой нише</div>
   </div>
 
   <!-- INTRO CARD -->
@@ -894,10 +1102,22 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     <p style="margin-top: 16px;">Когда знаешь точно что болит у твоей аудитории, оффер пишется сам. Когда не знаешь — пишешь про себя, а не про них.</p>
 
     <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
-      <p style="font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px;">Прямо здесь и сейчас</p>
+      <p style="font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px;">Проверь свой оффер прямо сейчас</p>
       <p>Такое ощущение, как будто знаешь всё о своём продукте, но объяснить что это и кому — выходит размыто. Говоришь одно, клиент слышит другое.</p>
-      <p><strong>Проверь прямо сейчас.</strong> Ты можешь написать оффер своего продукта за 2 минуты. Одним предложением. Так чтобы человек сразу понял: это про меня.</p>
-      <p>Если нет — дело в фундаменте.</p>
+
+      <div class="quiz-block">
+        <div class="quiz-question">Напиши оффер своего продукта одним предложением. Так, чтобы незнакомый человек сразу понял — это про меня или нет.</div>
+        <textarea class="quiz-textarea" id="offer-input" placeholder="Например: Система контент-плана для нутрициологов — закрываешь месяц постов за 2 часа, без выгорания и «о чём писать»"></textarea>
+        <button class="quiz-btn" onclick="checkOffer()">Проверить оффер →</button>
+        <div class="quiz-result" id="quiz-result-weak">
+          <strong>Оффер размытый.</strong> Скорее всего, в нём нет конкретного «кому» и конкретного результата. Это не значит, что продукт плохой. Это значит, что нет фундамента — карты аудитории с точными болями. Когда она есть, оффер пишется сам за 5 минут.
+        </div>
+        <div class="quiz-result" id="quiz-result-ok">
+          <strong>Оффер выглядит конкретно.</strong> Если в нём есть аудитория + боль + результат — он будет работать. Теперь важно проверить: это твоя формулировка или их? Если слова взяты из своей головы, а не из реальных запросов аудитории — оффер ещё можно усилить через фундамент.
+        </div>
+      </div>
+
+      <p>Если не смогла написать за 2 минуты — дело в фундаменте.</p>
     </div>
   </div>
 
@@ -1119,4 +1339,58 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
 </footer>
 
 </body>
+
+<script>
+// Прогресс-бар чтения
+const bar = document.getElementById('read-progress');
+const stickyCta = document.getElementById('sticky-cta');
+let stickyShown = false;
+
+window.addEventListener('scroll', function() {
+  const doc = document.documentElement;
+  const scrollTop = doc.scrollTop || document.body.scrollTop;
+  const scrollHeight = doc.scrollHeight - doc.clientHeight;
+  const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+  bar.style.width = Math.min(progress, 100) + '%';
+
+  // Показываем sticky CTA после 30% прокрутки
+  if (progress > 30 && !stickyShown) {
+    stickyShown = true;
+    stickyCta.classList.add('visible');
+  }
+  // Прячем когда почти у футера
+  if (progress > 88) {
+    stickyCta.classList.remove('visible');
+  } else if (progress > 30) {
+    stickyCta.classList.add('visible');
+  }
+});
+
+// Проверка оффера
+function checkOffer() {
+  const val = document.getElementById('offer-input').value.trim();
+  const weak = document.getElementById('quiz-result-weak');
+  const ok = document.getElementById('quiz-result-ok');
+  weak.style.display = 'none';
+  ok.style.display = 'none';
+
+  if (val.length < 20) {
+    weak.className = 'quiz-result weak';
+    weak.style.display = 'block';
+    return;
+  }
+
+  // Простая эвристика: есть ли конкретика
+  const hasAudience = /для|эксперт|нутрицио|коуч|дизайн|фотограф|онлайн|блог|бизнес|специалист|мам|женщин/i.test(val);
+  const hasResult = /за \d|минут|час|день|неделю|быстро|легко|без |результат|продаж|заработ|систем/i.test(val);
+
+  if (hasAudience && hasResult) {
+    ok.className = 'quiz-result ok';
+    ok.style.display = 'block';
+  } else {
+    weak.className = 'quiz-result weak';
+    weak.style.display = 'block';
+  }
+}
+</script>
 </html>
