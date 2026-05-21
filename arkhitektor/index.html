@@ -83,6 +83,9 @@ nav{position:sticky;top:0;z-index:100;background:rgba(247,246,242,0.92);backdrop
 .hero-price-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
 .btn-main{display:inline-flex;align-items:center;gap:8px;background:var(--dark);color:#fff;font-family:'Manrope',sans-serif;font-size:15px;font-weight:700;padding:18px 36px;border-radius:14px;text-decoration:none;transition:opacity 0.15s;letter-spacing:-0.01em;margin-bottom:12px;}
 .btn-main:hover{opacity:0.85;}
+@keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}
+.btn-main{background:linear-gradient(105deg,#1a1917 40%,#3a3830 50%,#1a1917 60%);background-size:200% auto;animation:shimmer 3s linear infinite;}
+.btn-main:hover{background-position:right center;}
 .guarantee-mini{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
 
 /* PAIN CARDS */
@@ -219,6 +222,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(247,246,242,0.92);backdrop
 .final-price-row{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:28px;}
 .final-btn{display:inline-flex;align-items:center;gap:8px;background:var(--dark);color:#fff;font-family:'Manrope',sans-serif;font-size:16px;font-weight:700;padding:20px 48px;border-radius:14px;text-decoration:none;transition:opacity 0.15s;letter-spacing:-0.01em;margin-bottom:12px;}
 .final-btn:hover{opacity:0.85;}
+.final-btn{background:linear-gradient(105deg,#1a1917 40%,#3a3830 50%,#1a1917 60%);background-size:200% auto;animation:shimmer 3s linear infinite;}
 .final-note{font-size:12px;color:var(--muted);}
 
 /* FOOTER */
