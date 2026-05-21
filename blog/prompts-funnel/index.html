@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Промпты для воронки продаж — Анастасия Лушникова</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108790481', 'ym');
+    ym(108790481, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108790481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2700527913660797');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --border: #e8e6df;
+    --text: #1a1917;
+    --text-muted: #6b6860;
+    --text-light: #a8a29e;
+    --accent: #2563eb;
+    --accent-light: #eff4ff;
+    --tag-bg: #f0ede6;
+    --dark: #1a1917;
+    --yellow-bg: #fffbf0;
+    --yellow-border: #fde68a;
+    --green-bg: #f0fdf4;
+    --green-border: #bbf7d0;
+    --green-text: #15803d;
+    --var-bg: #fef9c3;
+    --var-text: #854d0e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(247, 246, 242, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+  }
+
+  .nav-brand {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* MAIN */
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* META */
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .meta-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-light);
+    flex-shrink: 0;
+  }
+
+  /* TAGS */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 36px;
+  }
+
+  .tag {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--tag-bg);
+    padding: 5px 12px;
+    border-radius: 100px;
+  }
+
+  /* H1 */
+  h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+
+  /* INTRO CARD */
+  .intro-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+  }
+
+  .intro-card p {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 0;
+  }
+
+  .intro-card p + p { margin-top: 12px; }
+
+  /* HINT */
+  .hint {
+    background: var(--accent-light);
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .hint-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .hint p {
+    font-size: 14px;
+    color: #1e40af;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 48px 0 20px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--tag-bg);
+    padding: 4px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* STAGE CARD */
+  .stage-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .stage-head {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stage-number {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 6px;
+  }
+
+  .stage-title {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .stage-goal {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .stage-body {
+    padding: 20px 24px 24px;
+  }
+
+  .stage-body p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  /* PROMPT BLOCK */
+  .prompt-block {
+    background: #1a1917;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .prompt-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .prompt-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .prompt-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .prompt-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.05em;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .copy-btn {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.06);
+    border: none;
+    border-radius: 6px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+    transition: all 0.15s;
+    letter-spacing: 0.02em;
+  }
+
+  .copy-btn:hover {
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.7);
+  }
+
+  .copy-btn.copied {
+    color: #86efac;
+    background: rgba(134,239,172,0.1);
+  }
+
+  .prompt-code {
+    padding: 20px 20px 22px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.85;
+    color: #c8c0b4;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .prompt-code .role { color: #7dd3fc; }
+  .prompt-code .section-key { color: #fbbf24; font-weight: 500; }
+  .prompt-code .step-num { color: #a78bfa; }
+  .prompt-code .var {
+    background: var(--var-bg);
+    color: var(--var-text);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-weight: 500;
+  }
+  .prompt-code .rule { color: #f9a8d4; }
+
+  /* MIDTEXT */
+  .midtext {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin: 48px 0;
+  }
+
+  .midtext h2 {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  .midtext p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+
+  .midtext p:last-child { margin-bottom: 0; }
+
+  /* PRODUCT BLOCK */
+  .product-block {
+    background: var(--yellow-bg);
+    border: 1.5px solid var(--yellow-border);
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin: 48px 0;
+  }
+
+  .product-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #92400e;
+    margin-bottom: 12px;
+  }
+
+  .product-block h2 {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .product-block p {
+    font-size: 15px;
+    color: #78716c;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .product-features {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+
+  .product-features li {
+    font-size: 14px;
+    color: #57534e;
+    padding: 6px 0;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.6;
+  }
+
+  .product-features li::before {
+    content: '✓';
+    font-weight: 700;
+    color: #d97706;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .guarantee {
+    background: var(--green-bg);
+    border: 1px solid var(--green-border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--green-text);
+    line-height: 1.6;
+  }
+
+  .btn-product {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--dark);
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .btn-product:hover { opacity: 0.85; }
+
+  /* CONCLUSION */
+  .conclusion {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+  }
+
+  .conclusion p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+
+  .conclusion p:last-child { margin-bottom: 0; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    color: #fff;
+    padding: 56px 24px 40px;
+  }
+
+  .footer-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .footer-title {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .footer-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+    margin-bottom: 32px;
+    max-width: 480px;
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: 500px) {
+    .social-grid { grid-template-columns: 1fr; }
+  }
+
+  .social-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .social-card:hover { background: rgba(255,255,255,0.1); }
+
+  .social-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .social-info { min-width: 0; }
+
+  .social-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+
+  .social-desc {
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .footer-banner {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .footer-banner-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .btn-tg {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #2563eb;
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 100px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+
+  .btn-tg:hover { opacity: 0.85; }
+
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 32px 16px 60px; }
+    .intro-card, .midtext, .conclusion { padding: 22px 20px; }
+    .product-block { padding: 24px 20px; }
+    .stage-head, .stage-body { padding: 16px 18px; }
+    .prompt-code { font-size: 11.5px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="../">Анастасия Лушникова</a>
+  <div class="nav-links">
+    <a href="https://t.me/target_school1" target="_blank" rel="noopener">Telegram</a>
+    <a href="https://www.instagram.com/target_school" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank" rel="noopener">Написать</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="page">
+
+  <!-- META -->
+  <div class="meta">
+    <span>май 2026</span>
+    <span class="meta-dot"></span>
+    <span>10 мин чтения</span>
+    <span class="meta-dot"></span>
+    <span>Автор: Анастасия Лушникова</span>
+  </div>
+
+  <!-- H1 -->
+  <h1>Как заставить ИИ писать продающие тексты: промпты для каждого уровня воронки</h1>
+
+  <!-- TAGS -->
+  <div class="tags">
+    <span class="tag">Промпты</span>
+    <span class="tag">Продажи</span>
+    <span class="tag">AI-маркетинг</span>
+    <span class="tag">Стратегия</span>
+    <span class="tag">Контент</span>
+    <span class="tag">Инструменты</span>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro-card">
+    <p>Каждый продюсер и эксперт в онлайн-образовании сейчас пытается решить проблему контента через нейросети. Схема кажется идеальной: копируешь промпт, нажимаешь кнопку, получаешь готовый запуск.</p>
+    <p>Но почему у одних ИИ пишет тексты, которые приносят миллионы, а у других выдаёт серую водянистую массу, которую аудитория просто игнорирует? Вот честно, ответ тут простой. И он не про промпты.</p>
+  </div>
+
+  <!-- HINT -->
+  <div class="hint">
+    <span class="hint-icon">💡</span>
+    <p>Промпты ниже работают по уровням осознанности Эжена Шварца. Используйте их строго по этапам воронки, подставляя туда настоящие, глубокие данные о клиенте. Пустые скобки дают пустой результат.</p>
+  </div>
+
+  <!-- PROMPTS -->
+  <div class="section-header">
+    <div class="section-label">Этап 1</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Топ воронки</div>
+      <div class="stage-title">Холодный трафик</div>
+      <div class="stage-goal">Зацепить внимание того, кто ещё не знает вас. Сорвать розовые очки и показать внешнего врага.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">Claude · промпт для холодного трафика</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты гениальный маркетолог-стратег и копирайтер по методу Дэвида Огилви. Задача — написать контент для холодного трафика (Пост-крючок / Сценарий Reels / Статья), который заставит человека остановиться и осознать свою проблему.
+
+<span class="section-key">ДАННЫЕ ДЛЯ РАБОТЫ:</span>
+- Ниша и продукт: <span class="var">[Вставь данные]</span>
+- Целевая аудитория: <span class="var">[Вставь данные]</span>
+- Главная неочевидная боль ЦА: <span class="var">[Вставь данные]</span>
+- Мифы, в которые они верят (Враг): <span class="var">[Вставь данные]</span>
+
+<span class="section-key">МЕТОДОЛОГИЯ:</span>
+<span class="step-num">1.</span> Заголовок-крючок (Огилви): жёсткий факт, парадокс или разоблачение мифа. Только интригующая правда.
+<span class="step-num">2.</span> Смещение вины: объясни, почему у читателя не получалось раньше. Виноват не он.
+<span class="step-num">3.</span> Разрушение иллюзий: покажи скрытую цену бездействия. Что будет через полгода?
+<span class="step-num">4.</span> Мост к решению: один простой инсайт, который меняет правила игры.
+<span class="step-num">5.</span> CTA: забрать бесплатный инструмент (лид-магнит / гайд / видео).
+
+<span class="rule">ПРАВИЛА СТИЛЯ:</span>
+- Максимум конкретики, ноль абстракций.
+- Абзацы до 3 строк. Без длинных тире. Без восклицаний.
+- Без слов: «секрет», «шок», «уникальный», «революционный».
+
+Напиши готовый контент для холодного этапа воронки. Без вводных слов.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-label">Этап 2</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Мидл воронки</div>
+      <div class="stage-title">Тёплый трафик</div>
+      <div class="stage-goal">Клиент уже понимает проблему и ищет решение. Нужно доказать экспертность, вызвать доверие через кейсы и нативно закрыть возражения.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">Claude · промпт для тёплого трафика</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты эксперт по запускам и сторителлингу по методу Расселла Брансона. Задача — написать контент для тёплой аудитории (Пост-кейс / Рассылка / Сюжетная серия), который доказывает, что твой метод — единственный рабочий путь.
+
+<span class="section-key">ДАННЫЕ ДЛЯ РАБОТЫ:</span>
+- Продукт и суть метода: <span class="var">[Вставь данные]</span>
+- Главные возражения ЦА: <span class="var">[«дорого», «нет времени», «у меня не получится»]</span>
+- Конкретный кейс/история (Имя, Точка А, Точка Б, Срок): <span class="var">[Вставь данные]</span>
+
+<span class="section-key">МЕТОДОЛОГИЯ:</span>
+<span class="step-num">1.</span> История падения и взлёта (Брансон): начни с точки А героя. Он совершал те же ошибки, что и читатель.
+<span class="step-num">2.</span> Момент озарения: как герой нашёл метод и что изменилось в его мышлении.
+<span class="step-num">3.</span> Твёрдый результат: точка Б через сухие факты и цифры.
+<span class="step-num">4.</span> Отработка возражения: интегрируй страх аудитории в историю.
+<span class="step-num">5.</span> CTA: тест-драйв, вебинар, трипваер или бесплатная диагностика.
+
+<span class="rule">ПРАВИЛА СТИЛЯ:</span>
+- Живой язык, как будто рассказываешь другу.
+- Цифры пиши внутри предложений. Абзацы до 3 строк.
+- Без клише «это изменило всё» и «жизнь разделилась на до и после».
+
+Напиши готовый контент для тёплого этапа воронки.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-label">Этап 3</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Боттом воронки</div>
+      <div class="stage-title">Горячий трафик</div>
+      <div class="stage-goal">Клиент готов купить, но ему нужен финальный импульс. Убираем страх покупки через железобетонный оффер и обоснованный дефицит.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">Claude · промпт для горячего трафика</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты продавец по методологии Алекса Хормози. Задача — написать продающий текст (Финальное письмо / Продающий блок лендинга / Пост-оффер) с предложением, от которого глупо отказываться.
+
+<span class="section-key">ДАННЫЕ ДЛЯ РАБОТЫ:</span>
+- Продукт и цена: <span class="var">[Вставь данные]</span>
+- Стек ценности (компоненты + их реальная стоимость): <span class="var">[Вставь данные]</span>
+- Бонусы и дедлайн: <span class="var">[Вставь данные]</span>
+- Гарантия: <span class="var">[Вставь данные]</span>
+
+<span class="section-key">МЕТОДОЛОГИЯ:</span>
+<span class="step-num">1.</span> Уравнение ценности Хормози: вероятность успеха максимальна, усилия клиента сведены к минимуму.
+<span class="step-num">2.</span> Стек ценности: разверни предложение так, чтобы ценность в 10 раз превышала цену.
+<span class="step-num">3.</span> Ценовой якорь: сравни цену с ценой продолжения жизни в проблеме.
+<span class="step-num">4.</span> Дефицит: назови точную, честную причину ограничения.
+<span class="step-num">5.</span> Гарантия: полностью сними риск с покупателя.
+
+<span class="rule">ПРАВИЛА СТИЛЯ:</span>
+- Тон уверенный, поддерживающий.
+- Без рекламных штампов, капслока и восклицаний.
+- Короткие предложения, абзацы до 3 строк.
+
+Напиши финальный продающий текст для горячей аудитории.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-label">Этап 4</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Доворот и дожим</div>
+      <div class="stage-title">Закрытие сомневающихся</div>
+      <div class="stage-goal">Окно продаж закрывается. Честно вскрываем рациональные страхи, показываем цену бездействия и даём финальный импульс.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">Claude · промпт для дожима</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты топовый копирайтер по прямому отклику. Напиши дожимное письмо/пост «Последний шанс» для тех, кто застрял на этапе принятия решения.
+
+<span class="section-key">ДАННЫЕ ДЛЯ РАБОТЫ:</span>
+- Продукт и цена: <span class="var">[Вставь данные]</span>
+- Дедлайн (сколько часов осталось): <span class="var">[Вставь данные]</span>
+- Главный страх клиента перед покупкой: <span class="var">[Вставь данные]</span>
+
+<span class="section-key">МЕТОДОЛОГИЯ:</span>
+<span class="step-num">1.</span> Честное вскрытие карт: начни сразу с дедлайна и признания страха: «Я знаю, почему ты ещё не купил. Ты боишься, что...».
+<span class="step-num">2.</span> Логический выбор: два сценария. А — оставить всё как есть. Б — сделать шаг.
+<span class="step-num">3.</span> Анти-гарантия: кому этот продукт точно НЕ подходит.
+<span class="step-num">4.</span> Финальный счётчик: конкретное время до закрытия.
+<span class="step-num">5.</span> CTA: прямая ссылка на оплату.
+
+<span class="rule">ПРАВИЛА СТИЛЯ:</span>
+- Максимально честно, без давления и пафоса. Разговаривай как наставник.
+- Абзацы до 3 строк. Без длинных тире.
+
+Напиши готовый текст дожима.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ILLUSION SECTION -->
+  <div class="section-header">
+    <div class="section-label">Главная иллюзия</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="midtext">
+    <h2>Почему «просто промпты» не работают</h2>
+    <p>Все эти формулы Хормози, триггеры Огилви и структуры Брансона — полная пустота, если нет архитектуры смыслов.</p>
+    <p>Нейросеть — это спортивный болид. Без карты и маршрута он просто красиво разобьётся о стену на первом повороте.</p>
+    <p>Вы можете скопировать самый крутой шаблон в мире. Но если в поле <strong style="color:var(--text)">«Главная боль ЦА»</strong> написать банальное «они хотят больше зарабатывать и устали от рутины», нейросеть выдаст ровно такой же серый, шаблонный текст. Она просто множит то, что вы ей даёте. Загружаешь ноль — получаешь ноль.</p>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="section-header">
+    <div class="section-label">Итого</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="conclusion">
+    <p>Технологии меняются. Тренды на площадки приходят и уходят. Но психология людей, глубинная структура смыслов и триггеры принятия решений не меняются уже сто лет.</p>
+    <p>Промпты выше работают. Но только если в квадратных скобках стоят настоящие данные. ИИ не ходил за вас на интервью с клиентами. Он не знает, что ваш клиент засыпает в три ночи не из-за абстрактной «рутины», а потому что касса пуста и нужно платить аренду.</p>
+    <p>Вот реально, логика тут простая. Сильные данные на входе — сильный текст на выходе. Пустота на входе — пустота на выходе.</p>
+  </div>
+
+  <!-- PRODUCT BLOCK -->
+  <div class="product-block">
+    <div class="product-eyebrow">Инструмент</div>
+    <h2>Архитектор смыслов</h2>
+    <p>Если не хочется высасывать боли из пальца и гадать, что вписать в поля промпта — вот готовое решение. Пошаговый алгоритм, который вытащит из продукта настоящие триггеры и упакует их в карту для ИИ.</p>
+    <ul class="product-features">
+      <li>Готовая система распаковки смыслов за 1 вечер</li>
+      <li>Карта аудитории и семантический кристалл продукта</li>
+      <li>Железобетонные данные для любого промпта</li>
+      <li>Окупается с первого же запуска</li>
+    </ul>
+    <div class="guarantee">
+      ✓ Цена: 1 490 рублей. Без сложной теории, только практика. Подходит любой нише.
+    </div>
+    <a class="btn-product" href="https://app.lava.top/products/e09d7eec-f025-4686-96d7-5425f2973859" target="_blank" rel="noopener">
+      Получить Архитектор смыслов →
+    </a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">Понравился материал?</div>
+    <div class="footer-sub">Подписывайтесь на каналы — там ещё больше про AI-маркетинг, смыслы и продажи без выгорания</div>
+
+    <div class="social-grid">
+      <a class="social-card" href="https://t.me/target_school1" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#1d4ed8;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Telegram канал</div>
+          <div class="social-desc">Промпты и кейсы каждый день</div>
+        </div>
+      </a>
+
+      <a class="social-card" href="https://www.instagram.com/target_school" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#be185d;">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Instagram</div>
+          <div class="social-desc">Визуальные гайды и stories</div>
+        </div>
+      </a>
+
+      <a class="social-card" href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#166534;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Написать Анастасии</div>
+          <div class="social-desc">Личное сообщение в WhatsApp</div>
+        </div>
+      </a>
+
+      <a class="social-card" href="https://t.me/ailav_bot" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#78350f;">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Служба заботы</div>
+          <div class="social-desc">Техподдержка и вопросы</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="footer-banner">
+      <div class="footer-banner-text">Хотите больше материалов?</div>
+      <a class="btn-tg" href="https://t.me/target_school1" target="_blank" rel="noopener">
+        Подписаться на Telegram →
+      </a>
+    </div>
+
+    <div class="footer-copy">© 2026 Анастасия Лушникова. Все права защищены.</div>
+  </div>
+</footer>
+
+<script>
+  function copyPrompt(btn) {
+    const code = btn.closest('.prompt-block').querySelector('.prompt-code');
+    const text = code.innerText || code.textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Скопировано ✓';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Копировать';
+        btn.classList.remove('copied');
+      }, 2000);
+    }).catch(() => {
+      btn.textContent = 'Ошибка';
+      setTimeout(() => { btn.textContent = 'Копировать'; }, 2000);
+    });
+  }
+</script>
+
+</body>
+</html>
