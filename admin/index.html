@@ -363,7 +363,7 @@ td:nth-child(4) { color: #444; background: #fdfaf5; border-left: 3px solid #C8A9
       <div class="topnav-group-label">Живые данные</div>
       <div class="topnav-items">
         <div class="nav-item" onclick="go('dna')"><span class="nav-num">✦</span> ДНК голоса</div>
-        <div class="nav-item" onclick="go('voices')"><span class="nav-num">🔥</span> Голос аудитории</div>
+        <div class="nav-item" onclick="go('voices')"><span class="nav-num">🔥</span> Потребности аудитории</div>
       </div>
     </div>
 
@@ -371,6 +371,8 @@ td:nth-child(4) { color: #444; background: #fdfaf5; border-left: 3px solid #C8A9
       <div class="topnav-group-label">Продукты</div>
       <div class="topnav-items">
         <div class="nav-item" onclick="go('lineup')"><span class="nav-num">💎</span> Линейка</div>
+        <div class="nav-item" onclick="go('products')"><span class="nav-num">🛍</span> Продукты</div>
+        <div class="nav-item" onclick="go('stories')"><span class="nav-num">📱</span> Прогревы сторис</div>
       </div>
     </div>
 
@@ -408,8 +410,10 @@ td:nth-child(4) { color: #444; background: #fdfaf5; border-left: 3px solid #C8A9
         <div class="home-card" onclick="go('kr')" style="border-left-color:#C8A96E"><div class="hc-num" style="color:#C8A96E">★</div><div class="hc-title" style="color:#C8A96E">Смысловой кристалл</div><div class="hc-sub">5 мощных связок</div></div>
         <div class="home-card" onclick="go('crisis')" style="border-left-color:#e57373"><div class="hc-num" style="color:#e57373">⚡</div><div class="hc-title" style="color:#c0392b">Смыслы в кризис</div><div class="hc-sub">Продажи когда всё рушится</div></div>
         <div class="home-card" onclick="go('dna')" style="border-left-color:#C8A96E"><div class="hc-num" style="color:#C8A96E">✦</div><div class="hc-title" style="color:#8B6914">ДНК голоса</div><div class="hc-sub">Молекулы и банк смыслов</div></div>
-        <div class="home-card" onclick="go('voices')" style="border-left-color:#f87171"><div class="hc-num" style="color:#f87171">🔥</div><div class="hc-title" style="color:#c0392b">Голос аудитории</div><div class="hc-sub">Живые фразы из комментариев</div></div>
+        <div class="home-card" onclick="go('voices')" style="border-left-color:#f87171"><div class="hc-num" style="color:#f87171">🔥</div><div class="hc-title" style="color:#c0392b">Потребности аудитории</div><div class="hc-sub">Живые запросы из комментариев</div></div>
         <div class="home-card" onclick="go('lineup')" style="border-left-color:#4ade80"><div class="hc-num" style="color:#4ade80">💎</div><div class="hc-title" style="color:#166534">Продуктовая линейка</div><div class="hc-sub">Воронка от 0 до 35 000 руб</div></div>
+        <div class="home-card" onclick="go('products')" style="border-left-color:#38bdf8"><div class="hc-num" style="color:#38bdf8">🛍</div><div class="hc-title" style="color:#0369a1">Продукты</div><div class="hc-sub">Описания, цены, смыслы</div></div>
+        <div class="home-card" onclick="go('stories')" style="border-left-color:#f472b6"><div class="hc-num" style="color:#f472b6">📱</div><div class="hc-title" style="color:#9d174d">Прогревы сторис</div><div class="hc-sub">7-дневный скрипт запуска</div></div>
         <div class="home-card" onclick="go('valuedoc')" style="border-left-color:#a78bfa"><div class="hc-num" style="color:#a78bfa">📄</div><div class="hc-title" style="color:#5B21B6">Что транслировать в блоге</div><div class="hc-sub">Ценность каждого раздела</div></div>
       </div>
     </div>
@@ -746,7 +750,7 @@ td:nth-child(4) { color: #444; background: #fdfaf5; border-left: 3px solid #C8A9
 
     <!-- ГОЛОС АУДИТОРИИ -->
     <div class="section" id="voices">
-      <div class="section-title">🔥 Голос аудитории — живые фразы из комментариев</div>
+      <div class="section-title">🔥 Потребности аудитории — живые запросы из комментариев</div>
       <div class="tip-box"><strong>Зачем этот раздел.</strong> Это дословные слова людей. Используй их в заголовках постов, первых строках каруселей, офферах. Когда человек читает свою собственную фразу — он останавливается.</div>
 
       <div style="display:grid;gap:12px;margin-bottom:28px">
@@ -785,6 +789,18 @@ td:nth-child(4) { color: #444; background: #fdfaf5; border-left: 3px solid #C8A9
             <div><div class="v-label">Крючок для контента</div><div class="v-hook">«Когда знаешь 10 болей своей аудитории — идеи для постов никогда не заканчиваются. Открываешь список и берёшь следующую.»</div></div>
           </div>
         </div>
+
+        <div class="voice-card" style="border-left:4px solid #34d399">
+          <div class="voice-body">
+            <div class="voice-label" style="color:#34d399">Запрос на упаковку и систему клиентов</div>
+            «Мне нужен специалист, который поможет мне: упаковать меня как специалиста; понять, что я вообще продаю; собрать понятные услуги; научиться не бояться предлагать себя; выстроить систему клиентов»
+          </div>
+          <div class="voice-analysis">
+            <div><div class="v-label">Что за этим стоит</div><div class="v-body">Человек знает, что делает, но не знает как это назвать, упаковать и кому продать. Боль про <strong>самоидентификацию через продукт</strong>. Страх предложить себя, потому что не уверен в ценности.</div></div>
+            <div><div class="v-label">Глубинная потребность</div><div class="v-body">Хочет ясности: что именно я продаю, кому, зачем. Не просто «помочь с текстами», а понять свой продукт через боль клиента. Система клиентов — это не маркетинг, это уверенность в себе через структуру.</div></div>
+            <div><div class="v-label">Крючок для контента</div><div class="v-hook">«Ты не продаёшь потому что сама не до конца понимаешь что именно продаёшь. Архитектор смыслов начинается с этого.»</div></div>
+          </div>
+        </div>
       </div>
 
       <div style="background:#1c1c1e;border-radius:8px;padding:20px 22px;">
@@ -803,6 +819,7 @@ td:nth-child(4) { color: #444; background: #fdfaf5; border-left: 3px solid #C8A9
           <tr><td>Конфликт с системой</td><td>«Хочу писать как хочу я», «схуяли я должна соответствовать»</td><td>Свобода самовыражения без потери охватов.</td><td>Архитектор смыслов — это про что писать, а не про как упаковывать.</td></tr>
           <tr><td>Пустота отклика</td><td>«Никакой реакции», «пишу много — никто не видит»</td><td>Хочет быть услышанной. Контент — это коммуникация.</td><td>Когда пишешь про боль конкретного человека — он отвечает.</td></tr>
           <tr><td>Хаос без системы</td><td>«Что сегодня вообще писать», «устала придумывать»</td><td>Хочет предсказуемости. Генерация идей — это стресс.</td><td>10 болей аудитории = 10 готовых тем. Система заменяет вдохновение.</td></tr>
+          <tr><td>Туман вокруг себя как продукта</td><td>«Нужен специалист, который поможет понять что я вообще продаю», «боюсь предлагать себя»</td><td>Хочет ясности про свой продукт и уверенности в его ценности. Страх предложить = не понимает чем зацепит.</td><td>Архитектор смыслов даёт язык для упаковки: через боль клиента, а не через описание своих навыков.</td></tr>
         </tbody></table>
       </div>
     </div>
@@ -1424,7 +1441,7 @@ td:nth-child(4) { color: #444; background: #fdfaf5; border-left: 3px solid #C8A9
     </div>
   </div>
 
-  <div class="vd-section-divider">Блок 3 — Живые данные и голос</div>
+  <div class="vd-section-divider">Блок 3 — Живые данные и потребности</div>
 
   <!-- ДНК -->
   <div class="vd-block">
@@ -1469,7 +1486,7 @@ td:nth-child(4) { color: #444; background: #fdfaf5; border-left: 3px solid #C8A9
       <div class="vd-block-num">🔥</div>
       <div class="vd-block-meta">
         <span class="vd-block-tag" style="background:#FFF1F2;color:#9F1239">Живые данные</span>
-        <div class="vd-block-title">Голос аудитории — живые фразы из комментариев</div>
+        <div class="vd-block-title">Потребности аудитории — живые запросы из комментариев</div>
         <div class="vd-block-sub">Лучший копирайтинг — это слова самого клиента. Дословно</div>
       </div>
       <div class="vd-block-arr">▾</div>
@@ -1546,6 +1563,373 @@ td:nth-child(4) { color: #444; background: #fdfaf5; border-left: 3px solid #C8A9
 
 </div>
 
+</div>
+
+    <!-- ПРОДУКТЫ -->
+    <div class="section" id="products">
+      <div class="section-title">🛍 Продукты — описания, цены, смыслы</div>
+      <div class="tip-box"><strong>Зачем этот раздел.</strong> Сюда складываешь всё про каждый продукт: что это, для кого, сколько стоит, главный смысл и как продавать. Чтобы не держать в голове и быстро вытащить нужное для поста или сторис.</div>
+      <div style="display:grid;gap:14px;margin-bottom:24px" id="products-list">
+        <div style="background:#fff;border-radius:10px;overflow:hidden;border:0.5px solid #e8e2d8;box-shadow:0 1px 4px rgba(0,0,0,0.06)">
+
+          <!-- Шапка -->
+          <div style="background:#1c1c1e;padding:16px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+            <div>
+              <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#C8A96E;margin-bottom:4px">Основной продукт</div>
+              <div style="font-size:16px;font-weight:700;color:#fff">Архитектор смыслов</div>
+              <div style="font-size:12px;color:#888;margin-top:3px">Система маркетинга, которая превращает экспертизу в продажи</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0">
+              <div style="font-size:11px;color:#555;margin-bottom:2px">от</div>
+              <div style="font-size:20px;font-weight:700;color:#C8A96E">1 490 ₽</div>
+              <div style="font-size:10px;color:#666;margin-top:2px">как чашка кофе с десертом</div>
+            </div>
+          </div>
+
+          <!-- Суть -->
+          <div style="padding:14px 20px;border-bottom:1px solid #f0ece4;background:#fdfaf5">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#C8A96E;margin-bottom:8px">Суть</div>
+            <div style="font-size:13px;color:#333;line-height:1.7">Большинство экспертов умеют своё дело — знают нишу, получают хорошие отзывы. И при этом зарабатывают в три раза меньше, чем могли бы. Проблема не в опыте. Опыт просто не упакован.</div>
+            <div style="margin-top:8px;font-size:13px;color:#555;line-height:1.7">Когда клиент видит пост, у него есть три секунды: это про меня или нет? Если смысл не попал в боль — листает дальше. Не потому что плохой эксперт. Потому что контент говорит о тебе, а не о нём.</div>
+          </div>
+
+          <!-- НЕ КУРС -->
+          <div style="padding:14px 20px;border-bottom:1px solid #f0ece4">
+            <div style="background:#1c1c1e;border-radius:8px;padding:12px 16px;margin-bottom:12px">
+              <div style="font-size:12px;font-weight:700;color:#C8A96E;margin-bottom:5px">Это НЕ КУРС. Не марафон. Не набор видео.</div>
+              <div style="font-size:12px;color:#aaa;line-height:1.65">Это рабочая среда с пошаговой системой: заходишь, делаешь шаги в нужном порядке, на выходе получаешь готовый маркетинговый фундамент под свой продукт. С промптами для нейросетей, которые уже написаны и настроены. С таблицами, которые строятся сами. Не надо сидеть и учиться — нужно просто взять и сделать по шагам.</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+              <div style="background:#fafaf8;border-radius:6px;padding:10px 12px;border-left:3px solid #6B8CDE">
+                <div style="font-size:11px;font-weight:700;color:#1B3A8C;margin-bottom:4px">📋 Готовые таблицы</div>
+                <div style="font-size:11px;color:#555;line-height:1.6">Структура уже есть. Просто заполняешь под свою нишу.</div>
+              </div>
+              <div style="background:#fafaf8;border-radius:6px;padding:10px 12px;border-left:3px solid #7DBFA0">
+                <div style="font-size:11px;font-weight:700;color:#166534;margin-bottom:4px">🔢 Логические шаги</div>
+                <div style="font-size:11px;color:#555;line-height:1.6">Система ведёт по шагам. Следующий шаг уже прописан.</div>
+              </div>
+              <div style="background:#fafaf8;border-radius:6px;padding:10px 12px;border-left:3px solid #C8A96E">
+                <div style="font-size:11px;font-weight:700;color:#8B6914;margin-bottom:4px">🤖 Авторские промпты</div>
+                <div style="font-size:11px;color:#555;line-height:1.6">Копируешь, подставляешь нишу — получаешь готовый результат.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Два шага -->
+          <div style="padding:14px 20px;border-bottom:1px solid #f0ece4">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#bbb;margin-bottom:10px">Система — два шага</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div style="background:#EEF4FF;border-radius:8px;padding:12px 14px">
+                <div style="font-size:11px;font-weight:700;color:#1B3A8C;margin-bottom:6px">Шаг 1 — Фундамент</div>
+                <div style="font-size:11px;color:#444;line-height:1.6">Промпт «Глубоководный аналитик» разворачивает полную картину аудитории. На выходе — таблица с 10 разделами: сегмент, вопросы-паразиты, боли, страхи, ошибки, возражения через метафоры, мечты, сарказм, магниты, ценности. Раньше такой анализ занимал недели — теперь 15 минут.</div>
+              </div>
+              <div style="background:#EAF3DE;border-radius:8px;padding:12px 14px">
+                <div style="font-size:11px;font-weight:700;color:#166534;margin-bottom:6px">Шаг 2 — Кристаллизация</div>
+                <div style="font-size:11px;color:#444;line-height:1.6">Из массива данных система помогает выбрать пять ключевых связок: сегмент, боль, смысл-лекарство, твёрдый артефакт. Это смысловой кристалл — концентрат, который продаёт. Не 100 болей на выбор. Ровно то, что приносит 80% выручки.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Что получаешь -->
+          <div style="padding:14px 20px;border-bottom:1px solid #f0ece4">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#bbb;margin-bottom:10px">Что получаешь на выходе</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <div style="display:flex;gap:8px;align-items:flex-start"><div style="color:#C8A96E;font-size:14px;flex-shrink:0">✦</div><div style="font-size:12px;color:#444;line-height:1.55">Готовый маркетинговый фундамент под свою нишу и продукт</div></div>
+              <div style="display:flex;gap:8px;align-items:flex-start"><div style="color:#C8A96E;font-size:14px;flex-shrink:0">✦</div><div style="font-size:12px;color:#444;line-height:1.55">Смысловой кристалл — пять связок для контента, офферов, страниц продаж</div></div>
+              <div style="display:flex;gap:8px;align-items:flex-start"><div style="color:#C8A96E;font-size:14px;flex-shrink:0">✦</div><div style="font-size:12px;color:#444;line-height:1.55">Таблицу с полным анализом аудитории — открываешь и пишешь посты без мучений</div></div>
+              <div style="display:flex;gap:8px;align-items:flex-start"><div style="color:#C8A96E;font-size:14px;flex-shrink:0">✦</div><div style="font-size:12px;color:#444;line-height:1.55">Рабочую среду с навигацией — для запусков, постов и ежедневной работы</div></div>
+              <div style="display:flex;gap:8px;align-items:flex-start"><div style="color:#C8A96E;font-size:14px;flex-shrink:0">✦</div><div style="font-size:12px;color:#444;line-height:1.55">Инструкцию как оформить всё в собственное рабочее пространство в Claude</div></div>
+              <div style="display:flex;gap:8px;align-items:flex-start"><div style="color:#C8A96E;font-size:14px;flex-shrink:0">✦</div><div style="font-size:12px;color:#444;line-height:1.55">Систему, которую можно сразу продавать клиентам. Один клиент окупает её с первой продажи</div></div>
+            </div>
+          </div>
+
+          <!-- Почему работает -->
+          <div style="padding:14px 20px;border-bottom:1px solid #f0ece4;background:#fafaf8">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#bbb;margin-bottom:8px">Почему это работает</div>
+            <div style="font-size:12px;color:#555;line-height:1.7">За системой стоит не теория. Анастасия Лушникова прошла путь от таргетолога до основателя школы с 4000+ выпускниками. Видела какие смыслы конвертируют, а какие сливают бюджет. Строила запуски, где разница между «оффер попал» и «оффер не попал» измерялась миллионами. Понимала изнутри, что такое писать в пустоту — и как один правильный смысл разворачивает это в продажи. Всё это стало методологией. Методология стала системой. Система адаптирована под нейросети, чтобы то, на что раньше уходили недели, теперь занимало часы. <strong>17 лет опыта, спрессованные в пошаговый инструмент.</strong></div>
+          </div>
+
+          <!-- Для тех у кого опускаются руки -->
+          <div style="padding:14px 20px;border-bottom:1px solid #f0ece4">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#e57373;margin-bottom:8px">Для тех, у кого сейчас опускаются руки</div>
+            <div style="font-size:12px;color:#555;line-height:1.7">Если что-то снаружи — новости, нестабильность, ощущение что почва уходит из-под ног — забирает силы раньше, чем начинаешь. Анастасия прошла несколько кризисов за 17 лет: 2014-й, 2020-й, 2022-й, когда закрылся Instagram и весь бизнес школы нужно было перестраивать за месяцы. Каждый раз выживали те, у кого был фундамент. Не те, у кого больше подписчиков. Те, кто понимал: кому помогает, почему именно им, и как об этом говорить так, чтобы покупали.</div>
+            <div style="margin-top:8px;background:#FFF1F2;border-radius:6px;padding:10px 12px;font-size:12px;color:#9F1239;line-height:1.65">Смысловой маркетинг работает в любой стране, в любой валюте, с любым размером аудитории. Потому что он про понимание людей, а не про алгоритмы. Стабильности не будет. Это новая норма. Но внутри этой нормы можно зарабатывать — если говоришь точно в боль своего клиента.</div>
+          </div>
+
+          <!-- Две версии -->
+          <div style="padding:14px 20px">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#bbb;margin-bottom:10px">Две версии. Под разные задачи</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+
+              <div style="border:1.5px solid #e8e2d8;border-radius:8px;overflow:hidden">
+                <div style="background:#f5f3ef;padding:10px 14px;border-bottom:1px solid #e8e2d8;display:flex;justify-content:space-between;align-items:center">
+                  <div>
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:2px">Версия 1</div>
+                    <div style="font-size:13px;font-weight:700;color:#1a1a1a">Самостоятельное внедрение</div>
+                  </div>
+                  <div style="text-align:right">
+                    <div style="font-size:16px;font-weight:700;color:#1B3A8C">1 490 ₽</div>
+                    <div style="font-size:10px;color:#999">первые 100 мест</div>
+                  </div>
+                </div>
+                <div style="padding:12px 14px">
+                  <div style="font-size:11px;font-weight:600;color:#666;margin-bottom:5px">Для кого</div>
+                  <div style="font-size:11px;color:#555;line-height:1.6;margin-bottom:8px">Эксперт, который хочет сам пройти систему и получить маркетинговый фундамент. Или маркетолог, который хочет применять методологию у клиентов и зарабатывать на этом.</div>
+                  <div style="font-size:11px;font-weight:600;color:#666;margin-bottom:5px">Что внутри</div>
+                  <div style="font-size:11px;color:#555;line-height:1.6;margin-bottom:8px">Доступ к закрытой странице с пошаговой выдачей. Два шага, промпты, инструкции, объяснения голосом. Всё в нужной последовательности — не надо думать что делать следующим.</div>
+                  <div style="background:#EEF4FF;border-radius:5px;padding:7px 10px;font-size:11px;color:#1B3A8C;line-height:1.5">Один клиент, привлечённый через систему, окупает её стоимость за первую продажу. Если ты маркетолог — с первого же клиента, которому сделаешь анализ по методологии.</div>
+                </div>
+              </div>
+
+              <div style="border:1.5px solid #C8A96E;border-radius:8px;overflow:hidden">
+                <div style="background:#1c1c1e;padding:10px 14px;border-bottom:1px solid #333;display:flex;justify-content:space-between;align-items:center">
+                  <div>
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#666;margin-bottom:2px">Версия 2</div>
+                    <div style="font-size:13px;font-weight:700;color:#fff">Анастасия создаёт под тебя</div>
+                  </div>
+                  <div style="text-align:right">
+                    <div style="font-size:16px;font-weight:700;color:#C8A96E">35 000 ₽</div>
+                    <div style="font-size:10px;color:#666">под ключ</div>
+                  </div>
+                </div>
+                <div style="padding:12px 14px">
+                  <div style="font-size:11px;font-weight:600;color:#888;margin-bottom:5px">Для кого</div>
+                  <div style="font-size:11px;color:#555;line-height:1.6;margin-bottom:8px">Эксперт с реальной экспертизой, которому нужен точный фундамент без самостоятельного погружения. Или предприниматель, которому важно чтобы всё сделал человек с 17-летним опытом.</div>
+                  <div style="font-size:11px;font-weight:600;color:#888;margin-bottom:5px">Что происходит</div>
+                  <div style="font-size:11px;color:#555;line-height:1.6;margin-bottom:8px">Анастасия погружается в бизнес: изучает нишу, аудиторию, продукт. Создаёт позиционирование, смысловой кристалл, маркетинговый фундамент. Готовый документ — из него сразу работает вся команда: копирайтер, таргетолог, контент-менеджер.</div>
+                  <div style="background:#2a2a2a;border-radius:5px;padding:7px 10px;font-size:11px;color:#C8A96E;line-height:1.5">35 000 ₽ — не стоимость времени. Стоимость системы, которая убирает годы проб и ошибок. Средний чек за один клиентский контракт у эксперта с нормальным позиционированием — от 30 000 ₽. Окупается с первой продажи.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="add-box"><strong>+ Добавить продукт</strong>Этот раздел пополняется. Когда появится новый продукт — добавляй сюда.</div>
+    </div>
+
+    <!-- ПРОГРЕВЫ СТОРИС -->
+    <div class="section" id="stories">
+      <div class="section-title">📱 Прогревы сторис — инструкция и скрипты</div>
+      <div class="tip-box"><strong>Как использовать.</strong> Здесь хранится полный скрипт 7-дневного прогрева перед запуском. Не переписывай дословно — адаптируй под текущий момент. Визуал в скобках — подсказка, не жёсткое требование.</div>
+
+      <!-- ИНСТРУКЦИЯ ПОЛНАЯ -->
+      <div style="background:#1c1c1e;border-radius:10px;padding:22px 24px;margin-bottom:24px;display:grid;gap:20px">
+
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#C8A96E">
+          Инструкция для бота — читать перед каждым запуском. Полная версия без сокращений
+        </div>
+
+        <!-- БЛОК 1: Личность и тон -->
+        <div style="border-left:3px solid #C8A96E;padding-left:14px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#C8A96E;margin-bottom:10px">1. Личность и тон голоса</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+            <div>
+              <div style="font-size:10px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">Кто ты</div>
+              <div style="font-size:12px;color:#aaa;line-height:1.65">Анастасия Лушникова — эксперт с 17-летним стажем в маркетинге. Прошла путь от таргетолога руками до продюсера крупных запусков.</div>
+            </div>
+            <div>
+              <div style="font-size:10px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">Как говоришь</div>
+              <div style="font-size:12px;color:#aaa;line-height:1.65">Просто, спокойно, как со старым знакомым за чашкой чая. Без заумных терминов и теории. Стиль — лёгкий диалог на равных.</div>
+            </div>
+            <div>
+              <div style="font-size:10px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">Главное правило</div>
+              <div style="font-size:12px;color:#7fc97f;line-height:1.65;font-style:italic">«Хватит учиться и смотреть часовые вебинары. Пора просто зайти, взять готовый инструмент и сделать».</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- БЛОК 2: Логика расписания -->
+        <div style="border-left:3px solid #6B8CDE;padding-left:14px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#6B8CDE;margin-bottom:10px">2. Логика расписания — строго соблюдать</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div style="background:#252525;border-radius:8px;padding:12px 14px">
+              <div style="font-size:11px;font-weight:700;color:#C8A96E;margin-bottom:6px">Смысловые дни</div>
+              <div style="font-size:11px;color:#888;margin-bottom:6px">Чт, Сб, Пн, Вт-продажи</div>
+              <div style="font-size:12px;color:#aaa;line-height:1.65">Целевой блок из 4–5 сторис. Бьёт точно в боли ЦА, раскрывает суть рабочей среды и авторских промптов.</div>
+            </div>
+            <div style="background:#252525;border-radius:8px;padding:12px 14px">
+              <div style="font-size:11px;font-weight:700;color:#7fc97f;margin-bottom:6px">Лайф-дни со смыслом</div>
+              <div style="font-size:11px;color:#888;margin-bottom:6px">Пт, Вс</div>
+              <div style="font-size:12px;color:#aaa;line-height:1.65">Всего 2–3 сторис. Обычная жизнь (прогулка, кафе, дом), в которую встроен один живой вопрос или цитата из Директа на языке клиентов. Без агрессивных продаж.</div>
+            </div>
+          </div>
+          <div style="margin-top:10px;background:#252525;border-radius:8px;padding:10px 14px">
+            <div style="font-size:11px;color:#666;line-height:1.6">В 2026 году ежедневные «сериальные» прогревы утомляют людей и режут охваты. Полноценные смысловые блоки выходят раз в два дня — аудитория успевает «выдохнуть». В промежуточные дни — обычная жизнь с нужными смыслами внутри.</div>
+          </div>
+        </div>
+
+        <!-- БЛОК 3: Живой язык -->
+        <div style="border-left:3px solid #f472b6;padding-left:14px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#f472b6;margin-bottom:10px">3. Живой язык аудитории — использовать дословно</div>
+          <div style="display:grid;gap:7px">
+            <div style="background:#252525;border-radius:6px;padding:8px 12px;font-size:12px;color:#ddd;font-style:italic;line-height:1.55">«Пишу уже полгода. Лайки есть. Денег нет. Не понимаю, что делаю не так».</div>
+            <div style="background:#252525;border-radius:6px;padding:8px 12px;font-size:12px;color:#ddd;font-style:italic;line-height:1.55">«С чего вообще начинать — с блога, продукта, упаковки или трафика? Голова кругом».</div>
+            <div style="background:#252525;border-radius:6px;padding:8px 12px;font-size:12px;color:#ddd;font-style:italic;line-height:1.55">«Как объяснить, чем я занимаюсь, чтобы люди сразу понимали ценность и хотели купить, а не приходилось долго расписывать?»</div>
+            <div style="background:#252525;border-radius:6px;padding:8px 12px;font-size:12px;color:#ddd;font-style:italic;line-height:1.55"><span style="color:#888;font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:0.07em">Страх: </span>Кажется, что для продаж нужно устраивать цирк в сторис, плакать на камеру или выворачивать душу наизнанку.</div>
+          </div>
+        </div>
+
+        <!-- БЛОК 4: Суть продукта -->
+        <div style="border-left:3px solid #7fc97f;padding-left:14px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#7fc97f;margin-bottom:10px">4. Суть продукта и логика цены</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+            <div>
+              <div style="font-size:10px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">Что продаём</div>
+              <div style="font-size:12px;color:#aaa;line-height:1.65">Рабочую среду «Архитектор смыслов». Это <strong style="color:#fff">НЕ КУРС</strong>. Там нет лекций. Это готовые пошаговые таблицы и авторские настроенные промпты для нейросетей.</div>
+            </div>
+            <div>
+              <div style="font-size:10px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">Как это работает</div>
+              <div style="font-size:12px;color:#aaa;line-height:1.65">Человек заходит, берёт готовый промпт, подставляет свою нишу — и за один вечер получает готовый маркетинговый фундамент, с которого люди покупают сами.</div>
+            </div>
+            <div>
+              <div style="font-size:10px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px">Почему 1490 ₽</div>
+              <div style="font-size:12px;color:#aaa;line-height:1.65">Символическая цена — как чашка кофе с десертом. Думающие люди быстро внедряют, зарабатывают первые деньги и видят, как работает подход. Лёгкий тест-драйв системы.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- БЛОК 5: Активация -->
+        <div style="border-top:1px solid #2a2a2a;padding-top:14px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#555;margin-bottom:8px">Инструкция для активации бота</div>
+          <div style="font-size:12px;color:#666;line-height:1.7">Загрузи этот промпт в системные настройки Gem-бота. После этого при любом запросе он будет чётко делить дни на «Смысловые» и «Лайф со смыслом», выдавая тексты строго на языке аудитории.</div>
+        </div>
+
+      </div>
+
+      <!-- СКРИПТ ПО ДНЯМ -->
+      <div style="display:grid;gap:10px">
+
+        <!-- ЧЕТВЕРГ -->
+        <div style="background:#fff;border-radius:10px;overflow:hidden;border:0.5px solid #e8e2d8">
+          <div style="background:#EEF4FF;padding:12px 18px;border-bottom:1px solid #e8e2d8;display:flex;align-items:center;gap:10px">
+            <div style="font-size:13px;font-weight:700;color:#1B3A8C">Четверг</div>
+            <div style="font-size:11px;background:#1B3A8C;color:#fff;border-radius:4px;padding:2px 8px;font-weight:600">Смысловой день 1</div>
+            <div style="font-size:11px;color:#666;margin-left:auto">Тема: Проблема ведения блога вхолостую</div>
+          </div>
+          <div style="padding:14px 18px;display:grid;gap:10px">
+            <div style="border-left:3px solid #6B8CDE;padding:8px 12px;background:#fafaf8;border-radius:0 6px 6px 0">
+              <div style="font-size:10px;font-weight:700;color:#6B8CDE;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Сторис 1 · Визуал: видео от первого лица, ноутбук на фоне</div>
+              <div style="font-size:12px;color:#333;line-height:1.65">«Часто вижу одну и ту же картину: эксперт пишет классные посты, каждый день выкладывает сторис, тратит на это кучу сил... А в ответ тишина. Или просто лайки от коллег».</div>
+            </div>
+            <div style="border-left:3px solid #6B8CDE;padding:8px 12px;background:#fafaf8;border-radius:0 6px 6px 0">
+              <div style="font-size:10px;font-weight:700;color:#6B8CDE;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Сторис 2 · Визуал: скриншот заметки с хаотичными мыслями</div>
+              <div style="font-size:12px;color:#333;line-height:1.65">«В голове сразу мысли: "Ну что ещё сделать? Начать танцевать? Выворачивать душу наизнанку или придумывать драмы, чтобы хоть как-то покупали?"».</div>
+            </div>
+            <div style="border-left:3px solid #6B8CDE;padding:8px 12px;background:#fafaf8;border-radius:0 6px 6px 0">
+              <div style="font-size:10px;font-weight:700;color:#6B8CDE;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Сторис 3 · Визуал: говорящее лицо на нейтральном фоне</div>
+              <div style="font-size:12px;color:#333;line-height:1.65">«Мне в директ так и пишут: "Почему другие с нуля запускаются и зарабатывают, а я со своим опытом — нет?" Всё просто: ваш опыт огромный, но для клиентов он невидим. Вы говорите о себе, а не о них. Завтра покажу, как это исправить за один вечер».</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ПЯТНИЦА -->
+        <div style="background:#fff;border-radius:10px;overflow:hidden;border:0.5px solid #e8e2d8">
+          <div style="background:#F0FDF4;padding:12px 18px;border-bottom:1px solid #e8e2d8;display:flex;align-items:center;gap:10px">
+            <div style="font-size:13px;font-weight:700;color:#166534">Пятница</div>
+            <div style="font-size:11px;background:#166534;color:#fff;border-radius:4px;padding:2px 8px;font-weight:600">Лайф-день 1</div>
+            <div style="font-size:11px;color:#666;margin-left:auto">Тема: Снижение дистанции и трансляция свободы</div>
+          </div>
+          <div style="padding:14px 18px;display:grid;gap:10px">
+            <div style="border-left:3px solid #7DBFA0;padding:8px 12px;background:#fafaf8;border-radius:0 6px 6px 0">
+              <div style="font-size:10px;font-weight:700;color:#7DBFA0;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Сторис 1 · Визуал: кадр с прогулки или из кафе</div>
+              <div style="font-size:12px;color:#333;line-height:1.65">«Решила устроить себе разгрузочный день. Какое же это удовольствие — самой решать, когда работать, а когда просто гулять, не завися от жёсткого графика».</div>
+            </div>
+            <div style="border-left:3px solid #7DBFA0;padding:8px 12px;background:#fafaf8;border-radius:0 6px 6px 0">
+              <div style="font-size:10px;font-weight:700;color:#7DBFA0;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Сторис 2 · Визуал: телефон в руке на фоне улицы</div>
+              <div style="font-size:12px;color:#333;line-height:1.65">«Вчера получила много откликов на сторис. Эксперты пишут: "Как объяснить, чем я занимаюсь, чтобы люди сразу понимали ценность и хотели купить?" Людям не нужны наши слёзы или сторис 24/7. Им нужно просто и понятно донести смысл. В субботу покажу готовое решение».</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- СУББОТА -->
+        <div style="background:#fff;border-radius:10px;overflow:hidden;border:0.5px solid #e8e2d8">
+          <div style="background:#EEF4FF;padding:12px 18px;border-bottom:1px solid #e8e2d8;display:flex;align-items:center;gap:10px">
+            <div style="font-size:13px;font-weight:700;color:#1B3A8C">Суббота</div>
+            <div style="font-size:11px;background:#1B3A8C;color:#fff;border-radius:4px;padding:2px 8px;font-weight:600">Смысловой день 2</div>
+            <div style="font-size:11px;color:#666;margin-left:auto">Тема: Отстройка от курсов, презентация промптов</div>
+          </div>
+          <div style="padding:14px 18px;display:grid;gap:10px">
+            <div style="border-left:3px solid #6B8CDE;padding:8px 12px;background:#fafaf8;border-radius:0 6px 6px 0">
+              <div style="font-size:10px;font-weight:700;color:#6B8CDE;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Сторис 1 · Визуал: пустая таблица на экране</div>
+              <div style="font-size:12px;color:#333;line-height:1.65">«Вчера меня спросили: "С чего вообще начинать — с блога, продукта, упаковки или трафика? Голова кругом." Знаний в голове терабайты, а системы нет. И первая мысль — надо купить ещё какой-нибудь курс и посмотреть 50 часов лекций».</div>
+            </div>
+            <div style="border-left:3px solid #6B8CDE;padding:8px 12px;background:#fafaf8;border-radius:0 6px 6px 0">
+              <div style="font-size:10px;font-weight:700;color:#6B8CDE;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Сторис 2 · Визуал: жёсткий текст на однотонном фоне</div>
+              <div style="font-size:12px;color:#333;line-height:1.65">«Но давайте честно: от просмотра лекций деньги на карту не приходят. Вам некогда учиться. Вам нужно просто взять и сделать. По шагам».</div>
+            </div>
+            <div style="border-left:3px solid #6B8CDE;padding:8px 12px;background:#fafaf8;border-radius:0 6px 6px 0">
+              <div style="font-size:10px;font-weight:700;color:#6B8CDE;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Сторис 3 · Визуал: запись экрана — вставляешь промпт в нейросеть</div>
+              <div style="font-size:12px;color:#333;line-height:1.65">«Поэтому я создала "Архитектор смыслов". Это НЕ КУРС. Это рабочая среда, где собраны готовые таблицы и мои авторские настроенные промпты. Вы просто подставляете свою нишу — и система выдаёт готовый скелет контента, который бьёт точно в цели ваших клиентов».</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ВОСКРЕСЕНЬЕ -->
+        <div style="background:#fff;border-radius:10px;overflow:hidden;border:0.5px solid #e8e2d8">
+          <div style="background:#F0FDF4;padding:12px 18px;border-bottom:1px solid #e8e2d8;display:flex;align-items:center;gap:10px">
+            <div style="font-size:13px;font-weight:700;color:#166534">Воскресенье</div>
+            <div style="font-size:11px;background:#166534;color:#fff;border-radius:4px;padding:2px 8px;font-weight:600">Лайф-день 2</div>
+            <div style="font-size:11px;color:#666;margin-left:auto">Тема: Фиксация цены и мягкое напоминание</div>
+          </div>
+          <div style="padding:14px 18px;display:grid;gap:10px">
+            <div style="border-left:3px solid #7DBFA0;padding:8px 12px;background:#fafaf8;border-radius:0 6px 6px 0">
+              <div style="font-size:10px;font-weight:700;color:#7DBFA0;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Сторис 1 · Визуал: книга, плед или семейный завтрак</div>
+              <div style="font-size:12px;color:#333;line-height:1.65">«Воскресенье — день без контента и работы. Время для семьи и перезагрузки».</div>
+            </div>
+            <div style="border-left:3px solid #7DBFA0;padding:8px 12px;background:#fafaf8;border-radius:0 6px 6px 0">
+              <div style="font-size:10px;font-weight:700;color:#7DBFA0;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Сторис 2 · Визуал: крупный текст «1 490 рублей»</div>
+              <div style="font-size:12px;color:#333;line-height:1.65">«Кстати, про "Архитектор смыслов". На наставничествах за такие системы берут от 100 тысяч. Но я ставлю символическую цену — 1490₽ (как один раз сходить на кофе). Хочу, чтобы вы внедрили это за один вечер, заработали первые нормальные деньги и увидели, как работает мой подход. В понедельник расскажу, кому это точно подойдёт».</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ПОНЕДЕЛЬНИК -->
+        <div style="background:#fff;border-radius:10px;overflow:hidden;border:0.5px solid #e8e2d8">
+          <div style="background:#EEF4FF;padding:12px 18px;border-bottom:1px solid #e8e2d8;display:flex;align-items:center;gap:10px">
+            <div style="font-size:13px;font-weight:700;color:#1B3A8C">Понедельник</div>
+            <div style="font-size:11px;background:#1B3A8C;color:#fff;border-radius:4px;padding:2px 8px;font-weight:600">Смысловой день 3</div>
+            <div style="font-size:11px;color:#666;margin-left:auto">Тема: Отработка возражений, предкупольный день</div>
+          </div>
+          <div style="padding:14px 18px;display:grid;gap:10px">
+            <div style="border-left:3px solid #6B8CDE;padding:8px 12px;background:#fafaf8;border-radius:0 6px 6px 0">
+              <div style="font-size:10px;font-weight:700;color:#6B8CDE;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Сторис 1 · Визуал: скриншот вопроса из Директа</div>
+              <div style="font-size:12px;color:#333;line-height:1.65">«Настя, а если у меня сложная ниша / я только начинаю — мне подойдут ваши промпты и таблицы?» Смыслы и психология людей везде одинаковы. Покупатель везде принимает решение на основе ценности. Неважно, продаёте вы услуги или товары.</div>
+            </div>
+            <div style="border-left:3px solid #6B8CDE;padding:8px 12px;background:#fafaf8;border-radius:0 6px 6px 0">
+              <div style="font-size:10px;font-weight:700;color:#6B8CDE;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Сторис 2 · Визуал: просматриваешь структуру на ноутбуке</div>
+              <div style="font-size:12px;color:#333;line-height:1.65">«Внутри "Архитектора" зашиты готовые шаги. Вы просто вбиваете свои данные, применяете авторский промпт — и система выдаёт точную упаковку вашего опыта. Без мучений над текстами часами».</div>
+            </div>
+            <div style="border-left:3px solid #6B8CDE;padding:8px 12px;background:#fafaf8;border-radius:0 6px 6px 0">
+              <div style="font-size:10px;font-weight:700;color:#6B8CDE;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Сторис 3 · Визуал: плашка со стикером-напоминанием</div>
+              <div style="font-size:12px;color:#333;line-height:1.65">«Старт завтра утром строго на 24 часа прямо здесь, в сторис. Цена 1490 рублей. Больше повторов по этой цене не будет. Включайте напоминалку, чтобы не проспать».</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ВТОРНИК -->
+        <div style="background:#fff;border-radius:10px;overflow:hidden;border:2px solid #C8A96E">
+          <div style="background:#1c1c1e;padding:12px 18px;border-bottom:1px solid #333;display:flex;align-items:center;gap:10px">
+            <div style="font-size:13px;font-weight:700;color:#C8A96E">Вторник</div>
+            <div style="font-size:11px;background:#C8A96E;color:#1c1c1e;border-radius:4px;padding:2px 8px;font-weight:700">ДЕНЬ ПРОДАЖ</div>
+            <div style="font-size:11px;color:#666;margin-left:auto">Окно открыто 24 часа</div>
+          </div>
+          <div style="padding:14px 18px;display:grid;gap:10px">
+            <div style="border-left:3px solid #C8A96E;padding:8px 12px;background:#fdfaf5;border-radius:0 6px 6px 0">
+              <div style="font-size:10px;font-weight:700;color:#C8A96E;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Сторис 1 · Визуал: утренний кадр. Макбук. Большой стикер-ссылка</div>
+              <div style="font-size:12px;color:#333;line-height:1.65">«Доброе утро. Ссылка активна. Рабочая среда "Архитектор смыслов" доступна по ссылке к этой сторис. Цена: 1490 рублей. Ровно через 24 часа система автоматически закроет доступ».</div>
+            </div>
+            <div style="border-left:3px solid #C8A96E;padding:8px 12px;background:#fdfaf5;border-radius:0 6px 6px 0">
+              <div style="font-size:10px;font-weight:700;color:#C8A96E;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Сторис 2 · Визуал: скриншот строчек «Успешная оплата...»</div>
+              <div style="font-size:12px;color:#333;line-height:1.65">«Пока одни думают, другие за один вечер забирают инструмент, который избавит их от выгорания и ежедневных мучений с контентом. Ссылка выше, жду вас внутри рабочей среды».</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
 <script>
 function toggle(head) {
   var body = head.nextElementSibling;
@@ -1589,8 +1973,10 @@ var titles = {
   comp:   {t:'⚔ Конкуренты и сравнения', s:'Как управлять выбором клиента без атаки на других'},
   entry:  {t:'🚪 Точка входа', s:'Первое касание и маршрут от незнакомца до покупки'},
   dna:    {t:'✦ ДНК голоса и смыслы', s:'Голос Анастасии Лушниковой — молекулы и банк смыслов'},
-  voices: {t:'🔥 Голос аудитории', s:'Живые фразы из комментариев — дословно, без редактуры'},
+  voices: {t:'🔥 Потребности аудитории', s:'Живые запросы из комментариев — дословно, без редактуры'},
   lineup: {t:'💎 Продуктовая линейка', s:'Лид-магниты · Трипваер · Основной продукт · Услуга под ключ'},
+  products: {t:'🛍 Продукты', s:'Описания, цены, смыслы продажи'},
+  stories: {t:'📱 Прогревы сторис', s:'7-дневный скрипт запуска — инструкция и тексты'},
   valuedoc: {t:'📄 Что транслировать в блоге: зачем архитектор', s:'Ценность каждого раздела — для тебя и твоего продукта'}
 };
 
