@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Агенты Claude для маркетинга: как я собрала AI-команду из 5 агентов за один день — Анастасия Лушникова</title>
+<meta name="description" content="Пошаговая инструкция как создать команду AI-агентов на Claude для маркетинга, контента и продаж. Аналитик, продавец, контент-менеджер работают 24/7 за 1500-2000 рублей в месяц. Без технического бэкграунда.">
+<meta name="keywords" content="агенты Claude, AI агенты для маркетинга, Claude агент, AI команда, автоматизация маркетинга, Claude API, AI для эксперта, нейросети для бизнеса, контент агент, автоматизация контента">
+<meta property="og:title" content="Агенты Claude для маркетинга: AI-команда из 5 агентов за один день">
+<meta property="og:description" content="Пошаговая инструкция без технического бэкграунда. Аналитик, продавец, контент-менеджер работают пока ты спишь. 1500-2000 рублей в месяц.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.anastasialushnikova.com/blog/ai-team-one-day/">
+<meta property="og:site_name" content="Анастасия Лушникова">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.anastasialushnikova.com/blog/ai-team-one-day/">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=108790481','ym');
+ym(108790481,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108790481" style="position:absolute;left:-9999px;" alt=""/></div></noscript>
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','2700527913660797');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"/></noscript>
+<style>
+:root{--bg:#f7f6f2;--surface:#fff;--border:#e8e6df;--text:#1a1917;--muted:#6b6860;--light:#a8a29e;--accent:#2563eb;--tag:#f0ede6;--dark:#1a1917;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+nav{position:sticky;top:0;z-index:100;background:rgba(247,246,242,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;}
+.nav-brand{font-size:14px;font-weight:800;text-decoration:none;color:var(--dark);}
+.nav-links{display:flex;gap:20px;}
+.nav-links a{font-size:12px;color:var(--muted);text-decoration:none;}
+.nav-links a:hover{color:var(--dark);}
+.page{max-width:740px;margin:0 auto;padding:48px 24px 80px;}
+.meta{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);margin-bottom:16px;flex-wrap:wrap;}
+.meta-dot{width:3px;height:3px;border-radius:50%;background:var(--border);}
+h1{font-size:36px;font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:16px;}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;}
+.tag{font-size:12px;font-weight:600;color:var(--muted);background:var(--tag);padding:5px 12px;border-radius:100px;}
+.intro{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:24px;}
+.intro p{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:10px;}
+.intro p:last-child{margin-bottom:0;}
+.hint{background:#eff4ff;border:1px solid #bfdbfe;border-radius:12px;padding:16px 20px;margin-bottom:32px;font-size:14px;color:#1e40af;display:flex;gap:10px;align-items:flex-start;}
+h2{font-size:22px;font-weight:700;letter-spacing:-.02em;margin:40px 0 16px;border-top:1px solid var(--border);padding-top:32px;}
+h3{font-size:16px;font-weight:700;margin:24px 0 8px;}
+p{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:14px;}
+p:last-child{margin-bottom:0;}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:16px;}
+.step-header{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.step-num{width:36px;height:36px;border-radius:50%;background:var(--dark);color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-title{font-size:16px;font-weight:700;}
+.step-why{background:#eff4ff;border-left:3px solid #2563eb;padding:10px 14px;border-radius:0 8px 8px 0;margin-top:12px;font-size:13px;color:#1e40af;line-height:1.6;}
+.step-why b{display:block;margin-bottom:4px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;}
+.code-line{background:var(--dark);color:#a8b4c8;font-family:'JetBrains Mono',monospace;font-size:13px;padding:12px 16px;border-radius:10px;margin:8px 0;overflow-x:auto;}
+.result-card{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:20px 24px;margin:24px 0;}
+.result-card .label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#15803d;margin-bottom:8px;}
+.result-card p{font-size:14px;color:#166534;margin-bottom:0;}
+.quote{background:var(--surface);border-left:3px solid var(--border);padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px;color:var(--muted);font-style:italic;line-height:1.7;}
+.danger{background:#fff1f2;border:1.5px solid #fecdd3;border-radius:16px;padding:24px;margin:32px 0;}
+.danger h3{color:#be123c;margin:0 0 10px;}
+.danger p{font-size:14px;color:#9f1239;margin-bottom:8px;}
+.agents-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0;}
+.agent-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;}
+.agent-card .emoji{font-size:20px;margin-bottom:8px;}
+.agent-card h3{font-size:13px;margin:0 0 6px;}
+.agent-card p{font-size:12px;color:var(--muted);margin:0;line-height:1.5;}
+.cost-block{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;margin:24px 0;}
+.cost-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;}
+.cost-row:last-child{border-bottom:none;font-weight:700;}
+.cost-price{font-weight:700;color:var(--dark);}
+
+/* ПРОДУКТОВЫЙ БЛОК */
+.product-block{background:#fffbf0;border:2px solid #fde68a;border-radius:20px;padding:36px;margin:40px 0;}
+.product-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#92400e;background:#fef3c7;padding:4px 12px;border-radius:100px;display:inline-block;margin-bottom:20px;}
+.product-block h2{border:none;padding:0;margin:0 0 8px;font-size:28px;color:#1a1917;}
+.product-lead{font-size:16px;color:#78350f;line-height:1.6;margin-bottom:24px;}
+.case-block{background:rgba(255,255,255,.7);border-radius:14px;padding:18px 20px;margin-bottom:20px;}
+.case-block .case-name{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#92400e;margin-bottom:8px;}
+.case-block p{font-size:14px;color:#78350f;margin-bottom:0;line-height:1.6;}
+.case-result{font-weight:700;font-size:15px;color:#1a1917;margin-top:6px;}
+.product-features{margin-bottom:24px;}
+.pf{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid rgba(253,230,138,.5);font-size:14px;color:#78350f;line-height:1.5;align-items:flex-start;}
+.pf:last-child{border-bottom:none;}
+.pf-icon{flex-shrink:0;font-size:16px;margin-top:1px;}
+.stack-block{background:rgba(255,255,255,.6);border-radius:14px;padding:16px 20px;margin-bottom:20px;}
+.stack-block .stack-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#92400e;margin-bottom:12px;}
+.stack-row{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid rgba(253,230,138,.4);color:#78350f;}
+.stack-row:last-child{border-bottom:none;font-weight:700;font-size:14px;color:#1a1917;}
+.stack-price{font-weight:600;}
+.guarantee{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:14px 18px;margin-bottom:20px;font-size:14px;color:#166534;line-height:1.5;}
+.price-row{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;}
+.price{font-size:36px;font-weight:800;color:#1a1917;}
+.price-anchor{font-size:13px;color:#92400e;line-height:1.4;max-width:300px;}
+.btn-buy{display:inline-flex;align-items:center;gap:8px;background:var(--dark);color:#fff;font-family:'Manrope',sans-serif;font-size:15px;font-weight:700;padding:16px 32px;border-radius:14px;text-decoration:none;}
+.btn-buy:hover{opacity:.9;}
+.anti-guarantee{font-size:13px;color:#92400e;margin-top:14px;line-height:1.6;}
+
+footer{background:var(--dark);color:#fff;padding:48px 24px;}
+.footer-inner{max-width:740px;margin:0 auto;}
+.footer-title{font-size:22px;font-weight:800;margin-bottom:8px;}
+.footer-sub{font-size:14px;color:#a8a29e;margin-bottom:32px;}
+.social-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px;}
+.social-card{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;text-decoration:none;}
+.social-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.social-name{font-size:13px;font-weight:700;color:#fff;}
+.social-desc{font-size:11px;color:#a8a29e;}
+.tg-banner{background:rgba(255,255,255,.08);border-radius:16px;padding:24px;display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px;}
+.tg-banner p{font-size:15px;font-weight:600;}
+.btn-tg{background:#2563eb;color:#fff;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;padding:11px 22px;border-radius:100px;text-decoration:none;}
+.copy{font-size:12px;color:#a8a29e;text-align:center;}
+@media(max-width:600px){
+  h1{font-size:26px;}
+  .agents-grid{grid-template-columns:1fr;}
+  .social-grid{grid-template-columns:1fr;}
+  .tg-banner{flex-direction:column;}
+  .product-block{padding:24px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="../">Анастасия Лушникова</a>
+  <div class="nav-links">
+    <a href="https://t.me/target_school1">Telegram</a>
+    <a href="https://www.instagram.com/target_school">Instagram</a>
+    <a href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0">Написать</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="meta">
+    <span>май 2026</span>
+    <span class="meta-dot"></span>
+    <span>12 мин чтения</span>
+    <span class="meta-dot"></span>
+    <span>Автор: Анастасия Лушникова</span>
+  </div>
+
+  <h1>Агенты Claude для маркетинга: как я собрала AI-команду из 5 агентов за один день</h1>
+  <h2 style="font-size:18px;font-weight:500;color:#6b6860;border:none;padding:0;margin:-16px 0 20px;letter-spacing:0;">И почему без одной вещи всё это было бы мусором</h2>
+
+  <div class="tags">
+    <span class="tag">Агенты Claude</span>
+    <span class="tag">AI-маркетинг</span>
+    <span class="tag">Автоматизация</span>
+    <span class="tag">Инструменты</span>
+    <span class="tag">Авторский метод</span>
+  </div>
+
+  <div class="intro">
+    <p>Вот честно, я не планировала писать эту статью.</p>
+    <p>Я просто сидела и смотрела как в Telegram мне приходят сообщения от моей команды. Аналитик отчитался. Продавец сдал тексты. Контент-менеджер написал план на неделю. Редактор опубликовал страницу на сайт.</p>
+    <p>Всё это произошло пока я пила кофе. Я только дала одно задание.</p>
+    <p>Я 17 лет в маркетинге. Видела разное. Но это было что-то новое.</p>
+    <p>В этой статье расскажу как это собрать. Шаг за шагом. С объяснением зачем каждый шаг нужен. И почему без одной вещи вся эта конструкция превращается в красивый бесполезный дашборд.</p>
+  </div>
+
+  <div class="hint">
+    <span>💡</span>
+    <span>Статья для экспертов без технического бэкграунда. Никакого кода вручную. Только копировать команды и вставлять в терминал. Всё объясняю на человеческом языке.</span>
+  </div>
+
+  <h2>Что такое AI-команда и зачем она нужна эксперту</h2>
+
+  <p>Обычная картина выглядит так. Эксперт сам пишет посты. Сам думает что публиковать. Сам анализирует конкурентов. Сам готовит тексты для продаж. Сам обновляет сайт.</p>
+
+  <p>На это уходит от 3 до 6 часов в день. Каждый день. Это не работа. Это операционный ад.</p>
+
+  <p>AI-команда работает иначе. Ты пишешь одно задание своему боту в Telegram. Например: "Напиши прогрев в сторис под запуск нового продукта." Дальше начинается цепочка. Аналитик смотрит что сейчас работает у конкурентов. Продакт строит структуру. Продавец пишет тексты с учётом болей твоей аудитории. Контент оформляет по твоему расписанию.</p>
+
+  <p>Каждый результат сохраняется в Notion. Отчёт приходит в Telegram. Ты проверяешь и публикуешь.</p>
+
+  <p>Логика тут простая. Ты платишь один раз за настройку. Потом система работает 24/7 за 4 евро в месяц.</p>
+
+  <div class="agents-grid">
+    <div class="agent-card">
+      <div class="emoji">🔬</div>
+      <h3>Аналитик</h3>
+      <p>Парсит конкурентов, находит залетающие посты, выявляет контентные дыры в нише. Работает автоматически каждый четверг утром.</p>
+    </div>
+    <div class="agent-card">
+      <div class="emoji">⚡</div>
+      <h3>Продакт</h3>
+      <p>Строит методологию продуктов, воронки продаж, структуру запусков на основе данных аналитика.</p>
+    </div>
+    <div class="agent-card">
+      <div class="emoji">💰</div>
+      <h3>Продавец</h3>
+      <p>Пишет лендинги, продающие сторис, апсейл-письма. Использует методологию Хормози, Брансона, Огилви.</p>
+    </div>
+    <div class="agent-card">
+      <div class="emoji">📋</div>
+      <h3>Контент</h3>
+      <p>Пишет карусели, посты, прогревы в сторис. Ведёт расписание по дням. Создаёт воронки для Chatplace.</p>
+    </div>
+    <div class="agent-card">
+      <div class="emoji">🌐</div>
+      <h3>Редактор сайта</h3>
+      <p>Создаёт страницы блога по твоим текстам и публикует на сайт через GitHub автоматически.</p>
+    </div>
+    <div class="agent-card">
+      <div class="emoji">📊</div>
+      <h3>Дашборд</h3>
+      <p>Живой экран где видно кто что делает в реальном времени. С анимацией и звуком завершения.</p>
+    </div>
+  </div>
+
+  <h2>Почему именно Claude, а не ChatGPT или другие</h2>
+
+  <p>Меня спрашивают часто. Я работала с разными нейросетями. ChatGPT, Gemini, разные open-source модели.</p>
+
+  <p>Агентов я строю на Claude по одной причине. Он лучше держит контекст длинных задач. Когда аналитик передаёт данные продавцу, а продавец передаёт продавцу результат и тот строит тексты на его основе, важно чтобы цепочка не "забывала" предыдущие шаги. Claude справляется с этим лучше других.</p>
+
+  <p>Плюс API Anthropic позволяет использовать стриминг — это когда текст агента появляется в твоём дашборде прямо в момент написания, как на экране телефона когда человек печатает. Видно как агент думает.</p>
+
+  <p>Технически: каждый агент Claude получает системный промпт со своей ролью и данными, пользовательское сообщение с задачей и контекстом от предыдущего агента. Модель: claude-sonnet-4-5. Это баланс скорости и качества.</p>
+
+  <h2>Сколько это стоит</h2>
+
+  <div class="cost-block">
+    <div class="cost-row"><span>Сервер Hetzner CX22</span><span class="cost-price">~10$/мес</span></div>
+    <div class="cost-row"><span>Claude API (при активной работе)</span><span class="cost-price">3-7$/мес</span></div>
+    <div class="cost-row"><span>Telegram бот</span><span class="cost-price">бесплатно</span></div>
+    <div class="cost-row"><span>Notion</span><span class="cost-price">бесплатно</span></div>
+    <div class="cost-row"><span>Итого в месяц</span><span class="cost-price">около 1500-2000 руб.</span></div>
+  </div>
+
+  <p>Для сравнения. Один внештатный контент-менеджер стоит от 30 000 рублей в месяц. Один SMM-специалист — от 20 000. Один копирайтер — от 15 000.</p>
+
+  <p>800 рублей против 65 000. Причём команда работает ночью, в выходные, пока ты в отпуске.</p>
+
+  <h2>Пошаговая инструкция: как собрать</h2>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Создай сервер на Hetzner</div>
+    </div>
+    <p>Hetzner — это немецкий хостинг. Надёжный, дешёвый, работает в России. Регистрируешься на hetzner.com, создаёшь сервер CX22 (Ubuntu 24.04). Приходит письмо с IP-адресом и паролем.</p>
+    <div class="step-why">
+      <b>Зачем это нужно</b>
+      Сервер это компьютер который работает 24/7 без твоего участия. Твой MacBook засыпает ночью. Сервер не засыпает никогда. Именно на нём живут агенты и выполняют задачи даже пока ты спишь.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Получи API ключ Anthropic</div>
+    </div>
+    <p>Заходишь на console.anthropic.com. Регистрируешься. Слева "API Keys", создаёшь ключ. Это не подписка на Claude. Это доступ к мозгу агентов. Платишь только за использование.</p>
+    <div class="step-why">
+      <b>Зачем это нужно</b>
+      Когда ты пишешь задание боту, оно уходит в Claude через API. Claude думает, генерирует ответ, возвращает результат агенту. Без ключа агенты не смогут думать. Они будут просто пустыми оболочками.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Создай Telegram-бота через @BotFather</div>
+    </div>
+    <p>Пишешь @BotFather в Telegram. Команда /newbot. Даёшь имя. Получаешь токен вида 123456:ABC... Это твой личный канал связи с командой.</p>
+    <div class="step-why">
+      <b>Зачем это нужно</b>
+      Telegram — это твой интерфейс. Ты не заходишь на сервер каждый раз. Ты просто пишешь боту как обычному человеку. Он принимает задачу, запускает цепочку агентов и присылает результат сюда же. Плюс агенты сами пишут тебе отчёты когда заканчивают работу.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div class="step-title">Подключи Notion</div>
+    </div>
+    <p>Заходишь на notion.so/my-integrations. Создаёшь интеграцию. Получаешь ключ. Даёшь интеграции доступ к своей странице в Notion через кнопку Connections.</p>
+    <div class="step-why">
+      <b>Зачем это нужно</b>
+      Каждый результат работы агентов сохраняется в Notion автоматически. У тебя появляется база знаний: тексты, аналитика, прогревы, планы. Агенты видят что делали раньше и не начинают с нуля каждый раз.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <div class="step-title">Подключись к серверу и установи оркестратор</div>
+    </div>
+    <p>Открываешь Терминал на Mac. Вводишь одну команду для подключения к серверу. Потом вставляешь готовый скрипт установки. Всё устанавливается само: Python, зависимости, код агентов, расписание задач.</p>
+    <div class="code-line">ssh root@твой-ip-адрес</div>
+    <div class="step-why">
+      <b>Зачем это нужно</b>
+      Оркестратор это мозг системы. Он принимает задание из Telegram, решает каким агентам его передать, запускает их по цепочке, следит чтобы каждый получил результат предыдущего. Без оркестратора агенты работают в изоляции и не могут передавать данные друг другу.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">6</div>
+      <div class="step-title">Напиши боту первое задание</div>
+    </div>
+    <p>Открываешь своего бота в Telegram. Пишешь задание. Например: /task разработай воронку для продаж через таргет Instagram. Смотришь как цепочка запускается.</p>
+    <div class="step-why">
+      <b>Зачем это нужно</b>
+      Первое задание это проверка что всё работает. Ты увидишь сообщения от каждого агента по очереди. Аналитик анализирует. Продакт строит структуру. Продавец пишет тексты. Всё сохраняется в Notion и приходит тебе.
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="label">Что получилось у меня</div>
+    <p>Пять агентов работают 24/7. В понедельник в 8 утра контент сам пишет карусель на неделю. В четверг утром аналитик парсит конкурентов и присылает дайджест. Дашборд в браузере показывает кто что делает в реальном времени с живым текстом. Стоимость: 1500-2000 рублей в месяц.</p>
+  </div>
+
+  <h2>А теперь главное. То ради чего вообще эта статья</h2>
+
+  <p>Я запустила всё это. Агенты начали работать. В Telegram посыпались отчёты.</p>
+
+  <p>Я открыла первый результат и прочитала.</p>
+
+  <p>Это был мусор.</p>
+
+  <div class="quote">
+    Аналитик написал про "женщину 35-45 лет которая хочет больше зарабатывать и устала от рутины". Продавец написал текст про "вашу целевую аудиторию которая ищет решение". Контент сгенерировал пост про "как важно работать со смыслами".
+  </div>
+
+  <p>Абстрактная каша. Ни одного реального слова. Ни одной настоящей боли.</p>
+
+  <p>Потому что агенты пишут на основе того что им дают. Я дала им пустоту. Получила пять раз умноженную пустоту.</p>
+
+  <div class="danger">
+    <h3>Нейросеть умножает то что ей загружаешь</h3>
+    <p>Загружаешь "женщина хочет зарабатывать" — получаешь шаблонный текст про заработок.</p>
+    <p>Загружаешь "Марина, нутрициолог из Краснодара, пишет посты полгода, 200 лайков, ноль продаж, гуглит в 3 ночи почему умные зарабатывают меньше простых блогеров" — получаешь текст который останавливает скролл.</p>
+    <p>Разница не в промпте. Разница в качестве данных о твоей аудитории.</p>
+  </div>
+
+  <p>Когда я загрузила в агентов полный анализ своей ЦА — смысловой кристалл, таблицу болей со словами которыми клиенты описывают проблемы, страхи, возражения с метафорами — система заработала по-настоящему.</p>
+
+  <p>Аналитик начал находить именно те контентные дыры которые важны для моей аудитории. Продавец начал писать текстами которые попадают в живое. Контент перестал быть полезной безликой каруселью.</p>
+
+  <p>Эту карту я строила в Архитекторе смыслов.</p>
+
+  <div class="product-block">
+    <div class="product-label">Фундамент без которого AI-команда бесполезна</div>
+    <h2>Архитектор смыслов</h2>
+    <p class="product-lead">Рабочая среда которая за один вечер строит полный маркетинговый фундамент под твой продукт. Именно её ты загружаешь в агентов. Именно от неё зависит качество всего что они сделают.</p>
+
+    <div class="case-block">
+      <div class="case-name">Реальный кейс</div>
+      <p>Марина, нутрициолог из Краснодара. Вела блог полгода. Лайки есть. Продаж нет. После Архитектора поняла кто её клиент по-настоящему и что его не даёт спать в три ночи. Загрузила данные в агентов.</p>
+      <div class="case-result">Через неделю закрыла двух клиентов на консультации. Суммарно 16 000 рублей. Архитектор стоил 1490.</div>
+    </div>
+
+    <div class="product-features">
+      <div class="pf">
+        <span class="pf-icon">🔍</span>
+        <span>Промпт "Глубоководный аналитик" разворачивает полную карту твоей аудитории за 15 минут. Не абстрактный портрет. Конкретные боли, страхи, вопросы в три ночи, возражения через метафоры, сарказм аудитории. То что раньше добывалось через десятки интервью.</span>
+      </div>
+      <div class="pf">
+        <span class="pf-icon">💎</span>
+        <span>Смысловой кристалл — пять ключевых связок из которых пишется весь контент, все офферы, все страницы продаж. Не сто болей на выбор. Именно те пять которые приносят 80 процентов выручки.</span>
+      </div>
+      <div class="pf">
+        <span class="pf-icon">🤖</span>
+        <span>Инструкция как загрузить весь анализ в AI-агентов. Один раз настроил — агенты пишут на языке твоей аудитории, а не на языке абстрактного маркетинга.</span>
+      </div>
+      <div class="pf">
+        <span class="pf-icon">📋</span>
+        <span>Рабочая среда с навигацией для ежедневного использования. Пишешь пост — открываешь блок "боли и магниты". Готовишься к запуску — берёшь "страхи и возражения". Без мучений над пустым экраном.</span>
+      </div>
+    </div>
+
+    <div class="stack-block">
+      <div class="stack-title">Что это стоило бы по отдельности</div>
+      <div class="stack-row"><span>Маркетолог для анализа ЦА</span><span class="stack-price">от 30 000 руб.</span></div>
+      <div class="stack-row"><span>Копирайтер для смыслового кристалла</span><span class="stack-price">от 15 000 руб.</span></div>
+      <div class="stack-row"><span>Наставник для разбора позиционирования</span><span class="stack-price">от 20 000 руб.</span></div>
+      <div class="stack-row"><span>Архитектор смыслов</span><span class="stack-price">1 490 руб.</span></div>
+    </div>
+
+    <div class="guarantee">
+      Один клиент которого ты наконец поняла окупает Архитектор с первой продажи. Марина окупила его за неделю в десять раз.
+    </div>
+
+    <div class="price-row">
+      <span class="price">1 490 ₽</span>
+      <span class="price-anchor">Меньше одного похода к косметологу. Инструмент который работает каждый день.</span>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
+      <a class="btn-buy" href="https://app.lava.top/products/162ca29b-a6a4-414a-97c6-29962d1d3956">Оплатить сразу →</a>
+      <a href="https://www.anastasialushnikova.com/arkhitektor#pay" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#92400e;font-family:'Manrope',sans-serif;font-size:14px;font-weight:600;padding:16px 24px;border-radius:14px;text-decoration:none;border:1.5px solid #fde68a;">Узнать подробнее →</a>
+    </div>
+
+    <div class="anti-guarantee">
+      Этот продукт не подходит тем кто ищет ещё одну теорию на полку. Архитектор — это инструмент. Открываешь, подставляешь свою нишу, получаешь карту. Сегодня. Не через месяц после изучения.
+    </div>
+  </div>
+
+  <h2>Итого</h2>
+
+  <p>AI-команда из пяти агентов — это реально. Один день настройки. 1500-2000 рублей в месяц. Работает 24/7.</p>
+
+  <p>Но без карты своей аудитории это красивый бесполезный дашборд. Агенты умножают то что им дают.</p>
+
+  <p>Сначала Архитектор. Потом команда.</p>
+
+  <p>Именно в таком порядке это работает.</p>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">Понравился материал?</div>
+    <div class="footer-sub">Подписывайтесь на каналы — там ещё больше про AI-маркетинг, смыслы и продажи без выгорания</div>
+    <div class="social-grid">
+      <a class="social-card" href="https://t.me/target_school1">
+        <div class="social-icon" style="background:#e8f0fe;">📱</div>
+        <div><div class="social-name">Telegram канал</div><div class="social-desc">Промпты и кейсы каждый день</div></div>
+      </a>
+      <a class="social-card" href="https://www.instagram.com/target_school">
+        <div class="social-icon" style="background:#fce7f3;">📸</div>
+        <div><div class="social-name">Instagram</div><div class="social-desc">Визуальные гайды и stories</div></div>
+      </a>
+      <a class="social-card" href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0">
+        <div class="social-icon" style="background:#dcfce7;">💬</div>
+        <div><div class="social-name">Написать Анастасии</div><div class="social-desc">Личное сообщение в WhatsApp</div></div>
+      </a>
+      <a class="social-card" href="https://t.me/ailav_bot">
+        <div class="social-icon" style="background:#fef3c7;">🛎️</div>
+        <div><div class="social-name">Служба заботы</div><div class="social-desc">Техподдержка и вопросы</div></div>
+      </a>
+    </div>
+    <div class="tg-banner">
+      <p>Хотите больше материалов?</p>
+      <a class="btn-tg" href="https://t.me/target_school1">Подписаться на Telegram</a>
+    </div>
+    <div class="copy">© 2026 Анастасия Лушникова. Все права защищены.</div>
+  </div>
+</footer>
+
+</body>
+</html>
