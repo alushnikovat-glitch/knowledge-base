@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>17 промптов для Claude, которые заменят SMM-щика — Анастасия Лушникова</title>
+<meta name="description" content="17 готовых промптов для Claude: анализ аудитории, контент-план, тексты без воды, редактура. Копируете, подставляете свою нишу, получаете смыслы вместо пластика.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108790481', 'ym');
+    ym(108790481, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108790481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2700527913660797');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+  :root {
+    --bg: #f7f6f2; --surface: #ffffff; --border: #e8e6df;
+    --text: #1a1917; --text-muted: #6b6860; --text-light: #a8a29e;
+    --accent: #2563eb; --accent-light: #eff4ff;
+    --tag-bg: #f0ede6; --dark: #1a1917;
+    --warn-bg: #fffbf0; --warn-border: #fde68a;
+    --ok-bg: #f0fdf4; --ok-border: #bbf7d0; --ok-text: #15803d;
+    --var-bg: #fef9c3; --var-text: #854d0e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* НАВИГАЦИЯ */
+  .nav { position: sticky; top: 0; z-index: 100; background: rgba(247,246,242,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-brand { font-size: 15px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+  .nav-links { display: flex; gap: 22px; }
+  .nav-link { font-size: 13px; font-weight: 600; color: var(--text-muted); text-decoration: none; transition: color .15s; }
+  .nav-link:hover { color: var(--text); }
+
+  .page { max-width: 760px; margin: 0 auto; padding: 48px 24px 40px; }
+
+  /* МЕТА */
+  .meta { display: flex; align-items: center; gap: 14px; font-size: 13px; color: var(--text-muted); margin-bottom: 20px; flex-wrap: wrap; }
+  .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-light); }
+
+  h1 { font-size: 40px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.12; margin-bottom: 20px; }
+
+  /* ТЕГИ */
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 32px; }
+  .tag { font-size: 12px; font-weight: 600; color: var(--text-muted); background: var(--tag-bg); padding: 5px 13px; border-radius: 100px; }
+
+  /* ВВОДНЫЙ БЛОК */
+  .intro { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 30px 30px 24px; margin-bottom: 18px; }
+  .intro p { font-size: 16px; color: var(--text-muted); line-height: 1.7; margin-bottom: 14px; }
+  .intro p:last-child { margin-bottom: 0; }
+  .intro strong { color: var(--text); font-weight: 700; }
+
+  /* ГОЛУБАЯ ПОДСКАЗКА */
+  .hint { background: var(--accent-light); border: 1px solid #dbe6ff; border-radius: 16px; padding: 20px 24px; margin-bottom: 44px; display: flex; gap: 14px; }
+  .hint-ico { flex-shrink: 0; width: 22px; height: 22px; color: var(--accent); margin-top: 1px; }
+  .hint p { font-size: 14px; color: #2d4470; line-height: 1.65; margin: 0; }
+  .hint b { color: var(--accent); font-weight: 700; }
+
+  /* ТИХИЙ ИНЛАЙН-МОСТИК */
+  .inline-promo { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--warn-border); border-radius: 14px; padding: 16px 20px; margin: 20px 0 4px; }
+  .inline-promo-ico { flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px; background: #fef3c7; color: #d97706; display: flex; align-items: center; justify-content: center; font-size: 17px; }
+  .inline-promo p { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin: 0; }
+  .inline-promo a { color: var(--accent); font-weight: 700; text-decoration: none; white-space: nowrap; }
+  .inline-promo a:hover { text-decoration: underline; }
+
+  /* РАЗДЕЛИТЕЛЬ БЛОКА */
+  .block-header { display: flex; align-items: center; gap: 14px; margin: 44px 0 22px; }
+  .block-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); background: var(--tag-bg); padding: 5px 13px; border-radius: 100px; white-space: nowrap; }
+  .block-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* КАРТОЧКА ПРОМПТА */
+  .prompt { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px 24px; margin-bottom: 16px; }
+  .prompt-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
+  .prompt-num { flex-shrink: 0; width: 30px; height: 30px; background: var(--dark); color: #fff; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+  .prompt-title { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.35; padding-top: 3px; }
+  .prompt-body { position: relative; background: #1a1917; color: #d8d4cb; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.75; padding: 46px 20px 18px; border-radius: 12px; white-space: pre-wrap; word-break: break-word; }
+  .prompt-body .lead { color: #f2efe8; font-weight: 500; }
+  .var { background: var(--var-bg); color: var(--var-text); border-radius: 4px; padding: 1px 5px; font-weight: 500; }
+  .copy-btn { position: absolute; top: 11px; right: 11px; display: inline-flex; align-items: center; gap: 6px; background: #f4f1ea; color: #1a1917; border: none; font-family: 'Manrope', sans-serif; font-size: 12.5px; font-weight: 700; padding: 8px 14px; border-radius: 9px; cursor: pointer; transition: background .15s, transform .1s; box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+  .copy-btn::before { content: ""; width: 14px; height: 14px; flex-shrink: 0; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='13' height='13' rx='2'/%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='13' height='13' rx='2'/%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/%3E%3C/svg%3E") center / contain no-repeat; }
+  .copy-btn:hover { background: #fff; transform: translateY(-1px); }
+  .copy-btn.done { background: #16a34a; color: #fff; box-shadow: 0 2px 8px rgba(22,163,74,0.45); }
+  .copy-btn.done::before { -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat; }
+
+  /* МОСТИК К ПРОДУКТУ */
+  .bridge { margin: 52px 0 18px; }
+  .bridge p { font-size: 17px; color: var(--text); line-height: 1.7; margin-bottom: 14px; font-weight: 500; }
+  .bridge .muted { color: var(--text-muted); font-weight: 400; font-size: 16px; }
+  .arrow-chain { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; font-weight: 700; color: var(--text); }
+  .arrow-chain span { background: var(--tag-bg); padding: 3px 11px; border-radius: 100px; font-size: 14px; }
+  .arrow-chain i { color: var(--text-light); font-style: normal; }
+
+  /* ЖЁЛТЫЙ БЛОК ПРОДУКТА */
+  .product { background: var(--warn-bg); border: 1.5px solid var(--warn-border); border-radius: 22px; padding: 36px 34px; margin-bottom: 48px; }
+  .product-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #b45309; background: #fef3c7; display: inline-block; padding: 5px 13px; border-radius: 100px; margin-bottom: 16px; }
+  .product h2 { font-size: 27px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 14px; }
+  .product > p { font-size: 16px; color: #5c5345; line-height: 1.7; margin-bottom: 14px; }
+  .product > p:last-of-type { margin-bottom: 0; }
+  .product strong { color: #1a1917; font-weight: 700; }
+
+  .prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 22px 0; }
+  .prod-item { background: rgba(255,255,255,0.6); border: 1px solid var(--warn-border); border-radius: 12px; padding: 13px 15px; }
+  .prod-item .n { font-size: 11px; font-weight: 700; color: #b45309; font-family: 'JetBrains Mono', monospace; }
+  .prod-item .t { font-size: 13.5px; font-weight: 600; color: #1a1917; line-height: 1.4; margin-top: 3px; }
+
+  .crystal { background: #1a1917; border-radius: 14px; padding: 18px 20px; margin: 22px 0; }
+  .crystal-top { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #fbbf24; margin-bottom: 12px; }
+  .crystal-chain { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .crystal-chain span { background: rgba(255,255,255,0.08); color: #f2efe8; padding: 6px 14px; border-radius: 100px; font-size: 13.5px; font-weight: 600; }
+  .crystal-chain i { color: #6b6860; font-style: normal; font-weight: 700; }
+
+  /* ГАРАНТИЯ */
+  .guarantee { display: flex; gap: 12px; background: var(--ok-bg); border: 1px solid var(--ok-border); border-radius: 12px; padding: 15px 18px; margin: 22px 0; }
+  .guarantee svg { flex-shrink: 0; width: 20px; height: 20px; color: var(--ok-text); margin-top: 1px; }
+  .guarantee p { font-size: 13.5px; color: #166534; line-height: 1.6; margin: 0; }
+
+  .price-row { display: flex; align-items: baseline; gap: 12px; margin: 24px 0 18px; flex-wrap: wrap; }
+  .price-old { font-size: 17px; color: var(--text-light); text-decoration: line-through; }
+  .price-now { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; color: #1a1917; }
+  .price-note { font-size: 13px; color: #5c5345; }
+
+  .btn-buy { display: inline-flex; align-items: center; gap: 10px; background: var(--dark); color: #fff; font-family: 'Manrope', sans-serif; font-size: 16px; font-weight: 700; padding: 17px 30px; border-radius: 14px; text-decoration: none; position: relative; overflow: hidden; transition: transform .15s; }
+  .btn-buy:hover { transform: translateY(-1px); }
+  .btn-buy .shimmer { position: absolute; top: 0; left: -120%; width: 60%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,0.22), transparent); animation: shimmer 2.6s infinite; }
+  @keyframes shimmer { 0% { left: -120%; } 60%,100% { left: 130%; } }
+  .btn-sub { font-size: 13px; color: #8a7f6d; margin-top: 12px; }
+
+  /* ФУТЕР */
+  .footer { border-top: 1px solid var(--border); }
+  .footer-inner { max-width: 760px; margin: 0 auto; padding: 56px 24px 64px; }
+  .footer h3 { font-size: 24px; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 8px; }
+  .footer-sub { font-size: 15px; color: var(--text-muted); line-height: 1.6; margin-bottom: 28px; max-width: 540px; }
+  .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+  .social-card { display: flex; align-items: center; gap: 13px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 15px 17px; text-decoration: none; transition: border-color .15s, transform .15s; }
+  .social-card:hover { border-color: var(--text-light); transform: translateY(-1px); }
+  .social-ico { width: 38px; height: 38px; border-radius: 11px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .social-name { font-size: 14px; font-weight: 700; color: var(--text); }
+  .social-desc { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+
+  .banner { background: var(--dark); border-radius: 18px; padding: 28px 30px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 28px; }
+  .banner-title { font-size: 19px; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+  .banner-btn { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #1a1917; font-size: 14px; font-weight: 700; padding: 13px 22px; border-radius: 100px; text-decoration: none; white-space: nowrap; transition: transform .15s; }
+  .banner-btn:hover { transform: translateY(-1px); }
+  .copyright { font-size: 13px; color: var(--text-light); text-align: center; }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 30px; }
+    .nav-links { gap: 16px; }
+    .nav-link { font-size: 12px; }
+    .page { padding: 36px 18px 32px; }
+    .intro, .product { padding: 24px 20px; }
+    .prod-grid, .social-grid { grid-template-columns: 1fr; }
+    .price-now { font-size: 30px; }
+    .banner { flex-direction: column; align-items: flex-start; }
+    .product h2 { font-size: 23px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 1. НАВИГАЦИЯ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">Анастасия Лушникова</a>
+    <div class="nav-links">
+      <a href="https://t.me/target_school1" class="nav-link" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://www.instagram.com/target_school" class="nav-link" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" class="nav-link" target="_blank" rel="noopener">Написать</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- 2. МЕТА -->
+  <div class="meta">
+    <span>июнь 2026</span>
+    <span class="meta-dot"></span>
+    <span>12 мин чтения</span>
+    <span class="meta-dot"></span>
+    <span>Автор: Анастасия Лушникова</span>
+  </div>
+
+  <!-- 3. H1 -->
+  <h1>17 промптов для Claude, которые заменят SMM-щика</h1>
+
+  <!-- 4. ТЕГИ -->
+  <div class="tags">
+    <span class="tag">Промпты</span>
+    <span class="tag">AI-маркетинг</span>
+    <span class="tag">Контент</span>
+    <span class="tag">Стратегия</span>
+    <span class="tag">Авторский метод</span>
+  </div>
+
+  <!-- 5. ВВОДНЫЙ БЛОК -->
+  <div class="intro">
+    <p>Большинство людей открывают Claude, пишут «напиши пост про мой продукт» и получают гладкий пластик. Правильный, аккуратный, мёртвый. ЦА листает такое за секунду.</p>
+    <p>Логика тут простая. Нейросеть отвечает на уровне вопроса. Слабый запрос, слабый ответ. Сильный запрос вытаскивает то, на чём строятся продажи.</p>
+    <p>Я собрала <strong>17 промптов</strong>, которые достают из Claude не рерайт, а смыслы. Анализ аудитории, контент-план, тексты без воды, заголовки, редактура. Копируете, подставляете свою нишу, получаете результат уровня дорогого маркетолога. Бесплатно.</p>
+  </div>
+
+  <!-- 6. ГОЛУБАЯ ПОДСКАЗКА -->
+  <div class="hint">
+    <svg class="hint-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01" stroke-linecap="round"/></svg>
+    <p><b>Как пользоваться.</b> Каждый промпт это готовая команда. Жмёте «Копировать», вставляете в Claude, заменяете текст в <span class="var">[квадратных скобках]</span> на свои данные. Чем конкретнее опишете нишу и продукт, тем точнее ответ. Не «нутрициолог», а «нутрициолог для мам в декрете, которые хотят похудеть без срывов».</p>
+  </div>
+
+  <!-- 7. КОНТЕНТ -->
+
+  <!-- БЛОК 1 -->
+  <div class="block-header">
+    <span class="block-label">Блок 1 · Анализ аудитории и смыслов</span>
+    <span class="block-line"></span>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">1</div>
+      <div class="prompt-title">Карта истинных болей и скрытых мотивов</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Маркетолог-психолог.
+<span class="lead">Задача:</span> Составь карту скрытых мотивов для ЦА: <span class="var">[описание аудитории, например: эксперты, которые боятся проявляться]</span>.
+Выдели 5 уровней:
+1. Что они говорят вслух (внешняя проблема).
+2. О чём они молчат (глубокий страх).
+3. Что они чувствуют, когда смотрят на конкурентов.
+4. Какая главная вторичная выгода у них есть, чтобы ОСТАВАТЬСЯ в текущей точке.
+5. Идеальный сценарий решения проблемы, за который они готовы платить дорого.
+<span class="lead">Формат:</span> Таблица.</div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">2</div>
+      <div class="prompt-title">Распаковка экспертности и личной уникальности</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Смысловой контент-архитектор.
+<span class="lead">Контекст:</span> Я продаю <span class="var">[название продукта/услуги]</span> через свой опыт: <span class="var">[кратко описать свой подход или бэкграунд]</span>.
+<span class="lead">Задача:</span> Выдели 5 ключевых «смысловых ядер» моей экспертности, которые отличают меня от 90% рынка, делающего упор только на инструменты. Найди в моём подходе неочевидную суперсилу и сформулируй её как концепцию.</div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">3</div>
+      <div class="prompt-title">Оцифровка барьеров к покупке (анти-возражения)</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Сильный продуктовый маркетолог.
+<span class="lead">Задача:</span> Спрогнозируй 7 неочевидных причин, почему моя аудитория <span class="var">[описание ЦА]</span> откажется покупать продукт <span class="var">[описание продукта]</span>, даже если им закрыть классические возражения «дорого» и «нет времени». Сформулируй для каждой причины один точечный месседж, который снимет этот барьер ещё до этапа продаж.</div>
+  </div>
+
+  <!-- ТИХИЙ МОСТИК ПОСЛЕ БЛОКА 1 -->
+  <div class="inline-promo">
+    <div class="inline-promo-ico">★</div>
+    <p>Прогонять такой анализ руками под каждую задачу долго. В «Архитекторе смыслов» эти 10 слоёв ЦА собраны в один прогон, выдача одного шага кормит следующий. <a href="https://www.anastasialushnikova.com/arkhitektor/" target="_blank" rel="noopener">Посмотреть систему →</a></p>
+  </div>
+
+  <!-- БЛОК 2 -->
+  <div class="block-header">
+    <span class="block-label">Блок 2 · Контент-стратегия и архитектура</span>
+    <span class="block-line"></span>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">4</div>
+      <div class="prompt-title">Контент-план по методу «Смысловых слоёв»</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Главный контент-стратег проекта.
+<span class="lead">Задача:</span> Создай контент-план на 12 постов или каруселей для ниши <span class="var">[ваша ниша]</span>. Раздели контент на 3 слоя:
+1. Слой Доверия (кто я, мои ценности, почему мне можно верить).
+2. Слой Экспертности (глубокий разбор методологии, неочевидные инсайты).
+3. Слой Продаж (связка проблемы аудитории с решением через продукт).
+Для каждой темы пропиши: Заголовок, Главный смысл, Ссылка на продукт. Без банальных тем в духе «топ 3 совета».</div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">5</div>
+      <div class="prompt-title">Лид-магнит, который прогревает до покупки</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Архитектор продуктовых воронок.
+<span class="lead">Задача:</span> Разработай концепцию и подробный план (структуру по главам или экранам) лид-магнита для темы <span class="var">[тема вашего продукта]</span>. Лид-магнит должен не просто давать пользу, а подсвечивать главную ошибку аудитории и логично подводить к покупке основного продукта: <span class="var">[описание основного продукта]</span>.</div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">6</div>
+      <div class="prompt-title">Смысловая воронка для сторис и Threads (сериал)</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Сценарист прогревов в текстовых и слайдовых форматах.
+<span class="lead">Задача:</span> Напиши сценарий контентного «сериала» из 5 шагов (постов или цепочки слайдов) на тему: <span class="var">[внедрение новой привычки / кейс / факап]</span>. Контент должен держать интригу. Каждый шаг заканчивается открытым вопросом или триггером перехода к следующему слайду.</div>
+  </div>
+
+  <!-- БЛОК 3 -->
+  <div class="block-header">
+    <span class="block-label">Блок 3 · Копирайтинг без воды</span>
+    <span class="block-line"></span>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">7</div>
+      <div class="prompt-title">Метод «Тихого маркетинга» (продажа без впаривания)</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Копирайтер, пишущий в стиле смыслового маркетинга (глубоко, честно, без манипуляций и капслока).
+<span class="lead">Задача:</span> Напиши пост-презентацию продукта <span class="var">[название и суть]</span>. Сделай упор на уважение к клиенту, твёрдые факты, результаты и логику. Избегай клише: «уникальный», «успешный успех», «успей купить». Текст должен вызывать у читателя облегчение: «Наконец-то кто-то говорит по делу».</div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">8</div>
+      <div class="prompt-title">Сухой кейс превращаем в историю</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Сторителлер.
+<span class="lead">Исходные данные:</span> Точка А клиента <span class="var">[описать]</span>, Точка Б <span class="var">[описать]</span>, что было сделано <span class="var">[описать кратко]</span>.
+<span class="lead">Задача:</span> Напиши историю в формате Instagram-карусели. Структура:
+Слайд 1: Крючок (фокус на переломном моменте).
+Слайд 2: Внутренний кризис (почему старые методы не работали).
+Слайд 3: Поиск решения (какой инсайт перевернул игру).
+Слайд 4: Твёрдые результаты.
+Слайд 5: Вывод-смысл для читателя.</div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">9</div>
+      <div class="prompt-title">Вирусный пост-манифест</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Лидер мнений в нише <span class="var">[название ниши]</span>.
+<span class="lead">Задача:</span> Напиши пост-манифест против устоявшегося, но глупого правила или тренда на рынке (например: против бесконечного создания Reels ради просмотров). Обоснуй альтернативную точку зрения, покажи глубину проблемы и предложи зрелое решение. Стиль: уверенный, аргументированный, вовлекающий в дискуссию в комментариях.</div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">10</div>
+      <div class="prompt-title">Генератор заголовков (4 механики)</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Креативный директор.
+<span class="lead">Контекст темы:</span> <span class="var">[впишите тему, например: как эксперту автоматизировать маркетинг]</span>.
+<span class="lead">Задача:</span> Напиши 10 заголовков для текстовых каруселей, используя 4 механики:
+1. Разрушение мифа.
+2. Противопоставление (Было / Стало).
+3. Интрига через парадокс.
+4. Жёсткий фокус на ключевой боли.</div>
+  </div>
+
+  <!-- БЛОК 4 -->
+  <div class="block-header">
+    <span class="block-label">Блок 4 · Адаптация и дистрибуция</span>
+    <span class="block-line"></span>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">11</div>
+      <div class="prompt-title">Большая статья или видео в ёмкую карусель</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Редактор форматов.
+<span class="lead">Исходный текст:</span> <span class="var">[вставьте ваш большой текст, транскрипт видео или главу]</span>.
+<span class="lead">Задача:</span> Сократи материал до формата ёмкой карусели на 8 слайдов. Оставь только выжимку, «мясо» и ключевые тезисы. На каждый слайд дай не более 2-3 коротких предложений.</div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">12</div>
+      <div class="prompt-title">Адаптация под формат Threads</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Автор лаконичных вирусных тредов.
+<span class="lead">Задача:</span> Возьми идею или текст <span class="var">[краткая суть]</span> и преврати её в цепочку из 3-4 коротких, ёмких сообщений для Threads. Первое сообщение должно быть ярким тезисом, который заставляет развернуть ветку. Текст лёгкий, живой, без канцеляризмов.</div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">13</div>
+      <div class="prompt-title">Интерактивный пост для поднятия вовлечения</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Комьюнити-менеджер.
+<span class="lead">Задача:</span> Придумай механику и напиши текст поста, который заставит аудиторию <span class="var">[описание ЦА]</span> активно писать осознанные комментарии. Это должен быть не банальный конкурс, а разбор их ситуаций, игра-тест или обмен опытом.</div>
+  </div>
+
+  <!-- БЛОК 5 -->
+  <div class="block-header">
+    <span class="block-label">Блок 5 · Доработка, редактура, критика</span>
+    <span class="block-line"></span>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">14</div>
+      <div class="prompt-title">Жёсткий аудит текста на воду и клише</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Строгий, но поддерживающий главный редактор.
+<span class="lead">Текст для анализа:</span> <span class="var">[вставьте ваш текст]</span>.
+<span class="lead">Задача:</span> Проанализируй текст. Удали из него все маркеры инфоцыганства, пустые обещания, штампы и размытые формулировки. Перепиши так, чтобы он стал короче, плотнее по смыслам и звучал экспертно и весомо.</div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">15</div>
+      <div class="prompt-title">Смена тональности (Tone of Voice)</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Стилист текста.
+<span class="lead">Исходный текст:</span> <span class="var">[вставьте текст]</span>.
+<span class="lead">Задача:</span> Измени Tone of Voice этого текста. Сделай его <span class="var">[выберите: более ироничным и лёгким / более глубоким и академичным / более поддерживающим и тёплым]</span>. Смысл и факты остаются неизменными, меняется только подача и атмосфера.</div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">16</div>
+      <div class="prompt-title">Поиск логических дыр в контенте</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Критический мыслитель и продуктовый аудитор.
+<span class="lead">Задача:</span> Прочитай этот текст прогрева или описание продукта: <span class="var">[вставьте текст]</span>. Найди в нём логические несостыковки, слабые места, в которые покупатель не поверит, или моменты, где не хватает доказательств. Напиши, что именно нужно добавить или исправить.</div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top">
+      <div class="prompt-num">17</div>
+      <div class="prompt-title">Генератор метафор для сложных ниш</div>
+    </div>
+    <div class="prompt-body"><button class="copy-btn" onclick="copyPrompt(this)">Копировать</button><span class="lead">Роль:</span> Креативный копирайтер.
+<span class="lead">Задача:</span> Мне нужно объяснить сложную концепцию <span class="var">[название концепции, например: сквозная аналитика или архитектура смыслов]</span> для новичков. Придумай 3 яркие, понятные метафоры из реальной жизни (из сферы кулинарии, строительства, путешествий или отношений), которые мгновенно объяснят суть даже ребёнку.</div>
+  </div>
+
+  <!-- МОСТИК К ПРОДУКТУ -->
+  <div class="bridge">
+    <p>Заметили одну вещь?</p>
+    <p class="muted">Каждый промпт работает сам по себе. Вы получили 17 отдельных инструментов. Хорошие. Но разрозненные. Анализ ЦА живёт отдельно, контент-план отдельно, тексты отдельно. Каждый раз вы заново объясняете нейросети, кто ваш клиент.</p>
+    <p>Смыслы продают, когда они связаны в одну систему. Когда выдача анализа аудитории становится топливом для контент-плана. А контент-план превращается в готовые связки:</p>
+    <p class="arrow-chain"><span>Боль</span> <i>→</i> <span>Лекарство</span> <i>→</i> <span>Артефакт</span></p>
+  </div>
+
+  <!-- 8. ЖЁЛТЫЙ БЛОК ПРОДУКТА -->
+  <div class="product">
+    <div class="product-label">Авторская система</div>
+    <h2>«Архитектор смыслов»</h2>
+    <p>Это те же промпты, только собранные в конвейер. Выдача одного шага кормит следующий. Вы один раз вводите нишу, а система проводит вас от глубинного анализа аудитории до готового контент-плана на месяц. <strong>За 15 минут.</strong></p>
+    <p>Я собирала эту логику 17 лет. Сначала вручную: анкеты, десятки интервью, часы переписок с теми, кто только думал купить. На этих болях строились миллионные продажи в Target School. Теперь это делает система.</p>
+
+    <div class="prod-grid">
+      <div class="prod-item"><div class="n">01</div><div class="t">Портрет ЦА: ценности, страхи, мечты</div></div>
+      <div class="prod-item"><div class="n">02</div><div class="t">Скрытые возражения, что держит от покупки</div></div>
+      <div class="prod-item"><div class="n">03</div><div class="t">Боли в три ночи, что гуглят в отчаянии</div></div>
+      <div class="prod-item"><div class="n">04</div><div class="t">Триггеры покупки и язык клиента</div></div>
+      <div class="prod-item"><div class="n">05</div><div class="t">Конкурентный фон, почему уходят к другим</div></div>
+      <div class="prod-item"><div class="n">06</div><div class="t">10 модулей анализа + инструкция по Claude</div></div>
+    </div>
+
+    <div class="crystal">
+      <div class="crystal-top">★ Смысловой кристалл, стратегия</div>
+      <div class="crystal-chain">
+        <span>Боль</span> <i>→</i> <span>Лекарство</span> <i>→</i> <span>Артефакт</span>
+      </div>
+      <p style="color:#a8a29e;font-size:13px;margin:12px 0 0;line-height:1.6;">5 готовых связок. Это техзадание для контента, которое можно сразу передать ассистенту.</p>
+    </div>
+
+    <div class="guarantee">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9"/></svg>
+      <p><strong style="color:#15803d;">Гарантия 14 дней.</strong> Если поймёте, что система вам не подходит, напишите в службу заботы. Вернём полную сумму без лишних вопросов.</p>
+    </div>
+
+    <div class="price-row">
+      <span class="price-old">18 000 ₽</span>
+      <span class="price-now">1 490 ₽</span>
+      <span class="price-note">ссылка приходит сразу после оплаты</span>
+    </div>
+
+    <a class="btn-buy" href="https://app.lava.top/products/162ca29b-a6a4-414a-97c6-29962d1d3956" target="_blank" rel="noopener">
+      Забрать «Архитектор смыслов» за 1490 ₽
+      <span>→</span>
+      <span class="shimmer"></span>
+    </a>
+    <div class="btn-sub">Первые 50 мест по этой цене. Дальше цена растёт.</div>
+  </div>
+
+</div>
+
+<!-- 9. ФУТЕР -->
+<footer class="footer">
+  <div class="footer-inner">
+    <h3>Понравился материал?</h3>
+    <p class="footer-sub">Подписывайтесь на каналы, там ещё больше про AI-маркетинг, смыслы и продажи без выгорания.</p>
+
+    <div class="social-grid">
+      <a class="social-card" href="https://t.me/target_school1" target="_blank" rel="noopener">
+        <div class="social-ico" style="background:#e8f0fe;color:#2563eb;">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </div>
+        <div>
+          <div class="social-name">Telegram канал</div>
+          <div class="social-desc">Промпты и кейсы каждый день</div>
+        </div>
+      </a>
+
+      <a class="social-card" href="https://www.instagram.com/target_school" target="_blank" rel="noopener">
+        <div class="social-ico" style="background:#fce7f3;color:#db2777;">
+          <svg width="19" height="19" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <div>
+          <div class="social-name">Instagram</div>
+          <div class="social-desc">Визуальные гайды и stories</div>
+        </div>
+      </a>
+
+      <a class="social-card" href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank" rel="noopener">
+        <div class="social-ico" style="background:#dcfce7;color:#16a34a;">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        </div>
+        <div>
+          <div class="social-name">Написать Анастасии</div>
+          <div class="social-desc">Личное сообщение в WhatsApp</div>
+        </div>
+      </a>
+
+      <a class="social-card" href="https://t.me/ailav_bot" target="_blank" rel="noopener">
+        <div class="social-ico" style="background:#fef3c7;color:#d97706;">
+          <svg width="19" height="19" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div>
+          <div class="social-name">Служба заботы</div>
+          <div class="social-desc">Техподдержка и вопросы</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="banner">
+      <div class="banner-title">Хотите больше материалов?</div>
+      <a class="banner-btn" href="https://t.me/target_school1" target="_blank" rel="noopener">Подписаться на Telegram →</a>
+    </div>
+
+    <div class="copyright">© 2026 Анастасия Лушникова. Все права защищены.</div>
+  </div>
+</footer>
+
+<script>
+  function copyPrompt(btn) {
+    var body = btn.parentNode;
+    var text = body.innerText.replace(/^\s*Копировать\s*/, '').trim();
+    var done = function() {
+      var orig = btn.textContent;
+      btn.textContent = 'Скопировано';
+      btn.classList.add('done');
+      setTimeout(function(){ btn.textContent = 'Копировать'; btn.classList.remove('done'); }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(text, done); });
+    } else {
+      fallback(text, done);
+    }
+  }
+  function fallback(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch(e) {}
+    document.body.removeChild(ta);
+  }
+</script>
+
+</body>
+</html>
