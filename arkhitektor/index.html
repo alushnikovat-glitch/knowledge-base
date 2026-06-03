@@ -2,20 +2,20 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="Архитектор смыслов — авторский метод Анастасии Лушниковой. Система из 11 разделов, которая помогает экспертам продавать через контент без рекламного бюджета. Цена 1490 рублей.">
+<meta name="description" content="Архитектор смыслов, авторский метод Анастасии Лушниковой. Система из 11 разделов, которая помогает экспертам продавать через контент без рекламного бюджета. Цена 1490 рублей.">
 <meta name="keywords" content="архитектор смыслов, маркетинг смыслов, продажи без рекламы, контент-маркетинг, Анастасия Лушникова, Target School">
 <meta name="author" content="Анастасия Лушникова">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://anastasialushnikova.com/arkhitektor/">
 <meta property="og:type" content="product">
 <meta property="og:url" content="https://anastasialushnikova.com/arkhitektor/">
-<meta property="og:title" content="Архитектор смыслов — авторский метод Анастасии Лушниковой">
+<meta property="og:title" content="Архитектор смыслов, авторский метод Анастасии Лушниковой">
 <meta property="og:description" content="Пошаговая система из 11 разделов: вытащи из своего опыта смыслы-детонаторы, которые заставляют клиентов писать «куда платить?». 1490 рублей.">
 <meta property="og:site_name" content="Анастасия Лушникова">
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Архитектор смыслов — Анастасия Лушникова</title>
+<title>Архитектор смыслов, Анастасия Лушникова</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <!-- Yandex.Metrika counter -->
@@ -31,12 +31,20 @@
 
 <!-- Meta Pixel Code -->
 <script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','2700527913660797');fbq('track','PageView');
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2700527913660797');
+fbq('track', 'PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"/></noscript>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
+/></noscript>
 <!-- End Meta Pixel Code -->
 
 <style>
@@ -45,8 +53,9 @@ fbq('init','2700527913660797');fbq('track','PageView');
   --text:#1a1917; --muted:#6b6860; --light:#a8a29e;
   --dark:#1a1917; --accent:#2563eb; --accent-light:#eff4ff;
   --tag:#f0ede6;
-  --warn-bg:#fffbf0; --warn-brd:#fde68a;
+  --warn-bg:#fffbf0; --warn-brd:#fde68a; --warn-accent:#d97706;
   --ok-bg:#f0fdf4; --ok-brd:#bbf7d0; --ok-text:#166534;
+  --pain:#c2410c; --pain-soft:#fef0e8;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -74,42 +83,77 @@ nav{position:sticky;top:0;z-index:100;background:rgba(247,246,242,0.92);backdrop
 .s-sub{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:32px;}
 
 /* HERO */
-.hero{padding:64px 0 48px;}
-.hero-title{font-size:clamp(26px,4vw,46px);font-weight:800;letter-spacing:-0.03em;line-height:1.1;margin-bottom:20px;max-width:720px;}
-.hero-sub{font-size:16px;color:var(--muted);line-height:1.75;margin-bottom:16px;max-width:600px;}
-.hero-sub2{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:32px;max-width:600px;}
+.hero{padding:60px 0 48px;}
+.hero-title{font-size:clamp(28px,4.4vw,48px);font-weight:800;letter-spacing:-0.03em;line-height:1.08;margin-bottom:22px;max-width:760px;}
+.hero-title strong{color:var(--accent);font-weight:800;}
+.hero-tagline{font-size:clamp(15px,2vw,18px);font-weight:700;color:var(--text);line-height:1.4;margin-bottom:20px;max-width:640px;opacity:0.85;}
+.hero-sub{font-size:17px;color:var(--muted);line-height:1.7;margin-bottom:14px;max-width:620px;}
+.hero-sub strong{color:var(--text);font-weight:700;}
+.hero-sub2{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:28px;max-width:600px;}
 .price-new{font-size:48px;font-weight:800;letter-spacing:-0.04em;}
 .price-note{font-size:13px;color:var(--muted);}
-.hero-price-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
-.btn-main{display:inline-flex;align-items:center;gap:8px;background:var(--dark);color:#fff;font-family:'Manrope',sans-serif;font-size:15px;font-weight:700;padding:18px 36px;border-radius:14px;text-decoration:none;transition:opacity 0.15s;letter-spacing:-0.01em;margin-bottom:12px;}
-.btn-main:hover{opacity:0.85;}
+.hero-price-row{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:18px;}
+
+/* BUTTONS */
 @keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}
-.btn-main{background:linear-gradient(105deg,#1a1917 40%,#3a3830 50%,#1a1917 60%);background-size:200% auto;animation:shimmer 3s linear infinite;}
-.btn-main:hover{background-position:right center;}
+@keyframes ctaPulse{0%{box-shadow:0 0 0 0 rgba(26,25,23,0.35);}70%{box-shadow:0 0 0 14px rgba(26,25,23,0);}100%{box-shadow:0 0 0 0 rgba(26,25,23,0);}}
+.btn-main{position:relative;display:inline-flex;align-items:center;gap:8px;color:#fff;font-family:'Manrope',sans-serif;font-size:16px;font-weight:700;padding:19px 38px;border-radius:14px;text-decoration:none;letter-spacing:-0.01em;margin-bottom:14px;background:linear-gradient(105deg,#1a1917 40%,#3a3830 50%,#1a1917 60%);background-size:200% auto;animation:shimmer 3s linear infinite, ctaPulse 2.6s ease-out infinite;transition:transform 0.15s ease, background-position 0.4s;}
+.btn-main:hover{background-position:right center;transform:translateY(-2px);}
+.btn-main .arr{display:inline-block;transition:transform 0.2s ease;}
+.btn-main:hover .arr{transform:translateX(5px);}
+.scarcity{display:inline-flex;align-items:center;gap:8px;background:var(--warn-bg);border:1px solid var(--warn-brd);color:var(--warn-accent);font-size:13px;font-weight:700;padding:9px 16px;border-radius:100px;margin-bottom:14px;}
+.scarcity .dot{width:8px;height:8px;border-radius:50%;background:var(--warn-accent);animation:ctaPulse 1.8s ease-out infinite;}
 .guarantee-mini{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
 
+/* STICKY BAR */
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:200;background:rgba(26,25,23,0.97);backdrop-filter:blur(10px);border-top:1px solid #3a3830;padding:12px 24px;transform:translateY(120%);transition:transform 0.3s ease;}
+.sticky-cta.show{transform:translateY(0);}
+.sticky-in{max-width:880px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.sticky-left{color:#fff;}
+.sticky-name{font-size:13px;font-weight:700;line-height:1.2;}
+.sticky-price{font-size:12px;color:#a8a29e;}
+.sticky-price b{color:#fff;font-size:15px;}
+.sticky-btn{display:inline-flex;align-items:center;gap:6px;background:#fff;color:#1a1917;font-size:14px;font-weight:800;padding:12px 22px;border-radius:10px;text-decoration:none;white-space:nowrap;transition:transform 0.15s;}
+.sticky-btn:hover{transform:scale(1.03);}
+
 /* PAIN CARDS */
-.pain-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:32px;}
-.pain-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;}
-.pain-icon{font-size:28px;margin-bottom:12px;}
-.pain-title{font-size:15px;font-weight:700;margin-bottom:8px;}
-.pain-text{font-size:13px;color:var(--muted);line-height:1.65;}
+.pain-list{display:flex;flex-direction:column;gap:14px;margin-bottom:28px;}
+.pain-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px 32px 28px 30px;overflow:hidden;transition:transform 0.18s ease, box-shadow 0.18s ease;}
+.pain-card:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,0.06);}
+.pain-card::before{content:attr(data-num);position:absolute;top:-14px;right:18px;font-family:'JetBrains Mono',monospace;font-size:96px;font-weight:700;color:var(--pain-soft);line-height:1;pointer-events:none;}
+.pain-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;position:relative;z-index:1;}
+.pain-num{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--pain);background:var(--pain-soft);padding:4px 10px;border-radius:8px;}
+.pain-name{font-size:clamp(17px,2.4vw,21px);font-weight:800;letter-spacing:-0.02em;line-height:1.15;}
+.pain-lead{font-size:16px;font-weight:700;line-height:1.5;margin-bottom:10px;position:relative;z-index:1;}
+.pain-body{font-size:14px;color:var(--muted);line-height:1.7;position:relative;z-index:1;max-width:680px;}
+
+/* PAIN SUMMARY */
+.pain-summary{background:var(--dark);border-radius:20px;padding:38px 40px;}
+.pain-summary-lead{font-size:clamp(18px,2.6vw,22px);font-weight:800;color:#fff;line-height:1.4;letter-spacing:-0.02em;margin-bottom:16px;}
+.pain-summary-lead .hl{color:#fbbf24;}
+.pain-summary-body{font-size:15px;color:#c9c6bf;line-height:1.75;}
+.pain-summary-body strong{color:#fff;}
 
 /* CONTRAST BLOCK */
-.contrast-block{background:var(--dark);border-radius:20px;padding:36px 40px;margin-bottom:0;}
-.contrast-title{font-size:20px;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:20px;}
-.contrast-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.contrast-col-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;}
-.contrast-bad{color:#f87171;}
-.contrast-good{color:#4ade80;}
-.contrast-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;font-size:13px;line-height:1.6;}
-.contrast-item-icon{flex-shrink:0;margin-top:2px;font-size:14px;}
-.contrast-item-text-bad{color:#fca5a5;}
-.contrast-item-text-good{color:#bbf7d0;}
+.contrast-block{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:36px 40px;margin-top:14px;}
+.contrast-title{font-size:20px;font-weight:800;color:var(--text);letter-spacing:-0.02em;margin-bottom:24px;}
+.contrast-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.contrast-col{border-radius:16px;padding:22px 24px;}
+.contrast-col-bad-bg{background:var(--pain-soft);}
+.contrast-col-good-bg{background:var(--ok-bg);}
+.contrast-col-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;}
+.contrast-bad{color:#c2410c;}
+.contrast-good{color:#16a34a;}
+.contrast-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;font-size:13.5px;line-height:1.55;}
+.contrast-item:last-child{margin-bottom:0;}
+.contrast-item-icon{flex-shrink:0;margin-top:1px;font-size:14px;}
+.contrast-item-text-bad{color:#9a3412;}
+.contrast-item-text-good{color:#15803d;}
 
 /* SOLUTION */
 .solution-intro{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:16px;}
 .solution-intro p{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:12px;}
+.solution-intro p strong{color:var(--text);}
 .solution-intro p:last-child{margin-bottom:0;}
 
 /* INTERFACE MOCKUP */
@@ -171,6 +215,22 @@ nav{position:sticky;top:0;z-index:100;background:rgba(247,246,242,0.92);backdrop
 .author-fact{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 14px;}
 .author-quote{background:var(--warn-bg);border:1.5px solid var(--warn-brd);border-radius:16px;padding:24px 28px;margin-top:20px;font-size:15px;color:var(--muted);line-height:1.75;font-style:italic;}
 
+/* SECRET BLOCK */
+.secret-block{background:var(--dark);border-radius:24px;padding:48px 44px;margin-top:32px;}
+.secret-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#fbbf24;margin-bottom:14px;}
+.secret-title{font-size:clamp(22px,3.2vw,30px);font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1.18;margin-bottom:22px;}
+.secret-text{font-size:15px;color:#c9c6bf;line-height:1.8;margin-bottom:16px;}
+.secret-text strong{color:#fff;}
+.secret-nots{display:flex;flex-direction:column;gap:8px;margin:24px 0;}
+.secret-not{display:flex;align-items:center;gap:12px;font-size:16px;font-weight:700;color:#fff;}
+.secret-not span{color:#f87171;font-size:18px;flex-shrink:0;}
+.secret-cta-text{font-size:15px;color:#c9c6bf;line-height:1.8;margin-bottom:24px;border-left:3px solid #fbbf24;padding-left:18px;}
+.secret-cta-text strong{color:#fff;}
+.btn-secret{position:relative;display:inline-flex;align-items:center;gap:8px;background:#fff;color:#1a1917;font-family:'Manrope',sans-serif;font-size:15px;font-weight:800;padding:18px 34px;border-radius:14px;text-decoration:none;letter-spacing:-0.01em;transition:transform 0.15s;}
+.btn-secret:hover{transform:translateY(-2px);}
+.btn-secret .arr{transition:transform 0.2s;}
+.btn-secret:hover .arr{transform:translateX(5px);}
+
 /* CASES */
 .case-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:12px;}
 .case-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
@@ -180,6 +240,36 @@ nav{position:sticky;top:0;z-index:100;background:rgba(247,246,242,0.92);backdrop
 .case-col-text{font-size:13px;color:var(--muted);line-height:1.65;}
 .case-result-tag{display:inline-block;background:var(--ok-bg);border:1px solid var(--ok-brd);color:var(--ok-text);font-size:13px;font-weight:700;padding:8px 14px;border-radius:10px;margin-top:10px;line-height:1.4;}
 
+/* MOAT / WHY NOT JUST PROMPTS */
+.moat-lead{font-size:clamp(17px,2.4vw,21px);font-weight:700;line-height:1.5;letter-spacing:-0.01em;margin-bottom:18px;max-width:720px;}
+.moat-text{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:14px;max-width:720px;}
+.moat-text strong{color:var(--text);}
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0;}
+.vs-card{border-radius:18px;padding:26px;border:1px solid var(--border);}
+.vs-card-bad{background:var(--pain-soft);border-color:#f6d2c0;}
+.vs-card-good{background:var(--accent-light);border-color:#dbeafe;}
+.vs-tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;padding:5px 11px;border-radius:100px;margin-bottom:16px;}
+.vs-tag-bad{background:#fff;color:var(--pain);border:1px solid #f6d2c0;}
+.vs-tag-good{background:#fff;color:var(--accent);border:1px solid #dbeafe;}
+.vs-prompt{font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.6;background:rgba(255,255,255,0.7);border:1px dashed #d8b9a8;border-radius:10px;padding:12px 14px;margin-bottom:16px;color:#7c2d12;}
+.vs-card-good .vs-prompt{border-color:#bcd2f7;color:#1e3a8a;background:rgba(255,255,255,0.8);}
+.vs-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:16px;}
+.vs-list li{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;line-height:1.5;color:var(--text);}
+.vs-list li b{font-weight:700;}
+.vs-check{flex-shrink:0;margin-top:3px;width:15px;height:15px;color:var(--accent);}
+.vs-out{font-size:13px;line-height:1.6;padding-top:14px;border-top:1px solid rgba(0,0,0,0.07);}
+.vs-out-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:5px;}
+.vs-card-bad .vs-out{color:var(--pain);}
+.vs-card-good .vs-out{color:#1e40af;font-weight:600;}
+.pipe{display:flex;flex-direction:column;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:10px 26px;margin-bottom:24px;}
+.pipe-step{display:grid;grid-template-columns:108px 1fr;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--border);}
+.pipe-step:last-child{border-bottom:none;}
+.pipe-tag{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--accent);}
+.pipe-name{font-size:15px;font-weight:700;letter-spacing:-0.01em;}
+.pipe-name span{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-top:3px;letter-spacing:0;}
+.moat-quote{background:var(--dark);border-radius:18px;padding:30px 34px;font-size:clamp(16px,2.3vw,19px);font-weight:700;color:#fff;line-height:1.5;letter-spacing:-0.01em;}
+.moat-quote .hl{color:#fbbf24;}
+
 /* RESULT STRIP */
 .result-strip{background:var(--dark);border-radius:20px;padding:40px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
 .result-num{font-size:32px;font-weight:800;color:#fff;letter-spacing:-0.04em;margin-bottom:4px;}
@@ -187,10 +277,10 @@ nav{position:sticky;top:0;z-index:100;background:rgba(247,246,242,0.92);backdrop
 
 /* VALUE COMPARE */
 .value-table{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:24px;}
-.value-row{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--border);}
+.value-row{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--border);gap:16px;}
 .value-row:last-child{border-bottom:none;}
 .value-name{font-size:14px;font-weight:600;}
-.value-price{font-size:14px;font-weight:700;color:var(--light);text-decoration:line-through;}
+.value-price{font-size:14px;font-weight:700;color:var(--light);text-decoration:line-through;white-space:nowrap;}
 .value-total{background:var(--warn-bg);border:1.5px solid var(--warn-brd);border-radius:16px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;}
 
 /* OBJECTIONS */
@@ -210,19 +300,15 @@ nav{position:sticky;top:0;z-index:100;background:rgba(247,246,242,0.92);backdrop
 .guarantee-text{font-size:14px;color:#166534;line-height:1.75;}
 .guarantee-text + .guarantee-text{margin-top:12px;}
 
-/* ANTIGUARANTEE */
-.antiguarantee{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px 28px;margin-top:16px;}
-.antiguarantee-title{font-size:15px;font-weight:700;margin-bottom:8px;}
-.antiguarantee-text{font-size:14px;color:var(--muted);line-height:1.75;}
-
 /* FINAL CTA */
 .final-cta{background:var(--warn-bg);border:1.5px solid var(--warn-brd);border-radius:20px;padding:56px 48px;text-align:center;}
 .final-title{font-size:clamp(22px,3vw,34px);font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;line-height:1.15;}
-.final-sub{font-size:16px;color:var(--muted);margin-bottom:36px;line-height:1.7;max-width:540px;margin-left:auto;margin-right:auto;}
-.final-price-row{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:28px;}
-.final-btn{display:inline-flex;align-items:center;gap:8px;background:var(--dark);color:#fff;font-family:'Manrope',sans-serif;font-size:16px;font-weight:700;padding:20px 48px;border-radius:14px;text-decoration:none;transition:opacity 0.15s;letter-spacing:-0.01em;margin-bottom:12px;}
-.final-btn:hover{opacity:0.85;}
-.final-btn{background:linear-gradient(105deg,#1a1917 40%,#3a3830 50%,#1a1917 60%);background-size:200% auto;animation:shimmer 3s linear infinite;}
+.final-sub{font-size:16px;color:var(--muted);margin-bottom:30px;line-height:1.7;max-width:560px;margin-left:auto;margin-right:auto;}
+.final-price-row{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:18px;}
+.final-btn{position:relative;display:inline-flex;align-items:center;gap:8px;color:#fff;font-family:'Manrope',sans-serif;font-size:17px;font-weight:700;padding:21px 50px;border-radius:14px;text-decoration:none;letter-spacing:-0.01em;margin-bottom:14px;background:linear-gradient(105deg,#1a1917 40%,#3a3830 50%,#1a1917 60%);background-size:200% auto;animation:shimmer 3s linear infinite, ctaPulse 2.6s ease-out infinite;transition:transform 0.15s, background-position 0.4s;}
+.final-btn:hover{background-position:right center;transform:translateY(-2px);}
+.final-btn .arr{transition:transform 0.2s;}
+.final-btn:hover .arr{transform:translateX(5px);}
 .final-note{font-size:12px;color:var(--muted);}
 
 /* FOOTER */
@@ -240,13 +326,12 @@ nav{position:sticky;top:0;z-index:100;background:rgba(247,246,242,0.92);backdrop
 .tg-banner-sub{font-size:13px;color:var(--muted);margin-bottom:20px;}
 .tg-btn{display:inline-flex;align-items:center;gap:8px;background:#2563eb;color:#fff;font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;padding:12px 24px;border-radius:10px;text-decoration:none;transition:background 0.15s;}
 .tg-btn:hover{background:#1d4ed8;}
-footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
+footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 100px;}
 
 /* RESPONSIVE */
 @media(max-width:700px){
   .author-grid{grid-template-columns:1fr;}
   .author-photo-wrap{max-width:260px;margin:0 auto;}
-  .pain-grid{grid-template-columns:1fr;}
   .contrast-row{grid-template-columns:1fr;}
   .result-strip{grid-template-columns:1fr 1fr;}
   .case-cols{grid-template-columns:1fr;}
@@ -258,6 +343,15 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
   .mockup-modules{grid-template-columns:1fr 1fr;}
   .value-total{flex-direction:column;text-align:center;}
   .author-stats{grid-template-columns:1fr 1fr;}
+  .pain-card{padding:24px 22px;}
+  .pain-card::before{font-size:72px;top:-8px;right:12px;}
+  .secret-block{padding:32px 24px;}
+  .pain-summary{padding:28px 24px;}
+  .sticky-name{display:none;}
+  .vs-grid{grid-template-columns:1fr;}
+  .pipe-step{grid-template-columns:1fr;gap:4px;padding:14px 0;}
+  .pipe{padding:6px 20px;}
+  .moat-quote{padding:24px;}
 }
 </style>
 </head>
@@ -280,15 +374,20 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
 <section class="hero">
   <div class="eyebrow-pill">
     <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-    Авторский метод
+    Авторский метод Анастасии Лушниковой
   </div>
-  <h1 class="hero-title">Замените маркетолога за 50 000 рублей одной AI-системой, которая за 60 минут достанет истинные боли вашей аудитории</h1>
-  <p class="hero-sub">За один вечер нейросеть вытащит точные триггеры вашей аудитории — те самые, от которых клиенты пишут «куда платить?». Без созвонов. Без слива бюджета на тесты.</p>
+  <h1 class="hero-title">АРХИТЕКТУРА СМЫСЛОВ <strong>ЗА 15 МИНУТ</strong></h1>
+  <div class="hero-tagline">Как спроектировать фундамент маркетинга лучше 94% рынка? Инструкция 2026</div>
+  <p class="hero-sub">Запустите готовую систему, которая за 15 минут вытащит точные триггеры вашей аудитории, <strong>те самые, от которых клиенты пишут «куда платить?»</strong>. Авторские промпты, созданные на основе 17-летнего опыта в маркетинге, мгновенно сделают за вас всю глубинную работу.</p>
+  <p class="hero-sub2">Без бесконечных созвонов. Без слива бюджета на тесты.</p>
   <div class="hero-price-row">
     <span class="price-new">1 490 ₽</span>
     <span class="price-note">ссылка приходит сразу после оплаты</span>
   </div>
-  <a href="#pay" class="btn-main" onclick="fbq('track','InitiateCheckout')">Забрать систему за 1490 рублей →</a>
+  <a href="#pay" class="btn-main" onclick="fbq('track','InitiateCheckout')">Забрать систему за 1490 ₽ <span class="arr">→</span></a>
+  <div>
+    <span class="scarcity"><span class="dot"></span>Первые 50 мест по 1490 ₽. Дальше цена растёт</span>
+  </div>
   <div class="guarantee-mini">
     <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#16a34a" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     Гарантия возврата в течение 14 дней, без лишних вопросов
@@ -302,35 +401,68 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
 <div class="wrap">
 <section class="section">
   <div class="eyebrow">Проблема</div>
-  <div class="s-title">Почему ваш контент сейчас — это просто набор букв</div>
-  <div class="pain-grid">
-    <div class="pain-card">
-      <div class="pain-icon">💬</div>
-      <div class="pain-title">Тишина в личных сообщениях</div>
-      <div class="pain-text">Вы тратите часы на сценарии для видео и тексты, но в ответ получаете тишину. Ошибка не в алгоритмах площадок. Просто контент не бьёт в конкретные ночные мысли и страхи клиентов.</div>
+  <div class="s-title">Почему ваш контент сейчас просто мёртвый капитал и слитое время</div>
+
+  <div class="pain-list">
+
+    <div class="pain-card" data-num="01">
+      <div class="pain-head">
+        <span class="pain-num">01</span>
+        <span class="pain-name">Синдром социального удушья</span>
+      </div>
+      <div class="pain-lead">Вы открываете Instagram и через пять минут чувствуете себя позади всех.</div>
+      <div class="pain-body">Бесконечные рилсы конкурентов про «успешный успех». Кажется, все вокруг легко строят системы, путешествуют, монетизируют блог. А вы топчетесь на месте, выгораете и закрываете приложение. Вы сильный эксперт. У вас просто нет твёрдого инженерного каркаса, который выдаёт результат за 15 минут, а не ценой выжженной нервной системы.</div>
     </div>
-    <div class="pain-card">
-      <div class="pain-icon">🤖</div>
-      <div class="pain-title">Нейросети без контроля выдают пластик</div>
-      <div class="pain-text">Вас не покупают, потому что вы используете общие фразы. Люди лениво пролистывают контент, который мог написать любой ChatGPT. Это не ваш голос.</div>
+
+    <div class="pain-card" data-num="02">
+      <div class="pain-head">
+        <span class="pain-num">02</span>
+        <span class="pain-name">Холодный директ и тишина в ответ</span>
+      </div>
+      <div class="pain-lead">Вы вылизываете монтаж рилса и пишете километровые посты. А в кармане не теплеет.</div>
+      <div class="pain-body">Выкладываете продающий оффер и получаете либо глухую тишину, либо ленивое «цена?» в директ, после которого человек растворяется. Поэтому вы и не ведёте блог регулярно. Психика отказывается сливать энергию в пустоту. Вы тратите часы живого времени на контент, который работает как фоновый шум, и закономерно бросаете.</div>
     </div>
-    <div class="pain-card">
-      <div class="pain-icon">😶</div>
-      <div class="pain-title">Ощущение самозванца</div>
-      <div class="pain-text">Вы чувствуете себя самозванцем, потому что не можете донести ценность своего продукта. Не потому что продукт плохой. Потому что смыслы ещё не вытащены наружу.</div>
+
+    <div class="pain-card" data-num="03">
+      <div class="pain-head">
+        <span class="pain-num">03</span>
+        <span class="pain-name">Цифровой спам от ChatGPT и Claude</span>
+      </div>
+      <div class="pain-lead">Нейросети по умолчанию выдают гладкий стерильный пластик.</div>
+      <div class="pain-body">Тексты, похожие на статьи из Википедии. Ваша аудитория научилась пролистывать этот пластик за долю секунды. Без жёстких смысловых детонаторов ИИ просто помогает вам плодить спам на повышенной скорости. В таком контенте нет мяса, нет вашей дерзости и нет ни одной причины купить.</div>
     </div>
-    <div class="pain-card">
-      <div class="pain-icon">💸</div>
-      <div class="pain-title">Деньги на ветер</div>
-      <div class="pain-text">Обычно для поиска смыслов нанимают специалистов. Они две недели проводят созвоны, заполняют брифы и выдают отчёты на сто страниц, которые никто никогда не открывает. Вы теряете время и деньги.</div>
+
+    <div class="pain-card" data-num="04">
+      <div class="pain-head">
+        <span class="pain-num">04</span>
+        <span class="pain-name">Хронический синдром самозванца</span>
+      </div>
+      <div class="pain-lead">Вы чувствуете себя самозванцем, хотя за плечами годы практики и реальные кейсы.</div>
+      <div class="pain-body">Проблема в переводе. Вы не умеете переложить свой глубокий профессионализм на простой язык, понятный кошельку клиента. Пока сложные смыслы заперты у вас в голове, аудитория уходит к посредственным, но громким конкурентам. Они пишут проще и наглее.</div>
     </div>
+
+    <div class="pain-card" data-num="05">
+      <div class="pain-head">
+        <span class="pain-num">05</span>
+        <span class="pain-name">Слив вашего бюджета и времени</span>
+      </div>
+      <div class="pain-lead">Чтобы разобраться в аудитории, вы платите агентствам и маркетологам 50 000+.</div>
+      <div class="pain-body">Заполняете бесконечные брифы, ждёте неделями, сидите на бестолковых созвонах. На выходе получаете отчёт на 120 страниц, который никто никогда не откроет и не внедрит. Вы платите за процесс. Результата нет. И продолжаете тестировать гипотезы наугад, сливая деньги.</div>
+    </div>
+
+  </div>
+
+  <!-- ИТОГ -->
+  <div class="pain-summary">
+    <div class="pain-summary-lead">Вы лечите контент красивыми словами, заголовками и картинками. А контент остаётся <span class="hl">набором букв</span>, пока в него не вшиты смыслы.</div>
+    <div class="pain-summary-body">Пока вы копируете чужие идеальные обложки и пишете наугад, вы остаётесь в тисках нестабильного дохода и синдрома самозванца. Вам не нужен ещё один курс про успешный успех или тайм-менеджмент. Вам нужен прочный фундамент. С AI-системой <strong>«Архитектор смыслов»</strong> вы за 15 минут перешагнёте хаос и спроектируете систему, которая заставит блог работать на ваш кошелёк, а не на ваше выгорание.</div>
   </div>
 
   <!-- Схема: было / стало -->
   <div class="contrast-block">
     <div class="contrast-title">Так это сейчас работает у большинства</div>
     <div class="contrast-row">
-      <div>
+      <div class="contrast-col contrast-col-bad-bg">
         <div class="contrast-col-label contrast-bad">✕ Без системы</div>
         <div class="contrast-item">
           <span class="contrast-item-icon">❌</span>
@@ -353,11 +485,11 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
           <span class="contrast-item-text-bad">Выгораете и думаете, что это «просто не ваше»</span>
         </div>
       </div>
-      <div>
+      <div class="contrast-col contrast-col-good-bg">
         <div class="contrast-col-label contrast-good">✓ С Архитектором смыслов</div>
         <div class="contrast-item">
           <span class="contrast-item-icon">✅</span>
-          <span class="contrast-item-text-good">За один вечер вытащили карту болей вашей ЦА</span>
+          <span class="contrast-item-text-good">За 15 минут вытащили карту болей вашей ЦА</span>
         </div>
         <div class="contrast-item">
           <span class="contrast-item-icon">✅</span>
@@ -373,7 +505,7 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
         </div>
         <div class="contrast-item">
           <span class="contrast-item-icon">✅</span>
-          <span class="contrast-item-text-good">В директ пишут сами. Вы не продаёте — вас покупают</span>
+          <span class="contrast-item-text-good">В директ пишут сами. Вы не продаёте, вас покупают</span>
         </div>
       </div>
     </div>
@@ -390,7 +522,7 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
   <div class="s-title">Пошаговая система автоматизации аналитики из 11 разделов</div>
 
   <div class="solution-intro">
-    <p>Копируете команду, вставляете в Claude или Gemini, получаете карту болей вашей аудитории. На основе этой карты — контент-план на месяц, логика воронки и упаковка предложения. За один вечер.</p>
+    <p>Копируете команду, вставляете в Claude или Gemini, получаете карту болей вашей аудитории. На основе этой карты <strong>контент-план на месяц, логика воронки и упаковка предложения</strong>. За 15 минут.</p>
   </div>
 
   <!-- Интерфейс-макет рабочей области -->
@@ -401,7 +533,7 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
         <div class="mockup-dot" style="background:#ffbd2e;"></div>
         <div class="mockup-dot" style="background:#28c840;"></div>
       </div>
-      <div class="mockup-title-bar">Архитектор смыслов — рабочая область</div>
+      <div class="mockup-title-bar">Архитектор смыслов, рабочая область</div>
     </div>
     <div class="mockup-body">
       <div class="mockup-section-label">10 модулей глубинного анализа аудитории</div>
@@ -457,7 +589,7 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
           <div class="mockup-mod-desc">Итоговая карта аудитории</div>
         </div>
       </div>
-      <div class="mockup-section-label" style="color:#f59e0b;">★ Смысловой кристалл — стратегия</div>
+      <div class="mockup-section-label" style="color:#f59e0b;">★ Смысловой кристалл, стратегия</div>
       <div class="mockup-modules">
         <div class="mockup-module mockup-module-star">
           <div class="mockup-mod-num mockup-mod-num-star">★ 01</div>
@@ -491,7 +623,7 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
 
   <div class="inside-tip">
     <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    Рекомендую Claude — он лучше всего справляется с глубинным анализом контекста. Система также работает с Gemini и другими текстовыми нейросетями.
+    Рекомендую Claude, он лучше всего справляется с глубинным анализом контекста. Система также работает с Gemini и другими текстовыми нейросетями.
   </div>
 </section>
 </div>
@@ -516,7 +648,7 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
       <div class="step-num">★</div>
       <div>
         <div class="step-title">Стратегия. Смысловой кристалл.</div>
-        <div class="step-text">Пять готовых связок по схеме: Боль → Лекарство → Артефакт. Это готовое техническое задание для создания контента, которое можно сразу передать ассистенту. Контент-план на месяц вперёд — за один вечер.</div>
+        <div class="step-text">Пять готовых связок по схеме: Боль → Лекарство → Артефакт. Это готовое техническое задание для контента, которое можно сразу передать ассистенту. Контент-план на месяц вперёд за 15 минут.</div>
       </div>
     </div>
     <div class="step">
@@ -531,12 +663,12 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
   <!-- Скриншот продукта -->
   <div style="margin:32px 0;border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,0.08);">
     <img src="https://www.anastasialushnikova.com/arkhitektor/product-preview.jpg" alt="Так выглядит рабочая область Архитектора смыслов после оплаты" style="width:100%;display:block;">
-    <div style="background:var(--tag);padding:12px 20px;font-size:12px;color:var(--muted);text-align:center;">Так выглядит ваша рабочая область сразу после оплаты — интерфейс с промптами, навигацией и аудиоинструкцией</div>
+    <div style="background:var(--tag);padding:12px 20px;font-size:12px;color:var(--muted);text-align:center;">Так выглядит ваша рабочая область сразу после оплаты, интерфейс с промптами, навигацией и аудиоинструкцией</div>
   </div>
 
   <!-- Схема Смыслового кристалла -->
   <div class="crystal-schema" style="margin-top:32px;">
-    <div class="crystal-title">Как работает Смысловой кристалл — схема 5 связок</div>
+    <div class="crystal-title">Как работает Смысловой кристалл, схема 5 связок</div>
     <div class="crystal-rows">
       <div class="crystal-row">
         <div class="crystal-cell crystal-cell-pain">
@@ -567,7 +699,7 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
         <div class="crystal-arrow">→</div>
         <div class="crystal-cell crystal-cell-art">
           <div class="crystal-cell-label" style="color:#2563eb;">Пример</div>
-          <div class="crystal-cell-text">Контент-план на месяц за один вечер</div>
+          <div class="crystal-cell-text">Контент-план на месяц за 15 минут</div>
         </div>
       </div>
     </div>
@@ -613,10 +745,27 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
         <div class="author-fact">📖 Книга в издательстве Эксмо</div>
         <div class="author-fact">🎓 10 лет предпринимательства</div>
         <div class="author-fact">📊 Продаю через смыслы, без охватов и лица</div>
-        <div class="author-fact">🚫 0 рублей рекламного бюджета — опираюсь только на глубинные смыслы</div>
+        <div class="author-fact">🚫 0 рублей рекламного бюджета, опираюсь только на глубинные смыслы</div>
       </div>
-      <div class="author-quote">«Архитектор смыслов» — это не сухая теория. Это оцифрованный опыт 17 лет работы с аудиторией, который работает в любой нише. Я сама не начинаю работу над проектами без этой таблицы.</div>
+      <div class="author-quote">«Архитектор смыслов», это оцифрованный опыт 17 лет работы с аудиторией, который работает в любой нише. Я сама не начинаю работу над проектами без этой таблицы.</div>
     </div>
+  </div>
+
+  <!-- ═══ ГЛАВНЫЙ СЕКРЕТ ═══ -->
+  <div class="secret-block">
+    <div class="secret-eyebrow">★ Главный секрет, о котором все молчат</div>
+    <div class="secret-title">Нейросети не спасут ваш бизнес, если у вас нет фундамента</div>
+    <div class="secret-text">Рынок до сих пор верит в сказку: достаточно открыть ChatGPT, нажать две кнопки, и толпа клиентов снесёт ваш директ, умоляя взять их деньги. Этого не будет. На дворе 2026 год, и эта иллюзия официально мертва.</div>
+    <div class="secret-text">Нейросети, это высокоскоростной экскаватор. Они ускоряют написание постов, нарезают рилсы, рисуют визуал и перелопачивают тонну аналитики за секунды. Но экскаватор бесполезен, если вы не знаете, где копать золото.</div>
+    <div class="secret-nots">
+      <div class="secret-not"><span>✕</span> ИИ не заменит архитектуру</div>
+      <div class="secret-not"><span>✕</span> ИИ не заменит регулярность</div>
+      <div class="secret-not"><span>✕</span> ИИ не даст вам внутреннюю дисциплину</div>
+    </div>
+    <div class="secret-text">Чем дольше я строю миллионные продажи в маркетинге, тем сильнее убеждаюсь в одной жёсткой истине. Растут не те, кто скупил сто курсов по промптам. Растут те, у кого есть прочный инженерный каркас. Те, кто продолжает выдавать смыслы, когда нет вдохновения. Кто не впадает в депрессию после неудачного рилса, а хладнокровно смотрит на цифры, правит связку и бьёт снова.</div>
+    <div class="secret-cta-text">«Архитектор смыслов» даёт вам бетонный фундамент и автоматические рельсы. <strong>Встать на эти рельсы и забрать свои деньги вы должны сами.</strong></div>
+    <div class="secret-text" style="margin-bottom:24px;">Выбор за вами. Продолжать саботировать блог, зависеть от случая и чувствовать себя позади всех, глядя на чужой успех. Или забрать инженерную систему, спроектировать фундамент за 15 минут и начать продавать каждым словом.</div>
+    <a href="#pay" class="btn-secret" onclick="fbq('track','InitiateCheckout')">Забрать AI-систему «Архитектор смыслов» за 1490 ₽ <span class="arr">→</span></a>
   </div>
 </section>
 </div>
@@ -639,8 +788,8 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
       </div>
       <div>
         <div class="case-col-label">Результат по методике</div>
-        <div class="case-col-text">За один вечер прогнала промпты через нейросеть. Claude выдал категорию «Сарказм» и «Вопросы трёх ночи». На основе этих смыслов записала три видео.</div>
-        <div class="case-result-tag">За первые 4 дня — 12 целевых запросов на аудит и 3 продажи на общий чек 90 000 рублей</div>
+        <div class="case-col-text">За 15 минут прогнала промпты через нейросеть. Claude выдал категорию «Сарказм» и «Вопросы трёх ночи». На основе этих смыслов записала три видео.</div>
+        <div class="case-result-tag">За первые 4 дня, 12 целевых запросов на аудит и 3 продажи на общий чек 90 000 рублей</div>
       </div>
     </div>
   </div>
@@ -655,7 +804,7 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
       </div>
       <div>
         <div class="case-col-label">Результат по методике</div>
-        <div class="case-col-text">Использовал готовый пакет для глубинной диагностики. За 60 минут нейросеть выдала карту истинных страхов покупателей квартир. Тексты стали бить точно в цель.</div>
+        <div class="case-col-text">Использовал готовый пакет для глубинной диагностики. За 15 минут нейросеть выдала карту истинных страхов покупателей квартир. Тексты стали бить точно в цель.</div>
         <div class="case-result-tag">За 2 недели стоимость целевого лида из соцсетей снизилась в 2 раза</div>
       </div>
     </div>
@@ -680,7 +829,7 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
   <!-- Result strip -->
   <div class="result-strip" style="margin-top:32px;">
     <div>
-      <div class="result-num">60 мин</div>
+      <div class="result-num">15 мин</div>
       <div class="result-label">на запуск системы</div>
     </div>
     <div>
@@ -692,10 +841,77 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
       <div class="result-label">учеников прошли обучение</div>
     </div>
     <div>
-      <div class="result-num">1 вечер</div>
-      <div class="result-label">чтобы внедрить метод</div>
+      <div class="result-num">сегодня</div>
+      <div class="result-label">метод уже работает</div>
     </div>
   </div>
+</section>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ ПОЧЕМУ ЭТОГО НЕТ В СЕТИ ═══ -->
+<div class="wrap">
+<section class="section">
+  <div class="eyebrow">Честно про промпты</div>
+  <div class="s-title">Почему этого нет в открытом доступе</div>
+
+  <div class="moat-lead">Вот честно. Эти промпты писала не машина.</div>
+  <p class="moat-text">Я собирала их 17 лет. Сначала вручную: анкеты, десятки интервью, часы переписок с теми, кто только думал купить. Так мы вытаскивали истинные боли, на которых строились миллионные продажи в Target School. То, на что уходили месяцы, теперь занимает 15 минут. <strong>Глубина осталась той же.</strong></p>
+  <p class="moat-text">Такие промпты нельзя нагуглить. Это пошаговая система, где результат одного шага становится топливом для следующего. Ни один промпт из сети, так работать не будет.</p>
+
+  <!-- Контраст: обычный промпт vs аналитик -->
+  <div class="vs-grid">
+    <div class="vs-card vs-card-bad">
+      <span class="vs-tag vs-tag-bad">Обычный промпт из сети</span>
+      <div class="vs-prompt">«Напиши продающий пост про мой продукт»</div>
+      <div class="vs-out">
+        <div class="vs-out-label">Что на выходе</div>
+        Гладкий текст, похожий на статью из Википедии. ЦА пролистывает за секунду. Ни одной причины купить.
+      </div>
+    </div>
+    <div class="vs-card vs-card-good">
+      <span class="vs-tag vs-tag-good">Промпт «Глубоководный аналитик»</span>
+      <ul class="vs-list">
+        <li><svg class="vs-check" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Вопросы-паразиты, что клиент гуглит в три ночи</span></li>
+        <li><svg class="vs-check" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>10 страхов, которые мешают купить</span></li>
+        <li><svg class="vs-check" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Возражения, закрытые через метафоры</span></li>
+        <li><svg class="vs-check" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Сарказм, на который ЦА реагирует мгновенно</span></li>
+        <li><svg class="vs-check" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Смысловые магниты, ценности и триггеры</span></li>
+      </ul>
+      <div class="vs-out">
+        <div class="vs-out-label">Что на выходе</div>
+        Таблица из 4 колонок: категория, суть, смысловой перевод, метафора. Готовое ТЗ для контента уровня дорогого консалтинга.
+      </div>
+    </div>
+  </div>
+
+  <!-- Конвейер из 5 шагов -->
+  <div class="eyebrow" style="margin-top:8px;">Это конвейер, выдача каждого шага кормит следующий</div>
+  <div class="pipe">
+    <div class="pipe-step">
+      <div class="pipe-tag">ШАГ 01</div>
+      <div class="pipe-name">Фундамент<span>Глубинный анализ ЦА. 10 слоёв смыслов за один прогон</span></div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-tag">ШАГ 02</div>
+      <div class="pipe-name">Кристаллизация<span>Из сотен болей фильтруем 5 связок, которые дают 80% результата</span></div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-tag">ШАГ 03</div>
+      <div class="pipe-name">Контентная машина<span>Один смысл, 10 касаний. Рилс, пост и скрипт директа из одной связки</span></div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-tag">★ БОНУС</div>
+      <div class="pipe-name">Голос бренда<span>ИИ пишет вашим стилем, а не как Википедия</span></div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-tag">ШАГ 05</div>
+      <div class="pipe-name">Внедрение<span>Чек-лист на 24 часа и рабочая область, которую система собирает сама</span></div>
+    </div>
+  </div>
+
+  <div class="moat-quote">В Target School из сотен болей мы выбирали те самые <span class="hl">5, которые приносили 80% выручки</span>. Теперь эту фильтрацию делает система. За вас.</div>
 </section>
 </div>
 
@@ -729,12 +945,12 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
 
   <div class="value-total" id="pay">
     <div>
-      <div style="font-size:13px;color:var(--muted);margin-bottom:4px;">Вместо 18 000 рублей — всего</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:4px;">Вместо 18 000 рублей, всего</div>
       <div style="font-size:52px;font-weight:800;letter-spacing:-0.04em;line-height:1;">1 490 ₽</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:6px;">Это стоимость двух чашек кофе в хорошем кафе.</div>
-      <div style="font-size:12px;color:var(--muted);">Ссылка на личный кабинет придёт на вашу почту сразу после подтверждения платежа.</div>
+      <div style="display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--warn-brd);color:var(--warn-accent);font-size:12px;font-weight:700;padding:6px 12px;border-radius:100px;margin-top:10px;"><span class="dot" style="width:7px;height:7px;border-radius:50%;background:var(--warn-accent);"></span>Первые 50 мест по этой цене. Дальше цена растёт</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:8px;">Ссылка на личный кабинет придёт на вашу почту сразу после подтверждения платежа.</div>
     </div>
-    <a href="https://app.lava.top/products/162ca29b-a6a4-414a-97c6-29962d1d3956" target="_blank" class="btn-main" style="margin-bottom:0;" onclick="fbq('track','InitiateCheckout')">Оплатить 1490 рублей →</a>
+    <a href="https://app.lava.top/products/162ca29b-a6a4-414a-97c6-29962d1d3956" target="_blank" class="btn-main" style="margin-bottom:0;" onclick="fbq('track','InitiateCheckout')">Оплатить 1490 ₽ <span class="arr">→</span></a>
   </div>
 </section>
 </div>
@@ -751,35 +967,35 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
       <span class="obj-q-text">Нейросети пишут слишком сухо?</span>
       <svg class="obj-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
-    <div class="obj-a">«Архитектор смыслов» сначала вынимает ваше ДНК — ваш опыт, язык вашей аудитории, реальные страхи клиентов. ИИ потом просто упаковывает это. На выходе контент звучит как вы, а не как шаблон ChatGPT.</div>
+    <div class="obj-a">«Архитектор смыслов» сначала вынимает ваше ДНК, ваш опыт, язык вашей аудитории, реальные страхи клиентов. ИИ потом просто упаковывает это. На выходе контент звучит как вы, а не как шаблон ChatGPT.</div>
   </div>
   <div class="obj-item" onclick="this.classList.toggle('open')">
     <div class="obj-q">
       <span class="obj-q-text">У меня специфическая ниша, это не подойдёт?</span>
       <svg class="obj-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
-    <div class="obj-a">Вот честно — именно в узких нишах это работает лучше всего. Система находит смыслы-детонаторы, актуальные именно для вашего клиента. Будь то IT-услуги, психология, hand-made или преподавание редкого языка.</div>
+    <div class="obj-a">Вот честно, именно в узких нишах это работает лучше всего. Система находит смыслы-детонаторы, актуальные именно для вашего клиента. Будь то IT-услуги, психология, hand-made или преподавание редкого языка.</div>
   </div>
   <div class="obj-item" onclick="this.classList.toggle('open')">
     <div class="obj-q">
       <span class="obj-q-text">Я уже пробовал ИИ и не понравилось?</span>
       <svg class="obj-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
-    <div class="obj-a">Без «Смыслового кристалла» нейросеть выдаёт шум. Логика тут простая: если вы вводите общий запрос — получаете общий ответ. Архитектор даёт структуру, которая превращает любой запрос к ИИ в инструмент для продаж.</div>
+    <div class="obj-a">Без «Смыслового кристалла» нейросеть выдаёт шум. Логика тут простая: вводите общий запрос, получаете общий ответ. Архитектор даёт структуру, которая превращает любой запрос к ИИ в инструмент для продаж.</div>
   </div>
   <div class="obj-item" onclick="this.classList.toggle('open')">
     <div class="obj-q">
       <span class="obj-q-text">Нужны платные нейросети?</span>
       <svg class="obj-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
-    <div class="obj-a">Нет. Система работает даже с бесплатными версиями — Claude.ai, ChatGPT free и другими Telegram-ботами. Внутри есть руководство, как получить доступ к лучшим нейросетям без сложных регистраций.</div>
+    <div class="obj-a">Нет. Система работает даже с бесплатными версиями, Claude.ai, ChatGPT free и другими Telegram-ботами. Внутри есть руководство, как получить доступ к лучшим нейросетям без сложных регистраций.</div>
   </div>
   <div class="obj-item" onclick="this.classList.toggle('open')">
     <div class="obj-q">
       <span class="obj-q-text">Как быстро получу доступ?</span>
       <svg class="obj-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
-    <div class="obj-a">Сразу после оплаты. Ссылка на личный кабинет придёт на вашу почту. Все шаги пронумерованы, вы можете внедрить метод за один вечер.</div>
+    <div class="obj-a">Сразу после оплаты. Ссылка на личный кабинет придёт на вашу почту. Все шаги пронумерованы, вы можете внедрить метод за 15 минут.</div>
   </div>
 </section>
 </div>
@@ -795,10 +1011,9 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
     </div>
     <div>
       <div class="guarantee-title">Гарантия результата</div>
-      <div class="guarantee-text">Я уверена в своей технологии. Если в какой-то момент вы поймёте, что продукт вам не подходит — напишите в службу поддержки в течение 14 дней. Мы вернём полную сумму оплаты без лишних вопросов. Вы ничем не рискуете.</div>
+      <div class="guarantee-text">Я уверена в своей технологии. Если в какой-то момент вы поймёте, что продукт вам не подходит, напишите в службу поддержки в течение 14 дней. Мы вернём полную сумму оплаты без лишних вопросов. Вы ничем не рискуете.</div>
     </div>
   </div>
-
 </section>
 </div>
 
@@ -813,8 +1028,8 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
     <div class="final-price-row">
       <span class="price-new" style="font-size:56px;">1 490 ₽</span>
     </div>
-    <a href="https://app.lava.top/products/162ca29b-a6a4-414a-97c6-29962d1d3956" target="_blank" class="final-btn" onclick="fbq('track','InitiateCheckout')">Оплатить 1490 рублей →</a>
-    <div class="final-note">цена будет постепенно повышаться — ценность метода сильно выше</div>
+    <a href="https://app.lava.top/products/162ca29b-a6a4-414a-97c6-29962d1d3956" target="_blank" class="final-btn" onclick="fbq('track','InitiateCheckout')">Оплатить 1490 ₽ <span class="arr">→</span></a>
+    <div class="final-note">Первые 50 мест по 1490 ₽, дальше цена растёт, ценность метода сильно выше</div>
   </div>
 </section>
 </div>
@@ -823,7 +1038,7 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
 <div class="divider"></div>
 <div class="footer-social">
   <div class="footer-social-title">Понравился материал?</div>
-  <div class="footer-social-sub">Подписывайтесь на каналы — там ещё больше про AI-маркетинг, смыслы и продажи без выгорания</div>
+  <div class="footer-social-sub">Подписывайтесь на каналы, там ещё больше про AI-маркетинг, смыслы и продажи без выгорания</div>
   <div class="social-grid">
     <a href="https://t.me/target_school1" target="_blank" class="social-card">
       <div class="soc-icon" style="background:#e8f0fe;color:#2563eb;">
@@ -852,7 +1067,7 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
   </div>
   <div class="tg-banner">
     <div class="tg-banner-title">Хотите больше материалов?</div>
-    <div class="tg-banner-sub">Новые подборки выходят в Telegram — присоединяйтесь</div>
+    <div class="tg-banner-sub">Новые подборки выходят в Telegram, присоединяйтесь</div>
     <a href="https://t.me/target_school1" target="_blank" class="tg-btn">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
       Подписаться на Telegram
@@ -861,6 +1076,34 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 40px;}
 </div>
 
 <footer>© 2026 Анастасия Лушникова. Все права защищены.</footer>
+
+<!-- ═══ STICKY CTA ═══ -->
+<div class="sticky-cta" id="stickyCta">
+  <div class="sticky-in">
+    <div class="sticky-left">
+      <div class="sticky-name">Архитектор смыслов</div>
+      <div class="sticky-price">Первые 50 мест · <b>1 490 ₽</b></div>
+    </div>
+    <a href="https://app.lava.top/products/162ca29b-a6a4-414a-97c6-29962d1d3956" target="_blank" class="sticky-btn" onclick="fbq('track','InitiateCheckout')">Забрать за 1490 ₽ →</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  var bar = document.getElementById('stickyCta');
+  var hero = document.querySelector('.hero');
+  var footer = document.querySelector('.footer-social');
+  function onScroll(){
+    var heroBottom = hero.getBoundingClientRect().bottom;
+    var footerTop = footer.getBoundingClientRect().top;
+    var vh = window.innerHeight;
+    if(heroBottom < 0 && footerTop > vh){ bar.classList.add('show'); }
+    else { bar.classList.remove('show'); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+</script>
 
 </body>
 </html>
