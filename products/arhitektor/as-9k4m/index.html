@@ -248,31 +248,32 @@
   .btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 7px 16px;
+    gap: 5px;
+    padding: 5px 12px;
     border-radius: 4px;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 11px;
+    font-weight: 500;
     cursor: pointer;
     border: none;
     transition: all 0.2s;
-    font-family: 'Manrope', sans-serif;
-    letter-spacing: 0.03em;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
   }
 
   .btn-primary {
-    background: var(--gold);
-    color: var(--bg);
+    background: rgba(200,169,110,0.15);
+    color: var(--gold);
+    border: 1px solid rgba(200,169,110,0.35);
   }
-  .btn-primary:hover { background: #d4b87a; transform: translateY(-1px); }
+  .btn-primary:hover { background: rgba(200,169,110,0.25); }
 
   .btn-ghost {
     background: transparent;
-    color: var(--text2);
-    border: 1px solid var(--border2);
+    color: var(--text3);
+    border: 1px solid var(--border);
   }
-  .btn-ghost:hover { border-color: var(--gold-dim); color: var(--gold); }
+  .btn-ghost:hover { border-color: var(--border2); color: var(--text2); }
 
   /* Pages */
   .page { display: none; }
@@ -2336,6 +2337,43 @@
   }
 
 
+
+  /* ── TIME BADGE ── */
+  .step-time-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px 10px;
+    margin-top: 10px;
+  }
+
+
+  /* ── COPY BUTTON ── */
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(200,169,110,0.12);
+    border: 1px solid rgba(200,169,110,0.3);
+    color: var(--gold-dim);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: rgba(200,169,110,0.2); color: var(--gold); }
+  .copy-btn.copied { color: #4CAF50; border-color: rgba(76,175,80,0.4); background: rgba(76,175,80,0.08); }
+
   /* ─── AUTHOR NOTE ─── */
   .author-note {
     background: #fff8ee;
@@ -2645,6 +2683,15 @@
     </div>
   </div>
 
+
+
+  <!-- MOBILE PROGRESS BAR -->
+  <div class="mobile-progress" id="mobile-progress">
+    <div class="mobile-progress-bar">
+      <div class="mobile-progress-fill" id="mobile-progress-fill"></div>
+    </div>
+    <div class="mobile-progress-label" id="mobile-progress-label">1 / 7</div>
+  </div>
 
   <!-- PHILOSOPHY TICKER -->
   <div class="philosophy-banner">
@@ -3875,9 +3922,29 @@ HTML-дашборда с вкладками.
     currentPage = id;
     updateProgress();
     updateSteppers(id);
+    updateMobileProgress(id);
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     if (id === 'step5') setTimeout(launchConfetti, 400);
+  }
+
+  // ── MOBILE PROGRESS BAR ──
+  function updateMobileProgress(id) {
+    const order = ['welcome','step1','step2','step3','bonus','step4','step5'];
+    const idx = order.indexOf(id);
+    const total = order.length - 1; // welcome не считаем как шаг
+    const fill = document.getElementById('mobile-progress-fill');
+    const label = document.getElementById('mobile-progress-label');
+    if (!fill || !label) return;
+    if (id === 'welcome') {
+      fill.style.width = '0%';
+      label.textContent = 'Старт';
+    } else {
+      const stepNum = idx; // welcome=0, step1=1...
+      const pct = Math.round((stepNum / total) * 100);
+      fill.style.width = pct + '%';
+      label.textContent = stepNum + ' / ' + total;
+    }
   }
 
   function updateSteppers(activeId) {
@@ -4070,6 +4137,45 @@ HTML-дашборда с вкладками.
     const pct = (e.clientX - rect.left) / rect.width;
     if (audioFinal.duration) audioFinal.currentTime = pct * audioFinal.duration;
   }
+
+  // ── SCROLL-HIDE TOPBAR (mobile) ──
+  (function() {
+    let lastY = 0;
+    const topbar = document.querySelector('.topbar');
+    window.addEventListener('scroll', () => {
+      if (window.innerWidth > 768) return;
+      const y = window.scrollY;
+      if (y > lastY && y > 60) {
+        topbar.classList.add('hidden');
+      } else {
+        topbar.classList.remove('hidden');
+      }
+      lastY = y;
+    }, { passive: true });
+  })();
+
+  // ── TIME BADGES: insert into step headers ──
+  const stepTimes = {
+    'step1': '~ 15 минут',
+    'step2': '~ 20 минут',
+    'step3': '~ 30 минут',
+    'bonus': 'Бонус',
+    'step4': '~ 20 минут',
+    'step5': 'Финальный шаг',
+  };
+  Object.entries(stepTimes).forEach(([id, label]) => {
+    const page = document.getElementById('page-' + id);
+    if (!page) return;
+    const title = page.querySelector('.step-title');
+    if (!title) return;
+    const badge = document.createElement('div');
+    badge.className = 'step-time-badge';
+    badge.textContent = label;
+    title.insertAdjacentElement('afterend', badge);
+  });
+
+  // ── INIT MOBILE PROGRESS ──
+  updateMobileProgress('welcome');
 
   // ── LIGHTBOX ──
   document.querySelector('.result-screenshot-frame').addEventListener('click', function() {
