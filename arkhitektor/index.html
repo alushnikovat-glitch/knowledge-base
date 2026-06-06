@@ -666,7 +666,18 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 100px;
 .pv-nav-item.active .pv-nav-num { background:var(--gold); border-color:var(--gold); color:#1c1814; }
 .pv-nav-text { font-size:12px; font-weight:500; color:var(--text2); line-height:1.3; flex:1; }
 .pv-nav-item.active .pv-nav-text { color:var(--text); }
+.pv-outcome { margin-top: 28px; margin-bottom: 28px; }
+.pv-outcome-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text3); margin-bottom: 16px; }
+.pv-outcome-items { display: flex; flex-direction: column; gap: 10px; }
+.pv-outcome-item { display: flex; align-items: flex-start; gap: 12px; padding: 14px 18px; border-radius: 8px; background: rgba(90,82,72,0.05); border: 1px solid var(--border); }
+.pv-outcome-item--gold { background: rgba(200,169,110,0.07); border-color: rgba(200,169,110,0.25); }
+.pv-outcome-icon { font-size: 14px; font-weight: 700; flex-shrink: 0; margin-top: 1px; color: var(--border2); }
+.pv-outcome-item--gold .pv-outcome-icon { color: var(--gold); }
+.pv-outcome-text { font-size: 13px; color: var(--text2); line-height: 1.65; }
+.pv-outcome-item--gold .pv-outcome-text { color: var(--text); }
+
 .pv-nav-lock { font-size:10px; color:var(--border2); }
+.pv-nav-lock-desc { font-family:'DM Mono',monospace; font-size:8px; color:var(--text3); letter-spacing:.04em; white-space:nowrap; opacity:0.8; }
 
 /* content */
 .pv-content { padding:28px 32px; }
@@ -751,17 +762,26 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 100px;
           <div class="pv-nav-item locked">
             <div class="pv-nav-num">04</div>
             <div class="pv-nav-text">Голос бренда</div>
-            <div class="pv-nav-lock">🔒</div>
+            <div class="pv-nav-lock-wrap">
+              <div class="pv-nav-lock">🔒</div>
+              <div class="pv-nav-lock-desc">тексты звучат как вы</div>
+            </div>
           </div>
           <div class="pv-nav-item locked">
             <div class="pv-nav-num">05</div>
             <div class="pv-nav-text">База знаний</div>
-            <div class="pv-nav-lock">🔒</div>
+            <div class="pv-nav-lock-wrap">
+              <div class="pv-nav-lock">🔒</div>
+              <div class="pv-nav-lock-desc">фундамент на годы</div>
+            </div>
           </div>
           <div class="pv-nav-item locked">
             <div class="pv-nav-num">06</div>
             <div class="pv-nav-text">Внедрение</div>
-            <div class="pv-nav-lock">🔒</div>
+            <div class="pv-nav-lock-wrap">
+              <div class="pv-nav-lock">🔒</div>
+              <div class="pv-nav-lock-desc">первый результат за 24ч</div>
+            </div>
           </div>
         </div>
 
@@ -840,6 +860,29 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 100px;
       </div>
     </div>
 
+    <!-- Outcome block -->
+    <div class="pv-outcome">
+      <div class="pv-outcome-title">Что меняется после прохождения</div>
+      <div class="pv-outcome-items">
+        <div class="pv-outcome-item">
+          <div class="pv-outcome-icon">✗</div>
+          <div class="pv-outcome-text">Перестаёте сливать бюджет на рекламу, которая не работает, потому что смысл не попадает в человека</div>
+        </div>
+        <div class="pv-outcome-item">
+          <div class="pv-outcome-icon">✗</div>
+          <div class="pv-outcome-text">Перестаёте создавать тонны контента, который никто не читает и не покупает</div>
+        </div>
+        <div class="pv-outcome-item pv-outcome-item--gold">
+          <div class="pv-outcome-icon">✓</div>
+          <div class="pv-outcome-text">Получаете фундамент на годы — смысловую карту аудитории, с которой начинается любой контент, любая реклама, любой запуск</div>
+        </div>
+        <div class="pv-outcome-item pv-outcome-item--gold">
+          <div class="pv-outcome-icon">✓</div>
+          <div class="pv-outcome-text">Работаете точно по смыслам. Клиент читает и говорит: «она читает мои мысли» — и покупает</div>
+        </div>
+      </div>
+    </div>
+
     <div class="pv-cta">
       <div class="pv-cta-left">
         <div class="pv-cta-title">Ещё 3 шага внутри. Голос бренда,<br>база знаний, внедрение за 24 часа.</div>
@@ -893,12 +936,6 @@ function showStep(idx, el) {
         <div class="step-text">Короткое руководство, как бесплатно получить доступ к лучшим мировым нейросетям для анализа данных и настроить удобную рабочую область без сложных регистраций. Делай раз, делай два, делай три.</div>
       </div>
     </div>
-  </div>
-
-  <!-- Скриншот продукта -->
-  <div style="margin:32px 0;border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,0.08);">
-    <img src="https://www.anastasialushnikova.com/arkhitektor/product-preview.jpg" alt="Так выглядит рабочая область Архитектора смыслов после оплаты" style="width:100%;display:block;">
-    <div style="background:var(--tag);padding:12px 20px;font-size:12px;color:var(--muted);text-align:center;">Так выглядит ваша рабочая область сразу после оплаты, интерфейс с промптами, навигацией и аудиоинструкцией</div>
   </div>
 
   <!-- Схема Смыслового кристалла -->
