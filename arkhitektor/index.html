@@ -515,6 +515,202 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 100px;
 
 <div class="divider"></div>
 
+<!-- ═══ ОРБИТАЛЬНАЯ СХЕМА: ОДНА ПРИЧИНА ═══ -->
+<div class="wrap">
+<section class="section" style="text-align:center; padding-top:48px; padding-bottom:48px;">
+
+  <div class="eyebrow" style="margin-bottom:12px;">Почему всё это происходит</div>
+  <div class="s-title" style="margin-bottom:8px;">Одна причина. Пять следствий.</div>
+  <p style="font-size:15px;color:#6b6860;margin-bottom:40px;line-height:1.7;">Наведите на каждый кружок — узнаете себя</p>
+
+  <div style="position:relative;width:560px;max-width:100%;margin:0 auto;">
+    <svg viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible;">
+      <defs>
+        <radialGradient id="ocg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#2e2926"/>
+          <stop offset="100%" stop-color="#1a1714"/>
+        </radialGradient>
+        <radialGradient id="ocglow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(194,65,12,0.15)"/>
+          <stop offset="100%" stop-color="rgba(194,65,12,0)"/>
+        </radialGradient>
+        <radialGradient id="ong" cx="30%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="100%" stop-color="#f5f2ed"/>
+        </radialGradient>
+        <path id="op1" d="M280,228 L280,90"/>
+        <path id="op2" d="M306,248 L444,155"/>
+        <path id="op3" d="M300,295 L430,405"/>
+        <path id="op4" d="M260,300 L190,435"/>
+        <path id="op5" d="M240,258 L108,175"/>
+      </defs>
+
+      <!-- Outer orbit ring static -->
+      <circle cx="280" cy="280" r="195" fill="none" stroke="#d8d3cd" stroke-width="1" stroke-dasharray="3 6"/>
+
+      <!-- Rotating accent ring -->
+      <circle cx="280" cy="280" r="195" fill="none" stroke="rgba(194,65,12,0.18)" stroke-width="1.5" stroke-dasharray="8 16">
+        <animateTransform attributeName="transform" type="rotate" from="0 280 280" to="360 280 280" dur="40s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- Inner ring -->
+      <circle cx="280" cy="280" r="105" fill="none" stroke="#e8e3dd" stroke-width="1"/>
+
+      <!-- Center glow -->
+      <circle cx="280" cy="280" r="90" fill="url(#ocglow)"/>
+
+      <!-- Lines -->
+      <line x1="280" y1="228" x2="280" y2="90" stroke="rgba(194,65,12,0.22)" stroke-width="1.2"/>
+      <line x1="306" y1="248" x2="444" y2="155" stroke="rgba(194,65,12,0.22)" stroke-width="1.2"/>
+      <line x1="300" y1="295" x2="430" y2="405" stroke="rgba(194,65,12,0.22)" stroke-width="1.2"/>
+      <line x1="260" y1="300" x2="190" y2="435" stroke="rgba(194,65,12,0.22)" stroke-width="1.2"/>
+      <line x1="240" y1="258" x2="108" y2="175" stroke="rgba(194,65,12,0.22)" stroke-width="1.2"/>
+
+      <!-- Moving dots -->
+      <circle r="3.5" fill="#c2410c" opacity="0.8">
+        <animateMotion dur="3s" repeatCount="indefinite" begin="0s"><mpath href="#op1"/></animateMotion>
+      </circle>
+      <circle r="3.5" fill="#c2410c" opacity="0.8">
+        <animateMotion dur="3.4s" repeatCount="indefinite" begin="0.6s"><mpath href="#op2"/></animateMotion>
+      </circle>
+      <circle r="3.5" fill="#c2410c" opacity="0.8">
+        <animateMotion dur="2.9s" repeatCount="indefinite" begin="1.2s"><mpath href="#op3"/></animateMotion>
+      </circle>
+      <circle r="3.5" fill="#c2410c" opacity="0.8">
+        <animateMotion dur="3.2s" repeatCount="indefinite" begin="0.3s"><mpath href="#op4"/></animateMotion>
+      </circle>
+      <circle r="3.5" fill="#c2410c" opacity="0.8">
+        <animateMotion dur="3.1s" repeatCount="indefinite" begin="0.9s"><mpath href="#op5"/></animateMotion>
+      </circle>
+
+      <!-- CENTER -->
+      <g id="ocenterNode" style="cursor:pointer;">
+        <circle cx="280" cy="280" r="68" fill="url(#ocg)"/>
+        <circle cx="280" cy="280" r="68" fill="none" stroke="rgba(194,65,12,0.4)" stroke-width="1.5"/>
+        <circle cx="280" cy="280" r="68" fill="none" stroke="rgba(194,65,12,0.12)" stroke-width="8">
+          <animate attributeName="r" values="68;82;68" dur="3s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <text x="280" y="268" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="11" font-weight="500" fill="rgba(255,255,255,0.4)" letter-spacing="0.05em">я не понимаю</text>
+        <text x="280" y="285" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="14" font-weight="800" fill="#ffffff" letter-spacing="-0.01em">свою</text>
+        <text x="280" y="302" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="14" font-weight="800" fill="#e06030" letter-spacing="-0.01em">аудиторию</text>
+      </g>
+
+      <!-- NODE 1 — top: Контент в пустоту -->
+      <g id="onode1" style="cursor:pointer;">
+        <circle cx="280" cy="78" r="42" fill="none" stroke="rgba(194,65,12,0.18)" stroke-width="1" stroke-dasharray="4 4">
+          <animateTransform attributeName="transform" type="rotate" from="0 280 78" to="360 280 78" dur="12s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="280" cy="78" r="36" fill="url(#ong)"/>
+        <circle cx="280" cy="78" r="36" fill="none" stroke="#ddd8d2" stroke-width="1.5"/>
+        <text x="280" y="72" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="18">📭</text>
+        <text x="280" y="88" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="7.5" font-weight="700" fill="#c2410c" letter-spacing="0.08em">КОНТЕНТ</text>
+        <text x="280" y="128" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="9" font-weight="700" fill="#1a1917" letter-spacing="0.04em">КОНТЕНТ В ПУСТОТУ</text>
+        <text x="280" y="142" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="10" fill="#6b6860">охваты есть, заявок нет</text>
+      </g>
+
+      <!-- NODE 2 — top-right: Реклама сливается -->
+      <g id="onode2" style="cursor:pointer;">
+        <circle cx="456" cy="144" r="42" fill="none" stroke="rgba(194,65,12,0.18)" stroke-width="1" stroke-dasharray="4 4">
+          <animateTransform attributeName="transform" type="rotate" from="0 456 144" to="-360 456 144" dur="15s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="456" cy="144" r="36" fill="url(#ong)"/>
+        <circle cx="456" cy="144" r="36" fill="none" stroke="#ddd8d2" stroke-width="1.5"/>
+        <text x="456" y="138" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="18">💸</text>
+        <text x="456" y="154" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="7.5" font-weight="700" fill="#c2410c" letter-spacing="0.08em">БЮДЖЕТ</text>
+        <text x="510" y="115" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="9" font-weight="700" fill="#1a1917" letter-spacing="0.04em">РЕКЛАМА</text>
+        <text x="510" y="129" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="9" font-weight="700" fill="#1a1917" letter-spacing="0.04em">НЕ ОКУПАЕТСЯ</text>
+        <text x="510" y="143" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="10" fill="#6b6860">бюджет сливается</text>
+      </g>
+
+      <!-- NODE 3 — bottom-right: ИИ пишет шаблоны -->
+      <g id="onode3" style="cursor:pointer;">
+        <circle cx="444" cy="416" r="42" fill="none" stroke="rgba(194,65,12,0.18)" stroke-width="1" stroke-dasharray="4 4">
+          <animateTransform attributeName="transform" type="rotate" from="0 444 416" to="360 444 416" dur="18s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="444" cy="416" r="36" fill="url(#ong)"/>
+        <circle cx="444" cy="416" r="36" fill="none" stroke="#ddd8d2" stroke-width="1.5"/>
+        <text x="444" y="410" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="18">🤖</text>
+        <text x="444" y="426" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="7.5" font-weight="700" fill="#c2410c" letter-spacing="0.08em">ИИ</text>
+        <text x="500" y="406" text-anchor="start" font-family="'Manrope',sans-serif" font-size="9" font-weight="700" fill="#1a1917" letter-spacing="0.04em">ИИ ПИШЕТ</text>
+        <text x="500" y="420" text-anchor="start" font-family="'Manrope',sans-serif" font-size="9" font-weight="700" fill="#1a1917" letter-spacing="0.04em">ШАБЛОННЫЙ ТЕКСТ</text>
+        <text x="500" y="434" text-anchor="start" font-family="'Manrope',sans-serif" font-size="10" fill="#6b6860">гладкий пластик</text>
+      </g>
+
+      <!-- NODE 4 — bottom-left: Выгораю -->
+      <g id="onode4" style="cursor:pointer;">
+        <circle cx="178" cy="448" r="42" fill="none" stroke="rgba(194,65,12,0.18)" stroke-width="1" stroke-dasharray="4 4">
+          <animateTransform attributeName="transform" type="rotate" from="0 178 448" to="-360 178 448" dur="14s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="178" cy="448" r="36" fill="url(#ong)"/>
+        <circle cx="178" cy="448" r="36" fill="none" stroke="#ddd8d2" stroke-width="1.5"/>
+        <text x="178" y="442" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="18">🔥</text>
+        <text x="178" y="458" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="7.5" font-weight="700" fill="#c2410c" letter-spacing="0.08em">ВЫГОРАНИЕ</text>
+        <text x="178" y="498" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="9" font-weight="700" fill="#1a1917" letter-spacing="0.04em">ВЫГОРАЮ</text>
+        <text x="178" y="512" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="9" font-weight="700" fill="#1a1917" letter-spacing="0.04em">И БРОСАЮ БЛОГ</text>
+        <text x="178" y="526" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="10" fill="#6b6860">нет результата → нет веры</text>
+      </g>
+
+      <!-- NODE 5 — top-left: Самозванец -->
+      <g id="onode5" style="cursor:pointer;">
+        <circle cx="96" cy="162" r="42" fill="none" stroke="rgba(194,65,12,0.18)" stroke-width="1" stroke-dasharray="4 4">
+          <animateTransform attributeName="transform" type="rotate" from="0 96 162" to="360 96 162" dur="16s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="96" cy="162" r="36" fill="url(#ong)"/>
+        <circle cx="96" cy="162" r="36" fill="none" stroke="#ddd8d2" stroke-width="1.5"/>
+        <text x="96" y="156" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="18">😶</text>
+        <text x="96" y="172" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="7.5" font-weight="700" fill="#c2410c" letter-spacing="0.08em">САМОЗВАНЕЦ</text>
+        <text x="40" y="122" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="9" font-weight="700" fill="#1a1917" letter-spacing="0.04em">ЧУВСТВУЮ СЕБЯ</text>
+        <text x="40" y="136" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="9" font-weight="700" fill="#1a1917" letter-spacing="0.04em">САМОЗВАНЦЕМ</text>
+        <text x="40" y="150" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="10" fill="#6b6860">нет перевода на язык клиента</text>
+      </g>
+
+    </svg>
+
+    <!-- Tooltip -->
+    <div id="orbital-tooltip" style="position:fixed;background:#1a1917;border-radius:10px;padding:12px 16px;font-family:'Manrope',sans-serif;font-size:12px;color:rgba(255,255,255,0.8);pointer-events:none;opacity:0;transition:opacity 0.2s ease;max-width:220px;line-height:1.65;z-index:999;"></div>
+  </div>
+
+  <p style="margin-top:32px;font-size:14px;color:#6b6860;line-height:1.7;">
+    Все пять — следствия одной причины. <strong style="color:#1a1917;">«Архитектор смыслов»</strong> убирает её за 15 минут.
+  </p>
+
+</section>
+</div>
+
+<div class="divider"></div>
+
+<script>
+(function(){
+  var orbitalData = [
+    { id:'onode1', title:'Контент в пустоту', text:'Пишете посты часами. Охваты есть. Заявок нет. Потому что текст создан без понимания, что реально болит у клиента.' },
+    { id:'onode2', title:'Реклама не окупается', text:'Запускаете рекламу, бюджет сливается. Смыслы в объявлениях не те. Без знания аудитории трафика просто не будет.' },
+    { id:'onode3', title:'ИИ пишет шаблонный текст', text:'Открываете ChatGPT или Claude и получаете гладкий пластик. ИИ не знает вашу ЦА. Поэтому пишет для всех. А значит, ни для кого.' },
+    { id:'onode4', title:'Выгораю и бросаю блог', text:'Вкладываете время, не видите результата, перестаёте верить. И честно, вы тут ни при чём. Просто нет фундамента под контентом.' },
+    { id:'onode5', title:'Чувствую себя самозванцем', text:'Есть экспертиза, реальные кейсы. Но вы не можете объяснить свою ценность так, чтобы клиент сразу написал "куда платить". Потому что нет перевода с экспертного на клиентский язык.' },
+    { id:'ocenterNode', title:'Я не понимаю свою аудиторию', text:'Одна причина. Пять следствий. Архитектор смыслов вытаскивает страхи, боли и триггеры вашей ЦА за 15 минут.' }
+  ];
+  var tip = document.getElementById('orbital-tooltip');
+  orbitalData.forEach(function(n){
+    var el = document.getElementById(n.id);
+    if(!el) return;
+    el.addEventListener('mouseenter', function(){
+      tip.innerHTML = '<strong style="display:block;color:#e06030;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px;font-weight:700;">'+n.title+'</strong>'+n.text;
+      tip.style.opacity='1';
+    });
+    el.addEventListener('mousemove', function(e){
+      var x=e.clientX+16, y=e.clientY-10;
+      if(x+230>window.innerWidth) x=e.clientX-240;
+      tip.style.left=x+'px';
+      tip.style.top=y+'px';
+    });
+    el.addEventListener('mouseleave', function(){
+      tip.style.opacity='0';
+    });
+  });
+})();
+</script>
+
 <!-- ═══ БЛОК 3: РЕШЕНИЕ И ИНТЕРФЕЙС ═══ -->
 <div class="wrap">
 <section class="section">
@@ -757,7 +953,7 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 100px;
           </div>
           <div class="pv-nav-item" onclick="showStep(2,this)">
             <div class="pv-nav-num">03</div>
-            <div class="pv-nav-text">Контентная машина</div>
+            <div class="pv-nav-text">Контент из смыслов</div>
           </div>
           <div class="pv-nav-item locked">
             <div class="pv-nav-num">04</div>
@@ -835,7 +1031,7 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 100px;
 
           <div class="pv-step" id="pv-2">
             <div class="pv-step-badge">Шаг 03 · Контент</div>
-            <div class="pv-step-title">Контентная машина.<br>Золотой трансформатор</div>
+            <div class="pv-step-title">Контент из смыслов.<br>Золотой трансформатор</div>
             <div class="pv-step-desc">Один смысл в Reels, пост и скрипт Директа. Подставляете свой кристалл — получаете три единицы контента.</div>
             <div class="pv-prompt">
               <div class="pv-prompt-header">
@@ -1171,7 +1367,7 @@ function showStep(idx, el) {
     </div>
     <div class="pipe-step">
       <div class="pipe-tag">ШАГ 03</div>
-      <div class="pipe-name">Контентная машина<span>Один смысл, 10 касаний. Рилс, пост и скрипт директа из одной связки</span></div>
+      <div class="pipe-name">Контент из смыслов<span>Один смысл, 10 касаний. Рилс, пост и скрипт директа из одной связки</span></div>
     </div>
     <div class="pipe-step">
       <div class="pipe-tag">★ БОНУС</div>
