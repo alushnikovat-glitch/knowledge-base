@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ты используешь Claude неправильно — Анастасия Лушникова</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f2;
+  --surface: #fff;
+  --border: #e8e6df;
+  --text: #1a1917;
+  --muted: #6b6860;
+  --light: #a8a29e;
+  --accent: #c2410c;
+  --accent-light: #fef0e8;
+  --accent-border: #fcd5be;
+  --dark: #1a1917;
+  --dark2: #2a2825;
+  --gold: #d97706;
+  --gold-bg: #fffbf0;
+  --gold-border: #fde68a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; font-size: 16px; line-height: 1.7; }
+
+/* NAV */
+nav { position: sticky; top: 0; z-index: 100; background: rgba(247,246,242,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); height: 52px; display: flex; align-items: center; padding: 0 20px; }
+.nav-in { max-width: 720px; margin: 0 auto; width: 100%; display: flex; align-items: center; justify-content: space-between; }
+.nav-brand { font-size: 13px; font-weight: 800; color: var(--text); text-decoration: none; }
+.nav-tag { font-size: 11px; color: var(--muted); background: var(--border); padding: 3px 10px; border-radius: 100px; }
+
+/* LAYOUT */
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+.section { padding: 52px 0; }
+.divider { height: 1px; background: var(--border); max-width: 720px; margin: 0 auto; }
+
+/* HERO */
+.hero { background: var(--dark); padding: 64px 20px 56px; }
+.hero-in { max-width: 720px; margin: 0 auto; }
+.hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.hero-title { font-size: clamp(32px, 6vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; color: #fff; margin-bottom: 20px; }
+.hero-title span { color: var(--accent); }
+.hero-sub { font-size: clamp(16px, 2.5vw, 19px); color: rgba(255,255,255,0.65); line-height: 1.65; margin-bottom: 36px; max-width: 580px; }
+.hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+.hero-stat { }
+.hero-stat-num { font-size: 28px; font-weight: 800; color: var(--accent); letter-spacing: -0.03em; }
+.hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+.hero-author { display: flex; align-items: center; gap: 12px; margin-top: 36px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); }
+.hero-author-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.hero-author-name { font-size: 14px; font-weight: 700; color: #fff; }
+.hero-author-sub { font-size: 12px; color: rgba(255,255,255,0.45); }
+
+/* TOC */
+.toc { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; }
+.toc-title { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+.toc-items { display: flex; flex-direction: column; gap: 0; }
+.toc-item { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--text); transition: color 0.15s; }
+.toc-item:last-child { border-bottom: none; }
+.toc-item:hover { color: var(--accent); }
+.toc-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; color: var(--accent); width: 20px; flex-shrink: 0; }
+.toc-name { font-size: 15px; font-weight: 600; }
+.toc-desc { font-size: 13px; color: var(--muted); margin-top: 1px; }
+
+/* BLOCK HEADER */
+.block-header { background: var(--dark); border-radius: 16px; padding: 36px 32px; margin-bottom: 28px; }
+.block-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.block-title { font-size: clamp(26px, 4vw, 36px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: #fff; }
+.block-title span { color: var(--accent); }
+.block-sub { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-top: 12px; }
+
+/* CONTENT */
+.item { margin-bottom: 36px; }
+.item-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 6px; }
+.item-title { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
+.item-body { font-size: 16px; color: var(--muted); line-height: 1.75; }
+.item-body strong { color: var(--text); font-weight: 700; }
+.item-quote { background: var(--accent-light); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 16px 20px; font-size: 15px; font-style: italic; color: var(--text); line-height: 1.65; margin: 16px 0; }
+
+/* CARD GRID */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
+.card-icon { font-size: 20px; margin-bottom: 8px; }
+.card-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.card-text { font-size: 12px; color: var(--muted); line-height: 1.55; }
+
+/* CONTRAST */
+.contrast { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+.contrast-bad { background: #fff5f5; border: 1px solid #fecaca; border-radius: 12px; padding: 16px 18px; }
+.contrast-good { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 16px 18px; }
+.contrast-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+.contrast-bad .contrast-label { color: #dc2626; }
+.contrast-good .contrast-label { color: #16a34a; }
+.contrast-text { font-size: 13px; font-family: 'JetBrains Mono', monospace; line-height: 1.6; color: var(--text); }
+
+/* CODE BOX */
+.code-box { background: var(--dark2); border-radius: 12px; overflow: hidden; margin: 16px 0; }
+.code-bar { background: #1a1917; padding: 10px 16px; display: flex; align-items: center; gap: 8px; }
+.code-dot { width: 10px; height: 10px; border-radius: 50%; }
+.code-label { font-size: 11px; color: rgba(255,255,255,0.35); font-family: 'JetBrains Mono', monospace; margin-left: auto; }
+.code-body { padding: 16px 18px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: rgba(255,255,255,0.8); line-height: 1.7; }
+.code-body .hl { color: #60a5fa; }
+.code-body .str { color: #86efac; }
+
+/* TIP BOX */
+.tip { background: var(--gold-bg); border: 1px solid var(--gold-border); border-radius: 12px; padding: 16px 18px; font-size: 14px; color: #92400e; line-height: 1.65; margin: 16px 0; display: flex; gap: 10px; align-items: flex-start; }
+.tip-icon { flex-shrink: 0; font-size: 16px; margin-top: 1px; }
+
+/* ИТОГ БЛОКА */
+.block-result { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; margin-top: 28px; }
+.block-result-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.block-result-text { font-size: 15px; color: var(--text); line-height: 1.7; }
+
+/* ========== ВСТРОЙКА АРХИТЕКТОРА ========== */
+.arh-block {
+  background: #fff8f5;
+  border: 1.5px solid #fcd5be;
+  border-radius: 20px;
+  padding: 40px 36px;
+  margin: 40px 0;
+  position: relative;
+  overflow: hidden;
+}
+.arh-block::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(194,65,12,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.arh-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.arh-title {
+  font-size: clamp(20px, 3.5vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.arh-title span { color: var(--accent); }
+.arh-body {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 24px;
+  max-width: 560px;
+}
+.arh-body strong { color: var(--text); }
+.arh-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.arh-feature {
+  background: #fff;
+  border: 1px solid #fcd5be;
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.arh-feature-icon { font-size: 16px; margin-bottom: 6px; }
+.arh-feature-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.arh-feature-text { font-size: 11px; color: var(--muted); line-height: 1.5; }
+.arh-cta-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.arh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  padding: 16px 28px;
+  border-radius: 12px;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: background 0.15s, transform 0.15s;
+}
+.arh-btn:hover { background: #b43c0a; transform: translateY(-1px); }
+.arh-price { font-size: 13px; color: var(--muted); }
+.arh-price strong { color: var(--text); font-size: 18px; }
+
+/* ФИНАЛЬНЫЙ БЛОК */
+.final { background: #fff8f5; border-top: 1.5px solid #fcd5be; padding: 80px 20px; }
+.final-in { max-width: 720px; margin: 0 auto; text-align: center; }
+.final-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.final-title { font-size: clamp(28px, 5vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: var(--text); margin-bottom: 20px; }
+.final-title span { color: var(--accent); }
+.final-sub { font-size: 17px; color: var(--muted); line-height: 1.7; margin-bottom: 40px; max-width: 520px; margin-left: auto; margin-right: auto; }
+.final-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; font-family: 'Manrope', sans-serif; font-size: 17px; font-weight: 800; padding: 20px 44px; border-radius: 14px; text-decoration: none; margin-bottom: 16px; transition: background 0.15s, transform 0.15s; }
+.final-btn:hover { background: #b43c0a; transform: translateY(-2px); }
+.final-price { font-size: 13px; color: var(--muted); }
+
+/* RESPONSIVE */
+@media(max-width: 600px) {
+  .card-grid { grid-template-columns: 1fr; }
+  .contrast { grid-template-columns: 1fr; }
+  .arh-features { grid-template-columns: 1fr; }
+  .arh-block { padding: 28px 22px; }
+  .block-header { padding: 28px 22px; }
+  .toc { padding: 22px 20px; }
+  .hero { padding: 48px 20px 40px; }
+  .hero-stats { gap: 20px; }
+  .arh-cta-row { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="https://www.anastasialushnikova.com" class="nav-brand">Анастасия Лушникова</a>
+    <span class="nav-tag">100 уровней · Claude AI</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-in">
+    <div class="hero-eyebrow">Большинство использует 5% возможностей</div>
+    <h1 class="hero-title">Ты используешь Claude<br><span>неправильно.</span></h1>
+    <p class="hero-sub">Полная карта того что он умеет на самом деле. А это почти 100 уровней.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">100</div>
+        <div class="hero-stat-label">уровней</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">10</div>
+        <div class="hero-stat-label">блоков</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">1</div>
+        <div class="hero-stat-label">инструмент</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">∞</div>
+        <div class="hero-stat-label">применений</div>
+      </div>
+    </div>
+    <div class="hero-author">
+      <div class="hero-author-avatar">👩</div>
+      <div>
+        <div class="hero-author-name">Анастасия Лушникова</div>
+        <div class="hero-author-sub">17 лет в маркетинге · основатель Target School · @target_school</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ОБО МНЕ -->
+<div class="wrap">
+<section class="section">
+  <div class="item-quote">Когда я только начинала работать с Claude, то просто открывала чат, писала вопрос, получала ответ, закрывала. Думала: ну полезно, как поисковик только отвечает предложениями. Потом случайно наткнулась на одну функцию. Потом на другую. Потом поняла — то чем пользовалась, это примерно как купить iPhone и звонить только в такси.</div>
+  <div class="item-body" style="margin-top:20px;">Я вела блог. И это был конвейер. Надиктовываешь смыслы, контент-менеджер оформляет. Потом дизайнер верстает. Потом ты всё равно правишь, потому что голос не твой, подача не та, слова не те. Команда из четырёх человек. И ты всё равно в центре этих правок.<br><br>Потом я начала работать с Claude по-другому. Прописала свой голос один раз. Загрузила регламенты которые раньше объясняла каждому новому человеку. Настроила отдельные проекты. <strong>Правок стало меньше. Сильно меньше.</strong> Потому что Claude знает мои правила с первого запуска, а не с двадцатого исправления.</div>
+</section>
+</div>
+
+<!-- ОГЛАВЛЕНИЕ -->
+<div class="wrap">
+<section class="section" style="padding-top:0;">
+  <div class="toc">
+    <div class="toc-title">Навигация · 10 блоков</div>
+    <div class="toc-items">
+      <a href="#b1" class="toc-item"><span class="toc-num">1</span><div><div class="toc-name">Основы Claude</div><div class="toc-desc">Что такое Claude, модели, контекст, настройки</div></div></a>
+      <a href="#b2" class="toc-item"><span class="toc-num">2</span><div><div class="toc-name">Промпты</div><div class="toc-desc">Роли, стилизация, цепочки, отладка, библиотека</div></div></a>
+      <a href="#b3" class="toc-item"><span class="toc-num">3</span><div><div class="toc-name">Артефакты</div><div class="toc-desc">Создание файлов, мини-продукты, отладка</div></div></a>
+      <a href="#b4" class="toc-item"><span class="toc-num">4</span><div><div class="toc-name">Навыки</div><div class="toc-desc">Структура навыка, письмо, библиотека</div></div></a>
+      <a href="#b5" class="toc-item"><span class="toc-num">5</span><div><div class="toc-name">Коллега</div><div class="toc-desc">Рецензент, стратег, редактор, планировщик</div></div></a>
+      <a href="#b6" class="toc-item"><span class="toc-num">6</span><div><div class="toc-name">Коннекторы</div><div class="toc-desc">Google Drive, Notion, Slack, анализ файлов</div></div></a>
+      <a href="#b7" class="toc-item"><span class="toc-num">7</span><div><div class="toc-name">Автоматизация</div><div class="toc-desc">MCP, агенты, Zapier, Make, системы памяти</div></div></a>
+      <a href="#b8" class="toc-item"><span class="toc-num">8</span><div><div class="toc-name">Код</div><div class="toc-desc">Claude Code, отладка, продукты без разработчика</div></div></a>
+      <a href="#b9" class="toc-item"><span class="toc-num">9</span><div><div class="toc-name">Применения</div><div class="toc-desc">Маркетинг, продажи, HR, финансы, продуктивность</div></div></a>
+      <a href="#b10" class="toc-item"><span class="toc-num">10</span><div><div class="toc-name">Эксперт</div><div class="toc-desc">Продвинутые промпты, мульти-AI, свои системы</div></div></a>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="divider"></div>
+
+<!-- БЛОК 1 -->
+<div class="wrap" id="b1">
+<section class="section">
+  <div class="block-header">
+    <div class="block-eyebrow">Блок 1 из 10</div>
+    <div class="block-title">Основы <span>Claude</span></div>
+    <div class="block-sub">Пункты 1–10. Всё что нужно понять перед тем как начать использовать Claude на полную мощность.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">01 · Что такое Claude</div>
+    <div class="item-title">AI который думает вместе с тобой</div>
+    <div class="item-body">Claude — языковая модель от Anthropic. Разбирает задачи, пишет тексты, анализирует данные, строит структуры. Причём с контекстом — помнит всё что написано в этом разговоре и использует это дальше.<br><br>Anthropic — одна из самых серьёзных AI-компаний в мире. Строят Claude с упором на точность и безопасность.</div>
+    <div class="card-grid">
+      <div class="card"><div class="card-icon">✍️</div><div class="card-title">Тексты</div><div class="card-text">Пишет, редактирует, переформулирует в любом стиле</div></div>
+      <div class="card"><div class="card-icon">🔍</div><div class="card-title">Анализ</div><div class="card-text">Разбирает документы, данные, переписки</div></div>
+      <div class="card"><div class="card-icon">🏗</div><div class="card-title">Структуры</div><div class="card-text">Стратегии, планы, архитектура продуктов</div></div>
+      <div class="card"><div class="card-icon">💬</div><div class="card-title">Диалог</div><div class="card-text">Думает вместе с тобой, задаёт уточняющие вопросы</div></div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">02 · Модели</div>
+    <div class="item-title">Haiku, Sonnet, Opus</div>
+    <div class="item-body">У Claude несколько версий. Думай об этом как об автомобилях одной марки. <strong>Sonnet</strong> — баланс скорости и качества, закрывает 80% задач. В бесплатной версии доступен именно он. <strong>Opus</strong> — для сложного анализа и глубокой работы. <strong>Haiku</strong> — быстрый, для простых задач.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">03 · Память в чатах</div>
+    <div class="item-title">Каждый новый чат — чистый лист</div>
+    <div class="item-body">Внутри чата Claude помнит всё с самого начала. Между разными чатами памяти нет. Поэтому опытные пользователи сохраняют короткий текст о себе и вставляют в начало нового чата.</div>
+    <div class="code-box">
+      <div class="code-bar"><div class="code-dot" style="background:#ff5f57"></div><div class="code-dot" style="background:#ffbd2e"></div><div class="code-dot" style="background:#28c840"></div><div class="code-label">Шаблон контекста</div></div>
+      <div class="code-body">Меня зовут <span class="hl">[Имя]</span>. Я <span class="str">[профессия / роль]</span>.<br>Моя аудитория: <span class="str">[кто твои клиенты]</span>.<br>Мой продукт: <span class="str">[что продаёшь]</span>.<br>Стиль текстов: <span class="str">[живой / деловой / экспертный]</span>.<br>Сегодня мне нужно: <span class="hl">[конкретная задача]</span>.</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">04 · Окно контекста</div>
+    <div class="item-title">200 000+ токенов. Используют единицы.</div>
+    <div class="item-body">Один из самых недооценённых параметров. Можно вставить целый документ, длинную переписку, таблицу — и попросить проанализировать. Большинство пишет Claude короткие вопросы. А он при этом способен переварить <strong>150 страниц книги</strong> за секунды.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">08 · Важные настройки</div>
+    <div class="item-title">Персональные инструкции — один раз</div>
+    <div class="item-body">В настройках есть раздел с персональными инструкциями. Это текст который Claude читает перед каждым новым чатом. Туда пишешь: кто ты, чем занимаешься, какой стиль нужен. Один раз настроил — и Claude знает контекст без лишних объяснений.</div>
+    <div class="tip"><div class="tip-icon">💡</div>Я настроила это в первую же неделю. Экономит время каждый день.</div>
+  </div>
+
+  <div class="block-result">
+    <div class="block-result-label">Итог блока 1</div>
+    <div class="block-result-text">Ты только что узнал про Claude больше, чем знает большинство его пользователей. Это фундамент. Без него всё остальное работает вполсилы.</div>
+  </div>
+</section>
+</div>
+
+<div class="divider"></div>
+
+<!-- ВСТРОЙКА ПОСЛЕ БЛОКА 1 -->
+<div class="wrap">
+<div class="arh-block">
+  <div class="arh-eyebrow">Стоп. Важное отступление.</div>
+  <div class="arh-title">Claude — это инструмент.<br>Таргет — тоже инструмент.<br>Рилсы — <span>тоже.</span></div>
+  <div class="arh-body">
+    Вопрос всегда один: <strong>что ты через них говоришь?</strong><br><br>
+    Если у тебя не покупают — проблема не в инструменте. Проблема в том, что смыслы не попадают в человека. Claude не знает твою аудиторию. Он пишет для всех. А значит, ни для кого.<br><br>
+    Claude даёт скорость. <strong>«Архитектор смыслов»</strong> даёт точность. Один промпт разворачивает полную карту аудитории: боли, страхи, триггеры, возражения. То, на что раньше уходили недели интервью. Теперь 15 минут.
+  </div>
+  <div class="arh-features">
+    <div class="arh-feature"><div class="arh-feature-icon">🎯</div><div class="arh-feature-title">Глубоководный аналитик</div><div class="arh-feature-text">Полная карта аудитории за 15 минут</div></div>
+    <div class="arh-feature"><div class="arh-feature-icon">💎</div><div class="arh-feature-title">Смысловой кристалл</div><div class="arh-feature-text">5 связок из которых пишется весь контент</div></div>
+    <div class="arh-feature"><div class="arh-feature-icon">⚡</div><div class="arh-feature-title">Рабочая среда</div><div class="arh-feature-text">Настраиваешь один раз, открываешь каждый день</div></div>
+    <div class="arh-feature"><div class="arh-feature-icon">📋</div><div class="arh-feature-title">Контент из смыслов</div><div class="arh-feature-text">Рилс, пост и скрипт из одной связки</div></div>
+  </div>
+  <div class="arh-cta-row">
+    <a href="https://www.anastasialushnikova.com/arkhitektor" class="arh-btn" target="_blank">Забрать «Архитектор смыслов» →</a>
+    <div class="arh-price"><strong>1 490 ₽</strong> · мгновенный доступ</div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- БЛОК 2 -->
+<div class="wrap" id="b2">
+<section class="section">
+  <div class="block-header">
+    <div class="block-eyebrow">Блок 2 из 10</div>
+    <div class="block-title">Промпты <span>Claude</span></div>
+    <div class="block-sub">Пункты 11–20. Почему один и тот же вопрос даёт разные результаты — и как это исправить.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">11 · Ролевые промпты</div>
+    <div class="item-title">Первое что меняет качество ответа</div>
+    <div class="item-body">Скажи Claude кем он должен быть в этом разговоре. Не «напиши текст», а «ты опытный маркетолог с 10 годами в запусках, пиши текст для эксперта который продаёт наставничество.» Claude меняет подход, глубину, язык.</div>
+    <div class="contrast">
+      <div class="contrast-bad"><div class="contrast-label">✗ Без роли</div><div class="contrast-text">Напиши пост про продажи в Instagram</div></div>
+      <div class="contrast-good"><div class="contrast-label">✓ С ролью</div><div class="contrast-text">Ты копирайтер с 10 годами в онлайн-продажах. Напиши пост для нутрициолога, аудитория мамы 30–40 лет</div></div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">12 · Стилизация</div>
+    <div class="item-title">Claude пишет в твоём голосе</div>
+    <div class="item-body">Хочешь чтобы тексты звучали как ты — дай примеры своих постов. Один раз объяснил, и дальше Claude держит этот тон по всему разговору.</div>
+    <div class="code-box">
+      <div class="code-bar"><div class="code-dot" style="background:#ff5f57"></div><div class="code-dot" style="background:#ffbd2e"></div><div class="code-dot" style="background:#28c840"></div><div class="code-label">Промпт стилизации</div></div>
+      <div class="code-body">Вот примеры моих текстов:<br><span class="str">[вставь 2–3 поста]</span><br><br>Изучи мой стиль: ритм, длину предложений,<br>слова которые я использую.<br>Теперь напиши <span class="hl">[задача]</span> в точно таком же стиле.</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">14 · Ограничения</div>
+    <div class="item-title">Чем точнее — тем лучше результат</div>
+    <div class="item-body">«Напиши пост» — Claude напишет что-то среднее. «Напиши пост, 150 слов, без списков, для эксперта-психолога, аудитория 35–45 лет, тон тёплый но без сюсюканья» — Claude напишет то что нужно. Ограничения убирают догадки.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">15 · Цепочка промптов</div>
+    <div class="item-title">Большую задачу разбивай на шаги</div>
+    <div class="item-body">Не пихай всё в один запрос. Сначала собери информацию, потом структурируй, потом напиши, потом отредактируй. Каждый шаг — отдельный промпт. Так Claude работает точнее.</div>
+  </div>
+
+  <div class="block-result">
+    <div class="block-result-label">Итог блока 2</div>
+    <div class="block-result-text">Промпты — это навык общения с инструментом. Чем точнее объясняешь задачу, тем лучше результат. Именно здесь большинство застревает. Потому что никто не объяснил как.</div>
+  </div>
+</section>
+</div>
+
+<div class="divider"></div>
+
+<!-- ВСТРОЙКА ПОСЛЕ БЛОКА 2 -->
+<div class="wrap">
+<div class="arh-block">
+  <div class="arh-eyebrow">Ты знаешь как работает промпт</div>
+  <div class="arh-title">Но промпт работает только тогда,<br>когда знаешь <span>что говорить.</span></div>
+  <div class="arh-body">
+    Ролевой промпт, ограничения, стилизация — всё это инструменты. Они ускоряют написание.<br><br>
+    Но если ты не знаешь что <strong>реально болит</strong> у твоей аудитории — ни один промпт не спасёт. Claude будет писать красиво. И мимо.<br><br>
+    «Архитектор смыслов» вытаскивает те самые боли, страхи и триггеры, из которых потом работают все промпты.
+  </div>
+  <div class="arh-features">
+    <div class="arh-feature"><div class="arh-feature-icon">🎯</div><div class="arh-feature-title">Глубоководный аналитик</div><div class="arh-feature-text">10 слоёв аудитории за один прогон</div></div>
+    <div class="arh-feature"><div class="arh-feature-icon">💎</div><div class="arh-feature-title">Смысловой кристалл</div><div class="arh-feature-text">5 связок которые дают 80% результата</div></div>
+  </div>
+  <div class="arh-cta-row">
+    <a href="https://www.anastasialushnikova.com/arkhitektor" class="arh-btn" target="_blank">Забрать «Архитектор смыслов» →</a>
+    <div class="arh-price"><strong>1 490 ₽</strong></div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- БЛОК 3 -->
+<div class="wrap" id="b3">
+<section class="section">
+  <div class="block-header">
+    <div class="block-eyebrow">Блок 3 из 10</div>
+    <div class="block-title">Артефакты <span>Claude</span></div>
+    <div class="block-sub">Пункты 21–30. Как Claude перестаёт просто отвечать и начинает создавать готовые продукты.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">21 · Что такое артефакт</div>
+    <div class="item-title">Из режима ответов — в режим создания</div>
+    <div class="item-body">Артефакт — это отдельное окно справа от чата, где Claude создаёт готовый продукт. Текст в чате — это ответ. Артефакт — это документ, страница, таблица, код. Что-то что можно сразу скачать, скопировать или открыть в браузере.</div>
+    <div class="contrast">
+      <div class="contrast-bad"><div class="contrast-label">✗ Обычный режим</div><div class="contrast-text">Текст в чате. Надо скопировать, вставить, отформатировать вручную.</div></div>
+      <div class="contrast-good"><div class="contrast-label">✓ Артефакт</div><div class="contrast-text">Готовый документ или страница. Открываешь прямо в браузере.</div></div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">30 · Мини-продукты</div>
+    <div class="item-title">Калькулятор, квиз, лендинг — без разработчика</div>
+    <div class="item-body">Claude может собрать рабочий мини-продукт прямо в артефакте. Я сделала так несколько лид-магнитов. Без дизайнера, без разработчика. Описала что нужно — Claude собрал — скопировала код на сайт.</div>
+    <div class="card-grid">
+      <div class="card"><div class="card-icon">🧮</div><div class="card-title">Калькулятор</div><div class="card-text">Стоимости услуг, ROI, нутриентов</div></div>
+      <div class="card"><div class="card-icon">📋</div><div class="card-title">Квиз</div><div class="card-text">Диагностика, тест для аудитории</div></div>
+      <div class="card"><div class="card-icon">📄</div><div class="card-title">Лендинг</div><div class="card-text">HTML-страница для продукта или услуги</div></div>
+      <div class="card"><div class="card-icon">✅</div><div class="card-title">Чек-лист</div><div class="card-text">Интерактивный, с отметками</div></div>
+    </div>
+  </div>
+
+  <div class="block-result">
+    <div class="block-result-label">Итог блока 3</div>
+    <div class="block-result-text">Артефакты меняют сценарий работы с Claude. Из чата с ответами — в мастерскую где что-то создаётся. Стоит попробовать один раз чтобы понять.</div>
+  </div>
+</section>
+</div>
+
+<div class="divider"></div>
+
+<!-- БЛОК 4 -->
+<div class="wrap" id="b4">
+<section class="section">
+  <div class="block-header">
+    <div class="block-eyebrow">Блок 4 из 10</div>
+    <div class="block-title">Навыки <span>Claude</span></div>
+    <div class="block-sub">Пункты 31–40. Как перестать объяснять одно и то же каждый раз — и начать работать системно.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">31 · Что такое навыки</div>
+    <div class="item-title">Переход от разговора к системе</div>
+    <div class="item-body">Навык — это настроенный сценарий работы. Ты один раз описываешь: как должен думать Claude в этой задаче, что важно, чего избегать, какой результат нужен. Сохраняешь как шаблон. И дальше просто запускаешь.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">32 · Структура навыка</div>
+    <div class="item-title">Четыре части. Чем точнее — тем стабильнее.</div>
+    <div class="card-grid">
+      <div class="card"><div class="card-icon">🎭</div><div class="card-title">Роль</div><div class="card-text">Кем выступает Claude в этом сценарии</div></div>
+      <div class="card"><div class="card-icon">📋</div><div class="card-title">Правила</div><div class="card-text">Что важно соблюдать, чего избегать</div></div>
+      <div class="card"><div class="card-icon">⚙️</div><div class="card-title">Процесс</div><div class="card-text">Как именно думать и действовать</div></div>
+      <div class="card"><div class="card-icon">📄</div><div class="card-title">Формат</div><div class="card-text">Как должен выглядеть результат</div></div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">39 · Специализация</div>
+    <div class="item-title">Один навык — одна задача</div>
+    <div class="item-body">Навык для написания постов работает хуже, если туда же добавить анализ аудитории и составление стратегии. Лучше три отдельных сценария, каждый под свою задачу. Специализация даёт точность. Универсальный промпт — это компромисс везде.</div>
+  </div>
+
+  <div class="block-result">
+    <div class="block-result-label">Итог блока 4</div>
+    <div class="block-result-text">Навыки — это то что превращает Claude из чата в рабочую систему. Один раз настроил — и каждый следующий запуск быстрее и точнее предыдущего.</div>
+  </div>
+</section>
+</div>
+
+<div class="divider"></div>
+
+<!-- ВСТРОЙКА ПОСЛЕ БЛОКА 4 -->
+<div class="wrap">
+<div class="arh-block">
+  <div class="arh-eyebrow">Навык настроен. Голос прописан.</div>
+  <div class="arh-title">Осталось понять <span>что говорить,</span><br>чтобы покупали.</div>
+  <div class="arh-body">
+    Навык пишет в твоём стиле. Быстро, точно, стабильно.<br><br>
+    Но стиль — это форма. Смыслы — это содержание. <strong>Лайкают стиль. Покупают из-за смыслов.</strong><br><br>
+    «Архитектор смыслов» — это то что наполняет твои навыки содержанием. Карта болей, страхов и триггеров аудитории. За 15 минут.
+  </div>
+  <div class="arh-cta-row">
+    <a href="https://www.anastasialushnikova.com/arkhitektor" class="arh-btn" target="_blank">Забрать «Архитектор смыслов» →</a>
+    <div class="arh-price"><strong>1 490 ₽</strong> · гарантия 14 дней</div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- БЛОК 5 -->
+<div class="wrap" id="b5">
+<section class="section">
+  <div class="block-header">
+    <div class="block-eyebrow">Блок 5 из 10</div>
+    <div class="block-title">Коллега <span>Claude</span></div>
+    <div class="block-sub">Пункты 41–50. Когда Claude перестаёт быть инструментом и становится партнёром по мышлению.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">41 · Режим коллеги</div>
+    <div class="item-title">Думать вместе — другой результат</div>
+    <div class="item-body">Режим коллеги — это когда Claude работает партнёром, а не исполнителем. Ты думаешь вместе с ним. Обсуждаешь, проверяешь логику, получаешь обратную связь.</div>
+    <div class="contrast">
+      <div class="contrast-bad"><div class="contrast-label">✗ Исполнитель</div><div class="contrast-text">Напиши пост про мой курс по нутрициологии для мам.</div></div>
+      <div class="contrast-good"><div class="contrast-label">✓ Коллега</div><div class="contrast-text">Я думаю о запуске курса. Вот моя идея... Как ты видишь слабые места? Что бы ты проверил первым?</div></div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">43–46 · Роли Claude</div>
+    <div class="item-title">Рецензент, стратег, редактор, учитель</div>
+    <div class="card-grid">
+      <div class="card"><div class="card-icon">🔍</div><div class="card-title">Рецензент</div><div class="card-text">Честная обратная связь. Не хвалит из вежливости.</div></div>
+      <div class="card"><div class="card-icon">♟️</div><div class="card-title">Стратег</div><div class="card-text">Разбирает варианты, находит слабые места решений</div></div>
+      <div class="card"><div class="card-icon">✏️</div><div class="card-title">Редактор</div><div class="card-text">Точечная правка. Сократи, усиль, почисти.</div></div>
+      <div class="card"><div class="card-icon">📖</div><div class="card-title">Учитель</div><div class="card-text">Объясняет сложное под твой уровень</div></div>
+    </div>
+  </div>
+
+  <div class="block-result">
+    <div class="block-result-label">Итог блока 5</div>
+    <div class="block-result-text">Коллега — это буквально другой режим работы. Когда перестаёшь давать команды и начинаешь думать вместе — результат меняется.</div>
+  </div>
+</section>
+</div>
+
+<div class="divider"></div>
+
+<!-- ВСТРОЙКА ПОСЛЕ БЛОКА 5 -->
+<div class="wrap">
+<div class="arh-block">
+  <div class="arh-eyebrow">Claude думает вместе с тобой</div>
+  <div class="arh-title">Но думает он <span>твоими смыслами.</span><br>Если смыслов нет — думает шаблонами.</div>
+  <div class="arh-body">
+    Попроси Claude придумать контент-план. Он придумает.<br><br>
+    Попроси его найти боли аудитории. Он найдёт. Стандартные, которые гуглятся за пять секунд.<br><br>
+    <strong>Реальные боли — те что человек не произносит вслух, но на которые покупает</strong> — вытаскиваются по-другому. Через авторскую методологию 17 лет работы с аудиторией.
+  </div>
+  <div class="arh-cta-row">
+    <a href="https://www.anastasialushnikova.com/arkhitektor" class="arh-btn" target="_blank">Вытащить смыслы своей ЦА →</a>
+    <div class="arh-price"><strong>1 490 ₽</strong></div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- БЛОК 6 -->
+<div class="wrap" id="b6">
+<section class="section">
+  <div class="block-header">
+    <div class="block-eyebrow">Блок 6 из 10</div>
+    <div class="block-title">Коннекторы <span>Claude</span></div>
+    <div class="block-sub">Пункты 51–60. Как Claude подключается к твоим рабочим инструментам и перестаёт быть отдельной вкладкой.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">51 · Что такое коннекторы</div>
+    <div class="item-title">Claude внутри твоей рабочей системы</div>
+    <div class="item-body">Коннекторы — это интеграции, которые дают Claude доступ к твоим рабочим инструментам. Вместо того чтобы копировать текст из Notion в Claude и обратно — Claude читает Notion напрямую.</div>
+    <div class="card-grid">
+      <div class="card"><div class="card-icon">📁</div><div class="card-title">Google Drive</div><div class="card-text">Файлы, таблицы, документы — читает напрямую</div></div>
+      <div class="card"><div class="card-icon">📝</div><div class="card-title">Notion</div><div class="card-text">Читает страницы, создаёт новые, структурирует</div></div>
+      <div class="card"><div class="card-icon">💬</div><div class="card-title">Slack</div><div class="card-text">Ищет решения из прошлых обсуждений</div></div>
+      <div class="card"><div class="card-icon">💻</div><div class="card-title">GitHub</div><div class="card-text">Читает репозитории, находит ошибки в коде</div></div>
+    </div>
+  </div>
+
+  <div class="block-result">
+    <div class="block-result-label">Итог блока 6</div>
+    <div class="block-result-text">Коннекторы — это переход от «Claude как отдельный инструмент» к «Claude как часть рабочей системы». Настроил один раз — и он уже знает где что лежит.</div>
+  </div>
+</section>
+</div>
+
+<div class="divider"></div>
+
+<!-- БЛОК 7 -->
+<div class="wrap" id="b7">
+<section class="section">
+  <div class="block-header">
+    <div class="block-eyebrow">Блок 7 из 10</div>
+    <div class="block-title">Автоматизация <span>Claude</span></div>
+    <div class="block-sub">Пункты 61–70. Как Claude начинает работать без твоего участия — триггеры, агенты, автономные процессы.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">61–62 · MCP</div>
+    <div class="item-title">Claude получает руки</div>
+    <div class="item-body">MCP — это протокол, который позволяет Claude не просто читать данные, а совершать действия. Создавать файлы, отправлять сообщения, запускать процессы. Это граница между «AI отвечает» и «AI работает».</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">63 · Автоматизация</div>
+    <div class="item-title">Триггер → Действие → Результат</div>
+    <div class="item-body">Пришёл новый подписчик — Claude отправляет приветственное сообщение. Загрузили файл — Claude его анализирует и кладёт резюме в Notion. Каждый такой сценарий строится один раз. Потом работает сам.</div>
+  </div>
+
+  <div class="block-result">
+    <div class="block-result-label">Итог блока 7</div>
+    <div class="block-result-text">Автоматизация — это про то, сколько задач ты готов отдать системе. Чем больше настроишь — тем больше времени остаётся на то что требует тебя лично.</div>
+  </div>
+</section>
+</div>
+
+<div class="divider"></div>
+
+<!-- ВСТРОЙКА ПОСЛЕ БЛОКА 7 -->
+<div class="wrap">
+<div class="arh-block">
+  <div class="arh-eyebrow">Реклама автоматизирована. Рилсы выходят по расписанию.</div>
+  <div class="arh-title">Бюджет тает. Потому что <span>инструмент без смысла</span> — это дорогой шум.</div>
+  <div class="arh-body">
+    Можно автоматизировать публикации, рассылки, прогревы.<br><br>
+    Но если смысл в сообщении не попадает в человека — автоматизация только ускоряет слив бюджета.<br><br>
+    <strong>«Архитектор смыслов»</strong> строит фундамент. Из него потом работает всё остальное — и контент, и реклама, и автоматизация.
+  </div>
+  <div class="arh-features">
+    <div class="arh-feature"><div class="arh-feature-icon">🎯</div><div class="arh-feature-title">Боли в три ночи</div><div class="arh-feature-text">Что клиент гуглит в состоянии отчаяния</div></div>
+    <div class="arh-feature"><div class="arh-feature-icon">⚡</div><div class="arh-feature-title">Триггеры покупки</div><div class="arh-feature-text">Что заставляет нажать кнопку «купить»</div></div>
+    <div class="arh-feature"><div class="arh-feature-icon">💬</div><div class="arh-feature-title">Язык клиента</div><div class="arh-feature-text">Как ЦА сама описывает свою проблему</div></div>
+    <div class="arh-feature"><div class="arh-feature-icon">🔍</div><div class="arh-feature-title">Скрытые возражения</div><div class="arh-feature-text">Что держит от покупки — и как закрыть</div></div>
+  </div>
+  <div class="arh-cta-row">
+    <a href="https://www.anastasialushnikova.com/arkhitektor" class="arh-btn" target="_blank">Забрать «Архитектор смыслов» →</a>
+    <div class="arh-price"><strong>1 490 ₽</strong> · гарантия возврата 14 дней</div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- БЛОК 8 -->
+<div class="wrap" id="b8">
+<section class="section">
+  <div class="block-header">
+    <div class="block-eyebrow">Блок 8 из 10</div>
+    <div class="block-title">Код <span>Claude</span></div>
+    <div class="block-sub">Пункты 71–80. Как строить продукты без технического бэкграунда — объяснять задачу словами и получать рабочий код.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">71 · Claude Code</div>
+    <div class="item-title">Строить продукты без разработчика</div>
+    <div class="item-body">Я никогда не умела писать код. 17 лет в маркетинге — ни одной строчки. Когда решила строить свой AI-продукт, первая мысль была: надо нанять разработчика. Не наняла. Построила сама. С Claude.<br><br>Это не история про то что код стал простым. Это история про то что теперь необязательно его знать.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">73 · Отладка</div>
+    <div class="item-title">Описываешь что сломалось — Claude чинит</div>
+    <div class="item-body">Не надо понимать почему сломалось — надо уметь правильно описать симптом. «Кнопка не нажимается», «таблица съехала на мобильном», «текст не отображается» — Claude найдёт причину и починит.</div>
+  </div>
+
+  <div class="block-result">
+    <div class="block-result-label">Итог блока 8</div>
+    <div class="block-result-text">Код — это больше не барьер. Главное — уметь объяснить задачу и проверить результат.</div>
+  </div>
+</section>
+</div>
+
+<div class="divider"></div>
+
+<!-- БЛОК 9 -->
+<div class="wrap" id="b9">
+<section class="section">
+  <div class="block-header">
+    <div class="block-eyebrow">Блок 9 из 10</div>
+    <div class="block-title">Применения <span>Claude</span></div>
+    <div class="block-sub">Пункты 81–90. Где все инструменты из предыдущих блоков работают в реальной жизни и бизнесе.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">82 · Маркетинг и контент</div>
+    <div class="item-title">Claude усиливает то что ты в него вкладываешь</div>
+    <div class="item-body">Claude пишет посты, письма, офферы. Анализирует аудиторию, находит боли, формулирует ценностные предложения. Строит контент-планы и воронки.<br><br>Но вот честно — без правильного промпта и твоего голоса на входе выходит среднее. <strong>Пустой запрос даёт пустой результат.</strong></div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">83–90 · Все применения</div>
+    <div class="item-title">Claude работает в любой сфере</div>
+    <div class="card-grid">
+      <div class="card"><div class="card-icon">💼</div><div class="card-title">Продажи</div><div class="card-text">Письма, КП, ответы на возражения</div></div>
+      <div class="card"><div class="card-icon">👥</div><div class="card-title">HR</div><div class="card-text">Вакансии, интервью, офферы</div></div>
+      <div class="card"><div class="card-icon">📊</div><div class="card-title">Финансы</div><div class="card-text">Анализ данных, разбор цифр</div></div>
+      <div class="card"><div class="card-icon">🧘</div><div class="card-title">Продуктивность</div><div class="card-text">Планирование, решения, ясность</div></div>
+    </div>
+  </div>
+
+  <div class="block-result">
+    <div class="block-result-label">Итог блока 9</div>
+    <div class="block-result-text">Claude работает в любой сфере где есть работа с информацией, текстом или решениями. Это не замена специалистам — это ускорение всего того что ты делаешь сам.</div>
+  </div>
+</section>
+</div>
+
+<div class="divider"></div>
+
+<!-- ВСТРОЙКА ПОСЛЕ БЛОКА 9 -->
+<div class="wrap">
+<div class="arh-block">
+  <div class="arh-eyebrow">Ты знаешь где применять Claude.</div>
+  <div class="arh-title">Осталось понять <span>что именно говорить,</span><br>чтобы покупали.</div>
+  <div class="arh-body">
+    Claude ускоряет. <strong>«Архитектор смыслов»</strong> делает точным.<br><br>
+    Один промпт разворачивает полную карту твоей аудитории: сегменты, боли, страхи, возражения, триггеры. То, на что раньше уходили недели интервью и 50 000 ₽ маркетологу. Теперь 15 минут.
+  </div>
+  <div class="arh-features">
+    <div class="arh-feature"><div class="arh-feature-icon">🎯</div><div class="arh-feature-title">Глубоководный аналитик</div><div class="arh-feature-text">Полная карта аудитории за 15 минут</div></div>
+    <div class="arh-feature"><div class="arh-feature-icon">💎</div><div class="arh-feature-title">Смысловой кристалл</div><div class="arh-feature-text">5 связок из которых строится весь контент</div></div>
+    <div class="arh-feature"><div class="arh-feature-icon">⚡</div><div class="arh-feature-title">Контент из смыслов</div><div class="arh-feature-text">Рилс, пост и скрипт директа из одной связки</div></div>
+    <div class="arh-feature"><div class="arh-feature-icon">🏗</div><div class="arh-feature-title">Рабочая среда</div><div class="arh-feature-text">Настраиваешь один раз, открываешь каждый день</div></div>
+  </div>
+  <div class="arh-cta-row">
+    <a href="https://www.anastasialushnikova.com/arkhitektor" class="arh-btn" target="_blank">Забрать «Архитектор смыслов» →</a>
+    <div class="arh-price"><strong>1 490 ₽</strong> · первые 50 мест по этой цене</div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- БЛОК 10 -->
+<div class="wrap" id="b10">
+<section class="section">
+  <div class="block-header">
+    <div class="block-eyebrow">Блок 10 из 10</div>
+    <div class="block-title">Эксперт <span>Claude</span></div>
+    <div class="block-sub">Пункты 91–100. Что открывается когда пройдены все предыдущие уровни — и почему до этого доходят единицы.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">91 · Продвинутые промпты</div>
+    <div class="item-title">Архитектура, а не вопрос</div>
+    <div class="item-body">На экспертном уровне промпт — это уже не просто инструкция. Это архитектура. Включает роль, контекст, ограничения, формат, примеры, условия ветвления.<br><br>Разница между новичком и экспертом часто именно здесь. Один пишет «напиши пост», другой пишет систему из пяти инструкций которая каждый раз выдаёт нужный результат.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">99 · Создание своих систем</div>
+    <div class="item-title">Продукты на базе Claude</div>
+    <div class="item-body">Высший уровень — это когда перестаёшь использовать чужие инструменты и строишь свои. Свой AI-ассистент для клиентов. Своя система генерации контента. Свой инструмент для анализа аудитории.<br><br>Я прошла этот путь с AI Pulse PRO. Рабочий продукт которым пользуются люди — построенный без единого технического специалиста в команде.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-num">100 · Мастер Claude</div>
+    <div class="item-title">Системное мышление, не функции</div>
+    <div class="item-body">Мастер — это не тот кто знает все функции. Это тот кто точно знает какой инструмент нужен под каждую задачу. Кто строит системы, а не решает задачи по одной.</div>
+    <div class="item-quote">Вот честно — до этого уровня доходят единицы. Потому что большинство останавливается на первых нескольких блоках и думает что видело всё. Ты прошёл все 100 уровней. Это уже другая история.</div>
+  </div>
+
+  <div class="block-result">
+    <div class="block-result-label">Итог блока 10</div>
+    <div class="block-result-text">Экспертный уровень — это про системное мышление. Про то как Claude встраивается в бизнес целиком, а не закрывает отдельные задачи. И это не финал — инструмент обновляется каждые несколько месяцев. Мастерство — это умение учиться вместе с ним.</div>
+  </div>
+</section>
+</div>
+
+<div class="divider"></div>
+
+<!-- ФИНАЛ -->
+<div class="final">
+  <div class="final-in">
+    <div class="final-eyebrow">Ты прошёл все 100 уровней</div>
+    <h2 class="final-title">Инструмент есть.<br>Осталось понять <span>что через него говорить,</span><br>чтобы покупали.</h2>
+    <p class="final-sub">Claude даёт скорость. «Архитектор смыслов» даёт точность. Один промпт разворачивает полную карту твоей аудитории — сегменты, боли, страхи, возражения, триггеры. То на что раньше уходили недели интервью. Теперь 15 минут.</p>
+    <a href="https://www.anastasialushnikova.com/arkhitektor" class="final-btn" target="_blank">Забрать «Архитектор смыслов» за 1 490 ₽ →</a>
+    <div class="final-price">Первые 50 мест по этой цене · Гарантия возврата 14 дней</div>
+  </div>
+</div>
+
+</body>
+</html>
