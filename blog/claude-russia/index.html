@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как подключить Claude из России: пошаговое руководство — Анастасия Лушникова</title>
+
+<meta name="description" content="Пошаговая инструкция: VPN, почта, виртуальный номер, оплата Pro. Один раз настроил — дальше просто работаешь.">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108790481', 'ym');
+    ym(108790481, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108790481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2700527913660797');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --border: #e8e6df;
+    --text: #1a1917;
+    --text-muted: #6b6860;
+    --text-light: #a8a29e;
+    --accent: #2563eb;
+    --accent-light: #eff4ff;
+    --tag-bg: #f0ede6;
+    --dark: #1a1917;
+    --warning-bg: #fffbf0;
+    --warning-border: #fde68a;
+    --success-bg: #f0fdf4;
+    --success-border: #bbf7d0;
+    --var-bg: #fef9c3;
+    --var-color: #854d0e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(247, 246, 242, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 20px;
+  }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* PAGE */
+  .page {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* META */
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .meta-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-light);
+    flex-shrink: 0;
+  }
+
+  /* TAGS */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 32px;
+  }
+  .tag {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--tag-bg);
+    padding: 5px 12px;
+    border-radius: 100px;
+  }
+
+  /* H1 */
+  h1 {
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+
+  /* INTRO CARD */
+  .intro-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+  .intro-card p {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+  .intro-card p:last-child { margin-bottom: 0; }
+
+  /* HINT BLUE */
+  .hint-blue {
+    background: var(--accent-light);
+    border: 1px solid #bfdbfe;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .hint-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .hint-blue p {
+    font-size: 14px;
+    color: #1e40af;
+    line-height: 1.65;
+    margin: 0;
+  }
+  .hint-blue strong { font-weight: 700; }
+
+  /* SECTION BLOCK */
+  .block-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 40px 0 20px;
+  }
+  .block-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--border);
+    padding: 4px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .block-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* STEP CARDS */
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .step-number {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 10px;
+  }
+  .step-card h2 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .step-card p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 14px;
+  }
+  .step-card p:last-child { margin-bottom: 0; }
+  .step-card strong { color: var(--text); font-weight: 700; }
+
+  /* INLINE LIST */
+  .step-list {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0;
+  }
+  .step-list li {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    padding: 6px 0 6px 24px;
+    position: relative;
+    border-bottom: 1px solid var(--bg);
+  }
+  .step-list li:last-child { border-bottom: none; }
+  .step-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    border: 2px solid var(--text-light);
+  }
+  .step-list li strong { color: var(--text); }
+
+  /* NUMBERED LIST */
+  .ordered-list {
+    list-style: none;
+    counter-reset: steps;
+    padding: 0;
+    margin: 14px 0;
+  }
+  .ordered-list li {
+    counter-increment: steps;
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    padding: 10px 0 10px 40px;
+    position: relative;
+    border-bottom: 1px solid var(--bg);
+  }
+  .ordered-list li:last-child { border-bottom: none; }
+  .ordered-list li::before {
+    content: counter(steps);
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 26px;
+    height: 26px;
+    background: var(--dark);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ordered-list li strong { color: var(--text); }
+
+  /* INLINE CODE */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: var(--tag-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--text);
+  }
+
+  /* TARIFF CARDS */
+  .tariffs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+  }
+  @media (max-width: 600px) {
+    .tariffs { grid-template-columns: 1fr; }
+  }
+  .tariff-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .tariff-card.featured {
+    border-color: var(--dark);
+    background: var(--dark);
+    color: #fff;
+  }
+  .tariff-name {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .tariff-price {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  .tariff-card.featured .tariff-price { color: #fff; }
+  .tariff-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .tariff-card.featured .tariff-desc { color: rgba(255,255,255,0.65); }
+  .tariff-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 100px;
+    margin-bottom: 8px;
+  }
+
+  /* RULES CARD */
+  .rules-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-top: 16px;
+  }
+  .rules-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  /* PRODUCT BLOCK */
+  .product-block {
+    background: var(--warning-bg);
+    border: 1.5px solid var(--warning-border);
+    border-radius: 20px;
+    padding: 36px 36px 32px;
+    margin: 56px 0 40px;
+  }
+  .product-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #92400e;
+    margin-bottom: 14px;
+  }
+  .product-block h2 {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .product-block p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .product-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+  }
+  .product-features li {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    padding: 8px 0 8px 26px;
+    position: relative;
+    border-bottom: 1px solid var(--warning-border);
+  }
+  .product-features li:last-child { border-bottom: none; }
+  .product-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #b45309;
+  }
+  .product-features li strong { color: var(--text); }
+  .guarantee {
+    background: var(--success-bg);
+    border: 1px solid var(--success-border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #166534;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .btn-dark {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--dark);
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px 28px;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .btn-dark:hover { opacity: 0.85; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 56px;
+    margin-top: 56px;
+  }
+  .footer-heading {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .footer-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 28px;
+    max-width: 520px;
+  }
+  .social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 500px) {
+    .social-grid { grid-template-columns: 1fr; }
+  }
+  .social-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    text-decoration: none;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .social-card:hover {
+    border-color: #d1cdc5;
+    transform: translateY(-1px);
+  }
+  .social-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .social-text-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .social-text-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .tg-banner {
+    background: var(--dark);
+    border-radius: 16px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .tg-banner-text {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .tg-banner-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 3px;
+  }
+  .btn-tg {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    color: var(--dark);
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+    flex-shrink: 0;
+  }
+  .btn-tg:hover { opacity: 0.85; }
+  .copyright {
+    font-size: 13px;
+    color: var(--text-light);
+    padding-bottom: 8px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .page { padding: 32px 16px 60px; }
+    .intro-card, .step-card, .rules-card { padding: 22px 20px; }
+    .product-block { padding: 28px 20px; }
+    .nav-links { gap: 14px; }
+  }
+
+  /* DO / DONT ITEMS */
+  .do-list, .dont-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+  .do-list li, .dont-list li {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    padding: 7px 0 7px 30px;
+    position: relative;
+    border-bottom: 1px solid var(--bg);
+  }
+  .do-list li:last-child, .dont-list li:last-child { border-bottom: none; }
+  .do-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 18px;
+    height: 18px;
+    background: #dcfce7;
+    border-radius: 50%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%2316a34a' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .dont-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 18px;
+    height: 18px;
+    background: #fee2e2;
+    border-radius: 50%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 3l6 6M9 3l-6 6' stroke='%23dc2626' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .do-list li strong, .dont-list li strong { color: var(--text); }
+
+  /* INLINE WARNING (красная плашка) */
+  .inline-warn {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: #fff5f5;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    padding: 13px 16px;
+    margin: 12px 0;
+  }
+  .inline-warn-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    background: #fee2e2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .inline-warn-icon svg { display: block; }
+  .inline-warn p {
+    font-size: 14px;
+    color: #991b1b;
+    line-height: 1.6;
+    margin: 0 !important;
+  }
+  .inline-warn code {
+    background: #fecaca;
+    color: #7f1d1d;
+    font-size: 12px;
+  }
+
+  /* INLINE OK (зелёная плашка) */
+  .inline-ok {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 13px 16px;
+    margin: 12px 0;
+  }
+  .inline-ok-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    background: #dcfce7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .inline-ok p {
+    font-size: 14px;
+    color: #166534;
+    line-height: 1.6;
+    margin: 0 !important;
+  }
+  .inline-ok strong { color: #14532d; }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="../">Анастасия Лушникова</a>
+  <div class="nav-links">
+    <a href="https://t.me/target_school1">Telegram</a>
+    <a href="https://www.instagram.com/target_school">Instagram</a>
+    <a href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0">Написать</a>
+  </div>
+</nav>
+
+<!-- PAGE -->
+<div class="page">
+
+  <!-- META -->
+  <div class="meta">
+    <span>июнь 2026</span>
+    <span class="meta-dot"></span>
+    <span>10 мин чтения</span>
+    <span class="meta-dot"></span>
+    <span>Автор: Анастасия Лушникова</span>
+  </div>
+
+  <!-- H1 -->
+  <h1>Как подключить Claude из России: пошаговое руководство</h1>
+
+  <!-- TAGS -->
+  <div class="tags">
+    <span class="tag">Инструменты</span>
+    <span class="tag">AI-маркетинг</span>
+    <span class="tag">Промпты</span>
+  </div>
+
+  <!-- INTRO CARD -->
+  <div class="intro-card">
+    <p>Мне регулярно пишут в личные с одним вопросом: «Как ты стабильно работаешь в Claude, если официально нейросеть заблокирована?». Вот честно, для практикующих маркетологов этот инструмент давно стал таким же базовым, как доступ в интернет.</p>
+    <p>Разбираю весь процесс по шагам. Логика простая: здесь нет ничего сверхсложного. Один вечер настроить, дальше просто работаешь.</p>
+  </div>
+
+  <!-- HINT BLUE -->
+  <div class="hint-blue">
+    <div class="hint-icon">💡</div>
+    <p><strong>Как пользоваться этой инструкцией:</strong> сохраните страницу в закладки, чтобы не потерять ссылки на сервисы в процессе настройки. Проходите по шагам по порядку, не перепрыгивайте.</p>
+  </div>
+
+  <!-- BLOCK: ЧТО НУЖНО -->
+  <div class="block-header">
+    <div class="block-label">Что нужно подготовить</div>
+    <div class="block-line"></div>
+  </div>
+
+  <div class="step-card">
+    <p>Anthropic жёстко фильтрует пользователей. Зайти под российским IP не получится. Для успешной регистрации нужны четыре вещи:</p>
+    <ul class="step-list">
+      <li><strong>Правильный VPN</strong> с обфускацией трафика</li>
+      <li><strong>Почта Gmail</strong>, созданная из-за рубежа</li>
+      <li><strong>Иностранный номер телефона</strong> для одного SMS при регистрации</li>
+      <li><strong>Международная карта</strong>, если планируете Pro-тариф</li>
+    </ul>
+    <p>Все задачи решаются быстро и бюджетно. Пошли по шагам.</p>
+  </div>
+
+  <!-- ШАГИ -->
+  <div class="block-header" style="margin-top: 48px;">
+    <div class="block-label">Пошаговая инструкция</div>
+    <div class="block-line"></div>
+  </div>
+
+  <!-- ШАГ 1 -->
+  <div class="step-card">
+    <div class="step-number">Шаг 1</div>
+    <h2>Надёжный VPN</h2>
+    <div class="inline-warn">
+      <div class="inline-warn-icon">
+        <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 2v4M6 8.5v.5" stroke="#dc2626" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <p>Бесплатные сервисы из App Store не подходят. Роскомнадзор блокирует стандартные протоколы, системы Anthropic вычисляют публичные серверы моментально.</p>
+    </div>
+    <p>Нужен VPN с поддержкой <strong>обфускации</strong>: такой трафик внешне не отличается от обычного сайта. Рабочие протоколы в 2026 году:</p>
+    <ul class="do-list">
+      <li><strong>VLESS + Reality</strong>, оптимальный выбор по скорости и скрытности</li>
+      <li><strong>Hysteria2</strong></li>
+      <li><strong>Amnezia WireGuard</strong></li>
+    </ul>
+    <p><strong>Важное правило:</strong> выберите одну страну при первой настройке и придерживайтесь её. Идеально: Германия или Финляндия. Claude отслеживает геолокацию, хаотичные прыжки между странами ведут к блокировке.</p>
+  </div>
+
+  <!-- ШАГ 2 -->
+  <div class="step-card">
+    <div class="step-number">Шаг 2</div>
+    <h2>Правильная почта</h2>
+    <div class="inline-ok">
+      <div class="inline-ok-icon">
+        <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <p><strong>Нужен Gmail</strong>, созданный за пределами РФ. Если есть чистый рабочий ящик, можно взять его. Если хотите перестраховаться, заведите новый. Сначала включите VPN, откройте браузер в режиме инкогнито, только потом создавайте почту.</p>
+    </div>
+    <div class="inline-warn">
+      <div class="inline-warn-icon">
+        <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 2v4M6 8.5v.5" stroke="#dc2626" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <p>Ящики в зонах <code>mail.ru</code> или <code>yandex.ru</code> не подходят. Это явный маркер для антифрод-системы: автоматический отказ.</p>
+    </div>
+  </div>
+
+  <!-- ШАГ 3 -->
+  <div class="step-card">
+    <div class="step-number">Шаг 3</div>
+    <h2>Иностранный номер телефона</h2>
+    <p>Номер нужен ровно один раз: принять SMS при регистрации. Дальше система его не запрашивает. Стоимость: <strong>30–80 рублей</strong>.</p>
+    <p>Покупайте номер непосредственно в момент регистрации: виртуальный номер выделяется на 15–20 минут. Проверенные площадки, которые принимают российские карты:</p>
+    <ul class="do-list">
+      <li><strong>grizzlysms.com</strong></li>
+      <li><strong>onlinesim.ru</strong></li>
+      <li><strong>5sim.net</strong></li>
+    </ul>
+    <p>В личном кабинете выбирайте страну, соответствующую вашему VPN (например, Финляндия), и покупайте приём SMS под сервис <strong>Anthropic / Claude</strong>.</p>
+  </div>
+
+  <!-- ШАГ 4 -->
+  <div class="step-card">
+    <div class="step-number">Шаг 4</div>
+    <h2>Регистрация аккаунта</h2>
+    <p>Когда всё готово, действуйте строго по порядку:</p>
+    <ol class="ordered-list">
+      <li><strong>Включите VPN.</strong> Откройте <a href="https://2ip.ru/" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid #bfdbfe;">2ip.ru</a> и убедитесь, что IP и флаг соответствуют выбранной европейской стране.</li>
+      <li><strong>Откройте браузер в режиме инкогнито.</strong> Старые куки с российскими следами могут помешать.</li>
+      <li><strong>Перейдите на claude.ai.</strong> Нажмите «Continue with Google» и войдите через подготовленную почту Gmail.</li>
+      <li><strong>Введите виртуальный номер.</strong> Дождитесь SMS в личном кабинете сервиса, введите код на сайте Claude.</li>
+    </ol>
+    <p style="margin-top: 16px;"><strong>Лайфхак:</strong> не пытайтесь привязать карту и оплатить Pro сразу после создания аккаунта. Поработайте в бесплатной версии день-два: отправьте несколько осмысленных запросов, создайте тестовый проект. Система должна увидеть поведение реального человека.</p>
+  </div>
+
+  <!-- ШАГ 5 -->
+  <div class="step-card">
+    <div class="step-number">Шаг 5</div>
+    <h2>Оплата Pro-тарифа</h2>
+    <div class="inline-warn">
+      <div class="inline-warn-icon">
+        <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 2v4M6 8.5v.5" stroke="#dc2626" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <p>Обычная российская карта не сработает. Stripe полностью блокирует транзакции из РФ.</p>
+    </div>
+    <p>Рабочие варианты:</p>
+    <ul class="do-list">
+      <li><strong>Виртуальные карты (GoGoCard):</strong> предоплаченные MasterCard, баланс пополняется из России. Удобны для быстрого старта.</li>
+      <li><strong>Карты банков СНГ (Киргизия, Казахстан):</strong> mBank или Бакай Банк оформляются удалённо по паспорту РФ. Поддерживают автопродление подписок.</li>
+    </ul>
+    <p><strong>Важно:</strong> при заполнении платёжной формы страна карты и платёжный адрес должны совпадать. Если карта киргизская, указывайте киргизский адрес (подойдёт адрес любого отеля в Бишкеке).</p>
+  </div>
+
+  <!-- ТАРИФЫ -->
+  <div class="block-header" style="margin-top: 48px;">
+    <div class="block-label">Тарифы Claude</div>
+    <div class="block-line"></div>
+  </div>
+
+  <div class="tariffs">
+    <div class="tariff-card">
+      <div class="tariff-name" style="color: var(--text-muted);">Free</div>
+      <div class="tariff-price">$0</div>
+      <div class="tariff-desc">Базовый доступ к Sonnet, проекты, файлы. Лимиты обновляются раз в несколько часов. Хороший старт.</div>
+    </div>
+    <div class="tariff-card featured">
+      <div class="tariff-badge">Рекомендую</div>
+      <div class="tariff-name" style="color: rgba(255,255,255,0.7);">Pro</div>
+      <div class="tariff-price">$20/мес</div>
+      <div class="tariff-desc">Лимиты выше в 5 раз, приоритет к мощным моделям, Claude Design. Отсюда начинается нормальная автоматизация.</div>
+    </div>
+    <div class="tariff-card">
+      <div class="tariff-name" style="color: var(--text-muted);">Max</div>
+      <div class="tariff-price">$100+</div>
+      <div class="tariff-desc">Для тех, кто упирается в ограничения Pro при ежедневной плотной работе.</div>
+    </div>
+  </div>
+
+  <!-- ПРАВИЛА -->
+  <div class="block-header" style="margin-top: 48px;">
+    <div class="block-label">Как не получить бан</div>
+    <div class="block-line"></div>
+  </div>
+
+  <div class="rules-card">
+    <h3>Базовые правила цифровой гигиены</h3>
+    <ul class="dont-list">
+      <li><strong>VPN выключен.</strong> Один случайный клик на Claude без VPN может стоить аккаунта.</li>
+      <li><strong>Разные страны.</strong> Зарегистрировались через Финляндию, заходите только через Финляндию.</li>
+      <li><strong>Одна карта на несколько аккаунтов.</strong> Не оплачивайте одной картой подписки коллегам.</li>
+      <li><strong>Покупка готовых аккаунтов.</strong> Их регистрируют массово и продают в сети, но банят пачками в первый же месяц.</li>
+    </ul>
+  </div>
+
+  <!-- PRODUCT BLOCK -->
+  <div class="product-block">
+    <div class="product-eyebrow">Следующий шаг</div>
+    <h2>Вы подключили Claude. Что дальше?</h2>
+    <p>Инструмент есть. Но большинство экспертов застревают на отдельных промптах: написал запрос, получил текст, вставил в пост. И всё. Без системы это просто быстрый черновик, не больше.</p>
+    <p>«Архитектор смыслов» — это 11 разделов с готовыми промптами, которые ведут вас от анализа аудитории до готовых смыслов для контента и продаж. Вы один раз проходите этот путь с Claude, и у вас появляется база, из которой потом вытаскивается всё: посты, сторис, офферы, лендинги.</p>
+    <ul class="product-features">
+      <li><strong>11 разделов</strong> с пошаговым разбором аудитории</li>
+      <li><strong>Готовые промпты</strong> для каждого этапа, без угадывания «как спросить»</li>
+      <li><strong>Смысловой кристалл</strong> по методологии боль, лекарство, артефакт</li>
+      <li><strong>Вечный доступ</strong> к системе и всем обновлениям</li>
+    </ul>
+    <div class="guarantee">
+      ✓ Доступ сразу после оплаты. Работает с любым тарифом Claude, включая бесплатный.
+    </div>
+    <a class="btn-dark" href="https://www.anastasialushnikova.com/arkhitektor">Получить доступ к Архитектору →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-heading">Понравился материал?</div>
+    <div class="footer-sub">Подписывайтесь на каналы, там ещё больше про AI-маркетинг, смыслы и продажи без выгорания.</div>
+
+    <div class="social-grid">
+      <a class="social-card" href="https://t.me/target_school1">
+        <div class="social-icon" style="background:#e8f0fe;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#2563eb"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </div>
+        <div>
+          <div class="social-text-name">Telegram канал</div>
+          <div class="social-text-desc">Промпты и кейсы каждый день</div>
+        </div>
+      </a>
+      <a class="social-card" href="https://www.instagram.com/target_school">
+        <div class="social-icon" style="background:#fce7f3;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#db2777" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#db2777" stroke="none"/></svg>
+        </div>
+        <div>
+          <div class="social-text-name">Instagram</div>
+          <div class="social-text-desc">Визуальные гайды и stories</div>
+        </div>
+      </a>
+      <a class="social-card" href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0">
+        <div class="social-icon" style="background:#dcfce7;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#16a34a"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        </div>
+        <div>
+          <div class="social-text-name">Написать Анастасии</div>
+          <div class="social-text-desc">Личное сообщение в WhatsApp</div>
+        </div>
+      </a>
+      <a class="social-card" href="https://t.me/ailav_bot">
+        <div class="social-icon" style="background:#fef3c7;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#d97706" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div>
+          <div class="social-text-name">Служба заботы</div>
+          <div class="social-text-desc">Техподдержка и вопросы</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="tg-banner">
+      <div>
+        <div class="tg-banner-text">Хотите больше материалов?</div>
+        <div class="tg-banner-sub">Каждый день промпты, кейсы и разборы в Telegram</div>
+      </div>
+      <a class="btn-tg" href="https://t.me/target_school1">Подписаться на Telegram</a>
+    </div>
+
+    <div class="copyright">© 2026 Анастасия Лушникова. Все права защищены.</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
