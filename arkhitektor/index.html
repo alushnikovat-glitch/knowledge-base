@@ -378,8 +378,8 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 100px;
   </div>
   <h1 class="hero-title">АРХИТЕКТУРА СМЫСЛОВ <strong>ЗА 15 МИНУТ</strong></h1>
   <div class="hero-tagline">Как спроектировать фундамент маркетинга лучше 94% рынка? Инструкция 2026</div>
-  <p class="hero-sub">Запустите готовую систему, которая за 15 минут вытащит точные триггеры вашей аудитории, <strong>те самые, от которых клиенты пишут «куда платить?»</strong>. Авторские промпты, созданные на основе 17-летнего опыта в маркетинге, мгновенно сделают за вас всю глубинную работу.</p>
-  <p class="hero-sub2">Без бесконечных созвонов. Без слива бюджета на тесты.</p>
+  <p class="hero-sub">Запустите закрытый пошаговый алгоритм, который за 15 минут вытащит из вашей головы глубокие триггеры аудитории, на которые клиенты сами пишут «куда платить». Нейросеть на основе наших авторских промптов (которых нет в свободном доступе) сама спроектирует и выдаст вам готовое интерактивное рабочее пространство под ваш бизнес в виде автономного файла.</p>
+  <p class="hero-sub2">Без абонентских плат. Без сложных программ. Без слива бюджета на тесты.</p>
   <div class="hero-price-row">
     <span class="price-new">1 490 ₽</span>
     <span class="price-note">ссылка приходит сразу после оплаты</span>
@@ -718,103 +718,107 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 100px;
   <div class="s-title">Пошаговая система автоматизации аналитики из 11 разделов</div>
 
   <div class="solution-intro">
-    <p>Копируете команду, вставляете в Claude или Gemini, получаете карту болей вашей аудитории. На основе этой карты <strong>контент-план на месяц, логика воронки и упаковка предложения</strong>. За 15 минут.</p>
+    <p>Вы проходите пошаговый алгоритм, и на финальном шаге нейросеть сама собирает и выдает вам ваше персональное интерактивное рабочее пространство — готовый HTML-файл, созданный специально под ваш бизнес.</p>
+    <p>Вы открываете его на своем компьютере в один клик прямо в браузере (даже без интернета). Он работает абсолютно конфиденциально — все данные хранятся только у вас на жестком диске. Ваши боли ЦА, страхи и смысловые связки уже упакованы в интерактивные карточки.</p>
   </div>
 
-  <!-- Интерфейс-макет рабочей области -->
-  <div class="interface-mockup">
-    <div class="mockup-topbar">
-      <div class="mockup-dots">
-        <div class="mockup-dot" style="background:#ff5f57;"></div>
-        <div class="mockup-dot" style="background:#ffbd2e;"></div>
-        <div class="mockup-dot" style="background:#28c840;"></div>
+  <!-- Сборочный цех: двухпанельный интерфейс -->
+  <style>
+  .assembly-mockup{background:var(--dark);border-radius:20px;overflow:hidden;margin-bottom:16px;}
+  .assembly-topbar{background:#2a2825;padding:12px 20px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #3a3830;}
+  .assembly-dots{display:flex;gap:6px;}
+  .assembly-dot{width:12px;height:12px;border-radius:50%;}
+  .assembly-title-bar{flex:1;text-align:center;font-size:12px;color:#8a877f;font-family:'JetBrains Mono',monospace;}
+  .assembly-body{padding:20px;display:grid;grid-template-columns:1fr 48px 1fr;gap:0;align-items:start;}
+  @media(max-width:640px){
+    .assembly-body{grid-template-columns:1fr;gap:16px;}
+    .assembly-arrow-col{transform:rotate(90deg);display:flex;justify-content:center;}
+  }
+  .assembly-col-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#8a877f;margin-bottom:12px;}
+  .asm-card{background:#2a2825;border:1px solid #3a3830;border-radius:10px;padding:12px 14px;margin-bottom:8px;cursor:grab;}
+  .asm-card:last-child{margin-bottom:0;}
+  .asm-card-type{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#60a5fa;margin-bottom:4px;}
+  .asm-card-type.pain{color:#f87171;}
+  .asm-card-type.voice{color:#a78bfa;}
+  .asm-card-type.offer{color:#34d399;}
+  .asm-card-text{font-size:12px;font-weight:600;color:#e5e3de;line-height:1.4;}
+  .assembly-arrow-col{display:flex;align-items:center;justify-content:center;padding-top:48px;}
+  .asm-arrow-svg{color:#f59e0b;opacity:0.7;}
+  .asm-slot{border:1.5px dashed #3a3830;border-radius:10px;padding:12px 14px;margin-bottom:8px;position:relative;min-height:60px;transition:border-color 0.2s;}
+  .asm-slot:last-child{margin-bottom:0;}
+  .asm-slot-label{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#5a5755;margin-bottom:6px;}
+  .asm-slot-filled{background:#2a2825;border-color:#4a4745;}
+  .asm-slot-filled .asm-slot-label{color:#8a877f;}
+  .asm-slot-filled .asm-slot-content{font-size:12px;font-weight:600;color:#e5e3de;line-height:1.4;}
+  .asm-slot-empty{opacity:0.5;}
+  .asm-slot-empty .asm-slot-hint{font-size:11px;color:#5a5755;font-style:italic;}
+  .assembly-result{background:#1a1008;border-top:1px solid #3a3830;padding:16px 20px;}
+  .assembly-result-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#f59e0b;margin-bottom:8px;}
+  .assembly-result-text{font-size:13px;color:#c9c6bf;line-height:1.65;font-style:italic;}
+  /* Drag cursor line */
+  .asm-drag-hint{display:flex;align-items:center;gap:6px;margin-top:14px;padding:8px 12px;background:#1e1c18;border-radius:8px;border:1px solid #2e2c28;}
+  .asm-drag-icon{font-size:14px;}
+  .asm-drag-text{font-size:11px;color:#6a6860;}
+  </style>
+
+  <div class="assembly-mockup">
+    <div class="assembly-topbar">
+      <div class="assembly-dots">
+        <div class="assembly-dot" style="background:#ff5f57;"></div>
+        <div class="assembly-dot" style="background:#ffbd2e;"></div>
+        <div class="assembly-dot" style="background:#28c840;"></div>
       </div>
-      <div class="mockup-title-bar">Архитектор смыслов, рабочая область</div>
+      <div class="assembly-title-bar">Архитектор смыслов, Сборочный цех контента</div>
     </div>
-    <div class="mockup-body">
-      <div class="mockup-section-label">10 модулей глубинного анализа аудитории</div>
-      <div class="mockup-modules">
-        <div class="mockup-module">
-          <div class="mockup-mod-num">01</div>
-          <div class="mockup-mod-name">Портрет ЦА</div>
-          <div class="mockup-mod-desc">Ценности, страхи, мечты</div>
+    <div class="assembly-body">
+      <!-- Левая колонка -->
+      <div>
+        <div class="assembly-col-label">База смыслов от ИИ</div>
+        <div class="asm-card">
+          <div class="asm-card-type pain">01 · Pain / Болевая</div>
+          <div class="asm-card-text">Сливаю бюджет на продвижение</div>
         </div>
-        <div class="mockup-module">
-          <div class="mockup-mod-num">02</div>
-          <div class="mockup-mod-name">Скрытые возражения</div>
-          <div class="mockup-mod-desc">Что держит от покупки</div>
+        <div class="asm-card">
+          <div class="asm-card-type voice">02 · Brand Voice / Стиль</div>
+          <div class="asm-card-text">Ирония и жесткие факты</div>
         </div>
-        <div class="mockup-module">
-          <div class="mockup-mod-num">03</div>
-          <div class="mockup-mod-name">Боли в три ночи</div>
-          <div class="mockup-mod-desc">Что гуглят в состоянии отчаяния</div>
+        <div class="asm-card">
+          <div class="asm-card-type offer">03 · Offer / Магнит</div>
+          <div class="asm-card-text">Кейс Target School</div>
         </div>
-        <div class="mockup-module">
-          <div class="mockup-mod-num">04</div>
-          <div class="mockup-mod-name">Триггеры покупки</div>
-          <div class="mockup-mod-desc">Что заставляет нажать кнопку</div>
-        </div>
-        <div class="mockup-module">
-          <div class="mockup-mod-num">05</div>
-          <div class="mockup-mod-name">Язык клиента</div>
-          <div class="mockup-mod-desc">Как ЦА описывает проблему</div>
-        </div>
-        <div class="mockup-module">
-          <div class="mockup-mod-num">06</div>
-          <div class="mockup-mod-name">Конкурентный фон</div>
-          <div class="mockup-mod-desc">Почему уходят к другим</div>
-        </div>
-        <div class="mockup-module">
-          <div class="mockup-mod-num">07</div>
-          <div class="mockup-mod-name">Сарказм и провокация</div>
-          <div class="mockup-mod-desc">Форматы, которые цепляют</div>
-        </div>
-        <div class="mockup-module">
-          <div class="mockup-mod-num">08</div>
-          <div class="mockup-mod-name">История трансформации</div>
-          <div class="mockup-mod-desc">До и после клиента</div>
-        </div>
-        <div class="mockup-module">
-          <div class="mockup-mod-num">09</div>
-          <div class="mockup-mod-name">Точки решения</div>
-          <div class="mockup-mod-desc">Когда клиент готов купить</div>
-        </div>
-        <div class="mockup-module">
-          <div class="mockup-mod-num">10</div>
-          <div class="mockup-mod-name">Смысловые связки</div>
-          <div class="mockup-mod-desc">Итоговая карта аудитории</div>
+        <div class="asm-drag-hint">
+          <span class="asm-drag-icon">☝️</span>
+          <span class="asm-drag-text">Перетащите карточку в слот справа, чтобы собрать скелет поста</span>
         </div>
       </div>
-      <div class="mockup-section-label" style="color:#f59e0b;">★ Смысловой кристалл, стратегия</div>
-      <div class="mockup-modules">
-        <div class="mockup-module mockup-module-star">
-          <div class="mockup-mod-num mockup-mod-num-star">★ 01</div>
-          <div class="mockup-mod-name" style="color:#e5e3de;">Связка 1</div>
-          <div class="mockup-mod-desc">Боль → Лекарство → Артефакт</div>
+      <!-- Стрелка перетаскивания -->
+      <div class="assembly-arrow-col">
+        <svg class="asm-arrow-svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6"/>
+          <circle cx="8" cy="12" r="3" fill="#f59e0b" opacity="0.3"/>
+        </svg>
+      </div>
+      <!-- Правая колонка -->
+      <div>
+        <div class="assembly-col-label">Сборочный цех (Drag-and-Drop)</div>
+        <div class="asm-slot asm-slot-filled">
+          <div class="asm-slot-label">Слот 1 · Боль ЦА</div>
+          <div class="asm-slot-content">Сливаю бюджет на продвижение</div>
         </div>
-        <div class="mockup-module mockup-module-star">
-          <div class="mockup-mod-num mockup-mod-num-star">★ 02</div>
-          <div class="mockup-mod-name" style="color:#e5e3de;">Связка 2</div>
-          <div class="mockup-mod-desc">Боль → Лекарство → Артефакт</div>
+        <div class="asm-slot asm-slot-filled">
+          <div class="asm-slot-label">Слот 2 · Инструмент</div>
+          <div class="asm-slot-content">Кейс Target School</div>
         </div>
-        <div class="mockup-module mockup-module-star">
-          <div class="mockup-mod-num mockup-mod-num-star">★ 03</div>
-          <div class="mockup-mod-name" style="color:#e5e3de;">Связка 3</div>
-          <div class="mockup-mod-desc">Боль → Лекарство → Артефакт</div>
-        </div>
-        <div class="mockup-module mockup-module-star">
-          <div class="mockup-mod-num mockup-mod-num-star">★ 04</div>
-          <div class="mockup-mod-name" style="color:#e5e3de;">Связка 4</div>
-          <div class="mockup-mod-desc">Боль → Лекарство → Артефакт</div>
-        </div>
-        <div class="mockup-module mockup-module-star">
-          <div class="mockup-mod-num mockup-mod-num-star">★ 05</div>
-          <div class="mockup-mod-name" style="color:#e5e3de;">Связка 5</div>
-          <div class="mockup-mod-desc">Боль → Лекарство → Артефакт</div>
+        <div class="asm-slot asm-slot-filled">
+          <div class="asm-slot-label">Слот 3 · Стиль</div>
+          <div class="asm-slot-content">Ирония и жесткие факты</div>
         </div>
       </div>
     </div>
-    <div class="mockup-caption">Так выглядит ваша интерактивная рабочая область с промптами. Работайте прямо в ней или скачайте все материалы в один клик.</div>
+    <div class="assembly-result">
+      <div class="assembly-result-label">✦ Готовый скелет поста / Reels за 5 секунд</div>
+      <div class="assembly-result-text">Ироничный пост о том, как эксперты годами наступают на грабли дорогого таргета, сливая последние деньги, и решение этой проблемы через твердые цифры школы Target School.</div>
+    </div>
   </div>
 
   <div class="inside-tip">
@@ -1114,15 +1118,15 @@ function showStep(idx, el) {
     <div class="step">
       <div class="step-num">01</div>
       <div>
-        <div class="step-title">Анализ аудитории. Десять глубоких модулей.</div>
-        <div class="step-text">Пошаговые команды для нейросети, которые разложат скрытые страхи, возражения, мечты и ценности вашей ЦА. Система сформулирует вопросы, которые ваши клиенты гуглят в состоянии отчаяния в три часа ночи.</div>
+        <div class="step-title">Анализ аудитории и ДНК вашего бизнеса.</div>
+        <div class="step-text">Вы запускаете наш закрытый промпт-алгоритм «Глубоководный аналитик». Он заставляет нейросеть думать как дорогой маркетолог-стратег, вытаскивая глубочайшие смыслы именно из вашего опыта. Вы получаете карту из 10 слоев ЦА: боли, ночные страхи, скрытые мечты, возражения и сарказм аудитории.</div>
       </div>
     </div>
     <div class="step">
       <div class="step-num">★</div>
       <div>
-        <div class="step-title">Стратегия. Смысловой кристалл.</div>
-        <div class="step-text">Пять готовых связок по схеме: Боль → Лекарство → Артефакт. Это готовое техническое задание для контента, которое можно сразу передать ассистенту. Контент-план на месяц вперёд за 15 минут.</div>
+        <div class="step-title">Интерактивный «Сборочный цех контента» (Drag-and-Drop конструктор).</div>
+        <div class="step-text">Мы убрали страх «белого листа» навсегда. Полученные от ИИ карточки со смыслами встраиваются в ваш личный дашборд. Вы можете физически перетаскивать их мышкой в зону сборки, накидывать сверху элементы вашего стиля и визуально видеть скелет будущего поста или Reels. Маркетинг превратился в увлекательную сборку Lego прямо на вашем экране.</div>
       </div>
     </div>
     <div class="step">
@@ -1411,14 +1415,73 @@ function showStep(idx, el) {
     </div>
   </div>
 
-  <div class="value-total" id="pay">
-    <div>
-      <div style="font-size:13px;color:var(--muted);margin-bottom:4px;">Вместо 18 000 рублей, всего</div>
-      <div style="font-size:52px;font-weight:800;letter-spacing:-0.04em;line-height:1;">1 490 ₽</div>
-      <div style="display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--warn-brd);color:var(--warn-accent);font-size:12px;font-weight:700;padding:6px 12px;border-radius:100px;margin-top:10px;"><span class="dot" style="width:7px;height:7px;border-radius:50%;background:var(--warn-accent);"></span>Первые 50 мест по этой цене. Дальше цена растёт</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:8px;">Ссылка на личный кабинет придёт на вашу почту сразу после подтверждения платежа.</div>
+  <!-- Двухколончатая сетка тарифов -->
+  <style>
+  .tariffs-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:8px;}
+  @media(max-width:640px){.tariffs-grid{grid-template-columns:1fr;}}
+
+  /* Тариф 1 — минималистичный */
+  .tariff-card{border-radius:20px;padding:32px;display:flex;flex-direction:column;gap:0;}
+  .tariff-basic{background:var(--surface);border:1.5px solid var(--border);}
+  .tariff-name{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:16px;}
+  .tariff-price{font-size:48px;font-weight:800;letter-spacing:-0.04em;line-height:1;margin-bottom:6px;}
+  .tariff-price-note{font-size:12px;color:var(--muted);margin-bottom:24px;line-height:1.5;}
+  .tariff-divider{height:1px;background:var(--border);margin-bottom:20px;}
+  .tariff-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;flex:1;}
+  .tariff-list li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;line-height:1.55;color:var(--text);}
+  .tariff-check{flex-shrink:0;margin-top:1px;width:18px;height:18px;border-radius:50%;background:var(--ok-bg);border:1px solid var(--ok-brd);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--ok-text);}
+  .tariff-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;color:#fff;font-family:'Manrope',sans-serif;font-size:15px;font-weight:700;padding:17px 24px;border-radius:14px;text-decoration:none;letter-spacing:-0.01em;background:var(--dark);transition:transform 0.15s, opacity 0.15s;text-align:center;}
+  .tariff-btn:hover{transform:translateY(-2px);opacity:0.9;}
+
+  /* Тариф 2 — премиум */
+  .tariff-premium{background:#0f0e0c;border:1.5px solid #3a3020;position:relative;overflow:hidden;}
+  .tariff-premium::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(200,169,110,0.12) 0%,transparent 65%);pointer-events:none;}
+  .tariff-premium .tariff-name{color:#8a7a58;}
+  .tariff-premium .tariff-price{color:#fff;}
+  .tariff-premium .tariff-price-note{color:#6a6050;}
+  .tariff-premium .tariff-divider{background:#2a2820;}
+  .tariff-premium .tariff-list li{color:#d4cfc5;}
+  .tariff-gold-check{flex-shrink:0;margin-top:1px;width:18px;height:18px;border-radius:50%;background:rgba(200,169,110,0.15);border:1px solid rgba(200,169,110,0.4);display:flex;align-items:center;justify-content:center;font-size:10px;color:#C8A96E;}
+  .tariff-premium-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(200,169,110,0.1);border:1px solid rgba(200,169,110,0.3);color:#C8A96E;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:5px 12px;border-radius:100px;margin-bottom:16px;}
+  .tariff-btn-gold{background:linear-gradient(135deg,#C8A96E 0%,#9e7e4a 100%);color:#0f0e0c;font-weight:800;}
+  .tariff-btn-gold:hover{opacity:0.92;}
+  .tariff-slots-note{font-size:12px;color:#8a7a58;margin-top:10px;text-align:center;line-height:1.5;}
+  </style>
+
+  <div class="tariffs-grid" id="pay">
+    <!-- Тариф 1 -->
+    <div class="tariff-card tariff-basic">
+      <div class="tariff-name">Самостоятельный интерактивный шаблон</div>
+      <div class="tariff-price">1 490 ₽</div>
+      <div class="tariff-price-note">Доступ к системе приходит сразу после оплаты</div>
+      <div class="tariff-divider"></div>
+      <ul class="tariff-list">
+        <li><span class="tariff-check">✓</span><span>Доступ к закрытой пошаговой выдаче алгоритма</span></li>
+        <li><span class="tariff-check">✓</span><span>Авторские промпты-инструкции, которых нет в открытом доступе</span></li>
+        <li><span class="tariff-check">✓</span><span>Видеоинструкции по запуску в Claude и Gemini</span></li>
+        <li><span class="tariff-check">✓</span><span>Генерация вашего личного HTML-файла с Drag-and-Drop конструктором контента</span></li>
+        <li><span class="tariff-check">✓</span><span>Сохранение ваших личных правок прямо в файл на вашем ПК навсегда</span></li>
+      </ul>
+      <a href="https://app.lava.top/products/162ca29b-a6a4-414a-97c6-29962d1d3956" target="_blank" class="tariff-btn" onclick="fbq('track','InitiateCheckout')">Забрать систему за 1490 ₽ →</a>
     </div>
-    <a href="https://app.lava.top/products/162ca29b-a6a4-414a-97c6-29962d1d3956" target="_blank" class="btn-main" style="margin-bottom:0;" onclick="fbq('track','InitiateCheckout')">Оплатить 1490 ₽ <span class="arr">→</span></a>
+
+    <!-- Тариф 2 -->
+    <div class="tariff-card tariff-premium">
+      <div class="tariff-premium-badge">★ Личная докрутка</div>
+      <div class="tariff-name">Личное сопровождение и докрутка от Анастасии</div>
+      <div class="tariff-price" style="color:#fff;">35 000 ₽</div>
+      <div class="tariff-price-note">Беру всего 3-4 проекта в неделю</div>
+      <div class="tariff-divider"></div>
+      <ul class="tariff-list">
+        <li><span class="tariff-gold-check">✓</span><span>Всё, что входит в Тариф 1</span></li>
+        <li><span class="tariff-gold-check">✓</span><span>Моё личное 100% погружение в вашу нишу и продукт</span></li>
+        <li><span class="tariff-gold-check">✓</span><span>ИИ даёт структуру на 50%. Оставшиеся 50% глубины я докручиваю своими руками</span></li>
+        <li><span class="tariff-gold-check">✓</span><span>Лично захожу в ваш файл-конструктор и вычищаю банальщину ИИ</span></li>
+        <li><span class="tariff-gold-check">✓</span><span>Вы получаете готовый, выверенный мной «Смысловой Кристалл», по которому ваша команда сможет продавать слово в слово</span></li>
+      </ul>
+      <a href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank" class="tariff-btn tariff-btn-gold">Делегировать фундамент Анастасии →</a>
+      <div class="tariff-slots-note">Свободные места уточняйте в WhatsApp</div>
+    </div>
   </div>
 </section>
 </div>
