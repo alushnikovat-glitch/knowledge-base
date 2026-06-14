@@ -377,8 +377,8 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 100px;
     Авторский метод Анастасии Лушниковой
   </div>
   <h1 class="hero-title">АРХИТЕКТУРА СМЫСЛОВ <strong>ЗА 15 МИНУТ</strong></h1>
-  <div class="hero-tagline">Как спроектировать фундамент маркетинга лучше 94% рынка? Инструкция 2026</div>
-  <p class="hero-sub">Запустите закрытый пошаговый алгоритм, который за 15 минут вытащит из вашей головы глубокие триггеры аудитории, на которые клиенты сами пишут «куда платить». Нейросеть на основе наших авторских промптов (которых нет в свободном доступе) сама спроектирует и выдаст вам готовое интерактивное рабочее пространство под ваш бизнес в виде автономного файла.</p>
+  <div class="hero-tagline">Как спроектировать фундамент маркетинга лучше 94% рынка?</div>
+  <p class="hero-sub">Метод, который позволяет забирать 80% денег в вашей нише даже при охвате всего 150 человек. Спроектируйте ИИ-дашборд продаж за 15 минут и заставьте людей в Директе писать «куда платить», пока остальные авторы сутками монтируют Reels ради пустых лайков.</p>
   <p class="hero-sub2">Без абонентских плат. Без сложных программ. Без слива бюджета на тесты.</p>
   <div class="hero-price-row">
     <span class="price-new">1 490 ₽</span>
@@ -722,105 +722,1483 @@ footer{text-align:center;font-size:13px;color:var(--light);padding:0 24px 100px;
     <p>Вы открываете его на своем компьютере в один клик прямо в браузере (даже без интернета). Он работает абсолютно конфиденциально — все данные хранятся только у вас на жестком диске. Ваши боли ЦА, страхи и смысловые связки уже упакованы в интерактивные карточки.</p>
   </div>
 
-  <!-- Сборочный цех: двухпанельный интерфейс -->
+  <!-- Визуализатор: тёмная врезка -->
   <style>
-  .assembly-mockup{background:var(--dark);border-radius:20px;overflow:hidden;margin-bottom:16px;}
-  .assembly-topbar{background:#2a2825;padding:12px 20px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #3a3830;}
-  .assembly-dots{display:flex;gap:6px;}
-  .assembly-dot{width:12px;height:12px;border-radius:50%;}
-  .assembly-title-bar{flex:1;text-align:center;font-size:12px;color:#8a877f;font-family:'JetBrains Mono',monospace;}
-  .assembly-body{padding:20px;display:grid;grid-template-columns:1fr 48px 1fr;gap:0;align-items:start;}
-  @media(max-width:640px){
-    .assembly-body{grid-template-columns:1fr;gap:16px;}
-    .assembly-arrow-col{transform:rotate(90deg);display:flex;justify-content:center;}
-  }
-  .assembly-col-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#8a877f;margin-bottom:12px;}
-  .asm-card{background:#2a2825;border:1px solid #3a3830;border-radius:10px;padding:12px 14px;margin-bottom:8px;cursor:grab;}
-  .asm-card:last-child{margin-bottom:0;}
-  .asm-card-type{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#60a5fa;margin-bottom:4px;}
-  .asm-card-type.pain{color:#f87171;}
-  .asm-card-type.voice{color:#a78bfa;}
-  .asm-card-type.offer{color:#34d399;}
-  .asm-card-text{font-size:12px;font-weight:600;color:#e5e3de;line-height:1.4;}
-  .assembly-arrow-col{display:flex;align-items:center;justify-content:center;padding-top:48px;}
-  .asm-arrow-svg{color:#f59e0b;opacity:0.7;}
-  .asm-slot{border:1.5px dashed #3a3830;border-radius:10px;padding:12px 14px;margin-bottom:8px;position:relative;min-height:60px;transition:border-color 0.2s;}
-  .asm-slot:last-child{margin-bottom:0;}
-  .asm-slot-label{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#5a5755;margin-bottom:6px;}
-  .asm-slot-filled{background:#2a2825;border-color:#4a4745;}
-  .asm-slot-filled .asm-slot-label{color:#8a877f;}
-  .asm-slot-filled .asm-slot-content{font-size:12px;font-weight:600;color:#e5e3de;line-height:1.4;}
-  .asm-slot-empty{opacity:0.5;}
-  .asm-slot-empty .asm-slot-hint{font-size:11px;color:#5a5755;font-style:italic;}
-  .assembly-result{background:#1a1008;border-top:1px solid #3a3830;padding:16px 20px;}
-  .assembly-result-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#f59e0b;margin-bottom:8px;}
-  .assembly-result-text{font-size:13px;color:#c9c6bf;line-height:1.65;font-style:italic;}
-  /* Drag cursor line */
-  .asm-drag-hint{display:flex;align-items:center;gap:6px;margin-top:14px;padding:8px 12px;background:#1e1c18;border-radius:8px;border:1px solid #2e2c28;}
-  .asm-drag-icon{font-size:14px;}
-  .asm-drag-text{font-size:11px;color:#6a6860;}
-  </style>
 
-  <div class="assembly-mockup">
-    <div class="assembly-topbar">
-      <div class="assembly-dots">
-        <div class="assembly-dot" style="background:#ff5f57;"></div>
-        <div class="assembly-dot" style="background:#ffbd2e;"></div>
-        <div class="assembly-dot" style="background:#28c840;"></div>
-      </div>
-      <div class="assembly-title-bar">Архитектор смыслов, Сборочный цех контента</div>
-    </div>
-    <div class="assembly-body">
-      <!-- Левая колонка -->
-      <div>
-        <div class="assembly-col-label">База смыслов от ИИ</div>
-        <div class="asm-card">
-          <div class="asm-card-type pain">01 · Pain / Болевая</div>
-          <div class="asm-card-text">Клиенты не понимают, за что платить</div>
-        </div>
-        <div class="asm-card">
-          <div class="asm-card-type voice">02 · Brand Voice / Стиль</div>
-          <div class="asm-card-text">Честно, без пафоса, через цифры</div>
-        </div>
-        <div class="asm-card">
-          <div class="asm-card-type offer">03 · Offer / Магнит</div>
-          <div class="asm-card-text">Кейс: первый клиент за 3 дня</div>
-        </div>
-        <div class="asm-drag-hint">
-          <span class="asm-drag-icon">☝️</span>
-          <span class="asm-drag-text">Перетащите карточку в слот справа, чтобы собрать скелет поста</span>
-        </div>
-      </div>
-      <!-- Стрелка перетаскивания -->
-      <div class="assembly-arrow-col">
-        <svg class="asm-arrow-svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path d="M9 18l6-6-6-6"/>
-          <circle cx="8" cy="12" r="3" fill="#f59e0b" opacity="0.3"/>
-        </svg>
-      </div>
-      <!-- Правая колонка -->
-      <div>
-        <div class="assembly-col-label">Сборочный цех (Drag-and-Drop)</div>
-        <div class="asm-slot asm-slot-filled">
-          <div class="asm-slot-label">Слот 1 · Боль ЦА</div>
-          <div class="asm-slot-content">Клиенты не понимают, за что платить</div>
-        </div>
-        <div class="asm-slot asm-slot-filled">
-          <div class="asm-slot-label">Слот 2 · Инструмент</div>
-          <div class="asm-slot-content">Кейс: первый клиент за 3 дня</div>
-        </div>
-        <div class="asm-slot asm-slot-filled">
-          <div class="asm-slot-label">Слот 3 · Стиль</div>
-          <div class="asm-slot-content">Честно, без пафоса, через цифры</div>
-        </div>
-      </div>
-    </div>
-    <div class="assembly-result">
-      <div class="assembly-result-label">✦ Готовый скелет поста / Reels за 5 секунд</div>
-      <div class="assembly-result-text">Честный пост о том, почему клиенты уходят молча, не объясняя причину, и как один конкретный кейс закрывает это возражение лучше любого оффера.</div>
-    </div>
+/* ════════════════════════════════════════════
+   ТОКЕНЫ
+════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+#viz-block html { scroll-behavior: smooth; }
+
+
+
+/* ════════════════════════════════════════════
+   HEADER
+════════════════════════════════════════════ */
+#viz-block .site-header {
+  text-align: center;
+  padding: 48px 20px 36px;
+  position: relative;
+}
+#viz-block .site-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 320px; height: 1px;
+  background: linear-gradient(90deg, transparent, #252d48, transparent);
+}
+#viz-block .header-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #C8A96E;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+#viz-block .header-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #C8A96E;
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+@keyframes glow-pulse {
+#viz-block 0%, #viz-block 100% { box-shadow: 0 0 0 0 rgba(200,169,110,0.22); }
+#viz-block 50% { box-shadow: 0 0 0 6px transparent; }
+}
+#viz-block .header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 5vw, 44px);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 12px;
+  color: #fff;
+}
+#viz-block .header-title em { font-style: italic; color: #C8A96E; }
+#viz-block .header-sub {
+  font-size: 15px;
+  color: #a0a4bc;
+  max-width: 460px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ════════════════════════════════════════════
+   STAGE WRAPPER
+════════════════════════════════════════════ */
+#viz-block .stage-outer {
+  max-width: 860px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+}
+
+/* Полоска шагов */
+#viz-block .step-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 32px;
+  position: relative;
+}
+#viz-block .step-track-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 1px;
+  background: #252d48;
+  z-index: 0;
+}
+#viz-block .step-node {
+  position: relative;
+  z-index: 1;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid #252d48;
+  background: #0f1220;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: #6a6e88;
+  cursor: pointer;
+  transition: border-color 0.3s, color 0.3s, box-shadow 0.3s, background 0.3s;
+  flex-shrink: 0;
+}
+#viz-block .step-node.active {
+  border-color: #C8A96E;
+  color: #C8A96E;
+  background: #161b2e;
+  box-shadow: 0 0 0 4px rgba(200,169,110,0.22);
+}
+#viz-block .step-node.done {
+  border-color: #7a6030;
+  background: rgba(200,169,110,0.08);
+  color: #7a6030;
+}
+#viz-block .step-connector {
+  flex: 1;
+  height: 1px;
+  background: #252d48;
+  transition: background 0.5s;
+  min-width: 20px;
+}
+#viz-block .step-connector.lit { background: #7a6030; }
+
+/* ════════════════════════════════════════════
+   СЦЕНА
+════════════════════════════════════════════ */
+#viz-block .stage {
+  background: #090c18;
+  border: 1px solid #252d48;
+  border-radius: 24px;
+  position: relative;
+}
+/* фоновый туман */
+#viz-block .stage::before {
+  content: '';
+  position: absolute;
+  top: -40%; left: 30%;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,169,110,0.04) 0%, transparent 65%);
+  pointer-events: none;
+}
+#viz-block .stage::after {
+  content: '';
+  position: absolute;
+  bottom: -30%; right: -10%;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(91,141,239,0.04) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Каждый шаг — скрыт по умолчанию */
+#viz-block .step-scene {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 28px;
+  width: 100%;
+}
+#viz-block .step-scene.active {
+  display: flex;
+}
+.step-scene.exit-left,
+#viz-block .step-scene.exit-right {
+  display: none;
+}
+
+/* ════════════════════════════════════════════
+   ШАГ 1 — Секретный промпт
+════════════════════════════════════════════ */
+#viz-block .prompt-card {
+  background: linear-gradient(135deg, #12180f 0%, #0d1120 50%, #100818 100%);
+  border: 1px solid #7a6030;
+  border-radius: 20px;
+  padding: 28px 32px;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 48px rgba(200,169,110,0.08), 0 24px 64px rgba(0,0,0,0.5);
+}
+#viz-block .prompt-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C8A96E, transparent);
+}
+#viz-block .pc-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #C8A96E;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+#viz-block .pc-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+  line-height: 1.25;
+}
+#viz-block .pc-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+#viz-block .pc-line {
+  height: 8px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.06);
+}
+#viz-block .pc-line.l1 { width: 100%; }
+#viz-block .pc-line.l2 { width: 85%; }
+#viz-block .pc-line.l3 { width: 70%; }
+
+#viz-block .pc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #C8A96E;
+  color: #0a0c14;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 11px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  font-family: 'Manrope', sans-serif;
+}
+
+/* Курсор-рука */
+#viz-block .cursor {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  z-index: 20;
+  transition: left 0.6s cubic-bezier(0.4,0,0.2,1), top 0.6s cubic-bezier(0.4,0,0.2,1);
+  font-size: 22px;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+}
+#viz-block .cursor.clicking { animation: click-bounce 0.25s ease; }
+@keyframes click-bounce {
+#viz-block 0%, #viz-block 100% { transform: scale(1); }
+#viz-block 50% { transform: scale(0.78); }
+}
+
+/* Искра «скопировано» */
+#viz-block .copy-flash {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(200,169,110,0.12);
+  border: 1px solid #C8A96E;
+  color: #C8A96E;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 100px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.35s;
+  z-index: 10;
+}
+#viz-block .copy-flash.show { opacity: 1; }
+
+/* ════════════════════════════════════════════
+   ШАГ 2 — Интерфейс Claude
+════════════════════════════════════════════ */
+#viz-block .claude-ui {
+  background: #0a0b10;
+  border: 1px solid #1e2234;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 540px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+}
+#viz-block .claude-topbar {
+  background: #0f1019;
+  border-bottom: 1px solid #1e2234;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#viz-block .c-dots { display: flex; gap: 5px; }
+#viz-block .c-dot { width: 10px; height: 10px; border-radius: 50%; }
+#viz-block .claude-title-bar {
+  font-size: 11px;
+  color: #3a3d54;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+  margin-left: 6px;
+}
+#viz-block .claude-body { padding: 16px; }
+#viz-block .claude-input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+#viz-block .claude-input {
+  flex: 1;
+  background: #141620;
+  border: 1px solid #252a3e;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #e0dbd0;
+  font-size: 12px;
+  font-family: 'Manrope', sans-serif;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+#viz-block .claude-input .typed-text { color: #a0c4ff; font-size: 11px; }
+#viz-block .claude-input .cursor-blink {
+  display: inline-block;
+  width: 2px; height: 13px;
+  background: #5b8def;
+  animation: blink 0.9s step-end infinite;
+  vertical-align: middle;
+  margin-left: 1px;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+#viz-block .claude-send-btn {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: #5b8def;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+  flex-shrink: 0;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+/* Пульс «думает» */
+#viz-block .ai-thinking {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+#viz-block .ai-thinking.show { opacity: 1; }
+#viz-block .ai-thinking-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #C8A96E;
+  animation: bounce-dot 1.2s ease-in-out infinite;
+}
+#viz-block .ai-thinking-dot:nth-child(2) { animation-delay: 0.15s; }
+#viz-block .ai-thinking-dot:nth-child(3) { animation-delay: 0.3s; }
+@keyframes bounce-dot {
+#viz-block 0%, #viz-block 80%, #viz-block 100% {transform:translateY(0);opacity:0.4}
+#viz-block 40% {transform:translateY(-6px);opacity:1}
+}
+
+/* Таблица-результат */
+#viz-block .ai-table {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #252a3e;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+#viz-block .ai-table.show { opacity: 1; transform: translateY(0); }
+#viz-block .ai-table-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  border-bottom: 1px solid #1e2234;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.4s, transform 0.4s;
+}
+#viz-block .ai-table-row:last-child { border-bottom: none; }
+#viz-block .ai-table-row.appear { opacity: 1; transform: translateX(0); }
+#viz-block .ai-tc {
+  padding: 9px 12px;
+  font-size: 11px;
+  line-height: 1.45;
+}
+#viz-block .ai-tc-head {
+  background: #141620;
+  font-weight: 700;
+  color: #a0a4bc;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+#viz-block .ai-tc-body { color: #c4c0b8; background: #0f1019; }
+#viz-block .ai-tc-body.pain { border-left: 2px solid #e05252; }
+#viz-block .ai-tc-body.cure { border-left: 2px solid #e07c30; }
+#viz-block .ai-tc-body.voice { border-left: 2px solid #3ecf8e; }
+
+/* ════════════════════════════════════════════
+   ШАГ 3 — Дашборд: вылет карточек
+════════════════════════════════════════════ */
+#viz-block .dash-panel {
+  background: #0f1220;
+  border: 1px solid #252d48;
+  border-radius: 18px;
+  padding: 20px;
+  width: 100%;
+  max-width: 500px;
+}
+#viz-block .dash-panel-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6a6e88;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+#viz-block .dash-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#viz-block .dash-card {
+  border-radius: 12px;
+  padding: 14px 16px;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  opacity: 0;
+  transform: translateX(-20px) scale(0.95);
+  transition: opacity 0.45s, transform 0.45s;
+  position: relative;
+  overflow: hidden;
+}
+#viz-block .dash-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+}
+#viz-block .dash-card.appear { opacity: 1; transform: translateX(0) scale(1); }
+#viz-block .dash-card.dc-pain { background: rgba(224,82,82,0.07);  border-color: rgba(224,82,82,0.2);  }
+#viz-block .dash-card.dc-cure { background: rgba(224,124,48,0.07); border-color: rgba(224,124,48,0.2); }
+#viz-block .dash-card.dc-voice { background: rgba(62,207,142,0.06); border-color: rgba(62,207,142,0.2); }
+#viz-block .dash-card.dc-pain::before { background: #e05252; }
+#viz-block .dash-card.dc-cure::before { background: #e07c30; }
+#viz-block .dash-card.dc-voice::before { background: #3ecf8e; }
+#viz-block .dc-icon {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+#viz-block .dc-pain  .dc-icon { background: rgba(224,82,82,0.15);   color: #e05252; }
+#viz-block .dc-cure  .dc-icon { background: rgba(224,124,48,0.13);  color: #e07c30; }
+#viz-block .dc-voice .dc-icon { background: rgba(62,207,142,0.12);  color: #3ecf8e; }
+#viz-block .dc-body .dc-type {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 3px;
+}
+#viz-block .dc-pain  .dc-type { color: #e05252; }
+#viz-block .dc-cure  .dc-type { color: #e07c30; }
+#viz-block .dc-voice .dc-type { color: #3ecf8e; }
+#viz-block .dc-body .dc-text {
+  font-size: 12.5px; font-weight: 600;
+  color: #e0dbd0; line-height: 1.4;
+}
+
+/* ════════════════════════════════════════════
+   ШАГ 4 — Drag-анимация
+════════════════════════════════════════════ */
+#viz-block .lego-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+  max-width: 580px;
+}
+@media(max-width:520px){
+#viz-block .lego-wrap { grid-template-columns: 1fr; }
+}
+#viz-block .lego-col-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.09em; text-transform: uppercase;
+  color: #6a6e88; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 5px;
+}
+#viz-block .lego-card {
+  background: #161b2e;
+  border: 1px solid #252d48;
+  border-radius: 10px;
+  padding: 11px 13px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #e0dbd0;
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.4s, transform 0.4s;
+}
+#viz-block .lego-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+}
+#viz-block .lego-card.lc-pain::before { background: #e05252; }
+#viz-block .lego-card.lc-cure::before { background: #e07c30; }
+#viz-block .lego-card.lc-voice::before { background: #3ecf8e; }
+#viz-block .lego-card.dragged { opacity: 0.3; }
+
+#viz-block .lego-slot {
+  border: 1.5px dashed;
+  border-radius: 10px;
+  padding: 13px;
+  margin-bottom: 8px;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  transition: border-color 0.4s, background 0.4s, box-shadow 0.4s;
+  font-size: 11px;
+  color: #6a6e88;
+}
+#viz-block .lego-slot.sl-pain { border-color: rgba(224,82,82,0.35);   background: rgba(224,82,82,0.05); }
+#viz-block .lego-slot.sl-cure { border-color: rgba(224,124,48,0.35);  background: rgba(224,124,48,0.05); }
+#viz-block .lego-slot.sl-voice { border-color: rgba(62,207,142,0.35);  background: rgba(62,207,142,0.05); }
+
+#viz-block .lego-slot.lit-pain { border-color: #e05252;    background: rgba(224,82,82,0.12);  box-shadow: 0 0 16px rgba(224,82,82,0.3);    border-style: solid; }
+#viz-block .lego-slot.lit-cure { border-color: #e07c30; background: rgba(224,124,48,0.1);  box-shadow: 0 0 16px rgba(224,124,48,0.3); border-style: solid; }
+#viz-block .lego-slot.lit-voice { border-color: #3ecf8e;  background: rgba(62,207,142,0.1);  box-shadow: 0 0 16px rgba(62,207,142,0.3);  border-style: solid; }
+
+#viz-block .slot-filled-text { font-size: 12px; font-weight: 600; color: #e0dbd0; }
+
+/* Курсор-рука (Step 4) */
+#viz-block .drag-cursor {
+  position: absolute;
+  font-size: 22px;
+  z-index: 20;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+  transition: left 0.7s cubic-bezier(0.4,0,0.2,1), top 0.7s cubic-bezier(0.4,0,0.2,1);
+  opacity: 0;
+}
+#viz-block .drag-cursor.visible { opacity: 1; }
+
+/* ════════════════════════════════════════════
+   ШАГ 5 — Результат-пост
+════════════════════════════════════════════ */
+#viz-block .result-scene {
+  width: 100%;
+  max-width: 540px;
+}
+/* Золотая молния-соединение */
+#viz-block .lightning-svg {
+  display: block;
+  margin: 0 auto 16px;
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+#viz-block .lightning-svg.show { opacity: 1; }
+#viz-block .lightning-path {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  transition: stroke-dashoffset 1s ease;
+}
+#viz-block .lightning-path.draw { stroke-dashoffset: 0; }
+
+#viz-block .result-card {
+  background: #0f1220;
+  border: 1px solid #252d48;
+  border-radius: 18px;
+  padding: 24px 26px;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s, transform 0.6s;
+}
+#viz-block .result-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+#viz-block .result-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C8A96E, transparent);
+  opacity: 0;
+  transition: opacity 0.6s 0.5s;
+}
+#viz-block .result-card.show::before { opacity: 1; }
+#viz-block .result-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  box-shadow: 0 0 0 0 rgba(200,169,110,0.22);
+  transition: box-shadow 1s 0.3s;
+  pointer-events: none;
+}
+#viz-block .result-card.show .result-glow { box-shadow: 0 0 60px 4px rgba(200,169,110,0.22); }
+
+#viz-block .result-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #C8A96E; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 6px;
+}
+#viz-block .result-post-text {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #e0dbd0;
+  white-space: pre-line;
+  margin-bottom: 20px;
+}
+#viz-block .result-post-text strong { color: #fff; font-weight: 700; }
+
+#viz-block .result-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+#viz-block .btn-copy-result {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #C8A96E;
+  color: #09090f;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+#viz-block .btn-copy-result::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.18) 50%, transparent 60%);
+  background-size: 200% auto;
+  animation: btn-shimmer 2s linear infinite;
+}
+@keyframes btn-shimmer {
+#viz-block 0% { background-position: -200% center; }
+#viz-block 100% { background-position:  200% center; }
+}
+#viz-block .btn-copy-result:hover { opacity:0.88; transform:translateY(-1px); }
+
+/* Конфетти */
+#viz-block .confetti-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 18px;
+}
+#viz-block .confetti-piece {
+  position: absolute;
+  width: 6px; height: 8px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: confetti-fall 1.6s ease-out forwards;
+}
+@keyframes confetti-fall {
+#viz-block 0% { opacity: 1; transform: translateY(-20px) rotate(0deg) scale(1); }
+#viz-block 100% { opacity: 0; transform: translateY(180px) rotate(400deg) scale(0.6); }
+}
+
+/* ════════════════════════════════════════════
+   STEP LABEL
+════════════════════════════════════════════ */
+#viz-block .step-label-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+#viz-block .step-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #161b2e;
+  border: 1px solid #252d48;
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #C8A96E;
+  letter-spacing: 0.06em;
+}
+#viz-block .step-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #e0dbd0;
+}
+
+/* ════════════════════════════════════════════
+   ПАНЕЛЬ УПРАВЛЕНИЯ
+════════════════════════════════════════════ */
+#viz-block .controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+#viz-block .ctrl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #161b2e;
+  border: 1px solid #252d48;
+  color: #e0dbd0;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 11px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+#viz-block .ctrl-btn:hover { border-color: #6a6e88; transform: translateY(-1px); }
+#viz-block .ctrl-btn:disabled { opacity: 0.35; cursor: default; transform: none; }
+#viz-block .ctrl-play {
+  background: #C8A96E;
+  color: #09090f;
+  border-color: #C8A96E;
+  font-weight: 800;
+  padding: 11px 28px;
+}
+#viz-block .ctrl-play:hover { opacity: 0.88; transform: translateY(-1px); }
+#viz-block .ctrl-play:disabled { opacity: 0.4; }
+
+#viz-block .stage-hint {
+  text-align: center;
+  font-size: 12px;
+  color: #6a6e88;
+  margin-top: 14px;
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════ */
+
+/* ── Планшет ── */
+@media(max-width: 720px) {
+#viz-block .stage-outer { padding: 0 12px; }
+#viz-block .stage { min-height: 480px; }
+
+#viz-block .claude-ui { max-width: 100%; }
+#viz-block .claude-input { font-size: 10px; }
+
+#viz-block .lego-wrap { max-width: 100%; }
+
+#viz-block .result-scene { max-width: 100%; }
+#viz-block .result-card { padding: 20px 18px; }
+#viz-block .result-post-text { font-size: 13px; }
+}
+
+/* ── Мобильный ── */
+@media(max-width: 520px) {
+
+  /* Общее */
+
+#viz-block .site-header { padding: 32px 16px 24px; }
+#viz-block .header-sub { font-size: 13px; }
+#viz-block .stage-outer { padding: 0 10px; }
+
+  /* Сцена — авто-высота, скролл внутри */
+#viz-block .stage {
+    min-height: unset;
+    height: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 16px;
+  }
+
+  /* Сцены уже используют display:none/flex — работает везде */
+
+  /* Заголовок шага */
+#viz-block .step-label-row {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+#viz-block .step-name { font-size: 13px; }
+#viz-block .step-badge { font-size: 10px; padding: 5px 11px; }
+
+  /* Трек шагов */
+#viz-block .step-track { gap: 0; margin-bottom: 20px; }
+#viz-block .step-node { width: 30px; height: 30px; font-size: 11px; }
+#viz-block .step-connector { min-width: 10px; }
+
+  /* ── ШАГ 1: промпт-карточка ── */
+#viz-block .prompt-card { max-width: 100%; padding: 20px 16px; border-radius: 14px; }
+#viz-block .pc-title { font-size: 16px; }
+#viz-block .pc-btn { font-size: 12px; padding: 10px 16px; width: 100%; justify-content: center; }
+#viz-block .cursor { display: none; }   /* курсор-рука скрыт на тач-устройствах */
+#viz-block .copy-flash {
+    font-size: 12px;
+    padding: 9px 16px;
+    white-space: normal;
+    text-align: center;
+    width: calc(100% - 32px);
+  }
+
+  /* ── ШАГ 2: Claude UI ── */
+#viz-block .claude-ui { max-width: 100%; border-radius: 12px; }
+#viz-block .claude-body { padding: 12px 10px; }
+#viz-block .claude-input { font-size: 10px; padding: 8px 10px; min-height: 38px; }
+#viz-block .claude-send-btn { width: 38px; height: 38px; font-size: 13px; }
+#viz-block .ai-table { font-size: 11px; }
+#viz-block .ai-tc { padding: 7px 8px; font-size: 10px; }
+#viz-block .ai-table-row { grid-template-columns: 90px 1fr; }
+#viz-block .ai-tc-head { font-size: 9px; }
+
+  /* ── ШАГ 3: дашборд ── */
+#viz-block .dash-panel { max-width: 100%; padding: 14px 12px; border-radius: 14px; }
+#viz-block .dash-card { padding: 11px 12px; }
+#viz-block .dc-icon { width: 26px; height: 26px; font-size: 11px; flex-shrink: 0; }
+#viz-block .dc-body .dc-text { font-size: 11.5px; }
+#viz-block .dc-body .dc-type { font-size: 9px; }
+
+  /* ── ШАГ 4: lego — вертикально ── */
+#viz-block .lego-wrap {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 12px;
+  }
+  /* Скрываем курсор drag на мобильном, слоты заполняются сразу */
+#viz-block .drag-cursor { display: none; }
+
+#viz-block .lego-card { padding: 10px 12px; font-size: 11px; }
+#viz-block .lego-slot { padding: 10px 12px; min-height: 44px; font-size: 10px; }
+#viz-block .lego-col-label { font-size: 9px; }
+
+  /* ── ШАГ 5: результат ── */
+#viz-block .result-scene { max-width: 100%; }
+#viz-block .result-card { padding: 16px 14px; border-radius: 14px; }
+#viz-block .result-post-text { font-size: 12.5px; line-height: 1.7; }
+#viz-block .result-label { font-size: 9px; }
+#viz-block .lightning-svg { width: 100%; max-width: 280px; }
+#viz-block .btn-copy-result { font-size: 12px; padding: 11px 16px; width: 100%; justify-content: center; }
+
+  /* Управление */
+#viz-block .controls { gap: 8px; flex-wrap: wrap; }
+#viz-block .ctrl-btn { padding: 10px 14px; font-size: 12px; flex: 1; justify-content: center; min-width: 80px; }
+#viz-block .ctrl-play { padding: 11px 20px; flex: 2; font-size: 13px; }
+#viz-block .stage-hint { font-size: 11px; padding: 0 4px; }
+}
+
+  </style>
+  <div id="viz-block" style="background:#05070f;border-radius:24px;padding:36px 28px 32px;margin-bottom:16px;">
+    <p style="text-align:center;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#C8A96E;margin:0 0 8px;">● Интерактивное демо</p>
+    <p style="text-align:center;font-size:14px;color:#a0a4bc;line-height:1.6;max-width:480px;margin:0 auto 24px;">Потратьте 45 секунд — и увидите, как три реальные боли вашей аудитории превращаются в готовый продающий пост прямо на экране.</p>
+    <div class="stage-outer">
+<div class="step-track">
+    <div class="step-node active" data-step="0" onclick="jumpToStep(0)">1</div>
+    <div class="step-connector" id="conn-0"></div>
+    <div class="step-node" data-step="1" onclick="jumpToStep(1)">2</div>
+    <div class="step-connector" id="conn-1"></div>
+    <div class="step-node" data-step="2" onclick="jumpToStep(2)">3</div>
+    <div class="step-connector" id="conn-2"></div>
+    <div class="step-node" data-step="3" onclick="jumpToStep(3)">4</div>
+    <div class="step-connector" id="conn-3"></div>
+    <div class="step-node" data-step="4" onclick="jumpToStep(4)">5</div>
   </div>
 
+  <!-- Сцена -->
+  <div class="stage" id="stage">
+
+    <!-- ═══════════════════════════════════
+         ШАГ 1: Секретный промпт
+    ════════════════════════════════════════ -->
+    <div class="step-scene active" id="scene-0">
+      <div class="step-label-row">
+        <div class="step-badge">🔑 Шаг 1</div>
+        <div class="step-name">Копирование секретного промпта</div>
+      </div>
+
+      <div style="position:relative; width:100%; max-width:420px;">
+        <div class="prompt-card" id="pc">
+          <div class="pc-label">🔒 Закрытый алгоритм Анастасии</div>
+          <div class="pc-title">Секретный промпт-алгоритм<br>«Глубоководный аналитик»</div>
+          <div class="pc-lines">
+            <div class="pc-line l1"></div>
+            <div class="pc-line l2"></div>
+            <div class="pc-line l3"></div>
+          </div>
+          <button class="pc-btn" id="pcCopyBtn">
+            ⊕ Скопировать промпт Анастасии
+          </button>
+        </div>
+
+        <!-- Курсор-рука -->
+        <div class="cursor" id="cursor1" style="left:40px;top:40px;">☝️</div>
+
+        <!-- Тост «скопировано» -->
+        <div class="copy-flash" id="copyFlash">
+          ✓ Скопировано в буфер! Трансформируем в Claude AI...
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         ШАГ 2: Claude AI
+    ════════════════════════════════════════ -->
+    <div class="step-scene" id="scene-1">
+      <div class="step-label-row">
+        <div class="step-badge">✦ Шаг 2</div>
+        <div class="step-name">Магия генерации в Claude AI</div>
+      </div>
+
+      <div class="claude-ui">
+        <div class="claude-topbar">
+          <div class="c-dots">
+            <div class="c-dot" style="background:#e05252"></div>
+            <div class="c-dot" style="background:#e0a352"></div>
+            <div class="c-dot" style="background:#52e07b"></div>
+          </div>
+          <div class="claude-title-bar">claude.ai · новый чат</div>
+        </div>
+        <div class="claude-body">
+          <div class="claude-input-row">
+            <div class="claude-input" id="claudeInput">
+              <span class="typed-text" id="typedText"></span>
+              <span class="cursor-blink" id="cursorBlink"></span>
+            </div>
+            <button class="claude-send-btn" id="claudeSendBtn" style="opacity:0.3">
+              →
+            </button>
+          </div>
+          <!-- ИИ думает -->
+          <div class="ai-thinking" id="aiThinking">
+            <div class="ai-thinking-dot"></div>
+            <div class="ai-thinking-dot"></div>
+            <div class="ai-thinking-dot"></div>
+            <span style="font-size:12px;color:var(--muted);margin-left:4px;">Claude анализирует вашу аудиторию...</span>
+          </div>
+          <!-- Таблица -->
+          <div class="ai-table" id="aiTable">
+            <div class="ai-table-row" id="tr-head">
+              <div class="ai-tc ai-tc-head">Боль ЦА</div>
+              <div class="ai-tc ai-tc-head">Глубинный смысл</div>
+            </div>
+            <div class="ai-table-row" id="tr-pain">
+              <div class="ai-tc ai-tc-head" style="color:var(--red)">Свобода vs Алгоритм</div>
+              <div class="ai-tc ai-tc-body pain">Хочу выкладывать то, что мне нравится. А не то, что «должно залетать»</div>
+            </div>
+            <div class="ai-table-row" id="tr-cure">
+              <div class="ai-tc ai-tc-head" style="color:var(--orange)">Видимость и отклик</div>
+              <div class="ai-tc ai-tc-body cure">Пишу много, а как будто никто не видит. Делаю, делаю — всё в пустоту</div>
+            </div>
+            <div class="ai-table-row" id="tr-voice">
+              <div class="ai-tc ai-tc-head" style="color:var(--green)">Самоидентификация</div>
+              <div class="ai-tc ai-tc-body voice">Знаю, что делаю. Но не знаю, как это назвать, упаковать и кому продать</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         ШАГ 3: Дашборд
+    ════════════════════════════════════════ -->
+    <div class="step-scene" id="scene-2">
+      <div class="step-label-row">
+        <div class="step-badge">◈ Шаг 3</div>
+        <div class="step-name">Создание личного дашборда</div>
+      </div>
+
+      <div class="dash-panel">
+        <div class="dash-panel-title">
+          
+          Ваши смыслы · личная база знаний
+        </div>
+        <div class="dash-cards">
+          <div class="dash-card dc-pain" id="dc-pain">
+            <div class="dc-icon">🔥</div>
+            <div class="dc-body">
+              <div class="dc-type">Боль 1 · Свобода vs Алгоритм</div>
+              <div class="dc-text">Заебали алгоритмы. Хочу свободу выражения, а не плясать под дудку охватов</div>
+            </div>
+          </div>
+          <div class="dash-card dc-cure" id="dc-cure">
+            <div class="dc-icon">📡</div>
+            <div class="dc-body">
+              <div class="dc-type">Боль 2 · Работа в пустоту</div>
+              <div class="dc-text">Пишу километровые посты, а в ответ глухая тишина. Зачем всё это?</div>
+            </div>
+          </div>
+          <div class="dash-card dc-voice" id="dc-voice">
+            <div class="dc-icon">📦</div>
+            <div class="dc-body">
+              <div class="dc-type">Боль 3 · Самоидентификация</div>
+              <div class="dc-text">Знаю, что я классный эксперт, но не могу упаковать свои услуги просто и твёрдо</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         ШАГ 4: Drag Lego
+    ════════════════════════════════════════ -->
+    <div class="step-scene" id="scene-3">
+      <div class="step-label-row">
+        <div class="step-badge">⬡ Шаг 4</div>
+        <div class="step-name">Сборка Lego-контента</div>
+      </div>
+
+      <div class="lego-wrap" style="position:relative;">
+        <!-- Левая: карточки -->
+        <div>
+          <div class="lego-col-label">◎ База смыслов</div>
+          <div class="lego-card lc-pain" id="lc-pain">
+            🔥 
+            Заебали алгоритмы — хочу выражать себя
+          </div>
+          <div class="lego-card lc-cure" id="lc-cure">
+            📡 
+            Пишу в пустоту — никакой реакции
+          </div>
+          <div class="lego-card lc-voice" id="lc-voice">
+            📦 
+            Не знаю, как упаковать и продать себя
+          </div>
+        </div>
+        <!-- Правая: слоты -->
+        <div>
+          <div class="lego-col-label">⚙ Сборочный цех</div>
+          <div class="lego-slot sl-pain"  id="ls-pain">
+            <span id="ls-pain-text" style="color:var(--muted);font-size:11px;">[ Слот 1: Боль ЦА ]</span>
+          </div>
+          <div class="lego-slot sl-cure"  id="ls-cure">
+            <span id="ls-cure-text" style="color:var(--muted);font-size:11px;">[ Слот 2: Лекарство ]</span>
+          </div>
+          <div class="lego-slot sl-voice" id="ls-voice">
+            <span id="ls-voice-text" style="color:var(--muted);font-size:11px;">[ Слот 3: Тональность ]</span>
+          </div>
+        </div>
+        <!-- Курсор перетаскивания -->
+        <div class="drag-cursor" id="dragCursor">🖱️</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         ШАГ 5: Результат
+    ════════════════════════════════════════ -->
+    <div class="step-scene" id="scene-4">
+      <div class="step-label-row">
+        <div class="step-badge">⚡ Шаг 5</div>
+        <div class="step-name">Готовые продажи</div>
+      </div>
+
+      <div class="result-scene">
+        <!-- Молния-соединение -->
+        <svg class="lightning-svg" id="lightningsvg" width="320" height="24" viewBox="0 0 320 24">
+          <defs>
+            <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="var(--red)"   stop-opacity="0.7"/>
+              <stop offset="40%"  stop-color="var(--gold)"  stop-opacity="1"/>
+              <stop offset="70%"  stop-color="var(--green)" stop-opacity="0.7"/>
+              <stop offset="100%" stop-color="var(--blue)"  stop-opacity="0.7"/>
+            </linearGradient>
+          </defs>
+          <path class="lightning-path" id="lpath"
+                d="M 10,12 L 100,4 L 130,18 L 190,4 L 220,18 L 310,12"
+                fill="none" stroke="url(#lg1)" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="10"  cy="12" r="4" fill="var(--red)"   opacity="0.8"/>
+          <circle cx="160" cy="11" r="4" fill="var(--gold)"  opacity="0.9"/>
+          <circle cx="310" cy="12" r="4" fill="var(--blue)"  opacity="0.8"/>
+        </svg>
+
+        <div class="result-card" id="resultCard">
+          <div class="result-glow"></div>
+          <div class="confetti-wrap" id="confettiWrap"></div>
+
+          <div class="result-label">
+            ✓
+            Готовый пост · собрано за 5 секунд
+          </div>
+          <div class="result-post-text"><strong>Пишешь много, а в ответ тишина?</strong>
+
+Ощущение, что контент летит в глухую чёрную дыру, разрушает мотивацию быстрее любого хейта.
+
+И ты честно пытаешься. Тратишь часы на вылизанные посты и монтаж рилсов. Но в ответ — ленивое «цена?» в директ или полное отсутствие реакции.
+
+Проблема не в тебе. И не в ублюдских алгоритмах Инстаграма, под дудку которых тебя заставляют плясать контент-заводы, стирая твоё авторство. Проблема в том, что ты не продаёшь, потому что сама до конца не понимаешь, что именно продаёшь. Ценность твоего продукта заперта у тебя в голове.
+
+Контент-система — это не клетка из бесконечных «надо» и прогревов на коленке. Это язык твоей свободы. Смысловой кристалл Анастасии Лушниковой вытаскивает твёрдую структуру из твоей экспертизы за 15 минут. Когда ты бьёшь точными смыслами в боли своей аудитории — правила игры меняются. Тебя начинают слышать. И у тебя начинают покупать.</div>
+
+          <div class="result-actions">
+            <button class="btn-copy-result" onclick="copyResultPost()">
+              ✦ Скопировать готовый пост
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /stage -->
+
+  <!-- Панель управления -->
+  <div class="controls">
+    <button class="ctrl-btn" id="btnPrev" onclick="prevStep()" disabled>
+      ← Назад
+    </button>
+    <button class="ctrl-play" id="btnPlay" onclick="togglePlay()">
+      ▶ Смотреть магию ИИ
+    </button>
+    <button class="ctrl-btn" id="btnNext" onclick="nextStep()">
+      Вперёд →
+    </button>
+  </div>
+  <p class="stage-hint">Нажми Play для авто-показа · или управляй стрелками · или кликни на номер шага</p>
+    </div>
+  </div>
+  <script>
+
+// ═══════════════════════════════════════════
+// ДВИЖОК
+// ═══════════════════════════════════════════
+var cur        = 0;
+var playing    = false;
+var playTimers = [];
+var animTimers = [];
+var DURATIONS  = [2500, 6000, 4000, 6000, 8000];
+var TOTAL      = 5;
+
+function t(fn, ms) { animTimers.push(setTimeout(fn, ms)); }
+
+function killAnim() {
+  animTimers.forEach(clearTimeout); animTimers = [];
+}
+function killPlay() {
+  playTimers.forEach(clearTimeout); playTimers = [];
+}
+
+function show(idx) {
+  if (idx < 0 || idx >= TOTAL) return;
+  killAnim();
+  resetVisuals();
+  document.querySelectorAll('.step-scene').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById('scene-' + idx).classList.add('active');
+  cur = idx;
+  updateNav();
+  runAnim(cur);
+}
+
+function nextStep()    { killPlay(); playing=false; btnStop(); show(cur+1); }
+function prevStep()    { killPlay(); playing=false; btnStop(); show(cur-1); }
+function jumpToStep(i) { killPlay(); playing=false; btnStop(); show(i); }
+
+function btnStop() { document.getElementById('btnPlay').innerHTML = '▶ Смотреть снова'; }
+
+function togglePlay() {
+  if (playing) {
+    playing = false;
+    playTimers.forEach(clearTimeout); playTimers = [];
+    document.getElementById('btnPlay').innerHTML = '▶ Смотреть снова';
+    return;
+  }
+  playing = true;
+  document.getElementById('btnPlay').innerHTML = '⏸ Пауза';
+  var delay = 0;
+  for (var i = 0; i < TOTAL; i++) {
+    (function(idx, d) {
+      playTimers.push(setTimeout(function() {
+        if (!playing) return;
+        show(idx);
+      }, d));
+    })(i, delay);
+    delay += DURATIONS[i];
+  }
+  playTimers.push(setTimeout(function() {
+    playing = false;
+    document.getElementById('btnPlay').innerHTML = '▶ Смотреть снова';
+  }, delay));
+}
+
+function updateNav() {
+  document.querySelectorAll('.step-node').forEach(function(node, i) {
+    node.classList.remove('active','done');
+    if (i===cur) node.classList.add('active');
+    else if (i<cur) node.classList.add('done');
+  });
+  document.querySelectorAll('.step-connector').forEach(function(c,i){
+    c.classList.toggle('lit', i<cur);
+  });
+  document.getElementById('btnPrev').disabled = cur===0;
+  document.getElementById('btnNext').disabled = cur===TOTAL-1;
+}
+
+// ─── СБРОС ВИЗУАЛОВ ──────────────────────
+function resetVisualsFrom2() {
+  // Шаг 2
+  var tt = document.getElementById('typedText');
+  if (tt) tt.textContent = '';
+  var sb = document.getElementById('claudeSendBtn');
+  if (sb) { sb.style.opacity = '0.3'; sb.style.transform = ''; }
+  var ath = document.getElementById('aiThinking');
+  if (ath) ath.classList.remove('show');
+  var atb = document.getElementById('aiTable');
+  if (atb) atb.classList.remove('show');
+  ['tr-head','tr-pain','tr-cure','tr-voice'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.classList.remove('appear');
+  });
+  // Шаги 3-5
+  ['dc-pain','dc-cure','dc-voice'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.classList.remove('appear');
+  });
+  var dc = document.getElementById('dragCursor');
+  if (dc) { dc.classList.remove('visible'); dc.style.left='0'; dc.style.top='0'; }
+  ['lc-pain','lc-cure','lc-voice'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.classList.remove('dragged');
+  });
+  resetSlot('ls-pain',  'ls-pain-text',  '[ Слот 1: Боль ЦА ]',    ['lit-pain']);
+  resetSlot('ls-cure',  'ls-cure-text',  '[ Слот 2: Лекарство ]',  ['lit-cure']);
+  resetSlot('ls-voice', 'ls-voice-text', '[ Слот 3: Тональность ]',['lit-voice']);
+  var ls = document.getElementById('lightningsvg'); if (ls) ls.classList.remove('show');
+  var lp = document.getElementById('lpath'); if (lp) lp.classList.remove('draw');
+  var rc = document.getElementById('resultCard'); if (rc) rc.classList.remove('show');
+  var cw = document.getElementById('confettiWrap'); if (cw) cw.innerHTML = '';
+}
+
+function resetVisuals() {
+  // Шаг 1
+  var pc = document.getElementById('pc');
+  if (pc) { pc.style.transform = ''; pc.style.opacity = ''; pc.style.transition = ''; }
+  var cf = document.getElementById('copyFlash');
+  if (cf) cf.classList.remove('show');
+  var c1 = document.getElementById('cursor1');
+  if (c1) { c1.style.left = '40px'; c1.style.top = '40px'; }
+
+  // Шаг 2
+  var tt = document.getElementById('typedText');
+  if (tt) tt.textContent = '';
+  var sb = document.getElementById('claudeSendBtn');
+  if (sb) { sb.style.opacity = '0.3'; sb.style.transform = ''; }
+  var ath = document.getElementById('aiThinking');
+  if (ath) ath.classList.remove('show');
+  var atb = document.getElementById('aiTable');
+  if (atb) atb.classList.remove('show');
+  ['tr-head','tr-pain','tr-cure','tr-voice'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('appear');
+  });
+
+  // Шаг 3
+  ['dc-pain','dc-cure','dc-voice'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('appear');
+  });
+
+  // Шаг 4
+  var dc = document.getElementById('dragCursor');
+  if (dc) { dc.classList.remove('visible'); dc.style.left = '0'; dc.style.top = '0'; }
+  ['lc-pain','lc-cure','lc-voice'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('dragged');
+  });
+  resetSlot('ls-pain',  'ls-pain-text',  '[ Слот 1: Боль ЦА ]',    ['lit-pain']);
+  resetSlot('ls-cure',  'ls-cure-text',  '[ Слот 2: Лекарство ]',  ['lit-cure']);
+  resetSlot('ls-voice', 'ls-voice-text', '[ Слот 3: Тональность ]',['lit-voice']);
+
+  // Шаг 5
+  var ls = document.getElementById('lightningsvg');
+  if (ls) ls.classList.remove('show');
+  var lp = document.getElementById('lpath');
+  if (lp) lp.classList.remove('draw');
+  var rc = document.getElementById('resultCard');
+  if (rc) rc.classList.remove('show');
+  var cw = document.getElementById('confettiWrap');
+  if (cw) cw.innerHTML = '';
+}
+
+function resetSlot(slotId, textId, label, litClasses) {
+  var sl = document.getElementById(slotId);
+  var tx = document.getElementById(textId);
+  if (sl) {
+    litClasses.forEach(function(c) { sl.classList.remove(c); });
+    if (tx) { tx.textContent = label; tx.style.color = '#6a6e88'; tx.className = ''; }
+  }
+}
+
+// ─── АНИМАЦИИ ────────────────────────────
+function runAnim(step) {
+  if (step === 0) animStep1();
+  if (step === 1) animStep2();
+  if (step === 2) animStep3();
+  if (step === 3) animStep4();
+  if (step === 4) animStep5();
+}
+
+function animStep1() {
+  var cursor = document.getElementById('cursor1');
+  var flash  = document.getElementById('copyFlash');
+  var pc     = document.getElementById('pc');
+  t(function() { if (cursor) { cursor.style.left='28px'; cursor.style.top='160px'; } }, 200);
+  t(function() { if (cursor) { cursor.classList.add('clicking'); setTimeout(function(){ cursor.classList.remove('clicking'); }, 180); } }, 600);
+  t(function() { if (flash) flash.classList.add('show'); }, 800);
+  t(function() {
+    if (pc) { pc.style.transition='transform 0.5s ease,opacity 0.5s ease'; pc.style.transform='translateX(-120%) rotate(-4deg)'; pc.style.opacity='0'; }
+    if (flash) flash.classList.remove('show');
+  }, 1600);
+}
+
+var PROMPT_TEXT = '/run_deep_analysis "Target School, 17 лет в маркетинге..."';
+function animStep2() {
+  var input   = document.getElementById('typedText');
+  var sendBtn = document.getElementById('claudeSendBtn');
+  var think   = document.getElementById('aiThinking');
+  var table   = document.getElementById('aiTable');
+  var i = 0;
+  function typeChar() {
+    if (!input) return;
+    if (i < PROMPT_TEXT.length) {
+      input.textContent += PROMPT_TEXT[i++];
+      animTimers.push(setTimeout(typeChar, 25));
+    }
+  }
+  t(typeChar, 200);
+  t(function() { if (sendBtn) { sendBtn.style.transition='opacity 0.2s'; sendBtn.style.opacity='1'; } }, 1600);
+  t(function() { if (sendBtn) { sendBtn.style.transform='scale(0.85)'; setTimeout(function(){ sendBtn.style.transform='scale(1)'; },150); } }, 1700);
+  t(function() { if (think) think.classList.add('show'); }, 1900);
+  t(function() { if (think) think.classList.remove('show'); if (table) table.classList.add('show'); }, 3100);
+  ['tr-head','tr-pain','tr-cure','tr-voice'].forEach(function(id, idx) {
+    t(function() { var el=document.getElementById(id); if(el) el.classList.add('appear'); }, 3300 + idx*220);
+  });
+}
+
+function animStep3() {
+  ['dc-pain','dc-cure','dc-voice'].forEach(function(id, idx) {
+    t(function() { var el=document.getElementById(id); if(el) el.classList.add('appear'); }, 300 + idx*350);
+  });
+}
+
+function animStep4() {
+  var mob = window.innerWidth <= 520;
+  function fillSlot(cardId, slotId, textId, litClass, label, delay) {
+    t(function() {
+      var card=document.getElementById(cardId); if(card) card.classList.add('dragged');
+      var slot=document.getElementById(slotId);
+      if(slot) {
+        slot.classList.add(litClass);
+        var tx=document.getElementById(textId);
+        if(tx){ tx.textContent=label; tx.style.color='#e0dbd0'; tx.className='slot-filled-text'; }
+      }
+    }, delay);
+  }
+  function drag(cardId, slotId, textId, litClass, label, delay) {
+    if (mob) { fillSlot(cardId,slotId,textId,litClass,label,delay); return; }
+    var dc = document.getElementById('dragCursor');
+    t(function() {
+      var el=document.getElementById(cardId), wrap=document.querySelector('.lego-wrap');
+      if(!el||!wrap||!dc) return;
+      var er=el.getBoundingClientRect(), wr=wrap.getBoundingClientRect();
+      dc.style.left=(er.left-wr.left+er.width/2)+'px'; dc.style.top=(er.top-wr.top+er.height/2)+'px';
+      dc.classList.add('visible');
+    }, delay);
+    t(function() {
+      var sl=document.getElementById(slotId), wrap=document.querySelector('.lego-wrap');
+      if(!sl||!wrap||!dc) return;
+      var sr=sl.getBoundingClientRect(), wr=wrap.getBoundingClientRect();
+      dc.style.left=(sr.left-wr.left+sr.width/2)+'px'; dc.style.top=(sr.top-wr.top+sr.height/2)+'px';
+      var card=document.getElementById(cardId); if(card) card.classList.add('dragged');
+    }, delay+300);
+    t(function() {
+      var slot=document.getElementById(slotId);
+      if(slot){ slot.classList.add(litClass); var tx=document.getElementById(textId); if(tx){tx.textContent=label;tx.style.color='#e0dbd0';tx.className='slot-filled-text';} }
+      if(dc) dc.classList.remove('visible');
+    }, delay+1000);
+  }
+  drag('lc-pain',  'ls-pain',  'ls-pain-text',  'lit-pain',  'Заебали алгоритмы — хочу выражать себя',  300);
+  drag('lc-cure',  'ls-cure',  'ls-cure-text',  'lit-cure',  'Пишу в пустоту — никакой реакции',        mob?700:1700);
+  drag('lc-voice', 'ls-voice', 'ls-voice-text', 'lit-voice', 'Не знаю, как упаковать и продать себя',  mob?1100:3100);
+}
+
+function animStep5() {
+  var svg=document.getElementById('lightningsvg'), path=document.getElementById('lpath'), card=document.getElementById('resultCard');
+  t(function(){ if(svg) svg.classList.add('show'); if(path) path.classList.add('draw'); }, 300);
+  t(function(){ if(card) card.classList.add('show'); }, 900);
+  t(launchConfetti, 1400);
+}
+
+function launchConfetti() {
+  var wrap=document.getElementById('confettiWrap');
+  if(!wrap) return;
+  var colors=['#C8A96E','#e8c980','#fff','#5b8def','#3ecf8e','#e0a352'];
+  for(var i=0;i<32;i++){
+    var p=document.createElement('div'); p.className='confetti-piece';
+    p.style.left=Math.random()*100+'%'; p.style.top=Math.random()*20+'%';
+    p.style.background=colors[Math.floor(Math.random()*colors.length)];
+    p.style.animationDelay=Math.random()*0.8+'s';
+    p.style.animationDuration=(1.2+Math.random()*0.8)+'s';
+    p.style.width=(4+Math.random()*6)+'px'; p.style.height=(6+Math.random()*8)+'px';
+    p.style.borderRadius=Math.random()>0.5?'50%':'2px';
+    wrap.appendChild(p);
+  }
+}
+
+function copyResultPost() {
+  var text=(document.querySelector('.result-post-text')||{}).innerText||'';
+  function fallback() {
+    var ta=document.createElement('textarea'); ta.value=text;
+    ta.style.cssText='position:fixed;left:-9999px'; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy'); document.body.removeChild(ta); showCopied();
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(showCopied).catch(fallback);
+  else fallback();
+}
+function showCopied() {
+  var btn=document.querySelector('.btn-copy-result'); if(!btn) return;
+  btn.innerHTML='✓ Скопировано!';
+  setTimeout(function(){ btn.innerHTML='✦ Скопировать готовый пост'; }, 2200);
+}
+
+// ─── СТАРТ ───────────────────────────────
+updateNav();
+animStep1();
+
+// Авто-запуск когда блок появляется на экране
+var autoStarted = false;
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting && !autoStarted && !playing) {
+      autoStarted = true;
+      setTimeout(function() { togglePlay(); }, 800);
+    }
+  });
+}, { threshold: 0.4 });
+observer.observe(document.getElementById('stage'));
+
+  </script>
   <div class="inside-tip">
     <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
     Рекомендую Claude, он лучше всего справляется с глубинным анализом контекста. Система также работает с Gemini и другими текстовыми нейросетями.
