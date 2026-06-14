@@ -1308,17 +1308,19 @@ function togglePlay() {
     return;
   }
 
-  isPlaying     = true;
-  stepStartedAt = Date.now();
+  isPlaying = true;
   document.getElementById('btnPlay').innerHTML = '⏸ Пауза';
 
   // Если на последнем — начинаем с нуля
   if (currentStep === TOTAL - 1) goToStep(0);
 
+  // Шаг 0 уже показан при загрузке — сразу прыгаем на шаг 1
+  if (currentStep === 0) goToStep(1);
+
+  // Запускаем интервал — goToStep уже обновил stepStartedAt
   intervalId = setInterval(function() {
     if (!isPlaying) return;
-    var elapsed = Date.now() - stepStartedAt;
-    if (elapsed >= DURATIONS[currentStep]) {
+    if (Date.now() - stepStartedAt >= DURATIONS[currentStep]) {
       if (currentStep < TOTAL - 1) {
         goToStep(currentStep + 1);
       } else {
