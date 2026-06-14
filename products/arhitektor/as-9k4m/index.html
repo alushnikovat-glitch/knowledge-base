@@ -3190,6 +3190,129 @@
     </div>
   </div>
 
+  <!-- PAGE: STEP 2 -->
+  <div class="page" id="page-step2">
+    <div class="step-page">
+      <div class="stepper" id="stepper">
+        <div class="stepper-step" data-stepper="step1" onclick="showPage('step1')">
+          <div class="stepper-dot stepper-dot-inner">01</div>
+          <div class="stepper-label">Анализ ЦА</div>
+        </div>
+        <div class="stepper-step active" data-stepper="step2" onclick="showPage('step2')">
+          <div class="stepper-dot stepper-dot-inner">02</div>
+          <div class="stepper-label">Кристалл</div>
+        </div>
+        <div class="stepper-step" data-stepper="step3" onclick="showPage('step3')">
+          <div class="stepper-dot stepper-dot-inner">03</div>
+          <div class="stepper-label">Голос</div>
+        </div>
+        <div class="stepper-step" data-stepper="bonus" onclick="showPage('bonus')">
+          <div class="stepper-dot stepper-dot-inner">03</div>
+          <div class="stepper-label">Голос</div>
+        </div>
+        <div class="stepper-step" data-stepper="step4" onclick="showPage('step4')">
+          <div class="stepper-dot stepper-dot-inner">04</div>
+          <div class="stepper-label">Контент</div>
+        </div>
+        <div class="stepper-step" data-stepper="step5" onclick="showPage('step5')">
+          <div class="stepper-dot stepper-dot-inner">05</div>
+          <div class="stepper-label">База</div>
+        </div>
+        <div class="stepper-step" data-stepper="step6" onclick="showPage('step6')">
+          <div class="stepper-dot stepper-dot-inner">★</div>
+          <div class="stepper-label">Сборка</div>
+        </div>
+      </div>
+      <div class="step-indicator">
+        <span>Архитектор смыслов</span>
+        <span class="dot">·</span>
+        <span class="current">Шаг 2 из 6</span>
+      </div>
+
+      <div class="step-header">
+        <div class="step-badge">02</div>
+        <div>
+          <h2 class="step-title">Кристаллизация.<br>Архитектура смыслов</h2>
+          <p class="step-subtitle">Это этап из маркетинга Target School, когда из сотен болей мы выбирали те самые 5, которые приносили 80% выручки. Промпт-аналитик выдал вам десятки строк. Если внедрить всё сразу — клиент запутается. Задача этого шага: выбрать ядро.</p>
+        </div>
+      </div>
+
+      <div class="section-body">
+        <p>Ваша задача сейчас: перенести <strong>5 самых острых связок</strong> из отчёта нейросети в таблицу «Смысловой кристалл». Это те смыслы, которые станут фундаментом ваших Reels, постов и скриптов в переписках. Используйте промпт ниже.</p>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-header">
+          <div class="prompt-header-left">
+            <div class="prompt-dots">
+              <div class="prompt-dot dot-r"></div>
+              <div class="prompt-dot dot-y"></div>
+              <div class="prompt-dot dot-g"></div>
+            </div>
+            <span class="prompt-label">Промпт · Фильтр «Архитектор»</span>
+          </div>
+          <button class="copy-btn" onclick="copyPrompt(this, 'prompt2')">Скопировать</button>
+        </div>
+        <div class="prompt-body" id="prompt2">На основе проведённого анализа из Шага 1 выдели 5 самых мощных смысловых связок для таблицы «Смысловой кристалл».
+
+Для каждой связки пропиши в чате Markdown-таблицу:
+<span class="p-key">1. Сегмент аудитории.</span>
+<span class="p-key">2. Ключевую боль или скрытый страх.</span>
+<span class="p-key">3. Смысл-лекарство</span> (используй Словарь детонаторов: опора, фундамент, точка невозврата и т.д.).
+<span class="p-key">4. Твёрдый артефакт:</span> Что автор должен показать в контенте, чтобы ему поверили (конкретный пример результата, цифры или процесса).
+
+Представь ответ в виде лаконичной и хлёсткой таблицы. Пиши ёмко, авторитетно, как для дорогого консалтинга.</div>
+      </div>
+
+      <div class="author-note" style="margin-top: 16px;">
+        <div class="author-note-label">Примечание от Анастасии</div>
+        <p>Тут как говорится — не так важен формат, насколько важны <strong>смыслы</strong>. На этом шаге вы перестаёте «плавать» в информации и видите чёткую карту: кому вы продаёте, что у них болит и какой смысл нужно «прошить», чтобы люди покупали.</p>
+      </div>
+
+      <div class="bridge-block">
+        <div class="bridge-label">Как связка из таблицы переходит в промпт</div>
+        <div class="bridge-flow">
+          <div class="bridge-step">
+            <div class="bridge-step-num">Таблица · строка</div>
+            <div class="bridge-step-text"><strong>Мама в декрете.</strong> Боится что не окупится. Смысл-лекарство: доход со 2-й недели. Артефакт: кейс ученицы.</div>
+          </div>
+          <div class="bridge-arrow">→</div>
+          <div class="bridge-step">
+            <div class="bridge-step-num">Что вставляем в промпт</div>
+            <div class="bridge-step-text">«Сегмент: мама в декрете. Страх: не окупится. Смысл: профессия с доходом со 2-й недели. Докажи кейсом.»</div>
+          </div>
+          <div class="bridge-arrow">→</div>
+          <div class="bridge-step">
+            <div class="bridge-step-num">Что получаем</div>
+            <div class="bridge-step-text"><strong>Reels, пост и скрипт Директа</strong>, в каждом из которых зашит этот конкретный страх и конкретное доказательство.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="checklist">
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">Из десятков строк анализа отфильтровано ровно 5 ключевых ядерных связок</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">Каждая связка содержит понятный «Смысл-лекарство» и твёрдый «Артефакт» для подтверждения</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">Таблица сгенерирована в текущем чате с ИИ, я вижу концентрат, готовый для создания контента</div>
+        </div>
+      </div>
+
+      <div class="complete-wrap">
+        <button class="btn-complete" onclick="completeStep('step2', 'step3')">
+          Связки отфильтрованы. Идём дальше →
+        </button>
+        <p class="complete-note">Связки отфильтрованы, ядро готово. Переходим к Шагу 3, где мы обучим ИИ вашему уникальному голосу бренда перед запуском контентной машины.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- PAGE: STEP 3 -->
   <div class="page" id="page-step3">
     <div class="step-page">
