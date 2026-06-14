@@ -1271,10 +1271,18 @@ function goToStep(idx) {
   if (idx < 0 || idx >= TOTAL) return;
 
   killAnim();
-  resetVisuals();
 
   var prev = document.getElementById('scene-' + currentStep);
   if (prev) prev.classList.remove('active');
+
+  // Сброс визуалов только если уходим НЕ с шага 0 на шаг 1
+  // (шаг 1 сбрасывается сам через animStep1 при следующем вызове)
+  if (!(currentStep === 0 && idx === 1)) {
+    resetVisuals();
+  } else {
+    // Сбрасываем только шаги 2-5, шаг 1 не трогаем
+    resetVisualsFrom2();
+  }
 
   currentStep   = idx;
   stepStartedAt = Date.now();
@@ -1338,6 +1346,37 @@ function updateNav() {
 }
 
 // ─── СБРОС ВИЗУАЛОВ ──────────────────────
+function resetVisualsFrom2() {
+  // Шаг 2
+  var tt = document.getElementById('typedText');
+  if (tt) tt.textContent = '';
+  var sb = document.getElementById('claudeSendBtn');
+  if (sb) { sb.style.opacity = '0.3'; sb.style.transform = ''; }
+  var ath = document.getElementById('aiThinking');
+  if (ath) ath.classList.remove('show');
+  var atb = document.getElementById('aiTable');
+  if (atb) atb.classList.remove('show');
+  ['tr-head','tr-pain','tr-cure','tr-voice'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.classList.remove('appear');
+  });
+  // Шаги 3-5
+  ['dc-pain','dc-cure','dc-voice'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.classList.remove('appear');
+  });
+  var dc = document.getElementById('dragCursor');
+  if (dc) { dc.classList.remove('visible'); dc.style.left='0'; dc.style.top='0'; }
+  ['lc-pain','lc-cure','lc-voice'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.classList.remove('dragged');
+  });
+  resetSlot('ls-pain',  'ls-pain-text',  '[ Слот 1: Боль ЦА ]',    ['lit-pain']);
+  resetSlot('ls-cure',  'ls-cure-text',  '[ Слот 2: Лекарство ]',  ['lit-cure']);
+  resetSlot('ls-voice', 'ls-voice-text', '[ Слот 3: Тональность ]',['lit-voice']);
+  var ls = document.getElementById('lightningsvg'); if (ls) ls.classList.remove('show');
+  var lp = document.getElementById('lpath'); if (lp) lp.classList.remove('draw');
+  var rc = document.getElementById('resultCard'); if (rc) rc.classList.remove('show');
+  var cw = document.getElementById('confettiWrap'); if (cw) cw.innerHTML = '';
+}
+
 function resetVisuals() {
   // Шаг 1
   var pc = document.getElementById('pc');
