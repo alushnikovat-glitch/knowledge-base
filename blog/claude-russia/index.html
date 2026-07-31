@@ -694,6 +694,106 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
   }
   .inline-ok strong { color: #14532d; }
 
+  /* INLINE NOTE (нейтральная янтарная плашка, для «держите руку на пульсе») */
+  .inline-note {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 10px;
+    padding: 13px 16px;
+    margin: 12px 0;
+  }
+  .inline-note-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    background: #fef3c7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    font-size: 12px;
+  }
+  .inline-note p {
+    font-size: 14px;
+    color: #92400e;
+    line-height: 1.6;
+    margin: 0 !important;
+  }
+  .inline-note strong { color: #78350f; }
+
+  /* AUTH MOCKUP: макет окна входа claude.ai, только Google, без пароля */
+  .auth-mockup-caption {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 20px 0 10px;
+  }
+  .auth-mockup-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 24px;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .auth-mockup-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #ececea;
+    border-radius: 12px;
+    padding: 14px 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .auth-mockup-or {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-light);
+    margin: 14px 0;
+    letter-spacing: 0.05em;
+  }
+  .auth-mockup-input {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 13px 16px;
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 12px;
+  }
+  .auth-mockup-email-btn {
+    background: #1a1917;
+    color: #fff;
+    text-align: center;
+    border-radius: 12px;
+    padding: 14px 0;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .auth-mockup-legal {
+    text-align: center;
+    font-size: 11.5px;
+    color: var(--text-light);
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+  .auth-mockup-legal u { color: var(--text-muted); }
+  .auth-mockup-note {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-top: 12px;
+    text-align: center;
+  }
+
 </style>
 </head>
 <body>
@@ -781,6 +881,10 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
       <li><strong>Hysteria2</strong></li>
       <li><strong>Amnezia WireGuard</strong></li>
     </ul>
+    <div class="inline-note">
+      <div class="inline-note-icon">i</div>
+      <p><strong>VPN и протоколы постоянно меняются.</strong> Этот список рабочий на момент написания, но через полгода расклад может быть другим. Держите руку на пульсе: перед настройкой проверяйте, что реально работает сейчас, и выбирайте оптимальный вариант под себя.</p>
+    </div>
     <p><strong>Важное правило:</strong> выберите одну страну при первой настройке и придерживайтесь её. Идеально: Германия или Финляндия. Claude отслеживает геолокацию, хаотичные прыжки между странами ведут к блокировке.</p>
   </div>
 
@@ -824,9 +928,23 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     <ol class="ordered-list">
       <li><strong>Включите VPN.</strong> Откройте <a href="https://2ip.ru/" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid #bfdbfe;">2ip.ru</a> и убедитесь, что IP и флаг соответствуют выбранной европейской стране.</li>
       <li><strong>Откройте браузер в режиме инкогнито.</strong> Старые куки с российскими следами могут помешать.</li>
-      <li><strong>Перейдите на claude.ai.</strong> Нажмите «Continue with Google» и войдите через подготовленную почту Gmail.</li>
+      <li><strong>Перейдите на claude.ai.</strong> Отдельного имени и пароля для Claude вы не придумываете. Нажмите «Continue with Google» и войдите через ту самую Gmail-почту, которую подготовили на шаге 2.</li>
       <li><strong>Введите виртуальный номер.</strong> Дождитесь SMS в личном кабинете сервиса, введите код на сайте Claude.</li>
     </ol>
+
+    <div class="auth-mockup-caption">Так выглядит вход на claude.ai</div>
+    <div class="auth-mockup-card">
+      <div class="auth-mockup-google">
+        <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/><path fill="#FBBC05" d="M3.964 10.706A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.706V4.962H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.038l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.962L3.964 7.294C4.672 5.167 6.656 3.58 9 3.58z"/></svg>
+        Continue with Google
+      </div>
+      <div class="auth-mockup-or">OR</div>
+      <div class="auth-mockup-input">Enter your email</div>
+      <div class="auth-mockup-email-btn">Continue with email</div>
+      <div class="auth-mockup-legal">By continuing, you acknowledge Anthropic's <u>Privacy Policy</u>.</div>
+    </div>
+    <div class="auth-mockup-note">Отдельный пароль для Claude не нужен. Верхняя кнопка входит через Google и вашу Gmail-почту, это и есть правильный путь.</div>
+
     <p style="margin-top: 16px;"><strong>Лайфхак:</strong> не пытайтесь привязать карту и оплатить Pro сразу после создания аккаунта. Поработайте в бесплатной версии день-два: отправьте несколько осмысленных запросов, создайте тестовый проект. Система должна увидеть поведение реального человека.</p>
   </div>
 
