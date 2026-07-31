@@ -67,7 +67,7 @@ export default async function handler(req, res) {
     if (process.env.META_PIXEL_ID && process.env.META_CAPI_TOKEN) {
       try {
         const hashedEmail = crypto.createHash("sha256").update(email).digest("hex");
-        await fetch(`https://graph.facebook.com/v19.0/${process.env.META_PIXEL_ID}/events?access_token=${process.env.META_CAPI_TOKEN}`, {
+        const metaRes = await fetch(`https://graph.facebook.com/v19.0/${process.env.META_PIXEL_ID}/events?access_token=${process.env.META_CAPI_TOKEN}`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -81,12 +81,17 @@ export default async function handler(req, res) {
             }],
           }),
         });
-      } catch (e) {}
+        const metaText = await metaRes.text();
+        console.log("TS-WEBHOOK META CAPI", metaRes.status, metaText);
+      } catch (e) {
+        console.log("TS-WEBHOOK META CAPI ERROR", String(e));
+      }
+    } else {
+      console.log("TS-WEBHOOK META CAPI SKIPPED", "нет META_PIXEL_ID или META_CAPI_TOKEN в окружении");
     }
 
     return res.status(200).json({ ok: true });
   } catch (e) {
-    console.error("TS-WEBHOOK ERROR", e);
     return res.status(500).json({ error: String(e) });
   }
 }
