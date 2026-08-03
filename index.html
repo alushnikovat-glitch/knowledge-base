@@ -359,6 +359,7 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
   .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
   .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
   .card-soon-label { font-size: 12px; color: var(--text-light); font-weight: 500; }
+  .card-cta { font-size: 13px; font-weight: 600; color: var(--accent); letter-spacing: -0.01em; }
 
   /* DIVIDER */
   .divider { height: 1px; background: var(--border); max-width: 980px; margin: 0 auto; }
@@ -388,6 +389,7 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
   .icon-tg { background: #e8f0fe; color: #2563eb; }
   .icon-ig { background: #fce7f3; color: #db2777; }
   .icon-wa { background: #dcfce7; color: #16a34a; }
+  .icon-os { background: #ede9fe; color: #7c3aed; font-size: 18px; }
   .link-text strong { display: block; font-size: 14px; font-weight: 600; margin-bottom: 1px; }
   .link-text span { font-size: 12px; color: var(--text-muted); }
 
@@ -400,10 +402,81 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     .cards-grid { grid-template-columns: 1fr; }
     .stats-inner { grid-template-columns: 1fr; }
     .about-inner { grid-template-columns: 1fr; gap: 40px; }
-    .featured-card { grid-template-columns: 1fr; }
+    .featured-card { grid-template-columns: 1fr; padding: 32px 24px; }
     .featured-arrow { display: none; }
     .nav-links { display: none; }
+    .hero { padding: 72px 20px 64px; }
+    .section { padding: 56px 20px; }
+    .about-strip { padding: 56px 20px; }
+    .stats-strip { padding: 32px 20px; }
+    .stat { padding: 24px; }
   }
+
+  @media (max-width: 480px) {
+    .hero { padding: 56px 16px 52px; }
+    .hero-sub { font-size: 15px; }
+    .adsim { border-radius: 16px; margin-top: 4px; }
+    .adsim-bar { padding: 10px 12px; gap: 6px; }
+    .adsim-tab { font-size: 11px; margin-left: 6px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .adsim-step { font-size: 11px; flex-shrink: 0; }
+    .adsim-body { padding: 20px 16px; min-height: 210px; }
+    .ad-q { font-size: 14px; }
+    .opt { padding: 12px 14px; }
+    .opt b { font-size: 13.5px; }
+    .opt-wide b { font-size: 13px; }
+    .ad-result-title { font-size: 18px; }
+    .ad-result-cta { flex-direction: column; }
+    .ad-result-cta .btn-primary, .ad-result-cta .btn-secondary { width: 100%; }
+    .section { padding: 48px 16px; }
+    .section-title { margin-bottom: 28px; }
+    .about-strip { padding: 48px 16px; }
+    .card { min-height: auto; padding: 24px; }
+    .stat-num { font-size: 34px; }
+  }
+
+  /* AD SIMULATOR */
+  .adsim { max-width: 560px; margin: 8px auto 0; background: var(--bg); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.08); text-align: left; opacity: 0; animation: fadeUp .7s ease .5s forwards; }
+  .adsim-bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; background: var(--bg2); border-bottom: 1px solid var(--border); }
+  .adsim-dot { width: 11px; height: 11px; border-radius: 50%; }
+  .adsim-dot:nth-child(1) { background: #ff5f57; }
+  .adsim-dot:nth-child(2) { background: #febc2e; }
+  .adsim-dot:nth-child(3) { background: #28c840; }
+  .adsim-tab { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-left: 10px; }
+  .adsim-step { margin-left: auto; font-size: 12px; color: var(--text-light); font-weight: 500; }
+  .adsim-body { padding: 28px 24px; min-height: 240px; }
+  .ad-panel { display: none; }
+  .ad-panel.active { display: block; animation: fadeUp .4s ease; }
+  .ad-q { font-size: 15px; font-weight: 600; margin-bottom: 16px; letter-spacing: -0.01em; }
+  .ad-opts { display: flex; flex-direction: column; gap: 10px; }
+  .opt { text-align: left; background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; cursor: pointer; font-family: inherit; transition: border-color .15s, background .15s; display: flex; flex-direction: column; gap: 2px; }
+  .opt:hover { border-color: var(--accent); }
+  .opt.sel { border-color: var(--accent); background: #f0f7ff; }
+  .opt b { font-size: 14px; font-weight: 600; color: var(--text); }
+  .opt span { font-size: 12px; color: var(--text-muted); }
+  .opt-wide b { line-height: 1.45; font-weight: 500; }
+  .ad-budget input[type=range] { width: 100%; accent-color: var(--accent); }
+  .ad-budget-val { font-size: 13px; color: var(--text-muted); margin-top: 12px; }
+  .ad-budget-val b { color: var(--text); font-weight: 600; }
+  .ad-next, .ad-publish { width: 100%; justify-content: center; margin-top: 18px; }
+  .ad-hint { display: none; color: #d97706; font-size: 12px; margin-top: 10px; }
+  .ad-hint.show { display: block; }
+  .ad-checking { text-align: center; padding: 34px 0; color: var(--text-muted); font-size: 14px; }
+  .ad-spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; margin: 0 auto 14px; animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .ad-result-title { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; }
+  .ad-result-sub { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px; }
+  .ad-warns { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+  a.warn { display: flex; gap: 12px; align-items: flex-start; background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; text-decoration: none; color: var(--text); opacity: 0; transform: translateY(8px); animation: warnIn .4s ease forwards; transition: box-shadow .2s; }
+  a.warn:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+  .warn-ic { font-size: 18px; flex-shrink: 0; line-height: 1.4; }
+  .warn-tx b { display: block; font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+  .warn-tx > span { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .warn-go { color: var(--accent); font-weight: 600; font-size: 13px; display: inline-block; margin-top: 5px; }
+  @keyframes warnIn { to { opacity: 1; transform: none; } }
+  .ad-result-cta { display: flex; gap: 10px; flex-wrap: wrap; }
+  .ad-result-cta .btn-primary, .ad-result-cta .btn-secondary { flex: 1; justify-content: center; }
+  .hero-skip { display: inline-block; margin-top: 22px; font-size: 13px; color: var(--text-light); text-decoration: none; opacity: 0; animation: fadeIn 1s ease 1.2s forwards; }
+  .hero-skip:hover { color: var(--text-muted); }
 </style>
 </head>
 <body>
@@ -420,26 +493,77 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
 </nav>
 
 <section class="hero">
-  <div class="hero-sphere"></div>
   <div class="hero-inner">
-    <div class="hero-eyebrow">База знаний</div>
-    <h1 class="hero-title">Маркетинг смыслов.<br><em>Для тех, кто устал от шума.</em></h1>
-    <p class="hero-sub">Практические материалы про AI, контент и продажи без выгорания. Бесплатно.</p>
-    <div class="hero-pills">
-      <span class="hero-pill">AI-маркетинг</span>
-      <span class="hero-pill">Продажи в Директе</span>
-      <span class="hero-pill">Промпты</span>
-      <span class="hero-pill">Контент-стратегия</span>
-      <span class="hero-pill">Vibe coding</span>
+    <div class="hero-eyebrow">Запусти рекламу прямо сейчас</div>
+    <h1 class="hero-title">Собери кампанию за минуту.<br><em>Покажу, где она сольёт бюджет.</em></h1>
+    <p class="hero-sub">Мини-кабинет прямо на странице. Пройди четыре шага, нажми «Опубликовать» и увидь, чего не хватает.</p>
+
+    <div class="adsim" id="adsim">
+      <div class="adsim-bar">
+        <span class="adsim-dot"></span><span class="adsim-dot"></span><span class="adsim-dot"></span>
+        <div class="adsim-tab">Ads Manager · Новая кампания</div>
+        <div class="adsim-step" id="adStep">Шаг 1 из 4</div>
+      </div>
+      <div class="adsim-body">
+
+        <div class="ad-panel active" data-step="1">
+          <div class="ad-q">Выбери цель кампании</div>
+          <div class="ad-opts">
+            <button class="opt" data-goal="Трафик"><b>🔗 Трафик</b><span>Переходы на сайт</span></button>
+            <button class="opt" data-goal="Заявки"><b>📋 Заявки</b><span>Контакты и лиды</span></button>
+            <button class="opt" data-goal="Продажи"><b>💰 Продажи</b><span>Покупки на сайте</span></button>
+          </div>
+        </div>
+
+        <div class="ad-panel" data-step="2">
+          <div class="ad-q">Кому показываем рекламу?</div>
+          <div class="ad-opts">
+            <button class="opt" data-aud="all"><b>🌍 Всем, 25–45</b><span>Широкая аудитория</span></button>
+            <button class="opt" data-aud="interest"><b>🎯 По интересам</b><span>Маркетинг, бизнес, онлайн</span></button>
+            <button class="opt" data-aud="warm"><b>🔥 Кто меня уже знает</b><span>Тёплая база</span></button>
+          </div>
+        </div>
+
+        <div class="ad-panel" data-step="3">
+          <div class="ad-q">Задай бюджет на день</div>
+          <div class="ad-budget">
+            <input type="range" id="adBudget" min="5" max="100" value="20">
+            <div class="ad-budget-val"><b id="adBudgetVal">$20</b> в день · прогноз охвата <b id="adReach">~21 000</b> человек</div>
+          </div>
+          <button class="btn-primary ad-next" data-next>Дальше →</button>
+        </div>
+
+        <div class="ad-panel" data-step="4">
+          <div class="ad-q">Выбери текст объявления</div>
+          <div class="ad-opts">
+            <button class="opt opt-wide" data-copy="loud"><b>«Мы лучшие на рынке!!! Скидки только сегодня, жми скорее!»</b><span>кричит</span></button>
+            <button class="opt opt-wide" data-copy="smysl"><b>«Устала писать в пустоту? Есть система, которая достаёт смыслы, от которых покупают»</b><span>попадает в смысл</span></button>
+          </div>
+          <button class="btn-primary ad-publish" id="adPublish">🚀 Опубликовать кампанию</button>
+          <div class="ad-hint" id="adHint">Сначала выбери один из вариантов текста</div>
+        </div>
+
+        <div class="ad-panel" data-step="check">
+          <div class="ad-checking">
+            <div class="ad-spinner"></div>
+            Проверяем кампанию...
+          </div>
+        </div>
+
+        <div class="ad-panel" data-step="result">
+          <div class="ad-result-title">Кампания остановлена. Причина одна.</div>
+          <div class="ad-result-sub">Кабинет собран верно. Но реклама усиливает то, что уже есть. А смыслов внутри нет. Вот где она сольёт бюджет:</div>
+          <div class="ad-warns" id="adWarns"></div>
+          <div class="ad-result-cta">
+            <a href="https://www.anastasialushnikova.com/arkhitektor" class="btn-primary">Собрать смыслы → Архитектор</a>
+            <button class="btn-secondary" id="adReset">↺ Заново</button>
+          </div>
+        </div>
+
+      </div>
     </div>
-    <div class="hero-actions">
-      <a href="#materials" class="btn-primary">Смотреть материалы</a>
-      <a href="https://t.me/target_school1" target="_blank" class="btn-secondary">Telegram канал →</a>
-    </div>
-    <div class="hero-scroll">
-      <div class="scroll-line"></div>
-      <span>Листать</span>
-    </div>
+
+    <a href="#products" class="hero-skip">Не хочу играть, показать сайт ↓</a>
   </div>
 </section>
 
@@ -451,14 +575,39 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     </div>
     <div class="stat">
       <div class="stat-num">4 000+</div>
-      <div class="stat-label">учеников Target School</div>
+      <div class="stat-label">выпускников Target School</div>
     </div>
     <div class="stat">
-      <div class="stat-num">9</div>
-      <div class="stat-label">лет в блогинге</div>
+      <div class="stat-num">900 000+</div>
+      <div class="stat-label">подписчиков в Instagram</div>
     </div>
   </div>
 </div>
+
+<section class="section" id="products">
+  <div class="section-eyebrow">Продукты и метод</div>
+  <div class="section-title">С чего начать</div>
+  <div class="cards-grid">
+    <a href="https://www.anastasialushnikova.com/arkhitektor" class="card">
+      <div class="card-eyebrow">Авторский метод · AI</div>
+      <div class="card-title">Архитектор смыслов</div>
+      <div class="card-desc">AI-система из 11 разделов. Достаёт истинные боли твоей аудитории за вечер и заменяет маркетолога за 50 000. Вставляешь свои данные, получаешь карту смыслов, из которой рождается контент.</div>
+      <div class="card-footer"><span class="card-cta">Забрать метод →</span></div>
+    </a>
+    <a href="https://www.anastasialushnikova.com/trenazher/" class="card">
+      <div class="card-eyebrow">Мини-SaaS · профессия</div>
+      <div class="card-title">Тренажёр таргетолога</div>
+      <div class="card-desc">Профессия таргетолога по шагам, как язык в Duolingo. Собираешь первую кампанию на воссозданных экранах кабинета Meta. Первые шаги бесплатные.</div>
+      <div class="card-footer"><span class="card-cta">Открыть тренажёр →</span></div>
+    </a>
+    <a href="https://www.anastasialushnikova.com/os" class="card">
+      <div class="card-eyebrow">Кто я</div>
+      <div class="card-title">Обо мне · AnastasiaOS</div>
+      <div class="card-desc">26 лет на стыке IT и маркетинга в формате старой операционной системы. Инженер, который выбрал маркетинг. Как я дошла до продаж через смыслы.</div>
+      <div class="card-footer"><span class="card-cta">Включить систему →</span></div>
+    </a>
+  </div>
+</section>
 
 <section class="section" id="materials">
   <div class="section-eyebrow">Материалы</div>
@@ -494,7 +643,7 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     <div class="card soon">
       <div class="card-eyebrow">Промпты</div>
       <div class="card-title">11 промптов для сторис, которые греют аудиторию</div>
-      <div class="card-desc">Система прогрева через истории — без навязчивости.</div>
+      <div class="card-desc">Система прогрева через истории, без навязчивости.</div>
       <div class="card-footer"><span class="card-soon-label">Скоро</span></div>
     </div>
     <div class="card soon">
@@ -519,10 +668,14 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     <div>
       <div class="about-eyebrow">Об авторе</div>
       <h2 class="about-title">Анастасия Лушникова</h2>
-      <p class="about-text">Основатель одной из крупнейших школ маркетинга Target School — 4 000+ учеников. 17 лет в маркетинге, 9 лет в блогинге.</p>
-      <p class="about-text">Строю AI-продукты через vibe coding. Пишу про маркетинг смыслов, нейросети и то, как обычный человек без технического бэкграунда создаёт продукты в 2026.</p>
+      <p class="about-text">Инженер по образованию, в IT с 2000 года. В 2017 основала Target School, одну из крупнейших школ маркетинга на русскоязычном рынке. Через неё прошли 4 000+ человек. Написала книгу «Таргетолог как удалённая профессия», её издало Эксмо.</p>
+      <p class="about-text">Девять лет живу и работаю из Азии, между Вьетнамом и Таиландом. Сейчас строю AI-продукты через vibe coding и учу маркетингу смыслов. Ты голова, нейросеть руки.</p>
     </div>
     <div class="about-links">
+      <a href="https://www.anastasialushnikova.com/os" target="_blank" class="about-link">
+        <div class="link-icon icon-os">🖥️</div>
+        <div class="link-text"><strong>Обо мне · AnastasiaOS</strong><span>Кто я, в формате старой ОС</span></div>
+      </a>
       <a href="https://t.me/target_school1" target="_blank" class="about-link">
         <div class="link-icon icon-tg">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
@@ -547,5 +700,85 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
 
 <footer>© 2026 Анастасия Лушникова. Все права защищены.</footer>
 
+
+<script>
+(function(){
+  var adsim = document.getElementById('adsim'); if(!adsim) return;
+  var stepLabel = document.getElementById('adStep');
+  var state = { goal:null, aud:null, budget:20, copy:null };
+
+  function show(step){
+    adsim.querySelectorAll('.ad-panel').forEach(function(p){
+      p.classList.toggle('active', p.getAttribute('data-step') === String(step));
+    });
+    if(['1','2','3','4'].indexOf(String(step)) >= 0){ stepLabel.textContent = 'Шаг ' + step + ' из 4'; }
+    else if(step === 'result'){ stepLabel.textContent = 'Результат'; }
+    else { stepLabel.textContent = 'Проверка'; }
+  }
+  function fmt(n){ return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+
+  adsim.querySelectorAll('[data-goal]').forEach(function(b){ b.onclick = function(){ state.goal = b.getAttribute('data-goal'); show(2); }; });
+  adsim.querySelectorAll('[data-aud]').forEach(function(b){ b.onclick = function(){ state.aud = b.getAttribute('data-aud'); show(3); }; });
+
+  var budget = document.getElementById('adBudget'), bval = document.getElementById('adBudgetVal'), reach = document.getElementById('adReach');
+  budget.oninput = function(){ state.budget = +budget.value; bval.textContent = '$' + state.budget; reach.textContent = '~' + fmt(Math.round(state.budget * 1050)); };
+  adsim.querySelector('[data-next]').onclick = function(){ show(4); };
+
+  var hint = document.getElementById('adHint');
+  adsim.querySelectorAll('[data-copy]').forEach(function(b){ b.onclick = function(){
+    adsim.querySelectorAll('[data-copy]').forEach(function(x){ x.classList.remove('sel'); });
+    b.classList.add('sel'); state.copy = b.getAttribute('data-copy'); hint.classList.remove('show');
+  }; });
+
+  document.getElementById('adPublish').onclick = function(){
+    if(!state.copy){ hint.classList.add('show'); return; }
+    show('check');
+    try { if(window.fbq) fbq('trackCustom','AdSimPublish'); } catch(e){}
+    try { if(window.ym) ym(108790481,'reachGoal','adsim_publish'); } catch(e){}
+    setTimeout(buildResult, 1600);
+  };
+
+  function warn(ic, title, text, go, href){
+    return '<a class="warn" href="' + href + '"><div class="warn-ic">' + ic + '</div>' +
+      '<div class="warn-tx"><b>' + title + '</b><span>' + text + '</span>' +
+      '<span class="warn-go">' + go + ' →</span></div></a>';
+  }
+
+  function buildResult(){
+    var A = 'https://www.anastasialushnikova.com/arkhitektor';
+    var w = [];
+
+    if(state.aud === 'all'){
+      w.push(warn('⚠️','Аудитория размыта','Ты выбрал «всех». Реклама летит в пустоту, а бюджет тает. Нужна карта: кто твой человек и чего он боится в три ночи.','Собрать карту аудитории', A));
+    } else if(state.aud === 'interest'){
+      w.push(warn('⚠️','Интересы это ещё не смыслы','Meta покажет рекламу «маркетологам». Но купит тот, кто узнает свою боль в тексте. Интерес этого не даёт.','Достать боли аудитории', A));
+    } else {
+      w.push(warn('✅','Тёплая база, это хорошо','Им продать проще. Но и они пролистают, если не попасть в боль. Проверь, теми ли словами говоришь.','Собрать смысловой кристалл', A));
+    }
+
+    if(state.copy === 'loud'){
+      w.push(warn('⚠️','Текст кричит, а не попадает','«Мы лучшие, скидки» пролистывают за секунду. Продают слова клиента, а не восклицательные знаки. Их надо сначала достать.','Найти слова клиента', A));
+    } else {
+      w.push(warn('💡','Текст в смысл, уже лучше','Такой текст цепляет. Вопрос один: откуда брать эти слова для каждого сегмента? Из карты смыслов.','Построить карту смыслов', A));
+    }
+
+    w.push(warn('🎯','Не уверен в самом кабинете?','Освой профессию таргетолога по шагам, как язык в Duolingo. Внутри есть раздел, где начинаешь работать с нейросетями.','Открыть тренажёр', 'https://www.anastasialushnikova.com/trenazher/'));
+    w.push(warn('🤖','Ты из России?','Claude лучше всех достаёт смыслы для анализа. Показываю, как подключить его из России без плясок с бубном.','Читать статью', 'https://www.anastasialushnikova.com/blog/claude-russia/'));
+
+    var box = document.getElementById('adWarns');
+    box.innerHTML = w.join('');
+    box.querySelectorAll('.warn').forEach(function(el, i){ el.style.animationDelay = (i * 0.12) + 's'; });
+    show('result');
+  }
+
+  document.getElementById('adReset').onclick = function(){
+    state = { goal:null, aud:null, budget:20, copy:null };
+    budget.value = 20; bval.textContent = '$20'; reach.textContent = '~21 000';
+    adsim.querySelectorAll('[data-copy]').forEach(function(x){ x.classList.remove('sel'); });
+    hint.classList.remove('show');
+    show(1);
+  };
+})();
+</script>
 </body>
 </html>
