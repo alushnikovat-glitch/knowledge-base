@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>AnastasiaOS — операционная система смыслов</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { height:100%; overflow:hidden; }
+  body {
+    font-family: Tahoma, Verdana, "Segoe UI", sans-serif;
+    background:#000; color:#fff;
+    user-select:none;
+  }
+  .screen { position:fixed; inset:0; display:none; }
+  .screen.active { display:block; }
+
+  /* пиксельная сетка поверх всего, как ЭЛТ-монитор */
+  .crt::after {
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:9999;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,.045) 0 1px, transparent 1px 4px);
+  }
+
+  /* ============ POWER ============ */
+  #power { background:#0a0a0a; display:none; }
+  #power.active { display:flex; align-items:center; justify-content:center; flex-direction:column; gap:28px; }
+  .power-btn {
+    width:110px; height:110px; border-radius:50%;
+    border:3px solid #2f6f2f; background:radial-gradient(circle at 35% 30%, #1c1c1c, #060606);
+    color:#57d657; font-size:44px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 30px rgba(87,214,87,.25), inset 0 2px 6px rgba(255,255,255,.06);
+    transition:transform .1s, box-shadow .2s;
+  }
+  .power-btn:active { transform:scale(.94); box-shadow:0 0 50px rgba(87,214,87,.5); }
+  #power p { color:#6a6a6a; font-size:13px; letter-spacing:.06em; }
+
+  /* ============ BIOS ============ */
+  #bios { background:#000; padding:26px 18px; font-family:"Courier New", monospace; }
+  #bios pre {
+    font-family:inherit; color:#d8d8d8; font-size:13px; line-height:1.75;
+    white-space:pre-wrap; word-break:break-word;
+  }
+  #bios .dim { color:#7a7a7a; }
+  .cursor { display:inline-block; width:8px; background:#d8d8d8; animation:blink .8s steps(1) infinite; }
+  @keyframes blink { 50% { opacity:0; } }
+
+  /* ============ BOOT ============ */
+  #boot { background:#000; display:none; }
+  #boot.active { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; }
+  .flag { display:grid; grid-template-columns:52px 52px; grid-template-rows:36px 36px; gap:6px; transform:skewY(-4deg); margin-bottom:10px; }
+  .flag i { border-radius:6px 14px 6px 14px; }
+  .flag i:nth-child(1){ background:linear-gradient(135deg,#ff8a5c,#e85d2a); }
+  .flag i:nth-child(2){ background:linear-gradient(135deg,#9ede6a,#5bab2e); }
+  .flag i:nth-child(3){ background:linear-gradient(135deg,#7ab8f5,#2f7bd9); }
+  .flag i:nth-child(4){ background:linear-gradient(135deg,#ffd76a,#e8a92a); }
+  .boot-title { font-size:44px; font-weight:700; letter-spacing:-1px; }
+  .boot-title sup { color:#ff7a3c; font-size:16px; font-style:italic; margin-left:4px; }
+  .boot-sub { color:#bfc7d4; font-style:italic; font-size:15px; }
+  .loader { width:min(320px, 70vw); height:20px; border:2px solid #8a8a8a; border-radius:10px; margin-top:26px; padding:2px; overflow:hidden; }
+  .loader .blocks { display:flex; gap:4px; height:100%; animation:slide 1.6s linear infinite; }
+  .loader .blocks i { width:16px; height:100%; background:linear-gradient(#7ab0ff,#2456d6); border-radius:2px; flex:none; }
+  @keyframes slide { from{ transform:translateX(-70px);} to{ transform:translateX(330px);} }
+  #boot-status { color:#8f97a5; font-size:14px; margin-top:18px; min-height:20px; }
+
+  .avatar {
+    width:76px; height:76px; border-radius:12px; border:2px solid #fff;
+    background:linear-gradient(135deg,#ffd9c4,#f7a072 55%,#c96f45);
+    display:flex; align-items:center; justify-content:center; font-size:40px;
+    box-shadow:0 3px 8px rgba(0,0,40,.3);
+  }
+  .seg-note { background:#eaf1ff; border-left:3px solid #0052FF; padding:9px 11px; font-size:13.5px; color:#1a1a1a; margin-bottom:10px; }
+  .cta-main {
+    display:block; text-align:center; margin-top:14px; padding:13px;
+    background:#0052FF; color:#fff; font-weight:700; font-size:15px; text-decoration:none;
+    border-radius:6px; border:1px solid #002a99; box-shadow:0 2px 6px rgba(0,40,160,.35);
+  }
+  .cta-main:active { transform:translateY(1px); }
+  .g-wrap { position:fixed; z-index:500; display:none; align-items:flex-start; gap:5px; pointer-events:none; transition:left 1.1s ease, top 1.1s ease; }
+  .g-cursor { font-size:20px; color:#fff; text-shadow:-1px -1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; transform:rotate(-100deg); animation:gpulse 1.2s ease infinite; }
+  @keyframes gpulse { 50% { transform:rotate(-100deg) scale(1.25); } }
+  .g-tip { background:#ffffe1; border:1px solid #000; padding:5px 9px; font-size:12px; color:#000; max-width:190px; box-shadow:2px 2px 0 rgba(0,0,0,.3); }
+  .term-body { background:#000 !important; color:#d8d8d8; font-family:"Courier New", monospace; font-size:13px; line-height:1.65; padding:12px !important; display:flex; flex-direction:column; }
+  .term-out { flex:1; overflow-y:auto; white-space:pre-wrap; word-break:break-word; }
+  .term-out .cmd { color:#fff; font-weight:700; }
+  .term-out .ok { color:#57d657; }
+  .term-inrow { display:flex; gap:6px; align-items:center; margin-top:8px; border-top:1px solid #2a2a2a; padding-top:8px; }
+  .term-inrow .prompt { color:#fff; font-weight:700; }
+  .term-inrow input { flex:1; background:transparent; border:none; outline:none; color:#d8d8d8; font-family:inherit; font-size:13px; caret-color:#57d657; }
+
+  /* ============ DESKTOP ============ */
+  #desktop { display:none; }
+  #desktop.active { display:block; }
+  .wallpaper {
+    position:absolute; inset:0 0 40px 0; overflow:hidden;
+    background:linear-gradient(180deg,#3a7bd0 0%, #6fa9e0 30%, #a8d0ee 55%, #cfe6f5 62%);
+  }
+  .hill {
+    position:absolute; left:-25%; right:-25%; bottom:-38%; height:75%;
+    background:radial-gradient(ellipse at 50% 0%, #8ec455 0%, #5ea832 45%, #3d7d1f 80%);
+    border-radius:50% 50% 0 0;
+  }
+  .os-mark {
+    position:absolute; right:12px; bottom:10px; z-index:5; pointer-events:none;
+    text-align:right; color:rgba(255,255,255,.75); font-size:13px; font-weight:600;
+    text-shadow:0 1px 2px rgba(0,0,40,.5); line-height:1.4;
+  }
+  .os-mark span { display:block; font-size:11px; font-weight:400; color:rgba(255,255,255,.6); }
+  .hill-word {
+    position:absolute; bottom:16%; width:100%; text-align:center;
+    font-size:min(11vw, 64px); font-weight:800; letter-spacing:.04em; color:#3f7d21;
+    text-shadow:0 2px 0 #6db544, 0 -2px 3px #2c5a13; opacity:.85; transform:rotate(-2deg);
+  }
+  .cloud { position:absolute; background:rgba(255,255,255,.85); border-radius:50px; filter:blur(2px); }
+  .cloud::before, .cloud::after { content:""; position:absolute; background:inherit; border-radius:50%; }
+  .c1 { width:120px; height:30px; top:12%; left:8%; }
+  .c1::before { width:50px; height:50px; top:-22px; left:20px; }
+  .c1::after { width:36px; height:36px; top:-14px; left:62px; }
+  .c2 { width:150px; height:34px; top:24%; right:6%; }
+  .c2::before { width:60px; height:60px; top:-28px; left:30px; }
+  .c2::after { width:40px; height:40px; top:-16px; left:80px; }
+
+  .icons {
+    position:absolute; top:12px; left:10px; right:10px;
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:16px 6px;
+  }
+  .icon { display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; padding:4px 2px; border-radius:6px; }
+  .icon:active { background:rgba(49,106,197,.45); }
+  .icon .pic { font-size:38px; filter:drop-shadow(0 2px 2px rgba(0,0,40,.35)); }
+  .icon .cap {
+    font-size:12px; color:#fff; text-align:center; line-height:1.25;
+    text-shadow:0 1px 2px rgba(0,0,0,.8);
+  }
+
+  /* ============ WINDOW ============ */
+  .win {
+    position:absolute; inset:8px 6px 48px 6px; z-index:50; display:none;
+    flex-direction:column; border-radius:8px 8px 0 0; overflow:hidden;
+    border:1px solid #0a3ea8; box-shadow:0 8px 30px rgba(0,0,30,.5);
+    background:#ece9d8; color:#000;
+  }
+  .win.open { display:flex; }
+  .titlebar {
+    background:linear-gradient(180deg,#3f8cf3 0%, #1959d1 8%, #1246b8 40%, #1c58cf 88%, #3f8cf3 100%);
+    color:#fff; font-weight:700; font-size:15px; padding:7px 8px 7px 12px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .titlebar .t { flex:1; text-shadow:0 1px 2px rgba(0,0,60,.5); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .titlebar .t { flex:1; text-shadow:0 1px 2px rgba(0,0,60,.5); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .winbtn {
+    width:26px; height:24px; border-radius:4px; border:1px solid #fff;
+    font-size:13px; font-weight:700; color:#fff; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .winbtn.min { background:linear-gradient(#5a97f5,#2a63d8); }
+  .winbtn.x { background:linear-gradient(#f19a7e,#d9542b 45%, #c33d17); }
+  .menurow { background:#ece9d8; border-bottom:1px solid #cfc9b4; padding:5px 10px; font-size:13px; color:#222; display:flex; gap:16px; }
+  .addrrow { background:#ece9d8; border-bottom:1px solid #cfc9b4; padding:6px 8px; font-size:13px; display:flex; gap:8px; align-items:center; color:#555; }
+  .addr { flex:1; background:#fff; border:1px solid #7f9db9; border-radius:2px; padding:5px 8px; color:#000; display:flex; gap:6px; align-items:center; white-space:nowrap; overflow:hidden; }
+  .winbody { flex:1; overflow-y:auto; background:#fff; padding:16px 14px 24px; font-size:14.5px; line-height:1.55; color:#1a1a1a; }
+  .winbody h2 { font-size:20px; color:#0b3ea8; margin-bottom:8px; }
+  .winbody h3 { font-size:15px; color:#0b3ea8; margin:18px 0 6px; }
+  .winbody p { margin-bottom:10px; }
+  .winbody .muted { color:#666; font-size:13px; }
+  .statusrow { background:#ece9d8; border-top:1px solid #cfc9b4; padding:4px 10px; font-size:12px; color:#444; }
+
+  .cert {
+    border:1px solid #b9a75e; background:repeating-linear-gradient(0deg,#faf7ea 0 3px, #f4f0de 3px 6px);
+    border-radius:4px; padding:16px 14px; margin:12px 0; text-align:center;
+  }
+  .cert .brand { font-size:11px; letter-spacing:.25em; color:#8a7a34; margin-bottom:8px; }
+  .cert .name { font-size:19px; font-style:italic; font-weight:700; color:#6b5b17; margin-bottom:8px; }
+  .cert .desc { font-size:13.5px; color:#4a431f; }
+  .cert .issued { border-top:1px solid #d8cf9e; margin-top:12px; padding-top:8px; font-size:12px; color:#8a7a34; }
+
+  .contact-box { border:1px solid #aab4c8; background:#f4f6fb; border-radius:4px; padding:14px; margin-top:14px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  .xp-btn {
+    border:1px solid #003c74; border-radius:3px; padding:7px 14px; font-size:13.5px;
+    background:linear-gradient(#fff,#ecebe5 45%, #d8d4c8); cursor:pointer; color:#000; font-family:inherit;
+  }
+  .xp-btn:active { background:linear-gradient(#d8d4c8,#ecebe5); }
+
+  /* ============ АСЬКА ============ */
+  .icq-body { background:#e8f0e0 !important; display:flex; flex-direction:column; padding:0 !important; }
+  .icq-status { background:#d4e6c4; border-bottom:1px solid #a8c48a; padding:8px 12px; font-size:13px; display:flex; align-items:center; gap:8px; }
+  .dot { width:10px; height:10px; border-radius:50%; background:#4caf2e; box-shadow:0 0 5px #4caf2e; }
+  .chat { flex:1; overflow-y:auto; padding:12px; display:flex; flex-direction:column; gap:10px; }
+  .msg { max-width:85%; padding:9px 12px; border-radius:10px; font-size:14px; line-height:1.45; }
+  .msg.in { align-self:flex-start; background:#fff; border:1px solid #c8d8b8; border-radius:10px 10px 10px 2px; }
+  .msg.out { align-self:flex-end; background:#d0e4f7; border:1px solid #a8c4e0; border-radius:10px 10px 2px 10px; }
+  .msg .who { font-size:11px; color:#4a7a2e; font-weight:700; margin-bottom:3px; }
+  .msg.out .who { color:#2e5a8a; text-align:right; }
+  .quick { border-top:1px solid #a8c48a; background:#d4e6c4; padding:10px; display:flex; flex-wrap:wrap; gap:8px; }
+  .quick button { border:1px solid #7aa050; background:#fff; border-radius:14px; padding:7px 12px; font-size:13px; cursor:pointer; color:#2e4a1a; }
+  .quick button:active { background:#e0eed0; }
+  .icq-input { display:flex; gap:8px; padding:10px; border-top:1px solid #a8c48a; background:#eef5e6; }
+  .icq-input input {
+    flex:1; border:1px solid #7f9db9; border-radius:4px; padding:10px 12px;
+    font-size:14px; font-family:inherit; background:#fff; color:#000; outline:none;
+  }
+  .icq-send {
+    width:48px; border:1px solid #4a7a2e; border-radius:4px; cursor:pointer;
+    background:linear-gradient(#8cc860,#5a9c34); color:#fff; font-size:17px;
+  }
+  .icq-send:active { background:linear-gradient(#5a9c34,#8cc860); }
+
+  /* ============ WINAMP ============ */
+  .amp-body { background:#1a1a24 !important; padding:14px !important; color:#c8ccd8; font-family:"Courier New", monospace; }
+  .amp-display {
+    background:#000; border:2px inset #3a3a4a; border-radius:4px; padding:12px;
+    color:#57d657; font-size:13px; line-height:1.6;
+  }
+  .amp-track { white-space:nowrap; overflow:hidden; }
+  .amp-track span { display:inline-block; animation:marquee 9s linear infinite; }
+  @keyframes marquee { from{ transform:translateX(100%);} to{ transform:translateX(-100%);} }
+  .amp-viz { display:flex; align-items:flex-end; gap:3px; height:44px; margin-top:10px; }
+  .amp-viz i { flex:1; background:linear-gradient(#57d657, #1f7a1f); border-radius:1px; height:8%; transition:height .12s; }
+  .amp-controls { display:flex; gap:8px; margin-top:14px; }
+  .amp-btn {
+    flex:1; padding:11px 0; font-size:16px; cursor:pointer; color:#c8ccd8;
+    background:linear-gradient(#3a3a4a,#22222e); border:1px solid #4a4a5e; border-radius:4px;
+  }
+  .amp-btn:active { background:linear-gradient(#22222e,#3a3a4a); }
+  .amp-eq { margin-top:12px; font-size:11px; color:#6a6f80; }
+
+
+
+  /* ============ ЭМУЛЯТОР КАБИНЕТА META ============ */
+  .emu { border:1px solid #ccd0d5; border-radius:8px; overflow:hidden; margin-top:6px; background:#f0f2f5; }
+  .emu-head {
+    background:#fff; border-bottom:1px solid #dadde1; padding:10px 12px;
+    display:flex; justify-content:space-between; align-items:center; font-size:13px; font-weight:700; color:#1c1e21;
+  }
+  .emu-step { color:#1877f2; font-weight:700; font-size:12px; }
+  .emu-panel { padding:14px 12px; }
+  .emu-title { font-weight:700; font-size:15px; color:#1c1e21; margin-bottom:12px; }
+  .emu-cards { display:flex; flex-direction:column; gap:8px; }
+  .emu-card {
+    background:#fff; border:2px solid #dadde1; border-radius:8px; padding:12px;
+    cursor:pointer; font-size:14px; display:grid; grid-template-columns:32px 1fr; column-gap:10px; align-items:center;
+  }
+  .emu-card b { grid-column:2; }
+  .emu-card span { grid-column:2; color:#65676b; font-size:12.5px; }
+  .emu-card:active, .emu-card.sel { border-color:#1877f2; background:#e7f0fe; }
+  .emu-label { font-size:12px; color:#65676b; font-weight:700; margin:10px 0 6px; text-transform:uppercase; letter-spacing:.04em; }
+  .emu-chips { display:flex; flex-wrap:wrap; gap:8px; }
+  .chip {
+    background:#fff; border:1.5px solid #ccd0d5; border-radius:16px; padding:7px 13px;
+    font-size:13px; cursor:pointer; color:#1c1e21;
+  }
+  .chip.sel { background:#1877f2; border-color:#1877f2; color:#fff; }
+  .emu-next {
+    margin-top:14px; width:100%; padding:11px; border:none; border-radius:6px;
+    background:#1877f2; color:#fff; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;
+  }
+  .emu-next:active { background:#1257b8; }
+  .emu-range { width:100%; margin:8px 0; accent-color:#1877f2; }
+  .emu-forecast { font-size:14px; color:#1c1e21; background:#fff; border-radius:6px; padding:10px 12px; border:1px solid #dadde1; }
+  .emu-ad {
+    background:#fff; border:2px solid #dadde1; border-radius:8px; padding:12px;
+    font-size:13.5px; cursor:pointer; margin-bottom:8px; line-height:1.45; color:#1c1e21;
+  }
+  .emu-ad.sel { border-color:#1877f2; background:#e7f0fe; }
+  .emu-tag { display:block; margin-top:6px; font-size:11px; color:#65676b; font-style:italic; }
+  .emu-metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:8px 0 12px; }
+  .emu-m { background:#fff; border:1px solid #dadde1; border-radius:6px; padding:10px 4px; text-align:center; }
+  .emu-m span { font-size:16px; font-weight:800; color:#1877f2; display:block; }
+  .emu-m label { font-size:10.5px; color:#65676b; }
+
+  .taskbar {
+    position:absolute; left:0; right:0; bottom:0; height:42px; z-index:200;
+    background:linear-gradient(180deg,#4d8ef0 0%, #2b62d8 6%, #1f4fc4 50%, #2b62d8 94%, #1a44ad 100%);
+    display:flex; align-items:stretch;
+  }
+  .startbtn {
+    display:flex; align-items:center; gap:7px; padding:0 20px 0 12px;
+    background:linear-gradient(180deg,#7ede64 0%, #3f9c2c 8%, #2f8420 55%, #43a52e 100%);
+    border-radius:0 14px 14px 0; font-size:19px; font-weight:700; font-style:italic;
+    color:#fff; text-shadow:0 1px 2px rgba(0,40,0,.6); cursor:pointer;
+    box-shadow:2px 0 6px rgba(0,0,40,.35);
+  }
+  .startbtn .mini-flag { display:grid; grid-template-columns:8px 8px; grid-template-rows:6px 6px; gap:1px; transform:skewY(-6deg); }
+  .startbtn .mini-flag i:nth-child(1){background:#ff8a5c;} .startbtn .mini-flag i:nth-child(2){background:#9ede6a;}
+  .startbtn .mini-flag i:nth-child(3){background:#7ab8f5;} .startbtn .mini-flag i:nth-child(4){background:#ffd76a;}
+  .tray {
+    margin-left:auto; display:flex; align-items:center; gap:12px; padding:0 12px;
+    background:linear-gradient(180deg,#4aa0f5,#1a6ad8); border-left:1px solid #1246a0; font-size:14px;
+  }
+
+  /* ============ START MENU ============ */
+  .startmenu {
+    position:absolute; left:4px; bottom:46px; width:min(430px, 96vw); z-index:300; display:none;
+    border-radius:8px 8px 8px 0; overflow:hidden; border:1px solid #0a3ea8;
+    box-shadow:0 10px 34px rgba(0,0,30,.55); color:#000;
+  }
+  .startmenu.open { display:block; }
+  .sm-head {
+    background:linear-gradient(180deg,#3f8cf3,#1246b8); color:#fff; padding:12px 14px;
+    display:flex; align-items:center; gap:12px; font-size:22px; font-weight:700;
+    text-shadow:0 1px 2px rgba(0,0,60,.5);
+  }
+  .sm-head .avatar { width:52px; height:52px; font-size:28px; border-radius:8px; }
+  .sm-cols { display:flex; background:#fff; }
+  .sm-left { flex:1.2; padding:10px 6px; border-right:1px solid #d8d4c8; background:#fff; }
+  .sm-right { flex:1; background:#d6e6fb; padding:10px 6px; }
+  .sm-item { display:flex; gap:10px; align-items:center; padding:8px 8px; border-radius:4px; cursor:pointer; font-size:14px; }
+  .sm-item:active, .sm-item:hover { background:#316ac5; color:#fff; }
+  .sm-item .em { font-size:20px; width:24px; text-align:center; }
+  .sm-item small { display:block; color:#888; font-size:11.5px; }
+  .sm-item:hover small, .sm-item:active small { color:#dce7ff; }
+  .sm-sep { height:1px; background:#c9d6ec; margin:8px 4px; }
+  .sm-foot { background:linear-gradient(180deg,#3f8cf3,#1246b8); padding:9px 14px; display:flex; justify-content:flex-end; gap:16px; color:#fff; font-size:13.5px; }
+  .sm-foot span { cursor:pointer; }
+
+  /* ============ ASSISTANT + TOASTS ============ */
+  .toast {
+    position:absolute; left:50%; transform:translateX(-50%) translateY(20px);
+    bottom:60px; width:min(400px, 92vw); z-index:400; opacity:0; pointer-events:none;
+    background:repeating-linear-gradient(0deg,#fdfbe8 0 3px, #f7f4dc 3px 6px);
+    border:1px solid #c9c08a; border-radius:8px; padding:14px; color:#333;
+    box-shadow:0 8px 24px rgba(0,0,30,.35); transition:opacity .35s, transform .35s;
+    display:flex; gap:12px; align-items:flex-start; font-size:14px;
+  }
+  .toast.show { opacity:1; transform:translateX(-50%) translateY(0); pointer-events:auto; }
+  .toast .em { font-size:30px; }
+  .toast b.gold { color:#a4841a; letter-spacing:.08em; font-size:12px; display:block; }
+  .toast .x { margin-left:auto; cursor:pointer; color:#999; font-weight:700; padding:0 4px; }
+  .agent-name { color:#1a55c9; font-weight:700; }
+
+  .confetti { position:absolute; width:10px; height:14px; top:-20px; z-index:350; border-radius:2px; animation:fall linear forwards; }
+  @keyframes fall { to { transform:translateY(110vh) rotate(520deg); } }
+</style>
+</head>
+<body class="crt">
+
+<!-- POWER -->
+<div id="power" class="screen active">
+  <button class="power-btn" onclick="startBios()">⏻</button>
+  <p>нажми, чтобы включить AnastasiaOS</p>
+</div>
+
+<!-- BIOS -->
+<div id="bios" class="screen"><pre id="bios-text"></pre></div>
+
+<!-- BOOT -->
+<div id="boot" class="screen">
+  <div class="flag"><i></i><i></i><i></i><i></i></div>
+  <div class="boot-title">Anastasia<sup>OS</sup></div>
+  <div class="boot-sub">В IT с 2000 года · Маркетинг · Запуски</div>
+  <div class="loader"><div class="blocks"><i></i><i></i><i></i></div></div>
+  <div id="boot-status">Загрузка смыслов...</div>
+</div>
+
+<!-- DESKTOP -->
+<div id="desktop" class="screen">
+  <div class="wallpaper" onclick="closeStart()">
+    <div class="cloud c1"></div><div class="cloud c2"></div>
+    <div class="hill"></div>
+    <div class="os-mark">AnastasiaOS<span>anastasialushnikova.com</span></div>
+    <div class="icons">
+      <div class="icon" onclick="openWin('about', event)"><div class="pic">🖥️</div><div class="cap">Обо мне</div></div>
+      <div class="icon" onclick="openWin('school', event)"><div class="pic">📁</div><div class="cap">Target School</div></div>
+      <div class="icon" onclick="openWin('book', event)"><div class="pic">📄</div><div class="cap">Книга</div></div>
+      <div class="icon" onclick="openWin('certs', event)"><div class="pic">🏆</div><div class="cap">Достижения</div></div>
+      <div class="icon" onclick="openWin('ideas', event)"><div class="pic">💡</div><div class="cap">Идеи</div></div>
+      <div class="icon" onclick="openWin('contact', event)"><div class="pic">📨</div><div class="cap">Связаться</div></div>
+      <div class="icon" id="ic-trainer" onclick="openWin('trainer', event)"><div class="pic">🎯</div><div class="cap">Тренажёр таргетолога</div></div>
+      <div class="icon" id="ic-icq" onclick="openWin('icq', event)"><div class="pic">🌼</div><div class="cap">ICQ</div></div>
+      <div class="icon" onclick="openWin('amp', event)"><div class="pic">📻</div><div class="cap">Winamp</div></div>
+      <div class="icon" onclick="toastTip('Корзина пуста. Все неудачные запуски давно превращены в опыт.', event)"><div class="pic">🗑️</div><div class="cap">Корзина</div></div>
+    </div>
+  </div>
+
+  <!-- WINDOWS -->
+  <div class="win" id="w-about">
+    <div class="titlebar"><span>👩🏻‍💻</span><span class="t">Обо мне</span><div class="winbtn min" onclick="closeWin('about')">–</div><div class="winbtn x" onclick="closeWin('about')">✕</div></div>
+    <div class="menurow"><span>Файл</span><span>Правка</span><span>Вид</span><span>Избранное</span><span>Справка</span></div>
+    <div class="addrrow">Адрес <div class="addr">👩🏻‍💻 Обо мне</div></div>
+    <div class="winbody">
+      <h2>Анастасия Лушникова</h2>
+      <p>В IT с 2000 года. 26 лет на стыке технологий и маркетинга, это мой реальный трудовой стаж.</p>
+      <h3>ФУНДАМЕНТ</h3>
+      <p>Высшее образование: информационные технологии и сети. Инженер по образованию, который выбрал маркетинг. Поэтому нейросети для меня рабочий инструмент, а таргет — понятная система.</p>
+      <h3>ПРЕДПРИНИМАТЕЛЬ</h3>
+      <p>Веду предпринимательскую деятельность с 2012 года. 14 лет своих продуктов, запусков и ответственности за результат деньгами.</p>
+      <h3>У ИСТОКОВ ПРОФЕССИИ</h3>
+      <p>Стояла у истоков профессии «таргетолог» в России. В 2017 основала Target School, через неё прошли 4000+ выпускников. Написала книгу «Таргетолог как удалённая профессия», её издало Эксмо.</p>
+      <h3>ЦИФРЫ</h3>
+      <p>В Instagram с 2016 года, десять лет. Более 900 000 подписчиков. Маркетинг, продажи, запуски, воронки, всё это я делала руками сотни раз, прежде чем начала этому учить.</p>
+      <h3>СЕЙЧАС</h3>
+      <p>Строю Тренажёр таргетолога Meta, мини-SaaS на стыке IT и маркетинга. Профессия осваивается по шагам, как язык в Duolingo: открыл панель, сделал шаг, получил результат. 26 лет опыта, упакованные в продукт.</p>
+    </div>
+    <div class="statusrow">Стаж: 26 лет · Подписчиков: 900 000+</div>
+  </div>
+
+  <div class="win" id="w-school">
+    <div class="titlebar"><span>📁</span><span class="t">Target School</span><div class="winbtn min" onclick="closeWin('school')">–</div><div class="winbtn x" onclick="closeWin('school')">✕</div></div>
+    <div class="menurow"><span>Файл</span><span>Правка</span><span>Вид</span><span>Справка</span></div>
+    <div class="addrrow">Адрес <div class="addr">📁 C:\Проекты\Target School</div></div>
+    <div class="winbody">
+      <h2>Target School</h2>
+      <p>Я стояла у истоков профессии «таргетолог» в России. Когда в 2017 я запускала Target School, это слово приходилось объяснять на пальцах. Сегодня по нему ищут работу десятки тысяч людей.</p>
+      <p>4000+ выпускников. Одна из крупнейших школ маркетинга на русскоязычном рынке. Книга о профессии, изданная Эксмо.</p>
+      <h3>Чему учу сейчас</h3>
+      <p>Маркетингу смыслов и работе с нейросетями. Вы голова, нейросеть руки. Ценность в том, чтобы знать, что у неё запросить.</p>
+      <p class="muted">📷 @target_school · 900 000+ подписчиков</p>
+    </div>
+    <div class="statusrow">Объектов: 4000+</div>
+  </div>
+
+    <div class="titlebar"><span>📄</span><span class="t">Книга</span><div class="winbtn min" onclick="closeWin('book')">–</div><div class="winbtn x" onclick="closeWin('book')">✕</div></div>
+    <div class="menurow"><span>Файл</span><span>Правка</span><span>Вид</span><span>Справка</span></div>
+    <div class="addrrow">Адрес <div class="addr">📄 Таргетолог как удалённая профессия.doc</div></div>
+    <div class="winbody">
+      <h2>«Таргетолог как удалённая профессия»</h2>
+      <p>Книга, изданная Эксмо. Про то, как выйти из офиса и построить профессию, которая помещается в ноутбук.</p>
+      <p>Я написала её из личного опыта: с 2017 года не была в офисе ни дня. Вьетнам, Таиланд, работа с пляжа и из кофеен. Девять лет подряд это моя рабочая система.</p>
+      <p class="muted">Ищите на Ozon, Wildberries и в книжных.</p>
+    </div>
+    <div class="statusrow">Страница 1 из жизни</div>
+  </div>
+
+  <div class="win" id="w-certs">
+    <div class="titlebar"><span>🏆</span><span class="t">Достижения</span><div class="winbtn min" onclick="closeWin('certs')">–</div><div class="winbtn x" onclick="closeWin('certs')">✕</div></div>
+    <div class="menurow"><span>Файл</span><span>Правка</span><span>Вид</span><span>Справка</span></div>
+    <div class="addrrow">Адрес <div class="addr">🏆 Достижения игрока</div></div>
+    <div class="winbody">
+      <div class="cert">
+        <div class="brand">🏆 ДОСТИЖЕНИЕ ОТКРЫТО</div>
+        <div class="name">26 лет в IT</div>
+        <div class="desc">В IT с 2000 года. Высшее образование по специальности «информационные технологии и сети». Инженер, который выбрал маркетинг.</div>
+        <div class="issued">Открыто: 2000 год</div>
+      </div>
+      <div class="cert">
+        <div class="brand">🏆 ДОСТИЖЕНИЕ ОТКРЫТО</div>
+        <div class="name">У истоков профессии</div>
+        <div class="desc">Стояла у истоков профессии «таргетолог» в России. Основала Target School, 4000+ выпускников. Книга издана Эксмо.</div>
+        <div class="issued">Открыто: 2017 год</div>
+      </div>
+      <div class="cert">
+        <div class="brand">🏆 ДОСТИЖЕНИЕ ОТКРЫТО</div>
+        <div class="name">900 000+ подписчиков</div>
+        <div class="desc">Десять лет в Instagram, с 2016 года. Маркетинг, продажи, запуски, каждый приём проверен на собственной аудитории.</div>
+        <div class="issued">Открыто: Instagram, 2016–2026</div>
+      </div>
+      <div class="cert">
+        <div class="brand">🏆 ДОСТИЖЕНИЕ ОТКРЫТО</div>
+        <div class="name">Предприниматель</div>
+        <div class="desc">Предпринимательская деятельность с 2012 года. 14 лет продуктов, запусков и ответственности за результат деньгами.</div>
+        <div class="issued">Открыто: 2012 год</div>
+      </div>
+    </div>
+    <div class="statusrow">Открыто достижений: 4 из 4</div>
+  </div>
+
+  <div class="win" id="w-ideas">
+    <div class="titlebar"><span>💡</span><span class="t">Идеи</span><div class="winbtn min" onclick="closeWin('ideas')">–</div><div class="winbtn x" onclick="closeWin('ideas')">✕</div></div>
+    <div class="menurow"><span>Файл</span><span>Правка</span><span>Вид</span><span>Справка</span></div>
+    <div class="addrrow">Адрес <div class="addr">💡 Идеи в работе</div></div>
+    <div class="winbody">
+      <h2>Что сейчас в работе</h2>
+      <p>🎬 YouTube-канал про маркетинг и смыслы</p>
+      <p>🧘 Медитации, озвученные моим голосом через AI</p>
+      <p>🎓 Новая школа: маркетолог-смысловик как удалённая профессия</p>
+      <p>🔍 Анализатор веток Threads</p>
+      <p class="muted">Список пополняется быстрее, чем я успеваю спать.</p>
+    </div>
+    <div class="statusrow">Идей: много</div>
+  </div>
+
+  <div class="win" id="w-contact">
+    <div class="titlebar"><span>📨</span><span class="t">Связаться</span><div class="winbtn min" onclick="closeWin('contact')">–</div><div class="winbtn x" onclick="closeWin('contact')">✕</div></div>
+    <div class="menurow"><span>Файл</span><span>Правка</span><span>Вид</span><span>Справка</span></div>
+    <div class="addrrow">Адрес <div class="addr">📨 Связаться</div></div>
+    <div class="winbody">
+      <h2>Связаться</h2>
+      <p>Быстрее всего найти меня в Instagram и Threads. Я читаю директ сама, без ассистентов на подхвате.</p>
+      <p>Нахожусь между Вьетнамом и Таиландом, отвечаю по азиатскому времени. С удовольствием пообщаюсь про маркетинг, смыслы и AI-продукты.</p>
+      <div class="contact-box">
+        <span style="font-family:'Courier New',monospace; color:#666;">@target_school</span>
+        <button class="xp-btn" onclick="window.open('https://instagram.com/target_school','_blank')">📷 Написать в директ</button>
+        <button class="xp-btn" onclick="window.open('https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0','_blank')">💬 WhatsApp</button>
+      </div>
+    </div>
+    <div class="statusrow">Готово</div>
+  </div>
+
+  <div class="win" id="w-trainer">
+    <div class="titlebar"><span>🎯</span><span class="t">Тренажёр таргетолога Meta</span><div class="winbtn min" onclick="closeWin('trainer')">–</div><div class="winbtn x" onclick="closeWin('trainer')">✕</div></div>
+    <div class="menurow"><span>Файл</span><span>Правка</span><span>Вид</span><span>Справка</span></div>
+    <div class="addrrow">Адрес <div class="addr">🎯 C:\Продукты\Тренажёр таргетолога Meta.exe</div></div>
+    <div class="winbody">
+      <h2>Тренажёр таргетолога Meta</h2>
+      <p>Мини-SaaS на стыке IT и маркетинга. Профессия осваивается по шагам, как язык в Duolingo: открыл панель, сделал шаг, получил результат, пошёл дальше.</p>
+      <p class="seg-note">Собери первую кампанию в мини-версии ниже, это минута. Полная панель открывается по синей кнопке, первые шаги бесплатные.</p>
+      <p class="muted">Ниже мини-версия одного шага. Собери свою первую кампанию, это займёт минуту.</p>
+
+      <div class="emu">
+        <div class="emu-head"><span>📊 Ads Manager · Новая кампания</span><span class="emu-step" id="emu-step">Шаг 1 из 4</span></div>
+
+        <div class="emu-panel" id="emu-p1">
+          <div class="emu-title">Выбери цель кампании</div>
+          <div class="emu-cards">
+            <div class="emu-card" onclick="emuGoal(this,'Трафик')">🔗<b>Трафик</b><span>Переходы на сайт</span></div>
+            <div class="emu-card" onclick="emuGoal(this,'Лиды')">📋<b>Лиды</b><span>Заявки и контакты</span></div>
+            <div class="emu-card" onclick="emuGoal(this,'Продажи')">💰<b>Продажи</b><span>Покупки на сайте</span></div>
+          </div>
+        </div>
+
+        <div class="emu-panel" id="emu-p2" style="display:none;">
+          <div class="emu-title">Собери аудиторию</div>
+          <div class="emu-label">География</div>
+          <div class="emu-chips" id="emu-geo">
+            <span class="chip" onclick="emuChip(this)">Россия</span>
+            <span class="chip" onclick="emuChip(this)">Казахстан</span>
+            <span class="chip" onclick="emuChip(this)">Весь мир</span>
+          </div>
+          <div class="emu-label">Интересы</div>
+          <div class="emu-chips" id="emu-int">
+            <span class="chip" onclick="emuChip(this)">Онлайн-образование</span>
+            <span class="chip" onclick="emuChip(this)">Удалённая работа</span>
+            <span class="chip" onclick="emuChip(this)">Малый бизнес</span>
+            <span class="chip" onclick="emuChip(this)">Маркетинг</span>
+          </div>
+          <button class="emu-next" onclick="emuStep(3)">Далее →</button>
+        </div>
+
+        <div class="emu-panel" id="emu-p3" style="display:none;">
+          <div class="emu-title">Задай бюджет</div>
+          <input type="range" class="emu-range" id="emu-budget" min="5" max="100" value="20" oninput="emuBudget()">
+          <div class="emu-forecast"><b id="emu-bval">$20</b> в день · прогноз охвата: <b id="emu-reach">~21 000</b> человек</div>
+          <button class="emu-next" onclick="emuStep(4)">Далее →</button>
+        </div>
+
+        <div class="emu-panel" id="emu-p4" style="display:none;">
+          <div class="emu-title">Выбери текст объявления</div>
+          <div class="emu-ad" onclick="emuAd(this, false)">«Мы лучшие на рынке!!! Скидки только сегодня! Жми скорее!»<span class="emu-tag">кричит</span></div>
+          <div class="emu-ad" onclick="emuAd(this, true)">«Устала возить себя в офис? Есть профессия, которая помещается в ноутбук»<span class="emu-tag">попадает в смысл</span></div>
+          <button class="emu-next" id="emu-pub" style="display:none;" onclick="emuPublish()">🚀 Опубликовать кампанию</button>
+        </div>
+
+        <div class="emu-panel" id="emu-live" style="display:none;">
+          <div class="emu-title" id="emu-status">⏳ Кампания на проверке...</div>
+          <div class="emu-metrics" id="emu-metrics" style="display:none;">
+            <div class="emu-m"><span id="m-imp">0</span><label>показы</label></div>
+            <div class="emu-m"><span id="m-clk">0</span><label>клики</label></div>
+            <div class="emu-m"><span id="m-ctr">0%</span><label>CTR</label></div>
+            <div class="emu-m"><span id="m-lead">0</span><label>заявки</label></div>
+          </div>
+          <button class="emu-next" onclick="emuReset()">↺ Собрать заново</button>
+        </div>
+      </div>
+
+      <a class="cta-main" id="emu-cta" href="https://anastasialushnikova.com/trenazher/" target="_blank">🚀 Открыть тренажёр · вход бесплатный</a>
+      <p class="muted" style="margin-top:12px;">В полном тренажёре таких шагов десятки: от анализа ЦА до первого кейса, на воссозданных экранах кабинета Meta. Ты голова, нейросеть руки.</p>
+    </div>
+    <div class="statusrow">Уроков: 10 + продвинутый раздел</div>
+  </div>
+
+  <div class="win" id="w-icq">
+    <div class="titlebar"><span>🌼</span><span class="t">ICQ — Анастасия</span><div class="winbtn min" onclick="closeWin('icq')">–</div><div class="winbtn x" onclick="closeWin('icq')">✕</div></div>
+    <div class="winbody icq-body">
+      <div class="icq-status"><span class="dot"></span> Анастасия в сети · статус: «в IT с 2000, строю мини-SaaS»</div>
+      <div class="chat" id="icq-chat"></div>
+      <div class="quick">
+        <button onclick="icqAsk(0)">Чем ты занимаешься?</button>
+        <button onclick="icqAsk(1)">С чего мне начать?</button>
+        <button onclick="icqAsk(2)">Как ты, вообще?</button>
+      </div>
+      <div class="icq-input">
+        <input type="text" id="icq-field" placeholder="Написать Анастасии..." maxlength="500">
+        <button class="icq-send" onclick="icqSend()">➤</button>
+      </div>
+    </div>
+    <div class="statusrow">ICQ# 2000-900000 · сообщения приходят в Telegram</div>
+  </div>
+
+  <div class="win" id="w-amp">
+    <div class="titlebar"><span>📻</span><span class="t">Winamp</span><div class="winbtn min" onclick="ampStop(); closeWin('amp')">–</div><div class="winbtn x" onclick="ampStop(); closeWin('amp')">✕</div></div>
+    <div class="winbody amp-body">
+      <div class="amp-display">
+        <div class="amp-track"><span id="amp-title">◄◄ SMYSLY FM · Анастасия — Прогрев (Original Mix) · 128 kbps · stereo ►►</span></div>
+        <div class="amp-viz" id="amp-viz"></div>
+      </div>
+      <div class="amp-controls">
+        <button class="amp-btn" onclick="ampPlay()">▶</button>
+        <button class="amp-btn" onclick="ampStop()">■</button>
+        <button class="amp-btn" onclick="ampNext()">⏭</button>
+      </div>
+      <div class="amp-eq">EQ: смыслы +10dB · вода −20dB · ИИ-мусор mute</div>
+    </div>
+    <div class="statusrow">Winamp. Он реально делает запуски.</div>
+  </div>
+
+  <div class="win" id="w-term">
+    <div class="titlebar"><span>💻</span><span class="t">Терминал</span><div class="winbtn min" onclick="closeWin('term')">–</div><div class="winbtn x" onclick="closeWin('term')">✕</div></div>
+    <div class="winbody term-body">
+      <div class="term-out" id="term-out"></div>
+      <div class="term-inrow"><span class="prompt">C:\&gt;</span><input type="text" id="term-in" placeholder="введи help" autocomplete="off"></div>
+    </div>
+    <div class="statusrow">AnastasiaDOS · help — список команд</div>
+  </div>
+
+  <div class="startmenu" id="startmenu">
+    <div class="sm-head"><div class="avatar">👩🏻‍💻</div> Анастасия</div>
+    <div class="sm-cols">
+      <div class="sm-left">
+        <div class="sm-item" onclick="window.open('https://anastasialushnikova.com/trenazher/','_blank')"><span class="em">🚀</span><span><b>Открыть тренажёр</b><small>Бесплатный вход в панель</small></span></div>
+        <div class="sm-item" onclick="openWin('about', event)"><span class="em">👩🏻‍💻</span><span><b>Обо мне</b><small>Профессиональный профиль</small></span></div>
+        <div class="sm-item" onclick="openWin('school', event)"><span class="em">📁</span><span><b>Target School</b><small>4000+ выпускников</small></span></div>
+        <div class="sm-item" onclick="openWin('trainer', event)"><span class="em">🎯</span><span><b>Тренажёр таргетолога</b><small>Профессия по шагам</small></span></div>
+        <div class="sm-item" onclick="openWin('book', event)"><span class="em">📄</span><span><b>Книга</b><small>Издана в Эксмо</small></span></div>
+        <div class="sm-sep"></div>
+        <div class="sm-item" onclick="openWin('certs', event)"><span class="em">🏆</span>Достижения</div>
+        <div class="sm-item" onclick="openWin('ideas', event)"><span class="em">💡</span>Идеи</div>
+        <div class="sm-item" onclick="openWin('contact', event)"><span class="em">📨</span>Связаться</div>
+      </div>
+      <div class="sm-right">
+        <div class="sm-item" onclick="window.open('https://instagram.com/target_school','_blank')"><span class="em">📷</span>Instagram</div>
+        <div class="sm-item" onclick="window.open('https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0','_blank')"><span class="em">💬</span>WhatsApp</div>
+        <div class="sm-item"><span class="em">🧵</span>Threads</div>
+        <div class="sm-item" onclick="window.open('https://t.me/lavaiai','_blank')"><span class="em">✈️</span>Telegram</div>
+        <div class="sm-item"><span class="em">▶️</span>YouTube</div>
+        <div class="sm-sep"></div>
+        <div class="sm-item" style="color:#999;"><span class="em">🔍</span>Поиск смыслов</div>
+        <div class="sm-item" onclick="openWin('term', event)"><span class="em">💻</span>Терминал</div>
+      </div>
+    </div>
+    <div class="sm-foot"><span onclick="location.reload()">🔄 Перезагрузка</span><span onclick="location.reload()">⏻ Выключить</span></div>
+  </div>
+
+  <!-- TASKBAR -->
+  <div class="taskbar">
+    <div class="startbtn" onclick="toggleStart(event)"><span class="mini-flag"><i></i><i></i><i></i><i></i></span>Пуск</div>
+    <div class="tray"><span>РУС</span><span>🔊</span><span id="clock">00:00</span></div>
+  </div>
+
+  <!-- КУРСОР-ПРОВОДНИК -->
+  <div class="g-wrap" id="guide"><span class="g-cursor">➤</span><span class="g-tip" id="g-tip"></span></div>
+
+  <!-- TOASTS -->
+  <div class="toast" id="toast">
+    <span class="em" id="toast-em">🤖</span>
+    <div id="toast-body"></div>
+    <span class="x" onclick="hideToast()">✕</span>
+  </div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+
+  /* ============ ЗВУК ============ */
+  let actx = null;
+  function initAudio(){
+    if(!actx){
+      actx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if(actx.state === 'suspended') actx.resume();
+  }
+  // клик мыши: два коротких тика, как настоящая кнопка
+  function sndClick(){
+    if(!actx) return;
+    const t = actx.currentTime;
+    [0, 0.045].forEach((d, n)=>{
+      const o = actx.createOscillator();
+      const g = actx.createGain();
+      o.type = 'square';
+      o.frequency.value = n === 0 ? 2200 : 1400;
+      g.gain.setValueAtTime(0.12, t + d);
+      g.gain.exponentialRampToValueAtTime(0.001, t + d + 0.03);
+      o.connect(g); g.connect(actx.destination);
+      o.start(t + d); o.stop(t + d + 0.035);
+    });
+  }
+  // дзынь уведомления
+  function sndDing(){
+    if(!actx) return;
+    const t = actx.currentTime;
+    [880, 1320].forEach((f, n)=>{
+      const o = actx.createOscillator();
+      const g = actx.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.001, t + n*0.09);
+      g.gain.exponentialRampToValueAtTime(0.14, t + n*0.09 + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, t + n*0.09 + 0.5);
+      o.connect(g); g.connect(actx.destination);
+      o.start(t + n*0.09); o.stop(t + n*0.09 + 0.55);
+    });
+  }
+  // звук запуска системы: тёплый аккорд, привет из 2001-го
+  function sndStartup(){
+    if(!actx) return;
+    const t = actx.currentTime;
+    [[261.6, 0], [329.6, 0.12], [392.0, 0.24], [523.3, 0.36]].forEach(([f, d])=>{
+      const o = actx.createOscillator();
+      const g = actx.createGain();
+      o.type = 'triangle'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.001, t + d);
+      g.gain.exponentialRampToValueAtTime(0.11, t + d + 0.05);
+      g.gain.exponentialRampToValueAtTime(0.001, t + d + 1.6);
+      o.connect(g); g.connect(actx.destination);
+      o.start(t + d); o.stop(t + d + 1.7);
+    });
+  }
+  // фирменное «о-оу» аськи: две ноты вниз
+  function sndUhOh(){
+    if(!actx) return;
+    const t = actx.currentTime;
+    [[540, 0], [400, 0.16]].forEach(([f, d])=>{
+      const o = actx.createOscillator();
+      const g = actx.createGain();
+      o.type = 'sawtooth'; o.frequency.setValueAtTime(f, t + d);
+      o.frequency.exponentialRampToValueAtTime(f * 0.86, t + d + 0.13);
+      g.gain.setValueAtTime(0.001, t + d);
+      g.gain.exponentialRampToValueAtTime(0.13, t + d + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, t + d + 0.15);
+      o.connect(g); g.connect(actx.destination);
+      o.start(t + d); o.stop(t + d + 0.17);
+    });
+  }
+  // вешаем клик на всё интерактивное одним слушателем
+  document.addEventListener('pointerdown', e => {
+    initAudio();
+    if(e.target.closest('.icon, .xp-btn, .winbtn, .sm-item, .startbtn, .power-btn, .user-card, .toast .x, .sm-foot span, .quick button, .amp-btn, .icq-send, .emu-card, .emu-next, .chip, .emu-ad')){
+      sndClick();
+    }
+  });
+  const show = id => { document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); $(id).classList.add('active'); };
+
+  /* BIOS */
+  const biosLines = [
+    "AnastasiaOS Modular BIOS v1.0, An Energy Star Ally",
+    "Copyright (C) 2000-2026, Anastasia Studio",
+    "",
+    "Main Processor : IT Core (R) 26 Years",
+    "Память смыслов : 900,000K подписчиков OK",
+    "",
+    "Detecting IDE drives ...",
+    "Initializing Coffee Controllers .. Done",
+    "Auto-Detecting Wi-Fi (Нячанг/Бангкок) ... OK",
+    "Audio Device : Голосовые другу .. Enabled",
+    "",
+    "Primary Master        : ANASTASIA SSD 240GB",
+    "Primary Slave         : None",
+    "Secondary Master      : TARGET SCHOOL CD-ROM",
+    "Secondary Slave       : АРХИТЕКТОР СМЫСЛОВ",
+    "",
+    "AnastasiaOS запускается... _"
+  ];
+  function startBios(){
+    show('bios');
+    const pre = $('bios-text');
+    let i = 0;
+    function next(){
+      if(i < biosLines.length){
+        pre.textContent += biosLines[i] + "\n";
+        i++;
+        setTimeout(next, biosLines[i-1] === "" ? 120 : 220);
+      } else {
+        const dim = document.createElement('span');
+        dim.className = 'dim';
+        dim.textContent = "\nDEL для SETUP, F12 для меню загрузки. Нажмите любую клавишу.\n" + new Date().toLocaleDateString('ru-RU') + "-ANST-OS-2026";
+        pre.appendChild(dim);
+        setTimeout(startBoot, 1400);
+      }
+    }
+    next();
+  }
+
+  /* BOOT */
+  const bootMsgs = ["Загрузка смыслов...", "Запуск анализа ЦА...", "Прогрев аудитории...", "Подключение к Инстаграму 2016 года...", "Службы запускаются..."];
+  function startBoot(){
+    show('boot');
+    let i = 0;
+    const t = setInterval(()=>{ i=(i+1)%bootMsgs.length; $('boot-status').textContent = bootMsgs[i]; }, 900);
+    setTimeout(()=>{ clearInterval(t); enterDesktop(); }, 4200);
+  }
+
+  /* DESKTOP */
+  function enterDesktop(){
+    show('desktop');
+    sndStartup();
+    tickClock(); setInterval(tickClock, 20000);
+    setTimeout(()=>{
+      confetti();
+      toastAchieve('Первая загрузка', 'AnastasiaOS запущена');
+    }, 700);
+    setTimeout(()=>{ guideTo($('ic-trainer'), 'начни отсюда, тут можно потыкать'); }, 3000);
+    setTimeout(()=>{
+      toastAgent('Ты в системе человека, который в IT с 2000 года и стоял у истоков таргета в России. Начни с «Обо мне» или сразу открой «Тренажёр».');
+    }, 6000);
+  }
+
+  /* КУРСОР-ПРОВОДНИК */
+  let icqNudged = false;
+  function guideTo(el, text){
+    if(!el) return;
+    const r = el.getBoundingClientRect();
+    const g = $('guide');
+    $('g-tip').textContent = text;
+    g.style.display = 'flex';
+    requestAnimationFrame(()=>{
+      g.style.left = Math.min(r.left + r.width * 0.55, window.innerWidth - 210) + 'px';
+      g.style.top = Math.min(r.top + r.height * 0.7, window.innerHeight - 90) + 'px';
+    });
+  }
+  function guideHide(){ $('guide').style.display = 'none'; }
+  function tickClock(){
+    const d = new Date();
+    $('clock').textContent = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+  }
+
+  /* WINDOWS */
+  function openWin(id, e){
+    if(e) e.stopPropagation();
+    closeStart();
+    guideHide();
+    document.querySelectorAll('.win').forEach(w=>w.classList.remove('open'));
+    $('w-'+id).classList.add('open');
+    if(id === 'contact'){ setTimeout(confetti, 300); }
+    if(id === 'amp'){ ampBuildViz(); }
+    if(id === 'term'){ termBoot(); }
+    if(id === 'icq' && !icqStarted){
+      icqStarted = true;
+      setTimeout(()=>{ sndUhOh(); icqMsg('привет! рада тебя видеть. спрашивай, я тут', 'Анастасия', false); }, 500);
+    }
+  }
+  function closeWin(id){
+    $('w-'+id).classList.remove('open');
+    if(id === 'trainer'){
+      clearInterval(metricsTimer);
+      if(!icqNudged){ icqNudged = true; setTimeout(()=> guideTo($('ic-icq'), 'а тут можно написать мне, долетит в Telegram'), 600); }
+    }
+  }
+
+  /* START MENU */
+  function toggleStart(e){ e.stopPropagation(); $('startmenu').classList.toggle('open'); }
+  function closeStart(){ $('startmenu').classList.remove('open'); }
+
+  /* TOASTS */
+  let toastTimer;
+  function showToast(html, em){
+    $('toast-em').textContent = em;
+    $('toast-body').innerHTML = html;
+    $('toast').classList.add('show');
+    sndDing();
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(hideToast, 6000);
+  }
+  function hideToast(){ $('toast').classList.remove('show'); }
+  function toastAchieve(title, sub){
+    showToast('<b class="gold">ДОСТИЖЕНИЕ ОТКРЫТО</b><b>'+title+'</b><br>'+sub, '🏆');
+  }
+  function toastAgent(msg){
+    showToast('<span class="agent-name">@ Агент 2000</span><br>'+msg, '🤖');
+  }
+  function toastTip(msg, e){
+    if(e) e.stopPropagation();
+    toastAgent(msg);
+  }
+
+  /* ============ АСЬКА ============ */
+  let icqStarted = false;
+  const icqReplies = [
+    "я в IT с 2000 года, 26 лет. стояла у истоков профессии таргетолог в России, основала Target School, 4000+ выпускников. сейчас строю Тренажёр таргетолога Meta, мини-SaaS, где профессию осваивают как язык в Duolingo",
+    "открой «Тренажёр таргетолога» на рабочем столе. это панель, где идёшь по шагам от анализа ЦА до первого кейса. я собрала её на опыте 26 лет в IT и десяти лет в Instagram",
+    "вот честно, отлично. предприниматель с 2012, десять лет веду Instagram, 900 000+ подписчиков. и до сих пор кайфую, когда собираю новый продукт руками"
+  ];
+  function icqMsg(text, who, out){
+    const chat = $('icq-chat');
+    const m = document.createElement('div');
+    m.className = 'msg ' + (out ? 'out' : 'in');
+    m.innerHTML = '<div class="who">' + who + '</div>' + text;
+    chat.appendChild(m);
+    chat.scrollTop = chat.scrollHeight;
+  }
+  function icqAsk(i){
+    icqMsg(['Чем ты занимаешься?','С чего мне начать?','Как ты, вообще?'][i], 'Гость', true);
+    setTimeout(()=>{ sndUhOh(); icqMsg(icqReplies[i], 'Анастасия', false); }, 900);
+  }
+
+  /* ОТПРАВКА В TELEGRAM
+     Вариант 1 (автомат): создай бота у @BotFather, впиши сюда токен и свой chat_id.
+     Сообщения будут прилетать тебе в Telegram сами.
+     Вариант 2 (запасной): если токен не вписан, текст копируется
+     и открывается твой Telegram, гость вставляет и отправляет. */
+  const TG_BOT_TOKEN = '8273528291:AAGmaOzhKSxHlw8zPskAZzOyd21BHe3rmvo'; // бот для ICQ-сообщений
+  const TG_CHAT_ID   = '238798420'; // сообщения приходят сюда
+  const TG_USERNAME  = 'lavaiai'; // ник в Telegram без @
+
+  async function icqSend(){
+    const f = $('icq-field');
+    const text = f.value.trim();
+    if(!text) return;
+    icqMsg(text, 'Гость', true);
+    f.value = '';
+    if(TG_BOT_TOKEN && TG_CHAT_ID){
+      try {
+        await fetch('https://api.telegram.org/bot' + TG_BOT_TOKEN + '/sendMessage', {
+          method:'POST',
+          headers:{ 'Content-Type':'application/json' },
+          body: JSON.stringify({ chat_id: TG_CHAT_ID, text: '🌼 ICQ с сайта:\n\n' + text })
+        });
+        setTimeout(()=>{ sndUhOh(); icqMsg('сообщение улетело мне в Telegram. отвечу лично, я читаю всё сама', 'Анастасия', false); }, 800);
+      } catch(err){
+        setTimeout(()=>{ sndUhOh(); icqMsg('связь барахлит, как в 2003-м. напиши мне напрямую: t.me/' + TG_USERNAME, 'Анастасия', false); }, 800);
+      }
+    } else {
+      try { await navigator.clipboard.writeText(text); } catch(e){}
+      setTimeout(()=>{
+        sndUhOh();
+        icqMsg('открываю мой Telegram. текст уже скопирован, просто вставь и отправь', 'Анастасия', false);
+        setTimeout(()=> window.open('https://t.me/' + TG_USERNAME, '_blank'), 1200);
+      }, 800);
+    }
+  }
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Enter' && document.activeElement === $('icq-field')) icqSend();
+  });
+
+  /* ============ WINAMP ============ */
+  const tracks = [
+    { name: 'Анастасия — Прогрев (Original Mix)', notes: [440, 523, 659, 523, 440, 392, 440, 587], bass: [110, 110, 131, 131, 98, 98, 110, 110], bpm: 132 },
+    { name: 'Smysly FM — Запуск во вторник', notes: [523, 659, 784, 659, 587, 523, 587, 440], bass: [131, 131, 147, 147, 110, 110, 131, 131], bpm: 120 },
+    { name: 'AnastasiaOS — Дыхание удалёнки (Chill)', notes: [392, 440, 523, 440, 349, 392, 440, 330], bass: [98, 98, 87, 87, 110, 110, 82, 82], bpm: 96 }
+  ];
+  let ampTimer = null, ampStep = 0, ampTrack = 0, vizTimer = null;
+  function ampBuildViz(){
+    const v = $('amp-viz');
+    if(v.children.length) return;
+    for(let i=0;i<18;i++) v.appendChild(document.createElement('i'));
+  }
+  function ampPlay(){
+    initAudio(); ampBuildViz();
+    if(ampTimer) return;
+    const tr = tracks[ampTrack];
+    $('amp-title').textContent = '◄◄ SMYSLY FM · ' + tr.name + ' · 128 kbps · stereo ►►';
+    const stepMs = 60000 / tr.bpm / 2;
+    ampTimer = setInterval(()=>{
+      const t = actx.currentTime;
+      const i = ampStep % tr.notes.length;
+      // лид
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = 'square'; o.frequency.value = tr.notes[i];
+      g.gain.setValueAtTime(0.055, t);
+      g.gain.exponentialRampToValueAtTime(0.001, t + stepMs/1000 * 0.9);
+      o.connect(g); g.connect(actx.destination);
+      o.start(t); o.stop(t + stepMs/1000);
+      // бас
+      const b = actx.createOscillator(), bg = actx.createGain();
+      b.type = 'triangle'; b.frequency.value = tr.bass[i];
+      bg.gain.setValueAtTime(0.09, t);
+      bg.gain.exponentialRampToValueAtTime(0.001, t + stepMs/1000 * 0.85);
+      b.connect(bg); bg.connect(actx.destination);
+      b.start(t); b.stop(t + stepMs/1000);
+      ampStep++;
+    }, stepMs);
+    vizTimer = setInterval(()=>{
+      document.querySelectorAll('#amp-viz i').forEach(bar=>{
+        bar.style.height = (10 + Math.random()*90) + '%';
+      });
+    }, 130);
+  }
+  function ampStop(){
+    clearInterval(ampTimer); clearInterval(vizTimer);
+    ampTimer = null; vizTimer = null; ampStep = 0;
+    document.querySelectorAll('#amp-viz i').forEach(bar=> bar.style.height = '8%');
+  }
+  function ampNext(){
+    ampTrack = (ampTrack + 1) % tracks.length;
+    const wasPlaying = !!ampTimer;
+    ampStop();
+    $('amp-title').textContent = '◄◄ SMYSLY FM · ' + tracks[ampTrack].name + ' · 128 kbps · stereo ►►';
+    if(wasPlaying) ampPlay();
+  }
+
+  /* ============ ЭМУЛЯТОР КАБИНЕТА META ============ */
+  let emuStrong = false, emuInterests = 0, metricsTimer = null;
+  function emuStep(n){
+    [1,2,3,4].forEach(i => $('emu-p'+i).style.display = 'none');
+    $('emu-live').style.display = 'none';
+    if(n <= 4){ $('emu-p'+n).style.display = 'block'; $('emu-step').textContent = 'Шаг '+n+' из 4'; }
+  }
+  function emuGoal(el, goal){
+    el.parentNode.querySelectorAll('.emu-card').forEach(c=>c.classList.remove('sel'));
+    el.classList.add('sel');
+    setTimeout(()=> emuStep(2), 450);
+  }
+  function emuChip(el){
+    el.classList.toggle('sel');
+    emuInterests = document.querySelectorAll('#emu-int .chip.sel').length;
+  }
+  function emuBudget(){
+    const b = +$('emu-budget').value;
+    $('emu-bval').textContent = '$' + b;
+    $('emu-reach').textContent = '~' + (b * 1050).toLocaleString('ru-RU');
+  }
+  function emuAd(el, strong){
+    document.querySelectorAll('.emu-ad').forEach(a=>a.classList.remove('sel'));
+    el.classList.add('sel');
+    emuStrong = strong;
+    $('emu-pub').style.display = 'block';
+  }
+  function emuPublish(){
+    [1,2,3,4].forEach(i => $('emu-p'+i).style.display = 'none');
+    $('emu-live').style.display = 'block';
+    $('emu-step').textContent = 'Кампания';
+    $('emu-status').textContent = '⏳ Кампания на проверке...';
+    $('emu-metrics').style.display = 'none';
+    setTimeout(()=>{
+      $('emu-status').textContent = '🟢 Кампания активна';
+      $('emu-metrics').style.display = 'grid';
+      sndDing();
+      toastAchieve('Первая кампания', 'Реклама запущена в тренажёре');
+      const ctr = (emuStrong ? 2.3 : 0.8) + emuInterests * 0.15;
+      let imp = 0;
+      clearInterval(metricsTimer);
+      metricsTimer = setInterval(()=>{
+        imp += 380 + Math.floor(Math.random()*420);
+        const clk = Math.round(imp * ctr / 100);
+        $('m-imp').textContent = imp.toLocaleString('ru-RU');
+        $('m-clk').textContent = clk.toLocaleString('ru-RU');
+        $('m-ctr').textContent = ctr.toFixed(1) + '%';
+        $('m-lead').textContent = Math.round(clk * 0.08);
+      }, 650);
+      setTimeout(()=> guideTo($('emu-cta'), 'полная версия по кнопке, вход бесплатный'), 2000);
+      setTimeout(()=>{
+        toastAgent(emuStrong
+          ? 'CTR ' + ctr.toFixed(1) + '%, видишь? Текст со смыслом всегда бьёт крик. Этому и учит тренажёр.'
+          : 'CTR ' + ctr.toFixed(1) + '%, слабовато. Попробуй собрать заново с текстом, который попадает в смысл.');
+      }, 4000);
+    }, 1800);
+  }
+  function emuReset(){
+    clearInterval(metricsTimer);
+    document.querySelectorAll('.emu-card, .emu-ad, #emu-int .chip, #emu-geo .chip').forEach(el=>el.classList.remove('sel'));
+    $('emu-pub').style.display = 'none';
+    emuStrong = false; emuInterests = 0;
+    emuStep(1);
+  }
+
+  /* ============ ТЕРМИНАЛ ============ */
+  let termStarted = false, termBusy = false;
+  const termIntro = [
+    ['', 'AnastasiaDOS [версия 26.0]'],
+    ['', '(C) 2000-2026 Anastasia Studio. Все права у Анастасии.'],
+    ['', ' '],
+    ['cmd', 'C:\\> whoami'],
+    ['', 'анастасия лушникова. в IT с 2000 года. у истоков таргета в россии.'],
+    ['', ' '],
+    ['cmd', 'C:\\> dir C:\\опыт'],
+    ['', ' 26_лет_в_IT.sys'],
+    ['', ' target_school_4000_выпускников.exe'],
+    ['', ' книга_издана_эксмо.pdf'],
+    ['', ' instagram_900000_подписчиков.dll'],
+    ['', ' предпринимательство_с_2012.bat'],
+    ['', ' '],
+    ['cmd', 'C:\\> format C:\\отговорки'],
+    ['ok', 'Форматирование завершено. Отговорки удалены: 100%'],
+    ['', ' '],
+    ['cmd', 'C:\\> ping удалённая_профессия'],
+    ['ok', 'Ответ от нячанг: время=1мс'],
+    ['ok', 'Ответ от бангкок: время=1мс'],
+    ['', 'Ответ от твоего города: ожидание... введи start'],
+    ['', ' ']
+  ];
+  function termPrint(cls, text, done){
+    const out = $('term-out');
+    const line = document.createElement('div');
+    if(cls) line.className = cls;
+    out.appendChild(line);
+    let i = 0;
+    const speed = cls === 'cmd' ? 40 : 9;
+    (function type(){
+      if(i <= text.length){
+        line.textContent = text.slice(0, i);
+        out.scrollTop = out.scrollHeight;
+        i++;
+        setTimeout(type, speed);
+      } else if(done) setTimeout(done, cls === 'cmd' ? 350 : 90);
+    })();
+  }
+  function termRun(lines, after){
+    termBusy = true;
+    let idx = 0;
+    (function next(){
+      if(idx < lines.length){
+        const [cls, text] = lines[idx++];
+        termPrint(cls, text, next);
+      } else { termBusy = false; if(after) after(); }
+    })();
+  }
+  function termBoot(){
+    if(termStarted) return;
+    termStarted = true;
+    setTimeout(()=> termRun(termIntro, ()=> $('term-in').focus()), 400);
+  }
+  const termCmds = {
+    'help': [['','Команды: whoami · опыт · start · очистить · выход'],['',' ']],
+    'whoami': [['','анастасия лушникова. маркетинг, продажи, запуски. 26 лет в IT.'],['',' ']],
+    'опыт': [['',' 26_лет_в_IT.sys'],['',' target_school_4000_выпускников.exe'],['',' книга_издана_эксмо.pdf'],['',' instagram_900000_подписчиков.dll'],['',' предпринимательство_с_2012.bat'],['',' ']],
+    'start': [['ok','Запускаю trenazher.exe... первые шаги бесплатные'],['',' ']],
+    'выход': [['','Пока! Сеанс завершён.'],['',' ']]
+  };
+  function termExec(raw){
+    const c = raw.trim().toLowerCase();
+    if(!c) return;
+    termPrint('cmd', 'C:\\> ' + raw, ()=>{
+      if(c === 'очистить' || c === 'clear'){ $('term-out').innerHTML = ''; return; }
+      if(c === 'выход' || c === 'exit'){ termRun(termCmds['выход'], ()=> closeWin('term')); return; }
+      if(c === 'start' || c === 'тренажёр' || c === 'тренажер'){
+        termRun(termCmds['start'], ()=> window.open('https://anastasialushnikova.com/trenazher/','_blank'));
+        return;
+      }
+      const known = termCmds[c];
+      termRun(known || [['','"' + raw + '" не является командой. введи help'],['',' ']]);
+    });
+  }
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Enter' && document.activeElement === $('term-in') && !termBusy){
+      termExec($('term-in').value);
+      $('term-in').value = '';
+    }
+  });
+
+  /* CONFETTI */
+  function confetti(){
+    const colors = ['#ff8a5c','#9ede6a','#7ab8f5','#ffd76a','#c9a0f5','#f57a9e'];
+    for(let i=0;i<36;i++){
+      const c = document.createElement('div');
+      c.className = 'confetti';
+      c.style.left = Math.random()*100 + 'vw';
+      c.style.background = colors[Math.floor(Math.random()*colors.length)];
+      c.style.animationDuration = (2 + Math.random()*2.5) + 's';
+      c.style.animationDelay = (Math.random()*0.6) + 's';
+      $('desktop').appendChild(c);
+      setTimeout(()=>c.remove(), 5500);
+    }
+  }
+</script>
+</body>
+</html>
