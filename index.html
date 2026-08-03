@@ -368,13 +368,16 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
   .about-strip { background: var(--bg2); padding: 80px 24px; }
   .about-inner {
     max-width: 980px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 64px; align-items: center;
+    display: grid; grid-template-columns: 0.9fr 1.1fr;
+    gap: 48px; align-items: center;
   }
   .about-eyebrow { font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 12px; }
   .about-title { font-size: clamp(24px, 3vw, 32px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; }
   .about-text { font-size: 15px; color: var(--text-muted); line-height: 1.7; letter-spacing: -0.01em; margin-bottom: 12px; }
   .about-links { display: flex; flex-direction: column; gap: 12px; }
+  .about-main .about-links { margin-top: 22px; }
+  .about-photo img { width: 100%; border-radius: 20px; display: block; box-shadow: 0 20px 60px rgba(0,0,0,0.10); }
+  .about-cap { margin-top: 12px; font-size: 13px; color: var(--text-muted); font-weight: 500; text-align: center; }
   .about-link {
     display: flex; align-items: center; gap: 14px;
     padding: 16px 20px; background: var(--bg);
@@ -408,6 +411,7 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     .hero { padding: 72px 20px 64px; }
     .section { padding: 56px 20px; }
     .about-strip { padding: 56px 20px; }
+    .about-photo { max-width: 360px; margin: 0 auto; }
     .stats-strip { padding: 32px 20px; }
     .stat { padding: 24px; }
   }
@@ -665,13 +669,16 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
 
 <div class="about-strip">
   <div class="about-inner">
-    <div>
+    <div class="about-photo">
+      <img src="https://www.anastasialushnikova.com/anastasia-book.jpg" alt="Анастасия Лушникова с книгой «Таргетолог как удалённая профессия», издательство Эксмо" loading="lazy">
+      <div class="about-cap">📖 Книга издана в «Эксмо»</div>
+    </div>
+    <div class="about-main">
       <div class="about-eyebrow">Об авторе</div>
       <h2 class="about-title">Анастасия Лушникова</h2>
       <p class="about-text">Инженер по образованию, в IT с 2000 года. В 2017 основала Target School, одну из крупнейших школ маркетинга на русскоязычном рынке. Через неё прошли 4 000+ человек. Написала книгу «Таргетолог как удалённая профессия», её издало Эксмо.</p>
       <p class="about-text">Девять лет живу и работаю из Азии, между Вьетнамом и Таиландом. Сейчас строю AI-продукты через vibe coding и учу маркетингу смыслов. Ты голова, нейросеть руки.</p>
-    </div>
-    <div class="about-links">
+      <div class="about-links">
       <a href="https://www.anastasialushnikova.com/os" target="_blank" class="about-link">
         <div class="link-icon icon-os">🖥️</div>
         <div class="link-text"><strong>Обо мне · AnastasiaOS</strong><span>Кто я, в формате старой ОС</span></div>
@@ -694,6 +701,7 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
         </div>
         <div class="link-text"><strong>Написать Анастасии</strong><span>Личное сообщение в WhatsApp</span></div>
       </a>
+    </div>
     </div>
   </div>
 </div>
