@@ -37,6 +37,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+<script>document.documentElement.className+=' js';</script>
 <style>
   :root {
     --bg: #ffffff;
@@ -481,6 +482,16 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
   .ad-result-cta .btn-primary, .ad-result-cta .btn-secondary { flex: 1; justify-content: center; }
   .hero-skip { display: inline-block; margin-top: 22px; font-size: 13px; color: var(--text-light); text-decoration: none; opacity: 0; animation: fadeIn 1s ease 1.2s forwards; }
   .hero-skip:hover { color: var(--text-muted); }
+
+  /* SCROLL REVEAL + COUNT-UP + HERO DRIFT */
+  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1); }
+  .js .reveal.in { opacity: 1; transform: none; }
+  .hero::before { animation: heroDrift 20s ease-in-out infinite alternate; }
+  @keyframes heroDrift { from { transform: scale(1) translateY(0); } to { transform: scale(1.08) translateY(-12px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .hero::before { animation: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -573,15 +584,15 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
 
 <div class="stats-strip">
   <div class="stats-inner">
-    <div class="stat">
+    <div class="stat reveal">
       <div class="stat-num">17+</div>
       <div class="stat-label">лет в маркетинге</div>
     </div>
-    <div class="stat">
+    <div class="stat reveal">
       <div class="stat-num">4 000+</div>
       <div class="stat-label">выпускников Target School</div>
     </div>
-    <div class="stat">
+    <div class="stat reveal">
       <div class="stat-num">900 000+</div>
       <div class="stat-label">подписчиков в Instagram</div>
     </div>
@@ -592,19 +603,19 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
   <div class="section-eyebrow">Продукты и метод</div>
   <div class="section-title">С чего начать</div>
   <div class="cards-grid">
-    <a href="https://www.anastasialushnikova.com/arkhitektor" class="card">
+    <a href="https://www.anastasialushnikova.com/arkhitektor" class="card reveal">
       <div class="card-eyebrow">Авторский метод · AI</div>
       <div class="card-title">Архитектор смыслов</div>
       <div class="card-desc">AI-система из 11 разделов. Достаёт истинные боли твоей аудитории за вечер и заменяет маркетолога за 50 000. Вставляешь свои данные, получаешь карту смыслов, из которой рождается контент.</div>
       <div class="card-footer"><span class="card-cta">Забрать метод →</span></div>
     </a>
-    <a href="https://www.anastasialushnikova.com/trenazher/" class="card">
+    <a href="https://www.anastasialushnikova.com/trenazher/" class="card reveal">
       <div class="card-eyebrow">Мини-SaaS · профессия</div>
       <div class="card-title">Тренажёр таргетолога</div>
       <div class="card-desc">Профессия таргетолога по шагам, как язык в Duolingo. Собираешь первую кампанию на воссозданных экранах кабинета Meta. Первые шаги бесплатные.</div>
       <div class="card-footer"><span class="card-cta">Открыть тренажёр →</span></div>
     </a>
-    <a href="https://www.anastasialushnikova.com/os" class="card">
+    <a href="https://www.anastasialushnikova.com/os" class="card reveal">
       <div class="card-eyebrow">Кто я</div>
       <div class="card-title">Обо мне · AnastasiaOS</div>
       <div class="card-desc">26 лет на стыке IT и маркетинга в формате старой операционной системы. Инженер, который выбрал маркетинг. Как я дошла до продаж через смыслы.</div>
@@ -617,7 +628,7 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
   <div class="section-eyebrow">Материалы</div>
   <div class="section-title">Свежее</div>
 
-  <a href="/blog/reklama-5-shagov/" class="featured-card">
+  <a href="/blog/reklama-5-shagov/" class="featured-card reveal">
     <div>
       <div class="featured-badge">🔥 Новое</div>
       <div class="featured-title">Не запускай рекламу, пока не сделаешь эти 5 шагов</div>
@@ -640,44 +651,21 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     </div>
   </a>
 
-  <div class="section-eyebrow" style="margin-top:56px; margin-bottom:8px">Скоро</div>
-  <div class="section-title" style="margin-bottom:24px">В работе</div>
-
-  <div class="cards-grid">
-    <div class="card soon">
-      <div class="card-eyebrow">Промпты</div>
-      <div class="card-title">11 промптов для сторис, которые греют аудиторию</div>
-      <div class="card-desc">Система прогрева через истории, без навязчивости.</div>
-      <div class="card-footer"><span class="card-soon-label">Скоро</span></div>
-    </div>
-    <div class="card soon">
-      <div class="card-eyebrow">Контент</div>
-      <div class="card-title">Как писать посты, которые покупают, а не лайкают</div>
-      <div class="card-desc">Разбор структуры поста-смысла на реальных примерах.</div>
-      <div class="card-footer"><span class="card-soon-label">Скоро</span></div>
-    </div>
-    <div class="card soon">
-      <div class="card-eyebrow">AI-маркетинг</div>
-      <div class="card-title">Как я строю AI-продукты без технического бэкграунда</div>
-      <div class="card-desc">Честный рассказ про путь от идеи до запуска.</div>
-      <div class="card-footer"><span class="card-soon-label">Скоро</span></div>
-    </div>
-  </div>
-</section>
+  </section>
 
 <div class="divider"></div>
 
 <div class="about-strip">
   <div class="about-inner">
-    <div class="about-photo">
+    <div class="about-photo reveal">
       <img src="https://www.anastasialushnikova.com/anastasia-book.jpg" alt="Анастасия Лушникова с книгой «Таргетолог как удалённая профессия», издательство Эксмо" loading="lazy">
       <div class="about-cap">📖 Книга издана в «Эксмо»</div>
     </div>
-    <div class="about-main">
+    <div class="about-main reveal">
       <div class="about-eyebrow">Об авторе</div>
       <h2 class="about-title">Анастасия Лушникова</h2>
       <p class="about-text">Инженер по образованию, в IT с 2000 года. В 2017 основала Target School, одну из крупнейших школ маркетинга на русскоязычном рынке. Через неё прошли 4 000+ человек. Написала книгу «Таргетолог как удалённая профессия», её издало Эксмо.</p>
-      <p class="about-text">Девять лет живу и работаю из Азии, между Вьетнамом и Таиландом. Сейчас строю AI-продукты через vibe coding и учу маркетингу смыслов. Ты голова, нейросеть руки.</p>
+      <p class="about-text">Девять лет живу и работаю из Азии, между Вьетнамом и Таиландом. Сейчас строю SaaS-продукты через vibe coding. В основе твёрдые навыки: маркетинг и продажи через смыслы. Их за один промпт не соберёшь.</p>
       <div class="about-links">
       <a href="https://www.anastasialushnikova.com/os" target="_blank" class="about-link">
         <div class="link-icon icon-os">🖥️</div>
@@ -786,6 +774,66 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     hint.classList.remove('show');
     show(1);
   };
+})();
+</script>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var supportIO = 'IntersectionObserver' in window;
+
+  // --- всплытие блоков ---
+  var reveals = [].slice.call(document.querySelectorAll('.reveal'));
+  var seen = {};
+  reveals.forEach(function(el){
+    var p = el.parentElement;
+    var key = p.className + '|' + (p.dataset._rk || (p.dataset._rk = Math.random().toString(36).slice(2)));
+    var i = seen[key] || 0;
+    el.style.transitionDelay = (i * 90) + 'ms';
+    seen[key] = i + 1;
+  });
+  if (reduce || !supportIO) {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function(el){ io.observe(el); });
+  }
+
+  // --- счётчики цифр ---
+  function animateCount(el){
+    var raw = el.textContent.trim();
+    var target = parseInt(raw.replace(/\D/g, ''), 10);
+    if (!target) return;
+    var suffix = raw.replace(/[\d\s\u00a0]/g, '');
+    var spaced = /[\s\u00a0]/.test(raw);
+    function fmt(n){ return spaced ? n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : n.toString(); }
+    var dur = 1300, start = performance.now();
+    function tick(now){
+      var t = Math.min((now - start) / dur, 1);
+      var e = 1 - Math.pow(1 - t, 3);
+      el.textContent = fmt(Math.round(target * e)) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = fmt(target) + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+  var strip = document.querySelector('.stats-strip');
+  if (strip && !reduce && supportIO) {
+    var nums = strip.querySelectorAll('.stat-num');
+    var io2 = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          nums.forEach(function(n){ animateCount(n); });
+          io2.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+    io2.observe(strip);
+  }
 })();
 </script>
 </body>
