@@ -191,6 +191,7 @@ export default async function handler(req, res) {
 </style></head>
 <body>
   <h1>Target School · админка</h1>
+  <div class="tools"><a href="/api/ts-admin-questions?key=${esc(key)}">Вопросы учеников →</a> · <a href="/api/ts-presence?key=${esc(key)}">Кто онлайн →</a></div>
 
   ${message ? `<div class="msg ${message.startsWith("Не получилось") ? "err" : ""}">${message}</div>` : ""}
 
