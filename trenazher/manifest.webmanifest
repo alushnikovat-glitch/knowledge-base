@@ -1,0 +1,11 @@
+{
+  "name": "Target School · тренажёр таргетолога",
+  "short_name": "Target School",
+  "icons": [
+    { "src": "./icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#FFCC00",
+  "background_color": "#F6F6F4",
+  "display": "browser"
+}
