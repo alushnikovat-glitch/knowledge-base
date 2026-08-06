@@ -290,7 +290,7 @@ export default async function handler(req, res) {
           <div style="color:#888;font-size:12px;margin-top:2px">последний вопрос: ${esc(String(l.lastQ || "").slice(0, 90))}</div>
         </div>
         <div style="color:#999;font-size:12px;white-space:nowrap" class="ts" data-t="${esc(l.when || "")}">${esc(String(l.when || "").slice(0, 16).replace("T", " "))}</div>
-        <button onclick="leadWork('${esc(l.msgId)}',this)" style="background:#1C1C1E;color:#fff;border:none;border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer">взяла в работу</button>
+        <button onclick="leadWork('${esc(l.email)}',this)" style="background:#1C1C1E;color:#fff;border:none;border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer">взяла в работу</button>
       </div>`).join("")}
     <div style="margin-top:10px;font-size:13px"><a href="/api/ts-admin-questions?key=${esc(key)}&leads=1">все лиды, включая тёплых →</a></div>
   </div>` : ""}
@@ -395,11 +395,11 @@ export default async function handler(req, res) {
       el.textContent = p(d.getDate()) + '.' + p(d.getMonth() + 1) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
     });
 
-    function leadWork(id, btn) {
+    function leadWork(email, btn) {
       fetch('/api/ts-admin-questions?key=' + encodeURIComponent('${esc(key)}'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'work', id: id })
+        body: JSON.stringify({ action: 'work_person', email: email })
       }).then(function (r) {
         if (r.ok) { var row = btn.parentElement; row.style.opacity = '0.35'; btn.outerHTML = '✓'; }
       });

@@ -70,6 +70,19 @@ export default async function handler(req, res) {
         res.setHeader("Content-Type", "application/json");
         return res.status(200).send(JSON.stringify({ ok: true }));
       }
+      // Обработка человека целиком: гасит все его колокольчики разом
+      if (body.action === "work_person") {
+        const pe = String(body.email || "").trim().toLowerCase();
+        const okId = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(pe) || /^guest_[a-z0-9]{6,16}$/.test(pe);
+        if (okId) {
+          await sb(`ts_assistant_messages?user_email=eq.${encodeURIComponent(pe)}&escalated=eq.true&worked=eq.false`, {
+            method: "PATCH",
+            body: JSON.stringify({ worked: true }),
+          });
+          res.setHeader("Content-Type", "application/json");
+          return res.status(200).send(JSON.stringify({ ok: true }));
+        }
+      }
       return res.status(400).send("bad request");
     }
 
@@ -166,8 +179,7 @@ export default async function handler(req, res) {
         ];
         if (m.lesson) metaParts.push(`урок ${m.lesson}.${m.sub}`);
         if (contact) metaParts.push("🔥 контакт");
-        if (needWork) metaParts.push(`<button class="work-btn" data-id="${esc(m.id)}">взяла в работу</button>`);
-        else if (mine && m.escalated && m.worked) metaParts.push("🔔 ✓");
+        if (mine && m.escalated && m.worked) metaParts.push("🔔 ✓");
         else if (m.escalated) metaParts.push("🔔");
         return `<div class="row ${mine ? "right" : "left"}"><div class="bubble ${mine ? "user" : "bot"} ${contact ? "contact" : ""}"><div class="txt">${esc(m.content)}</div><div class="meta">${metaParts.join(" · ")}</div></div></div>`;
       }).join("");
@@ -191,19 +203,22 @@ export default async function handler(req, res) {
   .work-btn { background: #1C1C1E; color: #fff; border: none; border-radius: 6px; padding: 3px 8px; font-size: 11px; cursor: pointer; }
 </style></head>
 <body>
-  <h1>${who(dialogWith)}</h1>
+  <h1>${who(dialogWith)}
+    ${msgs.some((m) => m.role === "user" && m.escalated && !m.worked)
+      ? `<button id="work-person" data-e="${esc(dialogWith)}" style="float:right;background:#1C1C1E;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer">взяла в работу</button>`
+      : ""}
+  </h1>
   <div class="tools"><a href="/api/ts-admin-questions?key=${esc(key)}">← все диалоги</a> · <a href="/api/ts-admin?key=${esc(key)}">в админку</a></div>
   <div class="thread">${bubbles || "<div class='count'>Сообщений нет</div>"}</div>
   ${TS_SCRIPT}
   <script>
-    document.querySelectorAll('.work-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        fetch(location.pathname + '?key=' + encodeURIComponent(new URLSearchParams(location.search).get('key') || ''), {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'work', id: btn.getAttribute('data-id') })
-        }).then(function (r) { if (r.ok) btn.outerHTML = '✓'; });
-      });
+    var wp = document.getElementById('work-person');
+    if (wp) wp.addEventListener('click', function () {
+      fetch(location.pathname + '?key=' + encodeURIComponent(new URLSearchParams(location.search).get('key') || ''), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'work_person', email: wp.getAttribute('data-e') })
+      }).then(function (r) { if (r.ok) wp.outerHTML = '<span style="float:right;color:#1B7F3B;font-size:14px">✓ обработан</span>'; });
     });
   </script>
 </body></html>`;
