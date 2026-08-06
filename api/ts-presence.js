@@ -91,7 +91,7 @@ export default async function handler(req, res) {
     const who = (x) => isGuest(x) ? `<span class="guest">гость ${esc(x.email.slice(6, 10))}</span>` : esc(x.email);
 
     const rowHtml = (x, dot) => `
-      <tr>
+      <tr data-e="${esc(x.email)}">
         <td>${dot ? '<span class="dot"></span>' : ""}${who(x)}</td>
         <td>${esc(place(x))}</td>
         <td style="white-space:nowrap;color:#666">${esc(ago(x.last_seen))}</td>
@@ -100,7 +100,6 @@ export default async function handler(req, res) {
     const html = `<!DOCTYPE html>
 <html lang="ru"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="refresh" content="30">
 <title>Target School · кто онлайн</title>
 <style>
   body { font-family: -apple-system, sans-serif; background: #F6F6F4; color: #1C1C1E; padding: 24px; max-width: 860px; margin: 0 auto; }
@@ -117,22 +116,80 @@ export default async function handler(req, res) {
   .note { color: #999; font-size: 12px; margin-top: 16px; }
 </style></head>
 <body>
-  <h1>Кто в тренажёре</h1>
+  <h1>Кто в тренажёре <button id="snd" style="float:right;background:#fff;border:1px solid #E0E0E0;border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer">🔕 Звук выкл</button></h1>
   <div class="tools"><a href="/api/ts-admin?key=${esc(key)}">← назад в админку</a></div>
 
-  <h2>СЕЙЧАС ОНЛАЙН · ${online.length}${online.filter(isGuest).length ? ` (из них гостей: ${online.filter(isGuest).length})` : ""}</h2>
+  <h2 id="online-h">СЕЙЧАС ОНЛАЙН · ${online.length}${online.filter(isGuest).length ? ` (из них гостей: ${online.filter(isGuest).length})` : ""}</h2>
   <table>
     <thead><tr><th>Почта</th><th>Где</th><th>Когда</th></tr></thead>
-    <tbody>${online.map((x) => rowHtml(x, true)).join("") || "<tr><td colspan='3'>Сейчас никого</td></tr>"}</tbody>
+    <tbody id="online-b">${online.map((x) => rowHtml(x, true)).join("") || "<tr><td colspan='3'>Сейчас никого</td></tr>"}</tbody>
   </table>
 
-  <h2>БЫЛИ ЗА СУТКИ · ${today.length}</h2>
+  <h2 id="day-h">БЫЛИ ЗА СУТКИ · ${today.length}</h2>
   <table>
     <thead><tr><th>Почта</th><th>Последняя точка</th><th>Когда</th></tr></thead>
-    <tbody>${today.map((x) => rowHtml(x, false)).join("") || "<tr><td colspan='3'>Пока пусто</td></tr>"}</tbody>
+    <tbody id="day-b">${today.map((x) => rowHtml(x, false)).join("") || "<tr><td colspan='3'>Пока пусто</td></tr>"}</tbody>
   </table>
 
-  <div class="note">Страница обновляется сама раз в 30 секунд. Онлайн это активность за последние 3 минуты. «Последняя точка» это место, где человека видели в последний раз, удобно смотреть, где застревают. Гости это люди без регистрации: метка вида «гость 4f2k» живёт в их браузере, почты у них нет. Если гость потом зарегистрируется, он появится в списке уже с почтой, отдельной строкой.</div>
+  <script>
+    var soundOn = false;
+    var audioCtx = null;
+    var sndBtn = document.getElementById("snd");
+    sndBtn.addEventListener("click", function () {
+      soundOn = !soundOn;
+      if (soundOn && !audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (soundOn && audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+      sndBtn.textContent = soundOn ? "🔔 Звук вкл" : "🔕 Звук выкл";
+      if (soundOn) ding();
+    });
+
+    function ding() {
+      if (!soundOn || !audioCtx) return;
+      try {
+        [660, 880].forEach(function (freq, i) {
+          var o = audioCtx.createOscillator();
+          var g = audioCtx.createGain();
+          o.type = "sine";
+          o.frequency.value = freq;
+          g.gain.setValueAtTime(0.0001, audioCtx.currentTime + i * 0.12);
+          g.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + i * 0.12 + 0.02);
+          g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + i * 0.12 + 0.35);
+          o.connect(g); g.connect(audioCtx.destination);
+          o.start(audioCtx.currentTime + i * 0.12);
+          o.stop(audioCtx.currentTime + i * 0.12 + 0.4);
+        });
+      } catch (e) {}
+    }
+
+    function onlineSet() {
+      var s = {};
+      document.querySelectorAll("#online-b tr[data-e]").forEach(function (tr) {
+        s[tr.getAttribute("data-e")] = true;
+      });
+      return s;
+    }
+
+    var known = onlineSet();
+
+    setInterval(function () {
+      fetch(location.href, { cache: "no-store" })
+        .then(function (r) { return r.text(); })
+        .then(function (html) {
+          var doc = new DOMParser().parseFromString(html, "text/html");
+          ["online-h", "online-b", "day-h", "day-b"].forEach(function (id) {
+            var from = doc.getElementById(id);
+            var to = document.getElementById(id);
+            if (from && to) to.innerHTML = from.innerHTML;
+          });
+          var now = onlineSet();
+          var fresh = Object.keys(now).filter(function (e) { return !known[e]; });
+          if (fresh.length) ding();
+          known = now;
+        })
+        .catch(function () {});
+    }, 10000);
+  </script>
+  <div class="note">Цифры обновляются сами каждые 10 секунд, без перезагрузки страницы. Кнопка звука сверху: включи один раз, и каждый новый человек в списке онлайн отзовётся сигналом. Браузер требует этот клик, сам по себе звук включиться не может. Онлайн это активность за последние 3 минуты. «Последняя точка» это место, где человека видели в последний раз, удобно смотреть, где застревают. Гости это люди без регистрации: метка вида «гость 4f2k» живёт в их браузере, почты у них нет. Если гость потом зарегистрируется, он появится в списке уже с почтой, отдельной строкой.</div>
 </body></html>`;
 
     res.setHeader("Content-Type", "text/html; charset=utf-8");
