@@ -34,6 +34,11 @@ const csvCell = (s) => `"${String(s ?? "").replace(/"/g, '""')}"`;
 
 const isTest = (x) => x.source === "тест" || Number(x.amount) === 0;
 
+// Похоже ли сообщение на контакт: ник телеграма, ссылка, номер телефона или слово-маркер
+const looksLikeContact = (s) =>
+  /@[a-zA-Z0-9_]{4,}|t\.me\/|wa\.me\/|телеграм|telegram|ватсап|whatsapp|вотсап|(^|[^а-яёa-z])тг([^а-яёa-z]|$)/i.test(String(s || "")) ||
+  /(?:\+?\d[\s\-()]?){7,}/.test(String(s || ""));
+
 export default async function handler(req, res) {
   const key = req.query?.key || "";
   if (!process.env.TS_ADMIN_KEY || key !== process.env.TS_ADMIN_KEY) {
@@ -133,6 +138,42 @@ export default async function handler(req, res) {
     ]);
     const dash = (v) => (v == null ? "—" : v);
 
+    // Горячие лиды из чата: не оплатившие, кто оставил контакт или позвал Анастасию, и это не проработано
+    let hotLeads = [];
+    try {
+      const rmsg = await fetch(
+        `${SUPABASE_URL}/rest/v1/ts_assistant_messages?role=eq.user&order=created_at.desc&limit=500&select=id,user_email,content,escalated,worked,created_at`,
+        { headers: { apikey: SERVICE, Authorization: `Bearer ${SERVICE}` } }
+      );
+      const msgs = await rmsg.json();
+      if (Array.isArray(msgs)) {
+        const paidSet = new Set(paidRows.map((x) => x.email));
+        const byPerson = {};
+        for (const m of msgs) {
+          if (paidSet.has(m.user_email)) continue;
+          const p = byPerson[m.user_email] || (byPerson[m.user_email] = { email: m.user_email, last: m, contactMsg: null, escMsg: null });
+          if (!p.contactMsg && looksLikeContact(m.content)) p.contactMsg = m;
+          if (!p.escMsg && m.escalated) p.escMsg = m;
+        }
+        hotLeads = Object.values(byPerson)
+          .map((p) => {
+            const keyMsg = p.contactMsg || p.escMsg;
+            if (!keyMsg || keyMsg.worked) return null;
+            return {
+              email: p.email,
+              contact: p.contactMsg ? p.contactMsg.content : null,
+              lastQ: p.last.content,
+              when: keyMsg.created_at,
+              msgId: keyMsg.id,
+            };
+          })
+          .filter(Boolean)
+          .sort((a, b) => new Date(b.when) - new Date(a.when))
+          .slice(0, 10);
+      }
+    } catch (e) {}
+    const leadWho = (e) => /^guest_/.test(e) ? `гость ${esc(e.slice(6, 10))}` : esc(e);
+
     // Выгрузка в CSV: /api/ts-admin?key=...&export=paid | unpaid | all
     const exportKind = (req.query?.export || "").toString();
     if (exportKind) {
@@ -217,7 +258,7 @@ export default async function handler(req, res) {
   .card-sub .alert { color: #B3261E; }
 </style></head>
 <body>
-  <h1>Target School · админка</h1>
+  <h1>Target School · админка <button id="snd" style="float:right;background:#fff;border:1px solid #E0E0E0;border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer">🔕 Звук выкл</button></h1>
 
   <div class="dash">
     <a class="card" href="/api/ts-admin-questions?key=${esc(key)}">
@@ -226,9 +267,9 @@ export default async function handler(req, res) {
       <div class="card-sub">${qEsc ? `<b class="alert">${qEsc} ждут Анастасию</b>` : "эскалаций нет"}</div>
     </a>
     <a class="card" href="/api/ts-presence?key=${esc(key)}">
-      <div class="card-num">${dash(onlineUsers == null && onlineGuests == null ? null : (onlineUsers || 0) + (onlineGuests || 0))}</div>
+      <div class="card-num" id="on-num">${dash(onlineUsers == null && onlineGuests == null ? null : (onlineUsers || 0) + (onlineGuests || 0))}</div>
       <div class="card-label">сейчас онлайн</div>
-      <div class="card-sub">учеников: ${dash(onlineUsers)} · гостей: ${dash(onlineGuests)}</div>
+      <div class="card-sub" id="on-sub">учеников: ${dash(onlineUsers)} · гостей: ${dash(onlineGuests)}</div>
     </a>
     <div class="card">
       <div class="card-num">${realSales.length}</div>
@@ -238,6 +279,21 @@ export default async function handler(req, res) {
   </div>
 
   ${message ? `<div class="msg ${message.startsWith("Не получилось") ? "err" : ""}">${message}</div>` : ""}
+
+  ${hotLeads.length ? `
+  <div style="background:#FFF3E8;border:1px solid #F5C79A;border-radius:12px;padding:16px;margin:0 0 20px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px">🔥 Лиды из чата ждут ответа · ${hotLeads.length}</div>
+    ${hotLeads.map((l) => `
+      <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;padding:8px 0;border-top:1px solid #F5DEC4;font-size:14px">
+        <div style="min-width:110px;color:#666">${leadWho(l.email)}</div>
+        <div style="flex:1;min-width:200px">${l.contact ? `<b>${esc(l.contact)}</b>` : `<span style="color:#B3261E">нажал «Позвать Анастасию», контакта нет</span>`}
+          <div style="color:#888;font-size:12px;margin-top:2px">последний вопрос: ${esc(String(l.lastQ || "").slice(0, 90))}</div>
+        </div>
+        <div style="color:#999;font-size:12px;white-space:nowrap">${esc(String(l.when || "").slice(0, 16).replace("T", " "))}</div>
+        <button onclick="leadWork('${esc(l.msgId)}',this)" style="background:#1C1C1E;color:#fff;border:none;border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer">взяла в работу</button>
+      </div>`).join("")}
+    <div style="margin-top:10px;font-size:13px"><a href="/api/ts-admin-questions?key=${esc(key)}&leads=1">все лиды, включая тёплых →</a></div>
+  </div>` : ""}
 
   <input class="search" id="q" placeholder="Поиск по почте или телеграму" autocomplete="off" />
 
@@ -272,6 +328,74 @@ export default async function handler(req, res) {
   </table>
 
   <script>
+    // Звук на нового человека онлайн и живая карточка. Питается страницей «Кто онлайн».
+    var soundOn = false;
+    var audioCtx = null;
+    var sndBtn = document.getElementById('snd');
+    if (sndBtn) sndBtn.addEventListener('click', function () {
+      soundOn = !soundOn;
+      if (soundOn && !audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (soundOn && audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+      sndBtn.textContent = soundOn ? '🔔 Звук вкл' : '🔕 Звук выкл';
+      if (soundOn) ding();
+    });
+    function ding() {
+      if (!soundOn || !audioCtx) return;
+      try {
+        [660, 880].forEach(function (freq, i) {
+          var o = audioCtx.createOscillator();
+          var g = audioCtx.createGain();
+          o.type = 'sine';
+          o.frequency.value = freq;
+          g.gain.setValueAtTime(0.0001, audioCtx.currentTime + i * 0.12);
+          g.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + i * 0.12 + 0.02);
+          g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + i * 0.12 + 0.35);
+          o.connect(g); g.connect(audioCtx.destination);
+          o.start(audioCtx.currentTime + i * 0.12);
+          o.stop(audioCtx.currentTime + i * 0.12 + 0.4);
+        });
+      } catch (e) {}
+    }
+    var knownOnline = null;
+    function pollOnline() {
+      fetch('/api/ts-presence?key=' + encodeURIComponent('${esc(key)}'), { cache: 'no-store' })
+        .then(function (r) { return r.text(); })
+        .then(function (html) {
+          var doc = new DOMParser().parseFromString(html, 'text/html');
+          var rows = doc.querySelectorAll('#online-b tr[data-e]');
+          var now = {};
+          var guests = 0;
+          rows.forEach(function (tr) {
+            var e = tr.getAttribute('data-e');
+            now[e] = true;
+            if (e.indexOf('guest_') === 0) guests++;
+          });
+          var total = Object.keys(now).length;
+          var numEl = document.getElementById('on-num');
+          var subEl = document.getElementById('on-sub');
+          if (numEl) numEl.textContent = total;
+          if (subEl) subEl.textContent = 'учеников: ' + (total - guests) + ' · гостей: ' + guests;
+          if (knownOnline !== null) {
+            var fresh = Object.keys(now).filter(function (e) { return !knownOnline[e]; });
+            if (fresh.length) ding();
+          }
+          knownOnline = now;
+        })
+        .catch(function () {});
+    }
+    pollOnline();
+    setInterval(pollOnline, 10000);
+
+    function leadWork(id, btn) {
+      fetch('/api/ts-admin-questions?key=' + encodeURIComponent('${esc(key)}'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'work', id: id })
+      }).then(function (r) {
+        if (r.ok) { var row = btn.parentElement; row.style.opacity = '0.35'; btn.outerHTML = '✓'; }
+      });
+    }
+
     var q = document.getElementById('q');
     if (q) q.addEventListener('input', function () {
       var v = q.value.toLowerCase();
