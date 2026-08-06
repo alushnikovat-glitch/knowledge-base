@@ -285,7 +285,7 @@ export default async function handler(req, res) {
     <div style="font-size:15px;font-weight:700;margin-bottom:10px">🔥 Лиды из чата ждут ответа · ${hotLeads.length}</div>
     ${hotLeads.map((l) => `
       <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;padding:8px 0;border-top:1px solid #F5DEC4;font-size:14px">
-        <div style="min-width:110px;color:#666">${leadWho(l.email)}</div>
+        <a style="min-width:110px;color:#666;text-decoration:underline" href="/api/ts-admin-questions?key=${esc(key)}&dialog=${encodeURIComponent(l.email)}">${leadWho(l.email)}</a>
         <div style="flex:1;min-width:200px">${l.contact ? `<b>${esc(l.contact)}</b>` : `<span style="color:#B3261E">нажал «Позвать Анастасию», контакта нет</span>`}
           <div style="color:#888;font-size:12px;margin-top:2px">последний вопрос: ${esc(String(l.lastQ || "").slice(0, 90))}</div>
         </div>

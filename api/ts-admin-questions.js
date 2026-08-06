@@ -101,7 +101,7 @@ export default async function handler(req, res) {
       const leadRows = leads.map((p) => `
         <tr${p.hot ? ' class="hot"' : ""}>
           <td>${p.hot ? "🔥 горячий" : "🌡 тёплый"}</td>
-          <td>${who(p.email)}</td>
+          <td><a href="/api/ts-admin-questions?key=${esc(req.query?.key || "")}&dialog=${encodeURIComponent(p.email)}">${who(p.email)}</a></td>
           <td class="q">${p.contact ? `<b>${esc(p.contact)}</b>` : '<span style="color:#999">не оставлен</span>'}</td>
           <td style="text-align:center">${p.count}</td>
           <td class="q">${esc(String(p.last.content || "").slice(0, 120))}</td>
@@ -161,19 +161,15 @@ export default async function handler(req, res) {
         const mine = m.role === "user";
         const contact = mine && looksLikeContact(m.content);
         const needWork = mine && m.escalated && !m.worked;
-        return `
-        <div class="row ${mine ? "right" : "left"}">
-          <div class="bubble ${mine ? "user" : "bot"} ${contact ? "contact" : ""}">
-            ${esc(m.content)}
-            <div class="meta">
-              <span class="ts" data-t="${esc(m.created_at)}">${esc(String(m.created_at || "").slice(0, 16).replace("T", " "))}</span>
-              ${m.lesson ? ` · урок ${m.lesson}.${m.sub}` : ""}
-              ${contact ? " · 🔥 контакт" : ""}
-              ${m.escalated ? " · 🔔" : ""}
-              ${needWork ? ` · <button class="work-btn" data-id="${esc(m.id)}">взяла в работу</button>` : (mine && m.worked ? " · ✓" : "")}
-            </div>
-          </div>
-        </div>`;
+        const metaParts = [
+          `<span class="ts" data-t="${esc(m.created_at)}">${esc(String(m.created_at || "").slice(0, 16).replace("T", " "))}</span>`,
+        ];
+        if (m.lesson) metaParts.push(`урок ${m.lesson}.${m.sub}`);
+        if (contact) metaParts.push("🔥 контакт");
+        if (needWork) metaParts.push(`<button class="work-btn" data-id="${esc(m.id)}">взяла в работу</button>`);
+        else if (mine && m.escalated && m.worked) metaParts.push("🔔 ✓");
+        else if (m.escalated) metaParts.push("🔔");
+        return `<div class="row ${mine ? "right" : "left"}"><div class="bubble ${mine ? "user" : "bot"} ${contact ? "contact" : ""}"><div class="txt">${esc(m.content)}</div><div class="meta">${metaParts.join(" · ")}</div></div></div>`;
       }).join("");
 
       const html = `<!DOCTYPE html>
@@ -181,15 +177,17 @@ export default async function handler(req, res) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Диалог · ${who(dialogWith)}</title>
 <style>${BASE_CSS}
-  .thread { display: flex; flex-direction: column; gap: 10px; }
+  body { max-width: 640px; }
+  .thread { display: flex; flex-direction: column; gap: 8px; }
   .row { display: flex; }
   .row.right { justify-content: flex-end; }
   .row.left { justify-content: flex-start; }
-  .bubble { max-width: 78%; padding: 10px 14px; border-radius: 14px; font-size: 15px; line-height: 1.5; white-space: pre-wrap; }
-  .bubble.user { background: #FFCC00; }
-  .bubble.bot { background: #fff; border: 1px solid #E8E8E8; }
+  .bubble { max-width: 82%; padding: 9px 13px; border-radius: 14px; }
+  .bubble .txt { font-size: 15px; line-height: 1.45; white-space: pre-wrap; word-break: break-word; }
+  .bubble.user { background: #FFCC00; border-bottom-right-radius: 4px; }
+  .bubble.bot { background: #fff; border: 1px solid #E8E8E8; border-bottom-left-radius: 4px; }
   .bubble.contact { outline: 2px solid #FF9500; }
-  .meta { font-size: 11px; color: #8E8E93; margin-top: 6px; }
+  .meta { font-size: 11px; color: #8E8E93; margin-top: 5px; white-space: nowrap; }
   .work-btn { background: #1C1C1E; color: #fff; border: none; border-radius: 6px; padding: 3px 8px; font-size: 11px; cursor: pointer; }
 </style></head>
 <body>
