@@ -200,7 +200,7 @@ export default async function handler(req, res) {
           method: "POST",
           body: JSON.stringify([
             { user_email: email, role: "user", content: question, lesson, sub, escalated: true },
-            { user_email: email, role: "assistant", content: bye, lesson, sub },
+            { user_email: email, role: "assistant", content: bye, lesson, sub, escalated: false },
           ]),
         });
         if (!cr.ok) console.error("TS-ASSISTANT CONTACT SAVE REJECTED", cr.status, (await cr.text()).slice(0, 300));
@@ -281,7 +281,7 @@ export default async function handler(req, res) {
       method: "POST",
       body: JSON.stringify([
         { user_email: email, role: "user", content: question, lesson, sub, escalated: autoEscalate },
-        { user_email: email, role: "assistant", content: answer, lesson, sub },
+        { user_email: email, role: "assistant", content: answer, lesson, sub, escalated: false },
       ]),
     });
     if (!saveRes.ok) {
