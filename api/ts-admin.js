@@ -112,6 +112,27 @@ export default async function handler(req, res) {
     const realSales = paidRows.filter((x) => !isTest(x));
     const testRows = paidRows.filter((x) => isTest(x));
 
+    // Цифры для дашборда: вопросы ассистенту и кто онлайн. Если таблиц ещё нет, показываем прочерки.
+    const sbHead = async (pathAndQuery) => {
+      try {
+        const rc = await fetch(`${SUPABASE_URL}/rest/v1/${pathAndQuery}`, {
+          method: "HEAD",
+          headers: { apikey: SERVICE, Authorization: `Bearer ${SERVICE}`, Prefer: "count=exact" },
+        });
+        const n = parseInt((rc.headers.get("content-range") || "").split("/")[1], 10);
+        return Number.isFinite(n) ? n : null;
+      } catch (e) { return null; }
+    };
+    const dayStartIso = (() => { const d = new Date(); d.setUTCHours(0, 0, 0, 0); return d.toISOString(); })();
+    const onlineIso = new Date(Date.now() - 3 * 60 * 1000).toISOString();
+    const [qToday, qEsc, onlineUsers, onlineGuests] = await Promise.all([
+      sbHead(`ts_assistant_messages?role=eq.user&created_at=gte.${dayStartIso}&select=id`),
+      sbHead(`ts_assistant_messages?role=eq.user&escalated=eq.true&worked=eq.false&select=id`),
+      sbHead(`ts_presence?last_seen=gte.${onlineIso}&email=not.like.guest_*&select=email`),
+      sbHead(`ts_presence?last_seen=gte.${onlineIso}&email=like.guest_*&select=email`),
+    ]);
+    const dash = (v) => (v == null ? "—" : v);
+
     // Выгрузка в CSV: /api/ts-admin?key=...&export=paid | unpaid | all
     const exportKind = (req.query?.export || "").toString();
     if (exportKind) {
@@ -188,10 +209,33 @@ export default async function handler(req, res) {
   .search { width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1px solid #E0E0E0; border-radius: 8px; font-size: 14px; margin: 6px 0 16px; }
   .tools { margin: 6px 0 4px; font-size: 13px; }
   .tools a { color: #1C1C1E; }
+  .dash { display: flex; gap: 12px; margin: 4px 0 20px; flex-wrap: wrap; }
+  .card { flex: 1; min-width: 150px; background: #fff; border-radius: 12px; padding: 14px 16px; text-decoration: none; color: #1C1C1E; display: block; }
+  .card-num { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; }
+  .card-label { font-size: 13px; color: #666; margin-top: 2px; }
+  .card-sub { font-size: 12px; color: #999; margin-top: 6px; }
+  .card-sub .alert { color: #B3261E; }
 </style></head>
 <body>
   <h1>Target School · админка</h1>
-  <div class="tools"><a href="/api/ts-admin-questions?key=${esc(key)}">Вопросы учеников →</a> · <a href="/api/ts-presence?key=${esc(key)}">Кто онлайн →</a></div>
+
+  <div class="dash">
+    <a class="card" href="/api/ts-admin-questions?key=${esc(key)}">
+      <div class="card-num">${dash(qToday)}</div>
+      <div class="card-label">вопросов сегодня</div>
+      <div class="card-sub">${qEsc ? `<b class="alert">${qEsc} ждут Анастасию</b>` : "эскалаций нет"}</div>
+    </a>
+    <a class="card" href="/api/ts-presence?key=${esc(key)}">
+      <div class="card-num">${dash(onlineUsers == null && onlineGuests == null ? null : (onlineUsers || 0) + (onlineGuests || 0))}</div>
+      <div class="card-label">сейчас онлайн</div>
+      <div class="card-sub">учеников: ${dash(onlineUsers)} · гостей: ${dash(onlineGuests)}</div>
+    </a>
+    <div class="card">
+      <div class="card-num">${realSales.length}</div>
+      <div class="card-label">продаж всего</div>
+      <div class="card-sub">${testRows.length ? `плюс ${testRows.length} тестовых` : "без тестовых"}</div>
+    </div>
+  </div>
 
   ${message ? `<div class="msg ${message.startsWith("Не получилось") ? "err" : ""}">${message}</div>` : ""}
 
