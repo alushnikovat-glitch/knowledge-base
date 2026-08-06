@@ -68,9 +68,27 @@ export default async function handler(req, res) {
       return res.status(401).send("<p style='font-family:sans-serif'>Неверный ключ.</p>");
     }
 
-    const r = await sb(`ts_presence?select=*&order=last_seen.desc&limit=500`);
+    const r = await sb(`ts_presence?select=*&order=last_seen.desc&limit=1000`);
     const rows = await r.json();
     const all = Array.isArray(rows) ? rows : [];
+
+    // Выгрузка для анализа: кто, последняя точка, когда
+    if (req.query?.export === "1") {
+      const csvCell = (s) => `"${String(s ?? "").replace(/"/g, '""')}"`;
+      const head = ["kto", "tip", "poslednyaya_tochka", "lesson", "sub", "kogda_utc"];
+      const lines = all.map((x) => [
+        x.email,
+        /^guest_/.test(x.email) ? "гость" : "с почтой",
+        x.spot || "",
+        x.lesson,
+        x.sub,
+        x.last_seen,
+      ]);
+      const csv = [head, ...lines].map((row) => row.map(csvCell).join(",")).join("\r\n");
+      res.setHeader("Content-Type", "text/csv; charset=utf-8");
+      res.setHeader("Content-Disposition", `attachment; filename="ts-presence-${new Date().toISOString().slice(0, 10)}.csv"`);
+      return res.status(200).send("\uFEFF" + csv);
+    }
     const now = Date.now();
     const online = all.filter((x) => now - new Date(x.last_seen).getTime() < ONLINE_MS);
     const today = all.filter((x) => now - new Date(x.last_seen).getTime() < DAY_MS);
@@ -117,12 +135,30 @@ export default async function handler(req, res) {
 </style></head>
 <body>
   <h1>Кто в тренажёре <button id="snd" style="float:right;background:#fff;border:1px solid #E0E0E0;border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer">🔕 Звук выкл</button></h1>
-  <div class="tools"><a href="/api/ts-admin?key=${esc(key)}">← назад в админку</a></div>
+  <div class="tools"><a href="/api/ts-admin?key=${esc(key)}">← назад в админку</a> · <a href="/api/ts-presence?key=${esc(key)}&export=1">скачать выгрузку (CSV)</a></div>
 
   <h2 id="online-h">СЕЙЧАС ОНЛАЙН · ${online.length}${online.filter(isGuest).length ? ` (из них гостей: ${online.filter(isGuest).length})` : ""}</h2>
   <table>
     <thead><tr><th>Почта</th><th>Где</th><th>Когда</th></tr></thead>
     <tbody id="online-b">${online.map((x) => rowHtml(x, true)).join("") || "<tr><td colspan='3'>Сейчас никого</td></tr>"}</tbody>
+  </table>
+
+  <h2>СУТКИ ПО ТОЧКАМ</h2>
+  <table>
+    <thead><tr><th>Где остановились</th><th>Человек</th><th>Доля</th></tr></thead>
+    <tbody>
+      ${(() => {
+        const bySpot = {};
+        for (const x of today) {
+          const s = x.spot || (x.lesson ? `урок ${x.lesson}` : "вход");
+          bySpot[s] = (bySpot[s] || 0) + 1;
+        }
+        return Object.entries(bySpot)
+          .sort((a, b) => b[1] - a[1])
+          .map(([s, n]) => `<tr><td>${esc(s)}</td><td>${n}</td><td>${today.length ? Math.round((n / today.length) * 100) : 0}%</td></tr>`)
+          .join("");
+      })()}
+    </tbody>
   </table>
 
   <h2 id="day-h">БЫЛИ ЗА СУТКИ · ${today.length}</h2>
