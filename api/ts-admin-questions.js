@@ -14,6 +14,11 @@ const esc = (s) =>
 
 const csvCell = (s) => `"${String(s ?? "").replace(/"/g, '""')}"`;
 
+// Похоже ли сообщение на контакт: ник телеграма, ссылка, номер телефона или слово-маркер
+const looksLikeContact = (s) =>
+  /@[a-zA-Z0-9_]{4,}|t\.me\/|wa\.me\/|телеграм|telegram|ватсап|whatsapp|вотсап|(^|[^а-яёa-z])тг([^а-яёa-z]|$)/i.test(String(s || "")) ||
+  /(?:\+?\d[\s\-()]?){7,}/.test(String(s || ""));
+
 export default async function handler(req, res) {
   const key = req.query?.key || "";
   if (!process.env.TS_ADMIN_KEY || key !== process.env.TS_ADMIN_KEY) {
@@ -47,6 +52,71 @@ export default async function handler(req, res) {
         return res.status(200).send(JSON.stringify({ ok: true }));
       }
       return res.status(400).send("bad request");
+    }
+
+    // Режим «Лиды из чата»: гости и зарегистрированные без оплаты, сгруппированные по людям
+    if (req.query?.leads === "1") {
+      const rm = await sb(
+        `ts_assistant_messages?role=eq.user&order=created_at.desc&limit=1000&select=user_email,content,lesson,sub,escalated,created_at`
+      );
+      const msgs = (await rm.json()) || [];
+      const rp = await sb(`ts_payments?paid=eq.true&select=email`);
+      const paidRows = (await rp.json()) || [];
+      const paidSet = new Set((Array.isArray(paidRows) ? paidRows : []).map((x) => x.email));
+
+      const people = {};
+      for (const m of (Array.isArray(msgs) ? msgs : [])) {
+        if (paidSet.has(m.user_email)) continue; // оплатившие не лиды
+        const p = people[m.user_email] || (people[m.user_email] = {
+          email: m.user_email, count: 0, last: m, contact: null, escalated: false,
+        });
+        p.count++;
+        if (!p.contact && looksLikeContact(m.content)) p.contact = m.content;
+        if (m.escalated) p.escalated = true;
+      }
+      const leads = Object.values(people);
+      for (const p of leads) p.hot = !!(p.contact || p.escalated);
+      leads.sort((a, b) => (b.hot - a.hot) || (new Date(b.last.created_at) - new Date(a.last.created_at)));
+      const hotCount = leads.filter((p) => p.hot).length;
+
+      const who = (e) => /^guest_/.test(e) ? `гость ${esc(e.slice(6, 10))}` : esc(e);
+      const leadRows = leads.map((p) => `
+        <tr${p.hot ? ' class="hot"' : ""}>
+          <td>${p.hot ? "🔥 горячий" : "🌡 тёплый"}</td>
+          <td>${who(p.email)}</td>
+          <td class="q">${p.contact ? `<b>${esc(p.contact)}</b>` : '<span style="color:#999">не оставлен</span>'}</td>
+          <td style="text-align:center">${p.count}</td>
+          <td class="q">${esc(String(p.last.content || "").slice(0, 120))}</td>
+          <td style="white-space:nowrap;color:#666">${esc(String(p.last.created_at || "").slice(0, 16).replace("T", " "))}</td>
+        </tr>`).join("");
+
+      const leadsHtml = `<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Target School · лиды из чата</title>
+<style>
+  body { font-family: -apple-system, sans-serif; background: #F6F6F4; color: #1C1C1E; padding: 24px; max-width: 1060px; margin: 0 auto; }
+  h1 { font-size: 20px; }
+  a { color: #1C1C1E; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid #E8E8E8; font-size: 14px; vertical-align: top; }
+  th { background: #F0F0EE; font-size: 12px; text-transform: uppercase; color: #666; }
+  tr.hot { background: #FFF3E8; }
+  td.q { max-width: 320px; }
+  .count { color: #666; margin-bottom: 16px; }
+  .tools { margin: 6px 0 16px; font-size: 13px; }
+</style></head>
+<body>
+  <h1>Лиды из чата</h1>
+  <div class="tools"><a href="/api/ts-admin-questions?key=${esc(req.query?.key || "")}">← к вопросам</a> · <a href="/api/ts-admin?key=${esc(req.query?.key || "")}">в админку</a></div>
+  <div class="count">Горячие оставили контакт или позвали Анастасию, им пишем первым. Тёплые пока только спрашивают. Всего: ${leads.length}, горячих: <b>${hotCount}</b></div>
+  <table>
+    <thead><tr><th>Температура</th><th>Кто</th><th>Контакт</th><th>Вопросов</th><th>Последний вопрос</th><th>Когда</th></tr></thead>
+    <tbody>${leadRows || "<tr><td colspan='6'>Пока пусто</td></tr>"}</tbody>
+  </table>
+</body></html>`;
+      res.setHeader("Content-Type", "text/html; charset=utf-8");
+      return res.status(200).send(leadsHtml);
     }
 
     // Фильтры
@@ -168,7 +238,8 @@ export default async function handler(req, res) {
     <a href="${mkUrl({ esc: "1" })}">только эскалации</a> ·
     <a href="${mkUrl({ unworked: "1" })}">только непроработанные</a> ·
     урок: ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => `<a href="${mkUrl({ lesson: n })}">${n}</a>`).join(" ")} ·
-    <a href="${mkUrl({ esc: fEsc ? "1" : "", unworked: fUnworked ? "1" : "", lesson: Number.isInteger(fLesson) ? fLesson : "", export: "1" })}">скачать CSV</a>
+    <a href="${mkUrl({ esc: fEsc ? "1" : "", unworked: fUnworked ? "1" : "", lesson: Number.isInteger(fLesson) ? fLesson : "", export: "1" })}">скачать CSV</a> ·
+    <a href="${mkUrl({ leads: "1" })}"><b>Лиды из чата 🔥</b></a>
   </div>
 
   <table>
