@@ -33,15 +33,32 @@ export default async function handler(req, res) {
     if (req.method === "POST") {
       const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : (req.body || {});
       const email = String(body.email || "").trim().toLowerCase().slice(0, 254);
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({ ok: false });
+      const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      const okGuest = /^guest_[a-z0-9]{6,16}$/.test(email);
+      if (!okEmail && !okGuest) return res.status(400).json({ ok: false });
       const lesson = parseInt(body.lesson, 10) || 0;
       const sub = parseInt(body.sub, 10) || 0;
-      await sb("ts_presence?on_conflict=email", {
+      const spot = String(body.spot || "").slice(0, 80);
+      const row = { email, lesson, sub, last_seen: new Date().toISOString() };
+      if (spot) row.spot = spot;
+      let up = await sb("ts_presence?on_conflict=email", {
         method: "POST",
         headers: { Prefer: "resolution=merge-duplicates" },
-        body: JSON.stringify({ email, lesson, sub, last_seen: new Date().toISOString() }),
+        body: JSON.stringify(row),
       });
-      return res.status(200).json({ ok: true });
+      // если колонки spot в базе ещё нет, повторяем без неё, чтобы отметка не пропала
+      if (!up.ok && spot) {
+        const errText = await up.text();
+        if (/spot/i.test(errText)) {
+          delete row.spot;
+          up = await sb("ts_presence?on_conflict=email", {
+            method: "POST",
+            headers: { Prefer: "resolution=merge-duplicates" },
+            body: JSON.stringify(row),
+          });
+        }
+      }
+      return res.status(200).json({ ok: up.ok });
     }
 
     // Страница для Анастасии
@@ -66,13 +83,16 @@ export default async function handler(req, res) {
       return h < 24 ? `${h} ч назад` : new Date(t).toLocaleDateString("ru");
     };
     const place = (x) => {
+      if (x.spot) return x.spot;
       const name = LESSON_NAMES[x.lesson] || "";
       return x.lesson ? `урок ${x.lesson}${name ? " · " + name : ""}, экран ${x.sub}` : "вход или бесплатная часть";
     };
+    const isGuest = (x) => /^guest_/.test(x.email);
+    const who = (x) => isGuest(x) ? `<span class="guest">гость ${esc(x.email.slice(6, 10))}</span>` : esc(x.email);
 
     const rowHtml = (x, dot) => `
       <tr>
-        <td>${dot ? '<span class="dot"></span>' : ""}${esc(x.email)}</td>
+        <td>${dot ? '<span class="dot"></span>' : ""}${who(x)}</td>
         <td>${esc(place(x))}</td>
         <td style="white-space:nowrap;color:#666">${esc(ago(x.last_seen))}</td>
       </tr>`;
@@ -92,6 +112,7 @@ export default async function handler(req, res) {
   th { background: #F0F0EE; font-size: 12px; text-transform: uppercase; color: #666; }
   .count { color: #666; margin-bottom: 4px; }
   .dot { display: inline-block; width: 8px; height: 8px; border-radius: 4px; background: #34C759; margin-right: 8px; }
+  .guest { color: #8E8E93; }
   .tools { margin: 6px 0 16px; font-size: 13px; }
   .note { color: #999; font-size: 12px; margin-top: 16px; }
 </style></head>
@@ -99,7 +120,7 @@ export default async function handler(req, res) {
   <h1>Кто в тренажёре</h1>
   <div class="tools"><a href="/api/ts-admin?key=${esc(key)}">← назад в админку</a></div>
 
-  <h2>СЕЙЧАС ОНЛАЙН · ${online.length}</h2>
+  <h2>СЕЙЧАС ОНЛАЙН · ${online.length}${online.filter(isGuest).length ? ` (из них гостей: ${online.filter(isGuest).length})` : ""}</h2>
   <table>
     <thead><tr><th>Почта</th><th>Где</th><th>Когда</th></tr></thead>
     <tbody>${online.map((x) => rowHtml(x, true)).join("") || "<tr><td colspan='3'>Сейчас никого</td></tr>"}</tbody>
@@ -111,7 +132,7 @@ export default async function handler(req, res) {
     <tbody>${today.map((x) => rowHtml(x, false)).join("") || "<tr><td colspan='3'>Пока пусто</td></tr>"}</tbody>
   </table>
 
-  <div class="note">Страница обновляется сама раз в 30 секунд. Онлайн это активность за последние 3 минуты. «Последняя точка» это урок и экран, где человека видели в последний раз, удобно смотреть, где застревают.</div>
+  <div class="note">Страница обновляется сама раз в 30 секунд. Онлайн это активность за последние 3 минуты. «Последняя точка» это место, где человека видели в последний раз, удобно смотреть, где застревают. Гости это люди без регистрации: метка вида «гость 4f2k» живёт в их браузере, почты у них нет. Если гость потом зарегистрируется, он появится в списке уже с почтой, отдельной строкой.</div>
 </body></html>`;
 
     res.setHeader("Content-Type", "text/html; charset=utf-8");
