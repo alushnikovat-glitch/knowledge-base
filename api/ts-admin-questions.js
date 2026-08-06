@@ -87,7 +87,7 @@ export default async function handler(req, res) {
           <td class="q">${p.contact ? `<b>${esc(p.contact)}</b>` : '<span style="color:#999">не оставлен</span>'}</td>
           <td style="text-align:center">${p.count}</td>
           <td class="q">${esc(String(p.last.content || "").slice(0, 120))}</td>
-          <td style="white-space:nowrap;color:#666">${esc(String(p.last.created_at || "").slice(0, 16).replace("T", " "))}</td>
+          <td style="white-space:nowrap;color:#666" class="ts" data-t="${esc(p.last.created_at || "")}">${esc(String(p.last.created_at || "").slice(0, 16).replace("T", " "))}</td>
         </tr>`).join("");
 
       const leadsHtml = `<!DOCTYPE html>
@@ -114,6 +114,16 @@ export default async function handler(req, res) {
     <thead><tr><th>Температура</th><th>Кто</th><th>Контакт</th><th>Вопросов</th><th>Последний вопрос</th><th>Когда</th></tr></thead>
     <tbody>${leadRows || "<tr><td colspan='6'>Пока пусто</td></tr>"}</tbody>
   </table>
+<script>
+  document.querySelectorAll('.ts').forEach(function (el) {
+    var t = el.getAttribute('data-t');
+    if (!t) return;
+    var d = new Date(t);
+    if (isNaN(d)) return;
+    var p = function (n) { return (n < 10 ? '0' : '') + n; };
+    el.textContent = p(d.getDate()) + '.' + p(d.getMonth() + 1) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+  });
+</script>
 </body></html>`;
       res.setHeader("Content-Type", "text/html; charset=utf-8");
       return res.status(200).send(leadsHtml);
@@ -192,7 +202,7 @@ export default async function handler(req, res) {
       const hot = m.escalated && !m.worked;
       return `
       <tr${hot ? ' class="hot"' : ""}>
-        <td style="white-space:nowrap">${esc(String(m.created_at || "").slice(0, 16).replace("T", " "))}</td>
+        <td style="white-space:nowrap" class="ts" data-t="${esc(m.created_at || "")}">${esc(String(m.created_at || "").slice(0, 16).replace("T", " "))}</td>
         <td>${esc(m.user_email)}</td>
         <td style="text-align:center">${m.lesson}.${m.sub}</td>
         <td class="q">${esc(m.content)}
@@ -258,6 +268,16 @@ export default async function handler(req, res) {
       });
     });
   </script>
+<script>
+  document.querySelectorAll('.ts').forEach(function (el) {
+    var t = el.getAttribute('data-t');
+    if (!t) return;
+    var d = new Date(t);
+    if (isNaN(d)) return;
+    var p = function (n) { return (n < 10 ? '0' : '') + n; };
+    el.textContent = p(d.getDate()) + '.' + p(d.getMonth() + 1) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+  });
+</script>
 </body></html>`;
 
     res.setHeader("Content-Type", "text/html; charset=utf-8");
