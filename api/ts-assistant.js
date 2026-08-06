@@ -49,6 +49,10 @@ const RULES_GUEST = `Ты помощник на входе в тренажёр T
 
 const GUEST_LIMIT = 5;
 const isGuestId = (s) => /^guest_[a-z0-9]{6,16}$/.test(s);
+// Похоже ли сообщение на контакт: ник телеграма, ссылка, номер телефона или слово-маркер
+const looksLikeContact = (s) =>
+  /@[a-zA-Z0-9_]{4,}|t\.me\/|wa\.me\/|телеграм|telegram|ватсап|whatsapp|вотсап|(^|[^а-яёa-z])тг([^а-яёa-z]|$)/i.test(s) ||
+  /(?:\+?\d[\s\-()]?){7,}/.test(s);
 
 // --- утилиты ---
 
@@ -188,10 +192,24 @@ export default async function handler(req, res) {
   const limit = paidAccess ? DAILY_LIMIT : GUEST_LIMIT;
   const used = await questionsToday(email);
   if (used >= limit) {
+    // Гость оставил контакт после лимита: принимаем, помечаем колокольчиком, тепло прощаемся
+    if (!paidAccess && looksLikeContact(question)) {
+      const bye = "Спасибо! Анастасия увидит твой контакт и напишет сама, отвечать можно будет спокойно и подробно. Хорошего дня, и загляни в первый урок, он бесплатный.";
+      try {
+        await sb("ts_assistant_messages", {
+          method: "POST",
+          body: JSON.stringify([
+            { user_email: email, role: "user", content: question, lesson, sub, escalated: true },
+            { user_email: email, role: "assistant", content: bye, lesson, sub },
+          ]),
+        });
+      } catch (e) { console.error("TS-ASSISTANT contact save fail", e.message); }
+      return json(res, 200, { answer: bye, left: 0 });
+    }
     return json(res, 429, {
       error: paidAccess
         ? "На сегодня вопросы закончились, завтра лимит обновится. Срочное можно спросить у Анастасии в чате."
-        : "На сегодня вопросы закончились, завтра можно снова. Внутри тренажёра лимит больше, а первый урок бесплатный.",
+        : "Вопросы на сегодня закончились, но разговор терять не хочется. Оставь прямо здесь свой телеграм или номер телефона, и Анастасия напишет тебе сама и подробно ответит на всё. Звонить не будем, только напишем.",
     });
   }
 
@@ -255,12 +273,13 @@ export default async function handler(req, res) {
 
   if (!answer) answer = "Не получилось собрать ответ. Переформулируй вопрос или нажми «Позвать Анастасию».";
 
-  // сохраняем пару сообщений
+  // сохраняем пару сообщений; контакт от гостя сразу помечаем колокольчиком для админки
+  const autoEscalate = !paidAccess && looksLikeContact(question);
   try {
     await sb("ts_assistant_messages", {
       method: "POST",
       body: JSON.stringify([
-        { user_email: email, role: "user", content: question, lesson, sub },
+        { user_email: email, role: "user", content: question, lesson, sub, escalated: autoEscalate },
         { user_email: email, role: "assistant", content: answer, lesson, sub },
       ]),
     });
