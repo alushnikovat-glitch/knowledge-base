@@ -196,13 +196,14 @@ export default async function handler(req, res) {
     if (!paidAccess && looksLikeContact(question)) {
       const bye = "Спасибо! Анастасия увидит твой контакт и напишет сама, отвечать можно будет спокойно и подробно. Хорошего дня, и загляни в первый урок, он бесплатный.";
       try {
-        await sb("ts_assistant_messages", {
+        const cr = await sb("ts_assistant_messages", {
           method: "POST",
           body: JSON.stringify([
             { user_email: email, role: "user", content: question, lesson, sub, escalated: true },
             { user_email: email, role: "assistant", content: bye, lesson, sub },
           ]),
         });
+        if (!cr.ok) console.error("TS-ASSISTANT CONTACT SAVE REJECTED", cr.status, (await cr.text()).slice(0, 300));
       } catch (e) { console.error("TS-ASSISTANT contact save fail", e.message); }
       return json(res, 200, { answer: bye, left: 0 });
     }
@@ -276,13 +277,19 @@ export default async function handler(req, res) {
   // сохраняем пару сообщений; контакт от гостя сразу помечаем колокольчиком для админки
   const autoEscalate = !paidAccess && looksLikeContact(question);
   try {
-    await sb("ts_assistant_messages", {
+    const saveRes = await sb("ts_assistant_messages", {
       method: "POST",
       body: JSON.stringify([
         { user_email: email, role: "user", content: question, lesson, sub, escalated: autoEscalate },
         { user_email: email, role: "assistant", content: answer, lesson, sub },
       ]),
     });
+    if (!saveRes.ok) {
+      const detail = await saveRes.text();
+      console.error("TS-ASSISTANT SAVE REJECTED", saveRes.status, detail.slice(0, 300));
+    } else {
+      console.log("TS-ASSISTANT SAVED", email, "esc:", autoEscalate);
+    }
   } catch (e) {
     console.error("TS-ASSISTANT save fail", e.message);
   }
