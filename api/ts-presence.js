@@ -4,8 +4,15 @@
 // Онлайн это те, кого видели за последние 3 минуты. Страница сама обновляется раз в 30 секунд.
 // Переменные окружения те же: TS_ADMIN_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE
 
-const DAY_MS = 24 * 60 * 60 * 1000;
 const ONLINE_MS = 3 * 60 * 1000;
+// Часовой пояс для расчёта суток (Нячанг, UTC+7). При переезде поменять одно число.
+const TZ_OFFSET_H = 7;
+// Начало сегодняшнего дня по местному времени, в UTC
+function localDayStart(shiftDays = 0) {
+  const shifted = new Date(Date.now() + TZ_OFFSET_H * 3600 * 1000);
+  shifted.setUTCHours(0, 0, 0, 0);
+  return new Date(shifted.getTime() - TZ_OFFSET_H * 3600 * 1000 - shiftDays * 24 * 3600 * 1000);
+}
 
 const esc = (s) =>
   String(s ?? "").replace(/[&<>"']/g, (c) =>
@@ -91,7 +98,13 @@ export default async function handler(req, res) {
     }
     const now = Date.now();
     const online = all.filter((x) => now - new Date(x.last_seen).getTime() < ONLINE_MS);
-    const today = all.filter((x) => now - new Date(x.last_seen).getTime() < DAY_MS);
+    const todayStart = localDayStart(0).getTime();
+    const yesterdayStart = localDayStart(1).getTime();
+    const today = all.filter((x) => new Date(x.last_seen).getTime() >= todayStart);
+    const yesterday = all.filter((x) => {
+      const t = new Date(x.last_seen).getTime();
+      return t >= yesterdayStart && t < todayStart;
+    });
 
     const ago = (t) => {
       const m = Math.round((now - new Date(t).getTime()) / 60000);
@@ -143,25 +156,32 @@ export default async function handler(req, res) {
     <tbody id="online-b">${online.map((x) => rowHtml(x, true)).join("") || "<tr><td colspan='3'>Сейчас никого</td></tr>"}</tbody>
   </table>
 
-  <h2>СУТКИ ПО ТОЧКАМ</h2>
+  <h2>ПО ТОЧКАМ: СЕГОДНЯ И ВЧЕРА <span style="font-weight:400;color:#999;font-size:12px">(сутки по местному времени)</span></h2>
   <table>
-    <thead><tr><th>Где остановились</th><th>Человек</th><th>Доля</th></tr></thead>
+    <thead><tr><th>Где остановились</th><th>Сегодня</th><th>Доля</th><th>Вчера</th><th>Доля</th></tr></thead>
     <tbody>
       ${(() => {
-        const bySpot = {};
-        for (const x of today) {
-          const s = x.spot || (x.lesson ? `урок ${x.lesson}` : "вход");
-          bySpot[s] = (bySpot[s] || 0) + 1;
-        }
-        return Object.entries(bySpot)
-          .sort((a, b) => b[1] - a[1])
-          .map(([s, n]) => `<tr><td>${esc(s)}</td><td>${n}</td><td>${today.length ? Math.round((n / today.length) * 100) : 0}%</td></tr>`)
-          .join("");
+        const spotOf = (x) => x.spot || (x.lesson ? `урок ${x.lesson}` : "вход");
+        const cnt = (arr) => {
+          const m = {};
+          for (const x of arr) m[spotOf(x)] = (m[spotOf(x)] || 0) + 1;
+          return m;
+        };
+        const t = cnt(today), y = cnt(yesterday);
+        const spots = [...new Set([...Object.keys(t), ...Object.keys(y)])];
+        spots.sort((a, b) => (t[b] || 0) - (t[a] || 0) || (y[b] || 0) - (y[a] || 0));
+        const pct = (n, total) => total ? Math.round((n / total) * 100) + "%" : "—";
+        return spots.map((s) => `<tr>
+          <td>${esc(s)}</td>
+          <td>${t[s] || 0}</td><td>${pct(t[s] || 0, today.length)}</td>
+          <td style="color:#999">${y[s] || 0}</td><td style="color:#999">${pct(y[s] || 0, yesterday.length)}</td>
+        </tr>`).join("");
       })()}
+      <tr style="font-weight:700"><td>всего</td><td>${today.length}</td><td></td><td style="color:#999">${yesterday.length}</td><td></td></tr>
     </tbody>
   </table>
 
-  <h2 id="day-h">БЫЛИ ЗА СУТКИ · ${today.length}</h2>
+  <h2 id="day-h">БЫЛИ СЕГОДНЯ · ${today.length}</h2>
   <table>
     <thead><tr><th>Почта</th><th>Последняя точка</th><th>Когда</th></tr></thead>
     <tbody id="day-b">${today.map((x) => rowHtml(x, false)).join("") || "<tr><td colspan='3'>Пока пусто</td></tr>"}</tbody>
