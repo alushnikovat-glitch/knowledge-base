@@ -138,6 +138,19 @@ export default async function handler(req, res) {
     ]);
     const dash = (v) => (v == null ? "—" : v);
 
+    // Разогрев за сегодня: опережающие сигналы, которые появляются раньше оплаты.
+    // 1) сколько гостей дошли сегодня до продажной стены (ts_presence.spot)
+    // 2) сколько раз в чате сегодня прозвучало явное покупательское намерение
+    //    (одним словом не поймать точно, поэтому считаем сообщения с ключевыми словами,
+    //    берём объединение через OR-фильтр PostgREST, это одна строка запроса)
+    // 3) сколько контактов оставили сегодня (эскалации = контакт или «Позвать Анастасию»)
+    const buyOr = encodeURIComponent("content.ilike.*куп*,content.ilike.*оплат*,content.ilike.*беру*,content.ilike.*плачу*");
+    const [wallToday, buyIntentToday, contactsToday] = await Promise.all([
+      sbHead(`ts_presence?spot=eq.${encodeURIComponent("продажная стена")}&last_seen=gte.${dayStartIso}&select=email`),
+      sbHead(`ts_assistant_messages?role=eq.user&created_at=gte.${dayStartIso}&or=(${buyOr})&select=id`),
+      sbHead(`ts_assistant_messages?role=eq.user&created_at=gte.${dayStartIso}&escalated=eq.true&select=id`),
+    ]);
+
     // Горячие лиды из чата: не оплатившие, кто оставил контакт или позвал Анастасию, и это не проработано
     let hotLeads = [];
     try {
@@ -251,7 +264,7 @@ export default async function handler(req, res) {
   .tools { margin: 6px 0 4px; font-size: 13px; }
   .tools a { color: #1C1C1E; }
   .dash { display: flex; gap: 12px; margin: 4px 0 20px; flex-wrap: wrap; }
-  .card { flex: 1; min-width: 150px; background: #fff; border-radius: 12px; padding: 14px 16px; text-decoration: none; color: #1C1C1E; display: block; }
+  .card { flex: 1; min-width: 140px; background: #fff; border-radius: 12px; padding: 14px 16px; text-decoration: none; color: #1C1C1E; display: block; }
   .card-num { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; }
   .card-label { font-size: 13px; color: #666; margin-top: 2px; }
   .card-sub { font-size: 12px; color: #999; margin-top: 6px; }
@@ -276,6 +289,11 @@ export default async function handler(req, res) {
       <div class="card-label">продаж всего</div>
       <div class="card-sub">${testRows.length ? `плюс ${testRows.length} тестовых` : "без тестовых"}</div>
     </div>
+    <a class="card" href="/api/ts-admin-questions?key=${esc(key)}&leads=1">
+      <div class="card-num">${dash(wallToday)}</div>
+      <div class="card-label">разогрев сегодня</div>
+      <div class="card-sub">на стене: ${dash(wallToday)} · «хочу купить»: ${dash(buyIntentToday)} · контактов: ${dash(contactsToday)}</div>
+    </a>
   </div>
 
   ${message ? `<div class="msg ${message.startsWith("Не получилось") ? "err" : ""}">${message}</div>` : ""}
