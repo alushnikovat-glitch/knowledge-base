@@ -106,6 +106,21 @@ export default async function handler(req, res) {
       return t >= yesterdayStart && t < todayStart;
     });
 
+    // Сырой счётчик заходов, отдельная таблица, не пересекается с воронкой выше.
+    // Если таблицы ts_hits ещё нет (SQL не выполнен), тихо показываем прочерк.
+    let hitsToday = null;
+    let hitsYesterday = null;
+    try {
+      const [rt, ry] = await Promise.all([
+        sb(`ts_hits?created_at=gte.${new Date(todayStart).toISOString()}&select=id`, { method: "HEAD", headers: { Prefer: "count=exact" } }),
+        sb(`ts_hits?created_at=gte.${new Date(yesterdayStart).toISOString()}&created_at=lt.${new Date(todayStart).toISOString()}&select=id`, { method: "HEAD", headers: { Prefer: "count=exact" } }),
+      ]);
+      const ht = parseInt((rt.headers.get("content-range") || "").split("/")[1], 10);
+      const hy = parseInt((ry.headers.get("content-range") || "").split("/")[1], 10);
+      hitsToday = Number.isFinite(ht) ? ht : null;
+      hitsYesterday = Number.isFinite(hy) ? hy : null;
+    } catch (e) {}
+
     const ago = (t) => {
       const m = Math.round((now - new Date(t).getTime()) / 60000);
       if (m < 1) return "только что";
@@ -160,6 +175,10 @@ export default async function handler(req, res) {
   </table>
 
   <h2>ПО ТОЧКАМ: СЕГОДНЯ И ВЧЕРА <span style="font-weight:400;color:#999;font-size:12px">(сутки по местному времени)</span></h2>
+  <div style="color:#999;font-size:13px;margin:-6px 0 14px">
+    Всего заходов на страницу сегодня: <b style="color:#1C1C1E">${hitsToday == null ? "—" : hitsToday}</b>${hitsYesterday != null ? ` (вчера: ${hitsYesterday})` : ""}.
+    В воронку ниже попадают только те, кто задержался от 3 секунд.
+  </div>
   <table>
     <thead><tr><th>Где остановились</th><th>Сегодня</th><th>Доля</th><th>Вчера</th><th>Доля</th></tr></thead>
     <tbody>
