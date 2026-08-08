@@ -33,7 +33,10 @@ const BASE_CSS = `
   body { font-family: -apple-system, sans-serif; background: #F6F6F4; color: #1C1C1E; padding: 24px; max-width: 860px; margin: 0 auto; }
   h1 { font-size: 20px; }
   a { color: #1C1C1E; }
-  .tools { margin: 6px 0 16px; font-size: 13px; }
+
+  .btn-link { display: inline-block; background: #fff; border: 1px solid #E0E0E0; border-radius: 10px; padding: 9px 16px; font-size: 13px; font-weight: 700; color: #1C1C1E; text-decoration: none; margin: 0 8px 8px 0; }
+  .btn-link.accent { background: #FFF3E8; border-color: #F5C79A; color: #A05A00; }
+  .tools { display: flex; flex-wrap: wrap; align-items: center; margin: 6px 0 16px; }
   .count { color: #666; margin-bottom: 16px; font-size: 14px; }`;
 
 export default async function handler(req, res) {
@@ -135,11 +138,14 @@ export default async function handler(req, res) {
   tr.hot { background: #FFF3E8; }
   td.q { max-width: 320px; }
   .count { color: #666; margin-bottom: 16px; }
-  .tools { margin: 6px 0 16px; font-size: 13px; }
+
+  .btn-link { display: inline-block; background: #fff; border: 1px solid #E0E0E0; border-radius: 10px; padding: 9px 16px; font-size: 13px; font-weight: 700; color: #1C1C1E; text-decoration: none; margin: 0 8px 8px 0; }
+  .btn-link.accent { background: #FFF3E8; border-color: #F5C79A; color: #A05A00; }
+  .tools { display: flex; flex-wrap: wrap; align-items: center; margin: 6px 0 16px; }
 </style></head>
 <body>
   <h1>Лиды из чата</h1>
-  <div class="tools"><a href="/api/ts-admin-questions?key=${esc(req.query?.key || "")}">← к вопросам</a> · <a href="/api/ts-admin?key=${esc(req.query?.key || "")}">в админку</a></div>
+  <div class="tools"><a class="btn-link" href="/api/ts-admin-questions?key=${esc(req.query?.key || "")}">← к вопросам</a><a class="btn-link" href="/api/ts-admin?key=${esc(req.query?.key || "")}">В админку</a></div>
   <div class="count">Горячие оставили контакт или позвали Анастасию, им пишем первым. Тёплые пока только спрашивают. Всего: ${leads.length}, горячих: <b>${hotCount}</b></div>
   <table>
     <thead><tr><th>Температура</th><th>Кто</th><th>Контакт</th><th>Вопросов</th><th>Последний вопрос</th><th>Когда</th></tr></thead>
@@ -208,7 +214,7 @@ export default async function handler(req, res) {
       ? `<button id="work-person" data-e="${esc(dialogWith)}" style="float:right;background:#1C1C1E;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer">взяла в работу</button>`
       : ""}
   </h1>
-  <div class="tools"><a href="/api/ts-admin-questions?key=${esc(key)}">← все диалоги</a> · <a href="/api/ts-admin?key=${esc(key)}">в админку</a></div>
+  <div class="tools"><a class="btn-link" href="/api/ts-admin-questions?key=${esc(key)}">← все диалоги</a><a class="btn-link" href="/api/ts-admin?key=${esc(key)}">В админку</a></div>
   <div class="thread">${bubbles || "<div class='count'>Сообщений нет</div>"}</div>
   ${TS_SCRIPT}
   <script>
@@ -312,7 +318,7 @@ export default async function handler(req, res) {
 </style></head>
 <body>
   <h1>Диалоги с куратором</h1>
-  <div class="tools"><a href="/api/ts-admin?key=${esc(key)}">← в админку</a> · <a href="/api/ts-admin-questions?key=${esc(key)}&leads=1"><b>Лиды из чата 🔥</b></a> · <a href="/api/ts-admin-questions?key=${esc(key)}&export=1">скачать CSV</a></div>
+  <div class="tools"><a class="btn-link" href="/api/ts-admin?key=${esc(key)}">← в админку</a><a class="btn-link accent" href="/api/ts-admin-questions?key=${esc(key)}&leads=1">🔥 Лиды из чата</a><a class="btn-link" href="/api/ts-admin-questions?key=${esc(key)}&export=1">Скачать CSV</a></div>
   <div class="count">Сегодня вопросов: <b>${todayCount}</b>. За неделю: <b>${weekCount}</b>. Ждут Анастасию: <b style="color:${escOpen ? "#B3261E" : "#1C1C1E"}">${escOpen}</b></div>
   ${list || "<div class='count'>Диалогов пока нет</div>"}
   ${TS_SCRIPT}

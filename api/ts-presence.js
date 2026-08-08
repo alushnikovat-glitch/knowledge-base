@@ -143,12 +143,15 @@ export default async function handler(req, res) {
   .count { color: #666; margin-bottom: 4px; }
   .dot { display: inline-block; width: 8px; height: 8px; border-radius: 4px; background: #34C759; margin-right: 8px; }
   .guest { color: #8E8E93; }
-  .tools { margin: 6px 0 16px; font-size: 13px; }
+
+  .btn-link { display: inline-block; background: #fff; border: 1px solid #E0E0E0; border-radius: 10px; padding: 9px 16px; font-size: 13px; font-weight: 700; color: #1C1C1E; text-decoration: none; margin: 0 8px 8px 0; }
+  .btn-link.accent { background: #FFF3E8; border-color: #F5C79A; color: #A05A00; }
+  .tools { display: flex; flex-wrap: wrap; align-items: center; margin: 6px 0 16px; }
   .note { color: #999; font-size: 12px; margin-top: 16px; }
 </style></head>
 <body>
   <h1>Кто в тренажёре <button id="snd" style="float:right;background:#fff;border:1px solid #E0E0E0;border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer">🔕 Звук выкл</button></h1>
-  <div class="tools"><a href="/api/ts-admin?key=${esc(key)}">← назад в админку</a> · <a href="/api/ts-presence?key=${esc(key)}&export=1">скачать выгрузку (CSV)</a></div>
+  <div class="tools"><a class="btn-link" href="/api/ts-admin?key=${esc(key)}">← назад в админку</a><a class="btn-link" href="/api/ts-presence?key=${esc(key)}&export=1">Скачать выгрузку (CSV)</a></div>
 
   <h2 id="online-h">СЕЙЧАС ОНЛАЙН · ${online.length}${online.filter(isGuest).length ? ` (из них гостей: ${online.filter(isGuest).length})` : ""}</h2>
   <table>

@@ -243,6 +243,10 @@ export default async function handler(req, res) {
 <html lang="ru"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Target School · оплатившие</title>
+<link rel="apple-touch-icon" sizes="180x180" href="/trenazher/icon-180.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/trenazher/favicon-32.png" />
+<meta name="apple-mobile-web-app-title" content="TS Admin" />
+<meta name="theme-color" content="#FFCC00" />
 <style>
   body { font-family: -apple-system, sans-serif; background: #F6F6F4; color: #1C1C1E; padding: 24px; max-width: 940px; margin: 0 auto; }
   h1 { font-size: 20px; }
@@ -261,8 +265,8 @@ export default async function handler(req, res) {
   .msg.err { background: #FDEEEE; border-color: #F0B8B8; color: #B3261E; }
   .link-btn { background: none; border: none; color: #B3261E; text-decoration: underline; cursor: pointer; font-size: 13px; padding: 0; }
   .search { width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1px solid #E0E0E0; border-radius: 8px; font-size: 14px; margin: 6px 0 16px; }
-  .tools { margin: 6px 0 4px; font-size: 13px; }
-  .tools a { color: #1C1C1E; }
+  .btn-link { display: inline-block; background: #fff; border: 1px solid #E0E0E0; border-radius: 10px; padding: 9px 16px; font-size: 13px; font-weight: 700; color: #1C1C1E; text-decoration: none; margin: 0 8px 8px 0; }
+  .tools { display: flex; flex-wrap: wrap; align-items: center; margin: 6px 0 4px; }
   .dash { display: flex; gap: 12px; margin: 4px 0 20px; flex-wrap: wrap; }
   .card { flex: 1; min-width: 140px; background: #fff; border-radius: 12px; padding: 14px 16px; text-decoration: none; color: #1C1C1E; display: block; }
   .card-num { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; }
@@ -328,7 +332,7 @@ export default async function handler(req, res) {
   <h2>ОПЛАТИЛИ</h2>
   <div class="count">
     Продаж: ${realSales.length}${testRows.length ? `. Плюс ${testRows.length} тестовых, в счёт не идут.` : ""}
-    <div class="tools"><a href="?key=${esc(key)}&export=paid">скачать оплативших (CSV)</a></div>
+    <div class="tools"><a class="btn-link" href="?key=${esc(key)}&export=paid">Скачать оплативших (CSV)</a></div>
   </div>
   <table class="data">
     <thead><tr><th>Почта</th><th>Телеграм</th><th>Откуда</th><th>Сумма</th><th>Оплатил</th><th>Доступ до</th><th></th></tr></thead>
@@ -338,7 +342,7 @@ export default async function handler(req, res) {
   <h2>ЗАРЕГИСТРИРОВАЛИСЬ, НЕ ОПЛАТИЛИ</h2>
   <div class="count">
     Всего: ${unpaidRows.length}. Можно написать, если оставили телеграм.
-    <div class="tools"><a href="?key=${esc(key)}&export=unpaid">скачать этот список (CSV)</a></div>
+    <div class="tools"><a class="btn-link" href="?key=${esc(key)}&export=unpaid">Скачать этот список (CSV)</a></div>
   </div>
   <table class="data">
     <thead><tr><th>Почта</th><th>Телеграм</th><th>Когда зарегистрировался</th></tr></thead>
