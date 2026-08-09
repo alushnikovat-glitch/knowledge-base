@@ -121,6 +121,15 @@ export default async function handler(req, res) {
       hitsYesterday = Number.isFinite(hy) ? hy : null;
     } catch (e) {}
 
+    // Причины сомнений с виджета обратной связи на экране захвата.
+    // Если таблицы ts_feedback ещё нет, список остаётся пустым, страница не падает.
+    let feedbackToday = [];
+    try {
+      const rf = await sb(`ts_feedback?created_at=gte.${new Date(todayStart).toISOString()}&order=created_at.desc&limit=200&select=reason,identity,created_at`);
+      const fRows = await rf.json();
+      feedbackToday = Array.isArray(fRows) ? fRows : [];
+    } catch (e) {}
+
     const ago = (t) => {
       const m = Math.round((now - new Date(t).getTime()) / 60000);
       if (m < 1) return "только что";
@@ -202,6 +211,23 @@ export default async function handler(req, res) {
       <tr style="font-weight:700"><td>всего</td><td>${today.length}</td><td></td><td style="color:#999">${yesterday.length}</td><td></td></tr>
     </tbody>
   </table>
+
+  ${feedbackToday.length ? `
+  <h2>ПОЧЕМУ СОМНЕВАЮТСЯ · ${feedbackToday.length}</h2>
+  <table>
+    <thead><tr><th>Причина</th><th>Сколько</th></tr></thead>
+    <tbody>
+      ${(() => {
+        const byReason = {};
+        for (const f of feedbackToday) byReason[f.reason] = (byReason[f.reason] || 0) + 1;
+        return Object.entries(byReason)
+          .sort((a, b) => b[1] - a[1])
+          .map(([r, n]) => `<tr><td>${esc(r)}</td><td>${n}</td></tr>`)
+          .join("");
+      })()}
+    </tbody>
+  </table>
+  ` : ""}
 
   <h2 id="day-h">БЫЛИ СЕГОДНЯ · ${today.length}</h2>
   <table>
