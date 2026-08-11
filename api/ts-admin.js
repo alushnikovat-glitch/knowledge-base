@@ -151,6 +151,20 @@ export default async function handler(req, res) {
       sbHead(`ts_assistant_messages?role=eq.user&created_at=gte.${dayStartIso}&escalated=eq.true&select=id`),
     ]);
 
+    // Ответы анкеты «Точка старта» из урока 1: сколько всего и сколько уже с почтой
+    // (склеены с регистрацией, значит их можно писать лично). Если таблицы ts_goals
+    // ещё нет, тихо показываем прочерк, страница не падает.
+    let goalsTotal = null;
+    let goalsWithEmail = null;
+    try {
+      const [gt, ge] = await Promise.all([
+        sbHead(`ts_goals?select=sid`),
+        sbHead(`ts_goals?email=not.is.null&select=sid`),
+      ]);
+      goalsTotal = gt;
+      goalsWithEmail = ge;
+    } catch (e) {}
+
     // Горячие лиды из чата: не оплатившие, кто оставил контакт или позвал Анастасию, и это не проработано
     let hotLeads = [];
     try {
@@ -297,6 +311,11 @@ export default async function handler(req, res) {
       <div class="card-num">${dash(wallToday)}</div>
       <div class="card-label">разогрев сегодня</div>
       <div class="card-sub">на стене: ${dash(wallToday)} · «хочу купить»: ${dash(buyIntentToday)} · контактов: ${dash(contactsToday)}</div>
+    </a>
+    <a class="card" href="/api/ts-goals-admin?key=${esc(key)}">
+      <div class="card-num">${dash(goalsTotal)}</div>
+      <div class="card-label">ответов анкеты</div>
+      <div class="card-sub">точка старта, урок 1 · с почтой: ${dash(goalsWithEmail)}</div>
     </a>
   </div>
 
