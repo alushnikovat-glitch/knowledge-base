@@ -312,7 +312,7 @@ export default async function handler(req, res) {
       <div class="card-label">разогрев сегодня</div>
       <div class="card-sub">на стене: ${dash(wallToday)} · «хочу купить»: ${dash(buyIntentToday)} · контактов: ${dash(contactsToday)}</div>
     </a>
-    <a class="card" href="/api/ts-goals-admin?key=${esc(key)}">
+    <a class="card" href="/api/ts-admin-questions?key=${esc(key)}&goals=1">
       <div class="card-num">${dash(goalsTotal)}</div>
       <div class="card-label">ответов анкеты</div>
       <div class="card-sub">точка старта, урок 1 · с почтой: ${dash(goalsWithEmail)}</div>

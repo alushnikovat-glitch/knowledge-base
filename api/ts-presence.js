@@ -36,6 +36,19 @@ export default async function handler(req, res) {
     });
 
   try {
+    // Сырой мгновенный хит, без задержки. Раньше жил отдельным файлом ts-hit.js,
+    // перенесён сюда 12 августа, чтобы уложиться в лимит 12 функций на Vercel Hobby.
+    // Панель шлёт { hit: true, identity } один раз при открытии страницы.
+    if (req.method === "POST") {
+      const peek = typeof req.body === "string" ? JSON.parse(req.body || "{}") : (req.body || {});
+      if (peek && peek.hit === true) {
+        const identity = String(peek.identity || "").trim().slice(0, 254);
+        if (!identity) return res.status(400).json({ ok: false });
+        await sb("ts_hits", { method: "POST", body: JSON.stringify({ identity }) });
+        return res.status(200).json({ ok: true });
+      }
+    }
+
     // Пинг из панели
     if (req.method === "POST") {
       const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : (req.body || {});
