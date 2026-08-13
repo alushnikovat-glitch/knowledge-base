@@ -97,6 +97,11 @@ export default async function handler(req, res) {
       const SITUATION_RU = { decree: "Декрет", office: "Надоел найм", studied: "Уже училась", relocate: "Переезд", own: "Своё дело" };
       const GOAL_RU = { "50000": "50 000 ₽", "100000": "100 000 ₽", "150000": "150 000 ₽+", unsure: "Пока не знает" };
       const AI_RU = { yes: "Пользовалась", no: "Ни разу" };
+      const PAIN_RU = {
+        alarm_job: "Будильник и страх уволиться",
+        no_own_money: "Нет своих денег, за которые не надо отчитываться",
+        credit_pressure: "Кредит или ипотека съедают зарплату",
+      };
       const localTime = (iso) => {
         if (!iso) return "";
         const d = new Date(new Date(iso).getTime() + TZ_OFFSET_H * 3600 * 1000);
@@ -108,13 +113,25 @@ export default async function handler(req, res) {
         for (const r of rows) { const v = r[field]; if (!v) continue; out[v] = (out[v] || 0) + 1; }
         return Object.entries(out).sort((a, b) => b[1] - a[1]).map(([k, n]) => ({ label: (dict && dict[k]) || k, n }));
       };
+      // Как countBy, но поле хранит несколько значений через запятую (например pains)
+      const countByMulti = (rows, field, dict) => {
+        const out = {};
+        for (const r of rows) {
+          const v = r[field];
+          if (!v) continue;
+          for (const k of String(v).split(",").map((s) => s.trim()).filter(Boolean)) {
+            out[k] = (out[k] || 0) + 1;
+          }
+        }
+        return Object.entries(out).sort((a, b) => b[1] - a[1]).map(([k, n]) => ({ label: (dict && dict[k]) || k, n }));
+      };
 
       const rg = await sb(`ts_goals?select=*&order=updated_at.desc&limit=1000`);
       const rows = (await rg.json()) || [];
       const list = Array.isArray(rows) ? rows : [];
 
       if (req.query?.csv === "1") {
-        const head = ["sid", "niche", "situation", "goal_sum", "ai_exp", "commitment", "email", "created_at", "updated_at"];
+        const head = ["sid", "niche", "situation", "goal_sum", "ai_exp", "pains", "commitment", "email", "created_at", "updated_at"];
         const cell = (v) => `"${String(v == null ? "" : v).replace(/"/g, '""').replace(/\r?\n/g, " ")}"`;
         const csv = [head.join(";")].concat(list.map((r) => head.map((h) => cell(r[h])).join(";"))).join("\n");
         res.setHeader("Content-Type", "text/csv; charset=utf-8");
@@ -128,6 +145,7 @@ export default async function handler(req, res) {
       const bySituation = countBy(list, "situation", SITUATION_RU);
       const byGoal = countBy(list, "goal_sum", GOAL_RU);
       const byAi = countBy(list, "ai_exp", AI_RU);
+      const byPains = countByMulti(list, "pains", PAIN_RU);
 
       const statCard = (label, value, sub) => `
         <div class="stat"><div class="stat-label">${esc(label)}</div><div class="stat-value">${esc(value)}</div>${sub ? `<div class="stat-sub">${esc(sub)}</div>` : ""}</div>`;
@@ -197,6 +215,7 @@ export default async function handler(req, res) {
   ${distBlock("Ситуации", bySituation)}
   ${distBlock("Цели через 3 месяца", byGoal)}
   ${distBlock("Опыт нейросетей", byAi)}
+  ${distBlock("Что отзывается (можно несколько)", byPains)}
   <h2>Лента, свежие сверху</h2>
   ${feed || '<div class="gcard"><div class="empty">Ответов пока нет. Появятся после деплоя панели.</div></div>'}
 </body></html>`;

@@ -24,6 +24,7 @@ export default async function handler(req, res) {
   const commitment = clean(body.commitment, 1000);
   const aiExp = clean(body.ai_exp, 8);
   const email = clean(body.email, 254);
+  const pains = clean(body.pains, 100);
 
   // Кладём только присланные поля, чтобы поздний запрос не затирал ранние ответы пустотой
   if (niche) row.niche = niche;
@@ -31,6 +32,7 @@ export default async function handler(req, res) {
   if (goalSum) row.goal_sum = goalSum;
   if (commitment) row.commitment = commitment;
   if (aiExp === "yes" || aiExp === "no") row.ai_exp = aiExp;
+  if (pains) row.pains = pains;
   // Простая проверка на почту, без строгой валидации: пропускаем всё похожее
   if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) row.email = email.toLowerCase();
 
@@ -39,6 +41,12 @@ export default async function handler(req, res) {
   if (row.situation && !KNOWN_SITUATIONS.includes(row.situation)) delete row.situation;
   const KNOWN_GOALS = ["50000", "100000", "150000", "unsure"];
   if (row.goal_sum && !KNOWN_GOALS.includes(row.goal_sum)) delete row.goal_sum;
+  // Боли только из известного списка, через запятую, чужое выбрасываем
+  const KNOWN_PAINS = ["alarm_job", "no_own_money", "credit_pressure"];
+  if (row.pains) {
+    const filtered = row.pains.split(",").map((s) => s.trim()).filter((s) => KNOWN_PAINS.includes(s));
+    if (filtered.length) row.pains = filtered.join(","); else delete row.pains;
+  }
 
   try {
     const r = await fetch(
