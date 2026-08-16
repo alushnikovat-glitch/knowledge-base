@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Фундамент маркетинга · Target School</title>
+<style>
+  :root{
+    --ink:#1C1C1E;
+    --muted:#6C6F74;
+    --faint:#9A9CA1;
+    --paper:#FDFDF8;
+    --card:#FFFFFF;
+    --line:#E8E5DC;
+    --line-strong:#D8D4C9;
+    --yellow:#FFD60A;
+    --yellow-soft:#FFF7D6;
+    --green:#1B7F3B;
+    --green-bg:#E9F4ED;
+    --dark:#1c1c1e;
+    --cold:#3F6FA6;  --cold-bg:#EAF1F8;
+    --warm:#C9871F;  --warm-bg:#FAEFD9;
+    --hot:#CB4126;   --hot-bg:#FBE5DF;
+    --live:#B45AA6;  --live-bg:#F8EDF6;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:40px 22px 100px;}
+  .voice{font-family:Georgia,"Times New Roman",serif;font-style:italic;}
+
+  header.top{border-bottom:3px solid var(--ink);padding-bottom:22px;margin-bottom:18px;}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+  h1{font-size:clamp(30px,7vw,48px);line-height:1.03;margin:12px 0 10px;letter-spacing:-.02em;font-weight:800;}
+  h1 .hl{background:linear-gradient(transparent 62%, var(--yellow) 62%);}
+  .sub{color:var(--muted);font-size:15px;max-width:660px;}
+  .sub b{color:var(--ink);}
+
+  /* legend of layers */
+  .layers{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 8px;}
+  .layers .chip{flex:1;min-width:250px;display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13.5px;}
+  .layers .sq{width:12px;height:12px;border-radius:3px;flex:none;margin-top:4px;}
+  .sq.base{background:var(--yellow);}
+  .sq.live{background:var(--live);}
+  .layers .lab{font-weight:800;}
+  .layers .desc{color:var(--muted);}
+
+  /* sticky nav */
+  nav.toc{position:sticky;top:0;z-index:50;background:rgba(253,253,248,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin:0 -22px 34px;padding:10px 22px;}
+  nav.toc .scroll{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+  nav.toc .scroll::-webkit-scrollbar{display:none;}
+  nav.toc a{flex:none;font-size:12.5px;font-weight:700;color:var(--ink);text-decoration:none;background:var(--card);border:1px solid var(--line-strong);border-radius:999px;padding:6px 13px;white-space:nowrap;}
+  nav.toc a.live-link{border-color:var(--live);color:var(--live);}
+
+  section{margin:0 0 52px;scroll-margin-top:64px;}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;padding-bottom:10px;border-bottom:1px solid var(--line-strong);}
+  .sec-num{font-size:13px;font-weight:800;color:var(--ink);background:var(--yellow);border-radius:6px;padding:2px 9px;flex:none;}
+  .sec-num.live{background:var(--live);color:#fff;}
+  .sec-title{font-size:21px;font-weight:800;letter-spacing:-.01em;}
+  .sec-note{color:var(--muted);font-size:13.5px;margin:6px 0 18px;max-width:680px;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;}
+  .card h3{margin:0 0 8px;font-size:16.5px;font-weight:800;}
+  .card p{margin:0 0 8px;font-size:14.5px;color:var(--ink);}
+  .card p.dim{color:var(--muted);}
+  .card p:last-child{margin-bottom:0;}
+
+  /* learn block: light + yellow left line */
+  .learn{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--yellow);border-radius:12px;padding:15px 17px;font-size:14.5px;margin:14px 0;}
+  .learn b{font-weight:800;}
+
+  /* dark money card */
+  .money{background:var(--dark);color:#F4F4F0;border-radius:16px;padding:22px 20px;margin:16px 0;}
+  .money .m-eyebrow{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#B8B8B4;font-weight:700;margin-bottom:14px;}
+  .money .row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media(max-width:640px){.money .row{grid-template-columns:1fr;}}
+  .money .num{font-size:30px;font-weight:800;letter-spacing:-.02em;}
+  .money .num small{font-size:15px;font-weight:600;color:#CFCFCB;}
+  .money .cap{font-size:13px;color:#B8B8B4;margin-top:3px;}
+  .money .foot{margin-top:16px;font-size:13.5px;color:#DDDDD8;border-top:1px solid #3A3A3C;padding-top:12px;}
+
+  .badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:3px 10px;border-radius:999px;white-space:nowrap;}
+  .badge.cold{background:var(--cold-bg);color:var(--cold);}
+  .badge.warm{background:var(--warm-bg);color:var(--warm);}
+  .badge.hot{background:var(--hot-bg);color:var(--hot);}
+  .badge.key{background:var(--yellow);color:var(--ink);}
+  .badge.gr{background:var(--green-bg);color:var(--green);}
+
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:14px;}
+  th{background:#F6F5EE;text-align:left;padding:10px 12px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line-strong);}
+  td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  .tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px;}
+  .tbl-scroll table{min-width:560px;}
+
+  .q{font-family:Georgia,serif;font-style:italic;background:var(--yellow-soft);border-radius:8px;padding:2px 7px;display:inline;box-decoration-break:clone;-webkit-box-decoration-break:clone;font-size:14px;}
+  .qcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px;font-size:14px;}
+  .qcard .voice{display:block;font-size:14.5px;margin-bottom:6px;}
+  .qcard .src{font-size:12px;color:var(--faint);}
+
+  .taglist{display:flex;flex-wrap:wrap;gap:8px;}
+  .tag{background:var(--card);border:1px solid var(--line-strong);border-radius:999px;padding:5px 12px;font-size:13px;}
+  .tag b{font-weight:800;}
+  .tag.pull{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:700;}
+  .tag.push{border-color:#C9C6BC;background:#F0EFEA;color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px;}
+
+  /* trigger strength bars */
+  .trig{display:flex;flex-direction:column;gap:10px;}
+  .trig .t-row{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 15px;}
+  .t-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px;}
+  .t-name{font-weight:800;font-size:15px;}
+  .t-lvl{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);}
+  .t-bar{height:8px;border-radius:99px;background:#EFEDE5;overflow:hidden;margin-bottom:7px;}
+  .t-fill{height:100%;border-radius:99px;background:var(--yellow);}
+  .t-fill.max{background:var(--hot);}
+  .t-desc{font-size:13.5px;color:var(--muted);}
+
+  /* live layer slots */
+  .slot{border:2px dashed var(--live);background:var(--live-bg);border-radius:14px;padding:18px;margin:14px 0;}
+  .slot h3{margin:0 0 6px;font-size:16px;font-weight:800;color:var(--live);}
+  .slot p{margin:0 0 6px;font-size:14px;}
+  .slot .how{font-size:13px;color:var(--muted);}
+  .slot-entry{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:10px;font-size:14px;}
+
+  footer{margin-top:60px;border-top:2px solid var(--ink);padding-top:16px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  .upd{font-weight:700;color:var(--ink);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">Target School · Тренажёр таргетолога · рабочий документ</div>
+  <h1>Фундамент <span class="hl">маркетинга</span></h1>
+  <p class="sub">Через что покупают, как говорят, чего боятся и о чём мечтают. Собрано из <b>790 анкет</b> (ДНК аудитории) и <b>карты аудитории под запуск</b>. Документ живой: снизу слой, который пополняется находками из Threads, прогревами и постами-хитами.</p>
+  <div class="layers">
+    <div class="chip"><span class="sq base"></span><div><span class="lab">Фундамент.</span> <span class="desc">Психология, язык, боли. Слой почти не меняется годами.</span></div></div>
+    <div class="chip"><span class="sq live"></span><div><span class="lab">Живой слой.</span> <span class="desc">Threads, прогревы, посты-хиты. Пополняем по ходу работы.</span></div></div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="scroll">
+    <a href="#pasport">Паспорт</a>
+    <a href="#segmenty">Сегменты</a>
+    <a href="#pokupka">Через что покупают</a>
+    <a href="#boli">Боли</a>
+    <a href="#strahi">Страхи</a>
+    <a href="#vozrazheniya">Возражения</a>
+    <a href="#slova">Их слова</a>
+    <a href="#perevodchik">Переводчик</a>
+    <a href="#magnity">Магниты</a>
+    <a href="#mechty">Мечты</a>
+    <a href="#triggery">Триггеры</a>
+    <a href="#smysly">Смыслы</a>
+    <a href="#pravila">Правила текста</a>
+    <a href="#kontent">Контент-система</a>
+    <a class="live-link" href="#threads">Threads</a>
+    <a class="live-link" href="#progrevy">Прогревы</a>
+    <a class="live-link" href="#posty">Посты-хиты</a>
+    <a class="live-link" href="#gipotezy">Гипотезы</a>
+  </div>
+</nav>
+
+<!-- 01 ПАСПОРТ -->
+<section id="pasport">
+  <div class="sec-head"><span class="sec-num">01</span><span class="sec-title">Паспорт аудитории</span></div>
+  <p class="sec-note">790 анкет, 736 уникальных людей. Почти все пишут в женском роде. Психология и язык из этих анкет живут годами, ситуативный контекст (блокировки, релокация) докручиваем в живом слое.</p>
+
+  <div class="grid3">
+    <div class="card"><h3>Кто она</h3><p>Женщина 25–40. Пишет с телефона, быстро, с опечатками и смайлами. Четверть в декрете.</p></div>
+    <div class="card"><h3>Время</h3><p>Медиана 10 часов в неделю. У трети 5 часов и меньше. Продукт обязан помещаться в час-полтора в день.</p></div>
+    <div class="card"><h3>Опыт</h3><p>60% нигде не учились раньше. 27% уже проходили курсы. Это два разных разговора: новичкам страшно начать, бывшим ученикам стыдно, что не получилось.</p></div>
+  </div>
+
+  <div class="money">
+    <div class="m-eyebrow">Деньги: откуда стартуют и куда хотят</div>
+    <div class="row">
+      <div><div class="num">15 000 <small>₽</small></div><div class="cap">медиана дохода на старте. У 127 человек ноль</div></div>
+      <div><div class="num">50 000 <small>₽</small></div><div class="cap">цель через месяц. Самый частый ответ: ровно 50 000</div></div>
+      <div><div class="num">100 000 <small>₽</small></div><div class="cap">цель через три месяца. Прыжок в 3–7 раз от старта</div></div>
+    </div>
+    <div class="foot">Ожидания оторваны от точки старта. Мечту поддерживаем, продаём первый реалистичный шаг: первые клиенты, первые 15–30–50 тысяч.</div>
+  </div>
+</section>
+
+<!-- 02 СЕГМЕНТЫ -->
+<section id="segmenty">
+  <div class="sec-head"><span class="sec-num">02</span><span class="sec-title">Сегменты</span></div>
+  <p class="sec-note">Пять сегментов из анкет, разложенные по температуре к покупке. Уехавшая выделена как ключевая: у неё сходятся деньги, боль и срочность.</p>
+
+  <div class="tbl-scroll"><table>
+    <tr><th>Сегмент</th><th>Температура</th><th>Ситуация</th><th>Её язык</th><th>Ценный результат</th></tr>
+    <tr>
+      <td><b>Мама в декрете</b><br><span style="color:var(--faint);font-size:12px;">~25%, самый крупный</span></td>
+      <td><span class="badge cold">Холодный</span></td>
+      <td>Декрет заканчивается, в офис возвращаться не хочет, дома «лезет на стены». 5–10 часов в неделю.</td>
+      <td class="voice">«декрет», «не выходить в офис», «свои деньги», «без отрыва от семьи»</td>
+      <td>Первые клиенты и доход до выхода из декрета.</td>
+    </tr>
+    <tr>
+      <td><b>Выгоревшая в найме</b><br><span style="color:var(--faint);font-size:12px;">~13–15%</span></td>
+      <td><span class="badge warm">Тёплый</span></td>
+      <td>Потолок, «на дядю», страх сокращения. Уволиться решила сто раз, страшно без денег 5-го и 20-го.</td>
+      <td class="voice">«уйти из найма», «потолок», «стабильный доход»</td>
+      <td>Доход с таргета равен зарплате. Тогда увольняется.</td>
+    </tr>
+    <tr>
+      <td><b>Уехавшая из России</b> <span class="badge key">Ключевая</span></td>
+      <td><span class="badge hot">Горячий</span></td>
+      <td>Местную работу без языка не дают, удалёнка на Россию обесценилась, накопления тают. Meta у неё работает.</td>
+      <td class="voice">«на что жить после переезда», «из любой точки мира», «временно в Армении»</td>
+      <td>Профессия, которая едет с ней. Покупает первой.</td>
+    </tr>
+    <tr>
+      <td><b>Недоученный практик</b><br><span style="color:var(--faint);font-size:12px;">~25% уже учились</span></td>
+      <td><span class="badge warm">Тёплый</span></td>
+      <td>Курс прошла, вышла теоретиком. Брать клиентов страшно, поднять чек страшно.</td>
+      <td class="voice">«вышла теоретиком», «нет структуры в голове», «а не кнопочки знать»</td>
+      <td>Реальные кейсы и смелость называть цену.</td>
+    </tr>
+    <tr>
+      <td><b>Старт с нуля</b><br><span style="color:var(--faint);font-size:12px;">~17% с нулевым доходом</span></td>
+      <td><span class="badge hot">Горячий</span></td>
+      <td>Без работы, иногда буквально нечем платить за еду. Деньги нужны срочно.</td>
+      <td class="voice">«без денег и работы», «хотя бы», «для начала»</td>
+      <td>Первый заработок как можно быстрее, хотя бы 15–30 тысяч.</td>
+    </tr>
+  </table></div>
+
+  <div class="learn"><b>Свободное поле на рынке.</b> С уехавшей никто не говорит про то, на что жить после переезда, если ты не программист. Юристы дают ВНЖ, риелторы дают квартиру, а на что есть каждый день, тишина. Называем боль: доход на привязи. Называем решение: профессия, которая едет с тобой.</div>
+</section>
+
+<!-- 03 ЧЕРЕЗ ЧТО ПОКУПАЮТ -->
+<section id="pokupka">
+  <div class="sec-head"><span class="sec-num">03</span><span class="sec-title">Через что покупают</span></div>
+  <p class="sec-note">Четыре опоры. Каждый текст, прогрев и креатив проверяем об них.</p>
+  <div class="grid2">
+    <div class="card">
+      <h3>1. Доход, а профессия следом</h3>
+      <p>Слово «доход» звучит в анкетах 430 раз, чаще «работы» и «профессии». Люди приходят за доходом. Профессия для них способ.</p>
+      <p class="dim">В текстах слово «доход» с цифрой всегда сильнее слова «профессия».</p>
+    </div>
+    <div class="card">
+      <h3>2. Страшна не бедность, страшна пустота</h3>
+      <p>Слово «ничего» встречается 236 раз. Ответ на вопрос «что будет, если оставить как есть»: <span class="q">«ничего не изменится»</span>. Главный страх это стагнация.</p>
+      <p class="dim">Триггер «что изменится через год? Ничего» бьёт сильнее любой страшилки.</p>
+    </div>
+    <div class="card">
+      <h3>3. Покупают уверенность, упакованную в навык</h3>
+      <p>Скрытая первичная боль. Люди просят разрешения и смелости: <span class="q">«снова поверить в себя»</span>, <span class="q">«работать без страха и сомнений»</span>. Знания для них легальный способ купить уверенность.</p>
+      <p class="dim">Поэтому продукт снижает ставку: маленькие шаги, быстрые «получилось», тренажёр без риска.</p>
+    </div>
+    <div class="card">
+      <h3>4. Окно «сейчас»</h3>
+      <p>Человек мыслит точкой перехода. Слово «сейчас» он наполняет сам: конец декрета, сокращение, переезд, «возраст уже к 40». Рамка одна: проблема, окно, страх, что окно закроется.</p>
+      <p class="dim">Аргументация через дедлайн: «декрет заканчивается через полгода?»</p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 БОЛИ -->
+<section id="boli">
+  <div class="sec-head"><span class="sec-num">04</span><span class="sec-title">Боли по слоям</span></div>
+  <p class="sec-note">Цитаты дословные, с ошибками людей. Их можно брать в тексты как есть.</p>
+  <div class="grid2">
+    <div class="card">
+      <h3>Функциональные</h3>
+      <p>Нет дохода или он маленький. В своём городе работы нет. После курсов нет практики и системы. Не умеют находить клиентов.</p>
+      <p><span class="q">«Дошла до рекламы и всё, затор»</span> <span class="q">«Только теория. Выполняю д/з с помощью скриншотов»</span></p>
+    </div>
+    <div class="card">
+      <h3>Эмоциональные</h3>
+      <p>Усталость, выгорание, безысходность, декретная клаустрофобия, страх упасть глубже.</p>
+      <p><span class="q">«рутина меня просто сожрет, в декрете лезу на стены»</span> <span class="q">«Чувство, что жизнь проходит мимо»</span></p>
+    </div>
+    <div class="card">
+      <h3>Социальные</h3>
+      <p>Зависимость от мужа и родителей. Статус вечного новичка. Близкие не верят. Хочется, чтобы хвалили и рекомендовали.</p>
+      <p><span class="q">«останусь на шее у мужа»</span> <span class="q">«просить помощи в родственников, которые и так в меня не верят»</span></p>
+    </div>
+    <div class="card">
+      <h3>Финансовые</h3>
+      <p>Кредиты и ипотека у 46 человек. Экономия на базовом. Жизнь от зарплаты до зарплаты, в том числе <span class="q">«от зарплаты до зарплаты мужа»</span>.</p>
+      <p><span class="q">«семейный бюджет трещит по швам»</span> <span class="q">«будут душить кредиты»</span></p>
+    </div>
+  </div>
+  <div class="learn"><b>Скрытые боли, их не говорят прямо.</b> Неуверенность в себе как главная. Страх, что это очередной несработавший курс. Потребность в признании: «доказать себе». И страх разочароваться в себе. В себе, не в курсе: <span class="q">«время уходит я очень разочаруюсь в себе»</span>. Поэтому обещание в текстах снижает ставку: маленькие шаги, быстрые «получилось».</div>
+</section>
+
+<!-- 05 СТРАХИ -->
+<section id="strahi">
+  <div class="sec-head"><span class="sec-num">05</span><span class="sec-title">Страхи-блокираторы и чем снимаем</span></div>
+  <p class="sec-note">Включая те, что боятся сказать даже себе. Правая колонка это готовые формулировки для текстов.</p>
+  <div class="tbl-scroll"><table>
+    <tr><th>Страх</th><th>Фраза, которой снимаем</th></tr>
+    <tr><td class="voice">«Я не разберусь, я не технарь, там сто кнопок и я всё сломаю»</td><td>Если вы отправляете голосовые и заказываете еду в приложении, вы справитесь. Панель ведёт за руку по каждому экрану. Сломать реальный кабинет нельзя, вы тренируетесь.</td></tr>
+    <tr><td class="voice">«Опять начну и брошу, как те три курса на полке»</td><td>Тут нечего смотреть часами. Вы сразу делаете руками: задание, шаг, галочка. Закончить проще, чем бросить, потому что к концу на руках готовые документы.</td></tr>
+    <tr><td class="voice">«Поздно, рынок забит, да и мне уже 37, куда с нуля»</td><td>Бизнесу в любой стране нужны клиенты каждый день, а спецов, которые доводят до денег, мало. Возраст в плюс: взрослым платят охотнее, потому что не подведут.</td></tr>
+    <tr><td class="voice">«А вдруг я просто не создана зарабатывать. У всех получается, а у меня стоп»</td><td>Получается у тех, у кого есть пошаговая система и место потренироваться без риска. Раньше у вас этого не было. Теперь есть, дальше вы повторяете шаги.</td></tr>
+    <tr><td class="voice">«Вложу деньги из семьи, не отобьётся, и мне скажут: я же говорил»</td><td>Вход бесплатный. Вы проходите первые шаги, доходите до первого результата и сами решаете, идти ли дальше.</td></tr>
+  </table></div>
+</section>
+
+<!-- 06 ВОЗРАЖЕНИЯ -->
+<section id="vozrazheniya">
+  <div class="sec-head"><span class="sec-num">06</span><span class="sec-title">Сомнения и возражения</span></div>
+  <p class="sec-note">Метафора из жизни плюс честный ответ. Метафоры готовы для сторис и постов.</p>
+  <div class="tbl-scroll"><table>
+    <tr><th>«Почему нет»</th><th>Как это ощущается</th><th>Честный ответ</th></tr>
+    <tr><td class="voice">«Таргетологов уже как собак нерезаных»</td><td>Как открывать десятую шаурмичную на улице, где уже девять.</td><td>Шаурмичных девять, а голодных тысячи. Спецов много, а тех, кто доводит до денег, мало. Место есть, честно.</td></tr>
+    <tr><td class="voice">«Meta же заблокирована»</td><td>Как бояться, что телефон не ловит, стоя с пятью палочками сети.</td><td>Meta работает во всём мире. Бизнесу в Дубае, Алматы, Тбилиси реклама нужна каждый день.</td></tr>
+    <tr><td class="voice">«Я уже покупала курсы, лежат непройденные»</td><td>Как абонемент в зал, куда сходила два раза и забросила.</td><td>В зал не ходят, потому что надо заставлять себя смотреть. Тут вы делаете. К концу на руках четыре документа, а не конспект.</td></tr>
+    <tr><td class="voice">«Нет времени, ребёнок и работа»</td><td>Как говорить, что нет времени на воду, хотя пьёшь по глотку весь день.</td><td>Не надо садиться на три часа. Шаг занимает 15–20 минут, пока варится суп.</td></tr>
+    <tr><td class="voice">«А вдруг я не найду клиента»</td><td>Как бояться, что не найдёшь работу, держа в руках диплом и портфолио.</td><td>Внутри отдельный урок: где искать первых и что им написать. Первый кейс собираете в панели.</td></tr>
+    <tr><td class="voice">«Дорого, нет лишних денег»</td><td>Как жалеть четыре тысячи на инструмент, которым потом чинишь за деньги.</td><td>Вход бесплатный, платите, когда увидели, что справляетесь. Раньше за профессию отдавали сто тысяч.</td></tr>
+    <tr><td class="voice">«Боюсь я этих кабинетов, там всё на английском»</td><td>Как когда-то боялись вызвать такси через приложение, а теперь делаете не глядя.</td><td>Кабинет воссоздан по шагам, вам подсвечивают, куда нажать и зачем. Ошибиться на реальном аккаунте невозможно.</td></tr>
+  </table></div>
+</section>
+
+<!-- 07 ИХ СЛОВА -->
+<section id="slova">
+  <div class="sec-head"><span class="sec-num">07</span><span class="sec-title">Их слова</span></div>
+  <p class="sec-note">Речевая ДНК из анкет. Всё, что в жёлтых плашках, люди написали сами. Берём без перевода.</p>
+
+  <div class="card" style="margin-bottom:14px;">
+    <h3>Частотные слова с числами</h3>
+    <div class="taglist">
+      <span class="tag"><b>доход</b> · 430</span><span class="tag"><b>работа</b> · 318</span><span class="tag"><b>профессия</b> · 305</span><span class="tag"><b>ничего</b> · 236</span><span class="tag"><b>реклама</b> · 229</span><span class="tag"><b>знание</b> · 220</span><span class="tag"><b>клиент</b> · 191</span><span class="tag"><b>жизнь</b> · 167</span><span class="tag"><b>время</b> · 150</span><span class="tag"><b>ребёнок</b> · 120</span><span class="tag"><b>декрет</b> · 94</span><span class="tag"><b>найм</b> · 80</span>
+    </div>
+    <p class="dim" style="margin-top:10px;">Глаголы перехода: выйти, уйти, начать, освоить, сдвинуться. Человек мыслит себя в точке А и говорит языком перемещения.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Фразы, которые пишут десятки людей</h3>
+      <p><span class="q">«выйти на доход»</span> 43 чел · <span class="q">«востребованный специалист»</span> 38 · <span class="q">«освоить новую профессию»</span> 85 со всеми вариантами · <span class="q">«ничего не изменится»</span> 34 · <span class="q">«стабильный доход»</span> 27 · <span class="q">«путешествовать»</span> 29 · <span class="q">«не зависеть ни от кого»</span> ~35 · <span class="q">«уйти из найма»</span> 17 · <span class="q">«от зарплаты до зарплаты»</span> 7 · <span class="q">«доказать себе»</span> 7</p>
+    </div>
+    <div class="card">
+      <h3>Их метафоры, яркие и телесные</h3>
+      <p><span class="q">«бюджет трещит по швам»</span> <span class="q">«рутина меня просто сожрет»</span> <span class="q">«в декрете лезу на стены»</span> <span class="q">«душат кредиты»</span> <span class="q">«крысиные бега»</span> <span class="q">«глоток свежего воздуха»</span> <span class="q">«вырастут крылья»</span> <span class="q">«упёрлась в потолок»</span> <span class="q">«щелкать таргет как орешки»</span></p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px;">
+    <h3>Вопросы в 3 часа ночи</h3>
+    <p class="dim">Дословно, как вводят в поиск, когда никто не видит.</p>
+    <p><span class="badge cold">Мама</span> <span class="voice">как заработать в декрете из дома реально без вложений · удалённая работа для мам с ребёнком без опыта · кем можно работать дома если нет образования</span></p>
+    <p><span class="badge warm">Выгоревшая</span> <span class="voice">как уйти с работы и не остаться без денег · какую удалённую профессию можно освоить быстро с нуля · реально ли зарабатывать из дома а не 30 тысяч</span></p>
+    <p><span class="badge hot">Уехавшая</span> <span class="voice">на что жить после переезда если не программист · удалённая профессия чтобы зарабатывать за границей · как найти работу за границей без языка и документов</span></p>
+  </div>
+
+  <div class="learn"><b>Как строят речь.</b> Ответы короткие, медиана 5 слов. Цели формулируют инфинитивами, без «я». «Я» появляется вместе с эмоцией: «я устала», «я в декрете». Речь построена на отрицаниях: человек чаще описывает то, от чего бежит. Поэтому заходить через «не хочу возвращаться в офис» точнее, чем через «хочу свободу». Маркер накопленной усталости: слово «уже».</div>
+</section>
+
+<!-- 08 ПЕРЕВОДЧИК -->
+<section id="perevodchik">
+  <div class="sec-head"><span class="sec-num">08</span><span class="sec-title">Переводчик: маркетолог → человек</span></div>
+  <p class="sec-note">Проверка любого текста: если фразу мог написать любой инфобизнесмен, переписываем правой колонкой.</p>
+  <div class="tbl-scroll"><table>
+    <tr><th>Так говорит маркетолог</th><th>Так говорит она</th></tr>
+    <tr><td>монетизировать навыки</td><td class="voice">«начать зарабатывать на своих знаниях»</td></tr>
+    <tr><td>финансовая свобода</td><td class="voice">«не зависеть ни от кого», «свои деньги»</td></tr>
+    <tr><td>лидогенерация, лиды</td><td class="voice">«клиенты», «заказы», «где искать клиентов»</td></tr>
+    <tr><td>личный бренд</td><td class="voice">«чтобы меня рекомендовали», «чтобы моё имя узнавали»</td></tr>
+    <tr><td>масштабироваться</td><td class="voice">«повысить чек», «взять больше клиентов»</td></tr>
+    <tr><td>прокачать экспертность</td><td class="voice">«стать хорошим специалистом», «разобраться досконально»</td></tr>
+    <tr><td>трансформация, точка А и Б</td><td class="voice">«изменить свою жизнь», «сдвинуться с места»</td></tr>
+    <tr><td>гибкий график</td><td class="voice">«самой планировать свой день»</td></tr>
+    <tr><td>окупаемость инвестиций</td><td class="voice">«окупить курс в первый месяц»</td></tr>
+    <tr><td>удалённая профессия</td><td class="voice">«работать из дома», «не выходить в офис»</td></tr>
+  </table></div>
+  <p class="sec-note" style="margin-top:14px;">Без перевода можно брать: таргет, таргетолог, фриланс, удалёнка, кейс, найм, декрет, «кнопка продвигать» как символ дилетантства.</p>
+</section>
+
+<!-- 09 МАГНИТЫ -->
+<section id="magnity">
+  <div class="sec-head"><span class="sec-num">09</span><span class="sec-title">Слова-магниты и стоп-слова</span></div>
+  <p class="sec-note">На что среагирует и от чего закроется. Проверяем заголовки и первые строки.</p>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="color:var(--green);">↑ Притягивают</h3>
+      <div class="taglist">
+        <span class="tag pull">с нуля</span><span class="tag pull">первый клиент</span><span class="tag pull">из любой точки мира</span><span class="tag pull">без опыта</span><span class="tag pull">свои деньги</span><span class="tag pull">за руку, по шагам</span><span class="tag pull">руками, а не сорок видео</span><span class="tag pull">живой кабинет, тренажёр</span><span class="tag pull">первый результат уже сегодня</span><span class="tag pull">профессия, которая едет с тобой</span><span class="tag pull">выйти на доход</span><span class="tag pull">стабильный доход</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--muted);">↓ Закрывают наглухо</h3>
+      <div class="taglist">
+        <span class="tag push">вебинар</span><span class="tag push">инфобизнес</span><span class="tag push">миллион за месяц</span><span class="tag push">пассивный доход</span><span class="tag push">лёжа на пляже</span><span class="tag push">CPA, ROMI, лиды</span><span class="tag push">уникальный</span><span class="tag push">эксперт-наставник</span><span class="tag push">успешный успех</span>
+      </div>
+      <p class="dim" style="margin-top:10px;">И отдельно: не вести с AI-терминологией. Аудитория скептична к AI-хайпу. Нейросеть раскрываем после доверия.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 МЕЧТЫ -->
+<section id="mechty">
+  <div class="sec-head"><span class="sec-num">10</span><span class="sec-title">О чём мечтают</span></div>
+  <p class="sec-note">Про их жизнь, не про продукт. Готовые сцены для прогревов и визуала.</p>
+  <div class="grid2">
+    <div class="qcard"><span class="voice">Просыпается без будильника. Кухня, кофе, ноутбук, ребёнок рядом рисует. Работа сделана к обеду, вечер её.</span><span class="src">сцена · дом и дети</span></div>
+    <div class="qcard"><span class="voice">Сама оплачивает мамин день рождения и свою косметологию, ни у кого не спрашивая разрешения.</span><span class="src">сцена · свои деньги</span></div>
+    <div class="qcard"><span class="voice">Отвечает клиенту из кафе в новом городе, закрывает ноут и идёт гулять. Доход едет с ней, куда бы её ни занесло.</span><span class="src">сцена · путешествия и переезд</span></div>
+    <div class="qcard"><span class="voice">Пишет в старый рабочий чат «я увольняюсь» и впервые за годы дышит полной грудью.</span><span class="src">сцена · выход из найма</span></div>
+    <div class="qcard"><span class="voice">На вопрос «кем ты работаешь» отвечает спокойно, с гордостью. За словом «таргетолог» стоят реальные кейсы.</span><span class="src">сцена · признание</span></div>
+    <div class="qcard"><span class="voice">«Я сама планирую свою жизнь, работу, обучение, цели, отдых и заработок»</span><span class="src">дословно из анкеты</span></div>
+  </div>
+</section>
+
+<!-- 11 ТРИГГЕРЫ -->
+<section id="triggery">
+  <div class="sec-head"><span class="sec-num">11</span><span class="sec-title">Триггеры по силе отклика</span></div>
+  <p class="sec-note">Что запускает решение. Сила посчитана по массовости и эмоциональности ответов.</p>
+  <div class="trig">
+    <div class="t-row"><div class="t-top"><span class="t-name">Стагнация: «ничего не изменится»</span><span class="t-lvl">Очень сильный</span></div><div class="t-bar"><div class="t-fill max" style="width:100%"></div></div><div class="t-desc">Самый массовый и самый эмоциональный. «Время идёт, а я стою на месте», «останусь в точке А, пока другие двигаются».</div></div>
+    <div class="t-row"><div class="t-top"><span class="t-name">Декрет и дети</span><span class="t-lvl">Очень сильный</span></div><div class="t-bar"><div class="t-fill max" style="width:92%"></div></div><div class="t-desc">Четверть выборки. Дедлайн декрета работает как мотор: есть конкретная дата, когда «всё решится».</div></div>
+    <div class="t-row"><div class="t-top"><span class="t-name">Зависимость: муж, начальник, найм</span><span class="t-lvl">Сильный</span></div><div class="t-bar"><div class="t-fill" style="width:75%"></div></div><div class="t-desc">«Устала зависеть», «профессию, которая не будет зависеть от настроения начальства или доходов мужа».</div></div>
+    <div class="t-row"><div class="t-top"><span class="t-name">Усталость и выгорание</span><span class="t-lvl">Сильный</span></div><div class="t-bar"><div class="t-fill" style="width:70%"></div></div><div class="t-desc">«Устал от потолка», «стоять на ногах по 12 часов без изменения дохода».</div></div>
+    <div class="t-row"><div class="t-top"><span class="t-name">Переезд и путешествия</span><span class="t-lvl">Средний</span></div><div class="t-bar"><div class="t-fill" style="width:50%"></div></div><div class="t-desc">В анкетах 2021 сегмент маленький. В 2026 вырос, добираем язык в живом слое из Threads.</div></div>
+    <div class="t-row"><div class="t-top"><span class="t-name">Кредиты и долги</span><span class="t-lvl">Средний, острый</span></div><div class="t-bar"><div class="t-fill" style="width:45%"></div></div><div class="t-desc">Узкий сегмент, но боль режущая: «бюджет трещит по швам».</div></div>
+    <div class="t-row"><div class="t-top"><span class="t-name">Признание и статус</span><span class="t-lvl">Скрытый</span></div><div class="t-bar"><div class="t-fill" style="width:35%"></div></div><div class="t-desc">Есть почти у всех, проговаривается стыдливо. Работает как скрытый мотив, не как заголовок.</div></div>
+  </div>
+  <div class="learn"><b>Триггеры покупки из карты.</b> Ограничение по местам и времени, только честное. Быстрый первый результат: документ на руках уже сегодня. Бесплатный вход без риска. Живой пример «как она»: Лена, тоже была в декрете, сейчас три клиента. И момент открытой боли: только что отказали в работе, муж попрекнул деньгами.</div>
+</section>
+
+<!-- 12 СМЫСЛЫ -->
+<section id="smysly">
+  <div class="sec-head"><span class="sec-num">12</span><span class="sec-title">Пять смысловых кластеров</span></div>
+  <p class="sec-note">Повторяющиеся смыслы из сотен анкет. Любой пост, подкаст или прогрев опирается хотя бы на один.</p>
+  <div class="grid2">
+    <div class="card"><h3>1. Сдвинуться с места</h3><p>Крупнейший, 100+ человек. «Топчусь на месте», «по течению», «всё останется как есть». Страшна не бедность, страшна неподвижность.</p></div>
+    <div class="card"><h3>2. Доход, который зависит от меня</h3><p>~60 человек. «Сама контролирую свой доход», «работать на себя». Контроль важнее суммы.</p></div>
+    <div class="card"><h3>3. Дом, дети и работа одновременно</h3><p>~180 человек. «Рядом с ребёнком», «без отрыва от семьи». Суть: не выбирать между материнством и деньгами.</p></div>
+    <div class="card"><h3>4. Профессия как билет в другую жизнь</h3><p>~85 человек. «Сменить сферу», «из любой точки мира». Таргет для них транспорт в другую жизнь.</p></div>
+    <div class="card"><h3>5. Уверенный специалист, а не новичок</h3><p>~60 человек. «Не бояться брать заказы», «доказать себе». Покупают уверенность, упакованную в навык.</p></div>
+    <div class="card" style="border-left:4px solid var(--yellow);"><h3>Как этим пользоваться</h3><p>Один контент, один кластер. Смешивать смыслы в одном посте нельзя: размывается попадание. Серию контента строим так, чтобы за неделю закрыть 2–3 кластера.</p></div>
+  </div>
+</section>
+
+<!-- 13 ПРАВИЛА ТЕКСТА -->
+<section id="pravila">
+  <div class="sec-head"><span class="sec-num">13</span><span class="sec-title">Правила текста</span></div>
+  <p class="sec-note">Выжимка из 20 правил для копирайтера. Проверяем каждый текст перед выпуском.</p>
+  <div class="grid2">
+    <div class="card">
+      <h3>Как писать</h3>
+      <p>Предложение до 10 слов. После длинного короткое. Одна мысль на абзац в 1–3 строки. Начинать с боли или ситуации, продукт позже: «Декрет заканчивается через 4 месяца». Каждое обещание с цифрой: сумма, срок, число клиентов, часы. Контраст «от чего → к чему», начиная с «от чего»: «Не просить у мужа. Свои деньги». Эмоция через бытовую сцену: «дочь отводить в сад на весь день». Финал: маленький конкретный шаг.</p>
+    </div>
+    <div class="card">
+      <h3>Что снимать в каждом тексте</h3>
+      <p>Страх практики: «покажу, где нажимать и что говорить клиенту». Страх очередного курса: признавать, что человек уже обжигался, говорить про шаги и документы на руках. Нехватку времени: «час в день с телефона». Для мам всегда деталь про ребёнка и дом. Для наёмных: сначала совмещение, потом уход. Не давить «увольняйся».</p>
+    </div>
+  </div>
+  <div class="learn"><b>Калибровка обещаний.</b> Аудитория мечтает о прыжке в 3–7 раз за квартал. Мечту поддерживаем, продаём первый реалистичный шаг. Никаких гарантий результата, никакого обхода блокировок. Блокировки проходим по протоколу. Термин кабинета: «Бизнес-портфолио», не «Бизнес-менеджер».</div>
+</section>
+
+<!-- 14 КОНТЕНТ-СИСТЕМА -->
+<section id="kontent">
+  <div class="sec-head"><span class="sec-num">14</span><span class="sec-title">Контент-система</span></div>
+  <p class="sec-note">Куда несём эти смыслы. Три формата плюс главный вывод по трафику.</p>
+
+  <div class="money">
+    <div class="m-eyebrow">Вывод по трафику · август 2026</div>
+    <div class="row" style="grid-template-columns:1fr;">
+      <div><div class="num">Холодный таргет не покупает на чеке 1 490 ₽</div><div class="cap" style="margin-top:8px;">Показатели это подтвердили. Поэтому продаём через блог: сначала прогреваем контентом, тренажёр предлагаем тёплым. Холодному трафику отдаём лид-магнит с ощутимым результатом. Продажа идёт после прогрева.</div></div>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <h3>Телеграм: посты и короткие подкасты</h3>
+      <p>Основной упор. Темы: профессия, удалённый заработок, возможности. Опора на аудиторию, которая хочет путешествовать и не зависеть от релокации.</p>
+      <p class="dim">Кластеры-доноры: «билет в другую жизнь», «доход, который зависит от меня».</p>
+    </div>
+    <div class="card">
+      <h3>Инстаграм: сторис-прогревы</h3>
+      <p>Простейшая механика: личное, раскрытие, потом переход к продукту. Личный момент открывает, смысловой мост ведёт к тренажёру или Архитектору.</p>
+      <p class="dim">Кластеры-доноры: «сдвинуться с места», «уверенный специалист».</p>
+    </div>
+    <div class="card">
+      <h3>Инстаграм: карусели</h3>
+      <p>Рабочий формат под сохранения. Карусель раскрывает один смысл, финальный слайд ведёт на тренажёр.</p>
+      <p class="dim">Кластеры-доноры: «дом, дети и работа», страхи из раздела 05.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ЖИВОЙ СЛОЙ -->
+<section id="threads">
+  <div class="sec-head"><span class="sec-num live">15</span><span class="sec-title">Живой слой · Находки из Threads</span></div>
+  <p class="sec-note">Свежий язык 2026 поверх вечной психологии. Анкеты 2021 не знали про баны кабинетов, оплату из-за границы и массовую релокацию. Этот язык добираем здесь.</p>
+  <div class="slot">
+    <h3>Слот пустой. Что сюда складываем</h3>
+    <p>Дословные цитаты из Threads: боли, сомнения, возражения, достижения таргетологов, обороты речи.</p>
+    <p class="how">Как пополнять: присылай в чат скриншот или текст треда со словами «в фундамент, раздел Threads». Каждая находка получает карточку: цитата, дата, к какому кластеру относится, идея для контента.</p>
+  </div>
+</section>
+
+<section id="progrevy">
+  <div class="sec-head"><span class="sec-num live">16</span><span class="sec-title">Живой слой · Прогревы, которые сработали</span></div>
+  <p class="sec-note">Банк работавших связок. Раньше прогревы часто шли в сторис, сохраняем их структуру и переиспользуем.</p>
+  <div class="slot">
+    <h3>Слот пустой. Что сюда складываем</h3>
+    <p>Схема прогрева по дням: какой был заход, какое личное раскрытие, где стоял мост к продукту, что дало отклик и продажи.</p>
+    <p class="how">Как пополнять: присылай текст или скриншоты прогрева со словами «в фундамент, раздел прогревы». Разберу на структуру и добавлю карточкой с пометкой, что переиспользовать.</p>
+  </div>
+</section>
+
+<section id="posty">
+  <div class="sec-head"><span class="sec-num live">17</span><span class="sec-title">Живой слой · Посты-хиты</span></div>
+  <p class="sec-note">Посты, которые зашли. Сохраняем оригинал и на его основе генерируем рекламный контент: крео, карусели, подкасты.</p>
+  <div class="slot">
+    <h3>Слот пустой. Что сюда складываем</h3>
+    <p>Текст поста как есть, охваты и реакции, почему зашёл, какой кластер зацепил. Рядом: что из него уже сделали для рекламы.</p>
+    <p class="how">Как пополнять: присылай пост со словами «в фундамент, посты-хиты». Добавлю карточку и предложу 2–3 переупаковки под другие форматы.</p>
+  </div>
+</section>
+
+<section id="gipotezy">
+  <div class="sec-head"><span class="sec-num live">18</span><span class="sec-title">Живой слой · Гипотезы для рекламы</span></div>
+  <p class="sec-note">Что тестируем следующим. Гипотеза живёт здесь до проверки, потом уходит либо в фундамент, либо в корзину с пометкой почему.</p>
+  <div class="slot">
+    <h3>Первые гипотезы уже есть</h3>
+    <div class="slot-entry"><b>Г-1. Лид-магнит для холодного трафика.</b> Холодная аудитория не покупает даже за 1 490 ₽. Гипотеза: холодному трафику отдаём бесплатный ощутимый результат, продажа идёт после. Статус: в работе.</div>
+    <div class="slot-entry"><b>Г-2. Сегмент «уехавшая» как первая рекламная связка.</b> Гео: Грузия, Армения, Турция, Казахстан, Сербия, Таиланд, ОАЭ. Язык интерфейса русский. Заход через тающие накопления. Статус: ждёт запуска.</div>
+    <div class="slot-entry"><b>Г-3. Телеграм-подкасты про «профессию, которая едет с тобой».</b> Короткий формат, один выпуск на один кластер. Статус: ждёт первых выпусков.</div>
+  </div>
+</section>
+
+<footer>
+  <div>Фундамент маркетинга · Target School · тренажёр таргетолога</div>
+  <div class="upd">Обновлено: 16.08.2026 · версия 1</div>
+</footer>
+
+</div>
+</body>
+</html>
