@@ -135,13 +135,15 @@ export default async function handler(req, res) {
     } catch (e) {}
 
     // Причины сомнений с виджета обратной связи на экране захвата.
+    // Берём все записи разом, не только сегодняшние, чтобы видеть и «сегодня», и «всего».
     // Если таблицы ts_feedback ещё нет, список остаётся пустым, страница не падает.
-    let feedbackToday = [];
+    let feedbackAll = [];
     try {
-      const rf = await sb(`ts_feedback?created_at=gte.${new Date(todayStart).toISOString()}&order=created_at.desc&limit=200&select=reason,identity,created_at`);
+      const rf = await sb(`ts_feedback?order=created_at.desc&limit=2000&select=reason,identity,created_at`);
       const fRows = await rf.json();
-      feedbackToday = Array.isArray(fRows) ? fRows : [];
+      feedbackAll = Array.isArray(fRows) ? fRows : [];
     } catch (e) {}
+    const feedbackToday = feedbackAll.filter((f) => new Date(f.created_at).getTime() >= todayStart);
 
     const ago = (t) => {
       const m = Math.round((now - new Date(t).getTime()) / 60000);
@@ -225,17 +227,19 @@ export default async function handler(req, res) {
     </tbody>
   </table>
 
-  ${feedbackToday.length ? `
-  <h2>ПОЧЕМУ СОМНЕВАЮТСЯ · ${feedbackToday.length}</h2>
+  ${feedbackAll.length ? `
+  <h2>ПОЧЕМУ СОМНЕВАЮТСЯ · за сегодня ${feedbackToday.length}, всего ${feedbackAll.length}</h2>
   <table>
-    <thead><tr><th>Причина</th><th>Сколько</th></tr></thead>
+    <thead><tr><th>Причина</th><th>Сегодня</th><th>Всего</th></tr></thead>
     <tbody>
       ${(() => {
-        const byReason = {};
-        for (const f of feedbackToday) byReason[f.reason] = (byReason[f.reason] || 0) + 1;
-        return Object.entries(byReason)
-          .sort((a, b) => b[1] - a[1])
-          .map(([r, n]) => `<tr><td>${esc(r)}</td><td>${n}</td></tr>`)
+        const byReasonToday = {};
+        for (const f of feedbackToday) byReasonToday[f.reason] = (byReasonToday[f.reason] || 0) + 1;
+        const byReasonAll = {};
+        for (const f of feedbackAll) byReasonAll[f.reason] = (byReasonAll[f.reason] || 0) + 1;
+        const reasons = Object.keys(byReasonAll).sort((a, b) => byReasonAll[b] - byReasonAll[a]);
+        return reasons
+          .map((r) => `<tr><td>${esc(r)}</td><td>${byReasonToday[r] || 0}</td><td>${byReasonAll[r]}</td></tr>`)
           .join("");
       })()}
     </tbody>
