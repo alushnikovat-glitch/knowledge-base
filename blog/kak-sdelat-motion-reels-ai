@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как сделать экспертный мотион-рилс с помощью AI. Без дизайнера и монтажёра | Анастасия Лушникова</title>
+<meta name="description" content="Пошаговая инструкция: как собрать анимированный Reels для Instagram с помощью Claude Code. Без дизайнера, монтажёра и бюджета на подрядчиков.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108790481', 'ym');
+    ym(108790481, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108790481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2700527913660797');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Manrope',sans-serif;background:#f7f6f2;color:#1a1917;line-height:1.7;font-size:17px}
+a{color:#2563eb;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;background:rgba(247,246,242,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #e8e6df}
+.nav-inner{max-width:760px;margin:0 auto;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-weight:800;font-size:16px;color:#1a1917}
+.nav-links{display:flex;gap:18px;font-size:14px;font-weight:600}
+.nav-links a{color:#6b6860}
+.nav-links a:hover{color:#1a1917}
+.wrap{max-width:760px;margin:0 auto;padding:40px 20px 0}
+.meta{font-size:14px;color:#6b6860;margin-bottom:16px}
+h1{font-size:clamp(28px,5vw,42px);font-weight:800;line-height:1.2;letter-spacing:-.02em;margin-bottom:20px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.tag{background:#f0ede6;border-radius:100px;padding:6px 14px;font-size:13px;font-weight:600;color:#6b6860}
+.card{background:#fff;border:1px solid #e8e6df;border-radius:16px;padding:28px;margin-bottom:24px}
+.hint{background:#eff6ff;border:1px solid #bfdbfe;border-radius:16px;padding:22px 28px;margin-bottom:40px;font-size:15px}
+.hint b{color:#1d4ed8}
+h2{font-size:26px;font-weight:800;letter-spacing:-.01em;margin:48px 0 16px}
+h3{font-size:19px;font-weight:700;margin:28px 0 10px}
+p{margin-bottom:16px}
+ul,ol{margin:0 0 16px 22px}
+li{margin-bottom:8px}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:#1a1917;color:#fff;border-radius:10px;font-weight:800;font-size:16px;margin-right:12px;vertical-align:middle}
+.prompt-block{background:#1a1917;border-radius:14px;padding:22px;margin:18px 0 24px;position:relative}
+.prompt-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#f5f4f0;white-space:pre-wrap;word-break:break-word}
+.prompt-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#a8a49a;margin-bottom:12px}
+.copy-btn{position:absolute;top:16px;right:16px;background:#33312d;color:#f5f4f0;border:none;border-radius:8px;padding:7px 14px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:600;cursor:pointer}
+.copy-btn:hover{background:#44423d}
+.note{background:#fff;border-left:3px solid #2563eb;border-radius:0 12px 12px 0;padding:16px 22px;margin:20px 0;font-size:15px;color:#44423d}
+.product{background:#fffbf0;border:1px solid #fde68a;border-radius:18px;padding:32px;margin:56px 0 24px}
+.product h2{margin-top:0;font-size:28px}
+.product-price{font-size:34px;font-weight:800;margin:8px 0 4px}
+.product-price span{font-size:16px;font-weight:600;color:#6b6860}
+.product ul{margin-top:12px}
+.btn{display:inline-block;background:#1a1917;color:#fff;border-radius:12px;padding:16px 32px;font-weight:700;font-size:17px;margin-top:20px;transition:opacity .15s}
+.btn:hover{opacity:.85}
+.footer{margin-top:72px;border-top:1px solid #e8e6df;background:#fff}
+.footer-inner{max-width:760px;margin:0 auto;padding:56px 20px 32px}
+.footer h2{margin-top:0;font-size:26px}
+.footer-sub{color:#6b6860;margin-bottom:28px}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:28px}
+.footer-card{border:1px solid #e8e6df;border-radius:14px;padding:20px;display:block}
+.footer-card b{display:block;color:#1a1917;margin-bottom:4px}
+.footer-card span{font-size:14px;color:#6b6860}
+.footer-banner{background:#f0ede6;border-radius:14px;padding:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.footer-banner b{font-size:18px}
+.copyright{font-size:13px;color:#6b6860;text-align:center;padding-top:20px;border-top:1px solid #e8e6df}
+@media(max-width:600px){.card,.product{padding:22px}.nav-links{gap:12px}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="../">Анастасия Лушникова</a>
+    <div class="nav-links">
+      <a href="https://t.me/target_school1">Telegram</a>
+      <a href="https://www.instagram.com/target_school">Instagram</a>
+      <a href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0">Написать</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<div class="meta">24 августа 2026 · 12 минут чтения · Автор: Анастасия Лушникова</div>
+
+<h1>Как сделать экспертный мотион-рилс с помощью AI. Без дизайнера, монтажёра и бюджета</h1>
+
+<div class="tags">
+  <span class="tag">AI-маркетинг</span>
+  <span class="tag">Инструменты</span>
+  <span class="tag">Контент</span>
+</div>
+
+<div class="card">
+  <p>Вы пришли сюда с ролика, где анимация показывает рекламный кабинет, схемы и графики. Так вот, этот ролик от первой сцены до последней собрал искусственный интеллект. Я написала сценарий, записала голос на диктофон в телефоне и поставила задачу. Всё остальное сделала нейросеть: нарисовала кабинет кодом, анимировала схемы, положила субтитры, свела с голосом.</p>
+  <p>Дизайнера у меня нет. Монтажёра нет. After Effects я не открывала ни разу в жизни. Бюджет на подрядчиков: ноль. Времени ушёл один вечер.</p>
+  <p>Ниже полная инструкция, как повторить. Я написала её так, чтобы справился человек, который никогда не программировал. Потому что я сама не программирую. Вот честно.</p>
+</div>
+
+<div class="hint">
+  <b>Как пользоваться этой статьёй.</b> Идите по шагам сверху вниз, ничего не пропуская. Тёмные блоки копируются кнопкой целиком, их не нужно перепечатывать. Один шаг за раз, и через вечер у вас будет первый ролик.
+</div>
+
+<h2><span class="step-num">0</span>Что понадобится</h2>
+<ul>
+  <li>Компьютер, Mac или Windows.</li>
+  <li>Подписка Claude от Anthropic. Ролики собирает инструмент Claude Code, он входит в подписку.</li>
+  <li>Телефон с диктофоном, чтобы записать голос.</li>
+  <li>Один вечер времени.</li>
+</ul>
+<p>Это весь список. Камера не нужна, лицо показывать не нужно, платные программы для монтажа не нужны.</p>
+
+<h2><span class="step-num">1</span>Установите приложение Claude</h2>
+<p>Скачайте настольное приложение Claude с официального сайта claude.ai и войдите в аккаунт. Внутри приложения есть режим Claude Code: вы даёте ему папку на компьютере, и он работает с файлами в ней сам. Создаёт, пишет код, запускает программы. Ваша роль: ставить задачу и отвечать «да», когда он спрашивает разрешение.</p>
+<div class="note">Если при выборе папки появится надпись «Git is required», система попросит установить служебные инструменты. Нажмите «Установить» в появившемся окне и подождите минут десять. Это делается один раз.</div>
+
+<h2><span class="step-num">2</span>Создайте проект одной командой</h2>
+<p>Руками ничего создавать не будем. Создайте на рабочем столе одну пустую папку с названием <b>reels-factory</b>, откройте её в Claude Code и вставьте этот текст целиком:</p>
+
+<div class="prompt-block">
+  <div class="prompt-label">Промпт · создание проекта</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>Создай в этой папке структуру проекта для производства анимированных Reels: папки resources, scripts, public, а в resources четыре файла с правилами.
+
+Файл style.md: вертикаль 1080x1920, 30 fps. Безопасные зоны: 250px сверху, 350px снизу, 120px справа, там интерфейс Instagram. Мой бренд: [впиши свой основной цвет фона], акцентный цвет [впиши], цвет ошибок красный. Шрифт [впиши свой, если нет, возьми Golos Text]. Субтитры внизу над безопасной зоной, слова появляются группами по 2-3 с fade и лёгким подъёмом, максимум две строки, ключевые слова акцентным цветом. Разрешённые анимации: fade с подъёмом 20-30px, перечёркивание линией, поблочная сборка схем, рост числа счётчиком, движение линии графика, медленный наезд. Запрещено: пружины, глитчи, 3D, тряска, побуквенная анимация, эмодзи.
+
+Файл scene-rules.md: переводить смысл в визуал, без буквальных иллюстраций. Интерфейсы программ рисовать вёрсткой, без скриншотов. Цифры в кадре крупно. Одна сцена равна одной мысли.
+
+Файл versioning.md: любая правка сцены создаёт новую версию, оригинал не трогать. Scene1 превращается в Scene1v2.
+
+Файл tokens.md: работать партиями до 5 сцен, ответы короткие, инструкции по-русски по одному шагу.
+
+Когда закончишь, покажи структуру и жди сценарий.</pre>
+</div>
+
+<p>Claude Code создаст всё сам за минуту. В квадратных скобках впишите свои цвета до отправки. Если своего фирменного стиля пока нет, удалите скобки и напишите «подбери сдержанную палитру: тёмный фон, один тёплый акцент».</p>
+
+<h2><span class="step-num">3</span>Напишите сценарий по скелету</h2>
+<p>Формат, который работает в экспертных нишах, устроен просто. Я называю его скелетом «Показываю»:</p>
+<ol>
+  <li><b>Хук-глагол.</b> Первая фраза: «показываю, как…». Без приветствий, сразу в тему.</li>
+  <li><b>Три приёма.</b> Каждый строится по формуле: ошибка, почему это плохо, как надо. Запрет цепляет сильнее совета.</li>
+  <li><b>Обещание владения.</b> «Исправь эти три вещи, и…». Что человек получит, когда применит.</li>
+  <li><b>Кодовое слово.</b> «Напиши слово X в комментариях, пришлю…». Слово должно писаться без вариантов ошибок.</li>
+</ol>
+<p>Хронометраж 30-45 секунд. Тема берётся из вашей экспертности: ошибки, которые вы видите у клиентов каждый день. Сценарий сохраните в папку scripts как текстовый файл, на каждый смысловой блок отдельный абзац и короткое описание, что показать на экране.</p>
+<div class="note">Главный принцип визуала: показывать смысл, без буквальных картинок. Фраза «алгоритм не успевает обучиться» это график, который обрывается в начале. Чем точнее вы опишете картинку словами, тем меньше будет правок.</div>
+
+<h2><span class="step-num">4</span>Запишите голос на телефон</h2>
+<p>Откройте Диктофон, найдите комнату с мягкой мебелью или шторами, держите телефон в 15-20 сантиметрах ото рта и чуть сбоку. Читайте сценарий по блокам, после каждого блока пауза две секунды. По этим паузам нейросеть поймёт, где заканчивается сцена. Запишите два дубля, выберите лучший, перекиньте файл на компьютер и положите в папку public.</p>
+<p>Свой голос в записи не нравится никому. Слушателя это не смущает, он ваш голос слышит впервые.</p>
+
+<h2><span class="step-num">5</span>Соберите сцены</h2>
+<p>Вернитесь в Claude Code и вставьте:</p>
+<div class="prompt-block">
+  <div class="prompt-label">Промпт · сборка</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>Прочитай все файлы в папке resources и запомни правила. Установи Remotion в этот проект. В public лежит запись голоса, сконвертируй её в voice.mp3 через ffmpeg. Определи по паузам таймкоды блоков и выведи их списком. Потом открой сценарий в scripts и собери первые три сцены. Покажи, как запустить предпросмотр в Remotion Studio. Инструкции по-русски, по одному шагу.</pre>
+</div>
+<p>Remotion это инструмент, который превращает код в видео. Ставится он сам, вам нажимать «да» на вопросы. Через несколько минут Claude Code даст команду для предпросмотра, и в браузере откроется студия с вашими сценами.</p>
+
+<h2><span class="step-num">6</span>Правьте скриншотами</h2>
+<p>Смотрите сцены в предпросмотре. Что-то будет мимо, это нормально. Делаете скриншот, обводите проблемное место, кидаете в Claude Code и пишете обычными словами: «цифра мелкая, сделай крупнее», «этот блок появляется слишком рано». Он создаст новую версию сцены, оригинал останется на месте. Так вы ничего не сломаете.</p>
+<p>Когда первые три сцены нравятся, пишете «собери остальные сцены». Потом финальная команда:</p>
+<div class="prompt-block">
+  <div class="prompt-label">Промпт · рендер</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>Отрендери все финальные версии сцен в mp4 1080p в папку out, потом склей их в один вертикальный ролик с озвучкой voice.mp3. Готовый файл назови final.mp4.</pre>
+</div>
+<p>Файл final.mp4 загружаете в Instagram как обычный Reels. Всё.</p>
+
+<h2>Почему этот формат работает</h2>
+<p>Ролик, собранный по этой схеме, доказывает свою пользу до того, как что-то пообещал. Зритель видит аккуратную анимацию, точные схемы, профессиональные субтитры. И понимает без слов: человек разбирается. Экспертность показана, без рассказов о ней.</p>
+<p>И второе. Пока конкуренты записывают говорящую голову с кольцевой лампой, у вас мотион-дизайн уровня студии. Вечер работы против недель согласований с подрядчиками.</p>
+
+<h2>Если что-то непонятно</h2>
+<p>Застряли на каком-то шаге, это нормально. И тут я покажу приём, который важнее самой инструкции. Скопируйте текст этой статьи целиком, вставьте в свой Claude или другую нейросеть и напишите:</p>
+<div class="prompt-block">
+  <div class="prompt-label">Промпт · разбор статьи</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>У меня есть инструкция, текст ниже. Я застряла на шаге [напиши номер шага]. Вот что у меня происходит: [опиши своими словами, что видишь на экране]. Разбери этот шаг ещё подробнее, веди меня по одному действию за раз и жди моего подтверждения после каждого. Покажи, где я что-то упускаю.
+
+[сюда вставь текст статьи]</pre>
+</div>
+<p>Нейросеть разберёт мою инструкцию по косточкам и поведёт вас по шагам, под вашу ситуацию и ваш компьютер. Так работает любая инструкция в интернете: берёте текст, отдаёте нейросети, она превращает его в личного проводника. Освойте этот приём один раз, и слово «непонятно» перестанет вас останавливать где-либо вообще.</p>
+<p>А если всё равно не получается, напишите мне в директ, контакты ниже. Сориентирую.</p>
+
+<h2>Теперь главное. Про стену, которая исчезла</h2>
+<p>Заметьте, что сейчас произошло. Вы, человек без технического образования, собрали продукт, который год назад требовал дизайнера, моушн-аниматора и монтажёра. Нейросеть сделала руки. Голова осталась ваша: сценарий, смысл, понимание аудитории.</p>
+<p>Это ровно та причина, по которой я говорю: техническая стена исчезла. И касается это далеко не только роликов. Профессии, куда раньше не пускал страх «я гуманитарий, я не разберусь», открылись.</p>
+<p>Таргетолог, специалист по настройке рекламы в Instagram, одна из таких профессий. Работа удалённая, клиенты по всему миру, из инструментов нужен ноутбук. Раньше людей останавливал рекламный кабинет: кнопки, настройки, статистика, страшно нажать и слить чужие деньги. Сейчас та же связка, что с роликом: нейросеть делает руки, вы ставите задачу и принимаете решения.</p>
+<p>По анкетам моих учениц я знаю, что самый частый страх звучит так: «с теорией знакома, а практиковаться страшно». Люди проходят курсы, смотрят уроки и выходят теоретиками. Знаний много, уверенности ноль, клиентов брать боязно.</p>
+<p>Поэтому я собрала продукт, где уроков смотреть не надо.</p>
+
+<div class="product">
+  <h2>Тренажёр таргетолога</h2>
+  <p>Это интерактивная панель, где вы делаете настоящую работу таргетолога по шагам. Своими руками, с первого экрана.</p>
+  <ul>
+    <li>Проходите путь специалиста: анализ аудитории, стратегия, рекламный кабинет, запуск, работа с клиентом.</li>
+    <li>Работаете по готовым протестированным стратегиям, по которым работают лидеры рынка и работаю я. Новички обычно запускают рекламу вслепую и учатся на слитых бюджетах. Здесь тесты уже проведены, вы берёте рабочую схему и делаете по ней.</li>
+    <li>Получаете профессиональные промпты из моей практики, 17 лет в маркетинге. Несёте их в свой Claude или Gemini, результат используете в работе.</li>
+    <li>Экраны рекламного кабинета воссозданы внутри тренажёра. Учитесь на структуре, которая живёт годами.</li>
+    <li>На выходе у вас готовые рабочие документы: анализ ниши, стратегия, структура кампании. С ними уже можно идти к первому клиенту.</li>
+    <li>Внутри нейро-куратор, отвечает на вопросы по ходу работы.</li>
+  </ul>
+  <div class="product-price">1 490 ₽ <span>· стартовая цена, она будет расти</span></div>
+  <p>Для сравнения: один макет у дизайнера-фрилансера стоит дороже. Здесь за эти деньги профессия, которую вы пробуете руками.</p>
+  <p>И помните про время. Эта статья никуда не денется через полгода. Вопрос в том, где через полгода будете вы: там же, где сейчас, или с новой профессией и первыми клиентами. Окно, когда рынок ещё не заполнен людьми с AI-навыками, открыто сегодня.</p>
+  <a class="btn" href="https://www.anastasialushnikova.com/start/">Начать осваивать профессию</a>
+</div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <h2>Понравился материал?</h2>
+    <p class="footer-sub">Подписывайтесь на каналы — там ещё больше про AI-маркетинг, смыслы и продажи без выгорания</p>
+    <div class="footer-grid">
+      <a class="footer-card" href="https://t.me/target_school1"><b>Telegram канал</b><span>Промпты и кейсы каждый день</span></a>
+      <a class="footer-card" href="https://www.instagram.com/target_school"><b>Instagram</b><span>Визуальные гайды и stories</span></a>
+      <a class="footer-card" href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0"><b>Написать Анастасии</b><span>Личное сообщение в WhatsApp</span></a>
+      <a class="footer-card" href="https://t.me/ailav_bot"><b>Служба заботы</b><span>Техподдержка и вопросы</span></a>
+    </div>
+    <div class="footer-banner">
+      <b>Хотите больше материалов?</b>
+      <a class="btn" href="https://t.me/target_school1" style="margin-top:0">Подписаться на Telegram</a>
+    </div>
+    <div class="copyright">© 2026 Анастасия Лушникова. Все права защищены.</div>
+  </div>
+</footer>
+
+<script>
+function copyBlock(btn){
+  const text = btn.parentElement.querySelector('pre').innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const old = btn.textContent;
+    btn.textContent = 'Скопировано';
+    setTimeout(()=>{btn.textContent = old;}, 1600);
+  });
+}
+</script>
+
+</body>
+</html>
