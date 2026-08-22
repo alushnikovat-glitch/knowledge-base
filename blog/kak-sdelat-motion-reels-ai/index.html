@@ -77,8 +77,16 @@ li{margin-bottom:8px}
 .product p{color:rgba(255,255,255,0.82)}
 .product li{color:rgba(255,255,255,0.82)}
 .product li::marker{color:#e8b45f}
-.product-price{font-size:34px;font-weight:600;margin:8px 0 4px;color:#e8b45f}
-.product-price span{font-size:16px;font-weight:500;color:rgba(255,255,255,0.65)}
+.price-row{display:flex;align-items:baseline;gap:16px;margin:14px 0 2px;flex-wrap:wrap}
+.price-old{font-size:22px;font-weight:500;color:rgba(255,255,255,0.55);position:relative;white-space:nowrap}
+.price-old::after{content:"";position:absolute;left:0;top:52%;height:2.5px;width:0;background:#e05252;transform:rotate(-6deg);border-radius:2px;animation:strike 0.6s ease-out 0.9s forwards}
+@keyframes strike{to{width:100%}}
+.price-new{font-size:38px;font-weight:600;color:#e8b45f;white-space:nowrap}
+.price-note{font-size:15px;color:rgba(255,255,255,0.65);margin-bottom:6px}
+.product .btn{position:relative;overflow:hidden}
+.product .btn::before{content:"";position:absolute;top:-60%;left:-80%;width:50%;height:220%;background:linear-gradient(105deg,transparent,rgba(255,255,255,0.55),transparent);transform:rotate(12deg);animation:shine 3.2s ease-in-out 1.4s infinite}
+@keyframes shine{0%{left:-80%}18%{left:130%}100%{left:130%}}
+@media (prefers-reduced-motion: reduce){.price-old::after{animation:none;width:100%}.product .btn::before{animation:none;display:none}}
 .btn{display:inline-block;background:#2e7d76;color:#fff;border-radius:12px;padding:16px 32px;font-weight:600;font-size:17px;margin-top:20px;transition:opacity .15s}
 .btn:hover{opacity:.85}
 .product .btn{background:#e8b45f;color:#14171a}
@@ -93,7 +101,20 @@ li{margin-bottom:8px}
 .footer-banner{background:#ece6d8;border-radius:14px;padding:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px}
 .footer-banner b{font-size:18px}
 .copyright{font-size:13px;color:#948e84;text-align:center;padding-top:20px;border-top:1px solid #e3dcc9}
-@media(max-width:600px){.card,.product{padding:22px}.nav-links{gap:12px}}
+.viz{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.viz svg{min-width:640px}
+@media(max-width:600px){
+body{font-size:16px}
+.card,.product{padding:22px}
+.nav{position:static;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+.nav-links{gap:12px}
+h1{font-size:28px}
+.h1-pen{font-size:22px}
+h2{font-size:22px}
+.product h2{font-size:24px}
+.btn{display:block;text-align:center}
+.footer-banner .btn{display:inline-block}
+}
 </style>
 </head>
 <body>
@@ -308,8 +329,7 @@ li{margin-bottom:8px}
 <p>А если всё равно не получается, напишите мне в директ, контакты ниже. Сориентирую.</p>
 
 <h2>Теперь главное. Про стену, которая исчезла</h2>
-<p>Заметьте, что сейчас произошло. Вы, человек без технического образования, собрали продукт, который год назад требовал дизайнера, моушн-аниматора и монтажёра. Нейросеть сделала руки. Голова осталась ваша: сценарий, смысл, понимание аудитории.</p>
-<p>Это ровно та причина, по которой я говорю: техническая стена исчезла. И касается это далеко не только роликов. Профессии, куда раньше не пускал страх «я гуманитарий, я не разберусь», открылись.</p>
+<p>Заметьте, что сейчас произошло. Вы, человек без технического образования, собрали продукт, который год назад требовал трёх подрядчиков. Нейросеть сделала руки. Голова осталась ваша. Это касается далеко не только роликов: техническая стена исчезла, и профессии, куда раньше не пускал страх «я не разберусь», открылись.</p>
 
 <div class="viz">
 <svg viewBox="0 0 720 190" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
@@ -348,26 +368,29 @@ li{margin-bottom:8px}
   <text x="545" y="178" text-anchor="middle" font-size="12" fill="#2e7d76">нейросеть делает руки, вы голова</text>
 </svg>
 </div>
-<p>Таргетолог, специалист по настройке рекламы в Instagram*, одна из таких профессий. Работа удалённая, клиенты по всему миру, из инструментов нужен ноутбук. Раньше людей останавливал рекламный кабинет: кнопки, настройки, статистика, страшно нажать и слить чужие деньги. Сейчас та же связка, что с роликом: нейросеть делает руки, вы ставите задачу и принимаете решения.</p>
-<p>По анкетам моих учениц я знаю, что самый частый страх звучит так: «с теорией знакома, а практиковаться страшно». Люди проходят курсы, смотрят уроки и выходят теоретиками. Знаний много, уверенности ноль, клиентов брать боязно.</p>
-<p>Поэтому я собрала продукт, где уроков смотреть не надо.</p>
+<p>Таргетолог, специалист по настройке рекламы в Instagram*, одна из таких профессий. Работа удалённая, клиенты по всему миру, из инструментов нужен ноутбук. Раньше людей останавливал рекламный кабинет: страшно нажать и слить чужие деньги. Сейчас связка та же, что с роликом: нейросеть делает руки, вы ставите задачу и принимаете решения.</p>
+<p>По анкетам моих учениц самый частый страх звучит так: «с теорией знакома, а практиковаться страшно». Курсы пройдены, уверенности ноль. Поэтому я собрала продукт, где уроков смотреть не надо.</p>
 
 <div class="product">
   <h2>Тренажёр таргетолога</h2>
   <div class="pen">техническая стена исчезла</div>
-  <p>Это интерактивная панель, где вы делаете настоящую работу таргетолога по шагам. Своими руками, с первого экрана.</p>
-  <ul>
-    <li>Проходите путь специалиста: анализ аудитории, стратегия, рекламный кабинет, запуск, работа с клиентом.</li>
-    <li>Работаете по готовым протестированным стратегиям, по которым работают лидеры рынка и работаю я. Новички обычно запускают рекламу вслепую и учатся на слитых бюджетах. Здесь тесты уже проведены, вы берёте рабочую схему и делаете по ней.</li>
-    <li>Получаете профессиональные промпты из моей практики, 17 лет в маркетинге. Несёте их в свой Claude или Gemini, результат используете в работе.</li>
-    <li>Экраны рекламного кабинета воссозданы внутри тренажёра. Учитесь на структуре, которая живёт годами.</li>
-    <li>На выходе у вас готовые рабочие документы: анализ ниши, стратегия, структура кампании. С ними уже можно идти к первому клиенту.</li>
-    <li>Внутри нейро-куратор, отвечает на вопросы по ходу работы.</li>
-  </ul>
-  <div class="product-price">1 490 ₽ <span>· стартовая цена, она будет расти</span></div>
-  <p>Для сравнения: один макет у дизайнера-фрилансера стоит дороже. А одна ошибка в настройке рекламы вслепую съедает больше, чем весь тренажёр. Здесь за эти деньги профессия, которую вы пробуете руками, и стратегии, на тестирование которых у рынка ушли годы и бюджеты.</p>
-  <p>И помните про время. Эта статья никуда не денется через полгода. Вопрос в том, где через полгода будете вы: там же, где сейчас, или с новой профессией и первыми клиентами. Окно, когда рынок ещё не заполнен людьми с AI-навыками, открыто сегодня.</p>
+  <p>Интерактивная панель, где вы делаете настоящую работу таргетолога по шагам, своими руками, с первого экрана.</p>
+  <div class="price-row">
+    <span class="price-old">4 900 ₽</span>
+    <span class="price-new">1 490 ₽</span>
+  </div>
+  <div class="price-note">цена со скидкой, она будет расти</div>
   <a class="btn" href="https://www.anastasialushnikova.com/start/">Начать осваивать профессию</a>
+  <ul style="margin-top:26px">
+    <li>Путь специалиста целиком: анализ аудитории, стратегия, кабинет, запуск, работа с клиентом.</li>
+    <li>Готовые протестированные стратегии лидеров рынка. Берёте рабочую схему вместо тестов и слитых бюджетов.</li>
+    <li>Промпты из 17 лет практики. Несёте в свой Claude или Gemini, результат используете в работе.</li>
+    <li>На выходе рабочие документы: анализ ниши, стратегия, структура кампании. С ними идут к первому клиенту.</li>
+    <li>Нейро-куратор отвечает на вопросы по ходу работы.</li>
+  </ul>
+  <p style="margin-top:6px">Для сравнения: одна ошибка в настройке рекламы вслепую съедает больше, чем весь тренажёр.</p>
+  <p>Эта статья никуда не денется через полгода. Вопрос в том, где будете вы. Окно, пока рынок не заполнен людьми с AI-навыками, открыто сегодня.</p>
+  <a class="btn" href="https://www.anastasialushnikova.com/start/">Попробовать профессию руками</a>
 </div>
 
 </div>
