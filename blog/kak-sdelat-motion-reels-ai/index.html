@@ -7,7 +7,7 @@
 <meta name="description" content="Пошаговая инструкция: как собрать анимированный Reels для Instagram с помощью Claude Code. Без дизайнера, монтажёра и бюджета на подрядчиков.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Marck+Script&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
     (function(m,e,t,r,i,k,a){
@@ -39,52 +39,60 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Manrope',sans-serif;background:#f7f6f2;color:#1a1917;line-height:1.7;font-size:17px}
-a{color:#2563eb;text-decoration:none}
-.nav{position:sticky;top:0;z-index:100;background:rgba(247,246,242,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #e8e6df}
+body{font-family:'Golos Text',sans-serif;background:linear-gradient(165deg,#f4efe4 0%,#efe8d8 40%,#e2e9e6 100%);background-attachment:fixed;color:#23211c;line-height:1.7;font-size:17px}
+a{color:#2e7d76;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;background:rgba(244,239,228,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #e3dcc9}
 .nav-inner{max-width:760px;margin:0 auto;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
-.nav-logo{font-weight:800;font-size:16px;color:#1a1917}
+.nav-logo{font-weight:600;font-size:16px;color:#23211c}
 .nav-links{display:flex;gap:18px;font-size:14px;font-weight:600}
-.nav-links a{color:#6b6860}
-.nav-links a:hover{color:#1a1917}
+.nav-links a{color:#948e84}
+.nav-links a:hover{color:#23211c}
 .wrap{max-width:760px;margin:0 auto;padding:40px 20px 0}
-.meta{font-size:14px;color:#6b6860;margin-bottom:16px}
-h1{font-size:clamp(28px,5vw,42px);font-weight:800;line-height:1.2;letter-spacing:-.02em;margin-bottom:20px}
+.meta{font-size:14px;color:#948e84;margin-bottom:16px}
+h1{font-size:clamp(28px,5vw,42px);font-weight:600;line-height:1.2;letter-spacing:-.02em;margin-bottom:8px}
+.h1-pen{font-family:'Marck Script',cursive;font-weight:400;color:#2e7d76;font-size:clamp(24px,4vw,34px);margin-bottom:20px}
 .tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
-.tag{background:#f0ede6;border-radius:100px;padding:6px 14px;font-size:13px;font-weight:600;color:#6b6860}
-.card{background:#fff;border:1px solid #e8e6df;border-radius:16px;padding:28px;margin-bottom:24px}
-.hint{background:#eff6ff;border:1px solid #bfdbfe;border-radius:16px;padding:22px 28px;margin-bottom:40px;font-size:15px}
-.hint b{color:#1d4ed8}
-h2{font-size:26px;font-weight:800;letter-spacing:-.01em;margin:48px 0 16px}
-h3{font-size:19px;font-weight:700;margin:28px 0 10px}
+.tag{background:#ece6d8;border-radius:100px;padding:6px 14px;font-size:13px;font-weight:600;color:#6f6a5e}
+.card{background:#fffdf8;border:1px solid #e3dcc9;border-radius:18px;padding:28px;margin-bottom:24px;box-shadow:0 4px 24px rgba(0,0,0,0.05)}
+.hint{background:#e9f2f0;border:1px solid #bcd8d3;border-radius:18px;padding:22px 28px;margin-bottom:40px;font-size:15px}
+.hint b{color:#2e7d76}
+h2{font-size:26px;font-weight:600;letter-spacing:-.01em;margin:48px 0 16px}
+h3{font-size:19px;font-weight:600;margin:28px 0 10px}
 p{margin-bottom:16px}
 ul,ol{margin:0 0 16px 22px}
 li{margin-bottom:8px}
-.step-num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:#1a1917;color:#fff;border-radius:10px;font-weight:800;font-size:16px;margin-right:12px;vertical-align:middle}
-.prompt-block{background:#1a1917;border-radius:14px;padding:22px;margin:18px 0 24px;position:relative}
-.prompt-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#f5f4f0;white-space:pre-wrap;word-break:break-word}
-.prompt-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#a8a49a;margin-bottom:12px}
-.copy-btn{position:absolute;top:16px;right:16px;background:#33312d;color:#f5f4f0;border:none;border-radius:8px;padding:7px 14px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:600;cursor:pointer}
-.copy-btn:hover{background:#44423d}
-.note{background:#fff;border-left:3px solid #2563eb;border-radius:0 12px 12px 0;padding:16px 22px;margin:20px 0;font-size:15px;color:#44423d}
-.product{background:#fffbf0;border:1px solid #fde68a;border-radius:18px;padding:32px;margin:56px 0 24px}
-.product h2{margin-top:0;font-size:28px}
-.product-price{font-size:34px;font-weight:800;margin:8px 0 4px}
-.product-price span{font-size:16px;font-weight:600;color:#6b6860}
-.product ul{margin-top:12px}
-.btn{display:inline-block;background:#1a1917;color:#fff;border-radius:12px;padding:16px 32px;font-weight:700;font-size:17px;margin-top:20px;transition:opacity .15s}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:#2e7d76;color:#fff;border-radius:10px;font-weight:600;font-size:16px;margin-right:12px;vertical-align:middle}
+.prompt-block{background:#14171a;border-radius:16px;padding:22px;margin:18px 0 24px;position:relative;background-image:radial-gradient(ellipse 85% 55% at 15% 5%,rgba(190,130,55,0.22),transparent 60%)}
+.prompt-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#f5f2ec;white-space:pre-wrap;word-break:break-word}
+.prompt-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#e8b45f;margin-bottom:12px}
+.copy-btn{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.12);color:#f5f2ec;border:1px solid rgba(255,255,255,0.16);border-radius:8px;padding:7px 14px;font-family:'Golos Text',sans-serif;font-size:13px;font-weight:600;cursor:pointer}
+.copy-btn:hover{background:rgba(255,255,255,0.2)}
+.note{background:#fffdf8;border-left:3px solid #2e7d76;border-radius:0 12px 12px 0;padding:16px 22px;margin:20px 0;font-size:15px;color:#3d3b35}
+.viz{margin:10px 0 30px}
+.viz svg{display:block;width:100%;height:auto}
+.viz-cap{font-size:13px;color:#948e84;text-align:center;margin-top:8px}
+.product{background:#14171a;background-image:radial-gradient(ellipse 85% 55% at 15% 5%,rgba(190,130,55,0.38),transparent 60%);border-radius:20px;padding:36px 32px;margin:56px 0 24px;color:#f5f2ec}
+.product h2{margin-top:0;font-size:28px;color:#ffffff}
+.product .pen{font-family:'Marck Script',cursive;font-weight:400;color:#e8b45f;font-size:26px;margin-bottom:14px}
+.product p{color:rgba(255,255,255,0.82)}
+.product li{color:rgba(255,255,255,0.82)}
+.product li::marker{color:#e8b45f}
+.product-price{font-size:34px;font-weight:600;margin:8px 0 4px;color:#e8b45f}
+.product-price span{font-size:16px;font-weight:500;color:rgba(255,255,255,0.65)}
+.btn{display:inline-block;background:#2e7d76;color:#fff;border-radius:12px;padding:16px 32px;font-weight:600;font-size:17px;margin-top:20px;transition:opacity .15s}
 .btn:hover{opacity:.85}
-.footer{margin-top:72px;border-top:1px solid #e8e6df;background:#fff}
+.product .btn{background:#e8b45f;color:#14171a}
+.footer{margin-top:72px;border-top:1px solid #e3dcc9;background:#fffdf8}
 .footer-inner{max-width:760px;margin:0 auto;padding:56px 20px 32px}
 .footer h2{margin-top:0;font-size:26px}
-.footer-sub{color:#6b6860;margin-bottom:28px}
+.footer-sub{color:#948e84;margin-bottom:28px}
 .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:28px}
-.footer-card{border:1px solid #e8e6df;border-radius:14px;padding:20px;display:block}
-.footer-card b{display:block;color:#1a1917;margin-bottom:4px}
-.footer-card span{font-size:14px;color:#6b6860}
-.footer-banner{background:#f0ede6;border-radius:14px;padding:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.footer-card{border:1px solid #e3dcc9;border-radius:14px;padding:20px;display:block}
+.footer-card b{display:block;color:#23211c;margin-bottom:4px}
+.footer-card span{font-size:14px;color:#948e84}
+.footer-banner{background:#ece6d8;border-radius:14px;padding:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px}
 .footer-banner b{font-size:18px}
-.copyright{font-size:13px;color:#6b6860;text-align:center;padding-top:20px;border-top:1px solid #e8e6df}
+.copyright{font-size:13px;color:#948e84;text-align:center;padding-top:20px;border-top:1px solid #e3dcc9}
 @media(max-width:600px){.card,.product{padding:22px}.nav-links{gap:12px}}
 </style>
 </head>
@@ -105,7 +113,8 @@ li{margin-bottom:8px}
 
 <div class="meta">24 августа 2026 · 12 минут чтения · Автор: Анастасия Лушникова</div>
 
-<h1>Как сделать экспертный мотион-рилс с помощью AI. Без дизайнера, монтажёра и бюджета</h1>
+<h1>Как сделать экспертный мотион-рилс с помощью AI</h1>
+<div class="h1-pen">без дизайнера, монтажёра и бюджета</div>
 
 <div class="tags">
   <span class="tag">AI-маркетинг</span>
@@ -114,9 +123,31 @@ li{margin-bottom:8px}
 </div>
 
 <div class="card">
-  <p>Вы пришли сюда с ролика, где анимация показывает рекламный кабинет, схемы и графики. Так вот, этот ролик от первой сцены до последней собрал искусственный интеллект. Я написала сценарий, записала голос на диктофон в телефоне и поставила задачу. Всё остальное сделала нейросеть: нарисовала кабинет кодом, анимировала схемы, положила субтитры, свела с голосом.</p>
+  <p>Вы пришли сюда с ролика в Instagram*, где анимация показывает рекламный кабинет, схемы и графики. Так вот, этот ролик от первой сцены до последней собрал искусственный интеллект. Я написала сценарий, записала голос на диктофон в телефоне и поставила задачу. Всё остальное сделала нейросеть: нарисовала кабинет кодом, анимировала схемы, положила субтитры, свела с голосом.</p>
   <p>Дизайнера у меня нет. Монтажёра нет. After Effects я не открывала ни разу в жизни. Бюджет на подрядчиков: ноль. Времени ушёл один вечер.</p>
   <p>Ниже полная инструкция, как повторить. Я написала её так, чтобы справился человек, который никогда не программировал. Потому что я сама не программирую. Вот честно.</p>
+</div>
+
+<div class="viz">
+<svg viewBox="0 0 720 150" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <rect x="8" y="30" width="180" height="90" rx="14" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <circle cx="98" cy="62" r="15" fill="none" stroke="#23211c" stroke-width="2"/>
+  <rect x="94" y="54" width="8" height="12" rx="4" fill="#23211c"/>
+  <line x1="98" y1="77" x2="98" y2="83" stroke="#23211c" stroke-width="2"/>
+  <text x="98" y="105" text-anchor="middle" font-size="14" font-weight="700" fill="#23211c">Ваш голос</text>
+  <text x="220" y="80" font-size="22" fill="#948e84">→</text>
+  <rect x="255" y="30" width="210" height="90" rx="14" fill="#23211c"/>
+  <text x="360" y="63" text-anchor="middle" font-size="14" font-weight="700" fill="#fffdf8">Нейросеть</text>
+  <text x="360" y="84" text-anchor="middle" font-size="12" fill="#c9c5be">код · анимация · субтитры</text>
+  <text x="360" y="102" text-anchor="middle" font-size="12" fill="#c9c5be">сведение с голосом</text>
+  <text x="497" y="80" font-size="22" fill="#948e84">→</text>
+  <rect x="532" y="18" width="66" height="114" rx="12" fill="#fffdf8" stroke="#2e7d76" stroke-width="2"/>
+  <polygon points="557,63 557,87 577,75" fill="#2e7d76"/>
+  <text x="565" y="122" text-anchor="middle" font-size="11" fill="#948e84">Reels</text>
+  <text x="648" y="68" text-anchor="middle" font-size="14" font-weight="700" fill="#23211c">1 вечер</text>
+  <text x="648" y="88" text-anchor="middle" font-size="13" fill="#948e84">0 ₽ подряд-</text>
+  <text x="648" y="104" text-anchor="middle" font-size="13" fill="#948e84">чикам</text>
+</svg>
 </div>
 
 <div class="hint">
@@ -144,7 +175,7 @@ li{margin-bottom:8px}
   <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
   <pre>Создай в этой папке структуру проекта для производства анимированных Reels: папки resources, scripts, public, а в resources четыре файла с правилами.
 
-Файл style.md: вертикаль 1080x1920, 30 fps. Безопасные зоны: 250px сверху, 350px снизу, 120px справа, там интерфейс Instagram. Мой бренд: [впиши свой основной цвет фона], акцентный цвет [впиши], цвет ошибок красный. Шрифт [впиши свой, если нет, возьми Golos Text]. Субтитры внизу над безопасной зоной, слова появляются группами по 2-3 с fade и лёгким подъёмом, максимум две строки, ключевые слова акцентным цветом. Разрешённые анимации: fade с подъёмом 20-30px, перечёркивание линией, поблочная сборка схем, рост числа счётчиком, движение линии графика, медленный наезд. Запрещено: пружины, глитчи, 3D, тряска, побуквенная анимация, эмодзи.
+Файл style.md: вертикаль 1080x1920, 30 fps. Безопасные зоны: 250px сверху, 350px снизу, 120px справа, там интерфейс Instagram*. Мой бренд: [впиши свой основной цвет фона], акцентный цвет [впиши], цвет ошибок красный. Шрифт [впиши свой, если нет, возьми Golos Text]. Субтитры внизу над безопасной зоной, слова появляются группами по 2-3 с fade и лёгким подъёмом, максимум две строки, ключевые слова акцентным цветом. Разрешённые анимации: fade с подъёмом 20-30px, перечёркивание линией, поблочная сборка схем, рост числа счётчиком, движение линии графика, медленный наезд. Запрещено: пружины, глитчи, 3D, тряска, побуквенная анимация, эмодзи.
 
 Файл scene-rules.md: переводить смысл в визуал, без буквальных иллюстраций. Интерфейсы программ рисовать вёрсткой, без скриншотов. Цифры в кадре крупно. Одна сцена равна одной мысли.
 
@@ -159,6 +190,28 @@ li{margin-bottom:8px}
 
 <h2><span class="step-num">3</span>Напишите сценарий по скелету</h2>
 <p>Формат, который работает в экспертных нишах, устроен просто. Я называю его скелетом «Показываю»:</p>
+
+<div class="viz">
+<svg viewBox="0 0 720 240" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <line x1="40" y1="20" x2="40" y2="220" stroke="#d9d2bf" stroke-width="2"/>
+  <text x="14" y="40" font-size="12" fill="#948e84">0 с</text>
+  <text x="8" y="216" font-size="12" fill="#948e84">45 с</text>
+  <rect x="60" y="22" width="640" height="34" rx="10" fill="#23211c"/>
+  <text x="76" y="44" font-size="14" font-weight="700" fill="#fffdf8">Хук-глагол</text>
+  <text x="700" y="44" text-anchor="end" font-size="12" fill="#c9c5be">«показываю, как…»</text>
+  <rect x="60" y="64" width="640" height="34" rx="10" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <text x="76" y="86" font-size="14" font-weight="700" fill="#23211c">Приём 1</text>
+  <text x="700" y="86" text-anchor="end" font-size="12" fill="#948e84">ошибка → почему плохо → как надо</text>
+  <rect x="60" y="106" width="640" height="34" rx="10" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <text x="76" y="128" font-size="14" font-weight="700" fill="#23211c">Приём 2</text>
+  <rect x="60" y="148" width="640" height="34" rx="10" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <text x="76" y="170" font-size="14" font-weight="700" fill="#23211c">Приём 3</text>
+  <rect x="60" y="190" width="310" height="34" rx="10" fill="#fffdf8" stroke="#2e7d76" stroke-width="1.5"/>
+  <text x="76" y="212" font-size="14" font-weight="700" fill="#23211c">Обещание владения</text>
+  <rect x="386" y="190" width="314" height="34" rx="10" fill="#2e7d76"/>
+  <text x="402" y="212" font-size="14" font-weight="700" fill="#fffdf8">Кодовое слово</text>
+</svg>
+</div>
 <ol>
   <li><b>Хук-глагол.</b> Первая фраза: «показываю, как…». Без приветствий, сразу в тему.</li>
   <li><b>Три приёма.</b> Каждый строится по формуле: ошибка, почему это плохо, как надо. Запрет цепляет сильнее совета.</li>
@@ -170,6 +223,32 @@ li{margin-bottom:8px}
 
 <h2><span class="step-num">4</span>Запишите голос на телефон</h2>
 <p>Откройте Диктофон, найдите комнату с мягкой мебелью или шторами, держите телефон в 15-20 сантиметрах ото рта и чуть сбоку. Читайте сценарий по блокам, после каждого блока пауза две секунды. По этим паузам нейросеть поймёт, где заканчивается сцена. Запишите два дубля, выберите лучший, перекиньте файл на компьютер и положите в папку public.</p>
+
+<div class="viz">
+<svg viewBox="0 0 720 110" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <g fill="#23211c">
+    <rect x="30" y="38" width="5" height="24" rx="2"/><rect x="40" y="30" width="5" height="40" rx="2"/><rect x="50" y="24" width="5" height="52" rx="2"/><rect x="60" y="34" width="5" height="32" rx="2"/><rect x="70" y="28" width="5" height="44" rx="2"/><rect x="80" y="40" width="5" height="20" rx="2"/><rect x="90" y="30" width="5" height="40" rx="2"/><rect x="100" y="36" width="5" height="28" rx="2"/><rect x="110" y="26" width="5" height="48" rx="2"/><rect x="120" y="38" width="5" height="24" rx="2"/><rect x="130" y="32" width="5" height="36" rx="2"/><rect x="140" y="42" width="5" height="16" rx="2"/>
+  </g>
+  <g fill="#d9d2bf">
+    <rect x="158" y="48" width="4" height="4" rx="2"/><rect x="168" y="48" width="4" height="4" rx="2"/><rect x="178" y="48" width="4" height="4" rx="2"/><rect x="188" y="48" width="4" height="4" rx="2"/>
+  </g>
+  <g fill="#23211c">
+    <rect x="206" y="34" width="5" height="32" rx="2"/><rect x="216" y="26" width="5" height="48" rx="2"/><rect x="226" y="38" width="5" height="24" rx="2"/><rect x="236" y="30" width="5" height="40" rx="2"/><rect x="246" y="24" width="5" height="52" rx="2"/><rect x="256" y="36" width="5" height="28" rx="2"/><rect x="266" y="30" width="5" height="40" rx="2"/><rect x="276" y="40" width="5" height="20" rx="2"/><rect x="286" y="28" width="5" height="44" rx="2"/><rect x="296" y="36" width="5" height="28" rx="2"/><rect x="306" y="42" width="5" height="16" rx="2"/>
+  </g>
+  <g fill="#d9d2bf">
+    <rect x="324" y="48" width="4" height="4" rx="2"/><rect x="334" y="48" width="4" height="4" rx="2"/><rect x="344" y="48" width="4" height="4" rx="2"/><rect x="354" y="48" width="4" height="4" rx="2"/>
+  </g>
+  <g fill="#23211c">
+    <rect x="372" y="30" width="5" height="40" rx="2"/><rect x="382" y="24" width="5" height="52" rx="2"/><rect x="392" y="36" width="5" height="28" rx="2"/><rect x="402" y="28" width="5" height="44" rx="2"/><rect x="412" y="38" width="5" height="24" rx="2"/><rect x="422" y="30" width="5" height="40" rx="2"/><rect x="432" y="34" width="5" height="32" rx="2"/><rect x="442" y="26" width="5" height="48" rx="2"/><rect x="452" y="40" width="5" height="20" rx="2"/><rect x="462" y="32" width="5" height="36" rx="2"/>
+  </g>
+  <text x="88" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#23211c">блок 1</text>
+  <text x="174" y="96" text-anchor="middle" font-size="12" fill="#2e7d76">пауза 2 с</text>
+  <text x="258" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#23211c">блок 2</text>
+  <text x="340" y="96" text-anchor="middle" font-size="12" fill="#2e7d76">пауза 2 с</text>
+  <text x="420" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#23211c">блок 3</text>
+  <text x="700" y="54" text-anchor="end" font-size="13" fill="#948e84">пауза = граница сцены</text>
+</svg>
+</div>
 <p>Свой голос в записи не нравится никому. Слушателя это не смущает, он ваш голос слышит впервые.</p>
 
 <h2><span class="step-num">5</span>Соберите сцены</h2>
@@ -183,13 +262,34 @@ li{margin-bottom:8px}
 
 <h2><span class="step-num">6</span>Правьте скриншотами</h2>
 <p>Смотрите сцены в предпросмотре. Что-то будет мимо, это нормально. Делаете скриншот, обводите проблемное место, кидаете в Claude Code и пишете обычными словами: «цифра мелкая, сделай крупнее», «этот блок появляется слишком рано». Он создаст новую версию сцены, оригинал останется на месте. Так вы ничего не сломаете.</p>
+
+<div class="viz">
+<svg viewBox="0 0 720 150" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <rect x="20" y="30" width="180" height="90" rx="14" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <rect x="44" y="48" width="132" height="40" rx="6" fill="#ece6d8"/>
+  <text x="110" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#23211c">предпросмотр</text>
+  <text x="222" y="80" font-size="20" fill="#948e84">→</text>
+  <rect x="258" y="30" width="180" height="90" rx="14" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <rect x="282" y="48" width="132" height="40" rx="6" fill="#ece6d8"/>
+  <ellipse cx="390" cy="60" rx="26" ry="16" fill="none" stroke="#b0483b" stroke-width="2.5" transform="rotate(-6 390 60)"/>
+  <text x="348" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#23211c">скриншот с обводкой</text>
+  <text x="460" y="80" font-size="20" fill="#948e84">→</text>
+  <rect x="496" y="30" width="180" height="90" rx="14" fill="#fffdf8" stroke="#2e7d76" stroke-width="2"/>
+  <rect x="520" y="48" width="132" height="40" rx="6" fill="#e9f2f0"/>
+  <text x="586" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#23211c">версия v2</text>
+  <text x="662" y="46" text-anchor="middle" font-size="11" font-weight="700" fill="#2e7d76">v2</text>
+  <path d="M 586 128 Q 348 168 116 126" fill="none" stroke="#948e84" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <polygon points="112,130 124,124 120,134" fill="#948e84"/>
+</svg>
+<div class="viz-cap">Оригинал сцены не трогается. Не понравилась правка, вернулись назад.</div>
+</div>
 <p>Когда первые три сцены нравятся, пишете «собери остальные сцены». Потом финальная команда:</p>
 <div class="prompt-block">
   <div class="prompt-label">Промпт · рендер</div>
   <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
   <pre>Отрендери все финальные версии сцен в mp4 1080p в папку out, потом склей их в один вертикальный ролик с озвучкой voice.mp3. Готовый файл назови final.mp4.</pre>
 </div>
-<p>Файл final.mp4 загружаете в Instagram как обычный Reels. Всё.</p>
+<p>Файл final.mp4 загружаете в Instagram* как обычный Reels. Всё.</p>
 
 <h2>Почему этот формат работает</h2>
 <p>Ролик, собранный по этой схеме, доказывает свою пользу до того, как что-то пообещал. Зритель видит аккуратную анимацию, точные схемы, профессиональные субтитры. И понимает без слов: человек разбирается. Экспертность показана, без рассказов о ней.</p>
@@ -210,12 +310,51 @@ li{margin-bottom:8px}
 <h2>Теперь главное. Про стену, которая исчезла</h2>
 <p>Заметьте, что сейчас произошло. Вы, человек без технического образования, собрали продукт, который год назад требовал дизайнера, моушн-аниматора и монтажёра. Нейросеть сделала руки. Голова осталась ваша: сценарий, смысл, понимание аудитории.</p>
 <p>Это ровно та причина, по которой я говорю: техническая стена исчезла. И касается это далеко не только роликов. Профессии, куда раньше не пускал страх «я гуманитарий, я не разберусь», открылись.</p>
-<p>Таргетолог, специалист по настройке рекламы в Instagram, одна из таких профессий. Работа удалённая, клиенты по всему миру, из инструментов нужен ноутбук. Раньше людей останавливал рекламный кабинет: кнопки, настройки, статистика, страшно нажать и слить чужие деньги. Сейчас та же связка, что с роликом: нейросеть делает руки, вы ставите задачу и принимаете решения.</p>
+
+<div class="viz">
+<svg viewBox="0 0 720 190" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <text x="180" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#948e84">РАНЬШЕ</text>
+  <circle cx="70" cy="90" r="14" fill="none" stroke="#23211c" stroke-width="2"/>
+  <line x1="70" y1="104" x2="70" y2="136" stroke="#23211c" stroke-width="2"/>
+  <line x1="70" y1="114" x2="54" y2="128" stroke="#23211c" stroke-width="2"/>
+  <line x1="70" y1="114" x2="86" y2="128" stroke="#23211c" stroke-width="2"/>
+  <line x1="70" y1="136" x2="58" y2="158" stroke="#23211c" stroke-width="2"/>
+  <line x1="70" y1="136" x2="82" y2="158" stroke="#23211c" stroke-width="2"/>
+  <g fill="#948e84">
+    <rect x="150" y="46" width="34" height="18" rx="3"/><rect x="188" y="46" width="34" height="18" rx="3"/>
+    <rect x="132" y="68" width="34" height="18" rx="3"/><rect x="170" y="68" width="34" height="18" rx="3"/><rect x="208" y="68" width="14" height="18" rx="3"/>
+    <rect x="150" y="90" width="34" height="18" rx="3"/><rect x="188" y="90" width="34" height="18" rx="3"/>
+    <rect x="132" y="112" width="34" height="18" rx="3"/><rect x="170" y="112" width="34" height="18" rx="3"/><rect x="208" y="112" width="14" height="18" rx="3"/>
+    <rect x="150" y="134" width="34" height="18" rx="3"/><rect x="188" y="134" width="34" height="18" rx="3"/>
+  </g>
+  <text x="177" y="178" text-anchor="middle" font-size="12" fill="#948e84">«я не разберусь»</text>
+  <text x="290" y="95" text-anchor="middle" font-size="13" fill="#948e84">профессия</text>
+  <line x1="360" y1="20" x2="360" y2="170" stroke="#d9d2bf" stroke-width="1.5"/>
+  <text x="540" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#2e7d76">СЕЙЧАС</text>
+  <circle cx="430" cy="90" r="14" fill="none" stroke="#23211c" stroke-width="2"/>
+  <line x1="430" y1="104" x2="430" y2="136" stroke="#23211c" stroke-width="2"/>
+  <line x1="430" y1="114" x2="414" y2="128" stroke="#23211c" stroke-width="2"/>
+  <line x1="430" y1="114" x2="446" y2="128" stroke="#23211c" stroke-width="2"/>
+  <line x1="430" y1="136" x2="418" y2="158" stroke="#23211c" stroke-width="2"/>
+  <line x1="430" y1="136" x2="442" y2="158" stroke="#23211c" stroke-width="2"/>
+  <g fill="none" stroke="#d9d2bf" stroke-width="1.5" stroke-dasharray="4 4">
+    <rect x="510" y="46" width="34" height="18" rx="3"/><rect x="548" y="46" width="34" height="18" rx="3"/>
+    <rect x="492" y="90" width="34" height="18" rx="3"/><rect x="568" y="112" width="14" height="18" rx="3"/>
+    <rect x="510" y="134" width="34" height="18" rx="3"/>
+  </g>
+  <line x1="456" y1="97" x2="628" y2="97" stroke="#2e7d76" stroke-width="2.5"/>
+  <polygon points="636,97 622,90 622,104" fill="#2e7d76"/>
+  <text x="672" y="95" text-anchor="middle" font-size="13" font-weight="700" fill="#23211c">профессия</text>
+  <text x="545" y="178" text-anchor="middle" font-size="12" fill="#2e7d76">нейросеть делает руки, вы голова</text>
+</svg>
+</div>
+<p>Таргетолог, специалист по настройке рекламы в Instagram*, одна из таких профессий. Работа удалённая, клиенты по всему миру, из инструментов нужен ноутбук. Раньше людей останавливал рекламный кабинет: кнопки, настройки, статистика, страшно нажать и слить чужие деньги. Сейчас та же связка, что с роликом: нейросеть делает руки, вы ставите задачу и принимаете решения.</p>
 <p>По анкетам моих учениц я знаю, что самый частый страх звучит так: «с теорией знакома, а практиковаться страшно». Люди проходят курсы, смотрят уроки и выходят теоретиками. Знаний много, уверенности ноль, клиентов брать боязно.</p>
 <p>Поэтому я собрала продукт, где уроков смотреть не надо.</p>
 
 <div class="product">
   <h2>Тренажёр таргетолога</h2>
+  <div class="pen">техническая стена исчезла</div>
   <p>Это интерактивная панель, где вы делаете настоящую работу таргетолога по шагам. Своими руками, с первого экрана.</p>
   <ul>
     <li>Проходите путь специалиста: анализ аудитории, стратегия, рекламный кабинет, запуск, работа с клиентом.</li>
@@ -247,6 +386,7 @@ li{margin-bottom:8px}
       <b>Хотите больше материалов?</b>
       <a class="btn" href="https://t.me/target_school1" style="margin-top:0">Подписаться на Telegram</a>
     </div>
+    <div class="copyright" style="border-top:none;padding-top:0;margin-bottom:10px">*Instagram и Facebook принадлежат компании Meta Platforms Inc., признанной экстремистской организацией, её деятельность запрещена на территории Российской Федерации.</div>
     <div class="copyright">© 2026 Анастасия Лушникова. Все права защищены.</div>
   </div>
 </footer>
