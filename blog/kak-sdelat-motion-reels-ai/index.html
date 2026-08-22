@@ -101,8 +101,7 @@ li{margin-bottom:8px}
 .footer-banner{background:#ece6d8;border-radius:14px;padding:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px}
 .footer-banner b{font-size:18px}
 .copyright{font-size:13px;color:#948e84;text-align:center;padding-top:20px;border-top:1px solid #e3dcc9}
-.viz{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.viz svg{min-width:640px}
+.viz svg{max-width:460px;margin:0 auto}
 @media(max-width:600px){
 body{font-size:16px}
 .card,.product{padding:22px}
@@ -150,24 +149,21 @@ h2{font-size:22px}
 </div>
 
 <div class="viz">
-<svg viewBox="0 0 720 150" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
-  <rect x="8" y="30" width="180" height="90" rx="14" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
-  <circle cx="98" cy="62" r="15" fill="none" stroke="#23211c" stroke-width="2"/>
-  <rect x="94" y="54" width="8" height="12" rx="4" fill="#23211c"/>
-  <line x1="98" y1="77" x2="98" y2="83" stroke="#23211c" stroke-width="2"/>
-  <text x="98" y="105" text-anchor="middle" font-size="14" font-weight="700" fill="#23211c">Ваш голос</text>
-  <text x="220" y="80" font-size="22" fill="#948e84">→</text>
-  <rect x="255" y="30" width="210" height="90" rx="14" fill="#23211c"/>
-  <text x="360" y="63" text-anchor="middle" font-size="14" font-weight="700" fill="#fffdf8">Нейросеть</text>
-  <text x="360" y="84" text-anchor="middle" font-size="12" fill="#c9c5be">код · анимация · субтитры</text>
-  <text x="360" y="102" text-anchor="middle" font-size="12" fill="#c9c5be">сведение с голосом</text>
-  <text x="497" y="80" font-size="22" fill="#948e84">→</text>
-  <rect x="532" y="18" width="66" height="114" rx="12" fill="#fffdf8" stroke="#2e7d76" stroke-width="2"/>
-  <polygon points="557,63 557,87 577,75" fill="#2e7d76"/>
-  <text x="565" y="122" text-anchor="middle" font-size="11" fill="#948e84">Reels</text>
-  <text x="648" y="68" text-anchor="middle" font-size="14" font-weight="700" fill="#23211c">1 вечер</text>
-  <text x="648" y="88" text-anchor="middle" font-size="13" fill="#948e84">0 ₽ подряд-</text>
-  <text x="648" y="104" text-anchor="middle" font-size="13" fill="#948e84">чикам</text>
+<svg viewBox="0 0 360 380" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <rect x="40" y="8" width="280" height="64" rx="14" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <circle cx="90" cy="40" r="13" fill="none" stroke="#23211c" stroke-width="2"/>
+  <rect x="86" y="33" width="8" height="11" rx="4" fill="#23211c"/>
+  <text x="120" y="46" font-size="16" font-weight="600" fill="#23211c">Ваш голос</text>
+  <text x="180" y="94" text-anchor="middle" font-size="18" fill="#948e84">↓</text>
+  <rect x="40" y="106" width="280" height="76" rx="14" fill="#14171a"/>
+  <text x="180" y="138" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">Нейросеть</text>
+  <text x="180" y="162" text-anchor="middle" font-size="13" fill="#c9c5be">код · анимация · субтитры</text>
+  <text x="180" y="204" text-anchor="middle" font-size="18" fill="#948e84">↓</text>
+  <rect x="40" y="216" width="280" height="64" rx="14" fill="#fffdf8" stroke="#2e7d76" stroke-width="2"/>
+  <polygon points="86,236 86,260 106,248" fill="#2e7d76"/>
+  <text x="126" y="254" font-size="16" font-weight="600" fill="#23211c">Готовый Reels</text>
+  <rect x="40" y="304" width="280" height="52" rx="26" fill="#ece6d8"/>
+  <text x="180" y="336" text-anchor="middle" font-size="15" font-weight="600" fill="#23211c">1 вечер · 0 ₽ подрядчикам</text>
 </svg>
 </div>
 
@@ -213,24 +209,24 @@ h2{font-size:22px}
 <p>Формат, который работает в экспертных нишах, устроен просто. Я называю его скелетом «Показываю»:</p>
 
 <div class="viz">
-<svg viewBox="0 0 720 240" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
-  <line x1="40" y1="20" x2="40" y2="220" stroke="#d9d2bf" stroke-width="2"/>
-  <text x="14" y="40" font-size="12" fill="#948e84">0 с</text>
-  <text x="8" y="216" font-size="12" fill="#948e84">45 с</text>
-  <rect x="60" y="22" width="640" height="34" rx="10" fill="#23211c"/>
-  <text x="76" y="44" font-size="14" font-weight="700" fill="#fffdf8">Хук-глагол</text>
-  <text x="700" y="44" text-anchor="end" font-size="12" fill="#c9c5be">«показываю, как…»</text>
-  <rect x="60" y="64" width="640" height="34" rx="10" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
-  <text x="76" y="86" font-size="14" font-weight="700" fill="#23211c">Приём 1</text>
-  <text x="700" y="86" text-anchor="end" font-size="12" fill="#948e84">ошибка → почему плохо → как надо</text>
-  <rect x="60" y="106" width="640" height="34" rx="10" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
-  <text x="76" y="128" font-size="14" font-weight="700" fill="#23211c">Приём 2</text>
-  <rect x="60" y="148" width="640" height="34" rx="10" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
-  <text x="76" y="170" font-size="14" font-weight="700" fill="#23211c">Приём 3</text>
-  <rect x="60" y="190" width="310" height="34" rx="10" fill="#fffdf8" stroke="#2e7d76" stroke-width="1.5"/>
-  <text x="76" y="212" font-size="14" font-weight="700" fill="#23211c">Обещание владения</text>
-  <rect x="386" y="190" width="314" height="34" rx="10" fill="#2e7d76"/>
-  <text x="402" y="212" font-size="14" font-weight="700" fill="#fffdf8">Кодовое слово</text>
+<svg viewBox="0 0 360 330" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <text x="8" y="20" font-size="12" fill="#948e84">0 с</text>
+  <text x="352" y="20" text-anchor="end" font-size="12" fill="#948e84">45 с</text>
+  <rect x="8" y="30" width="344" height="42" rx="12" fill="#14171a"/>
+  <text x="24" y="56" font-size="15" font-weight="600" fill="#ffffff">Хук-глагол</text>
+  <text x="344" y="56" text-anchor="end" font-size="12" fill="#c9c5be">«показываю, как…»</text>
+  <rect x="8" y="80" width="344" height="42" rx="12" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <text x="24" y="106" font-size="15" font-weight="600" fill="#23211c">Приём 1</text>
+  <text x="344" y="106" text-anchor="end" font-size="11.5" fill="#948e84">ошибка → почему → как надо</text>
+  <rect x="8" y="130" width="344" height="42" rx="12" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <text x="24" y="156" font-size="15" font-weight="600" fill="#23211c">Приём 2</text>
+  <rect x="8" y="180" width="344" height="42" rx="12" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <text x="24" y="206" font-size="15" font-weight="600" fill="#23211c">Приём 3</text>
+  <rect x="8" y="230" width="344" height="42" rx="12" fill="#fffdf8" stroke="#2e7d76" stroke-width="1.5"/>
+  <text x="24" y="256" font-size="15" font-weight="600" fill="#23211c">Обещание владения</text>
+  <rect x="8" y="280" width="344" height="42" rx="12" fill="#2e7d76"/>
+  <text x="24" y="306" font-size="15" font-weight="600" fill="#ffffff">Кодовое слово</text>
+  <text x="344" y="306" text-anchor="end" font-size="12" fill="#d8ebe8">→ лид-магнит</text>
 </svg>
 </div>
 <ol>
@@ -246,29 +242,29 @@ h2{font-size:22px}
 <p>Откройте Диктофон, найдите комнату с мягкой мебелью или шторами, держите телефон в 15-20 сантиметрах ото рта и чуть сбоку. Читайте сценарий по блокам, после каждого блока пауза две секунды. По этим паузам нейросеть поймёт, где заканчивается сцена. Запишите два дубля, выберите лучший, перекиньте файл на компьютер и положите в папку public.</p>
 
 <div class="viz">
-<svg viewBox="0 0 720 110" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+<svg viewBox="0 0 360 110" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
   <g fill="#23211c">
-    <rect x="30" y="38" width="5" height="24" rx="2"/><rect x="40" y="30" width="5" height="40" rx="2"/><rect x="50" y="24" width="5" height="52" rx="2"/><rect x="60" y="34" width="5" height="32" rx="2"/><rect x="70" y="28" width="5" height="44" rx="2"/><rect x="80" y="40" width="5" height="20" rx="2"/><rect x="90" y="30" width="5" height="40" rx="2"/><rect x="100" y="36" width="5" height="28" rx="2"/><rect x="110" y="26" width="5" height="48" rx="2"/><rect x="120" y="38" width="5" height="24" rx="2"/><rect x="130" y="32" width="5" height="36" rx="2"/><rect x="140" y="42" width="5" height="16" rx="2"/>
+    <rect x="16" y="34" width="6" height="28" rx="3"/><rect x="27" y="24" width="6" height="48" rx="3"/><rect x="38" y="30" width="6" height="36" rx="3"/><rect x="49" y="20" width="6" height="56" rx="3"/><rect x="60" y="34" width="6" height="28" rx="3"/><rect x="71" y="26" width="6" height="44" rx="3"/><rect x="82" y="36" width="6" height="24" rx="3"/><rect x="93" y="28" width="6" height="40" rx="3"/>
   </g>
-  <g fill="#d9d2bf">
-    <rect x="158" y="48" width="4" height="4" rx="2"/><rect x="168" y="48" width="4" height="4" rx="2"/><rect x="178" y="48" width="4" height="4" rx="2"/><rect x="188" y="48" width="4" height="4" rx="2"/>
-  </g>
-  <g fill="#23211c">
-    <rect x="206" y="34" width="5" height="32" rx="2"/><rect x="216" y="26" width="5" height="48" rx="2"/><rect x="226" y="38" width="5" height="24" rx="2"/><rect x="236" y="30" width="5" height="40" rx="2"/><rect x="246" y="24" width="5" height="52" rx="2"/><rect x="256" y="36" width="5" height="28" rx="2"/><rect x="266" y="30" width="5" height="40" rx="2"/><rect x="276" y="40" width="5" height="20" rx="2"/><rect x="286" y="28" width="5" height="44" rx="2"/><rect x="296" y="36" width="5" height="28" rx="2"/><rect x="306" y="42" width="5" height="16" rx="2"/>
-  </g>
-  <g fill="#d9d2bf">
-    <rect x="324" y="48" width="4" height="4" rx="2"/><rect x="334" y="48" width="4" height="4" rx="2"/><rect x="344" y="48" width="4" height="4" rx="2"/><rect x="354" y="48" width="4" height="4" rx="2"/>
+  <g fill="#c9c5be">
+    <rect x="116" y="46" width="5" height="5" rx="2.5"/><rect x="128" y="46" width="5" height="5" rx="2.5"/><rect x="140" y="46" width="5" height="5" rx="2.5"/>
   </g>
   <g fill="#23211c">
-    <rect x="372" y="30" width="5" height="40" rx="2"/><rect x="382" y="24" width="5" height="52" rx="2"/><rect x="392" y="36" width="5" height="28" rx="2"/><rect x="402" y="28" width="5" height="44" rx="2"/><rect x="412" y="38" width="5" height="24" rx="2"/><rect x="422" y="30" width="5" height="40" rx="2"/><rect x="432" y="34" width="5" height="32" rx="2"/><rect x="442" y="26" width="5" height="48" rx="2"/><rect x="452" y="40" width="5" height="20" rx="2"/><rect x="462" y="32" width="5" height="36" rx="2"/>
+    <rect x="162" y="28" width="6" height="40" rx="3"/><rect x="173" y="22" width="6" height="52" rx="3"/><rect x="184" y="34" width="6" height="28" rx="3"/><rect x="195" y="26" width="6" height="44" rx="3"/><rect x="206" y="36" width="6" height="24" rx="3"/><rect x="217" y="24" width="6" height="48" rx="3"/><rect x="228" y="32" width="6" height="32" rx="3"/>
   </g>
-  <text x="88" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#23211c">блок 1</text>
-  <text x="174" y="96" text-anchor="middle" font-size="12" fill="#2e7d76">пауза 2 с</text>
-  <text x="258" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#23211c">блок 2</text>
-  <text x="340" y="96" text-anchor="middle" font-size="12" fill="#2e7d76">пауза 2 с</text>
-  <text x="420" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#23211c">блок 3</text>
-  <text x="700" y="54" text-anchor="end" font-size="13" fill="#948e84">пауза = граница сцены</text>
+  <g fill="#c9c5be">
+    <rect x="251" y="46" width="5" height="5" rx="2.5"/><rect x="263" y="46" width="5" height="5" rx="2.5"/><rect x="275" y="46" width="5" height="5" rx="2.5"/>
+  </g>
+  <g fill="#23211c">
+    <rect x="297" y="30" width="6" height="36" rx="3"/><rect x="308" y="24" width="6" height="48" rx="3"/><rect x="319" y="34" width="6" height="28" rx="3"/><rect x="330" y="28" width="6" height="40" rx="3"/><rect x="341" y="38" width="6" height="20" rx="3"/>
+  </g>
+  <text x="58" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#23211c">блок 1</text>
+  <text x="130" y="96" text-anchor="middle" font-size="12" fill="#2e7d76">2 с</text>
+  <text x="198" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#23211c">блок 2</text>
+  <text x="265" y="96" text-anchor="middle" font-size="12" fill="#2e7d76">2 с</text>
+  <text x="322" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#23211c">блок 3</text>
 </svg>
+<div class="viz-cap">Пауза две секунды = граница сцены</div>
 </div>
 <p>Свой голос в записи не нравится никому. Слушателя это не смущает, он ваш голос слышит впервые.</p>
 
@@ -285,22 +281,23 @@ h2{font-size:22px}
 <p>Смотрите сцены в предпросмотре. Что-то будет мимо, это нормально. Делаете скриншот, обводите проблемное место, кидаете в Claude Code и пишете обычными словами: «цифра мелкая, сделай крупнее», «этот блок появляется слишком рано». Он создаст новую версию сцены, оригинал останется на месте. Так вы ничего не сломаете.</p>
 
 <div class="viz">
-<svg viewBox="0 0 720 150" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
-  <rect x="20" y="30" width="180" height="90" rx="14" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
-  <rect x="44" y="48" width="132" height="40" rx="6" fill="#ece6d8"/>
-  <text x="110" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#23211c">предпросмотр</text>
-  <text x="222" y="80" font-size="20" fill="#948e84">→</text>
-  <rect x="258" y="30" width="180" height="90" rx="14" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
-  <rect x="282" y="48" width="132" height="40" rx="6" fill="#ece6d8"/>
-  <ellipse cx="390" cy="60" rx="26" ry="16" fill="none" stroke="#b0483b" stroke-width="2.5" transform="rotate(-6 390 60)"/>
-  <text x="348" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#23211c">скриншот с обводкой</text>
-  <text x="460" y="80" font-size="20" fill="#948e84">→</text>
-  <rect x="496" y="30" width="180" height="90" rx="14" fill="#fffdf8" stroke="#2e7d76" stroke-width="2"/>
-  <rect x="520" y="48" width="132" height="40" rx="6" fill="#e9f2f0"/>
-  <text x="586" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#23211c">версия v2</text>
-  <text x="662" y="46" text-anchor="middle" font-size="11" font-weight="700" fill="#2e7d76">v2</text>
-  <path d="M 586 128 Q 348 168 116 126" fill="none" stroke="#948e84" stroke-width="1.5" stroke-dasharray="4 4"/>
-  <polygon points="112,130 124,124 120,134" fill="#948e84"/>
+<svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <rect x="60" y="8" width="220" height="76" rx="14" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <rect x="88" y="22" width="164" height="30" rx="6" fill="#ece6d8"/>
+  <text x="170" y="72" text-anchor="middle" font-size="14" font-weight="600" fill="#23211c">предпросмотр</text>
+  <text x="170" y="106" text-anchor="middle" font-size="18" fill="#948e84">↓</text>
+  <rect x="60" y="118" width="220" height="76" rx="14" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <rect x="88" y="132" width="164" height="30" rx="6" fill="#ece6d8"/>
+  <ellipse cx="214" cy="147" rx="30" ry="15" fill="none" stroke="#b0483b" stroke-width="2.5" transform="rotate(-5 214 147)"/>
+  <text x="170" y="182" text-anchor="middle" font-size="14" font-weight="600" fill="#23211c">скриншот с обводкой</text>
+  <text x="170" y="216" text-anchor="middle" font-size="18" fill="#948e84">↓</text>
+  <rect x="60" y="228" width="220" height="76" rx="14" fill="#fffdf8" stroke="#2e7d76" stroke-width="2"/>
+  <rect x="88" y="242" width="164" height="30" rx="6" fill="#e9f2f0"/>
+  <text x="170" y="292" text-anchor="middle" font-size="14" font-weight="600" fill="#23211c">версия v2</text>
+  <text x="264" y="250" text-anchor="middle" font-size="12" font-weight="600" fill="#2e7d76">v2</text>
+  <path d="M 292 266 Q 340 170 296 52" fill="none" stroke="#948e84" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <polygon points="292,46 304,52 296,60" fill="#948e84"/>
+  <text x="336" y="168" text-anchor="middle" font-size="11" fill="#948e84" transform="rotate(90 336 168)">снова смотрим</text>
 </svg>
 <div class="viz-cap">Оригинал сцены не трогается. Не понравилась правка, вернулись назад.</div>
 </div>
@@ -332,40 +329,39 @@ h2{font-size:22px}
 <p>Заметьте, что сейчас произошло. Вы, человек без технического образования, собрали продукт, который год назад требовал трёх подрядчиков. Нейросеть сделала руки. Голова осталась ваша. Это касается далеко не только роликов: техническая стена исчезла, и профессии, куда раньше не пускал страх «я не разберусь», открылись.</p>
 
 <div class="viz">
-<svg viewBox="0 0 720 190" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
-  <text x="180" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#948e84">РАНЬШЕ</text>
-  <circle cx="70" cy="90" r="14" fill="none" stroke="#23211c" stroke-width="2"/>
-  <line x1="70" y1="104" x2="70" y2="136" stroke="#23211c" stroke-width="2"/>
-  <line x1="70" y1="114" x2="54" y2="128" stroke="#23211c" stroke-width="2"/>
-  <line x1="70" y1="114" x2="86" y2="128" stroke="#23211c" stroke-width="2"/>
-  <line x1="70" y1="136" x2="58" y2="158" stroke="#23211c" stroke-width="2"/>
-  <line x1="70" y1="136" x2="82" y2="158" stroke="#23211c" stroke-width="2"/>
+<svg viewBox="0 0 360 340" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <text x="16" y="24" font-size="13" font-weight="600" fill="#948e84">РАНЬШЕ</text>
+  <circle cx="48" cy="80" r="12" fill="none" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="92" x2="48" y2="118" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="100" x2="35" y2="112" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="100" x2="61" y2="112" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="118" x2="38" y2="136" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="118" x2="58" y2="136" stroke="#23211c" stroke-width="2"/>
   <g fill="#948e84">
-    <rect x="150" y="46" width="34" height="18" rx="3"/><rect x="188" y="46" width="34" height="18" rx="3"/>
-    <rect x="132" y="68" width="34" height="18" rx="3"/><rect x="170" y="68" width="34" height="18" rx="3"/><rect x="208" y="68" width="14" height="18" rx="3"/>
-    <rect x="150" y="90" width="34" height="18" rx="3"/><rect x="188" y="90" width="34" height="18" rx="3"/>
-    <rect x="132" y="112" width="34" height="18" rx="3"/><rect x="170" y="112" width="34" height="18" rx="3"/><rect x="208" y="112" width="14" height="18" rx="3"/>
-    <rect x="150" y="134" width="34" height="18" rx="3"/><rect x="188" y="134" width="34" height="18" rx="3"/>
+    <rect x="126" y="44" width="30" height="16" rx="3"/><rect x="160" y="44" width="30" height="16" rx="3"/>
+    <rect x="110" y="64" width="30" height="16" rx="3"/><rect x="144" y="64" width="30" height="16" rx="3"/><rect x="178" y="64" width="12" height="16" rx="3"/>
+    <rect x="126" y="84" width="30" height="16" rx="3"/><rect x="160" y="84" width="30" height="16" rx="3"/>
+    <rect x="110" y="104" width="30" height="16" rx="3"/><rect x="144" y="104" width="30" height="16" rx="3"/><rect x="178" y="104" width="12" height="16" rx="3"/>
+    <rect x="126" y="124" width="30" height="16" rx="3"/><rect x="160" y="124" width="30" height="16" rx="3"/>
   </g>
-  <text x="177" y="178" text-anchor="middle" font-size="12" fill="#948e84">«я не разберусь»</text>
-  <text x="290" y="95" text-anchor="middle" font-size="13" fill="#948e84">профессия</text>
-  <line x1="360" y1="20" x2="360" y2="170" stroke="#d9d2bf" stroke-width="1.5"/>
-  <text x="540" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#2e7d76">СЕЙЧАС</text>
-  <circle cx="430" cy="90" r="14" fill="none" stroke="#23211c" stroke-width="2"/>
-  <line x1="430" y1="104" x2="430" y2="136" stroke="#23211c" stroke-width="2"/>
-  <line x1="430" y1="114" x2="414" y2="128" stroke="#23211c" stroke-width="2"/>
-  <line x1="430" y1="114" x2="446" y2="128" stroke="#23211c" stroke-width="2"/>
-  <line x1="430" y1="136" x2="418" y2="158" stroke="#23211c" stroke-width="2"/>
-  <line x1="430" y1="136" x2="442" y2="158" stroke="#23211c" stroke-width="2"/>
+  <text x="150" y="162" text-anchor="middle" font-size="12" fill="#948e84">«я не разберусь»</text>
+  <text x="280" y="98" text-anchor="middle" font-size="14" fill="#948e84">профессия</text>
+  <line x1="16" y1="182" x2="344" y2="182" stroke="#d9d2bf" stroke-width="1.5"/>
+  <text x="16" y="210" font-size="13" font-weight="600" fill="#2e7d76">СЕЙЧАС</text>
+  <circle cx="48" cy="256" r="12" fill="none" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="268" x2="48" y2="294" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="276" x2="35" y2="288" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="276" x2="61" y2="288" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="294" x2="38" y2="312" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="294" x2="58" y2="312" stroke="#23211c" stroke-width="2"/>
   <g fill="none" stroke="#d9d2bf" stroke-width="1.5" stroke-dasharray="4 4">
-    <rect x="510" y="46" width="34" height="18" rx="3"/><rect x="548" y="46" width="34" height="18" rx="3"/>
-    <rect x="492" y="90" width="34" height="18" rx="3"/><rect x="568" y="112" width="14" height="18" rx="3"/>
-    <rect x="510" y="134" width="34" height="18" rx="3"/>
+    <rect x="126" y="222" width="30" height="16" rx="3"/><rect x="160" y="238" width="30" height="16" rx="3"/>
+    <rect x="110" y="258" width="30" height="16" rx="3"/><rect x="170" y="278" width="12" height="16" rx="3"/>
   </g>
-  <line x1="456" y1="97" x2="628" y2="97" stroke="#2e7d76" stroke-width="2.5"/>
-  <polygon points="636,97 622,90 622,104" fill="#2e7d76"/>
-  <text x="672" y="95" text-anchor="middle" font-size="13" font-weight="700" fill="#23211c">профессия</text>
-  <text x="545" y="178" text-anchor="middle" font-size="12" fill="#2e7d76">нейросеть делает руки, вы голова</text>
+  <line x1="72" y1="262" x2="252" y2="262" stroke="#2e7d76" stroke-width="2.5"/>
+  <polygon points="262,262 246,254 246,270" fill="#2e7d76"/>
+  <text x="304" y="266" text-anchor="middle" font-size="14" font-weight="600" fill="#23211c">профессия</text>
+  <text x="180" y="332" text-anchor="middle" font-size="12" fill="#2e7d76">нейросеть делает руки, вы голова</text>
 </svg>
 </div>
 <p>Таргетолог, специалист по настройке рекламы в Instagram*, одна из таких профессий. Работа удалённая, клиенты по всему миру, из инструментов нужен ноутбук. Раньше людей останавливал рекламный кабинет: страшно нажать и слить чужие деньги. Сейчас связка та же, что с роликом: нейросеть делает руки, вы ставите задачу и принимаете решения.</p>
