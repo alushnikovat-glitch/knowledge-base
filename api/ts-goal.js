@@ -25,6 +25,8 @@ export default async function handler(req, res) {
   const aiExp = clean(body.ai_exp, 8);
   const email = clean(body.email, 254);
   const pains = clean(body.pains, 100);
+  const source = clean(body.source, 20);
+  const fear = clean(body.fear, 1000);
 
   // Кладём только присланные поля, чтобы поздний запрос не затирал ранние ответы пустотой
   if (niche) row.niche = niche;
@@ -33,6 +35,10 @@ export default async function handler(req, res) {
   if (commitment) row.commitment = commitment;
   if (aiExp === "yes" || aiExp === "no") row.ai_exp = aiExp;
   if (pains) row.pains = pains;
+  if (fear) row.fear = fear;
+  // Источник входа: только известные значения, чужое отбрасываем.
+  // "start" — личная продажа, "start_ads" — та же страница, но пришли с рекламы.
+  if (source === "trenazher" || source === "start" || source === "start_ads") row.source = source;
   // Простая проверка на почту, без строгой валидации: пропускаем всё похожее
   if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) row.email = email.toLowerCase();
 

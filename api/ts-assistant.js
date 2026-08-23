@@ -13,7 +13,8 @@ import path from "path";
 // НА ВРЕМЯ ТЕСТОВ лимиты подняты до неощутимых: пусть люди общаются, это исследование.
 // Когда пойдёт стабильный поток продаж, вернуть рабочие значения: DAILY_LIMIT = 20, GUEST_LIMIT = 5.
 const DAILY_LIMIT = 200;
-const ACCESS_DAYS = 30;
+// 12 месяцев от даты оплаты, единый срок продукта (стратегия от 23.08). Раньше стояло 30.
+const ACCESS_DAYS = 365;
 const MAX_Q = 2000;
 const MODEL = "claude-sonnet-4-6";
 
@@ -91,7 +92,7 @@ async function sb(pathAndQuery, opts = {}) {
   return r;
 }
 
-// доступ: оплата не старше 30 дней (та же логика, что в панели)
+// доступ: оплата не старше ACCESS_DAYS, 12 месяцев (та же логика, что в панели)
 async function hasAccess(email) {
   const r = await sb(
     `ts_payments?email=eq.${encodeURIComponent(email)}&paid=eq.true&order=paid_at.desc&limit=1&select=paid_at`
@@ -247,6 +248,21 @@ export default async function handler(req, res) {
         cache_control: { type: "ephemeral" },
       });
     }
+    // Прямая продажа /start/ на входе спрашивает, что может остановить ученицу по дороге.
+    // Если ответ есть, куратор знает, где мягко подхватить, не упоминая, что это её же слова.
+    try {
+      const fr = await sb(
+        `ts_goals?email=eq.${encodeURIComponent(email)}&fear=not.is.null&order=updated_at.desc&limit=1&select=fear`
+      );
+      const frRows = fr.ok ? await fr.json() : [];
+      const fear = frRows[0] && cleanText(frRows[0].fear, 1000);
+      if (fear) {
+        system.push({
+          type: "text",
+          text: `На входе ученица сама назвала, что может остановить её по дороге: "${fear}". Если увидишь признаки этого в разговоре, мягко верни к делу через это же место, не упоминай, что цитируешь её собственный ответ.`,
+        });
+      }
+    } catch (e) {}
     system.push({
       type: "text",
       text: `Контекст: ученица сейчас в уроке ${lesson || "не определён"}, экран ${sub}. Если вопрос похож на вопрос про текущий экран, отвечай с учётом этого места.`,

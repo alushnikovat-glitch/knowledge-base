@@ -44,7 +44,10 @@ export default async function handler(req, res) {
       if (peek && peek.hit === true) {
         const identity = String(peek.identity || "").trim().slice(0, 254);
         if (!identity) return res.status(400).json({ ok: false });
-        await sb("ts_hits", { method: "POST", body: JSON.stringify({ identity }) });
+        const source = String(peek.source || "").trim().slice(0, 20);
+        const hitRow = { identity };
+        if (source === "trenazher" || source === "start" || source === "start_ads") hitRow.source = source;
+        await sb("ts_hits", { method: "POST", body: JSON.stringify(hitRow) });
         return res.status(200).json({ ok: true });
       }
     }
@@ -123,15 +126,27 @@ export default async function handler(req, res) {
     // Если таблицы ts_hits ещё нет (SQL не выполнен), тихо показываем прочерк.
     let hitsToday = null;
     let hitsYesterday = null;
+    let hitsBySource = null;
     try {
-      const [rt, ry] = await Promise.all([
+      const [rt, ry, rs] = await Promise.all([
         sb(`ts_hits?created_at=gte.${new Date(todayStart).toISOString()}&select=id`, { method: "HEAD", headers: { Prefer: "count=exact" } }),
         sb(`ts_hits?created_at=gte.${new Date(yesterdayStart).toISOString()}&created_at=lt.${new Date(todayStart).toISOString()}&select=id`, { method: "HEAD", headers: { Prefer: "count=exact" } }),
+        sb(`ts_hits?created_at=gte.${new Date(todayStart).toISOString()}&select=source`),
       ]);
       const ht = parseInt((rt.headers.get("content-range") || "").split("/")[1], 10);
       const hy = parseInt((ry.headers.get("content-range") || "").split("/")[1], 10);
       hitsToday = Number.isFinite(ht) ? ht : null;
       hitsYesterday = Number.isFinite(hy) ? hy : null;
+      const sRows = rs.ok ? await rs.json() : [];
+      if (Array.isArray(sRows) && sRows.length) {
+        hitsBySource = { trenazher: 0, start: 0, start_ads: 0, "не размечено": 0 };
+        for (const r of sRows) {
+          if (r.source === "trenazher") hitsBySource.trenazher++;
+          else if (r.source === "start") hitsBySource.start++;
+          else if (r.source === "start_ads") hitsBySource.start_ads++;
+          else hitsBySource["не размечено"]++;
+        }
+      }
     } catch (e) {}
 
     // Причины сомнений с виджета обратной связи на экране захвата.
@@ -202,6 +217,7 @@ export default async function handler(req, res) {
   <div style="color:#999;font-size:13px;margin:-6px 0 14px">
     Всего заходов на страницу сегодня: <b style="color:#1C1C1E">${hitsToday == null ? "—" : hitsToday}</b>${hitsYesterday != null ? ` (вчера: ${hitsYesterday})` : ""}.
     В воронку ниже попадают только те, кто задержался от 3 секунд.
+    ${hitsBySource ? `<br>Из них с /trenazher/: <b style="color:#1C1C1E">${hitsBySource.trenazher}</b>, с /start/: <b style="color:#1C1C1E">${hitsBySource.start}</b>${hitsBySource["не размечено"] ? `, без метки: ${hitsBySource["не размечено"]}` : ""}.` : ""}
   </div>
   <table>
     <thead><tr><th>Где остановились</th><th>Сегодня</th><th>Доля</th><th>Вчера</th><th>Доля</th></tr></thead>
