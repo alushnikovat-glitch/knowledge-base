@@ -192,7 +192,7 @@ footer { border-top: 1px solid var(--line); padding-top: var(--s4); padding-bott
 <nav class="top">
   <div class="in">
     <span class="brand">Target <i>School</i></span>
-    <a class="btn btn-primary" href="https://app.lava.top/products/e226dcba-d797-49a1-b300-02f1e0458886" data-cta>Начать · 1 490 ₽</a>
+    <a class="btn btn-primary" href="https://anastasialushnikova.com/start/?from=ads" data-cta>Начать · 1 490 ₽</a>
   </div>
 </nav>
 
@@ -208,7 +208,7 @@ footer { border-top: 1px solid var(--line); padding-top: var(--s4); padding-bott
         <div><b>Уже работаешь в таргете</b><span>Внутри методика 2026: широкая аудитория, тесты креативов, работа с новыми алгоритмами Meta*. Совет «один интерес, одна группа» больше не работает.</span></div>
       </div>
       <div class="cta-row">
-        <a class="btn btn-primary" href="https://app.lava.top/products/e226dcba-d797-49a1-b300-02f1e0458886" data-cta>Начать сегодня<small>1 490 ₽ · доступ 12 месяцев</small></a>
+        <a class="btn btn-primary" href="https://anastasialushnikova.com/start/?from=ads" data-cta>Начать сегодня<small>1 490 ₽ · доступ 12 месяцев</small></a>
         <a class="btn btn-secondary" href="#how">Как это устроено</a>
       </div>
       <p class="note">«Ничего» это ответ самой аудитории. Мы спросили 790 человек перед стартом обучения, это слово прозвучало 236 раз. Само не сдвинется.</p>
@@ -325,7 +325,7 @@ footer { border-top: 1px solid var(--line); padding-top: var(--s4); padding-bott
     <div class="num">1 490 ₽</div>
     <div class="acc">Доступ на 12 месяцев</div>
     <p>Профессию внутри проходят за несколько недель. Год даю с запасом, чтобы возвращаться к промптам и стратегиям в работе с реальными клиентами. Цена будет расти вместе с новыми модулями, о каждом повышении предупреждаю заранее.</p>
-    <a class="btn btn-primary" href="https://app.lava.top/products/e226dcba-d797-49a1-b300-02f1e0458886" data-cta>Оформить доступ<small>оплата картой, начало сразу после оплаты</small></a>
+    <a class="btn btn-primary" href="https://anastasialushnikova.com/start/?from=ads" data-cta>Оформить доступ<small>регистрация, оплата картой, старт сегодня</small></a>
   </div>
 </section>
 
@@ -347,7 +347,7 @@ footer { border-top: 1px solid var(--line); padding-top: var(--s4); padding-bott
 <section class="wrap narrow pad final up">
   <h2>Само не сдвинется</h2>
   <p class="sub">Первый готовый документ будет у тебя уже сегодня вечером.</p>
-  <a class="btn btn-primary" href="https://app.lava.top/products/e226dcba-d797-49a1-b300-02f1e0458886" data-cta>Начать сегодня · 1 490 ₽</a>
+  <a class="btn btn-primary" href="https://anastasialushnikova.com/start/?from=ads" data-cta>Начать сегодня · 1 490 ₽</a>
 </section>
 
 <footer>
@@ -378,9 +378,6 @@ footer { border-top: 1px solid var(--line); padding-top: var(--s4); padding-bott
     a.addEventListener("click", function () {
       try { fbq('track', 'InitiateCheckout', { value: 1490, currency: 'RUB' }); } catch (e) {}
       try { if (window.ym) ym(108790481, 'reachGoal', 'lp_cta_click'); } catch (e) {}
-      // Человек уходит платить на Lava и вернётся в /start/ уже без метки в адресе.
-      // Кладём метку в хранилище браузера, домен тот же, панель её подхватит.
-      try { localStorage.setItem('ts_src', 'start_ads'); } catch (e) {}
     });
   });
 
