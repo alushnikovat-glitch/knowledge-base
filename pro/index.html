@@ -1,392 +1,529 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Профессия таргетолог · Тренажёр Target School</title>
-<meta name="description" content="Освой профессию таргетолога с нуля до первого клиента. Час в день, с телефона, по шагам." />
-<meta property="og:title" content="Профессия таргетолог · Тренажёр Target School" />
-<meta property="og:description" content="С нуля до первого клиента. Час в день, с телефона, по шагам." />
-<meta name="theme-color" content="#FBFAF8" />
-<link rel="icon" type="image/png" sizes="32x32" href="/trenazher/favicon-32.png" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тренажёр таргетолога · Анастасия Лушникова</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Marck+Script&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ==========================================================================
-   ДИЗАЙН-СИСТЕМА · читается как ТЗ
-   Цвет: светлая тема, глубокий серый вместо чёрного, один акцент (терракота).
-   Шрифт: один, Inter/SF, различие весами. Сетка отступов: 8pt.
-   Радиусы: 16 / 20 / 24. Тени: две ступени мягкой глубины.
-   ========================================================================== */
-:root {
-  /* палитра */
-  --bg: #FBFAF8;            /* фон страницы, тёплый белый */
-  --surface: #FFFFFF;       /* поверхности карточек */
-  --ink: #1A1A1E;           /* заголовки, глубокий серый */
-  --body: #52525B;          /* основной текст */
-  --muted: #8E8E96;         /* подписи */
-  --accent: #B9502F;        /* единственный акцент, терракота бренда */
-  --accent-hover: #A3451F;
-  --accent-soft: rgba(185, 80, 47, 0.08);
-  --line: rgba(26, 26, 30, 0.08);
-  /* типографическая шкала: 13 / 15 / 17 / 20 / 28 / 40 / 64 */
-  --font: Inter, -apple-system, "SF Pro Display", sans-serif;
-  --mono: "SF Mono", ui-monospace, monospace;
-  /* spacing, 8pt: 8 / 16 / 24 / 32 / 48 / 64 / 96 */
-  --s2: 16px; --s3: 24px; --s4: 32px; --s6: 48px; --s8: 64px; --s12: 96px;
-  /* радиусы */
-  --r-md: 16px; --r-lg: 20px; --r-xl: 24px;
-  /* тени */
-  --shadow-sm: 0 1px 2px rgba(26,26,30,0.04), 0 4px 12px rgba(26,26,30,0.05);
-  --shadow-md: 0 2px 4px rgba(26,26,30,0.04), 0 16px 40px rgba(26,26,30,0.09);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { overflow-x: hidden; background: var(--bg); color: var(--ink); font-family: var(--font); -webkit-font-smoothing: antialiased; line-height: 1.6; font-size: 17px; }
-/* Отступы разведены по обязанностям, чтобы классы не гасили друг друга:
-   .wrap держит ТОЛЬКО боковые и ширину, .pad держит ТОЛЬКО вертикальные.
-   Сокращённая запись padding в этих классах запрещена, она обнуляет чужую сторону. */
-.wrap { max-width: 1040px; margin-left: auto; margin-right: auto; padding-left: 24px; padding-right: 24px; }
-.narrow { max-width: 640px; }
-.pad { padding-top: var(--s12); padding-bottom: var(--s12); }
-.pad-sm { padding-top: var(--s6); padding-bottom: var(--s6); }
-@media (max-width: 720px) {
-  .wrap { padding-left: 20px; padding-right: 20px; }
-  .pad { padding-top: var(--s8); padding-bottom: var(--s8); }
-}
+  :root{
+    --linen:#f4efe4;
+    --sea-mist:#e2e9e6;
+    --card:#fffdf8;
+    --ink:#23211c;
+    --sub:#55524b;
+    --muted:#8a857c;
+    --line:rgba(35,33,28,.10);
+    --teal:#2e7d76;
+    --teal-light:#5fb8ae;
+    --teal-wash:rgba(46,125,118,.10);
+    --dusk:#14171a;
+    --dusk-text:#f5f2ec;
+    --dusk-sub:#d9d5ce;
+    --gold:#e8b45f;
+    --red:#b0483b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Golos Text',sans-serif;
+    background:linear-gradient(180deg,var(--linen) 0%, var(--linen) 30%, var(--sea-mist) 100%);
+    color:var(--ink);
+    line-height:1.5;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px;}
+  .kicker{
+    font-family:Inter,sans-serif;font-size:12px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:14px;
+  }
+  h1{font-size:clamp(34px,6.2vw,54px);font-weight:600;letter-spacing:-.02em;line-height:1.1;}
+  h1 .ms, h2 .ms{font-family:'Marck Script',cursive;font-weight:400;color:var(--teal);}
+  h1 .ms{font-size:1.22em;}
+  h2{font-size:clamp(24px,4.2vw,32px);font-weight:600;letter-spacing:-.015em;line-height:1.2;margin-bottom:16px;}
+  h2 .ms{font-size:1.22em;}
+  p{font-size:15.5px;line-height:1.6;color:var(--sub);}
+  .sub{font-size:18px;color:var(--sub);font-weight:400;line-height:1.5;margin-top:18px;max-width:520px;}
+  .lead{font-size:19px;color:var(--ink);font-weight:500;line-height:1.5;max-width:560px;}
+  .section{padding:64px 0;}
+  .section-tight{padding:40px 0;}
+  .card{
+    background:var(--card);border-radius:16px;padding:24px;
+    box-shadow:0 10px 26px rgba(70,55,35,.06);
+  }
+  .card + .card{margin-top:14px;}
+  .card.accent{border-left:3px solid var(--teal);}
+  .badge{
+    display:inline-block;background:var(--teal);color:#fff;font-size:11px;font-weight:600;
+    padding:4px 11px;border-radius:99px;letter-spacing:.04em;
+  }
+  .signature{display:flex;align-items:center;gap:10px;margin-top:28px;}
+  .signature b{display:block;font-size:14px;font-weight:600;}
+  .signature span{font-size:12.5px;color:var(--muted);}
+  .cta{
+    display:inline-block;background:var(--teal);color:#fff;font-weight:600;font-size:15px;
+    padding:15px 28px;border-radius:99px;text-decoration:none;margin-top:26px;
+    box-shadow:0 10px 24px rgba(46,125,118,.28);
+    position:relative;overflow:hidden;
+  }
+  .cta::after{
+    content:"";position:absolute;top:0;left:-45%;width:45%;height:100%;
+    background:linear-gradient(115deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.75) 50%, rgba(255,255,255,0) 100%);
+    transform:skewX(-18deg);
+    transition:left .55s ease;
+  }
+  .cta:hover::after,.cta:focus-visible::after{left:130%;}
+  .cta.ghost{background:transparent;border:1.5px solid var(--teal);color:var(--teal);box-shadow:none;}
+  .cta.ghost::after{display:none;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:640px){.grid3,.grid2{grid-template-columns:1fr;}}
+  .scenario{padding:4px 0 4px 16px;border-left:2px solid var(--line);}
+  .scenario .tag{font-size:11px;font-weight:600;color:var(--teal);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;}
+  .scenario p{font-size:14.5px;}
+  .row{display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--line);}
+  .row:first-child{border-top:none;padding-top:0;}
+  .row .num{font-family:Inter,sans-serif;font-weight:600;font-size:13px;color:var(--teal);flex-shrink:0;width:22px;}
+  .row .body b{display:block;font-size:15px;font-weight:600;margin-bottom:3px;}
+  .row .body p{font-size:14px;}
+  .timeline{position:relative;}
+  .timeline::before{content:"";position:absolute;left:20px;top:26px;bottom:26px;width:1px;background:var(--line);}
+  .timeline .row{border-top:none;padding:16px 0;position:relative;}
+  .timeline .row .num{
+    width:22px;height:22px;border-radius:99px;background:var(--teal-wash);color:var(--teal);
+    display:flex;align-items:center;justify-content:center;font-size:11px;position:relative;z-index:1;
+  }
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:640px){.compare{grid-template-columns:1fr;}}
+  .compare .box{border-radius:14px;padding:18px;}
+  .compare .box.old{background:rgba(176,72,59,.06);}
+  .compare .box.new{background:var(--teal-wash);}
+  .compare .lbl{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;}
+  .compare .old .lbl{color:var(--red);}
+  .compare .new .lbl{color:var(--teal);}
+  .compare p{font-size:14px;}
+  .case{background:var(--card);border-radius:16px;padding:20px;}
+  .case .who{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+  .case .who .dot{width:38px;height:38px;border-radius:99px;background:var(--teal-wash);display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--teal);font-size:15px;}
+  .case .who b{font-size:15px;}
+  .case .stat{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);}
+  .case .stat b{color:var(--ink);}
+  .lesson-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  @media(max-width:640px){.lesson-grid{grid-template-columns:1fr;}}
+  .lesson{background:var(--card);border-radius:14px;padding:16px;}
+  .lesson .n{font-family:Inter,sans-serif;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:6px;}
+  .lesson b{display:block;font-size:14.5px;font-weight:600;margin-bottom:4px;}
+  .lesson p{font-size:13px;}
+  .result-list{display:flex;flex-direction:column;gap:0;}
+  .result-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line);}
+  .result-item:first-child{border-top:none;}
+  .result-item .check{width:20px;height:20px;border-radius:99px;background:var(--teal);color:#fff;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:2px;}
+  .result-item p{font-size:14.5px;color:var(--ink);}
+  details.faq{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:10px;}
+  details.faq summary{font-weight:600;font-size:15px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+  details.faq summary::-webkit-details-marker{display:none;}
+  details.faq summary::after{content:'+';font-size:20px;color:var(--teal);font-weight:400;}
+  details.faq[open] summary::after{content:'–';}
+  details.faq p{margin-top:10px;font-size:14px;}
+  .dusk-block{background:var(--dusk);color:var(--dusk-text);position:relative;overflow:hidden;}
+  .dusk-block::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 15% 0%, rgba(190,130,55,.28) 0%, transparent 60%);pointer-events:none;}
+  .dusk-block .wrap{position:relative;}
+  .dusk-block .kicker{color:#948e84;}
+  .dusk-block h2{color:var(--dusk-text);}
+  .dusk-block h2 .ms{color:var(--gold);}
+  .dusk-block p{color:var(--dusk-sub);}
+  .price-num{font-weight:600;font-size:56px;letter-spacing:-.02em;color:var(--gold);line-height:1;margin:14px 0 6px;}
+  .price-cta{
+    display:inline-block;background:var(--gold);color:#14171a;font-weight:600;font-size:15px;
+    padding:15px 28px;border-radius:99px;text-decoration:none;margin-top:20px;
+    position:relative;overflow:hidden;
+  }
+  .price-cta::after{
+    content:"";position:absolute;top:0;left:-45%;width:45%;height:100%;
+    background:linear-gradient(115deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.85) 50%, rgba(255,255,255,0) 100%);
+    transform:skewX(-18deg);
+    transition:left .55s ease;
+  }
+  .price-cta:hover::after,.price-cta:focus-visible::after{left:130%;}
 
-/* появление при прокрутке */
-.up { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
-.up.in { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .up, .btn, .card { transition: none !important; } .up { opacity: 1; transform: none; } }
+  .hero-section{position:relative;overflow:hidden;}
+  .world-net{
+    position:absolute;top:-30px;right:-40px;width:340px;height:340px;
+    opacity:.55;pointer-events:none;z-index:0;
+    -webkit-mask-image:radial-gradient(circle at 65% 35%, black 30%, transparent 72%);
+    mask-image:radial-gradient(circle at 65% 35%, black 30%, transparent 72%);
+  }
+  .hero-section .wrap{position:relative;z-index:1;}
+  @keyframes netTwinkle{
+    0%,100%{opacity:.3;}
+    50%{opacity:1;}
+  }
+  .net-dot{animation:netTwinkle 3.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
+  @media(max-width:640px){.world-net{width:220px;height:220px;top:-20px;right:-30px;opacity:.4;}}
+  @media (prefers-reduced-motion: reduce){.net-dot{animation:none !important;}}
+  .divider{height:1px;background:var(--line);margin:0;}
+  footer{padding:40px 0 60px;text-align:center;}
+  footer p{font-size:12px;color:var(--muted);}
 
-/* типографика */
-.kicker { font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; color: var(--muted); }
-h1 { font-size: 46px; font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; }
-h1 em { font-style: normal; color: var(--accent); }
-h2 { font-size: 40px; font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: var(--s2); }
-h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
-.sub { font-size: 20px; color: var(--body); line-height: 1.55; }
-p { color: var(--body); }
-@media (max-width: 720px) {
-  h1 { font-size: 31px; line-height: 1.16; }
-  h2 { font-size: 28px; }
-  .sub { font-size: 17px; }
-}
-
-/* кнопки: primary акцентная, secondary тихая. Hover: подъём и тень. Active: возврат. */
-.btn { display: inline-block; text-decoration: none; border-radius: var(--r-md); padding: 16px 28px; font-size: 17px; font-weight: 600; transition: transform .18s ease, box-shadow .18s ease, background .18s ease; }
-.btn:active { transform: translateY(0) scale(.99); }
-.btn-primary { background: var(--accent); color: #fff; box-shadow: 0 8px 24px rgba(185,80,47,.25); }
-.btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 14px 32px rgba(185,80,47,.3); }
-.btn-secondary { background: var(--surface); color: var(--ink); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
-.btn-secondary:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.btn small { display: block; font-size: 13px; font-weight: 400; opacity: .72; margin-top: 2px; }
-.cta-row { display: flex; gap: var(--s2); flex-wrap: wrap; margin-top: var(--s4); }
-@media (max-width: 420px) {
-  .top .in { padding-left: 20px; padding-right: 20px; gap: 12px; }
-  .top .btn { padding: 9px 14px; font-size: 14px; }
-  .brand { font-size: 15px; }
-}
-@media (max-width: 720px) { .cta-row { flex-direction: column; } .cta-row .btn { width: 100%; max-width: 420px; text-align: center; } }
-
-/* карточки */
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-xl); box-shadow: var(--shadow-sm); padding: var(--s4); transition: transform .18s ease, box-shadow .18s ease; }
-.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-
-/* шапка: умеренное стекло */
-.top { position: sticky; top: 0; z-index: 10; background: rgba(251,250,248,.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
-.top .in { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; max-width: 1040px; margin: 0 auto; }
-.brand { font-weight: 800; font-size: 16px; letter-spacing: -0.01em; }
-.brand i { font-style: normal; color: var(--accent); }
-.top .btn { padding: 10px 20px; font-size: 15px; }
-
-/* hero: две колонки, слева текст, справа макет телефона */
-.hero { padding-top: var(--s8); padding-bottom: var(--s12); }
-.hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--s8); align-items: center; }
-@media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; gap: var(--s6); } }
-.hero .note { font-size: 15px; color: var(--muted); margin-top: var(--s3); max-width: 460px; }
-
-/* два входа: новичок и практик */
-.both { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); margin-top: var(--s3); }
-@media (max-width: 720px) { .both { grid-template-columns: 1fr; } }
-.both > div { border-top: 2px solid var(--accent); padding-top: 12px; }
-.both b { display: block; font-size: 15px; margin-bottom: 4px; }
-.both span { font-size: 14.5px; color: var(--body); line-height: 1.5; }
-
-/* макет телефона, чистый CSS */
-.phone { width: 300px; max-width: 100%; margin: 0 auto; background: var(--ink); border-radius: 44px; padding: 12px; box-shadow: var(--shadow-md), 0 40px 80px rgba(26,26,30,.14); }
-.phone .screen { background: #F5F5F7; border-radius: 34px; overflow: hidden; font-size: 12px; }
-.phone .p-top { padding: 16px 16px 10px; }
-.phone .p-kicker { font-size: 9px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 600; }
-.phone .p-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-top: 2px; }
-.phone .p-bar { height: 4px; background: rgba(26,26,30,.08); border-radius: 99px; margin: 10px 16px; overflow: hidden; }
-.phone .p-bar i { display: block; height: 100%; width: 42%; background: var(--accent); border-radius: 99px; }
-.phone .p-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; margin: 8px 12px; padding: 12px; }
-.phone .p-card b { font-size: 11.5px; color: var(--ink); display: block; margin-bottom: 4px; }
-.phone .p-card span { font-size: 10.5px; color: var(--body); line-height: 1.5; display: block; }
-.phone .p-prompt { background: #26221F; color: #E8E2DA; font-family: var(--mono); font-size: 9px; line-height: 1.55; border-radius: 10px; padding: 10px; margin-top: 8px; }
-.phone .p-copy { display: inline-block; margin-top: 8px; font-size: 10px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 99px; padding: 4px 10px; }
-.phone .p-next { display: block; text-align: center; background: var(--ink); color: #fff; font-size: 11px; font-weight: 600; border-radius: 12px; padding: 10px; margin: 10px 12px 14px; }
-
-/* доверие: цифры в ряд */
-.trust { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-top: var(--s6); padding-bottom: var(--s6); }
-.trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s3); text-align: left; }
-@media (max-width: 720px) { .trust-grid { grid-template-columns: repeat(2, 1fr); gap: var(--s4) var(--s3); } }
-.trust b { display: block; font-size: 28px; font-weight: 800; letter-spacing: -0.02em; }
-.trust span { font-size: 14px; color: var(--muted); }
-
-/* проблема: цитаты */
-.voices { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s2); margin-top: var(--s4); }
-@media (max-width: 720px) { .voices { grid-template-columns: 1fr; } }
-.voices .card:last-child:nth-child(odd) { grid-column: 1 / -1; }
-.voice b { display: block; font-size: 17px; margin-bottom: 6px; }
-.voice span { font-size: 14.5px; color: var(--muted); }
-
-/* возможности */
-.feat { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s2); margin-top: var(--s4); }
-@media (max-width: 720px) { .feat { grid-template-columns: 1fr; } }
-.feat .card { padding: var(--s3); }
-.feat h3 { margin-bottom: 6px; font-size: 17px; }
-.feat p { font-size: 15px; }
-.fico { width: 36px; height: 36px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: var(--s2); }
-.fico svg { width: 18px; height: 18px; }
-
-/* шаги */
-.steps { counter-reset: s; margin-top: var(--s4); display: grid; gap: 0; }
-.step { position: relative; padding: var(--s3) 0 var(--s3) 64px; border-bottom: 1px solid var(--line); }
-.step:last-child { border-bottom: none; }
-.step::before { counter-increment: s; content: counter(s, decimal-leading-zero); position: absolute; left: 0; top: var(--s3); font-size: 15px; font-weight: 700; color: var(--accent); font-family: var(--mono); }
-.step h3 { margin-bottom: 4px; font-size: 18px; }
-.step p { font-size: 15.5px; }
-
-/* сомнения */
-.doubts { display: grid; gap: var(--s2); margin-top: var(--s4); }
-.doubts .q { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-weight: 600; color: var(--accent); display: block; margin-bottom: 8px; }
-.doubts p { font-size: 15.5px; }
-
-/* тариф */
-.price-card { max-width: 460px; margin: var(--s4) auto 0; padding: var(--s6) var(--s4); text-align: center; }
-.price-card .old { color: var(--muted); text-decoration: line-through; font-size: 17px; }
-.price-card .num { font-size: 56px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: var(--accent); }
-.price-card .acc { font-weight: 600; margin-top: 4px; }
-.price-card p { font-size: 14.5px; margin-top: var(--s2); }
-.price-card .btn { width: 100%; margin-top: var(--s3); }
-
-/* FAQ: details без библиотек */
-.faq { margin-top: var(--s4); }
-.faq details { border-bottom: 1px solid var(--line); }
-.faq summary { list-style: none; cursor: pointer; padding: var(--s3) 40px var(--s3) 0; font-size: 17px; font-weight: 600; position: relative; }
-.faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font-size: 22px; font-weight: 400; color: var(--muted); transition: transform .2s ease; }
-.faq details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
-.faq details p { padding: 0 0 var(--s3); font-size: 15.5px; max-width: 560px; }
-
-/* финал */
-.final { text-align: center; }
-.final .btn { margin-top: var(--s3); }
-
-footer { border-top: 1px solid var(--line); padding-top: var(--s4); padding-bottom: var(--s6); font-size: 13px; color: var(--muted); }
+  @keyframes dotWalk{
+    0%,100%{opacity:.35;transform:scale(1);}
+    50%{opacity:1;transform:scale(1.35);}
+  }
+  .path-dot{animation:dotWalk 1.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
+  @keyframes docPulse{
+    0%,100%{opacity:.85;}
+    50%{opacity:1;filter:drop-shadow(0 0 3px rgba(46,125,118,.5));}
+  }
+  .path-doc{animation:docPulse 1.8s ease-in-out infinite;}
+  @keyframes flowMove{
+    0%{stroke-dashoffset:24;}
+    100%{stroke-dashoffset:0;}
+  }
+  .flow-line{stroke-dasharray:4 4;animation:flowMove .9s linear infinite;}
+  @keyframes arrowNudge{
+    0%,100%{transform:translateX(0);}
+    50%{transform:translateX(4px);}
+  }
+  .flow-arrow{animation:arrowNudge 1.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
+  @media (prefers-reduced-motion: reduce){
+    .path-dot,.path-doc,.flow-line,.flow-arrow,.net-dot{animation:none !important;}
+  }
+  .avatar{
+    width:42px;height:42px;border-radius:99px;object-fit:cover;flex-shrink:0;
+    box-shadow:0 0 0 3px var(--card),0 3px 10px rgba(35,33,28,.12);
+  }
 </style>
 </head>
 <body>
 
-<nav class="top">
-  <div class="in">
-    <span class="brand">Target <i>School</i></span>
-    <a class="btn btn-primary" href="https://anastasialushnikova.com/start/?from=ads" data-cta>Начать · 1 490 ₽</a>
-  </div>
-</nav>
-
-<!-- HERO. Один вопрос экрана: «что мне тут предлагают и почему это про меня» -->
-<header class="wrap hero">
-  <div class="hero-grid">
-    <div>
-      <span class="kicker">Профессия · Таргетолог</span>
-      <h1 style="margin-top:16px">Что изменится через год, если оставить всё как есть? <em>Ничего.</em></h1>
-      <p class="sub" style="margin-top:24px">Тренажёр таргетолога учит профессии с нуля до первого клиента. Ты сразу делаешь настоящую работу: кабинет, документы, запуск. Час в день, с телефона.</p>
-      <div class="both">
-        <div><b>Начинаешь с нуля</b><span>Тренажёр ведёт с первого шага и объясняет каждое новое слово. Техническую часть выполняет нейросеть.</span></div>
-        <div><b>Уже работаешь в таргете</b><span>Внутри методика 2026: широкая аудитория, тесты креативов, работа с новыми алгоритмами Meta*. Совет «один интерес, одна группа» больше не работает.</span></div>
+<!-- БЛОК 1. ПЕРВЫЙ ЭКРАН -->
+<section class="section hero-section">
+  <svg class="world-net" viewBox="0 0 300 300" fill="none">
+    <line x1="40" y1="60" x2="120" y2="30" stroke="#5fb8ae" stroke-width="1" opacity=".4"/>
+    <line x1="120" y1="30" x2="200" y2="70" stroke="#5fb8ae" stroke-width="1" opacity=".4"/>
+    <line x1="200" y1="70" x2="260" y2="140" stroke="#5fb8ae" stroke-width="1" opacity=".4"/>
+    <line x1="260" y1="140" x2="180" y2="180" stroke="#5fb8ae" stroke-width="1" opacity=".4"/>
+    <line x1="180" y1="180" x2="90" y2="150" stroke="#5fb8ae" stroke-width="1" opacity=".4"/>
+    <line x1="90" y1="150" x2="30" y2="220" stroke="#5fb8ae" stroke-width="1" opacity=".4"/>
+    <line x1="90" y1="150" x2="150" y2="240" stroke="#5fb8ae" stroke-width="1" opacity=".4"/>
+    <line x1="150" y1="240" x2="230" y2="220" stroke="#5fb8ae" stroke-width="1" opacity=".4"/>
+    <line x1="120" y1="30" x2="90" y2="150" stroke="#5fb8ae" stroke-width="1" opacity=".25"/>
+    <line x1="200" y1="70" x2="180" y2="180" stroke="#5fb8ae" stroke-width="1" opacity=".25"/>
+    <circle class="net-dot" style="animation-delay:0s" cx="40" cy="60" r="3.5" fill="#2e7d76"/>
+    <circle class="net-dot" style="animation-delay:.3s" cx="120" cy="30" r="4" fill="#2e7d76"/>
+    <circle class="net-dot" style="animation-delay:.6s" cx="200" cy="70" r="3.5" fill="#2e7d76"/>
+    <circle class="net-dot" style="animation-delay:.9s" cx="260" cy="140" r="4.5" fill="#2e7d76"/>
+    <circle class="net-dot" style="animation-delay:1.2s" cx="180" cy="180" r="3.5" fill="#2e7d76"/>
+    <circle class="net-dot" style="animation-delay:1.5s" cx="90" cy="150" r="5" fill="#5fb8ae"/>
+    <circle class="net-dot" style="animation-delay:1.8s" cx="30" cy="220" r="3.5" fill="#2e7d76"/>
+    <circle class="net-dot" style="animation-delay:2.1s" cx="150" cy="240" r="4" fill="#2e7d76"/>
+    <circle class="net-dot" style="animation-delay:2.4s" cx="230" cy="220" r="3.5" fill="#2e7d76"/>
+  </svg>
+  <div class="wrap">
+    <div class="kicker">Тренажёр таргетолога</div>
+    <h1>Освой профессию таргетолога. <span class="ms">Зарабатывай из любой точки мира</span></h1>
+    <p class="sub">Десять простых блоков, шаг за шагом, от начала до готового кейса, который можно показать клиенту. Тренажёр устроен так, что дойти до конца может каждая.</p>
+    <svg viewBox="0 0 400 30" width="100%" height="30" style="max-width:420px;margin-top:22px;display:block;" fill="none">
+      <line x1="6" y1="15" x2="368" y2="15" stroke="var(--line)" stroke-width="2"/>
+      <circle class="path-dot" style="animation-delay:0s" cx="6" cy="15" r="4" fill="var(--teal)"/>
+      <circle class="path-dot" style="animation-delay:.18s" cx="46" cy="15" r="4" fill="var(--teal)"/>
+      <circle class="path-dot" style="animation-delay:.36s" cx="86" cy="15" r="4" fill="var(--teal)"/>
+      <circle class="path-dot" style="animation-delay:.54s" cx="126" cy="15" r="4" fill="var(--teal)"/>
+      <circle class="path-dot" style="animation-delay:.72s" cx="166" cy="15" r="4" fill="var(--teal)"/>
+      <circle class="path-dot" style="animation-delay:.9s" cx="206" cy="15" r="4" fill="var(--teal)"/>
+      <circle class="path-dot" style="animation-delay:1.08s" cx="246" cy="15" r="4" fill="var(--teal)"/>
+      <circle class="path-dot" style="animation-delay:1.26s" cx="286" cy="15" r="4" fill="var(--teal)"/>
+      <circle class="path-dot" style="animation-delay:1.44s" cx="326" cy="15" r="4" fill="var(--teal)"/>
+      <circle class="path-dot" style="animation-delay:1.62s" cx="366" cy="15" r="4" fill="var(--teal-light)"/>
+      <rect class="path-doc" x="382" y="5" width="14" height="20" rx="2" fill="var(--teal)"/>
+    </svg>
+    <a class="cta" href="#price">Начать первый блок</a>
+    <div class="signature">
+      <div class="dot" style="width:36px;height:36px;border-radius:99px;background:var(--teal-wash);display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--teal);font-size:14px;">TS</div>
+      <div>
+        <b>Школа Target School</b>
+        <span>С 2017 года · больше 4000 выпускниц</span>
       </div>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="https://anastasialushnikova.com/start/?from=ads" data-cta>Начать сегодня<small>1 490 ₽ · доступ 12 месяцев</small></a>
-        <a class="btn btn-secondary" href="#how">Как это устроено</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- БЛОК 2. УЗНАВАНИЕ -->
+<section class="section-tight">
+  <div class="wrap">
+    <h2>Знакомая ситуация?</h2>
+    <div class="grid3">
+      <div class="scenario">
+        <svg width="26" height="26" viewBox="0 0 28 28" fill="none" style="margin-bottom:10px;">
+          <rect x="4" y="4" width="20" height="20" rx="10" stroke="#2e7d76" stroke-width="1.4" stroke-dasharray="2.5 3"/>
+          <circle cx="14" cy="14" r="3" fill="#2e7d76"/>
+        </svg>
+        <div class="tag">Декрет</div>
+        <p>Декрет заканчивается. В офис возвращаться не хочешь. Дома тревожно, время идёт, а своих денег нет.</p>
       </div>
-      <p class="note">«Ничего» это ответ самой аудитории. Мы спросили 790 человек перед стартом обучения, это слово прозвучало 236 раз. Само не сдвинется.</p>
-    </div>
-    <div class="up">
-      <!-- макет продукта, вёрстка вместо 3D -->
-      <div class="phone" aria-hidden="true">
-        <div class="screen">
-          <div class="p-top">
-            <div class="p-kicker">Урок 2 · Шаг 3 из 7</div>
-            <div class="p-title">Анализ твоей ниши</div>
-          </div>
-          <div class="p-bar"><i></i></div>
-          <div class="p-card">
-            <b>Промпт готов. Скопируй его в нейросеть</b>
-            <span>Результат вставишь в поле ниже, панель соберёт из него документ.</span>
-            <div class="p-prompt">Ты маркетолог-аналитик. Изучи нишу «кондитер на заказ» и опиши три сегмента покупателей…</div>
-            <span class="p-copy">Скопировать</span>
-          </div>
-          <span class="p-next">Дальше</span>
-        </div>
+      <div class="scenario">
+        <svg width="26" height="26" viewBox="0 0 28 28" fill="none" style="margin-bottom:10px;">
+          <line x1="6" y1="8" x2="22" y2="8" stroke="#2e7d76" stroke-width="1.4"/>
+          <line x1="14" y1="11" x2="14" y2="15" stroke="#2e7d76" stroke-width="1.4"/>
+          <circle cx="14" cy="18" r="3" fill="#2e7d76"/>
+        </svg>
+        <div class="tag">Найм</div>
+        <p>Работа надоела. Потолок в зарплате. Хочется уйти из найма, но страшно прыгнуть в неизвестность.</p>
+      </div>
+      <div class="scenario">
+        <svg width="26" height="26" viewBox="0 0 28 28" fill="none" style="margin-bottom:10px;">
+          <path d="M14 5a9 9 0 1 1-7.5 15" stroke="#2e7d76" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="6.5" cy="20" r="2" fill="#2e7d76"/>
+        </svg>
+        <div class="tag">Уже училась</div>
+        <p>Слова знаешь. Кнопку так и не нажала. Клиентов нет, и по-прежнему страшно.</p>
       </div>
     </div>
   </div>
-</header>
-
-<!-- ДОВЕРИЕ. Только верифицированные цифры -->
-<div class="trust">
-  <div class="wrap trust-grid up">
-    <div><b>17 лет</b><span>в маркетинге</span></div>
-    <div><b>С 2017</b><span>работает Target School</span></div>
-    <div><b>4 000+</b><span>выпускников школы</span></div>
-    <div><b>Эксмо</b><span>издательство книги автора</span></div>
-  </div>
-</div>
-
-<!-- ПРОБЛЕМА. Один вопрос экрана: «это про меня?» -->
-<section class="wrap narrow pad up">
-  <span class="kicker">Знакомая точка</span>
-  <h2>Узнаёшь себя?</h2>
-  <div class="voices">
-    <div class="card voice"><b>«Переехала, а зацепиться не за что»</b><span>Местную работу без языка и документов не берут, удалёнка на Россию отвалилась. Нужна профессия, которая едет с тобой в любую страну.</span></div>
-    <div class="card voice"><b>«Декрет заканчивается, в офис не хочу»</b><span>Хочется остаться с ребёнком и работать из дома.</span></div>
-    <div class="card voice"><b>«Устала от найма, упёрлась в потолок»</b><span>Работы много, доход стоит на месте.</span></div>
-    <div class="card voice"><b>«Уже училась, вышла теоретиком»</b><span>Курс пройден. Структуры в голове нет, брать клиентов страшно.</span></div>
-    <div class="card voice"><b>«Хочу свои деньги»</b><span>Ни у кого не просить. Самой планировать свой день.</span></div>
-  </div>
 </section>
 
-<!-- РЕШЕНИЕ. Один вопрос экрана: «чем это отличается от курса» -->
-<section class="wrap narrow pad up">
-  <span class="kicker">Решение</span>
-  <h2>Это работа руками, без видеоуроков</h2>
-  <p class="sub">Внутри панель с десятью уроками. Каждый экран это одно маленькое действие: прочитала, сделала, нажала «дальше». Панель даёт готовый промпт, ты несёшь его в нейросеть и возвращаешь результат. Нейросеть выполняет техническую часть, ты принимаешь решения. Страх «я гуманитарий, не разберусь» больше не работает.</p>
-</section>
-
-<!-- ВОЗМОЖНОСТИ. Один вопрос экрана: «что я унесу» -->
-<section class="wrap pad up">
-  <div class="narrow" style="margin:0">
-    <span class="kicker">Что унесёшь</span>
-    <h2>Готовые документы, не конспекты</h2>
-  </div>
-  <div class="feat">
-    <div class="card">
-      <div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18"/></svg></div>
-      <h3>Рекламный кабинет</h3><p>Настроен под твою страну, с пометками риска на каждом шаге.</p>
+<!-- БЛОК 3. ПРОБЛЕМА СТАРОГО ПОДХОДА -->
+<section class="section-tight">
+  <div class="wrap">
+    <h2>Ты смотрела уроки. Кнопки так и не нажала</h2>
+    <div class="compare">
+      <div class="box old">
+        <svg width="56" height="56" viewBox="0 0 64 64" fill="none" style="margin-bottom:10px;">
+          <path d="M46 24a18 18 0 1 0 2 10" stroke="#b0483b" stroke-width="2" stroke-linecap="round"/>
+          <path d="M46 14v10h-10" stroke="#b0483b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="lbl">Обычный курс</div>
+        <p>Объясняет, показывает, даёт домашку. Человек закрывает вкладку, и знания остаются в голове, а руки так ничего и не тронули.</p>
+      </div>
+      <div class="box new">
+        <svg width="56" height="56" viewBox="0 0 64 64" fill="none" style="margin-bottom:10px;">
+          <line x1="6" y1="32" x2="42" y2="32" stroke="#2e7d76" stroke-width="2" stroke-linecap="round" class="flow-line"/>
+          <path class="flow-arrow" d="M34 24l8 8-8 8" stroke="#2e7d76" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <rect class="path-doc" x="48" y="20" width="10" height="24" rx="2" stroke="#2e7d76" stroke-width="2"/>
+        </svg>
+        <div class="lbl">Тренажёр</div>
+        <p>С первого блока ты делаешь настоящую работу таргетолога своими руками и уносишь готовый документ. Не пересказ урока. Документ для заказчика.</p>
+      </div>
     </div>
-    <div class="card">
-      <div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
-      <h3>Анализ ниши и аудитории</h3><p>Сделан твоими руками по промптам из практики, остаётся у тебя.</p>
+    <p style="margin-top:14px;font-size:13.5px;color:var(--muted);">27 из 100 учениц Target School до тренажёра уже где-то учились. Слова знают. Практики нет.</p>
+  </div>
+</section>
+
+<!-- БЛОК 4. НОВЫЙ ПОДХОД -->
+<section class="section-tight">
+  <div class="wrap">
+    <div class="card accent">
+      <h2 style="font-size:22px;margin-bottom:12px;">Нейросеть делает тяжёлое. Ты остаёшься нужной</h2>
+      <svg viewBox="0 0 320 90" width="100%" height="auto" style="max-width:360px;margin:6px 0 16px;" fill="none">
+        <rect x="8" y="30" width="30" height="30" rx="5" stroke="#2e7d76" stroke-width="1.5"/>
+        <line x1="38" y1="45" x2="88" y2="45" stroke="#2e7d76" stroke-width="1.5" class="flow-line"/>
+        <circle cx="118" cy="45" r="22" stroke="#2e7d76" stroke-width="1.5"/>
+        <circle cx="110" cy="38" r="2.5" fill="#2e7d76"/>
+        <circle cx="126" cy="38" r="2.5" fill="#2e7d76"/>
+        <circle cx="118" cy="53" r="2.5" fill="#2e7d76"/>
+        <line x1="140" y1="45" x2="190" y2="45" stroke="#2e7d76" stroke-width="1.5" class="flow-line"/>
+        <circle cx="220" cy="45" r="22" stroke="#2e7d76" stroke-width="1.5"/>
+        <path class="flow-arrow" d="M210 46l7 7 15-15" stroke="#2e7d76" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M220 67c0 16-193 16-193-3" stroke="#a09a90" stroke-width="1" stroke-dasharray="3 3" fill="none"/>
+        <path d="M27 64l-5-6 7-2" stroke="#a09a90" stroke-width="1" stroke-linecap="round"/>
+        <text x="5" y="20" font-family="Inter,sans-serif" font-size="10" fill="#8a857c">задача</text>
+        <text x="96" y="20" font-family="Inter,sans-serif" font-size="10" fill="#8a857c">нейросеть</text>
+        <text x="192" y="20" font-family="Inter,sans-serif" font-size="10" fill="#8a857c">твоё решение</text>
+      </svg>
+      <p>Раньше таргетолог держал всё в голове: аудиторию, тексты, цифры. Сейчас нейросеть пишет, считает, разбирает выгрузку за минуту.</p>
+      <p style="margin-top:10px;">Возникает честный вопрос: если нейросеть умеет так много, зачем нужен человек?</p>
+      <p style="margin-top:10px;">Затем, что нейросеть не почувствует, что креатив приелся клиенту. Не проведёт переговоры о цене. Не поймёт, чего боится живой человек по ту сторону экрана.</p>
+      <p style="margin-top:10px;"><b style="color:var(--ink);">В тренажёре ты учишься быть головой.</b> Ставить задачу, проверять результат, принимать решение.</p>
     </div>
-    <div class="card">
-      <div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h16M6 16V8m6 8V5m6 11v-6"/></svg></div>
-      <h3>Структура кампании</h3><p>Готовая связка: аудитория, тексты объявлений, план запуска.</p>
+  </div>
+</section>
+
+<!-- БЛОК 5. КАК ЭТО РАБОТАЕТ -->
+<section class="section-tight">
+  <div class="wrap">
+    <h2>Один блок, один вечер</h2>
+    <div class="card timeline">
+      <div class="row">
+        <div class="num">01</div>
+        <div class="body"><b>Получаешь задачу</b><p>Готовый профессиональный промпт для блока «Анализ аудитории».</p></div>
+      </div>
+      <div class="row">
+        <div class="num">02</div>
+        <div class="body"><b>Несёшь в свою нейросеть</b><p>Любую, с которой удобно. Она за минуту собирает разбор: сегменты, боли, страхи, возражения, готовые настройки.</p></div>
+      </div>
+      <div class="row">
+        <div class="num">03</div>
+        <div class="body"><b>Разбираешь вместе с тренажёром</b><p>Простыми словами, без жаргона. Панель помогает понять, что получилось.</p></div>
+      </div>
+      <div class="row">
+        <div class="num">04</div>
+        <div class="body"><b>Уносишь документ</b><p>Такой на бирже фриланса заказывают от 5000 рублей. Час, полтора, с телефона.</p></div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- БЛОК 6. ПОЧЕМУ НЕ КУРС -->
+<section class="section-tight">
+  <div class="wrap">
+    <h2>Мы не обещаем доход. Мы даём метод</h2>
+    <p class="lead">Скажу честно, доход я тебе не обещаю. Его никто не может обещать, если хочет остаться честным человеком.</p>
+    <p style="margin-top:14px;max-width:560px;">Рынок таргета за 2026 год устал от курсов, где вчерашнего новичка учат продавать себя за сорок тысяч, клиент получает слитый бюджет, а потом ругает всех таргетологов подряд. Это не абстрактный страх. Люди прямо об этом пишут.</p>
+    <p style="margin-top:10px;max-width:560px;">Тренажёр учит другому. Честно оценивать свой уровень. Не продавать себя дороже, чем умеешь сегодня. Расти шаг за шагом, а не обещать чужой результат в первый месяц.</p>
+  </div>
+</section>
+
+<!-- БЛОК 7. АВТОР -->
+<section class="section-tight">
+  <div class="wrap">
+    <h2>17 лет в маркетинге. Не сразу пришла к этому формату</h2>
     <div class="card">
-      <div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8a5 5 0 1 0-10 0c0 5-2 6-2 6h14s-2-1-2-6"/><path d="M10 18a2 2 0 0 0 4 0"/></svg></div>
-      <h3>Нейро-куратор внутри</h3><p>Отвечает на вопросы по ходу и помнит твою цель. План поиска первых клиентов тоже здесь.</p>
+      <p>Меня зовут Анастасия Лушникова. С 2017 года веду свою школу, за это время через неё прошло больше 4000 человек.</p>
+      <p style="margin-top:10px;">Годами я видела одно и то же. Человек честно смотрит уроки, честно кивает, а до практики так и не доходит. Смотреть и делать - разные мышцы. Тренажёр качает вторую.</p>
+      <p style="margin-top:10px;">Тренажёр появился из этого наблюдения. Не ещё один курс с видео. Инструмент, где практика встроена в каждый блок, а не отложена на потом.</p>
+      <div class="signature">
+        <img src="anastasia-photo.webp" alt="Анастасия Лушникова" class="avatar" style="object-position:50% 20%;">
+        <div><b>Анастасия Лушникова</b><span>Основатель Target School</span></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- КАК РАБОТАЕТ -->
-<section class="wrap narrow pad up" id="how">
-  <span class="kicker">Как это устроено</span>
-  <h2>Четыре шага, по кругу</h2>
-  <div class="steps">
-    <div class="step"><h3>Открываешь урок</h3><p>Один экран, одно действие. Панель ведёт за руку, длинных лекций нет.</p></div>
-    <div class="step"><h3>Копируешь промпт в нейросеть</h3><p>Промпты собраны из 17 лет работы в маркетинге и проверены на практике.</p></div>
-    <div class="step"><h3>Возвращаешь результат в панель</h3><p>Панель собирает из него рабочий документ. Первый будет готов в тот же вечер.</p></div>
-    <div class="step"><h3>Идёшь дальше</h3><p>К концу пути у тебя кабинет, документы и план, где искать первых клиентов. Кабинет Meta* меняется, тренажёр обновляется вместе с ним.</p></div>
+<!-- БЛОК 8. ТРИ ИСТОРИИ -->
+<section class="section-tight">
+  <div class="wrap">
+    <h2>Что происходит, когда человек <span class="ms">доходит до дела</span></h2>
+    <p style="margin-bottom:18px;">Три истории ниже, это не результаты тренажёра. Это опыт работы со мной лично, в разных нишах. Показываю их, чтобы ты видела: метод, по которому построен тренажёр, проверен годами и разными людьми.</p>
+    <div class="grid3">
+      <div class="case">
+        <div class="who"><img src="nazym-photo.jpeg" alt="Назым" class="avatar" style="object-position:50% 15%;"><b>Назым</b></div>
+        <p>Пришла в 2020 году, доход 30 000 ₽, мама троих детей. Прошла обучение таргету, потом сопровождение. Через три года открыла свою онлайн-школу.</p>
+        <svg viewBox="0 0 120 40" width="100%" height="34" fill="none" style="margin-top:10px;">
+          <circle cx="12" cy="28" r="4" fill="#5fb8ae"/>
+          <line x1="20" y1="26" x2="66" y2="14" stroke="#2e7d76" stroke-width="1.2" stroke-dasharray="2 3"/>
+          <circle cx="78" cy="12" r="12" fill="#2e7d76"/>
+        </svg>
+        <div class="stat">3 года · <b>30 000 → 500 000 ₽</b></div>
+      </div>
+      <div class="case">
+        <div class="who"><img src="nadezhda-photo.jpeg" alt="Надежда" class="avatar"><b>Надежда</b></div>
+        <p>Дизайнер, декрет, переезд в другую страну с нуля. Стала соавтором мастер-классов по упаковке. Сейчас ведёт свои программы несколько раз в год.</p>
+        <svg viewBox="0 0 120 40" width="100%" height="34" fill="none" style="margin-top:10px;">
+          <line x1="20" y1="32" x2="100" y2="32" stroke="var(--line)" stroke-width="1"/>
+          <line x1="60" y1="30" x2="60" y2="8" stroke="#2e7d76" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M52 16l8-8 8 8" stroke="#2e7d76" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div class="stat">Первый запуск · <b>200 000 ₽</b></div>
+      </div>
+      <div class="case">
+        <div class="who"><img src="lyubov-photo.jpeg" alt="Любовь" class="avatar" style="object-position:50% 25%;"><b>Любовь</b></div>
+        <p>Эксперт по CRM-маркетингу, опыт в Leroy Merlin, Tele2, Сбербанке. Запустили фокус-группу без вложений в рекламу и получили первый рабочий кейс.</p>
+        <svg viewBox="0 0 120 40" width="100%" height="34" fill="none" style="margin-top:10px;">
+          <circle cx="30" cy="14" r="3" fill="#2e7d76"/><circle cx="45" cy="14" r="3" fill="#2e7d76"/>
+          <circle cx="60" cy="14" r="3" fill="#2e7d76"/><circle cx="75" cy="14" r="3" fill="#2e7d76"/>
+          <circle cx="37" cy="26" r="3" fill="#5fb8ae"/><circle cx="52" cy="26" r="3" fill="#5fb8ae"/>
+          <circle cx="67" cy="26" r="3" fill="#5fb8ae"/>
+        </svg>
+        <div class="stat">Фокус-группа · <b>7 человек</b></div>
+      </div>
+    </div>
+    <p style="margin-top:16px;font-style:normal;">Три раза одно и то же. Человек проходит путь от ученика до своего дела. Я видела эту закономерность так часто, что построила тренажёр вокруг неё. Знания без практики никуда не ведут.</p>
   </div>
 </section>
 
-<!-- СОМНЕНИЯ вместо отзывов: честный разговор -->
-<section class="wrap narrow pad up">
-  <span class="kicker">Честно</span>
-  <h2>Про твои сомнения</h2>
-  <div class="doubts">
-    <div class="card"><span class="q">«Мало опыта, практиковаться страшно»</span><p>Первый запуск идёт по шагам: где нажать, что написать, что проверить. Маленькие шаги, быстрые «получилось».</p></div>
-    <div class="card"><span class="q">«Уже проходила курс, ничего не поменялось»</span><p>Тут нечего «пройти и забыть». Каждый шаг заканчивается готовым документом, который нужен в работе с клиентами.</p></div>
-    <div class="card"><span class="q">«Нет времени»</span><p>Час в день с телефона. Треть наших учениц располагает пятью часами в неделю, тренажёр собран под этот ритм.</p></div>
+<!-- БЛОК 9. ЧТО ВНУТРИ -->
+<section class="section-tight">
+  <div class="wrap">
+    <h2>Десять блоков, десять готовых документов</h2>
+    <p style="margin-bottom:16px;">Каждый только то, что нужно для дела.</p>
+    <div class="lesson-grid">
+      <div class="lesson"><div class="n">01</div><b>Анализ аудитории</b><p>Документ с сегментами, болями, возражениями и настройками для кабинета.</p></div>
+      <div class="lesson"><div class="n">02</div><b>Конкуренты и креативы</b><p>Разбор чужой рекламы, форматы, готовые промпты для текстов и брифа дизайнеру.</p></div>
+      <div class="lesson"><div class="n">03</div><b>Кабинет под твою страну</b><p>Полная сборка рекламного кабинета с нуля, по реальным экранам.</p></div>
+      <div class="lesson"><div class="n">04</div><b>Если прилетит бан</b><p>Протокол первых суток, готовый текст апелляции, только официальные каналы.</p></div>
+      <div class="lesson"><div class="n">05</div><b>Где взять первого клиента</b><p>Рабочий канал поиска, живой скрипт, готовые сообщения и офферы.</p></div>
+      <div class="lesson"><div class="n">06</div><b>Запуск тестовой кампании</b><p>Пошаговая сборка настоящей кампании, экран за экраном.</p></div>
+      <div class="lesson"><div class="n">07</div><b>Цифры и отчёт</b><p>Как читать цифры кампании и собрать понятный отчёт для клиента.</p></div>
+      <div class="lesson"><div class="n">08</div><b>Твой первый кейс</b><p>Тренажёр сам собирает черновик кейса из твоих ответов.</p></div>
+    </div>
+    <p style="margin-top:14px;font-size:13.5px;color:var(--muted);">Плюс продвинутый раздел про алгоритмы Meta и работу с готовыми аудиториями, и отдельный блок про настройку пикселя.</p>
   </div>
 </section>
 
-<!-- ТАРИФ. Один, карточкой -->
-<section class="wrap pad up">
-  <div class="narrow" style="margin:0 auto; text-align:center">
-    <span class="kicker">Доступ</span>
-    <h2>Одна цена, всё внутри</h2>
-  </div>
-  <div class="card price-card">
-    <div class="old">4 900 ₽</div>
-    <div class="num">1 490 ₽</div>
-    <div class="acc">Доступ на 12 месяцев</div>
-    <p>Профессию внутри проходят за несколько недель. Год даю с запасом, чтобы возвращаться к промптам и стратегиям в работе с реальными клиентами. Цена будет расти вместе с новыми модулями, о каждом повышении предупреждаю заранее.</p>
-    <a class="btn btn-primary" href="https://anastasialushnikova.com/start/?from=ads" data-cta>Оформить доступ<small>регистрация, оплата картой, старт сегодня</small></a>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="wrap narrow pad up">
-  <span class="kicker">Вопросы</span>
-  <h2>Коротко о главном</h2>
-  <div class="faq">
-    <details><summary>Я с полного нуля. Подойдёт?</summary><p>Да, тренажёр начинается с самого начала и объясняет каждое новое слово. Техническую часть выполняет нейросеть, твоя работа думать и принимать решения.</p></details>
-    <details><summary>Я уже работаю в таргете. Мне тут что делать?</summary><p>Кабинет и азы можно пролистать, они лежат отдельными шагами. Дальше идёт то, что поменялось за последние годы: широкая аудитория вместо узких интересов, тесты креативов вместо тестов аудиторий, метод масштабирования 3:2:2, серверное отслеживание через Conversions API. Плюс промпты, которые сокращают подготовку кампании до одного вечера.</p></details>
-    <details><summary>Сколько времени это занимает?</summary><p>Час в день с телефона. Профессию внутри проходят за несколько недель, доступ остаётся на 12 месяцев.</p></details>
-    <details><summary>Что с блокировками кабинетов?</summary><p>Блокировки случаются у всех, обещать их отсутствие было бы нечестно. В тренажёре есть протокол: как настраиваться с учётом страны, как снижать риск и что делать, если блокировка пришла.</p></details>
-    <details><summary>Вы гарантируете доход?</summary><p>Нет. Гарантий дохода не даёт ни одно честное обучение. Тренажёр даёт профессию, документы и план поиска первых клиентов, дальше работа твоя.</p></details>
-    <details><summary>Кто автор?</summary><p>Анастасия Лушникова. 17 лет в маркетинге, в таргете с 2016 года. Основатель Target School, школа работает с 2017 года, больше 4 000 выпускников. Автор книги, вышедшей в издательстве Эксмо.</p></details>
+<!-- БЛОК 11. РЕЗУЛЬТАТ -->
+<section class="section-tight" style="background:var(--teal-wash);">
+  <div class="wrap">
+    <h2>Что у тебя будет на руках</h2>
+    <div class="result-list">
+        <div class="result-item"><div class="check">✓</div><p>Готовый документ анализа аудитории под свою нишу</p></div>
+        <div class="result-item"><div class="check">✓</div><p>Собранный с нуля рекламный кабинет</p></div>
+        <div class="result-item"><div class="check">✓</div><p>План действий на случай бана</p></div>
+        <div class="result-item"><div class="check">✓</div><p>Первый рабочий контакт с потенциальным клиентом</p></div>
+        <div class="result-item"><div class="check">✓</div><p>Умение находить клиентов. В любой момент открываешь тренажёр и берёшь заказ, без просадки в доходе</p></div>
+        <div class="result-item"><div class="check">✓</div><p>Настоящая тестовая рекламная кампания</p></div>
+        <div class="result-item"><div class="check">✓</div><p>Отчёт с цифрами, который можно показать заказчику</p></div>
+        <div class="result-item"><div class="check">✓</div><p>Готовый кейс для портфолио</p></div>
+    </div>
   </div>
 </section>
 
-<!-- ФИНАЛЬНЫЙ CTA -->
-<section class="wrap narrow pad final up">
-  <h2>Само не сдвинется</h2>
-  <p class="sub">Первый готовый документ будет у тебя уже сегодня вечером.</p>
-  <a class="btn btn-primary" href="https://anastasialushnikova.com/start/?from=ads" data-cta>Начать сегодня · 1 490 ₽</a>
+<!-- БЛОК 13. ВОЗРАЖЕНИЯ -->
+<section class="section-tight">
+  <div class="wrap">
+    <h2>Что тебя может останавливать</h2>
+    <details class="faq"><summary>Это опять развод, как все курсы</summary><p>Я не обещаю доход. Обещаю метод: практику руками, честную оценку своего уровня, без обещаний быстрых денег.</p></details>
+    <details class="faq"><summary>Уже училась, не помогло</summary><p>После первого же блока у тебя на руках документ, а не ощущение прослушанной лекции. Разница чувствуется сразу.</p></details>
+    <details class="faq"><summary>Забанят кабинет, подведу клиента</summary><p>Блокировки Meta в 2026 году стали массовыми у всех. В тренажёре есть отдельный блок с протоколом, как проходить бан честно, не покупая серые аккаунты.</p></details>
+    <details class="faq"><summary>ИИ заменит меня через год</summary><p>Тренажёр учит именно тому, что нейросеть заменить не может: ставить задачу, чувствовать аудиторию, вести переговоры с клиентом.</p></details>
+    <details class="faq"><summary>Мало времени, не потяну</summary><p>Один блок, час-полтора, с телефона. Без дедлайнов и расписания.</p></details>
+    <details class="faq"><summary>Боюсь разочароваться в себе</summary><p>Каждый блок заканчивается маленькой победой, готовым документом. Не один большой результат в конце, а десять маленьких по пути.</p></details>
+    <details class="faq"><summary>А получится ли у меня</summary><p>Школа ведёт учениц с 2017 года. Больше 4000 человек прошли этот путь, многие начинали с нуля и без опыта.</p></details>
+  </div>
+</section>
+
+<!-- БЛОК 14 + 15. ЦЕНА (DUSK, ПОЛНОБОРТНАЯ СЕКЦИЯ) -->
+<section class="section dusk-block" id="price">
+  <div class="wrap">
+    <div class="kicker">Цена</div>
+    <h2>1490 рублей за путь <span class="ms">к первому кейсу</span></h2>
+    <div class="price-num">1490 ₽</div>
+    <p>Не абстрактный курс за пятьдесят тысяч. Десять блоков, каждый с готовым документом, доступ на 365 дней.</p>
+    <p style="margin-top:10px;">Один документ анализа аудитории на фрилансе стоит от 5000 рублей. В тренажёре таких документов десять, плюс собранный кабинет, план на случай бана и готовый кейс.</p>
+    <p style="margin-top:16px;color:var(--gold);font-weight:600;font-size:14px;">Цена вырастет по мере того как в тренажёр добавляются новые блоки. Кто зашёл сейчас, остаётся на своей цене.</p>
+    <a class="price-cta" href="#">Взять тренажёр за 1490 ₽</a>
+  </div>
+</section>
+
+<!-- БЛОК 16. FAQ -->
+<section class="section-tight">
+  <div class="wrap">
+    <h2>Вопросы, которые задают чаще всего</h2>
+    <details class="faq"><summary>Нужен ли опыт с нейросетями?</summary><p>Нет. Есть отдельный экран для тех, кто вообще не пользовался нейросетью, он снимает страх перед инструментом.</p></details>
+    <details class="faq"><summary>Какая нейросеть нужна?</summary><p>Любая, с которой тебе удобно работать. Список из нескольких вариантов есть внутри тренажёра.</p></details>
+    <details class="faq"><summary>Сколько времени нужно в неделю?</summary><p>Один блок за один вечер, час-полтора. Дальше в своём темпе.</p></details>
+    <details class="faq"><summary>А если я вообще новичок?</summary><p>Тренажёр рассчитан на нуль знаний в начале. Каждый термин объясняется при первом появлении.</p></details>
+    <details class="faq"><summary>Что если меня забанят?</summary><p>Есть отдельный блок с протоколом первых суток после бана и готовым текстом апелляции.</p></details>
+    <details class="faq"><summary>Кому подходит?</summary><p>Тем, кто хочет освоить профессию с нуля, и тем, кто уже учился, но застрял между «знаю» и «делаю».</p></details>
+    <details class="faq"><summary>Есть куратор, если застряну?</summary><p>Да. Нейро-куратор в тренажёре обучен на методологии школы и отвечает круглосуточно. Если нужен живой человек, спроси Анастасию или куратора потока, они отвечают в рабочее время.</p></details>
+  </div>
+</section>
+
+<!-- БЛОК 17. ФИНАЛЬНЫЙ CTA -->
+<section class="section">
+  <div class="wrap" style="text-align:center;">
+    <h2 style="text-align:center;">Дойди до своего <span class="ms">первого клиента</span></h2>
+    <p style="max-width:440px;margin:0 auto;">Десять блоков. Ничего лишнего. Каждый заканчивается документом, который живёт дальше урока.</p>
+    <p style="margin-top:6px;font-weight:600;color:var(--ink);">1490 ₽ · доступ на 365 дней · цена дальше будет расти</p>
+    <a class="cta" href="#price">Дойти до своего первого клиента</a>
+  </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <p>Target School · Анастасия Лушникова</p>
-    <p style="margin-top:8px">*Meta признана экстремистской организацией, её деятельность запрещена на территории РФ.</p>
+    <p>Target School · Анастасия Лушникова · с 2017 года</p>
   </div>
 </footer>
 
-<script>
-  try {
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
-    }, { threshold: 0.1 });
-    document.querySelectorAll(".up").forEach(function (el) { io.observe(el); });
-  } catch (e) { document.querySelectorAll(".up").forEach(function (el) { el.classList.add("in"); }); }
-
-  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-  document,'script','https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '2700527913660797');
-  fbq('track', 'PageView');
-  fbq('track', 'ViewContent', { content_name: 'lp-targetolog-premium' });
-
-  document.querySelectorAll("[data-cta]").forEach(function (a) {
-    a.addEventListener("click", function () {
-      try { fbq('track', 'InitiateCheckout', { value: 1490, currency: 'RUB' }); } catch (e) {}
-      try { if (window.ym) ym(108790481, 'reachGoal', 'lp_cta_click'); } catch (e) {}
-    });
-  });
-
-  (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-  m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],
-  k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-  (window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
-  ym(108790481, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
-</script>
-<noscript><img src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1" height="1" width="1" style="display:none" alt="" /></noscript>
 </body>
 </html>
