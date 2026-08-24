@@ -146,7 +146,7 @@
   }
   .price-cta:hover::after,.price-cta:focus-visible::after{left:130%;}
 
-  .hero-section{position:relative;overflow:hidden;}
+  .hero-section{position:relative;overflow:hidden;background:var(--card);}
   .world-net{
     position:absolute;top:-30px;right:-40px;width:340px;height:340px;
     opacity:.55;pointer-events:none;z-index:0;
@@ -204,6 +204,8 @@
     font-family:'Golos Text',sans-serif;font-weight:600;font-size:clamp(48px,9vw,72px);
     color:rgba(46,125,118,.62);line-height:1;letter-spacing:-.02em;
   }
+  .demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:400px;margin:0 auto;}
+  @media(max-width:640px){.demo-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -440,6 +442,30 @@
         </div>
       </div>
     </div>
+
+    <p style="margin:26px 0 14px;font-size:13.5px;color:var(--muted);max-width:400px;">И это не всё. По пути встретятся и другие экраны.</p>
+
+    <div class="demo-grid">
+      <div>
+        <div class="mock-card">
+          <div class="mock-label">Проверь себя</div>
+          <div style="font-size:12.5px;font-weight:600;margin-bottom:10px;line-height:1.4;color:#1D1D1F;">Что делать, если объявление отклонили?</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="border:1.5px solid #34C759;background:rgba(52,199,89,.12);border-radius:8px;padding:8px 10px;font-size:11px;font-weight:700;color:#1B7F3B;">Разобрать причину, подать апелляцию ✓</div>
+            <div style="border:1px solid #E5E5EA;border-radius:8px;padding:8px 10px;font-size:11px;color:#8E8E93;">Создать новый аккаунт</div>
+          </div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--sub);">Мини-тест сразу после темы. Ошиблась, тут же объяснили, идёшь дальше.</p>
+      </div>
+      <div>
+        <div class="mock-card">
+          <div class="mock-label">Словарь</div>
+          <div style="font-size:12.5px;line-height:1.6;color:#1D1D1F;">Смотрим на <span style="border-bottom:1.5px dotted #8E8E93;font-weight:600;">ROAS</span> в отчёте.</div>
+          <div style="background:#F5F5F7;border-radius:10px;padding:9px 11px;margin-top:8px;font-size:11px;line-height:1.5;color:#3A3A3C;">Сколько рублей вернулось на каждый вложенный рубль в рекламу.</div>
+        </div>
+        <p style="margin-top:10px;font-size:13px;color:var(--sub);">Непонятное слово в тексте? Тап, и простое объяснение рядом.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -567,21 +593,27 @@
 <!-- БЛОК 14 + 15. ЦЕНА (DUSK, ПОЛНОБОРТНАЯ СЕКЦИЯ) -->
 <section class="section dusk-block" id="price">
   <div class="wrap">
-    <div class="kicker">Цена</div>
+    <div class="kicker" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <span>Цена</span>
+      <span style="background:rgba(232,180,95,.12);color:var(--gold);border-radius:99px;padding:3px 10px;font-size:11px;letter-spacing:0;text-transform:none;">Обновлено <span id="update-date">сегодня</span></span>
+    </div>
     <h2>1490 рублей за путь <span class="ms">к первому кейсу</span></h2>
-    <div class="price-num">1490 ₽</div>
+    <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;">
+      <div style="font-size:26px;color:var(--dusk-sub);text-decoration:line-through;opacity:.55;">4900 ₽</div>
+      <div class="price-num" style="margin:0;">1490 ₽</div>
+    </div>
     <p>Это не абстрактный курс за пятьдесят тысяч, где платишь один раз и дальше разбираешься сама. За 1490 рублей ты получаешь десять блоков, и каждый заканчивается готовым документом, а доступ остаётся с тобой на 365 дней.</p>
     <p style="margin-top:10px;">Для сравнения: один документ анализа аудитории на бирже фриланса заказывают от 5000 рублей. В тренажёре таких документов десять, и вместе с ними идёт собранный с нуля рекламный кабинет, план действий на случай бана и готовый кейс для портфолио.</p>
-    <p style="margin-top:16px;color:var(--gold);font-weight:600;font-size:14px;">Цена вырастет по мере того как в тренажёр добавляются новые блоки. Кто зашёл сейчас, остаётся на своей цене.</p>
-    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:20px;">
-      <a class="price-cta" href="https://app.lava.top/products/e226dcba-d797-49a1-b300-02f1e0458886" style="margin-top:0;">Взять тренажёр за 1490 ₽</a>
-      <div style="display:flex;align-items:center;gap:4px;">
-        <svg width="52" height="34" viewBox="0 0 60 40" fill="none">
-          <path d="M52 10c-16 3-30 9-40 18" stroke="#e8b45f" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-          <path d="M12 28l8-3M12 28l4 8" stroke="#e8b45f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <p style="margin-top:16px;color:var(--gold);font-weight:600;font-size:14px;">Первые 100 мест по цене 1490 ₽. Дальше цена вырастет, кто зашёл сейчас, остаётся на своей цене навсегда.</p>
+    <div style="margin-top:22px;">
+      <div style="display:flex;align-items:flex-start;gap:6px;padding-left:8px;">
+        <svg width="42" height="40" viewBox="0 0 50 46" fill="none" style="flex-shrink:0;margin-top:2px;">
+          <path d="M12 6c3 14 10 24 22 30" stroke="#e8b45f" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+          <path d="M34 32l-9-2M34 32l-3 9" stroke="#e8b45f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
         </svg>
-        <span style="font-family:'Marck Script',cursive;color:var(--gold);font-size:20px;line-height:1.2;max-width:170px;">куратор рядом, поможет дойти до результата</span>
+        <span style="font-family:'Marck Script',cursive;color:var(--gold);font-size:20px;line-height:1.25;max-width:200px;">куратор рядом, поможет дойти до результата</span>
       </div>
+      <a class="price-cta" href="https://app.lava.top/products/e226dcba-d797-49a1-b300-02f1e0458886" style="margin-top:6px;">Взять тренажёр за 1490 ₽</a>
     </div>
   </div>
 </section>
@@ -616,5 +648,13 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  var months=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  var d=new Date();
+  var el=document.getElementById('update-date');
+  if(el) el.textContent=d.getDate()+' '+months[d.getMonth()]+' '+d.getFullYear();
+})();
+</script>
 </body>
 </html>
