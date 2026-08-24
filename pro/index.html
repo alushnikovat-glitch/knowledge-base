@@ -76,7 +76,8 @@
   .cta.ghost::after{display:none;}
   .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-  @media(max-width:640px){.grid3,.grid2{grid-template-columns:1fr;}}
+  .grid-auto{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;}
+  @media(max-width:640px){.grid3,.grid2,.grid-auto{grid-template-columns:1fr;}}
   .scenario{padding:4px 0 4px 16px;border-left:2px solid var(--line);}
   .scenario .tag{font-size:11px;font-weight:600;color:var(--teal);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;}
   .scenario p{font-size:14.5px;}
@@ -253,7 +254,7 @@
 <section class="section-tight">
   <div class="wrap">
     <h2>Знакомая ситуация?</h2>
-    <div class="grid3">
+    <div class="grid-auto">
       <div class="scenario">
         <svg width="26" height="26" viewBox="0 0 28 28" fill="none" style="margin-bottom:10px;">
           <rect x="4" y="4" width="20" height="20" rx="10" stroke="#2e7d76" stroke-width="1.4" stroke-dasharray="2.5 3"/>
@@ -278,6 +279,16 @@
         </svg>
         <div class="tag">Уже училась</div>
         <p>Слова знаешь. Кнопку так и не нажала. Клиентов нет, и по-прежнему страшно.</p>
+      </div>
+      <div class="scenario">
+        <svg width="26" height="26" viewBox="0 0 28 28" fill="none" style="margin-bottom:10px;">
+          <line x1="6" y1="22" x2="22" y2="22" stroke="#2e7d76" stroke-width="1.4"/>
+          <rect x="7" y="14" width="4" height="8" fill="#2e7d76"/>
+          <rect x="13" y="10" width="4" height="12" fill="#2e7d76"/>
+          <rect x="19" y="6" width="4" height="16" fill="#5fb8ae"/>
+        </svg>
+        <div class="tag">Свой бизнес</div>
+        <p>Затор на рекламе. Настраиваешь себе сама, без посредника, и не платишь таргетологу за то, что можешь сделать сама.</p>
       </div>
     </div>
   </div>
@@ -381,9 +392,9 @@
     <div class="card">
       <p>Меня зовут Анастасия Лушникова. С 2017 года веду свою школу, за это время через неё прошло больше 4000 человек.</p>
       <p style="margin-top:10px;">Годами я видела одно и то же. Человек честно смотрит уроки, честно кивает, а до практики так и не доходит. Смотреть и делать - разные мышцы. Тренажёр качает вторую.</p>
-      <p style="margin-top:10px;">Тренажёр появился из этого наблюдения. Не ещё один курс с видео. Инструмент, где практика встроена в каждый блок, а не отложена на потом.</p>
+      <p style="margin-top:10px;">Тренажёр появился из этого наблюдения. Ученицы кивали на видео, соглашались, а потом закрывали вкладку и не делали ничего сами. Тогда я решила: практика идёт внутри каждого блока, с первого дня, никаких «потом».</p>
       <div class="signature">
-        <img src="anastasia-photo.webp" alt="Анастасия Лушникова" class="avatar" style="object-position:50% 20%;">
+        <img src="anastasia-photo.webp" alt="Анастасия Лушникова" class="avatar" style="object-position:50% 30%;">
         <div><b>Анастасия Лушникова</b><span>Основатель Target School</span></div>
       </div>
     </div>
