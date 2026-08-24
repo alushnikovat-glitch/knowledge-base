@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как собрать экспертный Motion Reels с Claude Code | Анастасия Лушникова</title>
+<meta name="description" content="Полная инструкция: программы, команды, файлы правил и готовый комплект для сборки анимированных Reels без дизайнера и монтажёра.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Marck+Script&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108790481', 'ym');
+    ym(108790481, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108790481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2700527913660797');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Golos Text',sans-serif;background:linear-gradient(165deg,#f4efe4 0%,#efe8d8 40%,#e2e9e6 100%);background-attachment:fixed;color:#23211c;line-height:1.7;font-size:17px}
+a{color:#2e7d76;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;background:rgba(244,239,228,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #e3dcc9}
+.nav-inner{max-width:760px;margin:0 auto;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-weight:600;font-size:16px;color:#23211c}
+.nav-links{display:flex;gap:18px;font-size:14px;font-weight:600}
+.nav-links a{color:#948e84}
+.nav-links a:hover{color:#23211c}
+.wrap{max-width:760px;margin:0 auto;padding:40px 20px 0}
+.meta{font-size:14px;color:#948e84;margin-bottom:16px}
+h1{font-size:clamp(28px,5vw,42px);font-weight:600;line-height:1.2;letter-spacing:-.02em;margin-bottom:8px}
+.h1-pen{font-family:'Marck Script',cursive;font-weight:400;color:#2e7d76;font-size:clamp(24px,4vw,34px);margin-bottom:20px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.tag{background:#ece6d8;border-radius:100px;padding:6px 14px;font-size:13px;font-weight:600;color:#6f6a5e}
+.card{background:#fffdf8;border:1px solid #e3dcc9;border-radius:18px;padding:28px;margin-bottom:24px;box-shadow:0 4px 24px rgba(0,0,0,0.05)}
+.hint{background:#e9f2f0;border:1px solid #bcd8d3;border-radius:18px;padding:22px 28px;margin-bottom:40px;font-size:15px}
+.hint b{color:#2e7d76}
+h2{font-size:26px;font-weight:600;letter-spacing:-.01em;margin:48px 0 16px}
+h3{font-size:19px;font-weight:600;margin:28px 0 10px}
+p{margin-bottom:16px}
+ul,ol{margin:0 0 16px 22px}
+li{margin-bottom:8px}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:#2e7d76;color:#fff;border-radius:10px;font-weight:600;font-size:16px;margin-right:12px;vertical-align:middle}
+.prompt-block{background:#14171a;border-radius:16px;padding:22px;margin:18px 0 24px;position:relative;background-image:radial-gradient(ellipse 85% 55% at 15% 5%,rgba(190,130,55,0.22),transparent 60%)}
+.prompt-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#f5f2ec;white-space:pre-wrap;word-break:break-word}
+.prompt-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#e8b45f;margin-bottom:12px}
+.copy-btn{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.12);color:#f5f2ec;border:1px solid rgba(255,255,255,0.16);border-radius:8px;padding:7px 14px;font-family:'Golos Text',sans-serif;font-size:13px;font-weight:600;cursor:pointer}
+.copy-btn:hover{background:rgba(255,255,255,0.2)}
+.note{background:#fffdf8;border-left:3px solid #2e7d76;border-radius:0 12px 12px 0;padding:16px 22px;margin:20px 0;font-size:15px;color:#3d3b35}
+.viz{margin:10px 0 30px}
+.viz svg{display:block;width:100%;height:auto}
+.viz-cap{font-size:13px;color:#948e84;text-align:center;margin-top:8px}
+.product{background:#14171a;background-image:radial-gradient(ellipse 85% 55% at 15% 5%,rgba(190,130,55,0.38),transparent 60%);border-radius:20px;padding:36px 32px;margin:56px 0 24px;color:#f5f2ec}
+.product h2{margin-top:0;font-size:28px;color:#ffffff}
+.product .pen{font-family:'Marck Script',cursive;font-weight:400;color:#e8b45f;font-size:26px;margin-bottom:14px}
+.product p{color:rgba(255,255,255,0.82)}
+.product li{color:rgba(255,255,255,0.82)}
+.product li::marker{color:#e8b45f}
+.price-row{display:flex;align-items:baseline;gap:16px;margin:14px 0 2px;flex-wrap:wrap}
+.price-old{font-size:22px;font-weight:500;color:rgba(255,255,255,0.55);position:relative;white-space:nowrap}
+.price-old::after{content:"";position:absolute;left:0;top:52%;height:2.5px;width:0;background:#e05252;transform:rotate(-6deg);border-radius:2px;animation:strike 0.6s ease-out 0.9s forwards}
+@keyframes strike{to{width:100%}}
+.price-new{font-size:38px;font-weight:600;color:#e8b45f;white-space:nowrap}
+.price-note{font-size:15px;color:rgba(255,255,255,0.65);margin-bottom:6px}
+.product .btn{position:relative;overflow:hidden}
+.product .btn::before{content:"";position:absolute;top:-60%;left:-80%;width:50%;height:220%;background:linear-gradient(105deg,transparent,rgba(255,255,255,0.55),transparent);transform:rotate(12deg);animation:shine 3.2s ease-in-out 1.4s infinite}
+@keyframes shine{0%{left:-80%}18%{left:130%}100%{left:130%}}
+@media (prefers-reduced-motion: reduce){.price-old::after{animation:none;width:100%}.product .btn::before{animation:none;display:none}}
+.btn{display:inline-block;background:#2e7d76;color:#fff;border-radius:12px;padding:16px 32px;font-weight:600;font-size:17px;margin-top:20px;transition:opacity .15s}
+.btn:hover{opacity:.85}
+.product .btn{background:#e8b45f;color:#14171a}
+.footer{margin-top:72px;border-top:1px solid #e3dcc9;background:#fffdf8}
+.footer-inner{max-width:760px;margin:0 auto;padding:56px 20px 32px}
+.footer h2{margin-top:0;font-size:26px}
+.footer-sub{color:#948e84;margin-bottom:28px}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:28px}
+.footer-card{border:1px solid #e3dcc9;border-radius:14px;padding:20px;display:block}
+.footer-card b{display:block;color:#23211c;margin-bottom:4px}
+.footer-card span{font-size:14px;color:#948e84}
+.footer-banner{background:#ece6d8;border-radius:14px;padding:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.footer-banner b{font-size:18px}
+.copyright{font-size:13px;color:#948e84;text-align:center;padding-top:20px;border-top:1px solid #e3dcc9}
+.viz svg{max-width:460px;margin:0 auto}
+@media(max-width:600px){
+body{font-size:16px}
+.card,.product{padding:22px}
+.nav{position:static;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+.nav-links{gap:12px}
+h1{font-size:28px}
+.h1-pen{font-size:22px}
+h2{font-size:22px}
+.product h2{font-size:24px}
+.btn{display:block;text-align:center}
+.footer-banner .btn{display:inline-block}
+}
+</style>
+<style>
+.download{background:#14171a;background-image:radial-gradient(ellipse 85% 55% at 15% 5%,rgba(190,130,55,0.38),transparent 60%);border-radius:20px;padding:32px;margin:36px 0;color:#f5f2ec}
+.download h3{margin:0 0 10px;font-size:22px;color:#fff}
+.download p{color:rgba(255,255,255,0.82);margin-bottom:10px}
+.download ul{margin:12px 0 4px 20px}
+.download li{color:rgba(255,255,255,0.82)}
+.download li::marker{color:#e8b45f}
+.download .btn{background:#e8b45f;color:#14171a;position:relative;overflow:hidden}
+.download .btn::before{content:"";position:absolute;top:-60%;left:-80%;width:50%;height:220%;background:linear-gradient(105deg,transparent,rgba(255,255,255,0.55),transparent);transform:rotate(12deg);animation:shine 3.2s ease-in-out 1.4s infinite}
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid #e3dcc9;vertical-align:top}
+th{font-weight:600;color:#6f6a5e;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.warn{background:#fdf0ed;border-left:3px solid #b0483b;border-radius:0 12px 12px 0;padding:16px 22px;margin:20px 0;font-size:15px;color:#3d3b35}
+@media(max-width:600px){table{font-size:14px}th,td{padding:9px 8px}.download{padding:22px}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="../">Анастасия Лушникова</a>
+    <div class="nav-links">
+      <a href="https://t.me/target_school1">Telegram</a>
+      <a href="https://www.instagram.com/target_school">Instagram</a>
+      <a href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0">Написать</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<div class="meta">24 августа 2026 · 15 минут чтения · Автор: Анастасия Лушникова</div>
+
+<h1>Как собрать экспертный Motion Reels с Claude Code</h1>
+
+<div class="tags">
+  <span class="tag">AI-маркетинг</span>
+  <span class="tag">Инструменты</span>
+  <span class="tag">Контент</span>
+</div>
+
+<div class="card">
+  <p>Ролик, который вы посмотрели, собран ровно по этим шагам. Я написала сценарий, начитала голос на диктофон и объяснила задачу словами. Картинку собрал код.</p>
+  <p>Дизайнера нет. Монтажёра нет. Видеоредактор я не открывала. На первый ролик ушёл час. Дальше меньше, потому что правила уже написаны и работают на все следующие ролики.</p>
+  <p>Из программирования не нужно ничего. Нужно уметь объяснять задачу словами и говорить, что вам не нравится. Вот честно, это весь список навыков.</p>
+</div>
+
+<div class="hint">
+  <b>Как пользоваться инструкцией.</b> Идите по шагам сверху вниз. Тёмные блоки копируются кнопкой целиком. В конце статьи лежит комплект файлов: правила, скрипты, настройки. С ним первые четыре шага занимают пять минут.
+</div>
+
+<h2>Что получится</h2>
+<p>Вертикальный ролик 1080×1920 с вашей озвучкой, субтитрами и анимацией. Интерфейсы, схемы и графики рисуются кодом, поэтому любую правку вы вносите словами и получаете новую версию за минуту.</p>
+
+<div class="viz">
+<svg viewBox="0 0 360 380" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <rect x="40" y="8" width="280" height="64" rx="14" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <circle cx="90" cy="40" r="13" fill="none" stroke="#23211c" stroke-width="2"/>
+  <rect x="86" y="33" width="8" height="11" rx="4" fill="#23211c"/>
+  <text x="120" y="46" font-size="16" font-weight="600" fill="#23211c">Ваш голос</text>
+  <text x="180" y="94" text-anchor="middle" font-size="18" fill="#948e84">↓</text>
+  <rect x="40" y="106" width="280" height="76" rx="14" fill="#14171a"/>
+  <text x="180" y="138" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">Claude Code + Remotion</text>
+  <text x="180" y="162" text-anchor="middle" font-size="13" fill="#c9c5be">код · анимация · субтитры</text>
+  <text x="180" y="204" text-anchor="middle" font-size="18" fill="#948e84">↓</text>
+  <rect x="40" y="216" width="280" height="64" rx="14" fill="#fffdf8" stroke="#2e7d76" stroke-width="2"/>
+  <polygon points="86,236 86,260 106,248" fill="#2e7d76"/>
+  <text x="126" y="254" font-size="16" font-weight="600" fill="#23211c">Готовый Reels</text>
+  <rect x="40" y="304" width="280" height="52" rx="26" fill="#ece6d8"/>
+  <text x="180" y="336" text-anchor="middle" font-size="15" font-weight="600" fill="#23211c">1 час · 0 ₽ подрядчикам</text>
+</svg>
+</div>
+
+<h2>Что понадобится</h2>
+<table>
+<tr><th>Что</th><th>Зачем</th><th>Платно</th></tr>
+<tr><td>Mac или Windows</td><td>рабочая машина</td><td>нет</td></tr>
+<tr><td>Claude Code</td><td>собирает проект и пишет код</td><td>подписка Claude</td></tr>
+<tr><td>Node.js</td><td>среда, в которой работает Remotion</td><td>нет</td></tr>
+<tr><td>Remotion</td><td>рисует видео кодом</td><td>бесплатно для личного и малого бизнеса</td></tr>
+<tr><td>Диктофон в телефоне</td><td>озвучка</td><td>нет</td></tr>
+</table>
+<p>Плагины и расширения ставить не нужно. Роль навыков здесь выполняют обычные текстовые файлы с правилами, которые Claude читает в начале каждой сессии. Про них шаг 4.</p>
+
+<h2><span class="step-num">1</span>Поставить Claude Code</h2>
+<p>Два пути, оба рабочие.</p>
+<p><b>Путь А, без терминала.</b> Скачать десктоп-приложение Claude и включить в нём Claude Code. Подходит, если командная строка пугает. Так работала я.</p>
+<p><b>Путь Б, через терминал.</b> Открыть Терминал и выполнить:</p>
+<div class="prompt-block">
+  <div class="prompt-label">Команда · установка</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>npm install -g @anthropic-ai/claude-code</pre>
+</div>
+<p>Потом запускать командой <b>claude</b> из папки проекта. Актуальные ссылки: claude.com/code и docs.claude.com. Команда установки иногда меняется, в документации она всегда свежая.</p>
+
+<h2><span class="step-num">2</span>Поставить Node.js</h2>
+<p>Открыть nodejs.org, скачать версию с пометкой LTS для своей системы. На Mac это файл .pkg, запускается двойным кликом и просит пароль от компьютера. Проверка, что встало:</p>
+<div class="prompt-block">
+  <div class="prompt-label">Команда · проверка</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>node -v</pre>
+</div>
+<p>Должна появиться версия вида v22.x.x или выше. Если терминал отвечает command not found, установка не прошла. Node нужен потому, что на нём работает Remotion. Сам по себе он ничего не делает и в фоне не висит.</p>
+
+<h2><span class="step-num">3</span>Сделать папку проекта</h2>
+<div class="warn"><b>Важный момент, на котором я потеряла несколько часов.</b> Не кладите проект на Рабочий стол и в Документы. Эти папки синхронизируются с iCloud. Он выгружает содержимое в облако и оставляет пустые заглушки: размер у файла есть, а данных на диске нет. Программа пытается прочитать файл, не может и зависает без единой ошибки. У меня из-за этого дважды опустела папка с библиотеками и один раз исчезла запись голоса.</div>
+<p>Правильно: создать папку в домашней директории.</p>
+<div class="prompt-block">
+  <div class="prompt-label">Команды · папка проекта</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>mkdir ~/reels-factory
+cd ~/reels-factory
+mkdir resources scripts public out src</pre>
+</div>
+<p>Если хочется иметь папку под рукой на Рабочем столе, сделайте ярлык:</p>
+<div class="prompt-block">
+  <div class="prompt-label">Команда · ярлык</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>ln -s ~/reels-factory ~/Desktop/reels-factory</pre>
+</div>
+<table>
+<tr><th>Папка</th><th>Что лежит</th></tr>
+<tr><td>resources</td><td>правила: стиль, сцены, версии</td></tr>
+<tr><td>scripts</td><td>сценарии роликов и служебные скрипты</td></tr>
+<tr><td>public</td><td>озвучки</td></tr>
+<tr><td>out</td><td>готовые видео</td></tr>
+<tr><td>src</td><td>код сцен, его пишет Claude</td></tr>
+</table>
+
+<h2><span class="step-num">4</span>Положить файлы правил</h2>
+<p>Это главное. Без правил Claude каждый раз придумывает стиль заново, и ролики не похожи друг на друга.</p>
+<p>В корень проекта кладётся файл <b>CLAUDE.md</b>. Его Claude читает первым в каждой сессии: что за проект, где что лежит, как с вами разговаривать, что запрещено. В папку resources кладутся правила по темам:</p>
+<table>
+<tr><th>Файл</th><th>О чём</th></tr>
+<tr><td>style.md</td><td>цвета с кодами, шрифты, размеры, безопасные зоны</td></tr>
+<tr><td>scene-rules.md</td><td>как переводить смысл в картинку</td></tr>
+<tr><td>reels-skeleton.md</td><td>структура сценария: хук, приёмы, обещание, кодовое слово</td></tr>
+<tr><td>versioning.md</td><td>правки только новыми версиями, оригинал не трогается</td></tr>
+<tr><td>production-guide.md</td><td>полный свод: удержание, звук, минимальное время чтения</td></tr>
+</table>
+<p>Готовые шаблоны этих файлов лежат в комплекте в конце статьи. Свои цвета и шрифты вы подставите за пять минут.</p>
+<div class="note">Самое важное правило, скопируйте его целиком: переводить смысл в визуал, не иллюстрировать слова буквально. Перед каждым абзацем задавайте вопрос: какая картинка передаст смысл фразы человеку без слов? Фраза «алгоритм не успевает обучиться» это не робот с книжкой. Это полоса обучения, которая замирает на четырнадцати процентах.</div>
+
+<h2><span class="step-num">5</span>Поставить Remotion</h2>
+<p>Запустить Claude Code в папке проекта и написать ему:</p>
+<div class="prompt-block">
+  <div class="prompt-label">Промпт · установка</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>Прочитай все файлы в папке resources и запомни правила.
+Установи Remotion в этот проект.</pre>
+</div>
+<p>Он поставит всё сам. Если хочется сделать руками:</p>
+<div class="prompt-block">
+  <div class="prompt-label">Команды · вручную</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>npm init -y
+npm install remotion @remotion/cli @remotion/google-fonts react react-dom
+npm install -D ffmpeg-static typescript</pre>
+</div>
+<p>Пакет ffmpeg-static кладёт ffmpeg внутрь проекта. Отдельно в систему ставить его не нужно, Homebrew тоже не нужен.</p>
+
+<h2><span class="step-num">6</span>Записать голос</h2>
+<p>Пишите на диктофон телефона, одним дублем. Говорите спокойно, паузы между блоками делайте свободно, они подрежутся автоматически. Сбиваться и говорить своими словами можно: сборка идёт от расшифровки записи, а не от текста сценария. Пишите в тихой комнате, шум потом не убрать.</p>
+<p>Готовый файл положить в папку public. Формат любой: ogg, m4a, wav.</p>
+
+<div class="viz">
+<svg viewBox="0 0 360 110" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <g fill="#23211c">
+    <rect x="16" y="34" width="6" height="28" rx="3"/><rect x="27" y="24" width="6" height="48" rx="3"/><rect x="38" y="30" width="6" height="36" rx="3"/><rect x="49" y="20" width="6" height="56" rx="3"/><rect x="60" y="34" width="6" height="28" rx="3"/><rect x="71" y="26" width="6" height="44" rx="3"/><rect x="82" y="36" width="6" height="24" rx="3"/><rect x="93" y="28" width="6" height="40" rx="3"/>
+  </g>
+  <g fill="#c9c5be">
+    <rect x="116" y="46" width="5" height="5" rx="2.5"/><rect x="128" y="46" width="5" height="5" rx="2.5"/><rect x="140" y="46" width="5" height="5" rx="2.5"/>
+  </g>
+  <g fill="#23211c">
+    <rect x="162" y="28" width="6" height="40" rx="3"/><rect x="173" y="22" width="6" height="52" rx="3"/><rect x="184" y="34" width="6" height="28" rx="3"/><rect x="195" y="26" width="6" height="44" rx="3"/><rect x="206" y="36" width="6" height="24" rx="3"/><rect x="217" y="24" width="6" height="48" rx="3"/><rect x="228" y="32" width="6" height="32" rx="3"/>
+  </g>
+  <g fill="#c9c5be">
+    <rect x="251" y="46" width="5" height="5" rx="2.5"/><rect x="263" y="46" width="5" height="5" rx="2.5"/><rect x="275" y="46" width="5" height="5" rx="2.5"/>
+  </g>
+  <g fill="#23211c">
+    <rect x="297" y="30" width="6" height="36" rx="3"/><rect x="308" y="24" width="6" height="48" rx="3"/><rect x="319" y="34" width="6" height="28" rx="3"/><rect x="330" y="28" width="6" height="40" rx="3"/><rect x="341" y="38" width="6" height="20" rx="3"/>
+  </g>
+  <text x="58" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#23211c">блок 1</text>
+  <text x="130" y="96" text-anchor="middle" font-size="12" fill="#2e7d76">пауза</text>
+  <text x="198" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#23211c">блок 2</text>
+  <text x="265" y="96" text-anchor="middle" font-size="12" fill="#2e7d76">пауза</text>
+  <text x="322" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#23211c">блок 3</text>
+</svg>
+<div class="viz-cap">Слова «первое», «второе», «третье» станут границами сцен</div>
+</div>
+
+<h2><span class="step-num">7</span>Разложить запись по сценам</h2>
+<p>Здесь происходит то, что обычно делает монтажёр.</p>
+<p><b>Расшифровка.</b> Запись распознаётся на вашем компьютере, без отправки в интернет. Модель скачивается один раз.</p>
+<div class="prompt-block">
+  <div class="prompt-label">Команды · расшифровка</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>npm install @huggingface/transformers
+node scripts/transcribe.mjs public/voice.mp3</pre>
+</div>
+<p>На выходе список слов с точным временем каждого.</p>
+<p><b>Подрезка пауз и границы сцен.</b></p>
+<div class="prompt-block">
+  <div class="prompt-label">Команда · сборка дорожки</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>node scripts/tighten-audio.mjs</pre>
+</div>
+<p>Скрипт делает четыре вещи: режет паузы между словами до одной десятой секунды, слегка ускоряет речь без изменения высоты голоса, выравнивает громкость до стандарта соцсетей и считает границы сцен по словам-маркерам «первое», «второе», «третье». Мой ролик после этого стал короче на девять секунд и заметно живее. Оба скрипта лежат в комплекте.</p>
+<div class="note">Почему границы считаются по словам. Я пробовала делить по длине текста и по длине пауз. Оба способа дают рассинхрон: картинка про одно, голос про другое. По словам-маркерам попадание точное.</div>
+
+<h2><span class="step-num">8</span>Собрать сцены</h2>
+<p>Дальше вы разговариваете с Claude обычными словами:</p>
+<div class="prompt-block">
+  <div class="prompt-label">Промпт · сборка</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>Открой scripts/01-name.md и собери сцены 1-3.
+Покажи предпросмотр в Remotion Studio.</pre>
+</div>
+<p>Сцены лучше собирать партиями по три. После каждой партии смотреть и править. Если попросить сразу шесть, правок будет столько же, но искать их придётся дольше.</p>
+<p>Что важно проговорить один раз и записать в правила: одна сцена равна одному блоку текста и одной мысли; одна анимация-акцент на сцену, иначе кадр рассыпается; смысловой бит каждые две-четыре секунды; на нулевом кадре уже стоит читаемый смысл, потому что первый кадр это обложка в ленте.</p>
+<div class="prompt-block">
+  <div class="prompt-label">Команда · предпросмотр</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>npm run studio</pre>
+</div>
+
+<h2><span class="step-num">9</span>Править скриншотами</h2>
+<p>Самая недооценённая часть. Делаете скриншот кадра, обводите место, которое не нравится, кидаете в чат и пишете словами, что не так. «Тут цифра мелкая», «этот блок должен появляться позже», «фон слишком пустой».</p>
+<p>Правило, которое стоит записать в versioning.md: любая правка создаёт новую версию сцены, оригинал остаётся. Тогда в предпросмотре обе версии видны рядом и можно сравнить. Это спасает, когда первый вариант оказался лучше второго.</p>
+
+<div class="viz">
+<svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <rect x="60" y="8" width="220" height="76" rx="14" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <rect x="88" y="22" width="164" height="30" rx="6" fill="#ece6d8"/>
+  <text x="170" y="72" text-anchor="middle" font-size="14" font-weight="600" fill="#23211c">предпросмотр</text>
+  <text x="170" y="106" text-anchor="middle" font-size="18" fill="#948e84">↓</text>
+  <rect x="60" y="118" width="220" height="76" rx="14" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <rect x="88" y="132" width="164" height="30" rx="6" fill="#ece6d8"/>
+  <ellipse cx="214" cy="147" rx="30" ry="15" fill="none" stroke="#b0483b" stroke-width="2.5" transform="rotate(-5 214 147)"/>
+  <text x="170" y="182" text-anchor="middle" font-size="14" font-weight="600" fill="#23211c">скриншот с обводкой</text>
+  <text x="170" y="216" text-anchor="middle" font-size="18" fill="#948e84">↓</text>
+  <rect x="60" y="228" width="220" height="76" rx="14" fill="#fffdf8" stroke="#2e7d76" stroke-width="2"/>
+  <rect x="88" y="242" width="164" height="30" rx="6" fill="#e9f2f0"/>
+  <text x="170" y="292" text-anchor="middle" font-size="14" font-weight="600" fill="#23211c">версия v2</text>
+  <text x="264" y="250" text-anchor="middle" font-size="12" font-weight="600" fill="#2e7d76">v2</text>
+  <path d="M 292 266 Q 340 170 296 52" fill="none" stroke="#948e84" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <polygon points="292,46 304,52 296,60" fill="#948e84"/>
+</svg>
+<div class="viz-cap">Оригинал не трогается. Не понравилась правка, вернулись назад.</div>
+</div>
+
+<h2><span class="step-num">10</span>Отрендерить</h2>
+<p>Команда npm run studio и кнопка Render в интерфейсе. Либо напрямую:</p>
+<div class="prompt-block">
+  <div class="prompt-label">Команда · рендер</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>npx remotion render Reel01Full out/reel.mp4</pre>
+</div>
+<p>Готовый файл 1080×1920 лежит в папке out, его можно сразу загружать в соцсеть.</p>
+
+<h2>Грабли, на которых теряется вечер</h2>
+<p><b>iCloud.</b> Про это было в шаге 3. Если проект уже лежит на Рабочем столе и всё начало зависать без ошибок, перенесите папку в домашнюю директорию.</p>
+<p><b>Команда npx подвисает.</b> На некоторых машинах она проверяет реестр пакетов и висит. Запускайте через npm run или напрямую из папки: ./node_modules/.bin/remotion.</p>
+<p><b>Не хватает памяти.</b> Если открыто много вкладок браузера, система убивает процессы рендера, и команда виснет молча. Закройте лишнее и рендерите с ключом --concurrency=1.</p>
+<p><b>Две сессии в одной папке.</b> Не запускайте два окна Claude Code в одном проекте. Они затирают файлы друг друга. У меня так стёрлась запись голоса и половина библиотек.</p>
+<p><b>Нет истории версий.</b> Поставьте git с самого начала, тогда любую потерю можно откатить одной командой.</p>
+
+<div class="download">
+  <h3>Комплект файлов</h3>
+  <p>Всё, что описано выше, собрано в один архив:</p>
+  <ul>
+    <li>шаблоны правил: CLAUDE.md и шесть файлов resources с местами под вашу палитру и шрифты;</li>
+    <li>рабочие скрипты: расшифровка, подрезка пауз, выравнивание громкости, интерфейсные звуки;</li>
+    <li>готовый package.json со всеми зависимостями;</li>
+    <li>полный свод правил производства и чек-лист из пятнадцати пунктов перед публикацией.</li>
+  </ul>
+  <p>Комплект обезличен: цвета и шрифты помечены как места для ваших значений.</p>
+  <a class="btn" href="https://drive.google.com/uc?export=download&id=1SCU40f_FQqUE3SwohwB1GTVJGvQMZbVk">Скачать комплект</a>
+</div>
+
+<h2>Если что-то непонятно</h2>
+<p>Застряли на каком-то шаге, это нормально. И тут приём, который важнее самой инструкции. Скопируйте текст этой страницы целиком, вставьте в свой Claude и напишите:</p>
+<div class="prompt-block">
+  <div class="prompt-label">Промпт · разбор инструкции</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>У меня есть инструкция, текст ниже. Я застряла на шаге [номер].
+Вот что у меня происходит: [опиши своими словами, что видишь на экране].
+Разбери этот шаг подробнее, веди меня по одному действию за раз
+и жди моего подтверждения после каждого. Покажи, где я что-то упускаю.
+
+[сюда вставь текст инструкции]</pre>
+</div>
+<p>Нейросеть разберёт инструкцию под вашу ситуацию и поведёт по шагам. Освойте этот приём один раз, и слово «непонятно» перестанет вас останавливать где-либо вообще. А если всё равно не выходит, напишите мне в директ, контакты ниже.</p>
+
+<h2>Стена, которой больше нет</h2>
+<p>Заметьте, что сейчас произошло. Человек без технического образования собрал то, за что год назад платят трём подрядчикам. Нейросеть сделала руки. Голова осталась ваша: сценарий, смысл, понимание, для кого это.</p>
+
+<div class="viz">
+<svg viewBox="0 0 360 340" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <text x="16" y="24" font-size="13" font-weight="600" fill="#948e84">РАНЬШЕ</text>
+  <circle cx="48" cy="80" r="12" fill="none" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="92" x2="48" y2="118" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="100" x2="35" y2="112" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="100" x2="61" y2="112" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="118" x2="38" y2="136" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="118" x2="58" y2="136" stroke="#23211c" stroke-width="2"/>
+  <g fill="#948e84">
+    <rect x="126" y="44" width="30" height="16" rx="3"/><rect x="160" y="44" width="30" height="16" rx="3"/>
+    <rect x="110" y="64" width="30" height="16" rx="3"/><rect x="144" y="64" width="30" height="16" rx="3"/><rect x="178" y="64" width="12" height="16" rx="3"/>
+    <rect x="126" y="84" width="30" height="16" rx="3"/><rect x="160" y="84" width="30" height="16" rx="3"/>
+    <rect x="110" y="104" width="30" height="16" rx="3"/><rect x="144" y="104" width="30" height="16" rx="3"/><rect x="178" y="104" width="12" height="16" rx="3"/>
+    <rect x="126" y="124" width="30" height="16" rx="3"/><rect x="160" y="124" width="30" height="16" rx="3"/>
+  </g>
+  <text x="150" y="162" text-anchor="middle" font-size="12" fill="#948e84">«я не разберусь»</text>
+  <text x="280" y="98" text-anchor="middle" font-size="14" fill="#948e84">профессия</text>
+  <line x1="16" y1="182" x2="344" y2="182" stroke="#d9d2bf" stroke-width="1.5"/>
+  <text x="16" y="210" font-size="13" font-weight="600" fill="#2e7d76">СЕЙЧАС</text>
+  <circle cx="48" cy="256" r="12" fill="none" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="268" x2="48" y2="294" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="276" x2="35" y2="288" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="276" x2="61" y2="288" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="294" x2="38" y2="312" stroke="#23211c" stroke-width="2"/>
+  <line x1="48" y1="294" x2="58" y2="312" stroke="#23211c" stroke-width="2"/>
+  <g fill="none" stroke="#d9d2bf" stroke-width="1.5" stroke-dasharray="4 4">
+    <rect x="126" y="222" width="30" height="16" rx="3"/><rect x="160" y="238" width="30" height="16" rx="3"/>
+    <rect x="110" y="258" width="30" height="16" rx="3"/><rect x="170" y="278" width="12" height="16" rx="3"/>
+  </g>
+  <line x1="72" y1="262" x2="252" y2="262" stroke="#2e7d76" stroke-width="2.5"/>
+  <polygon points="262,262 246,254 246,270" fill="#2e7d76"/>
+  <text x="304" y="266" text-anchor="middle" font-size="14" font-weight="600" fill="#23211c">профессия</text>
+  <text x="180" y="332" text-anchor="middle" font-size="12" fill="#2e7d76">нейросеть делает руки, вы голова</text>
+</svg>
+</div>
+
+<p>Это касается далеко не только роликов. Таргетолог, специалист по настройке рекламы в Instagram*, работает удалённо, из дома или из любой точки, клиенты по всему миру. Раньше в эту профессию не пускал рекламный кабинет: кнопки, настройки, чужие деньги, страшно нажать. Сейчас связка та же, что с роликом. Нейросеть делает руки, вы ставите задачу и принимаете решения.</p>
+<p>По анкетам моих учениц самая частая фраза звучит так: «с теорией знакома, а практиковаться страшно». Человек проходит курс, смотрит уроки и выходит теоретиком. Знания есть, уверенности нет, клиентов брать боязно. Знакомо?</p>
+<p>Поэтому я собрала продукт, где уроков смотреть не надо.</p>
+
+<div class="product">
+  <h2>Тренажёр таргетолога</h2>
+  <div class="pen">не курс. рабочее место</div>
+  <p>Интерактивная панель, где вы делаете настоящую работу таргетолога по шагам. Своими руками, с первого экрана. Как в этой инструкции: не читаете про ролики, а собираете свой.</p>
+  <div class="price-row">
+    <span class="price-old">4 900 ₽</span>
+    <span class="price-new">1 490 ₽</span>
+  </div>
+  <div class="price-note">цена со скидкой, она будет расти · доступ 12 месяцев</div>
+  <a class="btn" href="https://www.anastasialushnikova.com/start/">Начать осваивать профессию</a>
+  <ul style="margin-top:26px">
+    <li>Путь специалиста целиком: анализ аудитории, стратегия, кабинет, запуск, поиск клиентов.</li>
+    <li>Готовые протестированные стратегии, по которым работают лидеры рынка. Не тестируете вслепую, берёте рабочую схему.</li>
+    <li>Промпты из 17 лет практики. Несёте в свой Claude, результат используете в работе.</li>
+    <li>На выходе рабочие документы: анализ ниши, стратегия, структура кампании. С ними идут к первому клиенту.</li>
+    <li>Нейро-куратор отвечает на вопросы по ходу работы, в любое время.</li>
+  </ul>
+  <p style="margin-top:6px">Помещается в час-полтора в день. Работает с телефона.</p>
+  <p>И самое честное, что могу сказать. Эта страница никуда не денется через полгода. Вопрос в том, где будете вы. Там же, где сегодня, или с профессией и первыми клиентами.</p>
+  <a class="btn" href="https://www.anastasialushnikova.com/start/">Попробовать профессию руками</a>
+</div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <h2>Понравился материал?</h2>
+    <p class="footer-sub">Подписывайтесь на каналы — там ещё больше про AI-маркетинг, смыслы и продажи без выгорания</p>
+    <div class="footer-grid">
+      <a class="footer-card" href="https://t.me/target_school1"><b>Telegram канал</b><span>Промпты и кейсы каждый день</span></a>
+      <a class="footer-card" href="https://www.instagram.com/target_school"><b>Instagram</b><span>Визуальные гайды и stories</span></a>
+      <a class="footer-card" href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0"><b>Написать Анастасии</b><span>Личное сообщение в WhatsApp</span></a>
+      <a class="footer-card" href="https://t.me/ailav_bot"><b>Служба заботы</b><span>Техподдержка и вопросы</span></a>
+    </div>
+    <div class="footer-banner">
+      <b>Хотите больше материалов?</b>
+      <a class="btn" href="https://t.me/target_school1" style="margin-top:0">Подписаться на Telegram</a>
+    </div>
+    <div class="copyright" style="border-top:none;padding-top:0;margin-bottom:10px">*Instagram и Facebook принадлежат компании Meta Platforms Inc., признанной экстремистской организацией, её деятельность запрещена на территории Российской Федерации.</div>
+    <div class="copyright">© 2026 Анастасия Лушникова. Все права защищены.</div>
+  </div>
+</footer>
+
+<script>
+function copyBlock(btn){
+  const text = btn.parentElement.querySelector('pre').innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const old = btn.textContent;
+    btn.textContent = 'Скопировано';
+    setTimeout(()=>{btn.textContent = old;}, 1600);
+  });
+}
+</script>
+
+</body>
+</html>
