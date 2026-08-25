@@ -22,6 +22,7 @@
     --dusk-text:#f5f2ec;
     --dusk-sub:#d9d5ce;
     --gold:#e8b45f;
+    --wave:#4fc0b4;
     --red:#b0483b;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -126,15 +127,15 @@
   details.faq[open] summary::after{content:'–';}
   details.faq p{margin-top:10px;font-size:14px;}
   .dusk-block{background:var(--dusk);color:var(--dusk-text);position:relative;overflow:hidden;}
-  .dusk-block::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 15% 0%, rgba(190,130,55,.28) 0%, transparent 60%);pointer-events:none;}
+  .dusk-block::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 15% 0%, rgba(79,192,180,.16) 0%, transparent 60%);pointer-events:none;}
   .dusk-block .wrap{position:relative;}
   .dusk-block .kicker{color:#948e84;}
   .dusk-block h2{color:var(--dusk-text);}
-  .dusk-block h2 .ms{color:var(--gold);}
+  .dusk-block h2 .ms{color:var(--wave);}
   .dusk-block p{color:var(--dusk-sub);}
-  .price-num{font-weight:600;font-size:56px;letter-spacing:-.02em;color:var(--gold);line-height:1;margin:14px 0 6px;}
+  .price-num{font-weight:600;font-size:56px;letter-spacing:-.02em;color:var(--wave);line-height:1;margin:14px 0 6px;}
   .price-cta{
-    display:inline-block;background:var(--gold);color:#14171a;font-weight:600;font-size:15px;
+    display:inline-block;background:var(--wave);color:#14171a;font-weight:600;font-size:15px;
     padding:15px 28px;border-radius:99px;text-decoration:none;margin-top:20px;
     position:relative;overflow:hidden;
   }
@@ -311,7 +312,8 @@
 <!-- БЛОК 3. ПРОБЛЕМА СТАРОГО ПОДХОДА -->
 <section class="section-tight">
   <div class="wrap">
-    <h2>Ты смотрела уроки. Кнопки так и не нажала</h2>
+    <h2>В чём отличие?</h2>
+    <p class="lead" style="margin-bottom:20px;">Ты смотрела уроки. Кнопки так и не нажала.</p>
     <div class="compare">
       <div class="box old">
         <svg width="56" height="56" viewBox="0 0 64 64" fill="none" style="margin-bottom:10px;">
@@ -339,7 +341,7 @@
 <section class="section-tight">
   <div class="wrap">
     <div class="card accent">
-      <h2 style="font-size:22px;margin-bottom:12px;">Нейросеть делает тяжёлое. Ты остаёшься нужной</h2>
+      <h2 style="font-size:22px;margin-bottom:12px;">Учимся автоматизировать 80% рутины!</h2>
       <svg viewBox="0 0 320 90" width="100%" height="auto" style="max-width:360px;margin:6px 0 16px;" fill="none">
         <rect x="8" y="30" width="30" height="30" rx="5" stroke="#2e7d76" stroke-width="1.5"/>
         <line x1="38" y1="45" x2="88" y2="45" stroke="#2e7d76" stroke-width="1.5" class="flow-line"/>
@@ -516,7 +518,7 @@
 <!-- БЛОК 6. ПОЧЕМУ НЕ КУРС -->
 <section class="section-tight">
   <div class="wrap">
-    <h2>Результат — 50 на 50</h2>
+    <h2>50/50</h2>
     <p class="lead">Люди хотят гарантий. Я их даю. Наполовину.</p>
     <p style="margin-top:14px;max-width:560px;">В методологии уверена на сто процентов. Она отточена за годы работы школы, через неё прошло больше 4000 человек. Это моя половина.</p>
     <p style="margin-top:10px;max-width:560px;">Вторая половина твоя: сесть и сделать. Учиться можно сколько угодно, до дела доходят единицы. Тренажёр учит делать.</p>
@@ -532,13 +534,13 @@
       <div class="stat-num">17</div>
       <div style="font-size:14px;color:var(--muted);line-height:1.35;max-width:120px;">лет опыта<br>в маркетинге</div>
     </div>
-    <p class="lead" style="margin-bottom:20px;">К этому формату я пришла не сразу.</p>
+    <p class="lead" style="margin-bottom:20px;">Методология отточена временем.</p>
     <div class="card">
       <p>Вот честно, за плечами семнадцать лет в маркетинге, и к этому формату я пришла не сразу. Меня зовут Анастасия Лушникова. С 2017 года веду свою школу, за это время через неё прошло больше 4000 человек.</p>
       <p style="margin-top:10px;">За эти годы я насмотрелась одной и той же картины. Человек честно смотрит уроки, кивает, соглашается со всем. Потом закрывает вкладку и не трогает кабинет неделями. Смотреть и делать - разные мышцы. Тогда я решила: практика идёт внутри каждого блока, с первого дня, никаких «потом».</p>
       <div class="signature">
         <img src="/pro/anastasia-photo.jpg" alt="Анастасия Лушникова" class="avatar" style="object-position:50% 30%;">
-        <div><b><a href="https://www.instagram.com/target_school" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Анастасия Лушникова</a></b><span>Основатель Target School*</span></div>
+        <div><b><a href="https://www.instagram.com/target_school" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Анастасия Лушникова<svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline-block;vertical-align:-2px;margin-left:5px;"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/></svg></a></b><span>Основатель Target School*</span></div>
       </div>
     </div>
   </div>
@@ -551,7 +553,7 @@
     <p style="margin-bottom:18px;">Три истории ниже, это опыт работы со мной лично, в разных нишах. Показываю их, чтобы ты видела: метод, по которому построен тренажёр, проверен годами и разными людьми.</p>
     <div class="grid3">
       <div class="case">
-        <div class="who"><img src="/pro/nazym-photo.jpeg" alt="Назым" class="avatar" style="object-position:50% 15%;"><b><a href="https://www.instagram.com/nazymkub?igsi=MWtndGNlcXYzc3Zteg==" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Назым</a></b></div>
+        <div class="who"><img src="/pro/nazym-photo.jpeg" alt="Назым" class="avatar" style="object-position:50% 15%;"><b><a href="https://www.instagram.com/nazymkub?igsi=MWtndGNlcXYzc3Zteg==" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Назым<svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline-block;vertical-align:-2px;margin-left:5px;"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/></svg></a></b></div>
         <p>Пришла в 2020 году, доход 30 000 ₽, мама троих детей. Прошла обучение таргету, потом сопровождение. Через три года открыла свою онлайн-школу.</p>
         <svg viewBox="0 0 120 40" width="100%" height="34" fill="none" style="margin-top:10px;">
           <circle cx="12" cy="28" r="4" fill="#5fb8ae"/>
@@ -561,7 +563,7 @@
         <div class="stat">3 года · <b>30 000 → 500 000 ₽</b></div>
       </div>
       <div class="case">
-        <div class="who"><img src="/pro/nadezhda-photo.jpeg" alt="Надежда" class="avatar"><b><a href="https://www.instagram.com/marsianka_dzn?igsi=MmZsZTV1bWg2dnQ4" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Надежда</a></b></div>
+        <div class="who"><img src="/pro/nadezhda-photo.jpeg" alt="Надежда" class="avatar"><b><a href="https://www.instagram.com/marsianka_dzn?igsi=MmZsZTV1bWg2dnQ4" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Надежда<svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline-block;vertical-align:-2px;margin-left:5px;"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/></svg></a></b></div>
         <p>Дизайнер, декрет, переезд в другую страну с нуля. Стала соавтором мастер-классов по упаковке. Сейчас ведёт свои программы несколько раз в год.</p>
         <svg viewBox="0 0 120 40" width="100%" height="34" fill="none" style="margin-top:10px;">
           <line x1="20" y1="32" x2="100" y2="32" stroke="var(--line)" stroke-width="1"/>
@@ -571,7 +573,7 @@
         <div class="stat">Первый запуск · <b>200 000 ₽</b></div>
       </div>
       <div class="case">
-        <div class="who"><img src="/pro/lyubov-photo.jpeg" alt="Любовь" class="avatar" style="object-position:50% 25%;"><b><a href="https://www.instagram.com/lyubov_yarovaya?igsi=MXQ5anh3ZWRoNW1iZg==" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Любовь</a></b></div>
+        <div class="who"><img src="/pro/lyubov-photo.jpeg" alt="Любовь" class="avatar" style="object-position:50% 25%;"><b><a href="https://www.instagram.com/lyubov_yarovaya?igsi=MXQ5anh3ZWRoNW1iZg==" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Любовь<svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline-block;vertical-align:-2px;margin-left:5px;"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/></svg></a></b></div>
         <p>Эксперт по CRM-маркетингу, опыт в Leroy Merlin, Tele2, Сбербанке. Запустили фокус-группу без вложений в рекламу и получили первый рабочий кейс.</p>
         <svg viewBox="0 0 120 40" width="100%" height="34" fill="none" style="margin-top:10px;">
           <circle cx="30" cy="14" r="3" fill="#2e7d76"/><circle cx="45" cy="14" r="3" fill="#2e7d76"/>
@@ -654,31 +656,29 @@
   </div>
 </section>
 
-<!-- БЛОК 14 + 15. ЦЕНА (DUSK, ПОЛНОБОРТНАЯ СЕКЦИЯ) -->
-<section class="section dusk-block" id="price">
+<!-- БЛОК 14 + 15. ЦЕНА (SAND, ЧЕСТНОЕ СРАВНЕНИЕ) -->
+<section class="section" id="price">
   <div class="wrap">
-    <div class="kicker" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-      <span>Цена</span>
-      <span style="background:rgba(255,255,255,.08);color:var(--dusk-sub);border-radius:99px;padding:3px 10px;font-size:10.5px;letter-spacing:0;text-transform:none;">Обновлено <span id="update-date">сегодня</span></span>
-    </div>
+    <div class="kicker">Цена <span style="color:var(--muted);text-transform:none;letter-spacing:0;">· обновлено <span id="update-date">сегодня</span></span></div>
     <h2>1490 рублей за путь <span class="ms">к первому кейсу</span></h2>
-    <div style="margin:4px 0 6px;">
-      <div style="font-size:18px;color:var(--dusk-sub);text-decoration:line-through;opacity:.55;">4900 ₽</div>
-      <div class="price-num" style="margin:2px 0 0;">1490 ₽</div>
-    </div>
-    <p>Это не абстрактный курс за пятьдесят тысяч, где платишь один раз и дальше разбираешься сама. За 1490 рублей ты получаешь десять блоков, и каждый заканчивается готовым документом, а доступ остаётся с тобой на 365 дней.</p>
-    <p style="margin-top:10px;">Для сравнения: один документ анализа аудитории на бирже фриланса заказывают от 5000 рублей. В тренажёре таких документов десять, и вместе с ними идёт собранный с нуля рекламный кабинет, план действий на случай бана и готовый кейс для портфолио.</p>
-    <p style="margin-top:16px;color:var(--dusk-text);font-weight:600;font-size:14px;">Первые 100 мест по цене 1490 ₽. Дальше цена вырастет, кто зашёл сейчас, остаётся на своей цене навсегда.</p>
-    <div style="margin-top:22px;">
-      <div style="display:flex;align-items:flex-start;gap:6px;padding-left:8px;">
-        <svg width="36" height="34" viewBox="0 0 50 46" fill="none" style="flex-shrink:0;margin-top:2px;">
-          <path d="M12 6c3 14 10 24 22 30" stroke="#e8b45f" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-          <path d="M34 32l-9-2M34 32l-3 9" stroke="#e8b45f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        </svg>
-        <span style="font-family:'Marck Script',cursive;color:var(--gold);font-size:clamp(16px,4.5vw,20px);line-height:1.25;max-width:200px;">куратор рядом, поможет дойти до результата</span>
+    <p class="lead" style="margin-bottom:24px;">Десять готовых документов. Один такой на бирже фриланса стоит от 5000 ₽, значит рыночная стоимость этой работы начинается от 50 000 ₽.</p>
+
+    <div class="compare">
+      <div class="box old">
+        <div class="lbl">Рыночная стоимость</div>
+        <div style="font-size:30px;font-weight:600;color:var(--ink);opacity:.45;margin:6px 0 8px;">от 50 000 ₽</div>
+        <p>Десять документов, каждый на бирже фриланса заказывают отдельно.</p>
       </div>
-      <a class="price-cta" href="https://app.lava.top/products/e226dcba-d797-49a1-b300-02f1e0458886" style="margin-top:6px;">Взять тренажёр за 1490 ₽</a>
+      <div class="box new">
+        <div class="lbl">Тренажёр сегодня</div>
+        <div class="price-num" style="margin:6px 0 8px;font-size:44px;">1490 ₽</div>
+        <p>Оплата один раз, доступ остаётся с тобой на 365 дней.</p>
+      </div>
     </div>
+
+    <p style="margin-top:24px;max-width:560px;">Каждый блок заканчивается готовым документом, не абстрактной теорией. Вместе с документами идёт собранный с нуля рекламный кабинет, план действий на случай бана и готовый кейс для портфолио.</p>
+    <p style="margin-top:16px;color:var(--muted);font-size:13.5px;">Первые 100 мест по цене 1490 ₽. Дальше цена вырастет, кто зашёл сейчас, остаётся на своей цене навсегда.</p>
+    <a class="price-cta" href="https://app.lava.top/products/e226dcba-d797-49a1-b300-02f1e0458886" style="margin-top:28px;">Взять тренажёр за 1490 ₽</a>
   </div>
 </section>
 
