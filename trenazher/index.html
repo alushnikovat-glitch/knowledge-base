@@ -1,26 +1,201 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Тренажёр таргетолога · Target School</title>
-  <meta name="description" content="Освой профессию таргетолог с нуля до первого клиента. Живой тренажёр, обновляется вместе с Meta." />
-  <meta property="og:title" content="Тренажёр таргетолога · Target School" />
-  <meta property="og:description" content="С нуля до первого клиента. Работа из любой точки мира." />
-  <meta name="facebook-domain-verification" content="r88onsroev7gi3qayjuio2vz1aj809" />
-  <link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
-  <link rel="manifest" href="./manifest.webmanifest" />
-  <meta name="apple-mobile-web-app-title" content="Target School" />
-  <meta name="theme-color" content="#FFCC00" />
-  <style>
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: #F6F6F4; -webkit-font-smoothing: antialiased; }
-    #root { min-height: 100vh; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Лента заказов · превью</title>
+<style>
+  :root { --bg:#F6F6F4; --ink:#1D1D1F; --sub:#8E8E93; --line:rgba(0,0,0,0.08); --acc:#FFCC00; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #e9e9e7; font-family: -apple-system, "SF Pro Text", "Segoe UI", sans-serif; padding: 20px 14px 60px; color: var(--ink); }
+  .note { max-width: 460px; margin: 0 auto 16px; font-size: 13.5px; color: #6E6E73; text-align: center; line-height: 1.5; }
+  .phone { max-width: 460px; margin: 0 auto; background: var(--bg); border-radius: 22px; padding: 18px 16px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+  .label { font-size: 11.5px; font-weight: 700; letter-spacing: .07em; color: var(--sub); text-transform: uppercase; }
+  .top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .relink { background: none; border: none; color: var(--sub); font: inherit; font-size: 13px; text-decoration: underline; cursor: pointer; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 14px; }
+  .tab { flex: 1; font: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer; padding: 9px 10px; border-radius: 10px; border: 1px solid var(--line); background: #fff; color: var(--sub); }
+  .tab.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .lead { font-size: 15.5px; line-height: 1.5; margin-bottom: 14px; }
+  .skel { height: 74px; border-radius: 12px; margin-bottom: 8px;
+    background: linear-gradient(90deg, var(--bg) 25%, rgba(0,0,0,.045) 37%, var(--bg) 63%);
+    background-size: 400% 100%; animation: shine 1.3s ease infinite; }
+  @keyframes shine { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+  @keyframes drop { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .job { border: 1px solid var(--line); border-radius: 14px; padding: 14px; margin-bottom: 8px; background: var(--bg); animation: drop .34s ease both; }
+  .jrow { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+  .jt { font-size: 15px; font-weight: 700; line-height: 1.3; }
+  .jw { font-size: 12px; color: var(--sub); white-space: nowrap; margin-top: 2px; }
+  .jc { font-size: 13.5px; color: var(--sub); margin-top: 4px; }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .pay { font-size: 12.5px; font-weight: 700; background: rgba(255,204,0,.22); border-radius: 99px; padding: 4px 10px; }
+  .rem { font-size: 12.5px; font-weight: 600; color: var(--sub); border: 1px solid var(--line); border-radius: 99px; padding: 4px 10px; }
+  .acts { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .b1 { font-size: 13.5px; font-weight: 700; font-family: inherit; background: var(--ink); color: #fff; border: none; border-radius: 10px; padding: 9px 14px; cursor: pointer; }
+  .b2 { font-size: 13.5px; font-weight: 600; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 9px 14px; text-decoration: none; }
+  .prompt { background: #1C1C1E; color: #E8E2DA; border-radius: 12px; padding: 13px; font-size: 12.5px; line-height: 1.55; font-family: ui-monospace, Menlo, monospace; white-space: pre-wrap; max-height: 240px; overflow: auto; margin-top: 12px; }
+  .bfull { display: block; width: 100%; text-align: center; background: var(--acc); color: var(--ink); border: none; border-radius: 12px; padding: 13px; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; margin-top: 10px; }
+  .hintline { font-size: 13px; color: var(--sub); line-height: 1.5; margin-top: 9px; }
+  .more { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .plat { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0; text-decoration: none; color: var(--ink); border-top: 1px solid var(--line); }
+  .plat:first-of-type { border-top: none; }
+  .pn { font-size: 15px; font-weight: 700; }
+  .pd { font-size: 13px; color: var(--sub); line-height: 1.4; margin-top: 2px; }
+</style>
 </head>
 <body>
-  <div id="root"></div>
-  <script src="./app.js?v=20260823-60"></script>
+
+<p class="note">Так лента выглядит внутри урока 5. Данные настоящие, из государственной базы. Нажми «Собрать отклик» и «обновить», чтобы посмотреть, как это работает.</p>
+
+<div class="phone">
+  <div class="card">
+    <div class="top">
+      <span class="label">Заказы прямо сейчас</span>
+      <button class="relink" id="again" style="display:none" onclick="run()">обновить</button>
+    </div>
+    <div class="tabs">
+      <button class="tab on" data-s="ru" onclick="setScope('ru', this)">Россия и СНГ</button>
+      <button class="tab" data-s="world" onclick="setScope('world', this)">Удалёнка, весь мир</button>
+    </div>
+    <div id="body"></div>
+  </div>
+</div>
+
+<script>
+const JOBS = [
+  { id:1, title:"Таргетолог", company:'РОФ "Без барьеров"', city:"Москва", salary:"от 39 730 ₽", remote:true, ago:"вчера",
+    need:"Умение оформлять и вести сообщества на базовом уровне. Навыки дизайна. Работа с веб-аналитикой",
+    task:"Настройка и запуск таргетированной рекламы в соцсетях. Исследование целевой аудитории. Создание креативов. Анализ эффективности и оптимизация рекламы" },
+  { id:2, title:"Таргетолог", company:'ООО "Звук-М"', city:"Ставропольский край", salary:"27 093 – 35 000 ₽", remote:false, ago:"2 дн назад",
+    need:"Дисциплинированность, умение слышать цели, анализировать их и выполнять",
+    task:"Создание, оптимизация и масштабирование рекламных кампаний. Проверка гипотез и тестирование решений. Работа с блокировками рекламных аккаунтов. Тестирование креативов и аудиторий" },
+  { id:3, title:"Маркетолог бизнес-выставки", company:"Балтик Мастер М", city:"Москва", salary:"от 100 000 ₽", remote:false, ago:"3 дн назад",
+    need:"Опыт в digital от 3 лет. Знание Яндекс.Директ, VK Реклама, Telegram-реклама, аналитика",
+    task:"Разрабатывать digital-стратегию продвижения выставки. Управлять кампаниями, настраивать таргетинг и ретаргетинг, следить за бюджетом и отчётностью" },
+  { id:4, title:"Менеджер по рекламе", company:"Фестивальная дирекция", city:"Воронежская область", salary:"от 27 093 ₽", remote:false, ago:"4 дн назад",
+    need:"Стрессоустойчивость, ориентированность на результат, умение работать в команде",
+    task:"Изучать целевую аудиторию, рынок и конкурентов. Формировать рекламную стратегию и медиаплан. Запускать кампании, следить за конверсиями, CTR, стоимостью лида" },
+];
+
+const promptFor = (j) => j.world ? `Ты помогаешь мне откликнуться на удалённую вакансию за рубежом. Письмо нужно на английском.
+
+VACANCY
+Position: ${j.title}
+Company: ${j.company}
+Location: ${j.city}
+Tags / requirements: ${j.need}
+About the role: ${j.task}
+
+ОБО МНЕ
+Я прошла тренажёр таргетолога. Умею: анализ аудитории и конкурентов, подготовка креативов, настройка рекламного кабинета с нуля, запуск и ведение кампаний, установка пикселя, чтение метрик и отчёты. Коммерческий опыт небольшой, есть собственный кейс.
+
+ЧТО СДЕЛАЙ
+Напиши сопроводительное письмо на английском, 5-7 предложений, простым живым языком уровня B1-B2, без канцелярита. Первой строкой покажи, что я прочитала вакансию: назови их задачу своими словами. Дальше скажи, что конкретно я могу сделать в первый месяц. Не выдумывай опыт и цифры, которых нет. В конце один короткий вопрос по их задаче.
+
+Отдельно снизу дай перевод письма на русский, чтобы я понимала, что отправляю.` : `Ты помогаешь мне откликнуться на заказ по таргетированной рекламе.
+
+ВАКАНСИЯ
+Название: ${j.title}
+Компания: ${j.company}, ${j.city}
+Что требуется: ${j.need}
+Задачи: ${j.task}
+
+ОБО МНЕ
+Я прошла тренажёр таргетолога. Умею: анализ аудитории и конкурентов, подготовка креативов, настройка рекламного кабинета с нуля, запуск и ведение кампаний, установка пикселя, чтение метрик и отчёты. Опыт коммерческий небольшой, есть собственный кейс из тренажёра.
+
+ЧТО СДЕЛАЙ
+Напиши сопроводительное письмо на 5-7 предложений. Живым человеческим языком, без канцелярита и без пафоса. Первой строкой покажи, что я прочитала вакансию: назови их задачу своими словами. Дальше скажи, что конкретно я могу для них сделать в первый месяц. Не выдумывай мой опыт и цифры, которых нет. В конце один короткий вопрос по их задаче, чтобы завязать разговор.`;
+
+const WORLD = [
+  { id:11, title:"Performance Marketing Manager (Paid Social)", company:"Hostinger", city:"весь мир", salary:"$2 500 – $4 000", remote:true, ago:"вчера", world:true,
+    need:"paid social, meta ads, analytics, growth",
+    task:"Run and scale paid social campaigns across Meta and TikTok. Test creatives, manage budgets, report on CAC and ROAS" },
+  { id:12, title:"Growth Marketer", company:"Remote-first startup", city:"Europe only", salary:"$3 000 – $4 500", remote:true, ago:"2 дн назад", world:true,
+    need:"growth, advertising, media buying, seo",
+    task:"Own paid acquisition channels end to end. Plan experiments, build landing pages with the team, report weekly on pipeline" },
+  { id:13, title:"Social Media Advertising Specialist", company:"Jobicy client", city:"весь мир", salary:null, remote:true, ago:"3 дн назад", world:true,
+    need:"social, advertising, content, reporting",
+    task:"Set up and optimize ad campaigns for e-commerce brands. Prepare creative briefs, analyse results, suggest next steps" },
+];
+
+let SCOPE = 'ru';
+function setScope(s, btn) {
+  SCOPE = s;
+  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('on', b === btn));
+  run();
+}
+const current = () => SCOPE === 'ru' ? JOBS : WORLD;
+
+const body = document.getElementById('body');
+const again = document.getElementById('again');
+
+function run() {
+  again.style.display = 'none';
+  body.innerHTML = '<div style="font-size:15px;color:var(--sub);margin-bottom:14px">Смотрим, кто ищет специалиста прямо сейчас</div>'
+    + [0,1,2].map(i => `<div class="skel" style="animation-delay:${i*0.12}s"></div>`).join('');
+  setTimeout(showList, 1500);
+}
+
+function showList() {
+  again.style.display = '';
+  const lead = SCOPE === 'ru'
+    ? `Прямо сейчас работодатели ищут специалиста по <b>${current().length}</b> открытым вакансиям. Это государственная база «Работа России», данные живые.`
+    : `Нашли <b>${current().length}</b> удалённых вакансий по маркетингу и рекламе. Работа не привязана к стране, платят в валюте. Вакансии на английском, отклик тоже пишем на английском, нейросеть поможет.`;
+  body.innerHTML = `<div class="lead">${lead}</div><div id="list"></div>`;
+  const list = document.getElementById('list');
+  current().forEach((j, i) => {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'job';
+      el.innerHTML = `
+        <div class="jrow"><div class="jt">${j.title}</div><div class="jw">${j.ago}</div></div>
+        <div class="jc">${j.company} · ${j.city}</div>
+        <div class="chips">
+          ${j.salary ? `<span class="pay">${j.salary}</span>` : ''}
+          ${j.remote ? `<span class="rem">удалённо</span>` : ''}
+        </div>
+        <div class="acts">
+          <button class="b1" onclick="toggle(${j.id}, this)">Собрать отклик</button>
+          <a class="b2" href="https://trudvsem.ru/vacancy/search?text=%D1%82%D0%B0%D1%80%D0%B3%D0%B5%D1%82%D0%BE%D0%BB%D0%BE%D0%B3" target="_blank" rel="noopener">Открыть вакансию</a>
+        </div>
+        <div id="p${j.id}"></div>`;
+      list.appendChild(el);
+      if (i === current().length - 1) addPlatforms();
+    }, 120 + i * 150);
+  });
+}
+
+function toggle(id, btn) {
+  const box = document.getElementById('p' + id);
+  if (box.innerHTML) { box.innerHTML = ''; btn.textContent = 'Собрать отклик'; return; }
+  const j = current().find(x => x.id === id);
+  box.innerHTML = `<div class="prompt">${promptFor(j).replace(/</g,'&lt;')}</div>
+    <button class="bfull" onclick="copyIt(${id}, this)">Скопировать промпт</button>
+    <div class="hintline">${j.world ? "Отнеси промпт в нейросеть, забери письмо на английском вместе с переводом. Прочитай перевод, убедись, что там правда про тебя, и отправь через форму на сайте вакансии." : "Отнеси промпт в нейросеть, забери письмо, прочитай его своими глазами и напиши работодателю сама. Контакты есть на карточке вакансии. Робота вместо себя не отправляем, за это блокируют аккаунт."}</div>`;
+  btn.textContent = 'Скрыть промпт';
+}
+
+function copyIt(id, btn) {
+  const j = current().find(x => x.id === id);
+  try { navigator.clipboard.writeText(promptFor(j)); btn.textContent = 'Скопировано'; setTimeout(()=>btn.textContent='Скопировать промпт',1600); } catch(e) {}
+}
+
+function addPlatforms() {
+  const old = document.querySelector('.more'); if (old) old.remove();
+  const wrap = document.createElement('div');
+  wrap.className = 'more';
+  wrap.innerHTML = `
+    <div class="label" style="margin-bottom:8px">Где ещё смотреть</div>
+    <div style="font-size:14.5px;line-height:1.55;color:var(--sub);margin-bottom:12px">Это лента одной базы. Площадок больше, и на каждой свой спрос. Открой любую, число вакансий увидишь прямо там, сегодняшнее.</div>
+    <a class="plat" href="https://hh.ru/vacancies/targetolog/za_sutki" target="_blank" rel="noopener"><div><div class="pn">hh.ru</div><div class="pd">Вакансии в штат и на удалёнку. Ссылка открывает то, что появилось за сутки</div></div><span style="color:var(--sub);font-size:18px">→</span></a>
+    <a class="plat" href="https://kwork.ru/projects" target="_blank" rel="noopener"><div><div class="pn">Kwork</div><div class="pd">Биржа разовых заказов. Начинают отсюда, когда нужен первый кейс</div></div><span style="color:var(--sub);font-size:18px">→</span></a>
+    <a class="plat" href="https://trudvsem.ru/vacancy/search?text=%D1%82%D0%B0%D1%80%D0%B3%D0%B5%D1%82%D0%BE%D0%BB%D0%BE%D0%B3" target="_blank" rel="noopener"><div><div class="pn">Работа России</div><div class="pd">Государственная база, та самая, откуда лента выше</div></div><span style="color:var(--sub);font-size:18px">→</span></a>
+    <div class="hintline">На каждой площадке заводишь свой профиль и ищешь под себя. Мы не откликаемся за тебя и не храним твои доступы.</div>`;
+  document.querySelector('.card').appendChild(wrap);
+}
+
+run();
+</script>
 </body>
 </html>
