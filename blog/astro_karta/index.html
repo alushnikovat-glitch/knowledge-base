@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Карта релокации через Claude · Анастасия Лушникова</title>
+<meta name="description" content="Как за полчаса разложить свой переезд по четырём сферам жизни: деньги, здоровье, отношения, реализация. Пошаговый гайд и готовый промпт.">
+<meta property="og:title" content="Карта релокации через Claude">
+<meta property="og:description" content="Разложить переезд по данным за полчаса. Пошаговый гайд и готовый промпт.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Marck+Script&display=swap" rel="stylesheet">
+<style>
+:root{
+  --linen:#f4efe4;
+  --haze:#e2e9e6;
+  --card:#fffdf8;
+  --ink:#23211c;
+  --ink-soft:#55524b;
+  --ink-mute:#8a857c;
+  --teal:#2e7d76;
+  --teal-light:#5fb8ae;
+  --gold:#e8b45f;
+  --dusk:#14171a;
+  --red:#e05252;
+  --pad:24px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Golos Text',system-ui,sans-serif;
+  background:linear-gradient(175deg,var(--linen) 0%,#efe9dc 55%,var(--haze) 100%);
+  color:var(--ink);
+  font-weight:400;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:640px;margin:0 auto;padding:0 var(--pad) 72px}
+
+/* ---------- hero, dusk ---------- */
+.hero{
+  background:var(--dusk);
+  color:var(--card);
+  padding:56px var(--pad) 48px;
+  position:relative;
+  overflow:hidden;
+}
+.hero-inner{max-width:640px;margin:0 auto;position:relative;z-index:2}
+.hero svg{
+  position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:.85;
+}
+.hero .line{
+  fill:none;stroke:var(--teal-light);stroke-width:1.4;
+  stroke-dasharray:1400;stroke-dashoffset:1400;
+  animation:draw 2.2s ease-out .2s forwards;
+}
+.hero .line.b{stroke:var(--gold);opacity:.55;animation-delay:.5s;stroke-width:1}
+.hero .line.c{stroke:var(--teal-light);opacity:.3;animation-delay:.8s;stroke-width:1}
+.hero .dot{fill:var(--gold);opacity:0;animation:pop .5s ease-out 2.1s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){
+  .hero .line{animation:none;stroke-dashoffset:0}
+  .hero .dot{animation:none;opacity:1}
+}
+.kicker{
+  font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);
+}
+.hero h1{
+  font-weight:600;font-size:34px;line-height:1.14;letter-spacing:-.02em;margin-top:14px;
+}
+.hero h1 .ms{font-family:'Marck Script',cursive;font-weight:400;font-size:44px;color:var(--teal-light);line-height:1}
+.hero .lede{margin-top:16px;font-size:16px;color:#c9c6bf;max-width:34em}
+.hero .meta{margin-top:26px;font-size:12px;color:#7d817f}
+
+/* ---------- body ---------- */
+.intro{padding-top:36px;font-size:17px;color:var(--ink-soft);max-width:34em}
+.intro p+p{margin-top:14px}
+.intro strong{color:var(--ink);font-weight:600}
+
+h2{
+  font-weight:600;font-size:24px;line-height:1.2;letter-spacing:-.015em;
+  margin:44px 0 14px;
+}
+h2 .ms{font-family:'Marck Script',cursive;font-weight:400;font-size:31px;color:var(--teal)}
+p{max-width:34em}
+.body-text{color:var(--ink-soft);font-size:16px}
+.body-text+.body-text{margin-top:12px}
+
+.need{
+  background:var(--card);border-radius:16px;padding:20px 22px;
+  box-shadow:0 14px 36px rgba(70,55,35,.10);margin-top:8px;
+}
+.need li{list-style:none;padding:10px 0;border-bottom:1px solid rgba(35,33,28,.08);font-size:16px;font-weight:500}
+.need li:last-child{border:none;padding-bottom:0}
+.need li:first-child{padding-top:0}
+.need li span{display:block;font-weight:400;font-size:14px;color:var(--ink-mute);margin-top:3px}
+
+/* ---------- steps ---------- */
+.step{margin-top:34px;display:flex;gap:18px;align-items:flex-start}
+.step .n{
+  font-weight:600;font-size:52px;line-height:.9;letter-spacing:-.03em;
+  color:rgba(46,125,118,.62);flex-shrink:0;width:52px;
+}
+.step .body{flex:1;min-width:0}
+.step h3{font-weight:600;font-size:20px;line-height:1.25;margin-bottom:8px}
+.step p{font-size:16px;color:var(--ink-soft)}
+.step p+p{margin-top:10px}
+.svc{
+  display:block;margin-top:12px;background:var(--card);border-radius:12px;
+  padding:14px 16px;text-decoration:none;color:var(--ink);
+  box-shadow:0 10px 26px rgba(70,55,35,.10);
+  transition:transform .18s ease-out,box-shadow .18s ease-out;
+}
+.svc:hover,.svc:focus-visible{transform:translateY(-2px);box-shadow:0 16px 32px rgba(70,55,35,.16)}
+.svc b{display:block;font-weight:600;font-size:15px}
+.svc span{display:block;font-size:13px;color:var(--ink-mute);margin-top:3px}
+.svc em{font-style:normal;color:var(--teal);font-weight:500}
+
+.sample{
+  background:var(--dusk);color:#d8d5ce;border-radius:12px;padding:16px 18px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;line-height:1.75;
+  margin-top:14px;overflow-x:auto;
+}
+
+/* ---------- prompt ---------- */
+.prompt-wrap{
+  background:var(--dusk);border-radius:18px;margin-top:20px;overflow:hidden;
+  box-shadow:0 20px 48px rgba(20,23,26,.28);
+}
+.prompt-head{
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:16px 18px;border-bottom:1px solid rgba(255,253,248,.10);
+}
+.prompt-head .t{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.copy{
+  font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;
+  background:var(--gold);color:var(--dusk);border:none;border-radius:999px;
+  padding:9px 18px;transition:background .18s ease-out;
+}
+.copy:hover,.copy:focus-visible{background:#f0c47c}
+.copy.done{background:var(--teal-light)}
+pre{
+  margin:0;padding:18px;color:#cfd6d3;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:12.5px;line-height:1.7;white-space:pre-wrap;word-break:break-word;
+}
+
+/* ---------- close ---------- */
+.note{
+  margin-top:22px;background:var(--card);border-radius:16px;padding:20px 22px;
+  box-shadow:0 14px 36px rgba(70,55,35,.10);
+}
+.note p{font-size:16px;color:var(--ink-soft)}
+.note p+p{margin-top:12px}
+.note b{color:var(--ink);font-weight:600}
+
+.next{
+  margin-top:44px;background:linear-gradient(165deg,#1a1e22 0%,var(--dusk) 100%);
+  color:var(--card);border-radius:20px;padding:32px 24px;
+}
+.next h2{margin:12px 0 12px;font-size:26px}
+.next h2 .ms{color:var(--gold);font-size:33px}
+.next p{color:#b9b6af;font-size:16px}
+.cta{
+  display:inline-block;margin-top:20px;background:var(--teal);color:#fff;
+  text-decoration:none;font-weight:600;font-size:16px;
+  padding:15px 28px;border-radius:999px;
+  transition:background .18s ease-out;
+}
+.cta:hover,.cta:focus-visible{background:#36938b}
+
+.sig{margin-top:36px;display:flex;align-items:center;gap:12px}
+.sig .r{line-height:1.35}
+.sig b{display:block;font-size:14px;font-weight:600}
+.sig span{font-size:12px;color:var(--ink-mute)}
+.rule{height:1px;background:rgba(35,33,28,.12);margin-top:36px}
+
+a:focus-visible,button:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+@media(max-width:480px){
+  :root{--pad:20px}
+  .hero h1{font-size:29px}
+  .hero h1 .ms{font-size:38px}
+  .step{gap:14px}
+  .step .n{font-size:42px;width:42px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg viewBox="0 0 640 340" preserveAspectRatio="none" aria-hidden="true">
+    <path class="line" d="M-20,240 C120,150 300,120 420,170 C520,212 600,190 660,150"/>
+    <path class="line b" d="M-20,120 C140,210 340,250 480,210 C560,187 620,200 660,230"/>
+    <path class="line c" d="M-20,300 C160,280 280,200 400,240 C520,280 600,300 660,280"/>
+    <circle class="dot" cx="420" cy="170" r="5"/>
+  </svg>
+  <div class="hero-inner">
+    <div class="kicker">Гайд · бесплатно</div>
+    <h1>Куда тебе переехать жить.<br><span class="ms">Карта релокации</span> и Claude</h1>
+    <p class="lede">Тот самый способ, которым я разобрала для себя, где жить и работать. Полчаса, два бесплатных сервиса и один промпт.</p>
+    <p class="meta">Анастасия Лушникова · Основатель TS @target_school</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="intro">
+    <p>Ты написала КАРТА, лови обещанное.</p>
+    <p>Обычно страну выбирают по чужим отзывам и по ощущению «вроде тут красиво». Я разложила свой переезд по карте и расшифровала его через Claude. Города, где мне было хорошо, совпали с линиями один в один.</p>
+    <p><strong>Сразу честно, без мистики.</strong> Механика внутри скучная и точная. Сервис считает астрономию: где над какой точкой планеты стояли в момент твоего рождения. Claude превращает эти сухие линии в человеческий разбор по сферам жизни. Дальше ты сверяешь с реальностью: деньги, виза, язык, климат, работа. Получается карта решения.</p>
+  </section>
+
+  <h2>Что понадобится</h2>
+  <ul class="need">
+    <li>Дата рождения</li>
+    <li>Точное время рождения, до минут
+      <span>Оно решает половину точности. Посмотри в свидетельстве о рождении, там оно почти всегда есть. Если совсем никак, бери 12:00, но часть линий поплывёт.</span>
+    </li>
+    <li>Город рождения</li>
+  </ul>
+
+  <h2>Три шага. <span class="ms">Полчаса</span></h2>
+
+  <div class="step">
+    <div class="n">1</div>
+    <div class="body">
+      <h3>Рассчитать карту</h3>
+      <p class="body-text">Идёшь на бесплатный сервис, регистрация не нужна. Вводишь дату, время и город рождения. Он строит карту мира с твоими планетарными линиями и по каждой пишет, что она значит и какие города рядом.</p>
+      <a class="svc" href="https://augurine.com/tools/astrocartography" target="_blank" rel="noopener">
+        <b>Augurine <em>основной</em></b>
+        <span>augurine.com/tools/astrocartography</span>
+      </a>
+      <a class="svc" href="https://horoscopes.astro-seek.com/astrocartography-online-astro-map-relocation" target="_blank" rel="noopener">
+        <b>Astro-Seek <em>второй взгляд</em></b>
+        <span>horoscopes.astro-seek.com</span>
+      </a>
+      <p class="body-text" style="margin-top:14px">На карте появятся цветные линии по всему миру. Каждая линия, это одна планета: Sun, Venus, Jupiter, Saturn и другие. Там, где линия проходит близко к городу, её энергия в этом месте сильнее.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="n">2</div>
+    <div class="body">
+      <h3>Сделать скриншот</h3>
+      <p class="body-text">Разбираться в астрологии не надо и выписывать ничего не надо. Просто сфотографируй экран.</p>
+      <p class="body-text">Сними карту целиком, вместе с подписями планет сверху и снизу. Они там мелкие, но именно по ним читаются линии.</p>
+      <p class="body-text">Если твои города в Европе или Азии, где линий много и они идут кучно, сделай второй скриншот с приближением на этот кусок карты. Два снимка дадут разбор точнее одного.</p>
+      <p class="body-text">И запиши себе короткий список городов, которые рассматриваешь. Четырёх-пяти хватит.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="n">3</div>
+    <div class="body">
+      <h3>Отдать Claude</h3>
+      <p class="body-text">Открываешь Claude, прикрепляешь скриншот карты, копируешь промпт ниже и подставляешь в него свои данные. Всё.</p>
+      <div class="prompt-wrap">
+        <div class="prompt-head">
+          <div class="t">Промпт</div>
+          <button class="copy" id="copyBtn" type="button">Скопировать</button>
+        </div>
+        <pre id="promptText">Я загружаю скриншот своей карты астрокартографии. Ты аналитик астрокартографии, работаешь по этой картинке.
+
+Мои данные рождения: [дата, время, город рождения]
+Города, которые я рассматриваю: [перечисли 4-5 городов]
+
+Шаг 1. Посмотри на карту и определи, какие планетарные линии проходят близко к каждому моему городу. Ориентируйся на подписи планет сверху и снизу карты и на углы AC, DC, MC, IC. Если какая-то линия на скриншоте читается неуверенно, скажи об этом прямо и не додумывай.
+
+Шаг 2. Разложи каждый город по четырём сферам моей жизни: деньги и изобилие, здоровье и энергия, отношения, реализация и дело.
+
+Правила расшифровки держи такими:
+- Jupiter: расширение, деньги, удача, возможности, рост
+- Venus: отношения, любовь, лёгкость в общении, деньги через ценность
+- Sun: витальность, здоровье, уверенность, видимость, лидерство
+- Moon: эмоциональная опора, дом, близость, ощущение своего места
+- Mercury: бизнес, коммуникация, обучение, ясность ума
+- Mars: энергия и драйв, но риск перегрева и конфликтов
+- Saturn: структура и долгий рост, но тяжесть, ограничения, одиночество
+- Угол MC читай через карьеру и реализацию, DC через отношения, AC через личную энергию и здоровье, IC через дом и опору.
+
+По каждому городу дай:
+1. Какие линии рядом и насколько близко.
+2. Сильные сферы, где мне тут легче.
+3. Слабые сферы, где будет проседать.
+4. Одну фразу, кому этот город подходит по состоянию.
+
+Шаг 3. Сведи всё в сравнительную таблицу. Строки, это мои города. Колонки: деньги, здоровье, отношения, реализация, общий вывод одной фразой. В ячейках ставь оценку от 1 до 5 и рядом два-три слова, почему такая оценка. Таблицу дай сразу после разборов, чтобы я видела всю картину одним взглядом.
+
+В конце коротким текстом: какой город под деньги, какой под отношения, какой под здоровье, какой под реализацию. Пиши по-человечески, без астрологического жаргона. И добавь напоминание сверить это с практикой: виза, стоимость жизни, язык, работа, близость к моим клиентам.</pre>
+      </div>
+      <p class="body-text" style="margin-top:14px">Claude выдаст разбор, где по каждому городу видно, что усиливается, а что проседает.</p>
+    </div>
+  </div>
+
+  <h2>Как это читать</h2>
+  <div class="note">
+    <p>Линия не красит целую страну одинаково. Она сильна там, где проходит близко. Поэтому смотри города, а не «страну вообще».</p>
+    <p><b>И главное.</b> Карта это символический слой, подсказка, куда посмотреть внимательнее. Решение принимаешь ты, сверяя с реальными вещами. Где твои клиенты, какой часовой пояс, виза, стоимость аренды, климат под твоё тело. Карта сужает выбор, практика его закрывает.</p>
+    <p>Вот честно, я делаю это не ради предсказания. Я разложила огромное решение на части и перестала метаться. Так же можно разбирать любой большой выбор, не только переезд.</p>
+  </div>
+
+  <section class="next">
+    <div class="kicker">Что дальше</div>
+    <h2>Тот же приём работает <span class="ms">на деньгах</span></h2>
+    <p>Карта разложила огромное решение на части, и метаться стало не о чем. С деньгами история такая же. Пока непонятно, кому ты продаёшь и за что тебе платят, ты пишешь посты вслепую и ждёшь, что кто-то откликнется.</p>
+    <p style="margin-top:14px">Архитектор смыслов делает с твоей аудиторией то же, что карта сделала с переездом. Раскладывает её на сегменты, боли, страхи и опоры покупки. На выходе ты видишь, кому писать, какими словами и что предлагать. Это фундамент, который ставится один раз и дальше держит весь блог и все продажи.</p>
+    <a class="cta" href="https://www.anastasialushnikova.com/arkhitektor">Посмотреть Архитектор смыслов</a>
+  </section>
+
+  <div class="rule"></div>
+  <div class="sig">
+    <div class="r">
+      <b>Анастасия Лушникова</b>
+      <span>Основатель TS · @target_school</span>
+    </div>
+  </div>
+
+</main>
+
+<script>
+document.getElementById('copyBtn').addEventListener('click', async function(){
+  var btn = this;
+  var text = document.getElementById('promptText').innerText;
+  try{
+    await navigator.clipboard.writeText(text);
+  }catch(e){
+    var ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+  }
+  btn.textContent = 'Скопировано';
+  btn.classList.add('done');
+  setTimeout(function(){ btn.textContent = 'Скопировать'; btn.classList.remove('done'); }, 2200);
+});
+</script>
+</body>
+</html>
