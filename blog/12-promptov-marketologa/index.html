@@ -671,6 +671,36 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
   .faq-a { font-size: 14px; color: #78716c; line-height: 1.7; margin-bottom: 14px; }
   .quiet-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 22px; margin: 0 0 40px; font-size: 14px; color: var(--text-muted); line-height: 1.7; }
   .quiet-card a { color: var(--text); font-weight: 700; }
+  /* ===== ПРОДАЮЩИЕ ВСТАВКИ v2 ===== */
+  .insert { display:block; border-left:none; border:1.5px solid #fde68a; background:#fffbf0; border-radius:18px; padding:26px 26px 24px; margin:40px 0; }
+  .insert-top { display:flex; gap:18px; align-items:center; margin-bottom:14px; }
+  .insert-viz { width:112px; flex-shrink:0; background:#fff; border-radius:12px; padding:6px; }
+  .insert-viz svg { width:100%; height:auto; display:block; }
+  .insert-eyebrow { font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:#b45309; margin-bottom:6px; }
+  .insert h3 { font-size:19px; font-weight:800; letter-spacing:-0.02em; line-height:1.3; margin:0; }
+  .insert p { font-size:14.5px; color:#57534e; line-height:1.7; margin-bottom:10px; }
+  .insert .btn-row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:16px; }
+  .insert .price-note { font-size:13px; color:#78716c; }
+  .btn-shine { position:relative; overflow:hidden; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    background:linear-gradient(180deg,#fbbf24,#f59e0b); color:#1a1917; font-family:'Manrope',sans-serif; font-weight:800; font-size:15px;
+    padding:15px 26px; border-radius:14px; text-decoration:none; box-shadow:0 6px 18px rgba(245,158,11,.35), inset 0 1px 0 rgba(255,255,255,.5);
+    transition:transform .15s ease, box-shadow .15s ease; isolation:isolate; }
+  .btn-shine::after { content:''; position:absolute; top:-20%; bottom:-20%; left:-60%; width:45%; transform:skewX(-22deg);
+    background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.85) 50%, rgba(255,255,255,0) 100%);
+    animation: shine 3.2s ease-in-out infinite; z-index:-0; pointer-events:none; }
+  .btn-shine:hover { transform:translateY(-2px); box-shadow:0 10px 26px rgba(245,158,11,.45), inset 0 1px 0 rgba(255,255,255,.5); }
+  .btn-shine.dark { background:linear-gradient(180deg,#2d2b28,#1a1917); color:#fff; box-shadow:0 8px 24px rgba(26,25,23,.28); }
+  .btn-shine.dark::after { background:linear-gradient(90deg, rgba(251,191,36,0) 0%, rgba(251,191,36,.55) 50%, rgba(251,191,36,0) 100%); }
+  .btn-shine.big { font-size:17px; padding:19px 30px; width:100%; }
+  .btn-ghost { font-size:14px; font-weight:700; color:#1a1917; text-decoration:underline; text-underline-offset:4px; text-decoration-color:#f59e0b; padding:8px 4px; }
+  @keyframes shine { 0% { left:-60%; } 55% { left:130%; } 100% { left:130%; } }
+  @media (prefers-reduced-motion: reduce) { .btn-shine::after { animation:none; opacity:0; } }
+  @media (max-width:600px) {
+    .insert { padding:22px 18px; }
+    .insert-top { align-items:flex-start; }
+    .insert-viz { width:88px; }
+    .insert .btn-shine { width:100%; }
+  }
   a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
@@ -707,9 +737,9 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
   </div>
 
   <div class="intro-card">
-    <p>Вы написали ПРОМПТЫ в комментарии. Держите, как обещала.</p>
-    <p>Здесь все 12 промптов из карусели в полной версии и бонусный 13-й. Полная версия длиннее: у каждого промпта есть роль, данные, задача и правила. С ними нейросеть отвечает по делу и без воды.</p>
-    <p>Ровно год назад я выложила 11 промптов, которые заменят копирайтера. Эти 12 про маркетинг целиком, от портрета клиента до рекламы.</p>
+    <p>Здесь 12 промптов для маркетинга в полной версии и бонусный 13-й. У каждого есть роль, данные, задача и правила. С ними нейросеть отвечает по делу и без воды.</p>
+    <p>Промпты идут цепочкой, от портрета клиента до рекламы. Каждый копируется одной кнопкой.</p>
+    <p>Мои 11 промптов, которые заменят копирайтера, набрали 61 тысячу просмотров. Эти 12 уже про маркетинг целиком.</p>
   </div>
 
   <div class="hint">
@@ -843,11 +873,15 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
 
 
   <div class="insert">
-    <div class="insert-body">
-      <h3>Промпты 1-3 дают портрет за вечер. Архитектор смыслов даёт карту аудитории за 15 минут</h3>
-      <p>Эти три промпта я упростила, чтобы вы начали прямо сегодня. Полная версия лежит в Архитекторе смыслов. Промпт «Глубоководный аналитик» выдаёт таблицу из 10 разделов: боли, страхи-блокираторы, вопросы, которые гуглят в 3 ночи, возражения, мечты, сарказм и юмор аудитории, смысловые магниты, ценности и триггеры.</p>
-      <p>Раньше я делала такой анализ неделями, через анкеты, интервью и переписки. Сейчас это 15 минут.</p>
-      <a class="insert-link" href="https://www.anastasialushnikova.com/arkhitektor" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','arkh_12p_insert1')">Посмотреть, что внутри Архитектора</a>
+    <div class="insert-top">
+      <div class="insert-viz"><svg viewBox="0 0 160 110" aria-hidden="true"><g fill="none" stroke="#cfc9bf" stroke-width="1.3" stroke-linecap="round"><line x1="20" y1="14" x2="118" y2="28"/><line x1="14" y1="40" x2="112" y2="86"/><line x1="28" y1="96" x2="128" y2="98"/><line x1="10" y1="70" x2="104" y2="14"/></g><polygon points="62,44 74,36 86,44 86,64 74,72 62,64" fill="#fff7e6" stroke="#1a1917" stroke-width="1.6" stroke-linejoin="round"/><line x1="86" y1="54" x2="132" y2="54" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/><circle cx="140" cy="54" r="14" fill="none" stroke="#cfc9bf" stroke-width="1.3"/><circle cx="140" cy="54" r="8" fill="none" stroke="#cfc9bf" stroke-width="1.3"/><circle cx="140" cy="54" r="3.5" fill="#f59e0b"/></svg></div>
+      <div><div class="insert-eyebrow">Полная версия промптов 1-3</div><h3>Карта аудитории за 15 минут вместо недель</h3></div>
+    </div>
+    <p>Эти три промпта я упростила, чтобы вы начали сегодня. Полная версия лежит в Архитекторе смыслов. Промпт «Глубоководный аналитик» выдаёт таблицу из 10 разделов: боли, страхи-блокираторы, вопросы в 3 ночи, возражения, мечты, сарказм аудитории, смысловые магниты, ценности и триггеры.</p>
+    <p>Раньше я делала такой анализ неделями, через анкеты и интервью.</p>
+    <div class="btn-row">
+      <a class="btn-shine" href="https://www.anastasialushnikova.com/arkhitektor" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','arkh_12p_insert1')">Посмотреть Архитектор смыслов</a>
+      <span class="price-note">1 490 ₽ · возврат 14 дней</span>
     </div>
   </div>
 
@@ -1088,7 +1122,16 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     </div>
   </div>
 
-  <p class="bridge">Промпт 7 даёт 30 тем. А в Архитекторе смыслов есть шаг «Кристаллизация»: из всей карты аудитории он выбирает 5 связок боль и смысл, которые приносят основной результат. Из каждой связки потом получается рилс, пост-манифест и скрипт для директа. Один смысл, 10 касаний. <a href="https://www.anastasialushnikova.com/arkhitektor" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','arkh_12p_bridge')">Как это устроено</a></p>
+  <div class="insert">
+    <div class="insert-top">
+      <div class="insert-viz"><svg viewBox="0 0 160 110" aria-hidden="true"><line x1="80" y1="55" x2="122" y2="55" stroke="#cfc9bf" stroke-width="1.2"/><circle cx="126" cy="55" r="4" fill="#fff" stroke="#1a1917" stroke-width="1.4"/><line x1="80" y1="55" x2="114" y2="80" stroke="#cfc9bf" stroke-width="1.2"/><circle cx="117" cy="82" r="4" fill="#fff" stroke="#1a1917" stroke-width="1.4"/><line x1="80" y1="55" x2="93" y2="95" stroke="#cfc9bf" stroke-width="1.2"/><circle cx="94" cy="99" r="4" fill="#fff" stroke="#1a1917" stroke-width="1.4"/><line x1="80" y1="55" x2="67" y2="95" stroke="#cfc9bf" stroke-width="1.2"/><circle cx="66" cy="99" r="4" fill="#fff" stroke="#1a1917" stroke-width="1.4"/><line x1="80" y1="55" x2="46" y2="80" stroke="#cfc9bf" stroke-width="1.2"/><circle cx="43" cy="82" r="4" fill="#fff" stroke="#1a1917" stroke-width="1.4"/><line x1="80" y1="55" x2="38" y2="55" stroke="#cfc9bf" stroke-width="1.2"/><circle cx="34" cy="55" r="4" fill="#fff" stroke="#1a1917" stroke-width="1.4"/><line x1="80" y1="55" x2="46" y2="30" stroke="#cfc9bf" stroke-width="1.2"/><circle cx="43" cy="28" r="4" fill="#fff" stroke="#1a1917" stroke-width="1.4"/><line x1="80" y1="55" x2="67" y2="15" stroke="#cfc9bf" stroke-width="1.2"/><circle cx="66" cy="11" r="4" fill="#fff" stroke="#1a1917" stroke-width="1.4"/><line x1="80" y1="55" x2="93" y2="15" stroke="#cfc9bf" stroke-width="1.2"/><circle cx="94" cy="11" r="4" fill="#fff" stroke="#1a1917" stroke-width="1.4"/><line x1="80" y1="55" x2="114" y2="30" stroke="#cfc9bf" stroke-width="1.2"/><circle cx="117" cy="28" r="4" fill="#fff" stroke="#1a1917" stroke-width="1.4"/><circle cx="80" cy="55" r="9" fill="#f59e0b"/></svg></div>
+      <div><div class="insert-eyebrow">Один смысл, 10 касаний</div><h3>30 тем хорошо. 5 точных связок лучше</h3></div>
+    </div>
+    <p>В Архитекторе смыслов есть шаг «Кристаллизация». Из всей карты аудитории он выбирает 5 связок боль и смысл, которые приносят основной результат. Из каждой связки получается рилс, пост-манифест и скрипт для директа.</p>
+    <div class="btn-row">
+      <a class="btn-shine" href="https://www.anastasialushnikova.com/arkhitektor" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','arkh_12p_bridge')">Как устроен кристалл смыслов</a>
+    </div>
+  </div>
 
   <div class="section-header">
     <div class="section-label">Этап 4. Реклама и цифры</div>
@@ -1260,7 +1303,16 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     </div>
   </div>
   </div>
-  <p class="bridge">Этот промпт чистит текст по общим правилам. В Архитекторе смыслов есть бонусный шаг «Голос бренда»: нейросеть учится писать вашим стилем по вашим же текстам.</p>
+  <div class="insert">
+    <div class="insert-top">
+      <div class="insert-viz"><svg viewBox="0 0 160 110" aria-hidden="true"><path d="M10,55 L20,55 L26,30 L34,82 L42,38 L50,70 L58,48 L66,60 L72,55 L80,55" fill="none" stroke="#1a1917" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><g stroke-linecap="round"><line x1="92" y1="38" x2="150" y2="38" stroke="#1a1917" stroke-width="3"/><line x1="92" y1="55" x2="140" y2="55" stroke="#1a1917" stroke-width="3"/><line x1="92" y1="72" x2="128" y2="72" stroke="#f59e0b" stroke-width="3"/></g></svg></div>
+      <div><div class="insert-eyebrow">Бонусный шаг в Архитекторе</div><h3>Нейросеть пишет вашим голосом</h3></div>
+    </div>
+    <p>Промпт 13 чистит текст по общим правилам. В Архитекторе смыслов есть шаг «Голос бренда»: нейросеть учится писать вашим стилем по вашим же текстам.</p>
+    <div class="btn-row">
+      <a class="btn-shine" href="https://www.anastasialushnikova.com/arkhitektor" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','arkh_12p_voice')">Хочу свой голос в нейросети</a>
+    </div>
+  </div>
 
   <div class="product-block" id="arkhitektor">
     <div class="product-eyebrow">Архитектор смыслов</div>
@@ -1289,7 +1341,8 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
       <div class="faq-a">Размер аудитории тут роли не играет. 200 тёплых людей, которые узнают себя в каждом посте, дают больше продаж, чем 20 000 случайных.</div>
     </div>
 
-    <a class="btn-product" href="https://app.lava.top/products/162ca29b-a6a4-414a-97c6-29962d1d3956" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','arkh_12p_pay')">Забрать Архитектор смыслов за 1 490 ₽</a>
+    <a class="btn-shine big" href="https://app.lava.top/products/162ca29b-a6a4-414a-97c6-29962d1d3956" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','arkh_12p_pay')">Забрать Архитектор смыслов за 1 490 ₽</a>
+    <div style="text-align:center;margin-top:12px"><a class="btn-ghost" href="https://www.anastasialushnikova.com/arkhitektor" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','arkh_12p_landing_final')">Сначала посмотреть, что внутри</a></div>
   </div>
 
   <div class="quiet-card">Дошли до промпта 10 и хотите сами запускать рекламу в Instagram? Для этого есть <a href="https://www.anastasialushnikova.com/pro" target="_blank" rel="noopener">Тренажёр таргетолога</a>: кабинет Meta по шагам, настройка под вашу страну и работа с блокировками.</div>
