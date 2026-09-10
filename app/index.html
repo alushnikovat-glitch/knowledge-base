@@ -75,17 +75,34 @@
   .btn-white{background:#fff;color:var(--teal);font-weight:700;font-size:15px;padding:12px 20px;border-radius:999px}
   .btn-white.wide{width:100%;padding:14px 16px}
   /* ПЛАШКА КОРОБКИ под полкой промптов */
-  .boxband{margin:22px 20px 4px;border-radius:var(--r-lg);background:radial-gradient(120% 120% at 100% 0%,#3f978f 0%,#2e7d76 50%,#245f5a 100%);color:#fff;padding:20px 20px 18px;position:relative;overflow:hidden}
-  .boxband .bb-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-  .boxband .soon{position:static}
-  .boxband .bb-ey{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7)}
-  .boxband h3{font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
-  .boxband .bb-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
-  .boxband p{font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.86);margin-top:10px}
-  .boxband p b{color:#fff;font-weight:600}
-  .boxband .bb-viz{width:92px;flex-shrink:0;margin:-8px -8px -4px 0}
+  .boxband{display:block;width:calc(100% - 40px);margin:22px 20px 4px;padding:18px 16px 18px 20px;border-radius:var(--r-lg);text-align:left;color:#fff;
+    background:linear-gradient(135deg,#2e7d76 0%,#24625c 100%);box-shadow:0 10px 30px rgba(46,125,118,.22);transition:transform .12s ease}
+  .boxband:active{transform:scale(.98)}
+  .boxband .bb-text{flex:1;min-width:0}
+  .boxband .bb-ey{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+  .boxband .bb-title{font-size:19px;font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-top:6px}
+  .boxband .bb-sub{font-size:13.5px;line-height:1.4;color:rgba(255,255,255,.78);margin-top:6px}
+  .boxband .bb-row{display:flex;align-items:center;gap:12px}
+  .boxband .bb-cta{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.18);font-size:14.5px;font-weight:700;color:#fff}
+  .boxband .bb-cta .a{width:30px;height:30px;border-radius:50%;background:var(--gold);color:var(--dusk);display:grid;place-items:center;font-size:15px;transition:transform .2s ease}
+  .boxband:hover .bb-cta .a{transform:translateX(3px)}
+  .boxband .bb-viz{width:84px;flex-shrink:0}
   .boxband .bb-viz svg{width:100%;height:auto;display:block}
-  .boxband .btn-white{margin-top:16px}
+  /* анимация коробки: куча по одной карточке складывается внутрь */
+  .boxband .bxc{transform-box:fill-box;transform-origin:center;animation:bxfall 6s cubic-bezier(.5,0,.3,1) infinite}
+  .boxband .c1{--dx:70px;--dy:105px;--r:-18deg;animation-delay:0s}
+  .boxband .c2{--dx:26px;--dy:118px;--r:12deg;animation-delay:.9s}
+  .boxband .c3{--dx:-26px;--dy:106px;--r:-8deg;animation-delay:1.8s}
+  .boxband .c4{--dx:-64px;--dy:80px;--r:20deg;animation-delay:2.7s}
+  .boxband .c5{--dx:60px;--dy:60px;--r:10deg;animation-delay:3.6s}
+  @keyframes bxfall{
+    0%{transform:translate(0,0) rotate(var(--r));opacity:1}
+    18%{transform:translate(var(--dx),var(--dy)) rotate(0deg) scale(.5);opacity:0}
+    80%{transform:translate(0,0) rotate(var(--r));opacity:0}
+    100%{transform:translate(0,0) rotate(var(--r));opacity:1}}
+  .boxband .bxg{transform-box:fill-box;transform-origin:center;animation:bxglow 2.4s ease-in-out infinite}
+  @keyframes bxglow{0%,100%{transform:scale(1);opacity:.25}50%{transform:scale(1.9);opacity:.05}}
+  @media (prefers-reduced-motion:reduce){.boxband .bxc,.boxband .bxg{animation:none}}
   /* ЗАМОК ПОДПИСКИ */
   .gate{margin:16px 20px 4px;background:var(--sand);border-radius:var(--r-md);padding:13px 16px;display:flex;gap:12px;align-items:center;font-size:14.5px}
   .pill{background:var(--teal);color:#fff;font-weight:700;font-size:12px;letter-spacing:.04em;padding:5px 11px;border-radius:999px;flex-shrink:0}
@@ -292,16 +309,20 @@ const INK='#14171a', T='#2e7d76', G='#e8b45f', M='#cbc4b6';
 const S=(inner,vb='6 14 184 172')=>`<svg class="cv" viewBox="${vb}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${inner}</svg>`;
 const COVERS={
   /* Коробка: из открытой коробки поднимается вся цепочка, пост, директ, бот, приложение, продукт. Система приходит целиком */
-  box:()=>S(`<defs><radialGradient id="bg1"><stop offset="0" stop-color="${G}" stop-opacity=".55"/><stop offset="1" stop-color="${G}" stop-opacity="0"/></radialGradient></defs>
-    <path d="M100 150 C100 130 70 122 70 104 S104 86 104 70 S78 52 92 38" fill="none" stroke="#bfe6e1" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round"/>
-    <circle cx="100" cy="150" r="0"/>
-    <g fill="#fff" stroke="#fff" stroke-width="0"><circle cx="100" cy="132" r="7" opacity=".9"/><circle cx="72" cy="104" r="7" opacity=".9"/><circle cx="104" cy="72" r="7" opacity=".9"/></g>
-    <circle cx="92" cy="38" r="20" fill="url(#bg1)"/><circle cx="92" cy="38" r="8" fill="${G}"/>
+  box:()=>S(`<g fill="#e4f0ee" fill-opacity=".12" stroke="#bfe6e1" stroke-width="2">
+      <rect class="bxc c1" x="18" y="30" width="30" height="20" rx="4"/>
+      <rect class="bxc c2" x="62" y="14" width="30" height="20" rx="4"/>
+      <rect class="bxc c3" x="112" y="26" width="30" height="20" rx="4"/>
+      <rect class="bxc c4" x="150" y="54" width="30" height="20" rx="4"/>
+      <rect class="bxc c5" x="26" y="74" width="30" height="20" rx="4"/>
+    </g>
     <path d="M52 146 L100 128 L148 146 L100 164 Z" fill="#3f978f"/>
     <path d="M52 146 L52 184 L100 202 L100 164 Z" fill="#1f5d57"/>
     <path d="M148 146 L148 184 L100 202 L100 164 Z" fill="#276e67"/>
-    <path d="M52 146 L34 130 L82 112 L100 128 Z" fill="#4aa89f" opacity=".95"/>
-    <path d="M148 146 L166 130 L118 112 L100 128 Z" fill="#4aa89f" opacity=".85"/>`,'10 20 180 190'),
+    <path class="bxl" d="M52 146 L34 130 L82 112 L100 128 Z" fill="#4aa89f" opacity=".95"/>
+    <path class="bxr" d="M148 146 L166 130 L118 112 L100 128 Z" fill="#4aa89f" opacity=".85"/>
+    <circle class="bxg" cx="100" cy="136" r="10" fill="${G}" opacity=".35"/>
+    <circle cx="100" cy="136" r="6" fill="${G}"/>`,'10 6 180 200'),
   /* Архитектор смыслов: под шумом поверхности слои глубже и глубже.
      На самом дне кристалл, настоящий смысл. Из глубины он поднимается одним лучом и точно попадает в поверхность */
   arkh:(vb='0 4 200 176')=>S(`<defs>
@@ -417,14 +438,17 @@ function heroBox(){
   <div class="hfoot"><button class="btn-white wide" data-tg="https://t.me/tschoolai_bot?start=korobka" data-goal="app_korobka">Хочу систему как у Анастасии</button></div></div></article>`;
 }
 function boxBand(){
-  return `<div class="boxband">
-    <div class="bb-head"><div><div class="bb-top"><span class="soon">СКОРО</span><span class="bb-ey">Предзапись</span></div>
-    <h3>Система как у Анастасии</h3></div><div class="bb-viz">${COVERS.box()}</div></div>
-    <p>Вы открыли промпты за пару нажатий. Но до этого был пост. До поста разбор аудитории и смыслы. А до всего этого большая невидимая работа, без которой Вы бы сюда не попали.</p>
-    <p><b>Я упаковываю эту систему в скиллы для Claude:</b> сайт, блог, контент, прогрев, воронка продаж и многое другое, без чего продаж не будет.</p>
-    <p><b>Вы можете получить всё это первыми.</b></p>
-    <button class="btn-white wide" data-tg="https://t.me/tschoolai_bot?start=korobka" data-goal="app_korobka">Хочу систему как у Анастасии</button>
-  </div>`;
+  return `<button class="boxband" data-tg="https://t.me/tschoolai_bot?start=korobka" data-goal="app_korobka">
+    <div class="bb-row">
+      <div class="bb-text">
+        <div class="bb-ey">Скоро · предзапись</div>
+        <div class="bb-title">Система как у Анастасии</div>
+        <div class="bb-sub">Настраиваете с Claude один раз, и система работает на Вас: от плана запуска до дашборда с цифрами</div>
+      </div>
+      <div class="bb-viz">${COVERS.box()}</div>
+    </div>
+    <div class="bb-cta"><span class="t">Хочу систему как у Анастасии</span><span class="a">→</span></div>
+  </button>`;
 }
 function heroArkh(){
   return `<article class="hcard"><div class="hmeta"><div class="eyebrow">Продукт</div><div class="htitle">Архитектор смыслов</div><div class="hsub">Глубинный разбор аудитории, который не делают 80% экспертов. Поэтому делают много, а всё уходит в пустоту.</div></div>
