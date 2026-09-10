@@ -74,6 +74,18 @@
   .soon{position:absolute;top:14px;left:14px;background:var(--gold);color:var(--dusk);font-size:12px;font-weight:700;letter-spacing:.06em;padding:4px 10px;border-radius:999px;z-index:2}
   .btn-white{background:#fff;color:var(--teal);font-weight:700;font-size:15px;padding:12px 20px;border-radius:999px}
   .btn-white.wide{width:100%;padding:14px 16px}
+  /* ПЛАШКА КОРОБКИ под полкой промптов */
+  .boxband{margin:22px 20px 4px;border-radius:var(--r-lg);background:radial-gradient(120% 120% at 100% 0%,#3f978f 0%,#2e7d76 50%,#245f5a 100%);color:#fff;padding:20px 20px 18px;position:relative;overflow:hidden}
+  .boxband .bb-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .boxband .soon{position:static}
+  .boxband .bb-ey{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+  .boxband h3{font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+  .boxband .bb-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .boxband p{font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.86);margin-top:10px}
+  .boxband p b{color:#fff;font-weight:600}
+  .boxband .bb-viz{width:92px;flex-shrink:0;margin:-8px -8px -4px 0}
+  .boxband .bb-viz svg{width:100%;height:auto;display:block}
+  .boxband .btn-white{margin-top:16px}
   /* ЗАМОК ПОДПИСКИ */
   .gate{margin:16px 20px 4px;background:var(--sand);border-radius:var(--r-md);padding:13px 16px;display:flex;gap:12px;align-items:center;font-size:14.5px}
   .pill{background:var(--teal);color:#fff;font-weight:700;font-size:12px;letter-spacing:.04em;padding:5px 11px;border-radius:999px;flex-shrink:0}
@@ -404,6 +416,16 @@ function heroBox(){
   <div class="hbox teal"><span class="soon">СКОРО</span>${COVERS.box()}
   <div class="hfoot"><button class="btn-white wide" data-tg="https://t.me/tschoolai_bot?start=korobka" data-goal="app_korobka">Хочу систему как у Анастасии</button></div></div></article>`;
 }
+function boxBand(){
+  return `<div class="boxband">
+    <div class="bb-head"><div><div class="bb-top"><span class="soon">СКОРО</span><span class="bb-ey">Предзапись</span></div>
+    <h3>Система как у Анастасии</h3></div><div class="bb-viz">${COVERS.box()}</div></div>
+    <p>Вы открыли промпты за пару нажатий. Но до этого был пост. До поста разбор аудитории и смыслы. А до всего этого большая невидимая работа, без которой Вы бы сюда не попали.</p>
+    <p><b>Я упаковываю эту систему в скиллы для Claude:</b> сайт, блог, контент, прогрев, воронка продаж и многое другое, без чего продаж не будет.</p>
+    <p><b>Вы можете получить всё это первыми.</b></p>
+    <button class="btn-white wide" data-tg="https://t.me/tschoolai_bot?start=korobka" data-goal="app_korobka">Хочу систему как у Анастасии</button>
+  </div>`;
+}
 function heroArkh(){
   return `<article class="hcard"><div class="hmeta"><div class="eyebrow">Продукт</div><div class="htitle">Архитектор смыслов</div><div class="hsub">Глубинный разбор аудитории, который не делают 80% экспертов. Поэтому делают много, а всё уходит в пустоту.</div></div>
   <div class="hbox dusk">${COVERS.arkh('-72 4 344 176')}
@@ -411,7 +433,7 @@ function heroArkh(){
   <a class="dusk-link" href="#" data-open="arkh-land" data-goal="app_arkh_land">Что внутри · гарантия 14 дней</a></div></article>`;
 }
 document.getElementById('hero').innerHTML=
-  heroBox()+heroFree(ALL['12-promptov-marketologa'],'Промпты')+heroArkh()+heroFree(ALL['astro_karta'],'Гайд');
+  heroFree(ALL['12-promptov-marketologa'],'Промпты')+heroArkh()+heroFree(ALL['astro_karta'],'Гайд');
 
 /* Шапки карточек карусели одной высоты: обложки стоят ровно по одной линии */
 function alignHero(){const m=[...document.querySelectorAll('.hero .hmeta')];m.forEach(x=>x.style.minHeight='');const h=Math.max(...m.map(x=>x.offsetHeight));m.forEach(x=>x.style.minHeight=h+'px')}
@@ -430,10 +452,10 @@ function renderChips(){
 function renderShelves(){
   const box=document.getElementById('shelves');
   if(current==='all'){
-    box.innerHTML=SHELVES.map(s=>`<div class="shelf"><div class="shelf-h"><h2>${s.name}</h2><button data-chip="${s.id}">Все ${s.items.length}</button></div><div class="shelf-row">${s.items.map(tile).join('')}${s.product?ptile(s.product):''}</div></div>`).join('');
+    box.innerHTML=SHELVES.map(s=>`<div class="shelf"><div class="shelf-h"><h2>${s.name}</h2><button data-chip="${s.id}">Все ${s.items.length}</button></div><div class="shelf-row">${s.items.map(tile).join('')}${s.product?ptile(s.product):''}</div></div>`+(s.id==='prompts'?boxBand():'')).join('');
   }else{
     const s=SHELVES.find(x=>x.id===current);
-    box.innerHTML=`<div class="shelf"><div class="grid">${s.items.map(tile).join('')}${s.product?ptile(s.product):''}</div></div>`;
+    box.innerHTML=`<div class="shelf"><div class="grid">${s.items.map(tile).join('')}${s.product?ptile(s.product):''}</div></div>`+(s.id==='prompts'?boxBand():'');
   }
 }
 renderChips();renderShelves();
