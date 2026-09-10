@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12 промптов, которые сделают работу маркетолога за вечер | Анастасия Лушникова</title>
+<meta name="description" content="12 промптов для Claude и ChatGPT цепочкой: портрет клиента, боли, оффер, 30 тем, прогрев в сторис, реклама и разбор статистики. Плюс бонусный промпт.">
+<meta property="og:title" content="12 промптов, которые сделают работу маркетолога за вечер">
+<meta property="og:description" content="Промпты идут цепочкой: ответ одного вставляете в следующий. От портрета клиента до рекламы за один вечер.">
+<meta property="og:type" content="article">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108790481', 'ym');
+    ym(108790481, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108790481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2700527913660797');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --border: #e8e6df;
+    --text: #1a1917;
+    --text-muted: #6b6860;
+    --text-light: #a8a29e;
+    --accent: #2563eb;
+    --accent-light: #eff4ff;
+    --tag-bg: #f0ede6;
+    --dark: #1a1917;
+    --yellow-bg: #fffbf0;
+    --yellow-border: #fde68a;
+    --green-bg: #f0fdf4;
+    --green-border: #bbf7d0;
+    --green-text: #15803d;
+    --var-bg: #fef9c3;
+    --var-text: #854d0e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(247, 246, 242, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+  }
+
+  .nav-brand {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* MAIN */
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* META */
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .meta-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-light);
+    flex-shrink: 0;
+  }
+
+  /* TAGS */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 36px;
+  }
+
+  .tag {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--tag-bg);
+    padding: 5px 12px;
+    border-radius: 100px;
+  }
+
+  /* H1 */
+  h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+
+  /* INTRO CARD */
+  .intro-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+  }
+
+  .intro-card p {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 0;
+  }
+
+  .intro-card p + p { margin-top: 12px; }
+
+  /* HINT */
+  .hint {
+    background: var(--accent-light);
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .hint-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .hint p {
+    font-size: 14px;
+    color: #1e40af;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 48px 0 20px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--tag-bg);
+    padding: 4px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* STAGE CARD */
+  .stage-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .stage-head {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stage-number {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 6px;
+  }
+
+  .stage-title {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .stage-goal {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .stage-body {
+    padding: 20px 24px 24px;
+  }
+
+  .stage-body p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  /* PROMPT BLOCK */
+  .prompt-block {
+    background: #1a1917;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .prompt-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .prompt-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .prompt-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .prompt-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.05em;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .copy-btn {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.06);
+    border: none;
+    border-radius: 6px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+    transition: all 0.15s;
+    letter-spacing: 0.02em;
+  }
+
+  .copy-btn:hover {
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.7);
+  }
+
+  .copy-btn.copied {
+    color: #86efac;
+    background: rgba(134,239,172,0.1);
+  }
+
+  .prompt-code {
+    padding: 20px 20px 22px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.85;
+    color: #c8c0b4;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .prompt-code .role { color: #7dd3fc; }
+  .prompt-code .section-key { color: #fbbf24; font-weight: 500; }
+  .prompt-code .step-num { color: #a78bfa; }
+  .prompt-code .var {
+    background: var(--var-bg);
+    color: var(--var-text);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-weight: 500;
+  }
+  .prompt-code .rule { color: #f9a8d4; }
+
+  /* MIDTEXT */
+  .midtext {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin: 48px 0;
+  }
+
+  .midtext h2 {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  .midtext p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+
+  .midtext p:last-child { margin-bottom: 0; }
+
+  /* PRODUCT BLOCK */
+  .product-block {
+    background: var(--yellow-bg);
+    border: 1.5px solid var(--yellow-border);
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin: 48px 0;
+  }
+
+  .product-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #92400e;
+    margin-bottom: 12px;
+  }
+
+  .product-block h2 {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .product-block p {
+    font-size: 15px;
+    color: #78716c;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .product-features {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+
+  .product-features li {
+    font-size: 14px;
+    color: #57534e;
+    padding: 6px 0;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.6;
+  }
+
+  .product-features li::before {
+    content: '✓';
+    font-weight: 700;
+    color: #d97706;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .guarantee {
+    background: var(--green-bg);
+    border: 1px solid var(--green-border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--green-text);
+    line-height: 1.6;
+  }
+
+  .btn-product {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--dark);
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .btn-product:hover { opacity: 0.85; }
+
+  /* CONCLUSION */
+  .conclusion {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+  }
+
+  .conclusion p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+
+  .conclusion p:last-child { margin-bottom: 0; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    color: #fff;
+    padding: 56px 24px 40px;
+  }
+
+  .footer-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .footer-title {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .footer-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+    margin-bottom: 32px;
+    max-width: 480px;
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: 500px) {
+    .social-grid { grid-template-columns: 1fr; }
+  }
+
+  .social-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .social-card:hover { background: rgba(255,255,255,0.1); }
+
+  .social-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .social-info { min-width: 0; }
+
+  .social-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+
+  .social-desc {
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .footer-banner {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .footer-banner-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .btn-tg {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #2563eb;
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 100px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+
+  .btn-tg:hover { opacity: 0.85; }
+
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 32px 16px 60px; }
+    .intro-card, .midtext, .conclusion { padding: 22px 20px; }
+    .product-block { padding: 24px 20px; }
+    .stage-head, .stage-body { padding: 16px 18px; }
+    .prompt-code { font-size: 11.5px; }
+  }
+
+  /* CHAIN */
+  .chain-note {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: -4px 0 12px 24px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+  }
+  .chain-line {
+    width: 2px;
+    height: 22px;
+    background: repeating-linear-gradient(to bottom, var(--border) 0 4px, transparent 4px 8px);
+  }
+  .stage-intro {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: -8px 0 20px;
+  }
+  .bonus .stage-card { border: 1.5px solid var(--yellow-border); }
+  .midtext p strong { color: var(--text); font-weight: 700; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="/">Анастасия Лушникова</a>
+  <div class="nav-links">
+    <a href="https://t.me/target_school1" target="_blank" rel="noopener">Telegram</a>
+    <a href="https://www.instagram.com/target_school" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank" rel="noopener">Написать</a>
+  </div>
+</nav>
+
+<main class="page">
+
+  <div class="meta">
+    <span>сентябрь 2026</span>
+    <span class="meta-dot"></span>
+    <span>12 мин чтения</span>
+    <span class="meta-dot"></span>
+    <span>Автор: Анастасия Лушникова</span>
+  </div>
+
+  <h1>12 промптов, которые сделают работу маркетолога за вечер</h1>
+
+  <div class="tags">
+    <span class="tag">Промпты</span>
+    <span class="tag">AI-маркетинг</span>
+    <span class="tag">Контент</span>
+    <span class="tag">Реклама</span>
+  </div>
+
+  <div class="intro-card">
+    <p>Вы написали ПРОМПТЫ в комментарии. Держите, как обещала.</p>
+    <p>Здесь все 12 промптов из карусели в полной версии и бонусный 13-й. Полная версия длиннее: у каждого промпта есть роль, данные, задача и правила. С ними нейросеть отвечает по делу и без воды.</p>
+    <p>Ровно год назад я выложила 11 промптов, которые заменят копирайтера. Эти 12 про маркетинг целиком, от портрета клиента до рекламы.</p>
+  </div>
+
+  <div class="hint">
+    <span class="hint-icon">💡</span>
+    <p>Откройте один чат в Claude или ChatGPT и идите по порядку внутри него. Так нейросеть помнит ответы предыдущих шагов. Текст в жёлтых скобках заменяете на своё. Пустые скобки дают пустой результат.</p>
+  </div>
+
+  <div class="section-header">
+    <div class="section-label">Этап 1. Клиент</div>
+    <div class="section-line"></div>
+  </div>
+  <p class="stage-intro">Сначала нейросеть узнаёт, кому вы пишете. Без этого все тексты дальше получатся ни для кого.</p>
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Промпт 1</div>
+      <div class="stage-title">Портрет клиента</div>
+      <div class="stage-goal">Нейросеть узнаёт вашего клиента по его же словам.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">промпт 1</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты маркетолог с 10-летним опытом, который слышит клиентов между строк.
+
+<span class="section-key">ДАННЫЕ:</span>
+- Чем я занимаюсь: <span class="var">[ниша и услуга]</span>
+- 10 сообщений от клиентов (директ, отзывы, комментарии): <span class="var">[вставь дословно, с ошибками и эмоциями]</span>
+
+<span class="section-key">ЗАДАЧА:</span>
+Составь портрет моего клиента по этим сообщениям.
+<span class="step-num">1.</span> Кто он: возраст, чем занят, в какой ситуации сейчас.
+<span class="step-num">2.</span> Что у него болит прямо сейчас.
+<span class="step-num">3.</span> Чего он боится и о чём не говорит вслух.
+<span class="step-num">4.</span> Чего он хочет через год.
+<span class="step-num">5.</span> Какими словами он описывает свою проблему.
+
+<span class="rule">ПРАВИЛА:</span>
+- Опирайся только на сообщения. Если данных не хватает, напиши, что спросить у клиентов.
+- Цитируй клиентов дословно, в кавычках.
+- Без общих фраз вроде «хочет развиваться».</div>
+      </div>
+    </div>
+  </div>
+  <div class="chain-note"><div class="chain-line"></div>Ответ вставляете в следующий промпт</div>
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Промпт 2</div>
+      <div class="stage-title">Карта болей</div>
+      <div class="stage-goal">10 болей так, как клиент говорит о них сам.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">промпт 2</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты исследователь аудитории.
+
+<span class="section-key">ДАННЫЕ:</span> портрет клиента из предыдущего ответа.
+
+<span class="section-key">ЗАДАЧА:</span>
+Выпиши 10 болей моего клиента. Для каждой боли:
+<span class="step-num">1.</span> Как он рассказывает о ней подруге на кухне, одной фразой.
+<span class="step-num">2.</span> Что он гуглит в 3 часа ночи.
+<span class="step-num">3.</span> Что уже пробовал и почему не сработало.
+<span class="step-num">4.</span> Что будет, если полгода ничего не менять.
+
+<span class="section-key">ФОРМАТ:</span> таблица. Отсортируй от самой острой боли к самой тихой.
+
+<span class="rule">ПРАВИЛА:</span>
+- Живой разговорный язык.
+- Никаких маркетинговых терминов.</div>
+      </div>
+    </div>
+  </div>
+  <div class="chain-note"><div class="chain-line"></div>Ответ вставляете в следующий промпт</div>
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Промпт 3</div>
+      <div class="stage-title">Возражения</div>
+      <div class="stage-goal">Почему не купят и что на это ответить без давления.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">промпт 3</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты менеджер по продажам, который слышал «я подумаю» тысячу раз.
+
+<span class="section-key">ДАННЫЕ:</span>
+- Мой продукт или услуга: <span class="var">[что продаёшь]</span>
+- Цена: <span class="var">[сумма]</span>
+- Портрет и боли клиента: из предыдущих ответов
+
+<span class="section-key">ЗАДАЧА:</span>
+<span class="step-num">1.</span> Назови 10 причин, почему клиент не купит. От частой к редкой.
+<span class="step-num">2.</span> Для каждой причины: что он говорит вслух и что стоит за этими словами.
+<span class="step-num">3.</span> Ответ, который снимает сомнение без давления. Одно-два предложения.
+
+<span class="rule">ПРАВИЛА:</span>
+- Без манипуляций и «осталось 2 места».
+- Отвечай так, как ответил бы честный человек, которому не всё равно.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="midtext">
+    <h2>Нет 10 сообщений от клиентов?</h2>
+    <p>Так бывает на старте. Берите чужие.</p>
+    <p>Откройте комментарии у 3-5 блогеров в вашей нише. Ищите, где люди жалуются, спрашивают, спорят. Отзывы на похожие продукты тоже подходят, и ветки в Threads по вашей теме.</p>
+    <p>Копируйте дословно, с ошибками и эмоциями. Нейросеть лучше всего работает на живых словах.</p>
+  </div>
+
+  <div class="section-header">
+    <div class="section-label">Этап 2. Упаковка</div>
+    <div class="section-line"></div>
+  </div>
+  <p class="stage-intro">Теперь из клиента собираем вас: кто вы для него и что предлагаете.</p>
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Промпт 4</div>
+      <div class="stage-title">Позиционирование</div>
+      <div class="stage-goal">Одна фраза, после которой понятно, зачем идти к вам.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">промпт 4</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты стратег по позиционированию.
+
+<span class="section-key">ДАННЫЕ:</span>
+- Мой опыт: <span class="var">[сколько лет, чего добилась, реальные кейсы с цифрами]</span>
+- Мои конкуренты: <span class="var">[2-3 имени или описания]</span>
+- Портрет, боли, возражения: из предыдущих ответов
+
+<span class="section-key">ЗАДАЧА:</span>
+<span class="step-num">1.</span> Предложи 5 вариантов фразы «Я помогаю <span class="var">[кому]</span> получить <span class="var">[что]</span> без <span class="var">[чего они боятся]</span>».
+<span class="step-num">2.</span> Оцени каждый вариант по 10-балльной шкале: насколько конкретно и насколько отличается от конкурентов.
+<span class="step-num">3.</span> Выбери лучший и объясни почему.
+<span class="step-num">4.</span> Напиши на его основе шапку профиля Instagram, до 150 знаков.
+
+<span class="rule">ПРАВИЛА:</span>
+- Без слов «эксперт», «уникальный», «раскрыть потенциал».</div>
+      </div>
+    </div>
+  </div>
+  <div class="chain-note"><div class="chain-line"></div>Ответ вставляете в следующий промпт</div>
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Промпт 5</div>
+      <div class="stage-title">Оффер</div>
+      <div class="stage-goal">Что вы продаёте, кому и с каким результатом.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">промпт 5</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты копирайтер прямого отклика.
+
+<span class="section-key">ДАННЫЕ:</span>
+- Продукт: <span class="var">[название, формат, что внутри]</span>
+- Цена и срок: <span class="var">[сумма, сколько длится]</span>
+- Реальные результаты клиентов: <span class="var">[кейсы с цифрами, если есть]</span>
+- Позиционирование: из предыдущего ответа
+
+<span class="section-key">ЗАДАЧА:</span>
+Собери оффер по структуре:
+<span class="step-num">1.</span> Кому это. Одна фраза, клиент узнаёт себя.
+<span class="step-num">2.</span> Какой результат и за какой срок.
+<span class="step-num">3.</span> Что внутри, простыми словами.
+<span class="step-num">4.</span> Почему сейчас.
+<span class="step-num">5.</span> Что снимает риск: гарантия, пробный шаг, возврат.
+Потом сократи оффер до 3 предложений для сторис.
+
+<span class="rule">ПРАВИЛА:</span>
+- Обещай только то, что подтверждают кейсы.
+- Если кейсов нет, формулируй без цифр дохода.
+- Без «миллиона за месяц».</div>
+      </div>
+    </div>
+  </div>
+  <div class="chain-note"><div class="chain-line"></div>Ответ вставляете в следующий промпт</div>
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Промпт 6</div>
+      <div class="stage-title">Проверка скептиком</div>
+      <div class="stage-goal">Нейросеть ищет, где вам не поверят.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">промпт 6</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты скептичный клиент. Ты уже трижды покупал обучение, и ничего не окупилось. Ты не веришь обещаниям и ищешь подвох.
+
+<span class="section-key">ДАННЫЕ:</span> мой оффер: <span class="var">[вставь оффер из предыдущего ответа]</span>
+
+<span class="section-key">ЗАДАЧА:</span>
+<span class="step-num">1.</span> Отметь каждую фразу, в которую не веришь. Объясни почему.
+<span class="step-num">2.</span> Что звучит как у всех?
+<span class="step-num">3.</span> Задай 5 вопросов, без ответа на которые ты не купишь.
+<span class="step-num">4.</span> Выйди из роли и перепиши оффер так, чтобы скептик дочитал до конца.
+
+<span class="rule">ПРАВИЛА:</span>
+- Будь жёстким. Мне нужна критика, комплименты не нужны.</div>
+      </div>
+    </div>
+  </div>
+  <div class="section-header">
+    <div class="section-label">Этап 3. Контент</div>
+    <div class="section-line"></div>
+  </div>
+  <p class="stage-intro">Из болей и возражений получается контент-план, первые строки и прогрев.</p>
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Промпт 7</div>
+      <div class="stage-title">30 тем для постов</div>
+      <div class="stage-goal">Контент-план на месяц из ваших болей и возражений.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">промпт 7</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты контент-стратег.
+
+<span class="section-key">ДАННЫЕ:</span>
+- Боли, возражения, позиционирование и оффер: из предыдущих ответов
+- Мои форматы: <span class="var">[карусели / посты / сторис / рилс]</span>
+
+<span class="section-key">ЗАДАЧА:</span>
+Составь 30 тем для постов.
+- 10 тем на узнавание: клиент видит себя и свою ситуацию.
+- 10 тем на доверие: мой опыт, кейсы, закулисье, мои ошибки.
+- 10 тем на продажу: закрытие возражений, разбор результата, оффер.
+
+<span class="section-key">ФОРМАТ:</span> таблица. Тема, какую боль или возражение закрывает, формат, первая строка поста.
+
+<span class="rule">ПРАВИЛА:</span>
+- Каждая тема опирается на конкретную боль из списка.
+- Без тем вроде «5 советов по продуктивности».</div>
+      </div>
+    </div>
+  </div>
+  <div class="chain-note"><div class="chain-line"></div>Ответ вставляете в следующий промпт</div>
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Промпт 8</div>
+      <div class="stage-title">Хуки</div>
+      <div class="stage-goal">Первые строки, после которых не листают дальше.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">промпт 8</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты автор, чьи посты дочитывают до конца.
+
+<span class="section-key">ДАННЫЕ:</span>
+- Тема поста: <span class="var">[тема из списка]</span>
+- Боль, которую закрывает пост: <span class="var">[боль]</span>
+- Дословные фразы клиентов: из портрета
+
+<span class="section-key">ЗАДАЧА:</span>
+<span class="step-num">1.</span> Напиши 10 первых строк для этого поста. Используй разные приёмы: дословная фраза клиента, цифра, ситуация с временем и местом, признание своей ошибки, неудобный вопрос.
+<span class="step-num">2.</span> Для каждой строки: почему человек остановится.
+<span class="step-num">3.</span> Выбери 3 сильнейшие.
+
+<span class="rule">ПРАВИЛА:</span>
+- До 12 слов в строке.
+- Без «А вы знали?», «Секрет», «Шок».
+- Без восклицательных знаков.</div>
+      </div>
+    </div>
+  </div>
+  <div class="chain-note"><div class="chain-line"></div>Ответ вставляете в следующий промпт</div>
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Промпт 9</div>
+      <div class="stage-title">Прогрев в сторис на 5 дней</div>
+      <div class="stage-goal">Серия сторис, которая подводит к продаже.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">промпт 9</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты продюсер запусков через сторис.
+
+<span class="section-key">ДАННЫЕ:</span>
+- Продукт и цена: <span class="var">[что и сколько]</span>
+- Когда открываю продажи: <span class="var">[дата]</span>
+- Возражения: из ответа на промпт 3
+- Мой быт на эти дни: <span class="var">[где я, чем занята, что можно снять]</span>
+
+<span class="section-key">ЗАДАЧА:</span>
+Распиши прогрев в сторис на 5 дней.
+<span class="step-num">День 1.</span> Проблема: клиент узнаёт себя.
+<span class="step-num">День 2.</span> Моя история: почему я в этой теме.
+<span class="step-num">День 3.</span> Метод: как решается проблема, без продажи.
+<span class="step-num">День 4.</span> Доказательства: кейсы, отзывы, результаты.
+<span class="step-num">День 5.</span> Открытие продаж: оффер и ответы на возражения.
+Для каждого дня 4-6 сторис: текст на экране, что в кадре, интерактив (опрос, вопрос, реакция).
+
+<span class="rule">ПРАВИЛА:</span>
+- Каждые 2-3 сторис переплетай мой быт с темой продукта.
+- Текст на экране до 20 слов.
+- Каждый день закрывает минимум одно возражение.</div>
+      </div>
+    </div>
+  </div>
+  <div class="section-header">
+    <div class="section-label">Этап 4. Реклама и цифры</div>
+    <div class="section-line"></div>
+  </div>
+  <p class="stage-intro">Здесь вы выходите за пределы своей аудитории и смотрите, что сработало.</p>
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Промпт 10</div>
+      <div class="stage-title">Тексты для рекламы</div>
+      <div class="stage-goal">3 объявления для таргета в Instagram, каждое под свою боль.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">промпт 10</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты таргетолог, который пишет рекламу для Instagram и Facebook.
+
+<span class="section-key">ДАННЫЕ:</span>
+- Продукт и оффер: из предыдущих ответов
+- Куда ведёт реклама: <span class="var">[директ / сайт / Telegram-бот / лид-форма]</span>
+- Боли: из ответа на промпт 2
+
+<span class="section-key">ЗАДАЧА:</span>
+Напиши 3 рекламных объявления, каждое под свою боль. Для каждого:
+<span class="step-num">1.</span> Первая строка до 125 знаков. Её видно до кнопки «ещё».
+<span class="step-num">2.</span> Основной текст до 500 знаков.
+<span class="step-num">3.</span> Заголовок до 40 знаков.
+<span class="step-num">4.</span> Текст кнопки.
+<span class="step-num">5.</span> Идея визуала: что на картинке или в первых 3 секундах видео.
+
+<span class="rule">ПРАВИЛА:</span>
+- Соблюдай правила рекламы Meta.
+- Без обещаний дохода и гарантий результата.
+- Без обращений к личным характеристикам вроде «Вы устали от лишнего веса?».
+- Без капслока.</div>
+      </div>
+    </div>
+  </div>
+  <div class="chain-note"><div class="chain-line"></div>Ответ вставляете в следующий промпт</div>
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Промпт 11</div>
+      <div class="stage-title">Разбор конкурентов</div>
+      <div class="stage-goal">Что у них залетает и где свободное место для вас.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">промпт 11</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты аналитик контента.
+
+<span class="section-key">ДАННЫЕ:</span>
+- 5 постов конкурента за последние 2 месяца: <span class="var">[текст или описание каждого + охват, лайки, комментарии, репосты]</span>
+- Мой список болей: из ответа на промпт 2
+
+<span class="section-key">ЗАДАЧА:</span>
+<span class="step-num">1.</span> Какие посты залетели и почему: тема, хук, формат, призыв.
+<span class="step-num">2.</span> Как он вовлекает: кодовые слова, вопросы, споры.
+<span class="step-num">3.</span> Какие боли из моего списка он не закрывает.
+<span class="step-num">4.</span> 5 тем, где я могу зайти со своим углом.
+<span class="step-num">5.</span> Что у него не стоит повторять.
+
+<span class="rule">ПРАВИЛА:</span>
+- Не предлагай копировать. Мне нужен свой угол.</div>
+      </div>
+    </div>
+  </div>
+  <div class="chain-note"><div class="chain-line"></div>Ответ вставляете в следующий промпт</div>
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Промпт 12</div>
+      <div class="stage-title">Разбор статистики</div>
+      <div class="stage-goal">Что работает в вашем блоге, цифрами.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">промпт 12</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты аналитик, который объясняет цифры простым языком.
+
+<span class="section-key">ДАННЫЕ:</span> статистика моих последних 10 постов: <span class="var">[для каждого: тема, формат, охват, сохранения, репосты, комментарии, подписки]</span>
+
+<span class="section-key">ЗАДАЧА:</span>
+<span class="step-num">1.</span> Найди закономерности: какие темы и форматы набирают сохранения и репосты.
+<span class="step-num">2.</span> Какой пост лучший по отношению сохранений к охвату и почему.
+<span class="step-num">3.</span> Что убрать из контента.
+<span class="step-num">4.</span> План на следующую неделю: 5 постов с темами и форматами на основе того, что сработало.
+
+<span class="rule">ПРАВИЛА:</span>
+- Говори цифрами.
+- Если данных мало для вывода, так и скажи.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="midtext">
+    <h2>Почему цепочка</h2>
+    <p>Логика тут простая. Нейросеть пишет хорошо, когда знает, кому пишет.</p>
+    <p>Большинство открывает чат и сразу просит «напиши пост». Нейросеть клиента не знает и выдаёт текст ни для кого. Гладкий, правильный и пустой.</p>
+    <p>В цепочке каждый шаг кормит следующий. К восьмому промпту нейросеть уже знает боли, возражения, ваш оффер и слова клиента. И хуки получаются про вашего человека.</p>
+  </div>
+
+  <div class="section-header bonus">
+    <div class="section-label">Бонус</div>
+    <div class="section-line"></div>
+  </div>
+  <p class="stage-intro">Тот самый 13-й. Прогоняйте через него всё, что написала нейросеть, перед публикацией.</p>
+  <div class="bonus">
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Бонус</div>
+      <div class="stage-title">Чистка текста от нейросетевого пластика</div>
+      <div class="stage-goal">Прогоняйте через него любой текст, который написала нейросеть.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">бонус</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты редактор, который убирает из текста нейросетевой пластик.
+
+<span class="section-key">ДАННЫЕ:</span> текст: <span class="var">[вставь]</span>
+
+<span class="section-key">ЗАДАЧА:</span>
+Перепиши текст так, как я рассказываю это подруге голосовым.
+Убери:
+- длинные тире, замени на запятую или точку;
+- конструкции «не X, а Y» и «это не просто X, это Y»;
+- слова «уникальный», «эффективный», «на самом деле», «именно», «безусловно», «стоит отметить»;
+- перечисления по три одинаковой длины;
+- пафос и призывы в финале.
+Добавь:
+- короткое предложение после длинного;
+- конкретику: имена, цифры, время;
+- прямой порядок слов: кто и что делает.
+
+<span class="rule">ПРАВИЛА:</span>
+- Смысл и мои примеры сохрани.
+- Если мысль можно сказать короче, скажи короче.</div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="product-block">
+    <div class="product-eyebrow">Следующий шаг</div>
+    <h2>Тексты для рекламы готовы. Теперь их надо запустить</h2>
+    <p>Промпт 10 пишет объявления. Дальше начинается кабинет Meta: настройка под вашу страну, блокировки, первая кампания, цифры. На этом месте застревает большинство новичков.</p>
+    <p>Для этого я собрала Тренажёр таргетолога. Вы идёте по шагам на воссозданных экранах кабинета и параллельно настраиваете свой.</p>
+    <ul class="product-features">
+      <li>Анализ аудитории и конкурентов с готовыми промптами</li>
+      <li>Настройка кабинета под свою страну</li>
+      <li>Что делать при блокировке и что писать в поддержку</li>
+      <li>Запуск тестовой кампании и отчёт клиенту человеческим языком</li>
+      <li>Пиксель Meta и продвинутые стратегии</li>
+    </ul>
+    <div class="guarantee">1 490 ₽. Доступ на 365 дней.</div>
+    <a class="btn-product" href="https://www.anastasialushnikova.com/pro" target="_blank" rel="noopener">Посмотреть, что внутри</a>
+  </div>
+
+  <div class="conclusion">
+    <p>Сохраните страницу в закладки. Цепочку можно прогонять заново каждый раз, когда запускаете новый продукт или меняете аудиторию.</p>
+    <p>И напишите мне в директ, что выдала нейросеть на первом промпте. Какие фразы клиентов всплыли у вас?</p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">Понравился материал?</div>
+    <div class="footer-sub">Подписывайтесь на каналы, там ещё больше про AI-маркетинг, смыслы и продажи без выгорания</div>
+
+    <div class="social-grid">
+      <a class="social-card" href="https://t.me/target_school1" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#1d4ed8;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Telegram канал</div>
+          <div class="social-desc">Промпты и кейсы каждый день</div>
+        </div>
+      </a>
+
+      <a class="social-card" href="https://www.instagram.com/target_school" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#be185d;">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Instagram</div>
+          <div class="social-desc">Визуальные гайды и stories</div>
+        </div>
+      </a>
+
+      <a class="social-card" href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#166534;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Написать Анастасии</div>
+          <div class="social-desc">Личное сообщение в WhatsApp</div>
+        </div>
+      </a>
+
+      <a class="social-card" href="https://t.me/ailav_bot" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#78350f;">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Служба заботы</div>
+          <div class="social-desc">Техподдержка и вопросы</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="footer-banner">
+      <div class="footer-banner-text">Хотите больше материалов?</div>
+      <a class="btn-tg" href="https://t.me/target_school1" target="_blank" rel="noopener">
+        Подписаться на Telegram →
+      </a>
+    </div>
+
+    <div class="footer-copy">© 2026 Анастасия Лушникова. Все права защищены.</div>
+  </div>
+</footer>
+
+<script>
+  function copyPrompt(btn) {
+    const code = btn.closest('.prompt-block').querySelector('.prompt-code');
+    const text = code.innerText || code.textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Скопировано ✓';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Копировать';
+        btn.classList.remove('copied');
+      }, 2000);
+    }).catch(() => {
+      btn.textContent = 'Ошибка';
+      setTimeout(() => { btn.textContent = 'Копировать'; }, 2000);
+    });
+  }
+</script>
+
+</body>
+</html>
