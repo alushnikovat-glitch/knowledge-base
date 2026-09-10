@@ -430,7 +430,7 @@ function applyGate(){
 async function checkSub(){
   if(!inTG){subscribed=true;applyGate();return true}
   try{
-    const r=await fetch('/api/tg-sub',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({initData:tg.initData})});
+    const r=await fetch('/api/lava-webhook?action=tg-sub',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({initData:tg.initData})});
     const j=await r.json();subscribed=j.subscribed!==false;
   }catch(e){subscribed=true}
   applyGate();return subscribed;
