@@ -69,6 +69,11 @@
   @keyframes shine{0%{left:-70%}50%{left:130%}100%{left:130%}}
   .dusk-link{display:block;text-align:center;font-size:13px;color:rgba(255,255,255,.6);padding:0 16px 14px;text-decoration:underline;text-underline-offset:3px}
 
+  .teal{background:radial-gradient(120% 90% at 20% 0%,#3f978f 0%,#2e7d76 55%,#245f5a 100%);color:#fff}
+  .teal .hfoot .time{color:rgba(255,255,255,.75)}
+  .soon{position:absolute;top:14px;left:14px;background:var(--gold);color:var(--dusk);font-size:12px;font-weight:700;letter-spacing:.06em;padding:4px 10px;border-radius:999px;z-index:2}
+  .btn-white{background:#fff;color:var(--teal);font-weight:700;font-size:15px;padding:12px 20px;border-radius:999px}
+  .btn-white.wide{width:100%;padding:14px 16px}
   /* ЗАМОК ПОДПИСКИ */
   .gate{margin:16px 20px 4px;background:var(--sand);border-radius:var(--r-md);padding:13px 16px;display:flex;gap:12px;align-items:center;font-size:14.5px}
   .pill{background:var(--teal);color:#fff;font-weight:700;font-size:12px;letter-spacing:.04em;padding:5px 11px;border-radius:999px;flex-shrink:0}
@@ -274,6 +279,17 @@ const LINKS={
 const INK='#14171a', T='#2e7d76', G='#e8b45f', M='#cbc4b6';
 const S=(inner,vb='6 14 184 172')=>`<svg class="cv" viewBox="${vb}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${inner}</svg>`;
 const COVERS={
+  /* Коробка: из открытой коробки поднимается вся цепочка, пост, директ, бот, приложение, продукт. Система приходит целиком */
+  box:()=>S(`<defs><radialGradient id="bg1"><stop offset="0" stop-color="${G}" stop-opacity=".55"/><stop offset="1" stop-color="${G}" stop-opacity="0"/></radialGradient></defs>
+    <path d="M100 150 C100 130 70 122 70 104 S104 86 104 70 S78 52 92 38" fill="none" stroke="#bfe6e1" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round"/>
+    <circle cx="100" cy="150" r="0"/>
+    <g fill="#fff" stroke="#fff" stroke-width="0"><circle cx="100" cy="132" r="7" opacity=".9"/><circle cx="72" cy="104" r="7" opacity=".9"/><circle cx="104" cy="72" r="7" opacity=".9"/></g>
+    <circle cx="92" cy="38" r="20" fill="url(#bg1)"/><circle cx="92" cy="38" r="8" fill="${G}"/>
+    <path d="M52 146 L100 128 L148 146 L100 164 Z" fill="#3f978f"/>
+    <path d="M52 146 L52 184 L100 202 L100 164 Z" fill="#1f5d57"/>
+    <path d="M148 146 L148 184 L100 202 L100 164 Z" fill="#276e67"/>
+    <path d="M52 146 L34 130 L82 112 L100 128 Z" fill="#4aa89f" opacity=".95"/>
+    <path d="M148 146 L166 130 L118 112 L100 128 Z" fill="#4aa89f" opacity=".85"/>`,'10 20 180 190'),
   /* Архитектор смыслов: под шумом поверхности слои глубже и глубже.
      На самом дне кристалл, настоящий смысл. Из глубины он поднимается одним лучом и точно попадает в поверхность */
   arkh:(vb='0 4 200 176')=>S(`<defs>
@@ -383,6 +399,11 @@ function heroFree(a,eyebrow){
   <div class="hbox">${a.isNew?'<span class="badge-new">Новое</span>':''}<span class="lock"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M7 10V7a5 5 0 0 1 10 0v3h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm2 0h6V7a3 3 0 0 0-6 0z"/></svg></span>${COVERS[a.cover]()}
   <div class="hfoot"><span class="time">${a.min} мин</span><button class="btn-soft" data-read="${a.slug}">Читать</button></div></div></article>`;
 }
+function heroBox(){
+  return `<article class="hcard"><div class="hmeta"><div class="eyebrow">Скоро · предзапись</div><div class="htitle">Система как у Анастасии</div><div class="hsub">Моя система в скиллах для Claude: сайт, блог, карусели, прогрев, воронка и приложение. Это приложение тоже внутри.</div></div>
+  <div class="hbox teal"><span class="soon">СКОРО</span>${COVERS.box()}
+  <div class="hfoot"><button class="btn-white wide" data-tg="https://t.me/tschoolai_bot?start=korobka" data-goal="app_korobka">Хочу систему как у Анастасии</button></div></div></article>`;
+}
 function heroArkh(){
   return `<article class="hcard"><div class="hmeta"><div class="eyebrow">Продукт</div><div class="htitle">Архитектор смыслов</div><div class="hsub">Глубинный разбор аудитории, который не делают 80% экспертов. Поэтому делают много, а всё уходит в пустоту.</div></div>
   <div class="hbox dusk">${COVERS.arkh('-72 4 344 176')}
@@ -390,7 +411,7 @@ function heroArkh(){
   <a class="dusk-link" href="#" data-open="arkh-land" data-goal="app_arkh_land">Что внутри · гарантия 14 дней</a></div></article>`;
 }
 document.getElementById('hero').innerHTML=
-  heroFree(ALL['12-promptov-marketologa'],'Промпты')+heroArkh()+heroFree(ALL['astro_karta'],'Гайд');
+  heroBox()+heroFree(ALL['12-promptov-marketologa'],'Промпты')+heroArkh()+heroFree(ALL['astro_karta'],'Гайд');
 
 /* Шапки карточек карусели одной высоты: обложки стоят ровно по одной линии */
 function alignHero(){const m=[...document.querySelectorAll('.hero .hmeta')];m.forEach(x=>x.style.minHeight='');const h=Math.max(...m.map(x=>x.offsetHeight));m.forEach(x=>x.style.minHeight=h+'px')}
@@ -470,7 +491,7 @@ document.addEventListener('click',e=>{
   if(t.dataset.read){openRead(t.dataset.read);return}
   if(t.dataset.open){e.preventDefault();if(t.dataset.goal)goal(t.dataset.goal);haptic();openExt(LINKS[t.dataset.open]);return}
   if(t.dataset.chip){current=t.dataset.chip;renderChips();renderShelves();window.scrollTo({top:document.getElementById('chips').offsetTop-8,behavior:'smooth'});return}
-  if(t.dataset.tg){openTg(t.dataset.tg);return}
+  if(t.dataset.tg){if(t.dataset.goal)goal(t.dataset.goal);haptic();openTg(t.dataset.tg);return}
   if(t.dataset.tab){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));document.getElementById('home').style.display=t.dataset.tab==='home'?'block':'none';document.getElementById('profile').style.display=t.dataset.tab==='profile'?'block':'none';window.scrollTo(0,0);return}
   if(t.id==='recentBtn'){const box=document.getElementById('recent');const rec=store.get('ts_recent')||[];box.innerHTML=rec.length?rec.map(s=>ALL[s]?`<a href="#" data-read="${s}">${ALL[s].title}</a>`:'').join(''):'<div class="empty">Пока пусто. Откройте любой материал.</div>';box.style.display=box.style.display==='block'?'none':'block'}
 });
