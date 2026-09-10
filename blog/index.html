@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Блог — База знаний Анастасии Лушниковой</title>
+<title>Блог | База знаний Анастасии Лушниковой</title>
 <meta name="description" content="Практические материалы про AI-маркетинг, смыслы и продажи без выгорания. Промпты, гайды, авторские методы.">
 <link rel="canonical" href="https://anastasialushnikova.com/blog/">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -468,6 +468,90 @@
     .article-card { flex-direction: column; gap: 12px; }
     .article-card-arrow { display: none; }
   }
+
+  /* ===== ВИЗУАЛ: смысл, не буквальная иллюстрация ===== */
+  :root { --ink:#1a1917; --amber:#f59e0b; --paper:#f7f6f2; }
+  svg .ln-ink   { fill:none; stroke:var(--ink); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+  svg .ln-muted { fill:none; stroke:#cfc9bf; stroke-width:1.3; stroke-linecap:round; stroke-linejoin:round; }
+  svg .ln-amber { fill:none; stroke:var(--amber); stroke-width:2.2; stroke-linecap:round; }
+  svg .dot-amber { fill:var(--amber); }
+  svg .ring { fill:none; stroke:#cfc9bf; stroke-width:1.3; }
+  svg .tile { fill:none; stroke:#cfc9bf; stroke-width:1.3; }
+  svg .tile.ink-fill { stroke:var(--ink); }
+  svg .tile.amber-fill { fill:var(--amber); stroke:var(--amber); }
+  svg .gem { fill:#fff7e6; stroke:var(--ink); stroke-width:1.6; stroke-linejoin:round; }
+
+  .viz-hero { margin: 28px 0 0; max-width: 640px; }
+  .viz-hero svg { width:100%; height:auto; display:block; }
+  .viz-hero .draw { stroke-dasharray: 1400; stroke-dashoffset: 1400; animation: draw 1.6s ease-out forwards; }
+  .viz-hero .d2 { animation-delay: .9s; animation-duration: 2s; }
+  .viz-hero .pop { opacity:0; animation: pop .4s ease-out 2.8s forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes pop { from { opacity:0; transform: scale(.4); } to { opacity:1; transform: scale(1); } }
+  .viz-hero .pop { transform-box: fill-box; transform-origin: center; }
+
+  .viz-feature { background: var(--paper); border-radius: 14px; margin: 4px 0 22px; padding: 8px 12px 0; }
+  .viz-feature svg { width:100%; height:auto; display:block; }
+  .viz-feature .ground { stroke:#cfc9bf; stroke-width:1.3; }
+  .viz-feature .sun { fill:none; stroke:#f5d9a3; stroke-width:1.3; }
+  .viz-feature .domino { fill:#fff; stroke:var(--ink); stroke-width:1.6; transform-box: fill-box; transform-origin: right bottom;
+    animation: topple .35s ease-in forwards; animation-delay: calc(.6s + var(--i) * .11s); }
+  .viz-feature .domino.amber { fill:var(--amber); stroke:var(--amber); animation-name: topple-last; }
+  .viz-feature .push { animation: nudge .5s ease-out .1s forwards; }
+  @keyframes topple { to { transform: rotate(31deg); } }
+  @keyframes topple-last { to { transform: rotate(90deg) translateX(0); } }
+  @keyframes nudge { from { transform: translateX(-14px); opacity:.2; } to { transform: translateX(0); opacity:1; } }
+
+  .viz-card { width: 132px; flex-shrink: 0; background: var(--paper); border-radius: 12px; padding: 6px; align-self: center; }
+  .viz-card svg { width:100%; height:auto; display:block; }
+
+  .viz-first { width: 150px; margin: 0 auto 14px; }
+  .viz-first svg { width:100%; height:auto; display:block; overflow:visible; }
+  .viz-first .pulse { fill:none; stroke:var(--amber); stroke-width:1.3; transform-box: fill-box; transform-origin: center; animation: pulse 2.4s ease-out infinite; }
+  @keyframes pulse { 0% { opacity:.9; transform: scale(.7); } 100% { opacity:0; transform: scale(1.6); } }
+
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .viz-hero .draw { animation:none; stroke-dashoffset:0; }
+    .viz-hero .pop { animation:none; opacity:1; }
+    .viz-feature .domino { animation:none; transform: rotate(31deg); }
+    .viz-feature .domino.amber { transform: rotate(90deg); }
+    .viz-feature .push, .viz-first .pulse { animation:none; }
+  }
+
+  @media (max-width: 600px) {
+    .viz-card { width: 100%; max-width: 220px; align-self: flex-start; }
+    .viz-feature svg { height: 84px; }
+  }
+
+  /* ===== HERO: много рывков сходятся в смысл и выходят одной линией роста ===== */
+  .page-header h1 { font-size: clamp(52px, 11vw, 104px); letter-spacing: -0.05em; line-height: 0.98; max-width: 760px; margin-bottom: 18px; }
+  .page-header .page-sub { font-size: 17px; max-width: 560px; }
+  .hero-viz { margin: 36px -24px 0; }
+  .hero-viz svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .hero-viz .strand { fill: none; stroke: #c9c2b6; stroke-width: 1.2; stroke-linejoin: round; opacity: .9;
+    stroke-dasharray: 1600; stroke-dashoffset: 1600; animation: hv-draw 1.4s ease-in forwards; animation-delay: calc(var(--k) * .07s); }
+  .hero-viz .main { fill: none; stroke: #1a1917; stroke-width: 4; stroke-linecap: round;
+    stroke-dasharray: 700; stroke-dashoffset: 700; animation: hv-draw 1.3s cubic-bezier(.2,.7,.2,1) 1.7s forwards; }
+  .hero-viz .core, .hero-viz .core-ring, .hero-viz .end, .hero-viz .end-pulse { transform-box: fill-box; transform-origin: center; }
+  .hero-viz .core { fill: #f59e0b; opacity: 0; animation: hv-pop .35s ease-out 1.45s forwards; }
+  .hero-viz .core-ring { fill: none; stroke: #f59e0b; stroke-width: 1.5; opacity: 0; animation: hv-pop .45s ease-out 1.55s forwards; }
+  .hero-viz .end { fill: #f59e0b; opacity: 0; animation: hv-pop .4s ease-out 2.95s forwards; }
+  .hero-viz .end-pulse { fill: none; stroke: #f59e0b; stroke-width: 1.5; opacity: 0; animation: hv-pulse 2.6s ease-out 3.3s infinite; }
+  @keyframes hv-draw { to { stroke-dashoffset: 0; } }
+  @keyframes hv-pop { from { opacity: 0; transform: scale(.3); } to { opacity: 1; transform: scale(1); } }
+  @keyframes hv-pulse { 0% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(2.6); } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-viz .strand, .hero-viz .main { animation: none; stroke-dashoffset: 0; }
+    .hero-viz .core, .hero-viz .core-ring, .hero-viz .end { animation: none; opacity: 1; }
+    .hero-viz .end-pulse { animation: none; }
+  }
+  @media (max-width: 600px) {
+    .page-header .page-sub { font-size: 15px; }
+    .hero-viz { margin: 24px -16px 0; }
+    .hero-viz .main { stroke-width: 5; }
+  }
 </style>
 </head>
 <body>
@@ -494,8 +578,20 @@
       <span class="breadcrumb-sep">→</span>
       <span>Блог</span>
     </div>
-    <h1>Все материалы</h1>
-    <p class="page-sub">Промпты, гайды и авторские методы про AI-маркетинг, смыслы и продажи без выгорания.</p>
+    <h1>Маркетинг легко</h1>
+    <p class="page-sub">Промпты, гайды и авторские методы про AI-маркетинг и смыслы. Всё проверено на моих запусках за 17 лет в маркетинге.</p>
+    <div class="hero-viz" aria-hidden="true">
+      <svg viewBox="0 0 860 260" preserveAspectRatio="xMidYMid meet">
+        <g class="strands"><path class="strand" style="--k:0" d="M0,126 L25,71 L45,186 L61,79 L83,188 L98,95 L113,183 L135,110 L161,179 L183,107 L199,155 L219,125 L236,157 L250,125 L269,161 L290,132 L310,155 L329,142 L355,152 L380,150" /><path class="strand" style="--k:1" d="M0,200 L18,150 L35,233 L58,145 L83,232 L108,133 L122,215 L147,146 L173,205 L188,145 L211,192 L226,152 L252,187 L267,153 L282,171 L306,153 L327,163 L343,150 L380,150" /><path class="strand" style="--k:2" d="M0,65 L15,12 L32,119 L58,15 L75,143 L92,44 L116,135 L131,43 L148,127 L171,76 L189,126 L204,84 L221,138 L239,100 L265,139 L285,114 L302,140 L327,131 L344,145 L380,150" /><path class="strand" style="--k:3" d="M0,180 L16,101 L41,236 L60,139 L74,239 L91,122 L108,223 L130,138 L146,209 L160,142 L181,202 L203,143 L228,179 L242,146 L261,170 L277,146 L298,164 L316,146 L342,157 L380,150" /><path class="strand" style="--k:4" d="M0,171 L16,131 L30,243 L52,99 L67,222 L86,113 L104,223 L119,124 L142,209 L165,126 L188,196 L207,132 L231,184 L250,136 L275,170 L296,145 L317,161 L332,147 L358,154 L380,150" /><path class="strand" style="--k:5" d="M0,178 L23,238 L42,108 L57,235 L71,121 L91,208 L114,129 L135,216 L152,145 L170,200 L186,143 L211,189 L230,135 L248,179 L265,144 L288,172 L313,148 L334,158 L349,149 L380,150" /><path class="strand" style="--k:6" d="M0,199 L23,119 L40,236 L59,149 L76,234 L97,143 L115,235 L141,146 L156,201 L180,156 L203,199 L220,144 L235,183 L254,155 L278,174 L294,154 L315,166 L337,150 L361,155 L380,150" /><path class="strand" style="--k:7" d="M0,170 L20,214 L34,114 L56,207 L74,123 L96,210 L117,116 L136,207 L161,139 L186,193 L202,135 L223,186 L242,138 L266,174 L292,144 L313,160 L336,147 L358,154 L380,150" /><path class="strand" style="--k:8" d="M0,81 L26,8 L46,154 L64,27 L88,137 L103,59 L124,150 L144,83 L167,132 L191,95 L209,148 L225,106 L245,146 L269,114 L294,145 L320,134 L336,147 L354,142 L380,150" /></g>
+        <path class="main" d="M380,150 C470,150 520,140 600,110 S740,50 840,38" />
+        <circle class="core-ring" cx="380" cy="150" r="16" />
+        <circle class="core" cx="380" cy="150" r="7" />
+        <circle class="end-pulse" cx="840" cy="38" r="9" />
+        <circle class="end" cx="840" cy="38" r="9" />
+      </svg>
+    </div>
+
+
   </div>
 
   <!-- FILTER -->
@@ -512,30 +608,68 @@
   <!-- ARTICLES -->
   <!-- ============================================================ -->
   <!-- ДОБАВЛЯЙ НОВЫЕ СТАТЬИ СЮДА — просто скопируй блок ниже      -->
+  <!-- У каждой карточки свой div.viz-card: картинка передаёт СМЫСЛ статьи, не иллюстрирует слова буквально -->
   <!-- ============================================================ -->
 
   <!-- FEATURED (самая свежая/важная статья) -->
-  <a href="/blog/prompts-direct/" class="article-featured">
+  <a href="/blog/12-promptov-marketologa/" class="article-featured">
     <div class="featured-badge">🔥 Свежее</div>
-    <h2>15 промптов, которые будут продавать за вас в Директе</h2>
-    <p>Как превратить «Дорого» и «Я подумаю» в оплаты с помощью ИИ. Готовые скрипты для каждого этапа — от первого контакта до закрытия сделки.</p>
+    <div class="viz-feature" aria-hidden="true">
+      <svg viewBox="0 58 640 106" preserveAspectRatio="xMaxYMid slice">
+        <circle class="sun" cx="596" cy="150" r="40" />
+        <line class="ground" x1="10" y1="150" x2="630" y2="150" />
+        <circle class="dot-amber push" cx="20" cy="92" r="7" />
+        <rect class="domino" style="--i:0" x="40" y="80" width="14" height="70" rx="2" /><rect class="domino" style="--i:1" x="84" y="80" width="14" height="70" rx="2" /><rect class="domino" style="--i:2" x="128" y="80" width="14" height="70" rx="2" /><rect class="domino" style="--i:3" x="172" y="80" width="14" height="70" rx="2" /><rect class="domino" style="--i:4" x="216" y="80" width="14" height="70" rx="2" /><rect class="domino" style="--i:5" x="260" y="80" width="14" height="70" rx="2" /><rect class="domino" style="--i:6" x="304" y="80" width="14" height="70" rx="2" /><rect class="domino" style="--i:7" x="348" y="80" width="14" height="70" rx="2" /><rect class="domino" style="--i:8" x="392" y="80" width="14" height="70" rx="2" /><rect class="domino" style="--i:9" x="436" y="80" width="14" height="70" rx="2" /><rect class="domino" style="--i:10" x="480" y="80" width="14" height="70" rx="2" /><rect class="domino amber" style="--i:11" x="524" y="80" width="14" height="70" rx="2" />
+      </svg>
+    </div>
+
+    <h2>12 промптов, которые сделают работу маркетолога за вечер</h2>
+    <p>Промпты идут цепочкой: портрет клиента, боли, оффер, 30 тем, прогрев в сторис, реклама и разбор статистики. Плюс бонусный промпт, который чистит текст от нейросетевого пластика.</p>
     <div class="article-meta">
-      <span class="meta-date">апрель 2026</span>
+      <span class="meta-date">сентябрь 2026</span>
       <span class="meta-dot"></span>
-      <span class="meta-read">10 мин чтения</span>
+      <span class="meta-read">12 мин чтения</span>
       <span class="meta-dot"></span>
       <span class="article-tag">Промпты</span>
-      <span class="article-tag">Продажи</span>
+      <span class="article-tag">AI-маркетинг</span>
     </div>
   </a>
 
   <!-- ОБЫЧНЫЕ СТАТЬИ -->
   <div class="articles-list">
 
+    <a href="/blog/prompts-direct/" class="article-card">
+      <div class="viz-card" aria-hidden="true"><svg viewBox="0 0 160 110">
+  <path class="ln-ink" style="stroke-width:1.8" d="M8,70 C20,20 58,20 52,52 C46,86 16,70 30,46 C44,22 78,30 66,62 C58,84 36,62 54,48 C66,38 80,52 84,56" />
+  <path class="ln-amber" d="M84,56 L140,56" />
+  <circle class="dot-amber" cx="146" cy="56" r="6" />
+</svg></div>
+      <div class="article-card-body">
+        <h3>15 промптов, которые будут продавать за вас в Директе</h3>
+        <p>Как превратить «Дорого» и «Я подумаю» в оплаты с помощью ИИ. Готовые скрипты для каждого этапа, от первого контакта до закрытия сделки.</p>
+        <div class="article-meta">
+          <span class="meta-date">апрель 2026</span>
+          <span class="meta-dot"></span>
+          <span class="meta-read">10 мин чтения</span>
+          <span class="meta-dot"></span>
+          <span class="article-tag">Промпты</span>
+          <span class="article-tag">Продажи</span>
+        </div>
+      </div>
+      <div class="article-card-arrow">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#1a1917" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
+
     <a href="/blog/marketing-glossary/" class="article-card">
+      <div class="viz-card" aria-hidden="true"><svg viewBox="0 0 160 110">
+  <rect class="tile" x="24" y="22" width="16" height="11" rx="2" transform="rotate(12 32 27)" /><rect class="tile" x="11" y="47" width="16" height="11" rx="2" transform="rotate(-11 19 52)" /><rect class="tile" x="11" y="45" width="16" height="11" rx="2" transform="rotate(-37 19 50)" /><rect class="tile" x="29" y="17" width="16" height="11" rx="2" transform="rotate(-33 37 22)" /><rect class="tile" x="28" y="67" width="16" height="11" rx="2" transform="rotate(-30 36 72)" /><rect class="tile" x="19" y="53" width="16" height="11" rx="2" transform="rotate(36 27 58)" /><rect class="tile" x="36" y="38" width="16" height="11" rx="2" transform="rotate(38 44 43)" /><rect class="tile" x="10" y="69" width="16" height="11" rx="2" transform="rotate(-17 18 74)" /><rect class="tile" x="15" y="20" width="16" height="11" rx="2" transform="rotate(-15 23 25)" />
+  <line class="ln-muted" x1="80" y1="14" x2="80" y2="96" stroke-dasharray="2 4" />
+  <rect class="tile ink-fill" x="92" y="24" width="16" height="11" rx="2" /><rect class="tile ink-fill" x="114" y="24" width="16" height="11" rx="2" /><rect class="tile ink-fill" x="136" y="24" width="16" height="11" rx="2" /><rect class="tile ink-fill" x="92" y="46" width="16" height="11" rx="2" /><rect class="tile amber-fill" x="114" y="46" width="16" height="11" rx="2" /><rect class="tile ink-fill" x="136" y="46" width="16" height="11" rx="2" /><rect class="tile ink-fill" x="92" y="68" width="16" height="11" rx="2" /><rect class="tile ink-fill" x="114" y="68" width="16" height="11" rx="2" /><rect class="tile ink-fill" x="136" y="68" width="16" height="11" rx="2" />
+</svg></div>
       <div class="article-card-body">
         <h3>Словарь маркетолога 2026: от KPI до GEO</h3>
-        <p>Когда людей накрывает поток новых слов. CTR, УТП, B2B, воронки, промпты, GEO — всё на одном экране без лишнего.</p>
+        <p>Когда людей накрывает поток новых слов. CTR, УТП, B2B, воронки, промпты, GEO, всё на одном экране без лишнего.</p>
         <div class="article-meta">
           <span class="meta-date">апрель 2026</span>
           <span class="meta-dot"></span>
@@ -550,7 +684,15 @@
       </div>
     </a>
 
-    <a href="/blog/smysly-2026/" class="article-card">
+    <a href="https://www.anastasialushnikova.com/blog/smysly-2026/" class="article-card">
+      <div class="viz-card" aria-hidden="true"><svg viewBox="0 0 160 110">
+  <line class="ln-muted" x1="20" y1="14" x2="118" y2="28" /><line class="ln-muted" x1="14" y1="40" x2="112" y2="86" /><line class="ln-muted" x1="28" y1="96" x2="128" y2="98" /><line class="ln-muted" x1="10" y1="70" x2="104" y2="14" /><line class="ln-muted" x1="40" y1="8" x2="138" y2="20" />
+  <polygon class="gem" points="62,44 74,36 86,44 86,64 74,72 62,64" />
+  <line class="ln-muted" x1="62" y1="44" x2="86" y2="64" /><line class="ln-muted" x1="86" y1="44" x2="62" y2="64" />
+  <line class="ln-amber" x1="86" y1="54" x2="132" y2="54" />
+  <circle class="ring" cx="140" cy="54" r="14" /><circle class="ring" cx="140" cy="54" r="8" />
+  <circle class="dot-amber" cx="140" cy="54" r="3.5" />
+</svg></div>
       <div class="article-card-body">
         <h3>100 часов на тесты или 15 минут на архитектуру? Почему эксперты без Смыслового Кристалла проигрывают уже на старте</h3>
         <p>Классический маркетинг «криков и обещаний» умер. Побеждают те, кто транслирует кристальную ясность. Методология Смыслового Кристалла за 4 шага.</p>
@@ -575,7 +717,8 @@
 
   <!-- СКОРО -->
   <div class="more-coming" style="margin-top: 24px;">
-    <p>Новые материалы выходят каждую неделю. Подпишись на Telegram — там выходят первыми.</p>
+    <div class="viz-first" aria-hidden="true"><svg viewBox="0 0 150 24"><circle class="pulse" cx="12" cy="12" r="9" /><circle class="dot-amber" cx="12" cy="12" r="6" /><circle class="ring" cx="33" cy="12" r="4" /><circle class="ring" cx="54" cy="12" r="4" /><circle class="ring" cx="75" cy="12" r="4" /><circle class="ring" cx="96" cy="12" r="4" /><circle class="ring" cx="117" cy="12" r="4" /><circle class="ring" cx="138" cy="12" r="4" /></svg></div>
+    <p>Новые материалы выходят каждую неделю. Подпишись на Telegram, там выходят первыми.</p>
     <a class="btn-tg" href="https://t.me/target_school1" target="_blank" rel="noopener">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
       Подписаться на Telegram
@@ -588,7 +731,7 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-title">Понравился материал?</div>
-    <p class="footer-sub">Подписывайтесь на каналы — там ещё больше про AI-маркетинг, смыслы и продажи без выгорания.</p>
+    <p class="footer-sub">Подписывайтесь на каналы, там ещё больше про AI-маркетинг, смыслы и продажи без выгорания.</p>
 
     <div class="social-grid">
       <a class="social-card" href="https://t.me/target_school1" target="_blank" rel="noopener">
@@ -632,7 +775,7 @@
     <div class="tg-banner">
       <div>
         <div class="tg-banner-text">Хотите больше материалов?</div>
-        <div class="tg-banner-sub">Подписывайтесь — новые гайды выходят каждую неделю</div>
+        <div class="tg-banner-sub">Подписывайтесь, новые гайды выходят каждую неделю</div>
       </div>
       <a class="btn-tg" href="https://t.me/target_school1" target="_blank" rel="noopener">
         Подписаться на Telegram →
