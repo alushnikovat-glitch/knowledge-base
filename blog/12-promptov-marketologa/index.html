@@ -642,6 +642,35 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
   }
   .bonus .stage-card { border: 1.5px solid var(--yellow-border); }
   .midtext p strong { color: var(--text); font-weight: 700; }
+  /* INSERT (Hormozi mid-roll) */
+  .insert {
+    display: flex;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid #f59e0b;
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin: 36px 0;
+  }
+  .insert-body h3 { font-size: 17px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 8px; line-height: 1.35; }
+  .insert-body p { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 10px; }
+  .insert-link { font-size: 14px; font-weight: 700; color: var(--text); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #f59e0b; }
+  .bridge { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin: -4px 0 32px; padding: 0 4px; }
+  .bridge a { color: var(--text); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #f59e0b; }
+  /* OFFER STACK */
+  .stack { background: var(--surface); border: 1px solid var(--yellow-border); border-radius: 14px; overflow: hidden; margin: 20px 0; }
+  .stack-row { display: flex; justify-content: space-between; gap: 16px; padding: 14px 18px; border-bottom: 1px solid #fdf1c7; font-size: 14px; color: #57534e; line-height: 1.5; }
+  .stack-row span:last-child { white-space: nowrap; font-weight: 700; color: var(--text); }
+  .stack-total { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 16px 18px; background: #fffdf5; }
+  .stack-total .old { text-decoration: line-through; color: var(--text-light); font-size: 15px; font-weight: 600; }
+  .stack-total .new { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
+  .equation { font-size: 15px; color: #57534e; line-height: 1.75; margin-bottom: 16px; }
+  .faq { margin: 24px 0; }
+  .faq-q { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .faq-a { font-size: 14px; color: #78716c; line-height: 1.7; margin-bottom: 14px; }
+  .quiet-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 22px; margin: 0 0 40px; font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+  .quiet-card a { color: var(--text); font-weight: 700; }
   a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
@@ -810,6 +839,16 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     <p>Так бывает на старте. Берите чужие.</p>
     <p>Откройте комментарии у 3-5 блогеров в вашей нише. Ищите, где люди жалуются, спрашивают, спорят. Отзывы на похожие продукты тоже подходят, и ветки в Threads по вашей теме.</p>
     <p>Копируйте дословно, с ошибками и эмоциями. Нейросеть лучше всего работает на живых словах.</p>
+  </div>
+
+
+  <div class="insert">
+    <div class="insert-body">
+      <h3>Промпты 1-3 дают портрет за вечер. Архитектор смыслов даёт карту аудитории за 15 минут</h3>
+      <p>Эти три промпта я упростила, чтобы вы начали прямо сегодня. Полная версия лежит в Архитекторе смыслов. Промпт «Глубоководный аналитик» выдаёт таблицу из 10 разделов: боли, страхи-блокираторы, вопросы, которые гуглят в 3 ночи, возражения, мечты, сарказм и юмор аудитории, смысловые магниты, ценности и триггеры.</p>
+      <p>Раньше я делала такой анализ неделями, через анкеты, интервью и переписки. Сейчас это 15 минут.</p>
+      <a class="insert-link" href="https://www.anastasialushnikova.com/arkhitektor" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','arkh_12p_insert1')">Посмотреть, что внутри Архитектора</a>
+    </div>
   </div>
 
   <div class="section-header">
@@ -1048,6 +1087,9 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
       </div>
     </div>
   </div>
+
+  <p class="bridge">Промпт 7 даёт 30 тем. А в Архитекторе смыслов есть шаг «Кристаллизация»: из всей карты аудитории он выбирает 5 связок боль и смысл, которые приносят основной результат. Из каждой связки потом получается рилс, пост-манифест и скрипт для директа. Один смысл, 10 касаний. <a href="https://www.anastasialushnikova.com/arkhitektor" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','arkh_12p_bridge')">Как это устроено</a></p>
+
   <div class="section-header">
     <div class="section-label">Этап 4. Реклама и цифры</div>
     <div class="section-line"></div>
@@ -1218,22 +1260,39 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     </div>
   </div>
   </div>
+  <p class="bridge">Этот промпт чистит текст по общим правилам. В Архитекторе смыслов есть бонусный шаг «Голос бренда»: нейросеть учится писать вашим стилем по вашим же текстам.</p>
 
-  <div class="product-block">
-    <div class="product-eyebrow">Следующий шаг</div>
-    <h2>Тексты для рекламы готовы. Теперь их надо запустить</h2>
-    <p>Промпт 10 пишет объявления. Дальше начинается кабинет Meta: настройка под вашу страну, блокировки, первая кампания, цифры. На этом месте застревает большинство новичков.</p>
-    <p>Для этого я собрала Тренажёр таргетолога. Вы идёте по шагам на воссозданных экранах кабинета и параллельно настраиваете свой.</p>
-    <ul class="product-features">
-      <li>Анализ аудитории и конкурентов с готовыми промптами</li>
-      <li>Настройка кабинета под свою страну</li>
-      <li>Что делать при блокировке и что писать в поддержку</li>
-      <li>Запуск тестовой кампании и отчёт клиенту человеческим языком</li>
-      <li>Пиксель Meta и продвинутые стратегии</li>
-    </ul>
-    <div class="guarantee">1 490 ₽. Доступ на 365 дней.</div>
-    <a class="btn-product" href="https://www.anastasialushnikova.com/pro" target="_blank" rel="noopener">Посмотреть, что внутри</a>
+  <div class="product-block" id="arkhitektor">
+    <div class="product-eyebrow">Архитектор смыслов</div>
+    <h2>Карта аудитории за 15 минут вместо недель. И контент, который попадает в боль клиента</h2>
+    <p class="equation">Промпты на этой странице работают. Но результат зависит от того, что вы вписали в скобки. Слабые данные на входе дают слабый текст на выходе.</p>
+    <p class="equation">Архитектор смыслов закрывает эту дыру. Это рабочая среда с шагами по порядку и настроенными промптами. Выдача одного шага кормит следующий, как на этой странице, только глубже. На выходе маркетинговый фундамент под ваш продукт, и дальше каждый промпт отсюда получает сильные данные.</p>
+
+    <div class="stack">
+      <div class="stack-row"><span>Авторские промпты: «Глубоководный аналитик», фильтр «Архитектор», контентный трансформатор</span><span>10 000 ₽</span></div>
+      <div class="stack-row"><span>Логика смыслового кристалла: 5 связок для контента, офферов и страниц продаж</span><span>5 000 ₽</span></div>
+      <div class="stack-row"><span>Руководство по настройке Claude и Gemini</span><span>3 000 ₽</span></div>
+      <div class="stack-row"><span>Бонус: «Голос бренда», нейросеть пишет вашим стилем</span><span>в подарок</span></div>
+      <div class="stack-total"><span class="old">18 000 ₽</span><span class="new">1 490 ₽</span></div>
+    </div>
+
+    <div class="guarantee">✓ Возврат 14 дней без вопросов. Не подошло, пишете мне, возвращаю деньги.</div>
+
+    <div class="faq">
+      <div class="faq-q">Чем это отличается от промптов на этой странице?</div>
+      <div class="faq-a">Здесь 12 отдельных инструментов. Архитектор собирает их в систему: сначала глубокая карта аудитории, потом кристалл смыслов, потом контент. Вы получаете данные, которые потом вставляете в любой промпт.</div>
+      <div class="faq-q">Это видеоуроки?</div>
+      <div class="faq-a">Там нет видео, которые надо смотреть неделями. Вы заходите в рабочую среду и делаете шаги по порядку.</div>
+      <div class="faq-q">Я плохо разбираюсь в нейросетях. Справлюсь?</div>
+      <div class="faq-a">Внутри есть руководство по настройке Claude и Gemini. Дальше вы копируете промпт, вставляете, получаете результат.</div>
+      <div class="faq-q">У меня маленький блог. Это для меня?</div>
+      <div class="faq-a">Размер аудитории тут роли не играет. 200 тёплых людей, которые узнают себя в каждом посте, дают больше продаж, чем 20 000 случайных.</div>
+    </div>
+
+    <a class="btn-product" href="https://app.lava.top/products/162ca29b-a6a4-414a-97c6-29962d1d3956" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','arkh_12p_pay')">Забрать Архитектор смыслов за 1 490 ₽</a>
   </div>
+
+  <div class="quiet-card">Дошли до промпта 10 и хотите сами запускать рекламу в Instagram? Для этого есть <a href="https://www.anastasialushnikova.com/pro" target="_blank" rel="noopener">Тренажёр таргетолога</a>: кабинет Meta по шагам, настройка под вашу страну и работа с блокировками.</div>
 
   <div class="conclusion">
     <p>Сохраните страницу в закладки. Цепочку можно прогонять заново каждый раз, когда запускаете новый продукт или меняете аудиторию.</p>
