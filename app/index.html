@@ -103,6 +103,24 @@
   .boxband .bxg{transform-box:fill-box;transform-origin:center;animation:bxglow 2.4s ease-in-out infinite}
   @keyframes bxglow{0%,100%{transform:scale(1);opacity:.25}50%{transform:scale(1.9);opacity:.05}}
   @media (prefers-reduced-motion:reduce){.boxband .bxc,.boxband .bxg{animation:none}}
+  .boxband.light{background:var(--sand);color:var(--ink);box-shadow:none;border:1px solid var(--line)}
+  .boxband.light .bb-ey{color:var(--teal)}
+  .boxband.light .bb-sub{color:var(--muted)}
+  .boxband.light .bb-cta{color:var(--ink);border-top-color:var(--line)}
+  .boxband.light .bb-cta .a{background:var(--teal);color:#fff}
+  .boxband .bdh{animation:bdh 2.2s ease-in-out infinite}
+  @keyframes bdh{0%,100%{transform:translate(0,0)}50%{transform:translate(-5px,-5px)}}
+  @media (prefers-reduced-motion:reduce){.boxband .bdh{animation:none}}
+  /* блик по кнопке «Хочу как у Анастасии» */
+  .boxband .bb-cta{position:relative;overflow:hidden;border-top:none;border-radius:999px;background:rgba(255,255,255,.13);padding:8px 8px 8px 18px;margin-top:16px}
+  .boxband .bb-cta::after{content:'';position:absolute;top:0;bottom:0;left:-60%;width:40%;transform:skewX(-22deg);
+    background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.38),rgba(255,255,255,0));animation:bbshine 3.6s ease-in-out 1s infinite;pointer-events:none}
+  .boxband .bb-cta .a{position:relative;overflow:hidden}
+  .boxband .bb-cta .a::after{content:'';position:absolute;top:-20%;bottom:-20%;left:-80%;width:50%;transform:skewX(-22deg);
+    background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.85),rgba(255,255,255,0));animation:bbshine2 3.6s ease-in-out 1s infinite}
+  @keyframes bbshine{0%{left:-60%}45%{left:130%}100%{left:130%}}
+  @keyframes bbshine2{0%,35%{left:-80%}55%{left:140%}100%{left:140%}}
+  @media (prefers-reduced-motion:reduce){.boxband .bb-cta::after,.boxband .bb-cta .a::after{animation:none;opacity:0}}
   /* ЗАМОК ПОДПИСКИ */
   .gate{margin:16px 20px 4px;background:var(--sand);border-radius:var(--r-md);padding:13px 16px;display:flex;gap:12px;align-items:center;font-size:14.5px}
   .pill{background:var(--teal);color:#fff;font-weight:700;font-size:12px;letter-spacing:.04em;padding:5px 11px;border-radius:999px;flex-shrink:0}
@@ -309,6 +327,18 @@ const INK='#14171a', T='#2e7d76', G='#e8b45f', M='#cbc4b6';
 const S=(inner,vb='6 14 184 172')=>`<svg class="cv" viewBox="${vb}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${inner}</svg>`;
 const COVERS={
   /* Коробка: из открытой коробки поднимается вся цепочка, пост, директ, бот, приложение, продукт. Система приходит целиком */
+  /* Сборка самой: телефон как чертёж, плитки экрана пунктиром, одна уже собрана */
+  build:()=>S(`<rect x="58" y="16" width="84" height="168" rx="16" fill="#fff" stroke="#fff" stroke-width="3"/>
+    <rect x="86" y="24" width="28" height="5" rx="2.5" fill="${INK}"/>
+    <g fill="none" stroke="${T}" stroke-width="2" stroke-dasharray="4 4">
+      <rect x="68" y="40" width="64" height="34" rx="6"/>
+      <rect x="68" y="82" width="29" height="29" rx="6"/><rect x="103" y="82" width="29" height="29" rx="6"/>
+      <rect x="68" y="119" width="29" height="29" rx="6"/>
+    </g>
+    <rect x="103" y="119" width="29" height="29" rx="6" fill="${G}"/>
+    <rect x="72" y="158" width="56" height="12" rx="6" fill="none" stroke="${T}" stroke-width="2" stroke-dasharray="4 4"/>
+    <path class="bdh" d="M150 150 L128 132" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    <circle class="bdh" cx="154" cy="154" r="7" fill="${G}"/>`,'30 8 150 184'),
   box:()=>S(`<g fill="#e4f0ee" fill-opacity=".12" stroke="#bfe6e1" stroke-width="2">
       <rect class="bxc c1" x="18" y="30" width="30" height="20" rx="4"/>
       <rect class="bxc c2" x="62" y="14" width="30" height="20" rx="4"/>
@@ -437,6 +467,19 @@ function heroBox(){
   <div class="hbox teal"><span class="soon">СКОРО</span>${COVERS.box()}
   <div class="hfoot"><button class="btn-white wide" data-tg="https://t.me/tschoolai_bot?start=korobka" data-goal="app_korobka">Хочу систему как у Анастасии</button></div></div></article>`;
 }
+function buildBand(){
+  return `<button class="boxband" data-tg="https://t.me/tschoolai_bot?start=korobka" data-goal="app_korobka_build">
+    <div class="bb-row">
+      <div class="bb-text">
+        <div class="bb-ey">Скоро · предзапись</div>
+        <div class="bb-title">Всё, что Вы видите здесь, Вы можете собрать сами</div>
+        <div class="bb-sub">Без дизайнеров, программистов и технических знаний. По моей системе «Хочу как у Анастасии»</div>
+      </div>
+      <div class="bb-viz">${COVERS.build()}</div>
+    </div>
+    <div class="bb-cta"><span class="t">Хочу как у Анастасии</span><span class="a">→</span></div>
+  </button>`;
+}
 function boxBand(){
   return `<button class="boxband" data-tg="https://t.me/tschoolai_bot?start=korobka" data-goal="app_korobka">
     <div class="bb-row">
@@ -476,10 +519,10 @@ function renderChips(){
 function renderShelves(){
   const box=document.getElementById('shelves');
   if(current==='all'){
-    box.innerHTML=SHELVES.map(s=>`<div class="shelf"><div class="shelf-h"><h2>${s.name}</h2><button data-chip="${s.id}">Все ${s.items.length}</button></div><div class="shelf-row">${s.items.map(tile).join('')}${s.product?ptile(s.product):''}</div></div>`+(s.id==='prompts'?boxBand():'')).join('');
+    box.innerHTML=SHELVES.map(s=>`<div class="shelf"><div class="shelf-h"><h2>${s.name}</h2><button data-chip="${s.id}">Все ${s.items.length}</button></div><div class="shelf-row">${s.items.map(tile).join('')}${s.product?ptile(s.product):''}</div></div>`+(s.id==='prompts'?boxBand():'')+(s.id==='claude'?buildBand():'')).join('');
   }else{
     const s=SHELVES.find(x=>x.id===current);
-    box.innerHTML=`<div class="shelf"><div class="grid">${s.items.map(tile).join('')}${s.product?ptile(s.product):''}</div></div>`+(s.id==='prompts'?boxBand():'');
+    box.innerHTML=`<div class="shelf"><div class="grid">${s.items.map(tile).join('')}${s.product?ptile(s.product):''}</div></div>`+(s.id==='prompts'?boxBand():'')+(s.id==='claude'?buildBand():'');
   }
 }
 renderChips();renderShelves();
