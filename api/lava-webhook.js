@@ -61,9 +61,80 @@ async function tgSubscription(req, res) {
 }
 
 
+
+// ─────────────────────────────────────────────────────────────
+// Дополнительно (11.09.2026): отчёт из Яндекс Метрики для дашборда.
+// Вызов: /api/lava-webhook?action=stats&key=СЕКРЕТ&days=7
+// Переменные в Vercel:
+//   YANDEX_METRIKA_TOKEN  токен с правом «Получение статистики» (только чтение)
+//   STATS_KEY             любой длинный секрет, без него отчёт не отдаётся
+//   METRIKA_COUNTER       можно не задавать, по умолчанию 108790481
+// Уведомления lava.top сюда не попадают: они приходят без action.
+// ─────────────────────────────────────────────────────────────
+async function metrikaGet(path, params, token) {
+  const url = 'https://api-metrika.yandex.net' + path + '?' + new URLSearchParams(params).toString();
+  const r = await fetch(url, { headers: { Authorization: 'OAuth ' + token } });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error((j && j.message) || ('HTTP ' + r.status));
+  return j;
+}
+function rowsOf(j, dimCount = 1) {
+  return (j.data || []).map(d => ({
+    name: d.dimensions.slice(0, dimCount).map(x => x && (x.name || x.id)).join(' / '),
+    values: d.metrics
+  }));
+}
+async function metrikaStats(req, res) {
+  const key = process.env.STATS_KEY;
+  const token = process.env.YANDEX_METRIKA_TOKEN;
+  const counter = process.env.METRIKA_COUNTER || '108790481';
+  if (!key || !token) return res.status(503).json({ error: 'Не заданы STATS_KEY или YANDEX_METRIKA_TOKEN в Vercel' });
+  if ((req.query && req.query.key) !== key) return res.status(403).json({ error: 'forbidden' });
+
+  const days = Math.min(Math.max(parseInt((req.query && req.query.days) || '7', 10) || 7, 1), 90);
+  const period = { date1: days + 'daysAgo', date2: 'today' };
+  const base = { ids: counter, accuracy: 'full', ...period };
+  const out = { counter, period: { days, ...period }, generatedAt: new Date().toISOString() };
+
+  try {
+    const [totals, app, sources, pages, utm, goalsList] = await Promise.all([
+      metrikaGet('/stat/v1/data', { ...base, metrics: 'ym:s:visits,ym:s:users,ym:s:pageviews' }, token),
+      metrikaGet('/stat/v1/data', { ...base, metrics: 'ym:s:visits,ym:s:users', filters: "ym:s:startURL=@'/app/'" }, token),
+      metrikaGet('/stat/v1/data', { ...base, metrics: 'ym:s:visits', dimensions: 'ym:s:lastTrafficSource', sort: '-ym:s:visits', limit: 10 }, token),
+      metrikaGet('/stat/v1/data', { ...base, metrics: 'ym:pv:pageviews', dimensions: 'ym:pv:URLPath', sort: '-ym:pv:pageviews', limit: 20 }, token),
+      metrikaGet('/stat/v1/data', { ...base, metrics: 'ym:s:visits', dimensions: 'ym:s:UTMSource,ym:s:UTMMedium,ym:s:UTMCampaign', sort: '-ym:s:visits', limit: 20 }, token),
+      metrikaGet('/management/v1/counter/' + counter + '/goals', {}, token)
+    ]);
+    out.totals = { visits: totals.totals[0], users: totals.totals[1], pageviews: totals.totals[2] };
+    out.miniapp = { visits: app.totals[0], users: app.totals[1] };
+    out.sources = rowsOf(sources).map(r => ({ source: r.name, visits: r.values[0] }));
+    out.topPages = rowsOf(pages).map(r => ({ path: r.name, pageviews: r.values[0] }));
+    out.utm = rowsOf(utm, 3).map(r => ({ utm: r.name, visits: r.values[0] }));
+
+    const goals = (goalsList.goals || []).map(g => ({
+      id: g.id, name: g.name, type: g.type,
+      identifier: (g.conditions && g.conditions[0] && g.conditions[0].url) || ''
+    }));
+    const reaches = {};
+    for (let i = 0; i < goals.length; i += 20) {
+      const chunk = goals.slice(i, i + 20);
+      const j = await metrikaGet('/stat/v1/data', { ...base, metrics: chunk.map(g => 'ym:s:goal' + g.id + 'reaches').join(',') }, token);
+      chunk.forEach((g, k) => { reaches[g.id] = j.totals[k]; });
+    }
+    out.goals = goals.map(g => ({ ...g, reaches: reaches[g.id] || 0 })).sort((a, b) => b.reaches - a.reaches);
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(200).json(out);
+  } catch (e) {
+    console.error('stats:', e);
+    return res.status(502).json({ error: 'Метрика ответила ошибкой: ' + e.message });
+  }
+}
+
 export default async function handler(req, res) {
   // Мини-приложение: проверка подписки. Остальной код ниже не тронут.
   if (req.query && req.query.action === 'tg-sub') return tgSubscription(req, res);
+  // Дашборд: отчёт из Метрики. Остальной код ниже не тронут.
+  if (req.query && req.query.action === 'stats') return metrikaStats(req, res);
 
   // lava.top шлёт уведомления методом POST, остальное игнорируем
   if (req.method !== 'POST') {
