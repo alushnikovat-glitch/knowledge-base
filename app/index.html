@@ -377,6 +377,9 @@ const COVERS={
     <ellipse cx="152" cy="40" rx="16" ry="4" fill="none" stroke="${G}" stroke-width="1.5" stroke-opacity=".8"/>
     <ellipse cx="152" cy="40" rx="30" ry="7.5" fill="none" stroke="${G}" stroke-width="1" stroke-opacity=".35"/>
     <circle cx="152" cy="40" r="4" fill="${G}"/>`,vb),
+  /* 17 промптов вместо SMM-щика: 17 разрозненных задач выстраиваются в одну линию к результату */
+  smm:()=>{let r='';let n=0;for(let row=0;row<3;row++)for(let c=0;c<6&&n<17;c++,n++){const x=30+c*24+(row%2?12:0),y=60+row*28;r+=`<rect x="${x}" y="${y}" width="16" height="16" rx="4" fill="${n===16?G:'#fff'}" stroke="${n===16?G:(n<6?M:INK)}" stroke-width="1.6"/>`}
+    r+=`<path d="M38 150 H150" stroke="${T}" stroke-width="2.4" stroke-linecap="round"/><circle cx="160" cy="150" r="7" fill="${G}"/>`;return S(r)},
   /* 12 промптов: одно движение, и падает вся цепочка */
   domino:()=>S(`<line x1="14" y1="150" x2="186" y2="150" stroke="${M}" stroke-width="1.4"/>`+
     Array.from({length:8},(_,i)=>{const x=24+i*19,last=i===7;return `<rect x="${x}" y="${last?140:98}" width="${last?44:9}" height="${last?10:52}" rx="2" fill="${last?G:'#fff'}" stroke="${last?G:INK}" stroke-width="1.6" ${last?'':`transform="rotate(28 ${x+9} 150)"`}/>`}).join('')+
@@ -414,6 +417,7 @@ const A=(slug,title,min,cover,extra={})=>({slug,title,min,cover,url:SITE+'/blog/
 const SHELVES=[
   {id:'prompts',name:'Промпты',items:[
     A('12-promptov-marketologa','12 промптов, которые сделают работу маркетолога за вечер',12,'domino',{isNew:true,short:'12 промптов маркетолога',sub:'Работа маркетолога за один вечер'}),
+    A('17-promptov-claude','17 промптов для Claude, которые заменят SMM-щика',7,'smm',{short:'17 промптов вместо SMM-щика'}),
     A('prompts-direct','15 промптов для продаж в директе',10,'knot'),
     A('prompts-funnel','Промпты для воронки продаж',10,'steps')]},
   {id:'smysly',name:'Смыслы',product:'arkh',items:[
