@@ -316,7 +316,7 @@ const AU='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUEBAQEAwUEBAQ
 document.documentElement.style.setProperty('--au',`url(${AU})`);
 const SITE='https://www.anastasialushnikova.com';
 const LINKS={
-  'arkh-land':SITE+'/arkhitektor',
+  'arkh-land':'https://www.anastasialushnikova.com/arkhitektor?utm_source=telegram&utm_medium=miniapp&utm_campaign=tschoolai',
   'arkh-pay':'https://app.lava.top/products/162ca29b-a6a4-414a-97c6-29962d1d3956',
   'tren-land':SITE+'/pro',
   'channel':'https://t.me/target_school1'
@@ -444,7 +444,7 @@ const inTG=!!(tg&&tg.initData);
 if(tg){try{tg.ready();tg.expand();tg.setHeaderColor('#ffffff');tg.setBackgroundColor('#ffffff');tg.disableVerticalSwipes&&tg.disableVerticalSwipes();}catch(e){}}
 const user=(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user)||null;
 const goal=(g)=>{try{ym(108790481,'reachGoal',g)}catch(e){}};
-const openExt=(url)=>{goal('app_ext');if(tg&&tg.openLink)tg.openLink(url);else window.open(url,'_blank')};
+const openExt=(url)=>{goal('app_ext');if(inTG&&tg.openLink)tg.openLink(url);else window.location.href=url};
 const openTg=(url)=>{if(tg&&tg.openTelegramLink)tg.openTelegramLink(url);else window.open(url,'_blank')};
 const haptic=()=>{try{tg.HapticFeedback.impactOccurred('light')}catch(e){}};
 const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
@@ -496,7 +496,7 @@ function boxBand(){
 function heroArkh(){
   return `<article class="hcard"><div class="hmeta"><div class="eyebrow">Продукт</div><div class="htitle">Архитектор смыслов</div><div class="hsub">Глубинный разбор аудитории, который не делают 80% экспертов. Поэтому делают много, а всё уходит в пустоту.</div></div>
   <div class="hbox dusk">${COVERS.arkh('-72 4 344 176')}
-  <div class="hfoot"><div class="price"><span class="old">18 000 ₽</span><span class="new">1 490 ₽</span></div><button class="btn-gold" data-open="arkh-pay" data-goal="app_arkh_pay">Забрать</button></div>
+  <div class="hfoot"><div class="price"><span class="old">18 000 ₽</span><span class="new">1 490 ₽</span></div><button class="btn-gold" data-open="arkh-land" data-goal="app_arkh_zabrat">Забрать</button></div>
   <a class="dusk-link" href="#" data-open="arkh-land" data-goal="app_arkh_land">Что внутри · гарантия 14 дней</a></div></article>`;
 }
 document.getElementById('hero').innerHTML=
