@@ -497,23 +497,23 @@ function heroFree(a,eyebrow){
 function heroBox(){
   return `<article class="hcard"><div class="hmeta"><div class="eyebrow">Скоро · предзапись</div><div class="htitle">Система как у Анастасии</div><div class="hsub">Моя система в скиллах для Claude: сайт, блог, карусели, прогрев, воронка и приложение. Это приложение тоже внутри.</div></div>
   <div class="hbox teal"><span class="soon">СКОРО</span>${COVERS.box()}
-  <div class="hfoot"><button class="btn-white wide" data-tg="https://t.me/tschoolai_bot?start=korobka" data-goal="app_korobka">Хочу систему как у Анастасии</button></div></div></article>`;
+  <div class="hfoot"><button class="btn-white wide" data-ext="https://www.anastasialushnikova.com/sistema/?utm_source=telegram&utm_medium=miniapp&utm_campaign=sistema" data-goal="app_korobka">Что внутри системы</button></div></div></article>`;
 }
 function buildBand(){
-  return `<button class="boxband" data-tg="https://t.me/tschoolai_bot?start=korobka" data-goal="app_korobka_build">
+  return `<button class="boxband" data-ext="https://www.anastasialushnikova.com/sistema/?utm_source=telegram&utm_medium=miniapp&utm_campaign=sistema" data-goal="app_korobka_build">
     <div class="bb-row">
       <div class="bb-text">
         <div class="bb-ey">Скоро · предзапись</div>
         <div class="bb-title">Всё, что Вы видите здесь, Вы можете собрать сами</div>
-        <div class="bb-sub">Без дизайнеров, программистов и технических знаний. По моей системе «Хочу как у Анастасии»</div>
+        <div class="bb-sub">Без дизайнеров, программистов и технических знаний. По моей системе «Система как у Анастасии»</div>
       </div>
       <div class="bb-viz">${COVERS.build()}</div>
     </div>
-    <div class="bb-cta"><span class="t">Хочу как у Анастасии</span><span class="a">→</span></div>
+    <div class="bb-cta"><span class="t">Посмотреть систему</span><span class="a">→</span></div>
   </button>`;
 }
 function boxBand(){
-  return `<button class="boxband" data-tg="https://t.me/tschoolai_bot?start=korobka" data-goal="app_korobka">
+  return `<button class="boxband" data-ext="https://www.anastasialushnikova.com/sistema/?utm_source=telegram&utm_medium=miniapp&utm_campaign=sistema" data-goal="app_korobka">
     <div class="bb-row">
       <div class="bb-text">
         <div class="bb-ey">Скоро · предзапись</div>
@@ -522,7 +522,7 @@ function boxBand(){
       </div>
       <div class="bb-viz">${COVERS.box()}</div>
     </div>
-    <div class="bb-cta"><span class="t">Хочу систему как у Анастасии</span><span class="a">→</span></div>
+    <div class="bb-cta"><span class="t">Посмотреть систему</span><span class="a">→</span></div>
   </button>`;
 }
 function heroArkh(){
@@ -608,9 +608,10 @@ document.getElementById('helloGo').onclick=()=>{store.set('ts_hello',1);closeShe
 
 /* ===== КЛИКИ ===== */
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-read],[data-open],[data-chip],[data-tab],[data-tg],#recentBtn');if(!t)return;
+  const t=e.target.closest('[data-read],[data-open],[data-chip],[data-tab],[data-tg],[data-ext],#recentBtn');if(!t)return;
   if(t.dataset.read){openRead(t.dataset.read);return}
   if(t.dataset.open){e.preventDefault();if(t.dataset.goal)goal(t.dataset.goal);haptic();openExt(LINKS[t.dataset.open]);return}
+  if(t.dataset.ext){e.preventDefault();if(t.dataset.goal)goal(t.dataset.goal);haptic();openExt(t.dataset.ext);return}
   if(t.dataset.chip){current=t.dataset.chip;renderChips();renderShelves();window.scrollTo({top:document.getElementById('chips').offsetTop-8,behavior:'smooth'});return}
   if(t.dataset.tg){if(t.dataset.goal)goal(t.dataset.goal);haptic();openTg(t.dataset.tg);return}
   if(t.dataset.tab){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));document.getElementById('home').style.display=t.dataset.tab==='home'?'block':'none';document.getElementById('profile').style.display=t.dataset.tab==='profile'?'block':'none';window.scrollTo(0,0);return}
