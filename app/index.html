@@ -121,6 +121,20 @@
   @keyframes bbshine{0%{left:-60%}45%{left:130%}100%{left:130%}}
   @keyframes bbshine2{0%,35%{left:-80%}55%{left:140%}100%{left:140%}}
   @media (prefers-reduced-motion:reduce){.boxband .bb-cta::after,.boxband .bb-cta .a::after{animation:none;opacity:0}}
+  /* обложка «11 промптов»: линии чертятся, точка опускается на дно */
+  .dp{stroke-dasharray:120;stroke-dashoffset:120;animation:dpdraw 700ms ease-out forwards}
+  .dp1{animation-delay:.15s}
+  .dp2{animation-delay:.45s}
+  .dp3{animation-delay:.75s}
+  .dp4{animation-delay:1.05s}
+  @keyframes dpdraw{to{stroke-dashoffset:0}}
+  .dpl{stroke-dasharray:2 7;animation:dpline 1s ease-out 1.2s forwards;opacity:0}
+  @keyframes dpline{to{opacity:1}}
+  .dpd{transform-box:fill-box;transform-origin:center;opacity:0;animation:dpdot 600ms cubic-bezier(.4,0,.2,1) 1.5s forwards}
+  @keyframes dpdot{0%{opacity:0;transform:translateY(-40px) scale(.5)}100%{opacity:1;transform:translateY(0) scale(1)}}
+  .dpg{transform-box:fill-box;transform-origin:center;animation:dpglow 2.8s ease-in-out 2s infinite}
+  @keyframes dpglow{0%,100%{transform:scale(1);opacity:.18}50%{transform:scale(1.5);opacity:.05}}
+  @media (prefers-reduced-motion:reduce){.dp,.dpl,.dpd,.dpg{animation:none;stroke-dashoffset:0;opacity:1}}
   /* ЗАМОК ПОДПИСКИ */
   .gate{margin:16px 20px 4px;background:var(--sand);border-radius:var(--r-md);padding:13px 16px;display:flex;gap:12px;align-items:center;font-size:14.5px}
   .pill{background:var(--teal);color:#fff;font-weight:700;font-size:12px;letter-spacing:.04em;padding:5px 11px;border-radius:999px;flex-shrink:0}
@@ -383,14 +397,14 @@ const COVERS={
       <path d="M20 44 H180"/><path d="M20 78 H180"/><path d="M20 112 H180"/>
     </g>
     <g fill="none" stroke="${INK}" stroke-width="2.4" stroke-linecap="round">
-      <path d="M46 30 H154"/>
-      <path d="M58 64 H142"/>
-      <path d="M70 98 H130"/>
+      <path class="dp dp1" d="M46 30 H154"/>
+      <path class="dp dp2" d="M58 64 H142"/>
+      <path class="dp dp3" d="M70 98 H130"/>
     </g>
-    <path d="M82 132 H118" stroke="${G}" stroke-width="4" stroke-linecap="round"/>
-    <circle cx="100" cy="132" r="16" fill="${G}" opacity=".2"/>
-    <path d="M100 22 V150" stroke="${T}" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/>
-    <circle cx="100" cy="150" r="6" fill="${T}"/>`,'10 10 180 160'),
+    <path class="dp dp4" d="M82 132 H118" stroke="${G}" stroke-width="4" stroke-linecap="round"/>
+    <circle class="dpg" cx="100" cy="132" r="16" fill="${G}" opacity=".2"/>
+    <path class="dpl" d="M100 22 V150" stroke="${T}" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/>
+    <circle class="dpd" cx="100" cy="150" r="6" fill="${T}"/>`,'10 10 180 160'),
   smm:()=>{let r='';let n=0;for(let row=0;row<3;row++)for(let c=0;c<6&&n<17;c++,n++){const x=30+c*24+(row%2?12:0),y=60+row*28;r+=`<rect x="${x}" y="${y}" width="16" height="16" rx="4" fill="${n===16?G:'#fff'}" stroke="${n===16?G:(n<6?M:INK)}" stroke-width="1.6"/>`}
     r+=`<path d="M38 150 H150" stroke="${T}" stroke-width="2.4" stroke-linecap="round"/><circle cx="160" cy="150" r="7" fill="${G}"/>`;return S(r)},
   /* 12 промптов: одно движение, и падает вся цепочка */
@@ -518,7 +532,7 @@ function heroArkh(){
   <a class="dusk-link" href="#" data-open="arkh-land" data-goal="app_arkh_land">Что внутри · гарантия 14 дней</a></div></article>`;
 }
 document.getElementById('hero').innerHTML=
-  heroFree(ALL['12-promptov-marketologa'],'Промпты')+heroArkh()+heroFree(ALL['astro_karta'],'Гайд');
+  heroFree(ALL['11-promptov-kopirayter'],'Промпты')+heroArkh()+heroFree(ALL['12-promptov-marketologa'],'Промпты')+heroFree(ALL['astro_karta'],'Гайд');
 
 /* Шапки карточек карусели одной высоты: обложки стоят ровно по одной линии */
 function alignHero(){const m=[...document.querySelectorAll('.hero .hmeta')];m.forEach(x=>x.style.minHeight='');const h=Math.max(...m.map(x=>x.offsetHeight));m.forEach(x=>x.style.minHeight=h+'px')}
