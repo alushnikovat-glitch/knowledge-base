@@ -378,6 +378,19 @@ const COVERS={
     <ellipse cx="152" cy="40" rx="30" ry="7.5" fill="none" stroke="${G}" stroke-width="1" stroke-opacity=".35"/>
     <circle cx="152" cy="40" r="4" fill="${G}"/>`,vb),
   /* 17 промптов вместо SMM-щика: 17 разрозненных задач выстраиваются в одну линию к результату */
+  /* 11 промптов: четыре слоя глубины, до идентичности */
+  deep:()=>S(`<g stroke="${M}" stroke-width="2" fill="none" stroke-dasharray="3 5">
+      <path d="M20 44 H180"/><path d="M20 78 H180"/><path d="M20 112 H180"/>
+    </g>
+    <g fill="none" stroke="${INK}" stroke-width="2.4" stroke-linecap="round">
+      <path d="M46 30 H154"/>
+      <path d="M58 64 H142"/>
+      <path d="M70 98 H130"/>
+    </g>
+    <path d="M82 132 H118" stroke="${G}" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="100" cy="132" r="16" fill="${G}" opacity=".2"/>
+    <path d="M100 22 V150" stroke="${T}" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/>
+    <circle cx="100" cy="150" r="6" fill="${T}"/>`,'10 10 180 160'),
   smm:()=>{let r='';let n=0;for(let row=0;row<3;row++)for(let c=0;c<6&&n<17;c++,n++){const x=30+c*24+(row%2?12:0),y=60+row*28;r+=`<rect x="${x}" y="${y}" width="16" height="16" rx="4" fill="${n===16?G:'#fff'}" stroke="${n===16?G:(n<6?M:INK)}" stroke-width="1.6"/>`}
     r+=`<path d="M38 150 H150" stroke="${T}" stroke-width="2.4" stroke-linecap="round"/><circle cx="160" cy="150" r="7" fill="${G}"/>`;return S(r)},
   /* 12 промптов: одно движение, и падает вся цепочка */
@@ -416,7 +429,8 @@ const COVERS={
 const A=(slug,title,min,cover,extra={})=>({slug,title,min,cover,url:SITE+'/blog/'+slug+'/',...extra});
 const SHELVES=[
   {id:'prompts',name:'Промпты',items:[
-    A('12-promptov-marketologa','12 промптов, которые сделают работу маркетолога за вечер',12,'domino',{isNew:true,short:'12 промптов маркетолога',sub:'Работа маркетолога за один вечер'}),
+    A('11-promptov-kopirayter','11 промптов, которые заменят копирайтера',11,'deep',{isNew:true,short:'11 промптов вместо копирайтера',sub:'Глубина вместо подборок из интернета'}),
+    A('12-promptov-marketologa','12 промптов, которые сделают работу маркетолога за вечер',12,'domino',{short:'12 промптов маркетолога',sub:'Работа маркетолога за один вечер'}),
     A('17-promptov-claude','17 промптов для Claude, которые заменят SMM-щика',7,'smm',{short:'17 промптов вместо SMM-щика'}),
     A('prompts-direct','15 промптов для продаж в директе',10,'knot'),
     A('prompts-funnel','Промпты для воронки продаж',10,'steps')]},
