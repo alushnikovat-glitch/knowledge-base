@@ -393,6 +393,12 @@ const COVERS={
     <circle cx="152" cy="40" r="4" fill="${G}"/>`,vb),
   /* 17 промптов вместо SMM-щика: 17 разрозненных задач выстраиваются в одну линию к результату */
   /* 11 промптов: четыре слоя глубины, до идентичности */
+  /* Карта шагов: ступени снизу вверх */
+  ladder:()=>S(`<rect x="24" y="118" width="152" height="30" rx="8" fill="${INK}"/>
+    <rect x="42" y="78" width="116" height="30" rx="8" fill="${T}"/>
+    <rect x="58" y="38" width="84" height="30" rx="8" fill="${G}"/>
+    <path d="M100 26 V12" stroke="${T}" stroke-width="2" stroke-linecap="round"/>
+    <path d="M94 18 L100 12 L106 18" fill="none" stroke="${T}" stroke-width="2"/>`,'10 0 180 160'),
   deep:()=>S(`<g stroke="${M}" stroke-width="2" fill="none" stroke-dasharray="3 5">
       <path d="M20 44 H180"/><path d="M20 78 H180"/><path d="M20 112 H180"/>
     </g>
@@ -443,7 +449,8 @@ const COVERS={
 const A=(slug,title,min,cover,extra={})=>({slug,title,min,cover,url:SITE+'/blog/'+slug+'/',...extra});
 const SHELVES=[
   {id:'prompts',name:'Промпты',items:[
-    A('11-promptov-kopirayter','11 промптов, которые заменят копирайтера',11,'deep',{isNew:true,short:'11 промптов вместо копирайтера',sub:'Глубина вместо подборок из интернета'}),
+    A('karta-shagov','Карта шагов: как из блога получаются деньги',10,'ladder',{isNew:true,short:'Карта шагов',sub:'Десять шагов от смыслов до денег'}),
+    A('11-promptov-kopirayter','11 промптов, которые заменят копирайтера',11,'deep',{short:'11 промптов вместо копирайтера',sub:'Глубина вместо подборок из интернета'}),
     A('12-promptov-marketologa','12 промптов, которые сделают работу маркетолога за вечер',12,'domino',{short:'12 промптов маркетолога',sub:'Работа маркетолога за один вечер'}),
     A('17-promptov-claude','17 промптов для Claude, которые заменят SMM-щика',7,'smm',{short:'17 промптов вместо SMM-щика'}),
     A('prompts-direct','15 промптов для продаж в директе',10,'knot'),
@@ -532,7 +539,7 @@ function heroArkh(){
   <a class="dusk-link" href="#" data-open="arkh-land" data-goal="app_arkh_land">Что внутри · гарантия 14 дней</a></div></article>`;
 }
 document.getElementById('hero').innerHTML=
-  heroFree(ALL['11-promptov-kopirayter'],'Промпты')+heroArkh()+heroFree(ALL['12-promptov-marketologa'],'Промпты')+heroFree(ALL['astro_karta'],'Гайд');
+  heroFree(ALL['karta-shagov'],'Карта')+heroArkh()+heroFree(ALL['11-promptov-kopirayter'],'Промпты')+heroFree(ALL['12-promptov-marketologa'],'Промпты')+heroFree(ALL['astro_karta'],'Гайд');
 
 /* Шапки карточек карусели одной высоты: обложки стоят ровно по одной линии */
 function alignHero(){const m=[...document.querySelectorAll('.hero .hmeta')];m.forEach(x=>x.style.minHeight='');const h=Math.max(...m.map(x=>x.offsetHeight));m.forEach(x=>x.style.minHeight=h+'px')}
