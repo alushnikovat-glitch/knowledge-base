@@ -837,6 +837,16 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
   .way li::before{content:'';position:absolute;left:3px;top:8px;width:7px;height:7px;border-radius:50%}
   .way-a li::before{background:#5fb8ae}
   .way-b li::before{background:#e8b45f}
+  .way-mid li::before{background:#e8b45f}
+  .fb-row{display:flex;gap:10px;align-items:flex-start;border-radius:14px;padding:13px 15px;margin:0 0 18px;font-size:14px;line-height:1.55}
+  .fb-row b{font-weight:700}
+  .fb-ico{flex:0 0 auto;font-size:15px;line-height:1.4}
+  .fb-a{background:#eef6f4;color:#2c4d48}
+  .fb-a b{color:#14171a}
+  .fb-mid{background:#fdf0d4;color:#6b4e12}
+  .fb-mid b{color:#14171a}
+  .fb-b{background:rgba(255,255,255,.1);color:rgba(245,242,236,.88)}
+  .fb-b b{color:#fff}
   .way-price{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
   .way-b .way-price{color:#fff}
   .way-note{font-size:13.5px;line-height:1.5;margin-bottom:18px}
@@ -845,7 +855,12 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
   .way-btn{display:block;text-align:center;padding:14px 20px;border-radius:999px;font-size:15.5px;font-weight:700;text-decoration:none}
   .way-btn.gold{background:#e8b45f;color:#14171a}
   .way-btn.dark{background:#fff;color:#14171a}
-  @media(min-width:760px){.ways{grid-template-columns:1fr 1fr}}
+  .way-mid{background:#fffbf0;border:1.5px solid #f0cf85;position:relative}
+  .way-mid .way-ey{color:#b8860b}
+  .fb-note{background:var(--surface);border:1px solid var(--border);border-left:4px solid #5fb8ae;border-radius:16px;padding:18px 20px;margin-top:18px;font-size:15px;line-height:1.7;color:#3a3936}
+  .fb-note b{color:#14171a}
+  @media(min-width:760px){.ways{grid-template-columns:repeat(3,1fr)}}
+
   .viz{margin:26px 0}
   .viz svg{width:100%;height:auto;display:block}
   .nrow rect{animation:nhl 9s ease-in-out infinite}
@@ -1437,25 +1452,43 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
 
 
   <div class="sec">
-    <h2>Два пути</h2>
-    <p>Система одна. Разница в том, кто её собирает.</p>
+    <h2>Три пути</h2>
+    <p>Система одна. Разница в том, кто её собирает и насколько я рядом.</p>
     <div class="ways">
       <div class="way way-a">
         <div class="way-ey">Путь 1 · Сами</div>
         <h3>Система как у Анастасии</h3>
         <p class="way-lead">Вы проходите путь сами по моей методологии. Скиллы, инструкции и шаблоны у вас на руках, дальше вы собираете свою систему и повторяете её сколько угодно раз.</p>
         <ul>
-          <li>Разбираетесь один раз и делаете сами</li>
+          <li>Все скиллы, инструкции и шаблоны</li>
+          <li>Скилл-куратор внутри: отвечает сразу и в любое время</li>
           <li>Можете собирать не только себе</li>
           <li>Система остаётся с вами навсегда</li>
         </ul>
+        <div class="fb-row fb-a"><span class="fb-ico">💬</span><span><b>Обратная связь:</b> скилл-куратор внутри. Отвечает сразу, в любое время суток, без ограничений</span></div>
         <div class="way-price">12 800 ₽</div>
         <div class="way-note">Это цена для списка первых. После старта она будет выше</div>
         <a class="way-btn gold" href="https://t.me/tschoolai_bot?start=korobka" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','korobka_page_ways')">Записаться первой</a>
       </div>
 
+      <div class="way way-mid">
+        <div class="way-ey">Путь 2 · Вместе со мной</div>
+        <h3>Система с сопровождением</h3>
+        <p class="way-lead">То же самое, но я рядом три месяца. Застряли или сомневаетесь в результате шага, пишете мне напрямую.</p>
+        <ul>
+          <li>Всё из первого пути</li>
+          <li>Мои личные ответы в Telegram в течение дня, по будням</li>
+          <li>Разбор результата после каждого блока</li>
+          <li>Три месяца, этого хватает пройти систему целиком</li>
+        </ul>
+        <div class="fb-row fb-mid"><span class="fb-ico">💬</span><span><b>Обратная связь:</b> скилл-куратор внутри плюс мои личные ответы в Telegram в течение дня, по будням. Три месяца</span></div>
+        <div class="way-price">42 000 ₽</div>
+        <div class="way-note">Беру ограниченное число человек: отвечаю лично, поэтому потянуть могу немногих</div>
+        <a class="way-btn gold" href="https://t.me/tschoolai_bot?start=korobka" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','korobka_page_mid_tarif')">Записаться первой</a>
+      </div>
+
       <div class="way way-b">
-        <div class="way-ey">Путь 2 · Под ключ</div>
+        <div class="way-ey">Путь 3 · Под ключ</div>
         <h3>Блог под ключ</h3>
         <p class="way-lead">Ту же систему собирает моя команда. Вы даёте вводные и снимаете себя, всё остальное делаем мы.</p>
         <ul>
@@ -1467,13 +1500,17 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
           <li>Приём оплаты и автоматическая выдача</li>
           <li>Дашборд с цифрами и настроенная аналитика</li>
         </ul>
+        <div class="fb-row fb-b"><span class="fb-ico">💬</span><span><b>Обратная связь:</b> мы на связи всё время работы над проектом. Вы согласуете результат на каждом шаге</span></div>
         <div class="way-price">149 000 ₽</div>
         <div class="way-note">Беру по одному проекту за раз. Очередь обычно на 1-2 месяца вперёд, поэтому сроки обсуждаем лично</div>
         <a class="way-btn dark" href="https://t.me/lavaiai" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','korobka_page_turnkey')">Написать мне</a>
       </div>
     </div>
-  </div>
 
+    <div class="fb-note">
+      <b>Как устроена поддержка.</b> Внутри системы стоит скилл-куратор: он отвечает сразу, разбирает, где вы застряли, и ведёт дальше. Он есть во всех трёх путях. А если вопрос требует моего взгляда, на втором пути вы пишете мне в Telegram, и я отвечаю в течение дня.
+    </div>
+  </div>
 
   <div class="honest">
     <h3>Честно про результат</h3>
