@@ -228,6 +228,7 @@
     .price .old::after{animation:none;transform:none}
     .reader,.sheet{transition:none}
   }
+  .legal-foot{margin:28px 20px 8px;font-size:11.5px;line-height:1.5;color:#948e84}
 </style>
 </head>
 <body>
@@ -248,6 +249,7 @@
 
   <nav class="chips" id="chips"></nav>
   <section id="shelves"></section>
+  <p class="legal-foot">* Instagram принадлежит компании Meta Platforms Inc. Деятельность компании признана экстремистской и запрещена на территории Российской Федерации.</p>
 </main>
 
 <!-- ПРОФИЛЬ -->
@@ -419,6 +421,8 @@ const COVERS={
     `<circle cx="16" cy="106" r="5" fill="${T}"/>`),
   /* Директ: «я подумаю» развязывается в прямую нить */
   knot:()=>S(`<path d="M18 120 C34 50 86 50 78 96 C70 140 28 118 46 84 C64 50 110 64 96 108 C86 136 60 110 82 92 C96 82 108 96 114 100" fill="none" stroke="${INK}" stroke-width="2" stroke-linecap="round"/><path d="M114 100 L172 100" stroke="${T}" stroke-width="3" stroke-linecap="round"/><circle cx="178" cy="100" r="7" fill="${G}"/>`),
+  /* Воронка через один чат: слово из комментария проходит через бот и ложится в базу */
+  chatflow:()=>S(`<rect x="18" y="42" width="72" height="38" rx="10" fill="#fff" stroke="${INK}" stroke-width="1.8"/><path d="M34 80 L30 94 L46 80" fill="#fff" stroke="${INK}" stroke-width="1.8" stroke-linejoin="round"/><rect x="30" y="55" width="48" height="12" rx="3" fill="${G}"/><path d="M90 61 C120 61 118 100 100 112" fill="none" stroke="${M}" stroke-width="1.6" stroke-dasharray="4 5"/><rect x="104" y="96" width="62" height="44" rx="10" fill="${T}"/><circle cx="124" cy="118" r="4" fill="#fff"/><circle cx="146" cy="118" r="4" fill="#fff"/><path d="M135 140 L135 158" stroke="${INK}" stroke-width="1.8"/>${[0,1,2,3,4].map(i=>`<rect x="${106+i*12}" y="160" width="9" height="9" rx="2" fill="${i===4?G:'#fff'}" stroke="${i===4?G:INK}" stroke-width="1.4"/>`).join('')}`),
   /* Воронка: человек теплеет шаг за шагом и доходит до двери */
   steps:()=>S([0,1,2,3,4].map(i=>`<rect x="${22+i*28}" y="${148-i*20}" width="28" height="${20+i*20}" fill="${i<4?(i<2?'#e9e4d8':'#cfe3df'):T}"/>`).join('')+`<rect x="160" y="40" width="22" height="44" rx="2" fill="none" stroke="${INK}" stroke-width="1.8"/><circle cx="176" cy="63" r="2" fill="${G}"/><line x1="14" y1="168" x2="186" y2="168" stroke="${M}" stroke-width="1.4"/>`),
   /* Кристалл: много попыток мимо, одно точное попадание */
@@ -449,12 +453,14 @@ const COVERS={
 const A=(slug,title,min,cover,extra={})=>({slug,title,min,cover,url:SITE+'/blog/'+slug+'/',...extra});
 const SHELVES=[
   {id:'prompts',name:'Промпты',items:[
-    A('karta-shagov','Карта шагов: как из блога получаются деньги',10,'ladder',{isNew:true,short:'Карта шагов',sub:'Десять шагов от смыслов до денег'}),
+    A('karta-shagov','Карта шагов: как из блога получаются деньги',10,'ladder',{short:'Карта шагов',sub:'Десять шагов от смыслов до денег'}),
     A('11-promptov-kopirayter','11 промптов, которые заменят копирайтера',11,'deep',{short:'11 промптов вместо копирайтера',sub:'Глубина вместо подборок из интернета'}),
     A('12-promptov-marketologa','12 промптов, которые сделают работу маркетолога за вечер',12,'domino',{short:'12 промптов маркетолога',sub:'Работа маркетолога за один вечер'}),
     A('17-promptov-claude','17 промптов для Claude, которые заменят SMM-щика',7,'smm',{short:'17 промптов вместо SMM-щика'}),
     A('prompts-direct','15 промптов для продаж в директе',10,'knot'),
     A('prompts-funnel','Промпты для воронки продаж',10,'steps')]},
+  {id:'voronki',name:'Воронки',items:[
+    A('razbor-voronka-odin-chat','Воронка с кодовым словом через один чат. Разбор',9,'chatflow',{isNew:true,short:'Воронка через ChatPlace из Instagram* в Telegram',sub:'Кодовое слово, бот и база в Telegram за вечер'})]},
   {id:'smysly',name:'Смыслы',product:'arkh',items:[
     A('smysly-2026','100 часов на тесты или 15 минут на архитектуру',9,'crystal',{short:'Смысловой кристалл за 4 шага'}),
     A('marketing-glossary','Словарь маркетолога 2026',7,'tiles')]},
@@ -475,7 +481,7 @@ const PRODUCTS={
   tren:{title:'Тренажёр таргетолога',meta:'1 490 ₽ за год',open:'tren-land',cover:()=>S(`<rect x="34" y="50" width="132" height="86" rx="10" fill="none" stroke="#5fb8ae" stroke-width="2"/><path d="M84 158h32M100 136v22" stroke="#5fb8ae" stroke-width="2"/><path d="M54 116 L82 94 L104 106 L146 70" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="148" cy="68" r="6" fill="${G}"/>`)}
 };
 /* startapp-параметр из кодового слова → сразу нужный материал */
-const START={prompty12:'12-promptov-marketologa',karta:'astro_karta',kabinet:'shema-kampanii',klienty:'gde-iskat-zakazy'};
+const START={razbor:'razbor-voronka-odin-chat',prompty12:'12-promptov-marketologa',karta:'astro_karta',kabinet:'shema-kampanii',klienty:'gde-iskat-zakazy'};
 
 /* ===== TELEGRAM ===== */
 const tg=window.Telegram&&window.Telegram.WebApp;
@@ -539,7 +545,7 @@ function heroArkh(){
   <a class="dusk-link" href="#" data-open="arkh-land" data-goal="app_arkh_land">Что внутри · гарантия 14 дней</a></div></article>`;
 }
 document.getElementById('hero').innerHTML=
-  heroFree(ALL['karta-shagov'],'Карта')+heroArkh()+heroFree(ALL['11-promptov-kopirayter'],'Промпты')+heroFree(ALL['12-promptov-marketologa'],'Промпты')+heroFree(ALL['astro_karta'],'Гайд');
+  heroFree(ALL['razbor-voronka-odin-chat'],'Воронка')+heroFree(ALL['karta-shagov'],'Карта')+heroArkh()+heroFree(ALL['11-promptov-kopirayter'],'Промпты')+heroFree(ALL['12-promptov-marketologa'],'Промпты')+heroFree(ALL['astro_karta'],'Гайд');
 
 /* Шапки карточек карусели одной высоты: обложки стоят ровно по одной линии */
 function alignHero(){const m=[...document.querySelectorAll('.hero .hmeta')];m.forEach(x=>x.style.minHeight='');const h=Math.max(...m.map(x=>x.offsetHeight));m.forEach(x=>x.style.minHeight=h+'px')}
