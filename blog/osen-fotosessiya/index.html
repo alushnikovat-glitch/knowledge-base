@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Осенняя фотосессия в ChatGPT: 8 кадров из одного селфи | Анастасия Лушникова</title>
+<meta name="description" content="4 промпта по порядку: осенний портрет, раскадровка из 8 кадров, цветокоррекция и отдельные фото 4:5 для ленты. Из одного селфи, без фотографа.">
+<meta property="og:title" content="Осенняя фотосессия в ChatGPT: 8 кадров из одного селфи">
+<meta property="og:description" content="Портрет, раскадровка, цветокоррекция и отдельные кадры 4:5. Все промпты копируются одной кнопкой.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="img/oblozhka.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108790481', 'ym');
+    ym(108790481, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108790481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2700527913660797');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+  :root {
+    --bg: #faf7f0;
+    --surface: #ffffff;
+    --surface-2: #f3ece1;
+    --border: #e9e0d2;
+    --text: #1f1915;
+    --text-muted: #5e554c;
+    --text-light: #968b7f;
+    --accent: #b85f24;
+    --accent-btn: #f0b97a;
+    --accent-dim: rgba(196,106,46,0.09);
+    --gold: #e8b45f;
+    --teal: #5fb8ae;
+    --code-bg: #0f0c0a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Onest', sans-serif;
+    background: var(--bg);
+    background-image: radial-gradient(ellipse 80% 45% at 50% -10%, rgba(240,185,122,0.35), transparent 70%);
+    background-repeat: no-repeat;
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,247,240,0.9);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    height: 52px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 20px;
+  }
+  .nav-brand { font-size: 14px; font-weight: 800; color: var(--text); text-decoration: none; }
+  .nav-links { display: flex; gap: 18px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-muted); text-decoration: none; }
+  .nav-links a:hover { color: var(--text); }
+
+  .page { max-width: 720px; margin: 0 auto; padding: 44px 16px 80px; }
+
+  .meta { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-light); margin-bottom: 18px; flex-wrap: wrap; }
+  .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-light); }
+
+  h1 {
+    font-size: clamp(30px, 6vw, 46px);
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1.08;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  h1 span { color: var(--accent); }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 32px; }
+  .tag { font-size: 12px; font-weight: 600; color: var(--text-muted); background: var(--surface-2); padding: 5px 12px; border-radius: 100px; }
+
+  .intro-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 26px 26px; margin-bottom: 20px; }
+  .intro-card p { font-size: 16px; color: var(--text-muted); line-height: 1.75; }
+  .intro-card p + p { margin-top: 12px; }
+  .intro-card b { color: var(--text); font-weight: 600; }
+
+  .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 20px; }
+  .before-after figure { margin: 0; }
+  .before-after img, .shot img { width: 100%; display: block; border-radius: 14px; border: 1px solid var(--border); }
+  figcaption { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); text-align: center; margin-top: 8px; }
+
+  .hint { background: var(--accent-dim); border: 1px solid rgba(196,106,46,0.25); border-radius: 14px; padding: 16px 18px; margin-bottom: 36px; display: flex; gap: 12px; }
+  .hint-icon { font-size: 18px; flex-shrink: 0; }
+  .hint p { font-size: 14px; color: #7a3f17; line-height: 1.65; }
+
+  .section-header { display: flex; align-items: center; gap: 12px; margin: 48px 0 18px; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: var(--accent-dim); padding: 5px 12px; border-radius: 100px; white-space: nowrap; }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 12px; }
+  .lead { font-size: 15px; color: var(--text-muted); line-height: 1.75; margin-bottom: 16px; }
+  .lead b { color: var(--text); font-weight: 600; }
+
+  ul.list { list-style: none; margin: 0 0 18px; }
+  ul.list li { font-size: 15px; color: var(--text-muted); line-height: 1.65; padding-left: 22px; position: relative; margin-bottom: 8px; }
+  ul.list li::before { content: ''; position: absolute; left: 4px; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+  .stage-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; margin: 18px 0 14px; }
+  .stage-head { padding: 18px 20px 14px; border-bottom: 1px solid var(--border); }
+  .stage-number { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 4px; }
+  .stage-title { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+  .stage-goal { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+  .stage-body { padding: 16px 16px 18px; }
+
+  .prompt-block { background: var(--code-bg); border-radius: 12px; overflow: hidden; border: 1px solid #241d18; box-shadow: 0 6px 20px rgba(60,35,15,0.12); }
+  .prompt-topbar { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .prompt-label { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.35); font-family: 'JetBrains Mono', monospace; }
+  .copy-btn { font-size: 12px; font-weight: 700; color: #1a120b; background: var(--accent-btn); border: none; border-radius: 8px; padding: 6px 12px; cursor: pointer; font-family: 'Onest', sans-serif; }
+  .copy-btn.copied { background: var(--teal); color: #0d1f1d; }
+  .prompt-code { padding: 18px 18px 20px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.8; color: #d6cbbd; white-space: pre-wrap; word-break: break-word; max-height: 420px; overflow-y: auto; }
+  .prompt-code .var { background: #3a2a16; color: var(--gold); border-radius: 4px; padding: 1px 5px; }
+
+  .note { font-size: 14px; color: var(--text-muted); line-height: 1.7; background: var(--surface-2); border-left: 3px solid var(--accent); border-radius: 0 12px 12px 0; padding: 14px 16px; margin: 14px 0; }
+  .note b { color: var(--text); }
+
+  .shot { margin: 18px 0; }
+
+  /* SALES */
+  .sale { background: linear-gradient(160deg, #fdeedd 0%, #ffffff 65%); border: 1px solid rgba(196,106,46,0.3); box-shadow: 0 10px 30px rgba(120,70,30,0.08); border-radius: 20px; padding: 28px 24px; margin: 48px 0; }
+  .sale-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .sale h2 { font-size: 24px; margin-bottom: 14px; }
+  .sale p { font-size: 15px; color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
+  .sale p b { color: var(--text); font-weight: 600; }
+  .facts { display: grid; gap: 8px; margin: 18px 0 20px; }
+  .fact { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--text); background: rgba(196,106,46,0.07); border-radius: 12px; padding: 12px 14px; line-height: 1.5; }
+  .fact span { color: var(--accent); font-weight: 800; flex-shrink: 0; }
+
+  .btn { display: block; text-align: center; background: var(--accent-btn); color: #1a120b; font-weight: 800; font-size: 16px; text-decoration: none; padding: 17px 20px; border-radius: 14px; margin-top: 18px; position: relative; overflow: hidden; }
+  .btn::after { content: ''; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent); transform: skewX(-20deg); animation: shine 3.2s infinite; }
+  @keyframes shine { 0% { left: -60%; } 60%, 100% { left: 130%; } }
+  .btn-sub { text-align: center; font-size: 13px; color: var(--text-light); margin-top: 10px; }
+
+  .quiet-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; font-size: 14px; color: var(--text-muted); line-height: 1.7; margin: 24px 0; }
+
+  .ideas { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+  .idea { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px; }
+  .idea b { display: block; font-size: 14px; margin-bottom: 4px; }
+  .idea span { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .formula { text-align: center; font-weight: 700; font-size: 15px; color: var(--accent); background: var(--accent-dim); border-radius: 12px; padding: 14px; margin: 16px 0; line-height: 1.6; }
+
+  .conclusion { border-top: 1px solid var(--border); padding-top: 28px; margin-top: 40px; }
+  .conclusion p { font-size: 16px; color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
+
+  .legal-note { max-width: 720px; margin: 0 auto; padding: 0 16px 32px; }
+  .legal-note p { font-size: 12px; color: var(--text-light); line-height: 1.6; margin-bottom: 6px; }
+
+  footer { border-top: 1px solid var(--border); padding: 40px 16px; }
+  .footer-inner { max-width: 720px; margin: 0 auto; }
+  .footer-title { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+  .footer-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+  .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .social-card { display: flex; gap: 12px; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px; text-decoration: none; }
+  .social-name { font-size: 14px; font-weight: 700; color: var(--text); }
+  .social-desc { font-size: 12px; color: var(--text-light); }
+  .footer-copy { font-size: 12px; color: var(--text-light); margin-top: 24px; }
+
+  @media (max-width: 520px) {
+    .nav-links a:not(:last-child) { display: none; }
+    .ideas, .social-grid { grid-template-columns: 1fr; }
+    .intro-card, .sale { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="/">Анастасия Лушникова</a>
+  <div class="nav-links">
+    <a href="https://t.me/target_school1" target="_blank" rel="noopener">Telegram</a>
+    <a href="https://www.instagram.com/target_school" target="_blank" rel="noopener">Instagram*</a>
+    <a href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank" rel="noopener">Написать</a>
+  </div>
+</nav>
+
+<main class="page">
+
+  <div class="meta">
+    <span>октябрь 2026</span><span class="meta-dot"></span>
+    <span>8 мин чтения</span><span class="meta-dot"></span>
+    <span>Автор: Анастасия Лушникова</span>
+  </div>
+
+  <h1>Осенняя фотосессия <span>в ChatGPT</span>: 8 кадров из одного селфи</h1>
+
+  <div class="tags">
+    <span class="tag">ChatGPT</span>
+    <span class="tag">Промпты</span>
+    <span class="tag">Визуал</span>
+    <span class="tag">Контент</span>
+  </div>
+
+  <div class="intro-card">
+    <p>Это обычное селфи. Очки, зелёный свитер, вечер в кафе.</p>
+    <p>Из него я сделала <b>8 осенних кадров</b>: портрет под клёнами, прогулка по аллее, кофе, листья в руке, капучино у окна.</p>
+    <p>Я никуда не выходила. Всё собрала в ChatGPT за один вечер. Ниже 4 промпта по порядку, каждый копируется одной кнопкой.</p>
+  </div>
+
+  <div class="before-after">
+    <figure><img src="img/iskhodnik.jpg" alt="Исходное селфи"><figcaption>Было</figcaption></figure>
+    <figure><img src="img/rezultat.jpg" alt="Готовая осенняя фотосессия"><figcaption>Стало</figcaption></figure>
+  </div>
+
+  <div class="hint">
+    <span class="hint-icon">🍂</span>
+    <p>Делайте всё в одном чате ChatGPT. Так нейросеть помнит главный портрет, и все 8 кадров выглядят как одна съёмка.</p>
+  </div>
+
+  <!-- ШАГ 1 -->
+  <div class="section-header"><div class="section-label">Шаг 1. Фото</div><div class="section-line"></div></div>
+  <h2>Выберите одно селфи</h2>
+  <p class="lead">Откройте <a href="https://chatgpt.com" target="_blank" rel="noopener">chatgpt.com</a> или приложение на телефоне и создайте новый чат. Понадобится одна фотография, где хорошо видно лицо.</p>
+  <ul class="list">
+    <li>Естественный свет, без сильных фильтров.</li>
+    <li>Видно глаза, нос и губы.</li>
+    <li>Лицо не закрыто волосами. Очки допустимы, у меня на исходнике они были, но без них сходство обычно выше.</li>
+  </ul>
+  <div class="note"><b>Мой совет:</b> берите фото, на котором Вы себе нравитесь. Нейросеть держится за то, что видит, и сохраняет внешность точнее.</div>
+  <p class="lead">Нажмите на скрепку и загрузите фото в чат.</p>
+
+  <!-- ШАГ 2 -->
+  <div class="section-header"><div class="section-label">Шаг 2. Портрет</div><div class="section-line"></div></div>
+  <h2>Главный осенний кадр</h2>
+  <p class="lead">Отправьте этот промпт вместе с фотографией. Из него получится портрет, от которого дальше строится вся фотосессия.</p>
+
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Промпт 1</div>
+      <div class="stage-title">Осенний портрет</div>
+      <div class="stage-goal">Селфи снизу вверх под кронами, молочный свитер, объёмные волосы.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar"><div class="prompt-label">промпт 1 · портрет</div><button class="copy-btn" onclick="copyPrompt(this,'osen_copy_1')">Копировать</button></div>
+        <div class="prompt-code">Не меняй черты лица. Ультрареалистичный натуральный кадр на iPhone 17 Pro Max, точно повторить композицию: очень близкий осенний селфи-кадр снизу вверх, камера находится чуть ниже уровня лица, девушка занимает почти весь кадр.
+
+Девушка стоит под деревьями с яркой осенней листвой, фон полностью заполнен кронами с красными, оранжевыми и зелёными листьями. Камера направлена вверх, создавая ощущение случайного снимка на прогулке.
+
+Она в объёмном молочно-белом вязаном свитере крупной фактуры, мягкая плотная вязка, длинные рукава закрывают часть кистей.
+
+Поза: одна рука поднята к волосам, пальцы не закрывают лицо, а аккуратно поправляют передние пряди у виска и убирают волосы в сторону. Лицо полностью видно. Вторая часть волос свободно лежит вокруг плеч. Взгляд направлен в камеру, лёгкая естественная полуулыбка.
+
+Волосы: распущенные, длинные по пояс, объёмная укладка layered blowout, крупные мягкие волны, объём у корней, волосы живо лежат вокруг лица и плеч, несколько прядей слегка двигаются от ветра.
+
+Ногти короткие, форма квадрат, бордовые.
+
+Свет: мягкий естественный дневной свет через листву, лёгкие тени от веток на волосах и лице, тёплая осенняя цветокоррекция, натуральная экспозиция.
+
+Реальное фото на телефон: лёгкое зерно, естественная кожа, настоящая текстура волос и вязки, немного случайная композиция, без HDR, без пластика, без эффекта AI.
+
+Мягкая сомкнутая улыбка.
+
+Формат 9:16</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">Волосы, ногти и свитер в промпте мои. Поменяйте под себя: цвет и длину волос, маникюр, одежду. Иначе ChatGPT дорисует Вам чужую причёску.</div>
+
+  <p class="lead"><b>Если лицо изменилось,</b> отправьте следом эту фразу:</p>
+  <div class="prompt-block">
+    <div class="prompt-topbar"><div class="prompt-label">если лицо не похоже</div><button class="copy-btn" onclick="copyPrompt(this,'osen_copy_fix')">Копировать</button></div>
+    <div class="prompt-code">Сохрани мою внешность максимально точно по загруженной фотографии. Не меняй форму глаз, носа, губ, овал лица и индивидуальные особенности. Убери чрезмерную ретушь. Сделай кожу естественной.</div>
+  </div>
+  <p class="lead" style="margin-top:14px">Не помогло, попробуйте другое исходное фото. Сходство на 100% нейросеть не гарантирует, с удачным селфи оно заметно выше.</p>
+
+  <!-- ШАГ 3 -->
+  <div class="section-header"><div class="section-label">Шаг 3. Раскадровка</div><div class="section-line"></div></div>
+  <h2>Из одного портрета целая фотосессия</h2>
+  <p class="lead">Это главный приём. В том же чате попросите ChatGPT нарисовать 8 кадров одной съёмки на одном листе. Лицо будет не на каждом: детали, кадры со спины и пейзаж делают серию живой.</p>
+
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Промпт 2</div>
+      <div class="stage-title">Раскадровка из 8 кадров</div>
+      <div class="stage-goal">Коллаж 4 × 2 с номерами, все кадры в одной гамме.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar"><div class="prompt-label">промпт 2 · раскадровка</div><button class="copy-btn" onclick="copyPrompt(this,'osen_copy_2')">Копировать</button></div>
+        <div class="prompt-code">Используй созданную осеннюю фотографию как основной визуальный референс.
+
+Создай единую раскадровку профессиональной осенней lifestyle-фотосессии из 8 разных кадров.
+
+Размести их в виде коллажа: 4 столбца и 2 ряда.
+
+КРИТИЧЕСКИ ВАЖНО:
+
+Все фотографии должны выглядеть как кадры одной фотосессии, сделанной в один день.
+
+Сохрани:
+- Одну и ту же девушку.
+- Её настоящую внешность.
+- Длинные объёмные каштановые волосы.
+- Молочно-белый вязаный свитер.
+- Единую осеннюю цветовую палитру.
+- Натуральный свет.
+- Атмосферу дорогой, но естественной lifestyle-фотографии.
+
+Не нужно показывать лицо на каждом кадре. Сделай разнообразную раскадровку с крупными планами, деталями и кадрами со спины.
+
+РАСКАДРОВКА:
+
+Кадр 1. Главный портрет девушки под осенними деревьями. Лицо хорошо видно, взгляд в камеру, мягкий естественный свет.
+
+Кадр 2. Крупный план бумажного стаканчика кофе с чёрной крышкой. Рядом молочный вязаный свитер, коричневая кожаная сумка и красивые осенние листья.
+
+Кадр 3. Девушка со спины идёт по осенней аллее. Длинные каштановые волосы, объёмный молочный свитер, светлые брюки и коричневая сумка на плече. На земле опавшая листва.
+
+Кадр 4. Крупный план женской руки с коротким бордовым маникюром. Рука в рукаве молочного свитера держит несколько красных и золотистых кленовых листьев.
+
+Кадр 5. Красивая чашка капучино с латте-артом на столике у окна уютного кафе. Рядом осенние веточки, мягкий свет и тёплая атмосфера.
+
+Кадр 6. Вид сверху на ноги девушки во время прогулки. Светлые брюки, коричневые ботинки, осенние листья на дорожке. Часть молочного свитера попадает в кадр.
+
+Кадр 7. Атмосферный натюрморт: открытая книга, коричневая кожаная сумка, солнцезащитные очки, кленовый лист и мягкий молочный свитер.
+
+Кадр 8. Осенние деревья с красными и золотистыми листьями. Мягкое вечернее солнце проходит сквозь ветви, на заднем плане водоём. Кинематографичный пейзаж.
+
+ЦВЕТОКОРРЕКЦИЯ:
+
+Используй цветовую гамму главной фотографии.
+
+Приглушённые, естественные оттенки осени.
+
+Цвета: шоколадный, кремовый, пыльный терракотовый, оливковый, приглушённый бордовый, карамельный.
+
+Умеренная насыщенность, мягкий контраст, натуральная экспозиция.
+
+Никаких кислотно-оранжевых цветов, чрезмерной яркости, сильного золотого свечения и искусственного HDR.
+
+Стиль: quiet luxury, editorial lifestyle, natural autumn photography.
+
+Реалистичная текстура кожи, ткани, листьев и волос.
+
+Никакого пластикового AI-эффекта.
+
+Добавь небольшие номера от 1 до 8 в верхнем углу каждого кадра, чтобы их было удобно выбирать.
+
+Все кадры должны быть визуально разными, но выглядеть как одна фотосессия.</div>
+      </div>
+    </div>
+  </div>
+
+  <figure class="shot"><img src="img/raskadrovka.jpg" alt="Раскадровка из 8 кадров"><figcaption>Так выглядит раскадровка</figcaption></figure>
+
+  <p class="lead">Секрет цельности в одной строке: <b>«используй цветовую гамму главной фотографии»</b>. Из-за неё восемь разных кадров выглядят как одна съёмка.</p>
+
+  <!-- ПРОДАЖА 1 -->
+  <div class="sale">
+    <div class="sale-label">Пока ChatGPT рисует</div>
+    <h2>Одна мысль, пока идёт генерация</h2>
+    <p>Раскадровка рисуется минуту-две. Расскажу, зачем я вообще это показываю.</p>
+    <p>Красивые фото оживляют ленту. Но вот честно, денег они не приносят.</p>
+    <p>Мой блог с 2017 года принёс больше <b>110 млн рублей</b>. Красивые картинки там были. Платили мне за то, что лежит под ними: кому я говорю, что человек получит и куда он пойдёт дальше.</p>
+    <p>И Вы сейчас внутри примера. Увидели карусель, написали ОСЕНЬ, открыли эту страницу. Меня в этой цепочке не было, она сработала сама.</p>
+    <p>Хотите, чтобы так работал Ваш блог? Начните с диагностики: 5 вопросов в моём Telegram-боте.</p>
+    <a class="btn" href="https://t.me/tschoolai_bot?start=diagnostika" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','osen_diag_mid')">Пройти диагностику</a>
+    <div class="btn-sub">Около 10 минут, прямо в боте.</div>
+  </div>
+
+  <!-- ШАГ 4 -->
+  <div class="section-header"><div class="section-label">Шаг 4. Цвет</div><div class="section-line"></div></div>
+  <h2>Убираем кислотный оранжевый</h2>
+  <p class="lead">Иногда ChatGPT перебарщивает: листья светятся, кожа пластиковая, контраст режет глаз. По такому кадру нейросеть видно сразу. Я поправила цвет отдельным промптом.</p>
+
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Промпт 3</div>
+      <div class="stage-title">Цветокоррекция</div>
+      <div class="stage-goal">Все 8 кадров в одну приглушённую гамму, без AI-глянца.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar"><div class="prompt-label">промпт 3 · цвет</div><button class="copy-btn" onclick="copyPrompt(this,'osen_copy_3')">Копировать</button></div>
+        <div class="prompt-code">Приведи все 8 кадров раскадровки к единому цветовому решению главной фотографии.
+
+Используй главную фотографию как строгий референс цветокоррекции.
+
+Сделай цвета более приглушёнными, натуральными и благородными.
+
+Уменьши насыщенность оранжевых, красных и жёлтых оттенков.
+
+Убери чрезмерное золотое свечение, искусственные блики, HDR и слишком сильный контраст.
+
+Сохрани естественные оттенки кожи, кремовый цвет свитера, шоколадные волосы и натуральные цвета осенней листвы.
+
+Свет должен быть мягким, как на обычной качественной фотографии, сделанной на iPhone при естественном дневном освещении.
+
+Эстетика: quiet luxury, натуральная осенняя фотография, лёгкая плёночная текстура.
+
+Сохрани композицию, предметы и содержание всех восьми кадров.
+
+Не меняй лицо девушки.
+
+Результат должен выглядеть как настоящая фотосессия без заметного эффекта AI.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note"><b>Лайфхак:</b> просьба «сделай красивее» не работает. Говорите нейросети, что поменять: насыщенность, контраст, оттенки, свет.</div>
+
+  <!-- ШАГ 5 -->
+  <div class="section-header"><div class="section-label">Шаг 5. Кадры 4:5</div><div class="section-line"></div></div>
+  <h2>Каждый кадр отдельно для ленты</h2>
+  <p class="lead">Коллаж в ленту не поставишь. Попросите ChatGPT сделать каждый кадр отдельной фотографией в формате 4:5. В номер подставьте нужный кадр.</p>
+
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Промпт 4</div>
+      <div class="stage-title">Отдельный кадр для Instagram*</div>
+      <div class="stage-goal">Полноценное фото 1080 × 1350 без номеров и рамок.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar"><div class="prompt-label">промпт 4 · кадр 4:5</div><button class="copy-btn" onclick="copyPrompt(this,'osen_copy_4')">Копировать</button></div>
+        <div class="prompt-code">Возьми кадр № <span class="var">[номер кадра]</span> из созданной раскадровки.
+
+Создай его отдельным изображением в вертикальном формате 4:5 для Instagram.
+
+Целевой размер: 1080×1350 пикселей или выше с сохранением пропорций 4:5.
+
+Максимально точно повтори исходный кадр из раскадровки.
+
+Сохрани:
+- Композицию.
+- Ракурс камеры.
+- Предметы и детали.
+- Освещение.
+- Цветовую гамму.
+- Фактуру тканей и материалов.
+- Натуральность фотографии.
+
+Не добавляй новые предметы и не меняй исходную композицию без необходимости.
+
+Если на фотографии присутствует девушка, сохрани её внешность и причёску.
+
+Убери номера кадров, подписи, рамки и любые графические элементы.
+
+Создай полноценную отдельную фотографию, а не обрезанный фрагмент коллажа.
+
+Качество максимально высокое, фотореализм, натуральная текстура, без искусственного AI-эффекта.</div>
+      </div>
+    </div>
+  </div>
+
+  <figure class="shot"><img src="img/kadr-4-5.jpg" alt="Кадр из раскадровки и он же отдельно в 4:5"><figcaption>Кадр 4 из раскадровки и он же отдельно</figcaption></figure>
+
+  <p class="lead">Дальше по одному: «Теперь возьми кадр №2 и сделай его отдельно в формате 4:5». И так до восьмого.</p>
+  <div class="note">При повторной генерации детали могут немного уплыть. Нужна точная копия, обрежьте кадр из коллажа. Нужно качество, генерируйте отдельно, так картинка чётче.</div>
+
+  <!-- ШАГ 6 -->
+  <div class="section-header"><div class="section-label">Шаг 6. Публикация</div><div class="section-line"></div></div>
+  <h2>Как поставить кадры в ленту</h2>
+  <p class="lead"><b>Одной каруселью.</b> Начните с портрета, потом чередуйте детали: кадр со спины, кофе, листья, пейзаж.</p>
+  <p class="lead"><b>По одному.</b> Каждый кадр отдельным постом, визуал ленты разнообразнее.</p>
+  <p class="lead"><b>Вперемешку с экспертным.</b> Сегодня портрет, завтра пост по теме, послезавтра кофе у окна, потом Reels, потом прогулка.</p>
+
+  <p class="lead">Перед публикацией проверьте:</p>
+  <ul class="list">
+    <li>У всех фото одинаковые пропорции 4:5.</li>
+    <li>Нет номеров и рамок.</li>
+    <li>Цвета одинаковые от кадра к кадру.</li>
+    <li>Лицо похоже на Ваше.</li>
+    <li>Важные детали не обрезаны.</li>
+  </ul>
+
+  <!-- БОНУС -->
+  <div class="section-header"><div class="section-label">Бонус</div><div class="section-line"></div></div>
+  <h2>Та же схема на любой сезон</h2>
+  <p class="lead">Меняете сюжет, одежду и детали в промптах 1 и 2. Всё остальное остаётся.</p>
+  <div class="ideas">
+    <div class="idea"><b>Осень в Париже</b><span>Кофе, французская булочная, бежевый тренч, узкие улочки.</span></div>
+    <div class="idea"><b>Осень в Нью-Йорке</b><span>Центральный парк, длинное пальто, стаканчик кофе, жёлтые деревья.</span></div>
+    <div class="idea"><b>Домашний вечер</b><span>Свечи, книга, мягкий плед, чашка чая, дождь за окном.</span></div>
+    <div class="idea"><b>Зима</b><span>Снег, объёмный свитер, шарф, заснеженные деревья.</span></div>
+  </div>
+  <div class="formula">Одно селфи → портрет → раскадровка → цвет → отдельные кадры</div>
+
+  <div class="section-header"><div class="section-label">Бесплатно?</div><div class="section-line"></div></div>
+  <p class="lead">Картинки в ChatGPT можно делать и на бесплатном тарифе, но число генераций ограничено. На всю серию из 8 кадров лимита за один день может не хватить. Тогда ждёте обновления лимита или берёте платный тариф. Отдельные приложения для фотосессий покупать не нужно.</p>
+
+  <!-- ПРОДАЖА 2 -->
+  <div class="sale">
+    <div class="sale-label">Фото готовы. А дальше?</div>
+    <h2>Красивая лента сама по себе не продаёт</h2>
+    <p>Много лет ко мне приходят эксперты с одной просьбой: «Настройте рекламу».</p>
+    <p>И за эти годы я поняла простую вещь. <b>Запускать таргет можно примерно каждому десятому.</b></p>
+    <p>Остальные просто сольют бюджет и лиды. Заявки придут, а дальше пусто. Непонятно, кому продаём. Человек кликнул, посмотрел профиль и ушёл, потому что дальше его ничего не ведёт.</p>
+    <p>Реклама ускоряет то, что уже есть. Если системы нет, она ускоряет слив.</p>
+    <p>Поэтому я открыла набор. Лично возьму Ваш проект и построю всю систему за Вас: смыслы, стратегию, воронку, точки касания и удержание.</p>
+    <div class="facts">
+      <div class="fact"><span>2</span>Беру не больше двух проектов в месяц. Ближайшее место в конце ноября.</div>
+      <div class="fact"><span>✓</span>Беру не всех. Только если вижу, что смогу помочь. Если нет, честно скажу и предложу решение под Вашу ситуацию.</div>
+      <div class="fact"><span>5</span>Начинаем с диагностики: 5 вопросов в Telegram-боте, около 10 минут.</div>
+    </div>
+    <a class="btn" href="https://t.me/tschoolai_bot?start=diagnostika" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','osen_diag_final')">Пройти диагностику</a>
+    <div class="btn-sub">5 вопросов, прямо в Telegram-боте.</div>
+  </div>
+
+  <div class="quiet-card">Хотите собрать такую систему сами, своими руками? Я упаковала её в скиллы для Claude: <a href="https://www.anastasialushnikova.com/sistema/" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','osen_sistema_click')">«Система как у Анастасии»</a>.</div>
+
+  <div class="conclusion">
+    <p>Сохраните страницу. Схема работает на любой сезон, меняются только сюжет и детали.</p>
+    <p>И пришлите мне в директ, какой кадр получился у Вас лучше всего. Мне правда интересно, что люди выбирают первым.</p>
+  </div>
+
+</main>
+
+<div class="legal-note">
+  <p>* Instagram принадлежит Meta Platforms Inc. Деятельность компании признана экстремистской и запрещена на территории Российской Федерации.</p>
+  <p>Материал носит информационный характер и не является обещанием дохода или гарантией результата.</p>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">Понравился материал?</div>
+    <div class="footer-sub">В Telegram ещё больше про нейросети для контента, смыслы и продажи.</div>
+    <div class="social-grid">
+      <a class="social-card" href="https://t.me/target_school1" target="_blank" rel="noopener"><div><div class="social-name">Telegram-канал</div><div class="social-desc">Промпты и кейсы</div></div></a>
+      <a class="social-card" href="https://www.instagram.com/target_school" target="_blank" rel="noopener"><div><div class="social-name">Instagram*</div><div class="social-desc">Карусели и сторис</div></div></a>
+      <a class="social-card" href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank" rel="noopener"><div><div class="social-name">Написать Анастасии</div><div class="social-desc">WhatsApp</div></div></a>
+      <a class="social-card" href="https://t.me/tschoolai_bot/app" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','osen_app_click')"><div><div class="social-name">📱 Приложение</div><div class="social-desc">Все мои материалы в одном месте</div></div></a>
+    </div>
+    <div class="footer-copy">© 2026 Анастасия Лушникова</div>
+  </div>
+</footer>
+
+<script>
+  function copyPrompt(btn, goal) {
+    var code = btn.closest('.prompt-block').querySelector('.prompt-code');
+    var text = code.innerText || code.textContent;
+    navigator.clipboard.writeText(text).then(function () {
+      btn.textContent = 'Скопировано ✓';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Копировать'; btn.classList.remove('copied'); }, 2000);
+    }).catch(function () {
+      btn.textContent = 'Выделите вручную';
+      setTimeout(function () { btn.textContent = 'Копировать'; }, 2000);
+    });
+    try { if (goal && window.ym) ym(108790481, 'reachGoal', goal); } catch (e) {}
+  }
+</script>
+
+</body>
+</html>
