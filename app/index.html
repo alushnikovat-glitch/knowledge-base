@@ -86,6 +86,10 @@
   .boxband .bb-cta{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.18);font-size:14.5px;font-weight:700;color:#fff}
   .boxband .bb-cta .a{width:30px;height:30px;border-radius:50%;background:var(--gold);color:var(--dusk);display:grid;place-items:center;font-size:15px;transition:transform .2s ease}
   .boxband:hover .bb-cta .a{transform:translateX(3px)}
+  .boxband .bb-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .boxband .bb-chips span{font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(232,180,95,.35);color:#fff}
+  .boxband .bb-note{font-size:12.5px;font-weight:600;color:var(--gold);margin-top:12px}
+  .boxband .bb-title{font-size:18px}
   .boxband .bb-viz{width:84px;flex-shrink:0}
   .boxband .bb-viz svg{width:100%;height:auto;display:block}
   /* анимация коробки: куча по одной карточке складывается внутрь */
@@ -448,6 +452,11 @@ const COVERS={
   motion:()=>S(`${[0,1,2].map(i=>`<rect x="${34+i*20}" y="${52}" width="70" height="100" rx="10" fill="#fff" stroke="${i===2?INK:M}" stroke-width="${i===2?1.8:1.3}" opacity="${[.45,.7,1][i]}"/>`).join('')}<path d="M100 88 L100 116 L124 102 Z" fill="${T}"/><circle cx="146" cy="60" r="5" fill="${G}"/>`),
   /* Карта релокации: среди линий одна точка, где Вам хорошо */
   map:()=>S(`<circle cx="100" cy="100" r="66" fill="#fff" stroke="${INK}" stroke-width="1.8"/><g fill="none" stroke="${M}" stroke-width="1.3"><ellipse cx="100" cy="100" rx="30" ry="66"/><path d="M34 100 H166 M42 68 H158 M42 132 H158"/></g><path d="M40 150 C80 120 120 90 170 40" fill="none" stroke="${T}" stroke-width="2.4" stroke-linecap="round"/><path d="M30 60 C80 90 120 110 176 150" fill="none" stroke="${M}" stroke-width="1.6" stroke-dasharray="4 5"/><circle cx="118" cy="86" r="7" fill="${G}"/>`),
+  /* Хорар в Claude: колесо карты, сходящийся аспект, ответ в центре */
+  horary:()=>{let r=`<circle cx="100" cy="100" r="70" fill="#fff" stroke="${INK}" stroke-width="1.8"/><circle cx="100" cy="100" r="54" fill="none" stroke="${M}" stroke-width="1.3"/><circle cx="100" cy="100" r="26" fill="#fdf5e4" stroke="${M}" stroke-width="1.3"/>`;
+    for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s2=Math.sin(a);r+=`<line x1="${(100+54*c).toFixed(1)}" y1="${(100+54*s2).toFixed(1)}" x2="${(100+70*c).toFixed(1)}" y2="${(100+70*s2).toFixed(1)}" stroke="${M}" stroke-width="1.2"/>`}
+    r+=`<line x1="${(100+26*Math.cos(2.4)).toFixed(1)}" y1="${(100+26*Math.sin(2.4)).toFixed(1)}" x2="${(100+26*Math.cos(0.5)).toFixed(1)}" y2="${(100+26*Math.sin(0.5)).toFixed(1)}" stroke="${T}" stroke-width="2.4" stroke-linecap="round"/><circle cx="${(100+40*Math.cos(2.4)).toFixed(1)}" cy="${(100+40*Math.sin(2.4)).toFixed(1)}" r="6" fill="${T}"/><circle cx="${(100+40*Math.cos(0.5)).toFixed(1)}" cy="${(100+40*Math.sin(0.5)).toFixed(1)}" r="7" fill="${G}"/>`;
+    return S(r)},
   /* Осенняя фотосессия: из одного кадра раскадровка на 8 */
   storyboard:()=>{let r='';for(let i=0;i<2;i++)for(let j=0;j<4;j++){const x=26+j*38,y=50+i*52,on=i===0&&j===0;r+=`<rect x="${x}" y="${y}" width="32" height="46" rx="4" fill="${on?T:'#fff'}" stroke="${on?T:(i+j)%2?M:INK}" stroke-width="1.6"/>`}
     r+=`<path d="M150 34 C158 26 172 26 176 36 C170 44 158 44 150 34 Z" fill="${G}"/><line x1="150" y1="34" x2="142" y2="40" stroke="${G}" stroke-width="1.6" stroke-linecap="round"/><circle cx="42" cy="66" r="6" fill="#fff"/><path d="M32 90 C34 80 50 80 52 90" fill="#fff"/>`;
@@ -457,7 +466,7 @@ const COVERS={
 const A=(slug,title,min,cover,extra={})=>({slug,title,min,cover,url:SITE+'/blog/'+slug+'/',...extra});
 const SHELVES=[
   {id:'prompts',name:'Промпты',items:[
-    A('osen-fotosessiya','Осенняя фотосессия в ChatGPT: 8 кадров из одного селфи',8,'storyboard',{isNew:true,short:'Осенняя фотосессия в ChatGPT',sub:'8 кадров из одного селфи, 4 промпта'}),
+    A('osen-fotosessiya','Осенняя фотосессия в ChatGPT: 8 кадров из одного селфи',8,'storyboard',{short:'Осенняя фотосессия в ChatGPT',sub:'8 кадров из одного селфи, 4 промпта'}),
     A('karta-shagov','Карта шагов: как из блога получаются деньги',10,'ladder',{short:'Карта шагов',sub:'Десять шагов от смыслов до денег'}),
     A('11-promptov-kopirayter','11 промптов, которые заменят копирайтера',11,'deep',{short:'11 промптов вместо копирайтера',sub:'Глубина вместо подборок из интернета'}),
     A('12-promptov-marketologa','12 промптов, которые сделают работу маркетолога за вечер',12,'domino',{short:'12 промптов маркетолога',sub:'Работа маркетолога за один вечер'}),
@@ -474,6 +483,7 @@ const SHELVES=[
     A('reklama-5-shagov','5 шагов до запуска рекламы',12,'base'),
     A('gde-iskat-zakazy','Где искать заказы и клиентов',18,'field')]},
   {id:'claude',name:'Claude',items:[
+    A('horar-v-claude','Хорар в Claude: как настроить его отвечать на вопросы, на которые ответа нет',10,'horary',{isNew:true,short:'Хорар в Claude',sub:'Да или нет по технике 1647 года'}),
     A('claude-russia','Как подключить Claude из России',10,'door'),
     A('carousel-claude','Дизайн каруселей в Claude',9,'slides'),
     A('mini-product-claude','Мини-продукт на 250 000 ₽ с Claude',12,'seed'),
@@ -486,7 +496,7 @@ const PRODUCTS={
   tren:{title:'Тренажёр таргетолога',meta:'1 490 ₽ за год',open:'tren-land',cover:()=>S(`<rect x="34" y="50" width="132" height="86" rx="10" fill="none" stroke="#5fb8ae" stroke-width="2"/><path d="M84 158h32M100 136v22" stroke="#5fb8ae" stroke-width="2"/><path d="M54 116 L82 94 L104 106 L146 70" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="148" cy="68" r="6" fill="${G}"/>`)}
 };
 /* startapp-параметр из кодового слова → сразу нужный материал */
-const START={osen:'osen-fotosessiya',razbor:'razbor-voronka-odin-chat',prompty12:'12-promptov-marketologa',karta:'astro_karta',kabinet:'shema-kampanii',klienty:'gde-iskat-zakazy'};
+const START={horar:'horar-v-claude',osen:'osen-fotosessiya',razbor:'razbor-voronka-odin-chat',prompty12:'12-promptov-marketologa',karta:'astro_karta',kabinet:'shema-kampanii',klienty:'gde-iskat-zakazy'};
 
 /* ===== TELEGRAM ===== */
 const tg=window.Telegram&&window.Telegram.WebApp;
@@ -531,16 +541,20 @@ function buildBand(){
   </button>`;
 }
 function boxBand(){
-  return `<button class="boxband" data-ext="https://www.anastasialushnikova.com/sistema/?utm_source=telegram&utm_medium=miniapp&utm_campaign=sistema" data-goal="app_korobka">
+  const U='https://www.anastasialushnikova.com/strategiya/?utm_source=telegram&utm_medium=miniapp&utm_campaign=strategiya_band';
+  const viz=`<svg viewBox="0 0 84 84" aria-hidden="true"><g fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2"><circle cx="34" cy="34" r="24"/><circle cx="34" cy="34" r="15"/><circle cx="34" cy="34" r="6"/></g><line x1="12" y1="56" x2="56" y2="12" stroke="#e05b4b" stroke-width="4" stroke-linecap="round"/><polyline class="bdh" points="10,76 30,68 46,70 74,46" fill="none" stroke="#e8b45f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="74" cy="46" r="4.5" fill="#5fb8ae"/></svg>`;
+  return `<button class="boxband" data-ext="${U}" data-goal="app_strategiya_band">
     <div class="bb-row">
       <div class="bb-text">
-        <div class="bb-ey">Скоро · предзапись</div>
-        <div class="bb-title">Система как у Анастасии</div>
-        <div class="bb-sub">Настраиваете с Claude один раз, и система работает на Вас: от плана запуска, воронки продаж и автоматизации до дашборда с цифрами</div>
+        <div class="bb-ey">Услуга · не курс</div>
+        <div class="bb-title">Таргет Вам не нужен. Вам нужна система, которая превращает блог в продажи</div>
       </div>
-      <div class="bb-viz">${COVERS.box()}</div>
+      <div class="bb-viz">${viz}</div>
     </div>
-    <div class="bb-cta"><span class="t">Посмотреть систему</span><span class="a">→</span></div>
+    <div class="bb-sub">Мы с командой строим Вам маркетинговый фундамент: смыслы, оффер, контент и воронку. Учиться самостоятельно не нужно.</div>
+    <div class="bb-chips"><span>Стратегия и смыслы</span><span>Линейка и оффер</span><span>Контент на 30 дней</span><span>Воронка и лид-магниты</span><span>Claude на Вашем голосе</span></div>
+    <div class="bb-note">От 45 000 ₽ · Разбор блога и персональное предложение бесплатно</div>
+    <div class="bb-cta"><span class="t">Смотреть, как это работает</span><span class="a">→</span></div>
   </button>`;
 }
 function heroArkh(){
@@ -550,7 +564,7 @@ function heroArkh(){
   <a class="dusk-link" href="#" data-open="arkh-land" data-goal="app_arkh_land">Что внутри · гарантия 14 дней</a></div></article>`;
 }
 document.getElementById('hero').innerHTML=
-  heroFree(ALL['osen-fotosessiya'],'Фотосессия')+heroFree(ALL['razbor-voronka-odin-chat'],'Воронка')+heroFree(ALL['karta-shagov'],'Карта')+heroArkh()+heroFree(ALL['11-promptov-kopirayter'],'Промпты')+heroFree(ALL['12-promptov-marketologa'],'Промпты')+heroFree(ALL['astro_karta'],'Гайд');
+  heroFree(ALL['horar-v-claude'],'Хорар')+heroFree(ALL['osen-fotosessiya'],'Фотосессия')+heroFree(ALL['razbor-voronka-odin-chat'],'Воронка')+heroFree(ALL['karta-shagov'],'Карта')+heroArkh()+heroFree(ALL['11-promptov-kopirayter'],'Промпты')+heroFree(ALL['12-promptov-marketologa'],'Промпты')+heroFree(ALL['astro_karta'],'Гайд');
 
 /* Шапки карточек карусели одной высоты: обложки стоят ровно по одной линии */
 function alignHero(){const m=[...document.querySelectorAll('.hero .hmeta')];m.forEach(x=>x.style.minHeight='');const h=Math.max(...m.map(x=>x.offsetHeight));m.forEach(x=>x.style.minHeight=h+'px')}
