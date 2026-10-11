@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Хорар в Claude: как настроить Claude отвечать на вопросы, на которые ответа нет | Анастасия Лушникова</title>
+<meta name="description" content="Инструкция, которая превращает Claude в хорарного астролога школы Уильяма Лилли. Вопрос, минута, город: да или нет, почему и когда. Две ветки: с астрологическим сайтом и с расчётом по Swiss Ephemeris.">
+<meta property="og:title" content="Хорар в Claude: вопросы, на которые ответа нет">
+<meta property="og:description" content="Состоится ли сделка, заплатит ли клиент, одобрят ли визу. Инструкция для Claude по технике 1647 года.">
+<meta property="og:type" content="article">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Marck+Script&display=swap" rel="stylesheet">
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108790481', 'ym');
+    ym(108790481, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108790481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2700527913660797');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --border: #e8e6df;
+    --text: #1a1917;
+    --text-muted: #6b6860;
+    --text-light: #a8a29e;
+    --accent: #2563eb;
+    --accent-light: #eff4ff;
+    --tag-bg: #f0ede6;
+    --dark: #1a1917;
+    --yellow-bg: #fffbf0;
+    --yellow-border: #fde68a;
+    --green-bg: #f0fdf4;
+    --green-border: #bbf7d0;
+    --green-text: #15803d;
+    --var-bg: #fef9c3;
+    --var-text: #854d0e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(247, 246, 242, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+  }
+
+  .nav-brand {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* MAIN */
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* META */
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .meta-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-light);
+    flex-shrink: 0;
+  }
+
+  /* TAGS */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 36px;
+  }
+
+  .tag {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--tag-bg);
+    padding: 5px 12px;
+    border-radius: 100px;
+  }
+
+  /* H1 */
+  h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+
+  /* INTRO CARD */
+  .intro-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+  }
+
+  .intro-card p {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 0;
+  }
+
+  .intro-card p + p { margin-top: 12px; }
+
+  /* HINT */
+  .hint {
+    background: var(--accent-light);
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .hint-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .hint p {
+    font-size: 14px;
+    color: #1e40af;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 48px 0 20px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--tag-bg);
+    padding: 4px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* STAGE CARD */
+  .stage-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .stage-head {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stage-number {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 6px;
+  }
+
+  .stage-title {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .stage-goal {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .stage-body {
+    padding: 20px 24px 24px;
+  }
+
+  .stage-body p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  /* PROMPT BLOCK */
+  .prompt-block {
+    background: #1a1917;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .prompt-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .prompt-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .prompt-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .prompt-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.05em;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .copy-btn {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.06);
+    border: none;
+    border-radius: 6px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+    transition: all 0.15s;
+    letter-spacing: 0.02em;
+  }
+
+  .copy-btn:hover {
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.7);
+  }
+
+  .copy-btn.copied {
+    color: #86efac;
+    background: rgba(134,239,172,0.1);
+  }
+
+  .prompt-code {
+    padding: 20px 20px 22px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.85;
+    color: #c8c0b4;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .prompt-code .role { color: #7dd3fc; }
+  .prompt-code .section-key { color: #fbbf24; font-weight: 500; }
+  .prompt-code .step-num { color: #a78bfa; }
+  .prompt-code .var {
+    background: var(--var-bg);
+    color: var(--var-text);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-weight: 500;
+  }
+  .prompt-code .rule { color: #f9a8d4; }
+
+  /* MIDTEXT */
+  .midtext {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin: 48px 0;
+  }
+
+  .midtext h2 {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  .midtext p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+
+  .midtext p:last-child { margin-bottom: 0; }
+
+  /* PRODUCT BLOCK */
+  .product-block {
+    background: var(--yellow-bg);
+    border: 1.5px solid var(--yellow-border);
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin: 48px 0;
+  }
+
+  .product-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #92400e;
+    margin-bottom: 12px;
+  }
+
+  .product-block h2 {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .product-block p {
+    font-size: 15px;
+    color: #78716c;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .product-features {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+
+  .product-features li {
+    font-size: 14px;
+    color: #57534e;
+    padding: 6px 0;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.6;
+  }
+
+  .product-features li::before {
+    content: '✓';
+    font-weight: 700;
+    color: #d97706;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .guarantee {
+    background: var(--green-bg);
+    border: 1px solid var(--green-border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--green-text);
+    line-height: 1.6;
+  }
+
+  .btn-product {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--dark);
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .btn-product:hover { opacity: 0.85; }
+
+  /* CONCLUSION */
+  .conclusion {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+  }
+
+  .conclusion p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+
+  .conclusion p:last-child { margin-bottom: 0; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    color: #fff;
+    padding: 56px 24px 40px;
+  }
+
+  .footer-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .footer-title {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .footer-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+    margin-bottom: 32px;
+    max-width: 480px;
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: 500px) {
+    .social-grid { grid-template-columns: 1fr; }
+  }
+
+  .social-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .social-card:hover { background: rgba(255,255,255,0.1); }
+
+  .social-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .social-info { min-width: 0; }
+
+  .social-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+
+  .social-desc {
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .footer-banner {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .footer-banner-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .btn-tg {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #2563eb;
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 100px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+
+  .btn-tg:hover { opacity: 0.85; }
+
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 32px 16px 60px; }
+    .intro-card, .midtext, .conclusion { padding: 22px 20px; }
+    .product-block { padding: 24px 20px; }
+    .stage-head, .stage-body { padding: 16px 18px; }
+    .prompt-code { font-size: 11.5px; }
+  }
+
+  /* CHAIN */
+  .chain-note {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: -4px 0 12px 24px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+  }
+  .chain-line {
+    width: 2px;
+    height: 22px;
+    background: repeating-linear-gradient(to bottom, var(--border) 0 4px, transparent 4px 8px);
+  }
+  .stage-intro {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: -8px 0 20px;
+  }
+  .bonus .stage-card { border: 1.5px solid var(--yellow-border); }
+  .midtext p strong { color: var(--text); font-weight: 700; }
+  /* INSERT (Hormozi mid-roll) */
+  .insert {
+    display: flex;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid #f59e0b;
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin: 36px 0;
+  }
+  .insert-body h3 { font-size: 17px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 8px; line-height: 1.35; }
+  .insert-body p { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 10px; }
+  .insert-link { font-size: 14px; font-weight: 700; color: var(--text); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #f59e0b; }
+  .bridge { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin: -4px 0 32px; padding: 0 4px; }
+  .bridge a { color: var(--text); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #f59e0b; }
+  /* OFFER STACK */
+  .stack { background: var(--surface); border: 1px solid var(--yellow-border); border-radius: 14px; overflow: hidden; margin: 20px 0; }
+  .stack-row { display: flex; justify-content: space-between; gap: 16px; padding: 14px 18px; border-bottom: 1px solid #fdf1c7; font-size: 14px; color: #57534e; line-height: 1.5; }
+  .stack-row span:last-child { white-space: nowrap; font-weight: 700; color: var(--text); }
+  .stack-total { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 16px 18px; background: #fffdf5; }
+  .stack-total .old { text-decoration: line-through; color: var(--text-light); font-size: 15px; font-weight: 600; }
+  .stack-total .new { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
+  .equation { font-size: 15px; color: #57534e; line-height: 1.75; margin-bottom: 16px; }
+  .faq { margin: 24px 0; }
+  .faq-q { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .faq-a { font-size: 14px; color: #78716c; line-height: 1.7; margin-bottom: 14px; }
+  .quiet-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 22px; margin: 0 0 40px; font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+  .quiet-card a { color: var(--text); font-weight: 700; }
+  /* ===== ПРОДАЮЩИЕ ВСТАВКИ v2 ===== */
+  .insert { display:block; border-left:none; border:1.5px solid #fde68a; background:#fffbf0; border-radius:18px; padding:26px 26px 24px; margin:40px 0; }
+  .insert-top { display:flex; gap:18px; align-items:center; margin-bottom:14px; }
+  .insert-viz { width:112px; flex-shrink:0; background:#fff; border-radius:12px; padding:6px; }
+  .insert-viz svg { width:100%; height:auto; display:block; }
+  .insert-eyebrow { font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:#b45309; margin-bottom:6px; }
+  .insert h3 { font-size:19px; font-weight:800; letter-spacing:-0.02em; line-height:1.3; margin:0; }
+  .insert p { font-size:14.5px; color:#57534e; line-height:1.7; margin-bottom:10px; }
+  .insert .btn-row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:16px; }
+  .insert .price-note { font-size:13px; color:#78716c; }
+  .btn-shine { position:relative; overflow:hidden; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    background:linear-gradient(180deg,#fbbf24,#f59e0b); color:#1a1917; font-family:'Manrope',sans-serif; font-weight:800; font-size:15px;
+    padding:15px 26px; border-radius:14px; text-decoration:none; box-shadow:0 6px 18px rgba(245,158,11,.35), inset 0 1px 0 rgba(255,255,255,.5);
+    transition:transform .15s ease, box-shadow .15s ease; isolation:isolate; }
+  .btn-shine::after { content:''; position:absolute; top:-20%; bottom:-20%; left:-60%; width:45%; transform:skewX(-22deg);
+    background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.85) 50%, rgba(255,255,255,0) 100%);
+    animation: shine 3.2s ease-in-out infinite; z-index:-0; pointer-events:none; }
+  .btn-shine:hover { transform:translateY(-2px); box-shadow:0 10px 26px rgba(245,158,11,.45), inset 0 1px 0 rgba(255,255,255,.5); }
+  .btn-shine.dark { background:linear-gradient(180deg,#2d2b28,#1a1917); color:#fff; box-shadow:0 8px 24px rgba(26,25,23,.28); }
+  .btn-shine.dark::after { background:linear-gradient(90deg, rgba(251,191,36,0) 0%, rgba(251,191,36,.55) 50%, rgba(251,191,36,0) 100%); }
+  .btn-shine.big { font-size:17px; padding:19px 30px; width:100%; }
+  .btn-ghost { font-size:14px; font-weight:700; color:#1a1917; text-decoration:underline; text-underline-offset:4px; text-decoration-color:#f59e0b; padding:8px 4px; }
+  @keyframes shine { 0% { left:-60%; } 55% { left:130%; } 100% { left:130%; } }
+  @media (prefers-reduced-motion: reduce) { .btn-shine::after { animation:none; opacity:0; } }
+  @media (max-width:600px) {
+    .insert { padding:22px 18px; }
+    .insert-top { align-items:flex-start; }
+    .insert-viz { width:88px; }
+    .insert .btn-shine { width:100%; }
+  }
+  .legal-note{max-width:760px;margin:28px auto 0;padding:0 20px;font-size:12.5px;line-height:1.55;color:#8b8f93}
+  .legal-note b{font-weight:600;color:#6b6f73}
+  .legal-inline{display:block;margin-top:8px;font-size:12.5px;color:#8b8f93;line-height:1.5}
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+
+  :root { --gold:#e8b45f; --gold-deep:#b9862f; --teal:#5fb8ae; --red:#e05b4b; --sand:#faf7f0; --ink:#1e2430; }
+  body { background: var(--sand); }
+  nav { background: rgba(250,247,240,.92); }
+  .eyebrow-astro { font-family:'Marck Script', cursive; font-size:24px; color:var(--gold-deep); margin-bottom:6px; }
+  .hero-astro { position:relative; display:grid; grid-template-columns: 1fr 260px; gap:24px; align-items:center;
+    background:linear-gradient(160deg,#fffdf8 0%,#f6efe0 100%); border:1px solid #efe3c8; border-radius:22px; padding:28px; margin-bottom:24px; overflow:hidden; }
+  .hero-astro::before { content:''; position:absolute; inset:0; pointer-events:none; opacity:.55;
+    background-image: radial-gradient(circle at 12% 18%, var(--gold) 0 1.2px, transparent 2px), radial-gradient(circle at 78% 12%, var(--gold) 0 1px, transparent 2px),
+    radial-gradient(circle at 34% 82%, var(--gold) 0 1.2px, transparent 2px), radial-gradient(circle at 58% 40%, var(--gold) 0 .8px, transparent 2px),
+    radial-gradient(circle at 90% 72%, var(--gold) 0 1.2px, transparent 2px), radial-gradient(circle at 6% 60%, var(--gold) 0 .8px, transparent 2px); }
+  .hero-astro p { font-size:16px; color:#57534e; line-height:1.75; position:relative; }
+  .hero-astro p + p { margin-top:12px; }
+  .hero-astro .big-num { font-size:15px; font-weight:800; color:var(--text); }
+  .wheel { width:100%; height:auto; display:block; position:relative; }
+  .wheel .w-ring { fill:none; stroke:#d9c49a; stroke-width:1.2; }
+  .wheel .w-inner { fill:#fffdf8; }
+  .wheel .w-tick { stroke:#d9c49a; stroke-width:1; }
+  .wheel .w-sign { font-size:15px; fill:var(--gold-deep); text-anchor:middle; dominant-baseline:central; font-family:'Segoe UI Symbol','Noto Sans Symbols 2','DejaVu Sans',sans-serif; }
+  .wheel .w-house { stroke:#e6d8b8; stroke-width:1; }
+  .wheel .w-axis { stroke:#1e2430; stroke-width:1.6; }
+  .wheel .w-asp-good { stroke:var(--teal); stroke-width:1.4; }
+  .wheel .w-asp-hard { stroke:var(--red); stroke-width:1.4; stroke-dasharray:4 3; }
+  .wheel .w-pl-bg { fill:#fff; stroke:#e6d8b8; }
+  .wheel .w-pl { font-size:13px; fill:var(--ink); text-anchor:middle; dominant-baseline:central; font-family:'Segoe UI Symbol','Noto Sans Symbols 2','DejaVu Sans',sans-serif; }
+  .wheel .w-center-a { font-size:22px; font-weight:800; fill:var(--gold-deep); text-anchor:middle; letter-spacing:.06em; }
+  .wheel .w-center-b { font-size:11px; fill:#8a8478; text-anchor:middle; }
+  .wheel .zring { transform-origin:160px 160px; transform-box:view-box; animation:spin 240s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .wheel .zring { animation:none; } }
+  .hint { background:#fff8ea; border-color:#f0dcae; } .hint p { color:#7a5a1e; } .hint-icon { color:var(--gold-deep); }
+  .glyph { display:inline-flex; width:26px; height:26px; border-radius:50%; align-items:center; justify-content:center; background:#fff7e6; border:1px solid #f0dcae; color:var(--gold-deep); font-size:14px; margin-right:2px; font-family:'Segoe UI Symbol','Noto Sans Symbols 2','DejaVu Sans',sans-serif; }
+  .section-header .section-label { display:inline-flex; align-items:center; gap:8px; }
+  .trio { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:8px 0 8px; }
+  .trio-card { background:#fff; border:1px solid var(--border); border-radius:14px; padding:18px; text-align:center; }
+  .trio-card .t-g { font-size:26px; color:var(--gold-deep); line-height:1; margin-bottom:8px; font-family:'Segoe UI Symbol','Noto Sans Symbols 2','DejaVu Sans',sans-serif; }
+  .trio-card .t-t { font-weight:800; font-size:15px; margin-bottom:4px; }
+  .trio-card .t-d { font-size:13px; color:var(--text-muted); line-height:1.5; }
+  .branch { background:#fff; border:1px solid var(--border); border-radius:16px; padding:22px 24px; margin-bottom:14px; }
+  .branch-top { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+  .branch-badge { white-space:nowrap; flex-shrink:0; font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:4px 10px; border-radius:100px; }
+  .branch-badge.a { background:#e9f6f4; color:#2f7d74; }
+  .branch-badge.b { background:#fff3dc; color:#9a6a1c; }
+  .branch h3 { font-size:18px; font-weight:800; letter-spacing:-0.01em; }
+  .branch p { font-size:15px; color:#57534e; line-height:1.7; margin-bottom:10px; }
+  .branch ol { padding-left:20px; color:#57534e; font-size:15px; line-height:1.7; }
+  .branch ol li { margin-bottom:6px; }
+  .branch code { font-family:'JetBrains Mono',monospace; font-size:13px; background:#f3efe6; padding:2px 6px; border-radius:6px; }
+  .go-astro { display:flex; align-items:center; gap:14px; margin-top:16px; padding:14px 18px; border-radius:14px; text-decoration:none;
+    background:linear-gradient(180deg,#fff7e6,#fdeccc); border:1.5px solid var(--gold); color:var(--text); transition:transform .15s, box-shadow .15s; }
+  .go-astro:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(232,180,95,.35); }
+  .go-astro-g { width:36px; height:36px; flex-shrink:0; border-radius:50%; background:#fff; border:1px solid #f0dcae; color:var(--gold-deep); display:flex; align-items:center; justify-content:center; font-size:16px; }
+  .go-astro-txt { display:flex; flex-direction:column; line-height:1.35; flex:1; }
+  .go-astro-txt b { font-size:16px; font-weight:800; }
+  .go-astro-txt span { font-size:13px; color:#8a6a2c; }
+  .go-astro-arr { font-size:22px; font-weight:800; color:var(--gold-deep); }
+  .kp-steps { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin:18px 0; }
+  .kp-step { display:flex; gap:10px; align-items:center; background:#fff; border:1px solid #f0dcae; border-radius:12px; padding:12px 14px; font-size:14px; color:#44403c; line-height:1.45; }
+  .kp-n { flex-shrink:0; width:28px; height:28px; border-radius:50%; background:linear-gradient(180deg,#f3c97a,#e2a94c); color:#fff; font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  @media (max-width:640px) { .kp-steps { grid-template-columns:1fr; } }
+  .warn { background:#fdf0ee; border:1px solid #f4cfc9; border-radius:12px; padding:14px 18px; margin:14px 0 0; font-size:14px; color:#8f3326; line-height:1.65; }
+  .houses { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+  .house { display:flex; gap:12px; align-items:flex-start; background:#fff; border:1px solid var(--border); border-radius:12px; padding:12px 14px; }
+  .house-n { flex-shrink:0; width:30px; height:30px; border-radius:50%; border:1.5px solid var(--gold); color:var(--gold-deep); font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .house-t { font-weight:800; font-size:14px; }
+  .house-d { font-size:13px; color:var(--text-muted); line-height:1.5; }
+  .dign-wrap { overflow-x:auto; background:#fff; border:1px solid var(--border); border-radius:14px; }
+  table.dign { width:100%; border-collapse:collapse; font-size:13.5px; min-width:520px; }
+  table.dign th { text-align:left; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--text-muted); padding:12px 12px; border-bottom:1px solid var(--border); background:#fdfbf6; }
+  table.dign td { padding:10px 12px; border-bottom:1px solid #f1eee7; color:#44403c; }
+  table.dign tr:last-child td { border-bottom:none; }
+  table.dign .g { color:var(--gold-deep); font-family:'Segoe UI Symbol','Noto Sans Symbols 2','DejaVu Sans',sans-serif; }
+  table.dign td:nth-child(2), table.dign td:nth-child(3) { color:#2f7d74; }
+  table.dign td:nth-child(4), table.dign td:nth-child(5) { color:#a8412f; }
+  .steps6 { position:relative; display:flex; flex-direction:column; gap:10px; }
+  .step6 { display:flex; gap:14px; align-items:flex-start; background:#fff; border:1px solid var(--border); border-radius:14px; padding:14px 16px; }
+  .step6-n { flex-shrink:0; width:34px; height:34px; border-radius:50%; background:linear-gradient(180deg,#f3c97a,#e2a94c); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(232,180,95,.35); }
+  .step6-t { font-weight:800; font-size:15px; margin-bottom:2px; }
+  .step6-d { font-size:14px; color:var(--text-muted); line-height:1.6; }
+  .journal-wrap { overflow-x:auto; background:#fff; border:1px solid var(--border); border-radius:14px; }
+  table.journal { width:100%; border-collapse:collapse; font-size:13.5px; min-width:560px; }
+  table.journal th, table.journal td { padding:12px; border-bottom:1px solid #f1eee7; text-align:left; }
+  table.journal th { font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--text-muted); background:#fdfbf6; }
+  table.journal td { color:#57534e; }
+  .ok { color:#2f7d74; font-weight:700; } .no { color:#a8412f; font-weight:700; }
+  .prompt-block { margin-top:4px; }
+  .prompt-code { max-height:520px; overflow:auto; }
+  @media (max-width: 640px) {
+    .hero-astro { grid-template-columns:1fr; padding:22px 20px; }
+    .hero-astro .wheel-box { max-width:240px; margin:0 auto; order:-1; }
+    .trio { grid-template-columns:1fr; }
+    .houses { grid-template-columns:1fr; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="/">Анастасия Лушникова</a>
+  <div class="nav-links">
+    <a href="https://t.me/target_school1" target="_blank" rel="noopener">Telegram</a>
+    <a href="https://www.instagram.com/target_school" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank" rel="noopener">Написать</a>
+  </div>
+</nav>
+
+<main class="page">
+
+  <div class="meta">
+    <span>октябрь 2026</span>
+    <span class="meta-dot"></span>
+    <span>10 мин чтения</span>
+    <span class="meta-dot"></span>
+    <span>Автор: Анастасия Лушникова</span>
+  </div>
+
+  <div class="eyebrow-astro">хорар в Claude</div>
+  <h1>Как настроить Claude отвечать на вопросы, на которые ответа нет</h1>
+
+  <div class="tags">
+    <span class="tag">Claude</span>
+    <span class="tag">Хорарная астрология</span>
+    <span class="tag">Настройка нейросети</span>
+    <span class="tag">Инструкция</span>
+  </div>
+
+  <div class="hero-astro">
+    <div>
+      <p>Состоится ли сделка. Выйдет ли на связь нужный человек. Заплатит ли клиент. Подписывать ли договор. Одобрят ли визу.</p>
+      <p>С такими вопросами идут к астрологу. От трёх тысяч за разбор и ответ через сутки. Я задала Claude <span class="big-num">тридцать таких вопросов за одну ночь</span>, и на каждый получила разбор за минуту.</p>
+      <p>Это хорарная астрология, техника Уильяма Лилли, 1647 год. Ниже инструкция целиком: копируете, вставляете, задаёте вопрос.</p>
+    </div>
+    <div class="wheel-box"><svg class="wheel" viewBox="0 0 320 320" role="img" aria-label="Хорарная карта: колесо зодиака с планетами">
+<g class="zring">
+<circle cx="160" cy="160" r="150" class="w-ring"/>
+<circle cx="160" cy="160" r="122" class="w-ring"/>
+<circle cx="160" cy="160" r="70" class="w-ring w-inner"/>
+<line x1="38.0" y1="160.0" x2="10.0" y2="160.0" class="w-tick"/>
+<text x="28.6" y="124.8" class="w-sign">♈︎</text>
+<line x1="54.3" y1="99.0" x2="30.1" y2="85.0" class="w-tick"/>
+<text x="63.8" y="63.8" class="w-sign">♉︎</text>
+<line x1="99.0" y1="54.3" x2="85.0" y2="30.1" class="w-tick"/>
+<text x="124.8" y="28.6" class="w-sign">♊︎</text>
+<line x1="160.0" y1="38.0" x2="160.0" y2="10.0" class="w-tick"/>
+<text x="195.2" y="28.6" class="w-sign">♋︎</text>
+<line x1="221.0" y1="54.3" x2="235.0" y2="30.1" class="w-tick"/>
+<text x="256.2" y="63.8" class="w-sign">♌︎</text>
+<line x1="265.7" y1="99.0" x2="289.9" y2="85.0" class="w-tick"/>
+<text x="291.4" y="124.8" class="w-sign">♍︎</text>
+<line x1="282.0" y1="160.0" x2="310.0" y2="160.0" class="w-tick"/>
+<text x="291.4" y="195.2" class="w-sign">♎︎</text>
+<line x1="265.7" y1="221.0" x2="289.9" y2="235.0" class="w-tick"/>
+<text x="256.2" y="256.2" class="w-sign">♏︎</text>
+<line x1="221.0" y1="265.7" x2="235.0" y2="289.9" class="w-tick"/>
+<text x="195.2" y="291.4" class="w-sign">♐︎</text>
+<line x1="160.0" y1="282.0" x2="160.0" y2="310.0" class="w-tick"/>
+<text x="124.8" y="291.4" class="w-sign">♑︎</text>
+<line x1="99.0" y1="265.7" x2="85.0" y2="289.9" class="w-tick"/>
+<text x="63.8" y="256.2" class="w-sign">♒︎</text>
+<line x1="54.3" y1="221.0" x2="30.1" y2="235.0" class="w-tick"/>
+<text x="28.6" y="195.2" class="w-sign">♓︎</text>
+</g>
+<line x1="134.9" y1="94.6" x2="116.3" y2="46.1" class="w-axis"/>
+<line x1="166.1" y1="90.3" x2="170.6" y2="38.5" class="w-house"/>
+<line x1="192.9" y1="98.2" x2="217.3" y2="52.3" class="w-house"/>
+<line x1="213.6" y1="115.0" x2="253.5" y2="81.6" class="w-axis"/>
+<line x1="228.5" y1="145.4" x2="279.3" y2="134.6" class="w-house"/>
+<line x1="219.4" y1="197.1" x2="263.5" y2="224.7" class="w-house"/>
+<line x1="185.1" y1="225.4" x2="203.7" y2="273.9" class="w-axis"/>
+<line x1="153.9" y1="229.7" x2="149.4" y2="281.5" class="w-house"/>
+<line x1="127.1" y1="221.8" x2="102.7" y2="267.7" class="w-house"/>
+<line x1="106.4" y1="205.0" x2="66.5" y2="238.4" class="w-axis"/>
+<line x1="91.5" y1="174.6" x2="40.7" y2="185.4" class="w-house"/>
+<line x1="100.6" y1="122.9" x2="56.5" y2="95.3" class="w-house"/>
+<line x1="227.3" y1="179.3" x2="218.0" y2="120.9" class="w-asp-good"/>
+<line x1="216.6" y1="201.1" x2="176.9" y2="227.9" class="w-asp-good"/>
+<line x1="197.1" y1="100.6" x2="91.1" y2="147.8" class="w-asp-hard"/>
+<circle cx="252.3" cy="186.5" r="11" class="w-pl-bg"/>
+<text x="252.3" y="186.5" class="w-pl">☉︎</text>
+<circle cx="237.7" cy="216.4" r="11" class="w-pl-bg"/>
+<text x="237.7" y="216.4" class="w-pl">☽︎</text>
+<circle cx="213.7" cy="239.6" r="11" class="w-pl-bg"/>
+<text x="213.7" y="239.6" class="w-pl">☿︎</text>
+<circle cx="183.2" cy="253.1" r="11" class="w-pl-bg"/>
+<text x="183.2" y="253.1" class="w-pl">♀︎</text>
+<circle cx="210.9" cy="78.6" r="11" class="w-pl-bg"/>
+<text x="210.9" y="78.6" class="w-pl">♂︎</text>
+<circle cx="239.6" cy="106.3" r="11" class="w-pl-bg"/>
+<text x="239.6" y="106.3" class="w-pl">♃︎</text>
+<circle cx="65.5" cy="143.3" r="11" class="w-pl-bg"/>
+<text x="65.5" y="143.3" class="w-pl">♄︎</text>
+<text x="160" y="154" class="w-center-a">ДА</text>
+<text x="160" y="176" class="w-center-b">через 3 дня</text>
+</svg></div>
+  </div>
+
+  <div class="hint">
+    <span class="hint-icon">✦</span>
+    <p>Главное правило всей инструкции. Claude не должен считать карту «из головы». Без точного расчёта он уверенно придумает градусы и выдаст красивый разбор ни о чём. Поэтому градусы берутся либо с астрологического сайта, либо из астрономической библиотеки. Ниже обе ветки.</p>
+  </div>
+
+  <div class="section-header">
+    <div class="section-label"><span class="glyph">☉︎</span> Как это устроено</div>
+    <div class="section-line"></div>
+  </div>
+  <p class="stage-intro">Хорар отвечает на вопрос по карте неба на ту минуту, когда вопрос созрел. Для карты нужны три вещи.</p>
+  <div class="trio">
+    <div class="trio-card"><div class="t-g">?</div><div class="t-t">Вопрос</div><div class="t-d">Один, конкретный, тот, что правда волнует</div></div>
+    <div class="trio-card"><div class="t-g">◷</div><div class="t-t">Минута</div><div class="t-d">Когда вы его сформулировали, с часовым поясом</div></div>
+    <div class="trio-card"><div class="t-g">⌖</div><div class="t-t">Город</div><div class="t-d">Где вы находитесь в этот момент</div></div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-label"><span class="glyph">☽︎</span> Выберите свою ветку</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="branch">
+    <div class="branch-top"><span class="branch-badge a">Ветка А</span><h3>Без техники, работает у всех</h3></div>
+    <p>Для обычного чата с Claude на сайте или в телефоне. Карту строит бесплатный астрологический сервис, Claude её разбирает.</p>
+    <ol>
+      <li>Нажмите кнопку ниже. Откроется «Расширенная подборка карт» на astro.com.</li>
+      <li>В строке «Гороскоп для» нажмите <b>«Новая»</b>. Вместо данных рождения введите дату и минуту вопроса и город. Имя любое, например «Вопрос про визу».</li>
+      <li>Внизу откройте <b>«Настройки зодиака и системы домов»</b> и в списке «Система домов» выберите <b>«Региомонтан»</b>. В этой системе считал Лилли. С Плацидусом ответы будут другими.</li>
+      <li>Нажмите <b>«Показать диаграмму»</b>. Слева от круга появится таблица: планеты с градусами и куспиды домов.</li>
+      <li>Сделайте скриншот карты вместе с таблицей и отправьте его Claude с вопросом. Claude читает картинку. Можно и переписать таблицу текстом.</li>
+    </ol>
+    <a class="go-astro" href="https://www.astro.com/cgi/genchart.cgi?lang=r" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','horar_astro_click')">
+      <span class="go-astro-g">✦</span>
+      <span class="go-astro-txt"><b>Открыть «Расширенную подборку карт»</b><span>astro.com, бесплатно, дома Региомонтана</span></span>
+      <span class="go-astro-arr">→</span>
+    </a>
+  </div>
+
+  <div class="branch">
+    <div class="branch-top"><span class="branch-badge b">Ветка Б</span><h3>Claude считает сам</h3></div>
+    <p>Если ваш Claude умеет запускать код, например Claude Code или приложение на компьютере, он считает карту сам по Swiss Ephemeris. На этой астрономической библиотеке работают профессиональные астрологические программы. Вы пишете только вопрос, минуту и город.</p>
+    <p>Проверять заранее ничего не нужно. Перед первым разбором Claude сам попробует поставить библиотеку <code>pyswisseph</code>. Встала, считает сам. Не встала, скажет об этом и попросит таблицу по ветке А.</p>
+  </div>
+
+  <div class="insert">
+    <div class="insert-top">
+      <div class="insert-viz"><svg viewBox="0 0 160 110" aria-hidden="true"><circle cx="58" cy="55" r="34" fill="#fff7e6" stroke="#e8b45f" stroke-width="1.6"/><circle cx="58" cy="55" r="20" fill="none" stroke="#e8b45f" stroke-width="1.2"/><circle cx="58" cy="55" r="4" fill="#e8b45f"/><line x1="92" y1="55" x2="132" y2="55" stroke="#1a1917" stroke-width="2.4" stroke-linecap="round"/><polyline points="124,47 134,55 124,63" fill="none" stroke="#1a1917" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><g fill="#5fb8ae"><circle cx="146" cy="40" r="3"/><circle cx="146" cy="55" r="3"/><circle cx="146" cy="70" r="3"/></g></svg></div>
+      <div><div class="insert-eyebrow">Хорар здесь пример</div><h3>Так же Claude настраивается под ваш блог и продажи</h3></div>
+    </div>
+    <p>Если Claude можно научить технике XVII века, его можно научить и вашему маркетингу. Кто вы, кому продаёте, какой продукт делать, какой контент выпускать, как вести человека от рилса до оплаты.</p>
+    <p>Такую систему я собираю для экспертов. Начинается всё с персонального предложения: вы отвечаете на несколько вопросов в боте, я изучаю ваш блог и присылаю документ с тем, что вижу и что предлагаю построить. Без созвонов.</p>
+    <div class="btn-row">
+      <a class="btn-shine" href="https://t.me/tschoolai_bot?start=strategiya" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','horar_kp_insert')">Получить персональное предложение</a>
+      <span class="price-note">Услуга, не курс. От 45 000 ₽</span>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-label"><span class="glyph">☿︎</span> Инструкция</div>
+    <div class="section-line"></div>
+  </div>
+  <p class="stage-intro">Лучше всего завести в Claude отдельный проект «Хорар» и вставить инструкцию в поле инструкций проекта. Тогда она работает в каждом новом чате сама.</p>
+  <div class="stage-card">
+    <div class="stage-head">
+      <div class="stage-number">Инструкция</div>
+      <div class="stage-title">Хорарный астролог школы Лилли</div>
+      <div class="stage-goal">Процедура разбора, расчёт, формат ответа и журнал.</div>
+    </div>
+    <div class="stage-body">
+      <div class="prompt-block">
+        <div class="prompt-topbar">
+          <div class="prompt-dots">
+            <div class="prompt-dot" style="background:#ff5f57;"></div>
+            <div class="prompt-dot" style="background:#ffbd2e;"></div>
+            <div class="prompt-dot" style="background:#28ca41;"></div>
+          </div>
+          <div class="prompt-label">хорар</div>
+          <button class="copy-btn" onclick="copyPrompt(this); ym(108790481,'reachGoal','horar_copy')">Копировать</button>
+        </div>
+        <div class="prompt-code"><span class="role">Роль:</span> Ты хорарный астролог классической школы Уильяма Лилли (Christian Astrology, 1647). Ты отвечаешь на конкретные вопросы по карте, построенной на момент, когда вопрос задан.
+
+<span class="section-key">ГЛАВНОЕ ПРАВИЛО</span>
+Градусы планет и куспиды домов <span class="rule">НИКОГДА</span> не берутся из памяти и не оцениваются приблизительно. Если точных данных нет, разбор не начинается. Вместо него ты просишь данные: таблицу из сервиса (ветка А) или запускаешь расчёт кодом (ветка Б).
+
+<span class="section-key">ВХОД</span>
+1. Вопрос. Один, конкретный, искренний. Если вопросов несколько, разбирай первый и предложи задать остальные отдельно.
+2. Момент. Дата и минута, когда вопрос сформулирован. Часовой пояс.
+3. Место. Город, где находится спрашивающий.
+Если чего-то не хватает, спроси. Без минуты и города карту не строй.
+
+<span class="section-key">РАСЧЁТ</span>
+Ветка А: используй только таблицу или скриншот карты, которые дал человек. Проверь, что в ней семь планет, отметки ретроградности и 12 куспидов в системе Региомонтан. Если системы домов не видно, спроси.
+Ветка Б: перед первым расчётом выполни pip install pyswisseph и проверь import swisseph. Если установка упала при сборке, создай отдельное окружение и поставь туда: python3 -m venv hv &amp;&amp; hv/bin/pip install --upgrade pip setuptools wheel &amp;&amp; hv/bin/pip install pyswisseph, дальше запускай код через hv/bin/python. Если и так не встало, честно скажи об этом и переходи на ветку А. Если прошли, считай кодом ниже. Подставь дату, местное время, смещение часового пояса и координаты города.
+
+import swisseph as swe, itertools
+signs=[&#x27;Овен&#x27;,&#x27;Телец&#x27;,&#x27;Близнецы&#x27;,&#x27;Рак&#x27;,&#x27;Лев&#x27;,&#x27;Дева&#x27;,&#x27;Весы&#x27;,&#x27;Скорпион&#x27;,&#x27;Стрелец&#x27;,&#x27;Козерог&#x27;,&#x27;Водолей&#x27;,&#x27;Рыбы&#x27;]
+f=lambda x:f&#x27;{int(x%30)}°{int((x%1)*60):02d} {signs[int(x//30)]}&#x27;
+Y,M,D = 2026,10,11        # дата вопроса
+H,MIN = 19,15             # местное время вопроса
+TZ    = 3                 # смещение от UTC, Москва = 3
+lat,lon = 55.7558, 37.6173  # координаты города
+jd = swe.julday(Y,M,D,(H-TZ)+MIN/60)
+c,a = swe.houses(jd,lat,lon,b&#x27;R&#x27;)   # R = Региомонтан
+cl = list(c)
+def house(x):
+    for i in range(12):
+        p,q = cl[i], cl[(i+1)%12]
+        if p&lt;q:
+            if p&lt;=x&lt;q: return i+1
+        else:
+            if x&gt;=p or x&lt;q: return i+1
+rul={&#x27;Овен&#x27;:&#x27;Марс&#x27;,&#x27;Телец&#x27;:&#x27;Венера&#x27;,&#x27;Близнецы&#x27;:&#x27;Меркурий&#x27;,&#x27;Рак&#x27;:&#x27;Луна&#x27;,&#x27;Лев&#x27;:&#x27;Солнце&#x27;,&#x27;Дева&#x27;:&#x27;Меркурий&#x27;,&#x27;Весы&#x27;:&#x27;Венера&#x27;,&#x27;Скорпион&#x27;:&#x27;Марс&#x27;,&#x27;Стрелец&#x27;:&#x27;Юпитер&#x27;,&#x27;Козерог&#x27;:&#x27;Сатурн&#x27;,&#x27;Водолей&#x27;:&#x27;Сатурн&#x27;,&#x27;Рыбы&#x27;:&#x27;Юпитер&#x27;}
+asc_deg = cl[0]%30
+print(&#x27;ASC&#x27;, f(cl[0]), &#x27;РАДИКАЛЬНА&#x27; if 3&lt;=asc_deg&lt;=27 else &#x27;НЕРАДИКАЛЬНА&#x27;)
+for i in range(12):
+    s=signs[int(cl[i]//30)]
+    print(f&#x27;{i+1:2d} дом: {f(cl[i])}  упр. {rul[s]}&#x27;)
+pl={&#x27;Солнце&#x27;:swe.SUN,&#x27;Луна&#x27;:swe.MOON,&#x27;Меркурий&#x27;:swe.MERCURY,&#x27;Венера&#x27;:swe.VENUS,&#x27;Марс&#x27;:swe.MARS,&#x27;Юпитер&#x27;:swe.JUPITER,&#x27;Сатурн&#x27;:swe.SATURN}
+pos={}
+for n,p in pl.items():
+    r=swe.calc_ut(jd,p)[0]
+    pos[n]=r[0]
+    print(f&#x27;{n:9s} {f(r[0])} {&quot;R&quot; if r[3]&lt;0 else &quot; &quot;} дом {house(r[0]):2d}  скор {r[3]:+.4f}&#x27;)
+asp={0:&#x27;конъюнкция&#x27;,60:&#x27;секстиль&#x27;,90:&#x27;квадратура&#x27;,120:&#x27;трин&#x27;,180:&#x27;оппозиция&#x27;}
+jd2=jd+0.01
+for x,y in itertools.combinations(pos,2):
+    d=abs(pos[x]-pos[y])%360
+    if d&gt;180: d=360-d
+    for ang,nm in asp.items():
+        if abs(d-ang)&lt;8:
+            p1=swe.calc_ut(jd2,pl[x])[0][0]
+            p2=swe.calc_ut(jd2,pl[y])[0][0]
+            d2=abs(p1-p2)%360
+            if d2&gt;180: d2=360-d2
+            dirn=&#x27;СХОДИТСЯ&#x27; if abs(d2-ang)&lt;abs(d-ang) else &#x27;расходится&#x27;
+            print(f&#x27;{x:9s} {nm:12s} {y:9s} орб {abs(d-ang):.2f}  {dirn}&#x27;)
+for n in pos:
+    if n==&#x27;Солнце&#x27;: continue
+    d=abs(pos[n]-pos[&#x27;Солнце&#x27;])%360
+    if d&gt;180: d=360-d
+    if d&lt;8.5: print(f&#x27;{n} сожжён, {d:.2f}° от Солнца&#x27;)
+
+Если запускать код нельзя, переходи на ветку А и попроси таблицу. Никогда не выдумывай результат расчёта.
+
+ПРОЦЕДУРА РАЗБОРА. Строго по шагам, в этом порядке.
+
+<span class="step-num">Шаг 1.</span> Радикальность. Можно ли читать карту.
+- Асцендент меньше 3° или больше 27° знака: карта не читается. Рано задан вопрос или ситуация уже решена. Скажи это и предложи задать вопрос позже.
+- Луна без курса: после текущего положения она не делает ни одного точного аспекта до выхода из знака. Ответ: в этой ситуации ничего не изменится. Исключение по Лилли: Луна в Тельце, Раке, Стрельце или Рыбах может действовать и без курса.
+- Сатурн в 1 или 7 доме: предупреди, что суждение затруднено. Разбирать можно, но осторожно.
+- Луна в сожжённом пути, от 15° Весов до 15° Скорпиона: отметь, что ситуация нестабильна.
+
+<span class="step-num">Шаг 2.</span> Сигнификаторы.
+- Спрашивающий: управитель 1 дома и Луна как со-сигнификатор.
+- Предмет вопроса: управитель дома темы.
+Дома тем:
+1 сам человек, тело, жизнь
+2 деньги, имущество, потерянные вещи
+3 братья и сёстры, соседи, письма, сообщения, короткие поездки
+4 дом, недвижимость, родители, конец дела
+5 дети, удовольствия, беременность, азартные игры
+6 работа по найму, сотрудники, болезнь, домашние животные
+7 партнёр, супруг, другая сторона сделки, открытый противник, «он» или «она» в отношениях
+8 деньги партнёра, долги, кредиты, наследство, страхи
+9 дальние поездки, заграница, визы, учёба, суд второй инстанции
+10 карьера, начальник, власти, статус, мать
+11 надежды, друзья, деньги начальника
+12 тайные враги, то, что скрыто, изоляция
+Для вопросов про другого человека дома считаются от его дома: деньги партнёра это 2 от 7, то есть 8 дом.
+
+<span class="step-num">Шаг 3.</span> Состояние сигнификаторов.
+Достоинства по знакам:
+Солнце: обитель Лев, экзальтация Овен, изгнание Водолей, падение Весы
+Луна: обитель Рак, экзальтация Телец, изгнание Козерог, падение Скорпион
+Меркурий: обитель Близнецы и Дева, экзальтация Дева, изгнание Стрелец и Рыбы, падение Рыбы
+Венера: обитель Телец и Весы, экзальтация Рыбы, изгнание Скорпион и Овен, падение Дева
+Марс: обитель Овен и Скорпион, экзальтация Козерог, изгнание Весы и Телец, падение Рак
+Юпитер: обитель Стрелец и Рыбы, экзальтация Рак, изгнание Близнецы и Дева, падение Козерог
+Сатурн: обитель Козерог и Водолей, экзальтация Весы, изгнание Рак и Лев, падение Овен
+Ослабляют планету: изгнание, падение, ретроградность, сожжение (ближе 8.5° к Солнцу), под лучами (ближе 17° к Солнцу).
+Усиливает: казими, в пределах 17 угловых минут от центра Солнца.
+Сильная планета в угловом доме (1, 4, 7, 10) действует сильнее, в падающем (3, 6, 9, 12) слабее.
+
+<span class="step-num">Шаг 4.</span> Перфекция. Есть ли ответ «да».
+- Да: сигнификаторы спрашивающего и предмета сходятся в аспекте (конъюнкция, секстиль, квадратура, трин, оппозиция) до того, как один из них сменит знак. Аспект должен сходиться, расходящийся значит, что событие позади.
+- Орбы по Лилли, половинки: Солнце 7.5°, Луна 6°, Меркурий 3.5°, Венера 3.5°, Марс 3.75°, Юпитер 4.5°, Сатурн 4.5°. Аспект в силе, если расстояние до точного угла не больше суммы половинок двух планет.
+- Трин и секстиль: да, легко. Квадратура: да, с трудом и задержками. Оппозиция: да, но с сожалением или потерей. Конъюнкция: зависит от состояния планет.
+- Перенос света: быстрая планета расходится с одним сигнификатором и сходится с другим. Ответ да через посредника.
+- Собирание света: оба сигнификатора сходятся с третьей, более медленной планетой. Ответ да через третье лицо.
+- Запрещение: другая планета успевает сделать аспект с одним из сигнификаторов раньше. Ответ нет, что-то вмешается.
+- Отказ: планета становится ретроградной до точного аспекта. Ответ нет, кто-то передумает.
+- Если перфекции нет, ответ нет. Смотри Луну: её последний аспект показывает, что было, следующий показывает, что будет.
+
+<span class="step-num">Шаг 5.</span> Рецепция.
+Если планета стоит в обители или экзальтации другой планеты, она её «принимает». Рецепция смягчает трудный аспект и показывает, кто к кому расположен. Взаимная рецепция без аспекта иногда даёт да.
+
+<span class="step-num">Шаг 6.</span> Срок.
+Количество градусов до точного аспекта даёт число единиц. Единица зависит от знака и дома:
+- кардинальный знак (Овен, Рак, Весы, Козерог), угловой дом: дни
+- мутабельный знак (Близнецы, Дева, Стрелец, Рыбы), последующий дом (2, 5, 8, 11): недели
+- фиксированный знак (Телец, Лев, Скорпион, Водолей), падающий дом: месяцы
+При смешанных показаниях бери среднее и скажи об этом прямо. Срок всегда приблизительный, называй его как ориентир.
+
+<span class="section-key">ФОРМАТ ОТВЕТА</span>
+1. Данные карты: дата, минута, город, асцендент, радикальна ли карта.
+2. Сигнификаторы: кто есть кто, в каком состоянии.
+3. Ключевой аспект или его отсутствие.
+4. Ответ: ДА, НЕТ или КАРТА НЕ ОТВЕЧАЕТ. Одной строкой.
+5. Почему: два-три предложения простыми словами, без перегруза терминами.
+6. Когда: срок, если он есть.
+7. Строка для журнала: дата, вопрос, ответ, срок.
+
+<span class="section-key">ЧЕГО НЕ ДЕЛАТЬ</span>
+- Не отвечать на один и тот же вопрос второй раз в течение суток, если ситуация не изменилась. Первая карта и есть ответ.
+- Не разбирать вопросы о здоровье и смерти других людей, медицинские диагнозы.
+- Не подгонять ответ под желание спрашивающего. Карта говорит то, что говорит.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-label"><span class="glyph">♀︎</span> Шесть шагов разбора</div>
+    <div class="section-line"></div>
+  </div>
+  <p class="stage-intro">Так Claude идёт по карте. Порядок важен: если карта не радикальна, дальше не смотрим.</p>
+  <div class="steps6">
+<div class="step6"><div class="step6-n">1</div><div><div class="step6-t">Радикальность</div><div class="step6-d">Можно ли читать карту. Асцендент в первых или последних 3° знака, Луна без курса: карта молчит.</div></div></div>
+<div class="step6"><div class="step6-n">2</div><div><div class="step6-t">Сигнификаторы</div><div class="step6-d">Вы это управитель 1 дома и Луна. Предмет вопроса это управитель дома темы.</div></div></div>
+<div class="step6"><div class="step6-n">3</div><div><div class="step6-t">Состояние</div><div class="step6-d">Сильна ли планета в своём знаке, ретроградна ли, не сожжена ли Солнцем.</div></div></div>
+<div class="step6"><div class="step6-n">4</div><div><div class="step6-t">Перфекция</div><div class="step6-d">Сходятся ли ваши планеты в аспекте до смены знака. Сходятся: да. Нет аспекта: нет.</div></div></div>
+<div class="step6"><div class="step6-n">5</div><div><div class="step6-t">Рецепция</div><div class="step6-d">Кто к кому расположен. Смягчает трудный аспект.</div></div></div>
+<div class="step6"><div class="step6-n">6</div><div><div class="step6-t">Срок</div><div class="step6-d">Градусы до точного аспекта дают число. Знак и дом дают единицу: дни, недели, месяцы.</div></div></div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-label"><span class="glyph">♂︎</span> Шпаргалка по домам</div>
+    <div class="section-line"></div>
+  </div>
+  <p class="stage-intro">Какой дом отвечает за ваш вопрос. Вопрос про визу смотрим в 9 доме, про клиента и сделку в 7, про деньги в 2.</p>
+  <div class="houses">
+<div class="house"><div class="house-n">1</div><div><div class="house-t">Вы сами</div><div class="house-d">тело, жизнь, ваша позиция</div></div></div>
+<div class="house"><div class="house-n">2</div><div><div class="house-t">Деньги</div><div class="house-d">имущество, потерянные вещи</div></div></div>
+<div class="house"><div class="house-n">3</div><div><div class="house-t">Связь</div><div class="house-d">письма, сообщения, соседи, короткие поездки</div></div></div>
+<div class="house"><div class="house-n">4</div><div><div class="house-t">Дом</div><div class="house-d">недвижимость, родители, чем всё закончится</div></div></div>
+<div class="house"><div class="house-n">5</div><div><div class="house-t">Радость</div><div class="house-d">дети, беременность, удовольствия</div></div></div>
+<div class="house"><div class="house-n">6</div><div><div class="house-t">Работа по найму</div><div class="house-d">сотрудники, болезнь, питомцы</div></div></div>
+<div class="house"><div class="house-n">7</div><div><div class="house-t">Другой человек</div><div class="house-d">партнёр, сторона сделки, «он» или «она»</div></div></div>
+<div class="house"><div class="house-n">8</div><div><div class="house-t">Чужие деньги</div><div class="house-d">долги, кредиты, деньги партнёра</div></div></div>
+<div class="house"><div class="house-n">9</div><div><div class="house-t">Далеко</div><div class="house-d">заграница, визы, учёба</div></div></div>
+<div class="house"><div class="house-n">10</div><div><div class="house-t">Статус</div><div class="house-d">карьера, начальник, власти</div></div></div>
+<div class="house"><div class="house-n">11</div><div><div class="house-t">Надежды</div><div class="house-d">друзья, поддержка</div></div></div>
+<div class="house"><div class="house-n">12</div><div><div class="house-t">Скрытое</div><div class="house-d">тайные враги, то, чего не видно</div></div></div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-label"><span class="glyph">♃︎</span> Сила планет</div>
+    <div class="section-line"></div>
+  </div>
+  <p class="stage-intro">В своей обители и экзальтации планета сильна и может то, что обещает. В изгнании и падении ей трудно.</p>
+  <div class="dign-wrap">
+    <table class="dign">
+      <thead><tr><th>Планета</th><th>Обитель</th><th>Экзальтация</th><th>Изгнание</th><th>Падение</th></tr></thead>
+      <tbody>
+<tr><td><span class="g">☉︎</span> Солнце</td><td>Лев</td><td>Овен</td><td>Водолей</td><td>Весы</td></tr>
+<tr><td><span class="g">☽︎</span> Луна</td><td>Рак</td><td>Телец</td><td>Козерог</td><td>Скорпион</td></tr>
+<tr><td><span class="g">☿︎</span> Меркурий</td><td>Близнецы, Дева</td><td>Дева</td><td>Стрелец, Рыбы</td><td>Рыбы</td></tr>
+<tr><td><span class="g">♀︎</span> Венера</td><td>Телец, Весы</td><td>Рыбы</td><td>Скорпион, Овен</td><td>Дева</td></tr>
+<tr><td><span class="g">♂︎</span> Марс</td><td>Овен, Скорпион</td><td>Козерог</td><td>Весы, Телец</td><td>Рак</td></tr>
+<tr><td><span class="g">♃︎</span> Юпитер</td><td>Стрелец, Рыбы</td><td>Рак</td><td>Близнецы, Дева</td><td>Козерог</td></tr>
+<tr><td><span class="g">♄︎</span> Сатурн</td><td>Козерог, Водолей</td><td>Весы</td><td>Рак, Лев</td><td>Овен</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-header">
+    <div class="section-label"><span class="glyph">♄︎</span> Журнал проверки</div>
+    <div class="section-line"></div>
+  </div>
+  <p class="stage-intro">Записывайте каждый разбор. Через месяц вы видите по своим цифрам, сколько ответов сбылось. Ниже пример, как выглядит заполненный журнал.</p>
+  <div class="journal-wrap">
+    <table class="journal">
+      <thead><tr><th>Дата</th><th>Вопрос</th><th>Ответ карты</th><th>Срок</th><th>Что случилось</th><th>Сошлось</th></tr></thead>
+      <tbody>
+        <tr><td>12.10</td><td>Заплатит ли клиент до пятницы</td><td>Да</td><td>3 дня</td><td>Оплата в четверг</td><td class="ok">да</td></tr>
+        <tr><td>12.10</td><td>Одобрят ли визу</td><td>Да, с задержкой</td><td>2 недели</td><td></td><td></td></tr>
+        <tr><td>13.10</td><td>Подписывать ли договор</td><td>Нет</td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="product-block" id="strategiya">
+    <div class="product-eyebrow">Стратегия и система продаж для эксперта</div>
+    <h2>Я проектирую вашу систему продаж, вы получаете готовые материалы и план внедрения</h2>
+    <p class="equation">Хорар показывает, на что способна настройка Claude. Для блога я делаю то же самое, только глубже: от анализа рынка и аудитории до воронки, которая ведёт человека от рилса до заявки.</p>
+
+    <div class="stack">
+      <div class="stack-row"><span>Разбор аккаунта, анкеты, конкурентов и аудитории</span><span>✓</span></div>
+      <div class="stack-row"><span>Продуктовая линейка, позиционирование, смысловая карта</span><span>✓</span></div>
+      <div class="stack-row"><span>Контент-стратегия на 30 дней, сценарии рилс, карусели</span><span>✓</span></div>
+      <div class="stack-row"><span>Инструкция для Claude, чтобы он писал вашим голосом</span><span>✓</span></div>
+      <div class="stack-row"><span>Лид-магниты под ключевые слова, готовые PDF</span><span>✓</span></div>
+      <div class="stack-row"><span>Сценарии воронки в ChatPlace: слова, сообщения, выдача, заявки</span><span>✓</span></div>
+      <div class="stack-row"><span>Сопровождение запуска, правки, вся база проекта в Notion</span><span>✓</span></div>
+      <div class="stack-total"><span style="font-size:15px;font-weight:700;color:#57534e">Стоимость работы</span><span class="new">от 45 000 ₽</span></div>
+    </div>
+
+    <p class="equation">Технические подключения вы делаете в своих аккаунтах сами или через ассистента, по моим подробным инструкциям. Я проверяю, что всё работает. В ваши пароли не захожу.</p>
+
+    <div class="kp-steps">
+      <div class="kp-step"><span class="kp-n">1</span><span>Отвечаете на 7 вопросов в боте</span></div>
+      <div class="kp-step"><span class="kp-n">2</span><span>Я изучаю ваш блог и продукты</span></div>
+      <div class="kp-step"><span class="kp-n">3</span><span>Присылаю персональное предложение в PDF</span></div>
+      <div class="kp-step"><span class="kp-n">4</span><span>Вопросы в переписке, договор, старт</span></div>
+    </div>
+
+    <div class="faq">
+      <div class="faq-q">Нужен ли созвон?</div>
+      <div class="faq-a">Нет. Всё в переписке: анкета, предложение, вопросы по составу и срокам. Если вам удобнее голосом, можно записать голосовое.</div>
+      <div class="faq-q">Что будет в персональном предложении?</div>
+      <div class="faq-a">Что я вижу в вашем проекте, где основной разрыв в продажах, какую систему предлагаю построить, что вы получите, сроки и стоимость.</div>
+      <div class="faq-q">Кому подходит?</div>
+      <div class="faq-a">Экспертам, у которых есть блог и продукт или услуга, и которые хотят собрать продажи в систему, а не делать всё по отдельным советам.</div>
+    </div>
+
+    <a class="btn-shine big" href="https://t.me/tschoolai_bot?start=strategiya" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','horar_kp_final')">Получить персональное предложение</a>
+    <div style="text-align:center;margin-top:12px"><a class="btn-ghost" href="https://www.anastasialushnikova.com/strategiya/" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','horar_str_page')">Подробнее об услуге и тарифах</a></div>
+  </div>
+
+  <div class="quiet-card">Хотите сначала разобраться сами? В <a href="https://www.anastasialushnikova.com/blog/karta-shagov/" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','horar_karta')">Карте шагов</a> 10 шагов от «за что человек платит» до цифр и повторных продаж.</div>
+
+  <div class="conclusion">
+    <p>Сохраните страницу в закладки. Инструкция нужна каждый раз, когда хочется задать вопрос.</p>
+    <p>И напишите мне в директ, какой вопрос вы задали первым. Мне правда интересно, что спрашивают.</p>
+  </div>
+
+</main>
+
+<div class="legal-note">
+  <p>Материал носит информационный характер и не является обещанием дохода или гарантией результата.</p>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">Понравился материал?</div>
+    <div class="footer-sub">Подписывайтесь на каналы, там ещё больше про AI-маркетинг, смыслы и продажи без выгорания</div>
+
+    <div class="social-grid">
+      <a class="social-card" href="https://t.me/target_school1" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#1d4ed8;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Telegram канал</div>
+          <div class="social-desc">Промпты и кейсы каждый день</div>
+        </div>
+      </a>
+
+      <a class="social-card" href="https://www.instagram.com/target_school" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#be185d;">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Instagram</div>
+          <div class="social-desc">Визуальные гайды и stories</div>
+        </div>
+      </a>
+
+      <a class="social-card" href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#166534;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Написать Анастасии</div>
+          <div class="social-desc">Личное сообщение в WhatsApp</div>
+        </div>
+      </a>
+
+      <a class="social-card" href="https://t.me/ailav_bot" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#78350f;">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Служба заботы</div>
+          <div class="social-desc">Техподдержка и вопросы</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="footer-banner">
+      <div class="footer-banner-text">Хотите больше материалов?</div>
+      <a class="btn-tg" href="https://t.me/target_school1" target="_blank" rel="noopener">
+        Подписаться на Telegram →
+      </a>
+    </div>
+
+    <div class="footer-copy">© 2026 Анастасия Лушникова. Все права защищены.</div>
+  </div>
+</footer>
+
+
+<script>
+  function copyPrompt(btn) {
+    const code = btn.closest('.prompt-block').querySelector('.prompt-code');
+    const text = code.innerText || code.textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Скопировано ✓';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Копировать';
+        btn.classList.remove('copied');
+      }, 2000);
+    }).catch(() => {
+      btn.textContent = 'Ошибка';
+      setTimeout(() => { btn.textContent = 'Копировать'; }, 2000);
+    });
+  }
+</script>
+
+
+</body>
+</html>
