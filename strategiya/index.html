@@ -801,6 +801,25 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
   .nt-check.done::before { background:#2383e2; border-color:#2383e2; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-size:14px; background-position:center; background-repeat:no-repeat; }
   .nt-li { font-size:14.5px; color:#44403c; line-height:1.6; padding:6px 0 6px 16px; position:relative; }
   .nt-li::before { content:'•'; position:absolute; left:2px; color:#78716c; }
+  .kb { display:grid; grid-template-columns:1.05fr 1fr; gap:14px; margin-top:6px; }
+  .kb-doc { background:#fff; border:1px solid var(--border); border-radius:18px; padding:16px 16px 10px; box-shadow:0 10px 30px rgba(120,90,30,.07); }
+  .kb-head { display:flex; align-items:center; gap:8px; font-weight:800; font-size:15.5px; padding-bottom:10px; border-bottom:1px solid #f1ece2; margin-bottom:6px; }
+  .kb-count { margin-left:auto; font-size:12.5px; font-weight:700; color:var(--gold-deep); background:#fff7e6; border:1px solid #f0dcae; border-radius:999px; padding:3px 10px; white-space:nowrap; }
+  .kb-row { font-size:14px; color:#44403c; padding:6px 4px; border-bottom:1px dashed #f1ece2; opacity:.18; transform:translateX(-6px); transition:opacity .45s ease, transform .45s ease, background .6s ease; border-radius:6px; }
+  .kb-row.in { opacity:1; transform:none; }
+  .kb-row.flash { background:#fff7e6; }
+  .kb-row:last-child { border-bottom:none; }
+  .kb-side { display:flex; flex-direction:column; gap:10px; }
+  .kb-step { display:flex; gap:12px; background:#fff; border:1px solid #f0dcae; border-radius:14px; padding:14px; font-size:14px; color:#57534e; line-height:1.6; }
+  .kb-step b { color:var(--text); display:block; margin-bottom:2px; }
+  .kb-n { flex-shrink:0; width:28px; height:28px; border-radius:50%; background:var(--gold); color:#3b2a0b; font-weight:800; display:grid; place-items:center; font-size:14px; }
+  .kb-hub { background:linear-gradient(160deg,#eef7f5,#e2f1ee); border:1px solid #cfe8e3; border-radius:14px; padding:14px; text-align:center; }
+  .kb-core { display:inline-block; background:#fff; border:2px solid var(--teal); color:#1f4943; font-weight:800; font-size:14.5px; border-radius:12px; padding:8px 14px; position:relative; }
+  .kb-ai { display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin-top:12px; position:relative; }
+  .kb-ai::before { content:''; position:absolute; top:-12px; left:50%; width:2px; height:12px; background:var(--teal); }
+  .kb-ai span { font-size:12.5px; font-weight:700; color:#2f5d57; background:#fff; border:1px solid #cfe8e3; border-radius:999px; padding:4px 10px; }
+  @media (max-width:640px){ .kb { grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion:reduce){ .kb-row { opacity:1; transform:none; transition:none; } }
   .nt-points { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px; }
   .nt-points div { background:#fff; border:1px solid var(--border); border-radius:14px; padding:14px; font-size:13.5px; color:#57534e; line-height:1.6; }
   .nt-points b { color:var(--text); display:block; margin-bottom:2px; }
@@ -989,8 +1008,47 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
   <div class="nt-points">
     <div><b>Журнал по датам.</b> Что сделано, где посмотреть, что дальше. Вы не теряетесь в переписке.</div>
     <div><b>Две стороны задач.</b> Видно, что делаю я и что нужно от Вас, чтобы проект не стоял.</div>
-    <div><b>База остаётся у Вас.</b> После проекта все документы, инструкции и голос бренда для Claude Ваши.</div>
+    <div><b>Всё в одном месте.</b> Документы, ссылки, инструкции и файлы лежат в проекте, искать в чатах ничего не нужно.</div>
   </div>
+
+  <h2 class="sec">Мы строим Вам продающую машину. Её фундамент остаётся у Вас</h2>
+  <p class="sec-lead">Параллельно с работой мы ведём для Вас большую базу знаний. Наполняем её сами, от Вас ничего не нужно. Вы просто видите, как она растёт с каждым этапом.</p>
+
+  <div class="kb">
+    <div class="kb-doc">
+      <div class="kb-head"><span>📚</span> База знаний проекта<span class="kb-count"><b id="kbN">0</b> документов</span></div>
+      <div class="kb-list" id="kbList">
+        <div class="kb-row">📋 Анкета проекта</div>
+        <div class="kb-row">📝 Ответы на анкету</div>
+        <div class="kb-row">🔍 Разбор анкеты и продукта</div>
+        <div class="kb-row">🗺️ План работы</div>
+        <div class="kb-row">🧠 Смысловая карта</div>
+        <div class="kb-row">🏛️ Архитектор смыслов: разбор аудитории</div>
+        <div class="kb-row">📊 Разбор аккаунта</div>
+        <div class="kb-row">🔍 Конкурентный анализ</div>
+        <div class="kb-row">📅 Контент-стратегия на 30 дней</div>
+        <div class="kb-row">🧭 Порядок работы до старта потока</div>
+        <div class="kb-row">🎬 Сценарии рилс</div>
+        <div class="kb-row">🖥️ Раздел на сайте</div>
+        <div class="kb-row">🎨 Памятка по каруселям</div>
+        <div class="kb-row">🤖 Инструкция: Telegram-бот</div>
+        <div class="kb-row">💰 Лид-магнит: структура и запрос для Claude</div>
+        <div class="kb-row">🎙️ Голос бренда: инструкция для Claude</div>
+        <div class="kb-row">⚙️ Воронка в ChatPlace: слово, заявка и цепочка</div>
+        <div class="kb-row">🧠 Инструкция: Ваш Claude с голосом бренда</div>
+      </div>
+    </div>
+    <div class="kb-side">
+      <div class="kb-step"><div class="kb-n">1</div><div><b>Мы наполняем базу.</b> Смыслы, аудитория, оффер, контент, воронка. Всё, на что опирается система продаж, выстроено по порядку.</div></div>
+      <div class="kb-step"><div class="kb-n">2</div><div><b>Вы подключаете её к Claude.</b> Даём инструкцию, и база синхронизируется с Claude. Он пишет посты, рилсы и ответы, опираясь на Ваш фундамент и Ваш голос.</div></div>
+      <div class="kb-step"><div class="kb-n">3</div><div><b>Она остаётся с Вами навсегда.</b> Даже если доступ к Claude пропадёт, база у Вас. Подключаете её к любой другой нейросети и продолжаете с того же места.</div></div>
+      <div class="kb-hub">
+        <div class="kb-core">Ваша база знаний</div>
+        <div class="kb-ai"><span>Claude</span><span>ChatGPT</span><span>Gemini</span><span>Любая другая</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="border-card"><b>Почему это важно.</b> Нейросети меняются каждые полгода. Фундамент маркетинга и продаж остаётся. Вы один раз строите его правильно и дальше подключаете к нему любой инструмент.</div>
 
   <h2 class="sec">Кто я и почему мне можно доверить систему</h2>
   <div class="who">
@@ -1168,7 +1226,10 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     if(auto){var t=tabs[k];var bar=t.parentNode;try{bar.scrollTo({left:t.offsetLeft-12,behavior:'smooth'})}catch(e){}}
   }
   function next(){ if(stopped) return; show((i+1)%tabs.length,true); timer=setTimeout(next,2600); }
-  tabs.forEach(function(b,k){b.addEventListener('click',function(){stopped=true;clearTimeout(timer);show(k,false);try{ym(108790481,'reachGoal','str_notion_tab')}catch(e){}});});
+  (function(){var rows=[].slice.call(document.querySelectorAll('#kbList .kb-row'));var n=document.getElementById('kbN');if(!rows.length)return;var started=false;
+function run(){if(started)return;started=true;var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;rows.forEach(function(r,i){setTimeout(function(){r.classList.add('in','flash');n.textContent=i+1;setTimeout(function(){r.classList.remove('flash')},700)},reduce?0:i*260)})}
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){run();io.disconnect()}},{threshold:.3});io.observe(document.getElementById('kbList'))}else run();})();
+tabs.forEach(function(b,k){b.addEventListener('click',function(){stopped=true;clearTimeout(timer);show(k,false);try{ym(108790481,'reachGoal','str_notion_tab')}catch(e){}});});
   if(reduce||!('IntersectionObserver' in window)) return;
   var started=false;
   new IntersectionObserver(function(es){es.forEach(function(e){
