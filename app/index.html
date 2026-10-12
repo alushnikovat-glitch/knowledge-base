@@ -453,6 +453,9 @@ const COVERS={
   /* Карта релокации: среди линий одна точка, где Вам хорошо */
   map:()=>S(`<circle cx="100" cy="100" r="66" fill="#fff" stroke="${INK}" stroke-width="1.8"/><g fill="none" stroke="${M}" stroke-width="1.3"><ellipse cx="100" cy="100" rx="30" ry="66"/><path d="M34 100 H166 M42 68 H158 M42 132 H158"/></g><path d="M40 150 C80 120 120 90 170 40" fill="none" stroke="${T}" stroke-width="2.4" stroke-linecap="round"/><path d="M30 60 C80 90 120 110 176 150" fill="none" stroke="${M}" stroke-width="1.6" stroke-dasharray="4 5"/><circle cx="118" cy="86" r="7" fill="${G}"/>`),
   /* Хорар в Claude: колесо карты, сходящийся аспект, ответ в центре */
+  skills5:()=>{let r=`<rect x="40" y="44" width="40" height="40" rx="11" fill="#fff" stroke="${INK}" stroke-width="1.8"/><circle cx="60" cy="64" r="9" fill="none" stroke="${INK}" stroke-width="1.8"/><line x1="84" y1="64" x2="116" y2="64" stroke="${M}" stroke-width="2" stroke-dasharray="3 4"/><rect x="120" y="44" width="40" height="40" rx="11" fill="#d97757"/><g stroke="#fff" stroke-width="2.4" stroke-linecap="round"><line x1="140" y1="53" x2="140" y2="75"/><line x1="129" y1="64" x2="151" y2="64"/><line x1="132" y1="56" x2="148" y2="72"/><line x1="148" y1="56" x2="132" y2="72"/></g><rect x="40" y="100" width="120" height="50" rx="10" fill="#fff" stroke="${INK}" stroke-width="1.8"/><text x="52" y="136" font-family="Manrope,sans-serif" font-size="30" font-weight="800" fill="${INK}">5</text><text x="72" y="136" font-family="Manrope,sans-serif" font-size="13" font-weight="700" fill="${M}">/ 5</text>`;
+    for(let i=0;i<5;i++)r+=`<rect x="${100+i*11}" y="122" width="8" height="14" rx="2" fill="${i<4?G:T}"/>`;
+    return S(r)},
   horary:()=>{let r=`<circle cx="100" cy="100" r="70" fill="#fff" stroke="${INK}" stroke-width="1.8"/><circle cx="100" cy="100" r="54" fill="none" stroke="${M}" stroke-width="1.3"/><circle cx="100" cy="100" r="26" fill="#fdf5e4" stroke="${M}" stroke-width="1.3"/>`;
     for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s2=Math.sin(a);r+=`<line x1="${(100+54*c).toFixed(1)}" y1="${(100+54*s2).toFixed(1)}" x2="${(100+70*c).toFixed(1)}" y2="${(100+70*s2).toFixed(1)}" stroke="${M}" stroke-width="1.2"/>`}
     r+=`<line x1="${(100+26*Math.cos(2.4)).toFixed(1)}" y1="${(100+26*Math.sin(2.4)).toFixed(1)}" x2="${(100+26*Math.cos(0.5)).toFixed(1)}" y2="${(100+26*Math.sin(0.5)).toFixed(1)}" stroke="${T}" stroke-width="2.4" stroke-linecap="round"/><circle cx="${(100+40*Math.cos(2.4)).toFixed(1)}" cy="${(100+40*Math.sin(2.4)).toFixed(1)}" r="6" fill="${T}"/><circle cx="${(100+40*Math.cos(0.5)).toFixed(1)}" cy="${(100+40*Math.sin(0.5)).toFixed(1)}" r="7" fill="${G}"/>`;
@@ -483,6 +486,7 @@ const SHELVES=[
     A('reklama-5-shagov','5 шагов до запуска рекламы',12,'base'),
     A('gde-iskat-zakazy','Где искать заказы и клиентов',18,'field')]},
   {id:'claude',name:'Claude',items:[
+    A('5-skillov-claude','5 скиллов Claude, которые заменяют контент-команду в Instagram',8,'skills5',{isNew:true,short:'5 скиллов для Instagram',sub:'Скилл по рилсам бесплатно'}),
     A('horar-v-claude','Хорар в Claude: как настроить его отвечать на вопросы, на которые ответа нет',10,'horary',{isNew:true,short:'Хорар в Claude',sub:'Да или нет по технике 1647 года'}),
     A('claude-russia','Как подключить Claude из России',10,'door'),
     A('carousel-claude','Дизайн каруселей в Claude',9,'slides'),
@@ -496,7 +500,7 @@ const PRODUCTS={
   tren:{title:'Тренажёр таргетолога',meta:'1 490 ₽ за год',open:'tren-land',cover:()=>S(`<rect x="34" y="50" width="132" height="86" rx="10" fill="none" stroke="#5fb8ae" stroke-width="2"/><path d="M84 158h32M100 136v22" stroke="#5fb8ae" stroke-width="2"/><path d="M54 116 L82 94 L104 106 L146 70" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="148" cy="68" r="6" fill="${G}"/>`)}
 };
 /* startapp-параметр из кодового слова → сразу нужный материал */
-const START={horar:'horar-v-claude',osen:'osen-fotosessiya',razbor:'razbor-voronka-odin-chat',prompty12:'12-promptov-marketologa',karta:'astro_karta',kabinet:'shema-kampanii',klienty:'gde-iskat-zakazy'};
+const START={skilly:'5-skillov-claude',horar:'horar-v-claude',osen:'osen-fotosessiya',razbor:'razbor-voronka-odin-chat',prompty12:'12-promptov-marketologa',karta:'astro_karta',kabinet:'shema-kampanii',klienty:'gde-iskat-zakazy'};
 
 /* ===== TELEGRAM ===== */
 const tg=window.Telegram&&window.Telegram.WebApp;
@@ -564,7 +568,7 @@ function heroArkh(){
   <a class="dusk-link" href="#" data-open="arkh-land" data-goal="app_arkh_land">Что внутри · гарантия 14 дней</a></div></article>`;
 }
 document.getElementById('hero').innerHTML=
-  heroFree(ALL['horar-v-claude'],'Хорар')+heroFree(ALL['osen-fotosessiya'],'Фотосессия')+heroFree(ALL['razbor-voronka-odin-chat'],'Воронка')+heroFree(ALL['karta-shagov'],'Карта')+heroArkh()+heroFree(ALL['11-promptov-kopirayter'],'Промпты')+heroFree(ALL['12-promptov-marketologa'],'Промпты')+heroFree(ALL['astro_karta'],'Гайд');
+  heroFree(ALL['5-skillov-claude'],'Скиллы')+heroFree(ALL['horar-v-claude'],'Хорар')+heroFree(ALL['osen-fotosessiya'],'Фотосессия')+heroFree(ALL['razbor-voronka-odin-chat'],'Воронка')+heroFree(ALL['karta-shagov'],'Карта')+heroArkh()+heroFree(ALL['11-promptov-kopirayter'],'Промпты')+heroFree(ALL['12-promptov-marketologa'],'Промпты')+heroFree(ALL['astro_karta'],'Гайд');
 
 /* Шапки карточек карусели одной высоты: обложки стоят ровно по одной линии */
 function alignHero(){const m=[...document.querySelectorAll('.hero .hmeta')];m.forEach(x=>x.style.minHeight='');const h=Math.max(...m.map(x=>x.offsetHeight));m.forEach(x=>x.style.minHeight=h+'px')}
