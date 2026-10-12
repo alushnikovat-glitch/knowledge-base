@@ -801,6 +801,10 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     .houses { grid-template-columns:1fr; }
   }
 
+  .promo-note { display:flex; align-items:center; gap:8px; margin:10px 0 0; font-size:13.5px; font-weight:700; color:#a8412f; background:#fdf0ee; border:1px solid #f4cfc9; border-radius:10px; padding:8px 12px; line-height:1.4; }
+  .pn-dot { width:8px; height:8px; flex-shrink:0; border-radius:50%; background:#e05b4b; animation:pnp 1.6s ease-in-out infinite; }
+  @keyframes pnp { 50% { opacity:.3; } }
+  @media (prefers-reduced-motion:reduce){ .pn-dot{animation:none} }
 </style>
 </head>
 <body>
@@ -1122,7 +1126,7 @@ for n in pos:
     <p><b>Разбор блога и персональное предложение бесплатно.</b> Дальше вы сами решаете, идём в работу или нет.</p>
     <div class="btn-row">
       <a class="btn-shine" href="https://t.me/tschoolai_bot?start=strategiya" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','horar_kp_insert')">Получить персональное предложение</a>
-      <span class="price-note">Предложение бесплатно. Работа от 45 000 ₽</span>
+      <span class="price-note">Предложение бесплатно. Работа от 45 000 ₽<span data-until="2026-11-01"> по акции до 1 ноября</span></span>
     </div>
   </div>
 
@@ -1211,6 +1215,7 @@ for n in pos:
       <div class="stack-row"><span>Сопровождение запуска, правки, вся база проекта в Notion</span><span>✓</span></div>
       <div class="stack-total"><span style="font-size:15px;font-weight:700;color:#57534e">Стоимость работы</span><span class="new">от 45 000 ₽</span></div>
     </div>
+    <div class="promo-note" data-until="2026-11-01"><span class="pn-dot"></span>Акционная цена до 1 ноября. С ноября стоимость повысится</div>
 
     <p class="equation">Технические подключения вы делаете в своих аккаунтах сами или через ассистента, по моим подробным инструкциям. Я проверяю, что всё работает. В ваши пароли не захожу.</p>
 
@@ -1327,5 +1332,6 @@ for n in pos:
 </script>
 
 
+<script>(function(){var n=Date.now();document.querySelectorAll('[data-until]').forEach(function(e){if(n>=Date.parse(e.getAttribute('data-until')+'T00:00:00+03:00'))e.remove()})})();</script>
 </body>
 </html>
