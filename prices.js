@@ -15,7 +15,7 @@
    ===================================================================== */
 
 window.PRICES = {
-  strategiya:     { name: "Стратегия",                    price: 45000, promoUntil: "2026-11-01", priceAfter: null },
+  strategiya:     { name: "Стратегия",                    price: 45000, promoUntil: "2026-11-01", priceAfter: 49900 },
   soprovozhdenie: { name: "Стратегия и сопровождение",    price: 99000, promoUntil: null,         priceAfter: null }
 };
 
@@ -45,6 +45,8 @@ window.PRICES = {
       if (!s || !s.promo) { el.style.display = 'none'; return; }
       el.style.display = '';
       el.querySelectorAll('[data-promo-date]').forEach(function (x) { x.textContent = s.date; });
+      var pa = window.PRICES[el.getAttribute('data-promo')].priceAfter;
+      el.querySelectorAll('[data-price-after]').forEach(function (x) { if (pa) x.textContent = fmt(pa); else x.parentNode && (x.closest('[data-after-wrap]') || x).remove(); });
     });
     root.querySelectorAll('[data-month]').forEach(function (el) {
       el.textContent = MONTHS_NOM[new Date().getMonth()];
