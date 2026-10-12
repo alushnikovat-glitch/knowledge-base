@@ -850,6 +850,10 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     .hero-card { padding:20px; }
   }
 
+  .promo-note { display:flex; align-items:center; gap:8px; margin:10px 0 0; font-size:13.5px; font-weight:700; color:#a8412f; background:#fdf0ee; border:1px solid #f4cfc9; border-radius:10px; padding:8px 12px; line-height:1.4; }
+  .pn-dot { width:8px; height:8px; flex-shrink:0; border-radius:50%; background:#e05b4b; animation:pnp 1.6s ease-in-out infinite; }
+  @keyframes pnp { 50% { opacity:.3; } }
+  @media (prefers-reduced-motion:reduce){ .pn-dot{animation:none} }
 </style>
 </head>
 <body>
@@ -886,7 +890,8 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
       <div class="svc-get">
         <span>Стратегия и смыслы</span><span>Продуктовая линейка и оффер</span><span>Контент на 30 дней</span><span>Воронка и лид-магниты</span><span>Claude на Вашем голосе</span>
       </div>
-      <div class="svc-price">от 45 000 ₽</div>
+      <div class="svc-price">от <span data-price="strategiya">45 000 ₽</span></div>
+      <div class="promo-note" data-promo="strategiya"><span class="pn-dot"></span>Акционная цена до <span data-promo-date>1 ноября</span>. После этого стоимость повысится</div>
     </div>
     <div class="hero-cta">
       <a class="btn-shine" href="https://t.me/tschoolai_bot?start=strategiya" target="_blank" rel="noopener" onclick="ym(108790481,'reachGoal','str_kp_top')">Получить персональное предложение</a>
@@ -1103,7 +1108,8 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
     <div class="tariff">
       <div class="tariff-name">Стратегия</div>
       <div class="tariff-sub">Для тех, кто внедряет сам или с командой</div>
-      <div class="tariff-price">45 000 ₽</div>
+      <div class="tariff-price"><span data-price="strategiya">45 000 ₽</span></div>
+      <div class="promo-note" data-promo="strategiya"><span class="pn-dot"></span>Акционная цена до <span data-promo-date>1 ноября</span>. После этого стоимость повысится</div>
       <ul>
         <li>Смысловой фундамент и разбор аккаунта</li>
         <li>Продуктовая линейка, позиционирование, оффер</li>
@@ -1117,7 +1123,7 @@ src="https://www.facebook.com/tr?id=2700527913660797&ev=PageView&noscript=1"
       <div class="tariff-badge">С сопровождением</div>
       <div class="tariff-name">Стратегия и месяц сопровождения</div>
       <div class="tariff-sub">Для тех, кто хочет готовую систему и проверку внедрения</div>
-      <div class="tariff-price">99 000 ₽</div>
+      <div class="tariff-price"><span data-price="soprovozhdenie">99 000 ₽</span></div>
       <ul>
         <li>Всё из тарифа «Стратегия»</li>
         <li class="plus">Сценарии рилс и карусели</li>
@@ -1238,5 +1244,6 @@ tabs.forEach(function(b,k){b.addEventListener('click',function(){stopped=true;cl
   });},{threshold:0.45}).observe(w);
 })();
 </script>
+<script src="/prices.js"></script>
 </body>
 </html>
