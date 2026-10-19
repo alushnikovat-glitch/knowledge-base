@@ -339,7 +339,7 @@ body.intro-mode .kcard{display:none}
         <div class="here">
           <button class="btn" id="continueBtn">
             <svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5v11l9-5.5z"/></svg>
-            Продолжить урок
+            Продолжить модуль
           </button>
           <div class="here-txt">Вы сейчас здесь<strong id="hereTitle"></strong></div>
         </div>
@@ -352,7 +352,7 @@ body.intro-mode .kcard{display:none}
         </svg>
         <div class="ring-center">
           <div class="big" id="ringPct">0%</div>
-          <div class="small" id="ringCount">0 из 0 уроков</div>
+          <div class="small" id="ringCount">0 из 0 модулей</div>
           <div class="script" id="ringScript">первый шаг сделан</div>
         </div>
       </div>
@@ -393,7 +393,7 @@ body.intro-mode .kcard{display:none}
   <!-- LESSON -->
   <main id="lessonView">
     <div class="crumbs">
-      <button id="backBtn"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 2L4 7l5 5"/></svg>Все уроки</button>
+      <button id="backBtn"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 2L4 7l5 5"/></svg>Все модули</button>
       <span id="crumbMod"></span>
     </div>
     <section class="l-hero">
@@ -405,8 +405,8 @@ body.intro-mode .kcard{display:none}
     <div class="l-grid">
       <div>
         <div class="video"><div class="play"><svg viewBox="0 0 24 24" fill="#14171a"><path d="M5 3v18l15-9z"/></svg></div><div class="cap" id="lVideo"></div></div>
-        <div class="block"><h3 id="lMainH">Главное из урока</h3><ul class="main" id="lMain"></ul></div>
-        <div class="block words"><h3>Слова урока</h3><dl id="lWords"></dl></div>
+        <div class="block"><h3 id="lMainH">Главное из модуля</h3><ul class="main" id="lMain"></ul></div>
+        <div class="block words"><h3>Слова модуля</h3><dl id="lWords"></dl></div>
         <div class="block task">
           <h3>Задание</h3>
           <p id="lTask"></p>
@@ -417,11 +417,11 @@ body.intro-mode .kcard{display:none}
             <span class="hint" id="closeHint">Отметьте все пункты, и шаг закроется</span>
           </div>
         </div>
-        <div class="kcard"><span class="ic">PDF</span><div><b>Конспект урока</b><small>Одна страница, сохраните себе</small></div><a class="pdfbtn" id="lPdf" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg>Скачать</a></div>
+        <div class="kcard"><span class="ic">PDF</span><div><b>Конспект модуля</b><small>Одна страница, сохраните себе</small></div><a class="pdfbtn" id="lPdf" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg>Скачать</a></div>
       </div>
       <aside class="side">
-        <div class="panel mats"><h4>Материалы урока</h4><div id="lMats"></div><p class="note">Скачанные файлы остаются у Вас и после окончания доступа</p></div>
-        <div class="panel next"><div><small>Следующий урок</small><b id="nextTitle"></b></div><button class="btn" id="nextBtn" aria-label="Открыть следующий урок"><svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5v11l9-5.5z"/></svg></button></div>
+        <div class="panel mats"><h4>Материалы модуля</h4><div id="lMats"></div><p class="note">Скачанные файлы остаются у Вас и после окончания доступа</p></div>
+        <div class="panel next"><div><small>Следующий модуль</small><b id="nextTitle"></b></div><button class="btn" id="nextBtn" aria-label="Открыть следующий модуль"><svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5v11l9-5.5z"/></svg></button></div>
       </aside>
     </div>
   </main>
@@ -443,15 +443,15 @@ const CHECK = `<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke
 const M = [
  {n:0,name:"Подготовка",sticker:"key",
   sub:"Ставим Claude, проводник и базу знаний. Бесплатного тарифа Claude для этого хватает",
-  intro:{min:2,t:"Зачем подготовка",main:["Модель у всех одна, разница в том, что Claude знает о Вашем деле","К концу блока у Вас кабинет в Claude, проводник и база знаний","Четыре урока, около двух часов, можно за один вечер"]},
+  intro:{min:2,t:"Зачем подготовка",main:["Модель у всех одна, разница в том, что Claude знает о Вашем деле","К концу блока у Вас кабинет в Claude, проводник и база знаний","Четыре модуля, около двух часов, можно за один вечер"]},
   lessons:[
    {id:"0.0",t:"Маршрут: как здесь всё устроено",min:8,vmin:8,thing:"Вы выбрали дорожку и знаете первый шаг",
     why:"Восемь минут о том, как устроен кабинет, что понадобится и как идти, чтобы не потеряться",
     main:["Цель одна: первая воронка, которая работает по паспорту из 10 пунктов","Папки открываются по мере прохождения, сроков нет","Каждый шаг: зачем, работа, Ваш выбор, проверка, готовая вещь","Claude и Notion бесплатно, ChatPlace платный, он нужен с блока 3"],
     words:[["Паспорт","10 пунктов, по которым видно, что воронка работает"],["Проводник","Скилл в Claude, который ведёт по шагам и помогает, если застряли"],["Дорожка","Есть у Вас продукт или нет. От этого зависит начало блока 1"]],
-    task:"Выберите дорожку в карточке «У Вас уже есть продукт?» и откройте урок 0.1",
+    task:"Выберите дорожку в карточке «У Вас уже есть продукт?» и откройте модуль 0.1",
     check:["Выбрала дорожку: продукт есть или нет","Знаю, где кнопка «Продолжить» и блок «Если застряли»"],
-    mats:["Карта всех уроков","Что понадобится: список сервисов"]},
+    mats:["Карта всех модулей","Что понадобится: список сервисов"]},
    {id:"0.1",t:"Как устроен Claude",min:25,vmin:6,thing:"Проект в Claude с инструкцией",
     why:"Пять понятий, на которых держится вся система. Разберёте их один раз и перестанете начинать каждый раз с чистого чата",
     main:["Claude работает лучше, когда у него есть проект с инструкцией","Скилл даёт ему мою схему, коннектор даёт доступ к сервисам","Чистый чат каждый раз означает потерянный контекст"],
@@ -534,7 +534,7 @@ const M = [
   ]},
  {n:3,name:"Система заявок",sticker:"magnet",
   sub:"Путь от поста до заявки: кодовое слово, бот, прогрев, заявка у Вас в Telegram. ChatPlace для автоматизаций платный",
-  intro:{min:3,t:"Путь от поста до заявки",main:["Человек пишет слово ночью, бот отдаёт материал, утром у Вас заявка","Десять уроков, каждый зажигает свой пункт паспорта","Понадобится ChatPlace, он платный, подключим первым уроком"]},
+  intro:{min:3,t:"Путь от поста до заявки",main:["Человек пишет слово ночью, бот отдаёт материал, утром у Вас заявка","Десять модулей, каждый зажигает свой пункт паспорта","Понадобится ChatPlace, он платный, подключим первым модулем"]},
   lessons:[
    {id:"3.1",t:"Подключаем ChatPlace",thing:"Claude видит Ваши автоматизации"},
    {id:"3.2",t:"Лид-магнит",thing:"Бесплатный материал под боль из кристалла",pass:[2]},
@@ -602,7 +602,7 @@ function renderRing(){
   const list=routeAll(), n=list.filter(l=>done.has(l.id)).length, total=list.length, pct=Math.round(n/total*100);
   $("ringArc").style.strokeDashoffset = 540.35*(1-n/total);
   $("ringPct").textContent=pct+"%";
-  $("ringCount").textContent=n+" из "+total+" уроков";
+  $("ringCount").textContent=n+" из "+total+" "+plural(total,"модуля","модулей","модулей");
   $("ringScript").textContent = n===0?"начнём сегодня": n<4?"первые шаги сделаны": n<7?"фундамент почти готов":"смыслы собраны";
   const c=current(); $("hereTitle").textContent=c.id+" "+c.t;
 }
@@ -646,7 +646,7 @@ function renderModule(){
   const ls=m.lessons.filter(l=>!skipped(l));
   const cnt=ls.filter(l=>done.has(l.id)).length;
   $("modulePanel").innerHTML = `
-    <div class="mod-head"><h3>Блок ${m.n}. ${m.name}</h3><div class="count">${m.open?cnt+" из "+ls.length:ls.length+" уроков"}</div></div>
+    <div class="mod-head"><h3>Блок ${m.n}. ${m.name}</h3><div class="count">${m.open?cnt+" из "+ls.length:ls.length+" "+plural(ls.length,"модуль","модуля","модулей")}</div></div>
     <p class="mod-sub">${m.sub}</p>
     ${m.open?'':`<div class="lock-note"><svg viewBox="0 0 24 24" fill="none" stroke="#b98431" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg><span>Откроется, когда закроете блок ${m.n-1}. Ссылка придёт в бот</span></div>`}
     ${m.intro?`<button class="intro-row" data-intro="${m.n}" ${m.open?"":"disabled"}><span class="iplay"><svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5v11l9-5.5z"/></svg></span><span class="itxt"><b>Вводное видео · ${m.intro.t}</b><small>${m.intro.min} мин · смотреть первым, в прогресс не входит</small></span></button>`:""}
@@ -654,10 +654,10 @@ function renderModule(){
       const nr=m.open&&!ready(l), sk=skipped(l), tag=l.route==="none"&&!sk?'<span class="badge-route">если продукта нет</span>':'';
       return `
       <li class="lesson ${done.has(l.id)?'done':''} ${m.open&&!sk&&c.id===l.id?'current':''} ${m.open?'':'locked'} ${sk?'skipped':''}">
-        ${m.open&&!sk&&!nr?`<button class="tick" data-tick="${l.id}" aria-label="Отметить урок ${l.id}">${CHECK}</button>`:`<span class="tick"></span>`}
+        ${m.open&&!sk&&!nr?`<button class="tick" data-tick="${l.id}" aria-label="Отметить модуль ${l.id}">${CHECK}</button>`:`<span class="tick"></span>`}
         ${m.open&&!nr?`<button class="l-open" data-open="${l.id}">`:`<div>`}
           <div class="l-title">${l.id} ${l.t}${tag}${m.open&&!sk&&c.id===l.id&&!done.has(l.id)?'<span class="badge-now">сейчас</span>':''}</div>
-          <div class="l-thing">${sk?'Пропускаете: продукт у Вас уже есть. Открыть можно в любой момент':nr?'Урок готовится, откроется здесь же':'На выходе: '+l.thing}${l.pass&&!sk?' <span class="badge-pass">паспорт '+l.pass.join(', ')+'</span>':''}</div>
+          <div class="l-thing">${sk?'Пропускаете: продукт у Вас уже есть. Открыть можно в любой момент':nr?'Модуль готовится, откроется здесь же':'На выходе: '+l.thing}${l.pass&&!sk?' <span class="badge-pass">паспорт '+l.pass.join(', ')+'</span>':''}</div>
         ${m.open&&!nr?`</button>`:`</div>`}
         <div class="l-time">${l.min&&!sk?(l.minNote||l.min+" мин"):""}</div>
       </li>`}).join("")}</ul>`;
@@ -671,7 +671,7 @@ function renderPass(){
   const n=PASS.filter((_,i)=>passDone(i+1)).length;
   $("passBar").innerHTML=PASS.map((_,i)=>`<i class="${passDone(i+1)?'on':''}"></i>`).join("");
   const list=passOpen?PASS:PASS.slice(0,4);
-  $("passList").innerHTML=list.map((p,i)=>{const w=ALL.find(l=>l.pass&&l.pass.includes(i+1));return `<li class="${passDone(i+1)?'pdone':''}"><span>${i+1}</span><div>${p}<small>${w?'урок '+w.id:''}</small></div></li>`}).join("");
+  $("passList").innerHTML=list.map((p,i)=>{const w=ALL.find(l=>l.pass&&l.pass.includes(i+1));return `<li class="${passDone(i+1)?'pdone':''}"><span>${i+1}</span><div>${p}<small>${w?'модуль '+w.id:''}</small></div></li>`}).join("");
   $("passToggle").textContent=passOpen?"Свернуть":"Показать все 10";
 }
 
@@ -697,9 +697,9 @@ function openIntro(n){
   $("lMainH").textContent="Главное из видео";
   $("lMain").innerHTML=m.intro.main.map(x=>`<li>${x}</li>`).join("");
   const f=m.lessons.find(l=>!skipped(l)&&ready(l));
-  $("nextTitle").textContent=f?f.id+" "+f.t:"Уроки блока готовятся";
+  $("nextTitle").textContent=f?f.id+" "+f.t:"Модули блока готовятся";
   $("nextBtn").style.display=f?"":"none"; $("nextBtn").onclick=()=>f&&openLesson(f.id);
-  $("lMats").innerHTML='<p class="note" style="margin-top:0">У вводного видео нет задания. Посмотрите и переходите к первому уроку блока</p>';
+  $("lMats").innerHTML='<p class="note" style="margin-top:0">У вводного видео нет задания. Посмотрите и переходите к первому модулю блока</p>';
   document.body.classList.add("reading"); window.scrollTo({top:0}); try{tg&&tg.BackButton.show()}catch(e){}
 }
 function openLesson(id){
@@ -707,20 +707,20 @@ function openLesson(id){
   const l=ALL.find(x=>x.id===id); if(!l||!l.mod.open) return;
   reading=l;
   $("crumbMod").textContent="Блок "+l.mod.n+". "+l.mod.name;
-  $("lNum").textContent="Урок "+l.id+" · "+l.min+" минут";
+  $("lNum").textContent="Модуль "+l.id+" · "+l.min+" минут";
   $("lTitle").textContent=l.t;
   $("lWhy").textContent=l.why;
   const vm=l.vmin||Math.max(3,Math.round(l.min/3));
   $("lVideo").textContent="Видео, "+vm+" "+plural(vm,"минута","минуты","минут");
   $("lWatchTxt").textContent="Главное и задание ждут ниже";
-  $("lMainH").textContent="Главное из урока";
+  $("lMainH").textContent="Главное из модуля";
   const pdf="konspekt/"+l.id.replace(".","-")+".pdf";
   $("lPdf").href=pdf; $("lPdf").onclick=e=>dl(e,pdf,l.id);
   $("lMain").innerHTML=l.main.map(x=>`<li>${x}</li>`).join("");
   $("lWords").innerHTML=l.words.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join("");
   $("lTask").textContent=l.task;
   $("lThing").textContent=l.thing;
-  $("lMats").innerHTML=`<a class="m" href="${pdf}" target="_blank" rel="noopener" data-pdf><span class="ic">PDF</span><span>Конспект урока ${l.id}</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg></a>`+l.mats.map(x=>typeof x==="string"?`<button class="m"><span class="ic">PDF</span><span>${x}</span>${DLI}</button>`:`<a class="m" href="${x.h}" target="_blank" rel="noopener" data-f="${x.h}"><span class="ic">${x.ic||"PDF"}</span><span>${x.t}</span>${DLI}</a>`).join("");
+  $("lMats").innerHTML=`<a class="m" href="${pdf}" target="_blank" rel="noopener" data-pdf><span class="ic">PDF</span><span>Конспект модуля ${l.id}</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg></a>`+l.mats.map(x=>typeof x==="string"?`<button class="m"><span class="ic">PDF</span><span>${x}</span>${DLI}</button>`:`<a class="m" href="${x.h}" target="_blank" rel="noopener" data-f="${x.h}"><span class="ic">${x.ic||"PDF"}</span><span>${x.t}</span>${DLI}</a>`).join("");
   $("lMats").querySelector("[data-pdf]").onclick=e=>dl(e,pdf,l.id);
   $("lMats").querySelectorAll("[data-f]").forEach(a=>a.onclick=e=>dl(e,a.dataset.f,l.id+"_file"));
   const isDone=done.has(l.id);
