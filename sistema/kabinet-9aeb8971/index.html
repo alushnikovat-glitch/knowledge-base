@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Хочу как у Анастасии · кабинет</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;800&family=Marck+Script&display=swap" rel="stylesheet">
+<style>
+[hidden]{display:none!important}
+:root{
+  --bg:#faf7f0;
+  --paper:#fffdf9;
+  --ink:#14171a;
+  --ink2:#3b3f44;
+  --muted:#948e84;
+  --line:#ebe3d3;
+  --sand:#efe5d2;
+  --sand2:#e4d5b9;
+  --sand3:#d6c29d;
+  --teal:#5fb8ae;
+  --teal-soft:#dff1ee;
+  --gold:#e8b45f;
+  --gold-soft:#f8ead0;
+  --red:#e05b4b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Onest',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(900px 520px at 85% -10%, rgba(232,180,95,.28), transparent 60%),
+    radial-gradient(700px 480px at -10% 30%, rgba(95,184,174,.16), transparent 60%);
+}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:8px}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 24px 80px}
+
+/* top bar */
+.top{display:flex;align-items:center;justify-content:space-between;padding:22px 0 10px;gap:16px}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand b{font-weight:800;font-size:18px;letter-spacing:-.01em}
+.brand span{font-family:'Marck Script',cursive;font-size:20px;color:var(--muted)}
+.tariff{font-size:13px;color:var(--ink2);background:var(--paper);border:1px solid var(--line);padding:7px 14px;border-radius:999px}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:center;padding:36px 0 26px}
+.hello{font-family:'Marck Script',cursive;font-size:34px;color:var(--teal);line-height:1}
+.hero h1{font-weight:800;font-size:clamp(34px,5vw,58px);line-height:1.02;letter-spacing:-.03em;margin:14px 0 22px;max-width:14ch}
+.here{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.here-txt{font-size:15px;color:var(--ink2)}
+.here-txt strong{display:block;color:var(--ink);font-size:17px;font-weight:600}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#faf7f0;padding:14px 22px;border-radius:14px;font-weight:600;font-size:15px;transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn svg{width:14px;height:14px}
+.btn.gold{background:var(--gold);color:var(--ink)}
+
+.ring-card{position:relative;justify-self:end;width:280px;height:280px}
+.ring-card svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.ring-center .big{font-weight:800;font-size:64px;line-height:1;letter-spacing:-.04em}
+.ring-center .small{font-size:14px;color:var(--muted);margin-top:6px}
+.ring-center{padding:0 22%}
+.ring-center .script{font-family:'Marck Script',cursive;font-size:20px;line-height:1.05;color:#c9933e;margin-top:8px;max-width:100%;text-wrap:balance}
+@media (max-width:980px){.ring-center .script{font-size:17px;margin-top:6px}.ring-center .small{font-size:13px}}
+
+/* shelf */
+.shelf-head{display:flex;justify-content:space-between;align-items:flex-end;margin:28px 0 6px}
+.shelf-head h2{font-weight:800;font-size:22px;letter-spacing:-.02em}
+.shelf-head p{font-size:14px;color:var(--muted)}
+.shelf{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;padding:46px 6px 0;position:relative}
+
+.folder{position:relative;height:150px;text-align:left;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.folder .back{position:absolute;inset:0;background:var(--sand2);border-radius:6px 14px 12px 12px;
+  clip-path:polygon(0 0,42% 0,50% 12%,100% 12%,100% 100%,0 100%)}
+.folder .sheet{position:absolute;left:10%;right:12%;top:2%;height:70%;background:#fff;border-radius:6px;
+  box-shadow:0 1px 0 var(--line);transition:transform .35s cubic-bezier(.2,.8,.2,1);transform:rotate(-2deg)}
+.folder .sheet::before{content:"";position:absolute;left:14%;right:30%;top:16%;height:3px;border-radius:2px;background:var(--line);box-shadow:0 9px 0 var(--line),0 18px 0 var(--line)}
+.folder .front{position:absolute;left:0;right:0;bottom:0;height:72%;background:var(--sand);border-radius:12px;
+  padding:14px 14px 12px;display:flex;flex-direction:column;justify-content:space-between;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7);transition:background .3s}
+.folder .num{font-size:12px;color:var(--muted);font-weight:500}
+.folder .name{font-weight:800;font-size:15px;line-height:1.15;letter-spacing:-.01em}
+.folder .dots{display:flex;gap:4px;flex-wrap:wrap}
+.folder .dots i{width:7px;height:7px;border-radius:50%;background:rgba(20,23,26,.14)}
+.folder .dots i.done{background:var(--teal)}
+.folder .sticker{position:absolute;top:-16px;right:11%;width:54px;height:54px;transform:rotate(6deg);
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),filter .35s;filter:drop-shadow(0 4px 6px rgba(80,55,20,.18))}
+.folder .sticker svg{width:100%;height:100%;display:block}
+.folder .lock{position:absolute;bottom:12px;right:12px;width:22px;height:22px;color:var(--muted)}
+.folder:hover{transform:translateY(-4px)}
+.folder:hover .sheet{transform:rotate(-3deg) translateY(-8px)}
+.folder.active{transform:translateY(-14px)}
+.folder.active .sheet{transform:rotate(-4deg) translateY(-22px)}
+.folder.active .sticker{transform:rotate(-4deg) translateY(-16px)}
+.folder:hover .sticker{transform:rotate(2deg) translateY(-7px)}
+.folder.active:hover .sticker{transform:rotate(-6deg) translateY(-19px)}
+.folder.active .front{background:var(--gold-soft)}
+.folder.active .back{background:var(--gold)}
+.folder.locked .front{background:#f3ece0}
+.folder.locked .name{color:var(--ink2)}
+.folder.locked .sticker{transform:rotate(6deg) translateY(5px);filter:saturate(.45) opacity(.8)}
+.folder.locked:hover .sticker{transform:rotate(4deg) translateY(-1px)}
+.folder .check{position:absolute;top:22%;left:10px;width:22px;height:22px;border-radius:50%;background:var(--teal);color:#fff;display:none;align-items:center;justify-content:center}
+.folder.complete .check{display:flex}
+
+
+/* папки: общая мягкая тень по силуэту */
+.folder{transform:none;filter:drop-shadow(0 1px 1.5px rgba(110,84,40,.10)) drop-shadow(0 10px 22px rgba(110,84,40,.13));transition:transform .35s cubic-bezier(.2,.8,.2,1),filter .35s}
+.folder:hover{transform:translateY(-4px);filter:drop-shadow(0 2px 2px rgba(110,84,40,.10)) drop-shadow(0 16px 26px rgba(110,84,40,.17))}
+.folder.active{transform:translateY(-10px);filter:drop-shadow(0 2px 2px rgba(110,84,40,.12)) drop-shadow(0 20px 30px rgba(180,130,50,.24))}
+.folder.locked{filter:drop-shadow(0 1px 1px rgba(110,84,40,.07)) drop-shadow(0 8px 16px rgba(110,84,40,.08))}
+
+
+/* main grid */
+.grid{display:grid;grid-template-columns:1fr 340px;gap:24px;margin-top:46px;align-items:start}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:26px}
+.mod-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:6px}
+.mod-head h3{font-weight:800;font-size:24px;letter-spacing:-.02em;line-height:1.15}
+.mod-head .count{font-size:14px;color:var(--muted);white-space:nowrap;padding-top:6px}
+.mod-sub{color:var(--ink2);font-size:15px;max-width:60ch;margin-bottom:18px}
+.lock-note{display:flex;gap:12px;align-items:center;background:var(--gold-soft);border-radius:14px;padding:12px 16px;font-size:14px;margin-bottom:16px}
+.lock-note svg{width:20px;height:20px;flex:none}
+.lessons{list-style:none}
+.lesson{display:grid;grid-template-columns:28px 1fr auto;gap:14px;align-items:center;padding:14px 4px;border-top:1px solid var(--line)}
+.lesson:first-child{border-top:0}
+.tick{width:24px;height:24px;border-radius:50%;border:2px solid var(--sand3);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.tick svg{width:12px;height:12px;opacity:0;color:#fff}
+.lesson.done .tick{background:var(--teal);border-color:var(--teal)}
+.lesson.done .tick svg{opacity:1}
+.lesson.current .tick{border-color:var(--gold);box-shadow:0 0 0 4px var(--gold-soft)}
+.l-open{text-align:left}
+.l-title{font-weight:600;font-size:16px;line-height:1.3}
+.l-thing{font-size:13.5px;color:var(--muted);margin-top:2px}
+.l-time{font-size:13px;color:var(--muted);white-space:nowrap}
+.lesson.locked .l-title{color:var(--ink2)}
+.lesson.locked .tick{border-style:dashed}
+.lesson:not(.locked) .l-open:hover .l-title{color:var(--teal)}
+.badge-now{display:inline-block;font-size:12px;font-weight:600;color:var(--ink);background:var(--gold);border-radius:999px;padding:2px 9px;margin-left:8px;vertical-align:2px}
+
+.badge-route{display:inline-block;font-size:12px;font-weight:600;color:#3d7e77;background:var(--teal-soft);border-radius:999px;padding:2px 9px;margin-left:8px;vertical-align:2px}
+.lesson.skipped .l-title{color:var(--muted)}
+.lesson.skipped .tick{border-style:dotted;opacity:.6}
+.route{border-color:var(--gold);background:linear-gradient(180deg,var(--gold-soft),var(--paper) 70%)}
+.route-btns{display:grid;gap:8px;margin-top:14px}
+.route-btn{text-align:left;padding:12px 14px;border-radius:14px;background:var(--paper);border:1px solid var(--line);transition:border-color .2s,transform .15s}
+.route-btn:hover{border-color:var(--teal);transform:translateY(-1px)}
+.route-btn b{display:block;font-size:15px}
+.route-btn small{font-size:13px;color:var(--ink2)}
+.route-now{display:flex;gap:12px;align-items:flex-start;margin-top:8px}
+.route-now b{display:block;font-size:15px}
+.route-now small{font-size:13.5px;color:var(--ink2)}
+.route-dot{width:12px;height:12px;border-radius:50%;margin-top:5px;flex:none;background:var(--teal)}
+.route-dot.none{background:var(--gold)}
+.selfcheck{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12)}
+.selfcheck h4{font-weight:800;font-size:16px;color:#faf7f0;margin-bottom:8px}
+.ck{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;padding:9px 0;color:#e9e4da;font-size:15px}
+.ck .bx{width:22px;height:22px;border-radius:7px;border:2px solid #6f6a62;flex:none;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.ck .bx svg{width:12px;height:12px;opacity:0;color:#14171a}
+.ck.on .bx{background:#5fb8ae;border-color:#5fb8ae}
+.ck.on .bx svg{opacity:1}
+.ck.on span{color:#b9e2dc}
+.btn[disabled]{opacity:.4;cursor:not-allowed;transform:none}
+.badge-pass{display:inline-block;font-size:11.5px;font-weight:600;color:#a8741f;background:var(--gold-soft);border-radius:99px;padding:1px 8px;margin-left:6px}
+.passport li div{flex:1}
+.passport li small{display:block;font-size:12px;color:var(--muted)}
+.passport li.pdone{color:#2e7d76}
+.passport li.pdone span{color:#2e7d76}
+.intro-row{display:flex;gap:14px;align-items:center;width:100%;text-align:left;background:var(--gold-soft);border-radius:16px;padding:12px 14px;margin:2px 0 12px;transition:transform .15s}
+.intro-row:not([disabled]):hover{transform:translateY(-1px)}
+.intro-row[disabled]{opacity:.55;cursor:default}
+.iplay{width:36px;height:36px;border-radius:50%;background:var(--ink);color:#faf7f0;display:flex;align-items:center;justify-content:center;flex:none}
+.iplay svg{width:12px;height:12px;margin-left:2px}
+.itxt b{display:block;font-size:15px}
+.itxt small{font-size:13px;color:var(--ink2)}
+body.intro-mode .words,body.intro-mode .task,body.intro-mode .rhythm{display:none}
+.side{display:flex;flex-direction:column;gap:18px}
+.side h4{font-weight:800;font-size:17px;letter-spacing:-.01em;margin-bottom:4px}
+.side p.s{font-size:14px;color:var(--ink2)}
+.passport-bar{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin:14px 0 12px}
+.passport-bar i{height:8px;border-radius:4px;background:var(--line)}
+.passport-bar i.on{background:var(--teal)}
+.passport ul{list-style:none;font-size:13.5px;color:var(--ink2)}
+.passport li{display:flex;gap:10px;padding:6px 0;border-top:1px dashed var(--line)}
+.passport li:first-child{border-top:0}
+.passport li span{color:var(--muted);width:18px;flex:none}
+.toggle{font-size:13.5px;font-weight:600;color:var(--teal);margin-top:8px}
+.support .row{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}
+.support .row:first-of-type{border-top:0}
+.ava{width:38px;height:38px;border-radius:12px;flex:none;display:flex;align-items:center;justify-content:center}
+.ava.t{background:var(--teal-soft);color:var(--teal)}
+.ava.g{background:var(--gold-soft);color:#b98431}
+.ava svg{width:20px;height:20px}
+.support b{display:block;font-size:15px}
+.support small{font-size:13.5px;color:var(--ink2)}
+
+/* lesson page */
+#lessonView{display:none}
+body.reading #homeView{display:none}
+body.reading #lessonView{display:block}
+.crumbs{display:flex;align-items:center;gap:12px;padding:26px 0 0;font-size:14px;color:var(--muted)}
+.crumbs button{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+.crumbs button svg{width:14px;height:14px}
+.l-hero{padding:28px 0 18px;max-width:780px}
+.l-hero .script{font-family:'Marck Script',cursive;font-size:26px;color:var(--gold)}
+.l-hero h1{font-weight:800;font-size:clamp(30px,4.4vw,48px);line-height:1.05;letter-spacing:-.03em;margin-top:6px}
+.l-hero p{font-size:17px;color:var(--ink2);margin-top:14px;max-width:58ch}
+.rhythm{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:8px 0 26px}
+.rhythm div{position:relative;padding:12px 12px 12px;border-radius:14px;background:var(--paper);border:1px solid var(--line);font-size:13px;color:var(--muted)}
+.rhythm div b{display:block;font-size:14px;color:var(--ink);font-weight:600}
+.rhythm div.on{background:var(--ink);border-color:var(--ink);color:#c9c3b8}
+.rhythm div.on b{color:#faf7f0}
+.rhythm div.past{background:var(--teal-soft);border-color:transparent;color:#3d7e77}
+.l-grid{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+.video{position:relative;aspect-ratio:16/9;border-radius:22px;overflow:hidden;background:
+  radial-gradient(500px 280px at 20% 10%, rgba(232,180,95,.55), transparent 60%),
+  radial-gradient(500px 300px at 90% 100%, rgba(95,184,174,.5), transparent 60%),#20252a;
+  display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+.video .play{width:78px;height:78px;border-radius:50%;background:#faf7f0;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.video .play svg{width:26px;height:26px;margin-left:4px}
+.video .cap{position:absolute;left:22px;bottom:18px;color:#faf7f0;font-size:14px;opacity:.85}
+.block{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:24px 26px;margin-bottom:18px}
+.block h3{font-weight:800;font-size:19px;letter-spacing:-.01em;margin-bottom:12px}
+.block ul.main{list-style:none}
+.block ul.main li{position:relative;padding:8px 0 8px 26px;font-size:16px}
+.block ul.main li::before{content:"";position:absolute;left:4px;top:17px;width:9px;height:9px;border-radius:3px;background:var(--gold);transform:rotate(45deg)}
+.words dl{display:grid;grid-template-columns:180px 1fr;gap:10px 18px}
+.words dt{font-weight:600}
+.words dd{color:var(--ink2)}
+.task{background:var(--ink);color:#e9e4da;border:0}
+.task h3{color:#faf7f0}
+.task .thing{display:flex;gap:10px;align-items:center;margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.07);font-size:14.5px}
+.task .thing b{color:var(--gold);font-weight:600}
+.task .done-row{display:flex;gap:12px;align-items:center;margin-top:18px;flex-wrap:wrap}
+.task .done-row .hint{font-size:13.5px;color:#a7a196}
+.mats .m{display:flex;gap:12px;align-items:center;padding:11px 0;border-top:1px solid var(--line);font-size:14.5px;width:100%;text-align:left}
+.mats .m:first-of-type{border-top:0}
+.mats .ic{width:34px;height:40px;border-radius:6px;background:var(--sand);position:relative;flex:none;font-size:9px;font-weight:600;color:var(--ink2);display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px}
+.mats .ic::after{content:"";position:absolute;top:0;right:0;border-width:0 10px 10px 0;border-style:solid;border-color:var(--bg) var(--bg) var(--sand3) var(--sand3);border-radius:0 0 0 3px}
+.mats .m span{flex:1}
+.mats .m .ic{flex:none;width:34px}
+.mats .m svg{width:16px;height:16px;color:var(--muted)}
+.mats .note{font-size:12.5px;color:var(--muted);margin-top:10px}
+.next{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.next small{color:var(--muted);font-size:13px}
+.next b{display:block;font-size:15px}
+
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,30px);opacity:0;background:var(--ink);color:#faf7f0;padding:12px 20px;border-radius:14px;font-size:14.5px;z-index:9;transition:all .35s;pointer-events:none;display:flex;gap:10px;align-items:center}
+.toast i{width:9px;height:9px;border-radius:50%;background:var(--teal)}
+.toast.show{transform:translate(-50%,0);opacity:1}
+
+/* задание: светлое */
+.task{background:var(--teal-soft);color:var(--ink);border:0}
+.task h3{color:var(--ink)}
+.task .thing{background:var(--paper)}
+.task .thing b{color:#2e7d76}
+.task .done-row .hint{color:var(--ink2)}
+.selfcheck{border-top:1px solid #c6e3de}
+.selfcheck h4{color:var(--ink)}
+.ck{color:var(--ink)}
+.ck .bx{border-color:#9cc9c2;background:var(--paper)}
+.ck .bx svg{color:#fff}
+.ck.on .bx{background:#2e7d76;border-color:#2e7d76}
+.ck.on span{color:#2e7d76}
+
+
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.shelf .folder{animation:rise .6s cubic-bezier(.2,.8,.2,1) both}
+.shelf .folder:nth-child(2){animation-delay:.06s}.shelf .folder:nth-child(3){animation-delay:.12s}
+.shelf .folder:nth-child(4){animation-delay:.18s}.shelf .folder:nth-child(5){animation-delay:.24s}.shelf .folder:nth-child(6){animation-delay:.3s}
+.folder.active{animation:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr;gap:20px}
+  .ring-card{justify-self:start;width:220px;height:220px}
+  .ring-center .big{font-size:50px}
+  .grid,.l-grid{grid-template-columns:1fr}
+  .shelf{grid-template-columns:repeat(3,1fr);row-gap:64px}
+  .rhythm{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:560px){
+  .wrap{padding:0 16px 60px}
+  .tariff{display:none}
+  .shelf{grid-template-columns:repeat(2,1fr);gap:14px;row-gap:60px}
+  .panel,.block{padding:20px}
+  .words dl{grid-template-columns:1fr;gap:2px}
+  .words dd{margin-bottom:10px}
+  .rhythm{grid-template-columns:repeat(2,1fr)}
+  .lesson{grid-template-columns:28px 1fr}
+  .l-time{display:none}
+}
+</style>
+<meta name="robots" content="noindex, nofollow">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108790481', 'ym');
+    ym(108790481, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108790481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand"><b>Хочу как у Анастасии</b><span>кабинет</span></div>
+    <div class="tariff" id="tariffLabel" hidden>Тариф с обратной связью</div>
+  </header>
+
+  <!-- HOME -->
+  <main id="homeView">
+    <section class="hero">
+      <div>
+        <div class="hello" id="hello">Добрый вечер</div>
+        <h1>Собираем блог, который приводит клиентов</h1>
+        <div class="here">
+          <button class="btn" id="continueBtn">
+            <svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5v11l9-5.5z"/></svg>
+            Продолжить урок
+          </button>
+          <div class="here-txt">Вы сейчас здесь<strong id="hereTitle"></strong></div>
+        </div>
+      </div>
+      <div class="ring-card" aria-label="Прогресс">
+        <svg viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="86" fill="none" stroke="#ebe3d3" stroke-width="10"/>
+          <circle id="ringArc" cx="100" cy="100" r="86" fill="none" stroke="url(#rg)" stroke-width="10" stroke-linecap="round" stroke-dasharray="540.35" stroke-dashoffset="540.35" style="transition:stroke-dashoffset .8s cubic-bezier(.2,.8,.2,1)"/>
+          <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fb8ae"/><stop offset="1" stop-color="#e8b45f"/></linearGradient></defs>
+        </svg>
+        <div class="ring-center">
+          <div class="big" id="ringPct">0%</div>
+          <div class="small" id="ringCount">0 из 0 уроков</div>
+          <div class="script" id="ringScript">первый шаг сделан</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="shelf-head">
+      <h2>Ваш путь</h2>
+      <p>Шесть блоков снизу вверх. Каждый шаг заканчивается готовой вещью</p>
+    </div>
+    <nav class="shelf" id="shelf"></nav>
+
+    <section class="grid">
+      <div class="panel" id="modulePanel"></div>
+      <aside class="side">
+        <div class="panel route" id="routeCard"></div>
+        <div class="panel passport">
+          <h4>Паспорт первой воронки</h4>
+          <p class="s">Когда все 10 пунктов закрыты, Ваша система заявок работает. Проводник проверяет их вместе с Вами</p>
+          <div class="passport-bar" id="passBar"></div>
+          <ul id="passList"></ul>
+          <button class="toggle" id="passToggle">Показать все 10</button>
+        </div>
+        <div class="panel support">
+          <h4>Если застряли</h4>
+          <div class="row">
+            <div class="ava t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l2.4 5.6L20 11l-5.6 2.4L12 19l-2.4-5.6L4 11l5.6-2.4z"/></svg></div>
+            <div><b>Проводник в Claude</b><small>Отвечает сразу и в любое время. Разбирает, где Вы встали, и ведёт дальше</small></div>
+          </div>
+          <div class="row" id="annaRow" hidden>
+            <div class="ava g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4L3 11l6 2 2 6 3-4 5 4z"/></svg></div>
+            <div><b>Анастасия в Telegram</b><small>Когда нужен мой взгляд. Отвечаю в течение дня по будням, месяц с начала</small></div>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <!-- LESSON -->
+  <main id="lessonView">
+    <div class="crumbs">
+      <button id="backBtn"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 2L4 7l5 5"/></svg>Все уроки</button>
+      <span id="crumbMod"></span>
+    </div>
+    <section class="l-hero">
+      <div class="script" id="lNum"></div>
+      <h1 id="lTitle"></h1>
+      <p id="lWhy"></p>
+    </section>
+    <div class="rhythm" id="rhythm"></div>
+    <div class="l-grid">
+      <div>
+        <div class="video"><div class="play"><svg viewBox="0 0 24 24" fill="#14171a"><path d="M5 3v18l15-9z"/></svg></div><div class="cap" id="lVideo"></div></div>
+        <div class="block"><h3>Главное из урока</h3><ul class="main" id="lMain"></ul></div>
+        <div class="block words"><h3>Слова урока</h3><dl id="lWords"></dl></div>
+        <div class="block task">
+          <h3>Задание</h3>
+          <p id="lTask"></p>
+          <div class="thing"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2e7d76" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg><span>На выходе: <b id="lThing"></b></span></div>
+          <div class="selfcheck"><h4>Проверьте себя</h4><div id="lCheck"></div></div>
+          <div class="done-row">
+            <button class="btn gold" id="closeBtn">Шаг закрыт</button>
+            <span class="hint" id="closeHint">Отметьте все пункты, и шаг закроется</span>
+          </div>
+        </div>
+      </div>
+      <aside class="side">
+        <div class="panel mats"><h4>Материалы урока</h4><div id="lMats"></div><p class="note">Скачанные файлы остаются у Вас и после окончания доступа</p></div>
+        <div class="panel next"><div><small>Следующий урок</small><b id="nextTitle"></b></div><button class="btn" id="nextBtn" aria-label="Открыть следующий урок"><svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5v11l9-5.5z"/></svg></button></div>
+      </aside>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast"><i></i><span id="toastTxt"></span></div>
+
+<script>
+const ST = {
+  key:`<svg viewBox="0 0 64 64"><circle cx="22" cy="30" r="14" fill="#e8b45f"/><circle cx="22" cy="30" r="5.5" fill="#fffdf9"/><rect x="33" y="26" width="26" height="8" rx="3" fill="#e8b45f"/><rect x="47" y="34" width="5" height="9" rx="2" fill="#c9933e"/><rect x="54" y="34" width="5" height="6" rx="2" fill="#c9933e"/><path d="M12 22a14 14 0 0 1 10-6" stroke="#f6d9a6" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`,
+  crystal:`<svg viewBox="0 0 64 64"><path d="M15 10h34l10 13-27 33L5 23z" fill="#5fb8ae"/><path d="M15 10h34l10 13H5z" fill="#9ad6ce"/><path d="M23 23h18L32 56z" fill="#3f9a90"/><path d="M23 23l9-13 9 13z" fill="#c8ebe6"/></svg>`,
+  ticket:`<svg viewBox="0 0 64 64"><path d="M32 4c9 7 13 16 13 27l-5 11H24l-5-11C19 20 23 11 32 4z" fill="#2a2f35"/><circle cx="32" cy="24" r="5.5" fill="#e8b45f"/><path d="M19 33l-8 9 4 6 9-6zM45 33l8 9-4 6-9-6z" fill="#5fb8ae"/><path d="M27 42h10l-5 16z" fill="#e8b45f"/></svg>`,
+  magnet:`<svg viewBox="0 0 64 64"><path d="M10 8h15v24a7 7 0 0 0 14 0V8h15v24a22 22 0 0 1-44 0z" fill="#e05b4b"/><path d="M10 8h15v10H10zM39 8h15v10H39z" fill="#f2ebe0"/><path d="M14 32a18 18 0 0 0 9 14" stroke="#ef8b7e" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`,
+  cards:`<svg viewBox="0 0 64 64"><rect x="18" y="6" width="36" height="44" rx="7" fill="#9ad6ce" transform="rotate(10 36 28)"/><rect x="10" y="12" width="36" height="44" rx="7" fill="#e8b45f"/><path d="M23 26v16l13-8z" fill="#fffdf9"/></svg>`,
+  chart:`<svg viewBox="0 0 64 64"><rect x="8" y="34" width="12" height="22" rx="4" fill="#c8ebe6"/><rect x="26" y="22" width="12" height="34" rx="4" fill="#5fb8ae"/><rect x="44" y="8" width="12" height="48" rx="4" fill="#e8b45f"/><circle cx="50" cy="8" r="0" fill="none"/></svg>`
+};
+const LOCK = `<svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>`;
+const CHECK = `<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg>`;
+
+const M = [
+ {n:0,name:"Подготовка",sticker:"key",
+  sub:"Ставим Claude, проводник и базу знаний. Бесплатного тарифа Claude для этого хватает",
+  intro:{min:2,t:"Зачем подготовка",main:["Модель у всех одна, разница в том, что Claude знает о Вашем деле","К концу блока у Вас кабинет в Claude, проводник и база знаний","Четыре урока, около двух часов, можно за один вечер"]},
+  lessons:[
+   {id:"0.0",t:"Маршрут: как здесь всё устроено",min:8,thing:"Вы выбрали дорожку и знаете первый шаг",
+    why:"Восемь минут о том, как устроен кабинет, что понадобится и как идти, чтобы не потеряться",
+    main:["Цель одна: первая воронка, которая работает по паспорту из 10 пунктов","Папки открываются по мере прохождения, сроков нет","Каждый шаг: зачем, работа, Ваш выбор, проверка, готовая вещь","Claude и Notion бесплатно, ChatPlace платный, он нужен с блока 3"],
+    words:[["Паспорт","10 пунктов, по которым видно, что воронка работает"],["Проводник","Скилл в Claude, который ведёт по шагам и помогает, если застряли"],["Дорожка","Есть у Вас продукт или нет. От этого зависит начало блока 1"]],
+    task:"Выберите дорожку в карточке «У Вас уже есть продукт?» и откройте урок 0.1",
+    check:["Выбрала дорожку: продукт есть или нет","Знаю, где кнопка «Продолжить» и блок «Если застряли»"],
+    mats:["Карта всех уроков","Что понадобится: список сервисов"]},
+   {id:"0.1",t:"Как устроен Claude",min:25,thing:"Проект в Claude с инструкцией",
+    why:"Пять понятий, на которых держится вся система. Разберёте их один раз и перестанете начинать каждый раз с чистого чата",
+    main:["Claude работает лучше, когда у него есть проект с инструкцией","Скилл даёт ему мою схему, коннектор даёт доступ к сервисам","Чистый чат каждый раз означает потерянный контекст"],
+    words:[["Чат","Один разговор с Claude"],["Проект","Папка с инструкцией и файлами. Claude читает их в каждом чате проекта"],["Память","То, что Claude помнит о Вас между чатами"],["Скилл","Папка с инструкцией, по которой Claude работает по моей схеме"],["Коннектор","Мост между Claude и сервисом, например Notion или ChatPlace"]],
+    task:"Заведите свой кабинет. Создайте проект и вставьте в него шаблон инструкции из материалов",
+    check:["Проект создан и назван по делу","Инструкция заполнена Вашими словами","На вопрос «Что ты обо мне знаешь?» Claude ответил Вашими строками"],
+    mats:["Схема «Как устроен Claude»","Шаблон инструкции проекта","Частые сбои"]},
+   {id:"0.2",t:"Как ставить задачи Claude",min:30,thing:"Первая задача по формуле",
+    why:"Одна формула из пяти частей. С ней Claude пишет с первого раза, и правок становится в разы меньше",
+    main:["Формула: что, для кого, из чего, когда готово, сначала спроси","Одна правка за раз, точечно","Если Claude ошибся, фраза на исправление уже готова"],
+    words:[["Формула запроса","Пять частей, из которых собирается любая задача"],["Точечная правка","Одно изменение в одном месте, без переписывания всего"],["Сначала спроси","Просьба к Claude задать вопросы до работы"]],
+    task:"Допишите две строки в инструкцию проекта и поставьте первую настоящую задачу по формуле",
+    check:["В инструкции проекта есть две новые строки","В задаче есть все пять частей формулы","Версия после точечной правки ближе к Вашему голосу"],
+    mats:["Формула запроса","Шесть ошибок и фраза на каждую"]},
+   {id:"0.3",t:"Установка, проводник и скиллы",min:30,thing:"Проводник поздоровался и спросил про Ваше дело",
+    why:"Проводник ставится первым. Он держит порядок шагов, чтобы Вам не решать, что за чем",
+    main:["Скиллы запускаются, когда в настройках Claude включено выполнение кода","Скиллы открытых блоков загружаете сразу, одним заходом","Проводник проверяет, готов ли предыдущий шаг, и ведёт дальше"],
+    words:[["Проводник","Главный скилл коробки, ведёт Вас по шагам"],["Выполнение кода","Настройка Claude, без которой скиллы не запускаются"]],
+    task:"Включите выполнение кода, загрузите проводник и скиллы блоков 0 и 1, напишите в новом чате проекта «Привет»",
+    check:["Выполнение кода включено","Проводник и скиллы стоят в списке, переключатели включены","Проводник ответил и спросил про Ваше дело"],
+    mats:["Скачать проводник","Скиллы блоков 0 и 1 одним архивом","Частые сбои"]},
+   {id:"0.4",t:"Notion, база знаний и первый разговор",min:30,thing:"База знаний в Notion",
+    why:"База хранит Ваши решения. Claude читает её перед работой, и Вам больше не нужно объяснять всё заново",
+    main:["Notion подключается из каталога коннекторов, на бесплатном Claude тоже","Одно решение живёт в одной карточке","Первое сообщение проводнику запускает маршрут"],
+    words:[["База знаний","Страницы в Notion, где лежат решения по Вашему делу"],["Карточка","Одна страница под одно решение"]],
+    task:"Подключите Notion, скопируйте шаблон базы и напишите проводнику «Начинаем»",
+    check:["Claude показывает Ваши страницы в Notion","Шаблон базы лежит у Вас в Notion","Проводник завёл первые карточки и назвал следующий шаг"],
+    mats:["Шаблон базы знаний","Первое сообщение проводнику"]}
+  ]},
+ {n:1,name:"Продукт и смыслы",sticker:"crystal",
+  sub:"Что Вы продаёте, кому, что у клиента болит и почему он выбирает Вас. Продукта пока нет? Начнёте с шага 1.0. На второй день у Вас первый пост",
+  intro:{min:3,t:"Почему продукт и смыслы первыми",main:["Пишете много, а никто не видит: дело в том, для кого Вы пишете","Соберёте слова клиентов, их карту и пять связок, на второй день первый пост","Шаг 1.1 займёт 15 минут сегодня и два дня сбора фраз в фоне"]},
+  lessons:[
+   {id:"1.0",route:"none",t:"Продукт из Вас",min:30,thing:"Гипотеза продукта",
+    why:"Продукта пока нет, и это нормально. Claude вытаскивает его из Вашего опыта и из вопросов, которые Вам уже задают",
+    main:["Продукт уже лежит в том, что Вы умеете и за что Вам говорят спасибо","На выходе гипотеза. Живые фразы и разбор проверят её","Упакуете продукт в блоке 2, когда смыслы собраны"],
+    words:[["Гипотеза продукта","Черновик: кому, с чем и в каком формате Вы помогаете"],["Повторный запрос","Вопрос, который Вам задают снова и снова. Там чаще всего и сидит продукт"]],
+    task:"Ответьте проводнику на вопросы шага 1.0 и выберите одну гипотезу из его вариантов",
+    check:["Гипотеза записана одной фразой: кому, с чем, в каком формате","Под гипотезой хотя бы два вопроса, которые Вам уже задавали","Гипотезу выбрали Вы из вариантов Claude"],
+    mats:["Вопросы для поиска продукта","Пример гипотезы у копирайтера"]},
+   {id:"1.1",t:"Язык клиента: гипотезы и живые фразы",min:15,minNote:"15 минут и 2 дня в фоне",thing:"Карточка «Живые фразы»",
+    why:"Разбор держится на словах Ваших клиентов. Сегодня 15 минут, дальше два дня собираете фразы в фоне",
+    main:["Проводник даёт три фразы-гипотезы и пять поисковых запросов под Вашу нишу","Первая победа сегодня: найти хотя бы одну гипотезу в чужих комментариях","Фразы копируете как есть, с ошибками и эмоциями"],
+    words:[["Живая фраза","Слова клиента, как он сам их сказал"],["Гипотеза","Фраза, которую предполагает Claude. Подтверждаете её Вы, когда находите у живых людей"]],
+    task:"Напишите проводнику «Делаем шаг 1.1». Найдите одну гипотезу сегодня. Два дня собирайте фразы в карточку «Живые фразы»",
+    check:["В карточке 15 фраз и больше, все в словах клиентов","У каждой фразы есть источник: где и у кого","Хотя бы 5 фраз про то, что человек уже пробовал","Работаете на клиента: фразы из аудитории клиента"],
+    mats:["Где искать живые фразы","Шаблон карточки «Живые фразы»"]},
+   {id:"1.2",t:"Разбор аудитории",min:40,thing:"Карточка «Разбор аудитории»",
+    why:"Claude раскладывает Ваши живые фразы по 10 разделам и четырём слоям глубины. Догадок здесь нет, только слова клиентов",
+    main:["Разбор идёт по фразам из шага 1.1","Сегмент выбираете Вы, Claude даёт варианты","Разбор становится входом для кристалла"],
+    words:[["Сегмент","Группа клиентов с одной болью и одним решением"],["Слой глубины","Что человек говорит, что чувствует и что прячет"]],
+    task:"Напишите проводнику «Делаем шаг 1.2» и пройдите семь шагов разбора, отвечая на его вопросы",
+    check:["Боли в карточке написаны словами клиентов","Сегмент выбран Вами","Читая карточку, Вы узнаёте своих клиентов"],
+    mats:["Пример готового разбора"]},
+   {id:"1.3",t:"Смысловой кристалл",min:45,thing:"Пять связок и первый пост",
+    why:"Пять связок боли, смысла и продукта. Из них дальше собирается весь контент и все офферы",
+    main:["Из первой связки сегодня же собирается пост","Каждая связка проходит критика по шести пунктам","Слабую связку переделываем до публикации"],
+    words:[["Связка","Боль клиента, смысл и Ваш продукт в одной фразе"],["Критик","Проверка черновика: язык, конкретность, честность, попадание"]],
+    task:"Соберите кристалл и опубликуйте пост из первой связки",
+    check:["5 связок, у каждой доказательство или пометка, что его собрать","Ни одна связка не подойдёт любой нише","Пост из первой связки опубликован"],
+    mats:["Пример кристалла","Рубрика критика"]},
+   {id:"1.4",t:"Позиционирование от альтернатив",min:45,thing:"Фраза позиционирования",
+    why:"Клиент всегда выбирает Вас вместо чего-то: курса, подрядчика, бесплатного гайда. Здесь находим, где Вы выигрываете",
+    main:["Альтернативы берутся из Вашего разбора","Категорию выбираете Вы","Одна фраза идёт во все тексты и офферы"],
+    words:[["Альтернатива","То, что клиент сделал бы без Вас"],["Категория","Поле, в котором Вас сравнивают"]],
+    task:"Выберите категорию и соберите фразу позиционирования",
+    check:["Человек, видящий Вас впервые, понимает фразу за 5 секунд","Ясно, вместо чего Вас выбирают","Есть строка, кому Вы не подходите"],
+    mats:["Эталон: система вместо инструментов"]}
+  ]},
+ {n:2,name:"Запуск продукта",sticker:"ticket",
+  sub:"Что продаёте, кому и по какой цене. Продаёте раньше, чем создали",
+  intro:{min:3,t:"Продать раньше, чем создали",main:["Самая дорогая ошибка: полгода делать продукт, который не покупают","Опишете продукт и соберёте первые «да» до того, как он готов","В конце блока закроется первый пункт паспорта"]},
+  lessons:[
+   {id:"2.1",t:"Описание продукта",thing:"Карточка продукта"},
+   {id:"2.2",t:"Продать раньше, чем создали",thing:"Предзапись и первые «да»"},
+   {id:"2.3",t:"Линейка продуктов",thing:"Магнит, вход, основной и дорогой продукт"},
+   {id:"2.4",t:"Маркетинговое описание",thing:"Текст, который продаёт",pass:[1]},
+   {id:"2.5",t:"Продающая страница",thing:"Страница продукта"},
+   {id:"2.6",t:"План запуска",thing:"43 задачи по дням"}
+  ]},
+ {n:3,name:"Система заявок",sticker:"magnet",
+  sub:"Путь от поста до заявки: кодовое слово, бот, прогрев, заявка у Вас в Telegram. ChatPlace для автоматизаций платный",
+  intro:{min:3,t:"Путь от поста до заявки",main:["Человек пишет слово ночью, бот отдаёт материал, утром у Вас заявка","Десять уроков, каждый зажигает свой пункт паспорта","Понадобится ChatPlace, он платный, подключим первым уроком"]},
+  lessons:[
+   {id:"3.1",t:"Подключаем ChatPlace",thing:"Claude видит Ваши автоматизации"},
+   {id:"3.2",t:"Лид-магнит",thing:"Бесплатный материал под боль из кристалла",pass:[2]},
+   {id:"3.3",t:"Пост или рилс с кодовым словом",thing:"Публикация с кодовым словом",pass:[3]},
+   {id:"3.4",t:"Воронка на кодовое слово",thing:"Выдача сама, переход в Telegram с меткой",pass:[4,5]},
+   {id:"3.5",t:"Прогрев в боте",thing:"Цепочка сообщений",pass:[6]},
+   {id:"3.6",t:"Квалификация, заявка и работа с базой",thing:"Заявка в базе, уведомление, точки касания",pass:[7,8]},
+   {id:"3.7",t:"Оплата и выдача доступа",thing:"Оплата без Вашего участия"},
+   {id:"3.8",t:"Приём денег и юридический минимум",thing:"Оферта, политика, согласие, чек"},
+   {id:"3.9",t:"Скрипты в переписке",thing:"Ответы на вопросы и возражения"},
+   {id:"3.10",t:"Проверка по паспорту",thing:"Первая воронка запущена",pass:[9,10]}
+  ]},
+ {n:4,name:"Контент-завод",sticker:"cards",
+  sub:"Контент Вашим голосом из болей Ваших клиентов. Вы выбираете и публикуете",
+  lessons:[
+   {id:"4.1",t:"Брендбук",thing:"Цвета, шрифты, правила"},
+   {id:"4.2",t:"Голос бренда",thing:"Claude пишет как Вы"},
+   {id:"4.3",t:"Карусели одной фразой",thing:"Первая карусель"},
+   {id:"4.4",t:"Motion-рилс без съёмки",thing:"Первый рилс"},
+   {id:"4.5",t:"Прогрев в сторис",thing:"Серия сторис под продажу"}
+  ]},
+ {n:5,name:"Цифры и повторные продажи",short:"Цифры и продажи",sticker:"chart",
+  sub:"Видно, сколько людей пришло, откуда и сколько купило. И следующая продажа тем, кто уже купил",
+  lessons:[
+   {id:"5.1",t:"Метки и цели",thing:"Видно, откуда пришла заявка"},
+   {id:"5.2",t:"Дашборд",thing:"Все цифры на одной странице"},
+   {id:"5.3",t:"Онбординг и первый результат",thing:"Путь клиента после покупки"},
+   {id:"5.4",t:"Кейс и следующая продажа",thing:"Кейс и второй продукт"}
+  ]}
+];
+const PASS = ["Продукт, покупатель и оффер","Лид-магнит","Пост или рилс с кодовым словом","Выдача материала работает сама","Переход в Telegram с меткой","Прогрев в боте","Точка заявки и уведомление","Заявка сохраняется в базе","Отчёт по этапам","Тест с реального аккаунта"];
+const ALL = M.flatMap(m=>m.lessons.map(l=>({...l,mod:m})));
+
+let done = new Set();
+let route = null; // "has" — продукт есть, "none" — продукта пока нет
+const tg=(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.initData)?Telegram.WebApp:null;
+const cloud=tg&&tg.CloudStorage&&tg.isVersionAtLeast&&tg.isVersionAtLeast('6.9')?tg.CloudStorage:null;
+const goal=g=>{try{ym(108790481,'reachGoal',g)}catch(e){}};
+try{const s=JSON.parse(localStorage.getItem("hk-done")||"null"); if(s) done=new Set(s);}catch(e){}
+try{route=localStorage.getItem("hk-route")||null;}catch(e){}
+const save=()=>{const d=JSON.stringify([...done]);
+  try{localStorage.setItem("hk-done",d); if(route) localStorage.setItem("hk-route",route);}catch(e){}
+  if(cloud){try{cloud.setItem("hk-done",d,()=>{}); if(route) cloud.setItem("hk-route",route,()=>{});}catch(e){}}};
+/* тариф: ссылка с ?t=os открывает кабинет тарифа с обратной связью */
+const TARIFF=(()=>{try{const q=new URLSearchParams(location.search).get("t"); if(q){localStorage.setItem("hk-t",q); return q;} return localStorage.getItem("hk-t")||"";}catch(e){return "";}})();
+let activeMod = 0, passOpen=false;
+
+const $=id=>document.getElementById(id);
+const skipped=l=>l.route==="none" && route==="has";
+const routeAll=()=>ALL.filter(l=>!skipped(l));
+const blockDone=m=>m.lessons.filter(l=>!skipped(l)).every(l=>done.has(l.id));
+function computeOpen(){M.forEach((m,i)=>{m.open = i===0 || (M[i-1].open && blockDone(M[i-1]));});}
+const ready=l=>!!l.why;
+const openLessons=()=>routeAll().filter(l=>l.mod.open&&ready(l));
+const current=()=>openLessons().find(l=>!done.has(l.id)) || openLessons().at(-1);
+
+function greet(){
+  const h=new Date().getHours();
+  const p=h<5?"Доброй ночи":h<12?"Доброе утро":h<18?"Добрый день":"Добрый вечер";
+  const u=tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user;
+  $("hello").textContent=p+(u&&u.first_name?", "+u.first_name:"");
+}
+
+function renderRing(){
+  const list=routeAll(), n=list.filter(l=>done.has(l.id)).length, total=list.length, pct=Math.round(n/total*100);
+  $("ringArc").style.strokeDashoffset = 540.35*(1-n/total);
+  $("ringPct").textContent=pct+"%";
+  $("ringCount").textContent=n+" из "+total+" уроков";
+  $("ringScript").textContent = n===0?"начнём сегодня": n<4?"первые шаги сделаны": n<7?"фундамент почти готов":"смыслы собраны";
+  const c=current(); $("hereTitle").textContent=c.id+" "+c.t;
+}
+
+function renderRoute(){
+  const el=$("routeCard");
+  if(!route){
+    el.innerHTML=`<h4>У Вас уже есть продукт?</h4>
+      <p class="s">От ответа зависит, с какого шага начнётся блок 1. Поменять можно в любой момент</p>
+      <div class="route-btns">
+        <button class="route-btn" data-route="has"><b>Да, есть</b><small>Сразу в смыслы, шаг 1.1</small></button>
+        <button class="route-btn" data-route="none"><b>Пока нет</b><small>Начнём с шага 1.0 «Продукт из Вас»</small></button>
+      </div>`;
+  } else {
+    el.innerHTML=`<h4>Ваша дорожка</h4>
+      <div class="route-now"><span class="route-dot ${route}"></span><div><b>${route==="has"?"Продукт уже есть":"Продукта пока нет"}</b><small>${route==="has"?"Блок 1 начинается с разбора аудитории":"Блок 1 начинается с шага 1.0, продукт соберём из Вашего опыта"}</small></div></div>
+      <button class="toggle" data-route="${route==="has"?"none":"has"}">${route==="has"?"Продукта пока нет":"Продукт уже есть"}? Сменить дорожку</button>`;
+  }
+  el.querySelectorAll("[data-route]").forEach(b=>b.onclick=()=>{route=b.dataset.route;save();goal("sis_route_"+route);toast(route==="has"?"Дорожка: продукт уже есть":"Дорожка: начинаем с продукта");renderAll();});
+}
+
+function renderShelf(){
+  $("shelf").innerHTML = M.map((m,i)=>{
+    const ls=m.lessons.filter(l=>!skipped(l));
+    const complete = m.open && ls.every(l=>done.has(l.id));
+    return `<button class="folder ${i===activeMod?'active':''} ${m.open?'':'locked'} ${complete?'complete':''}" data-i="${i}" aria-pressed="${i===activeMod}" aria-label="Блок ${m.n}. ${m.name}">
+      <div class="back"></div><div class="sheet"></div>
+      <div class="sticker">${ST[m.sticker]}</div>
+      <div class="front">
+        <div><div class="num">Блок ${m.n}</div><div class="name">${m.short||m.name}</div></div>
+        <div class="dots">${ls.map(l=>`<i class="${done.has(l.id)?'done':''}"></i>`).join("")}</div>
+      </div>
+      <div class="check">${CHECK}</div>
+      ${m.open?'':LOCK}
+    </button>`}).join("");
+  document.querySelectorAll(".folder").forEach(f=>f.onclick=()=>{activeMod=+f.dataset.i;renderShelf();renderModule();});
+}
+
+function renderModule(){
+  const m=M[activeMod], c=current();
+  const ls=m.lessons.filter(l=>!skipped(l));
+  const cnt=ls.filter(l=>done.has(l.id)).length;
+  $("modulePanel").innerHTML = `
+    <div class="mod-head"><h3>Блок ${m.n}. ${m.name}</h3><div class="count">${m.open?cnt+" из "+ls.length:ls.length+" уроков"}</div></div>
+    <p class="mod-sub">${m.sub}</p>
+    ${m.open?'':`<div class="lock-note"><svg viewBox="0 0 24 24" fill="none" stroke="#b98431" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg><span>Откроется, когда закроете блок ${m.n-1}. Ссылка придёт в бот</span></div>`}
+    ${m.intro?`<button class="intro-row" data-intro="${m.n}" ${m.open?"":"disabled"}><span class="iplay"><svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5v11l9-5.5z"/></svg></span><span class="itxt"><b>Вводное видео · ${m.intro.t}</b><small>${m.intro.min} мин · смотреть первым, в прогресс не входит</small></span></button>`:""}
+    <ul class="lessons">${m.lessons.map(l=>{
+      const nr=m.open&&!ready(l), sk=skipped(l), tag=l.route==="none"&&!sk?'<span class="badge-route">если продукта нет</span>':'';
+      return `
+      <li class="lesson ${done.has(l.id)?'done':''} ${m.open&&!sk&&c.id===l.id?'current':''} ${m.open?'':'locked'} ${sk?'skipped':''}">
+        ${m.open&&!sk&&!nr?`<button class="tick" data-tick="${l.id}" aria-label="Отметить урок ${l.id}">${CHECK}</button>`:`<span class="tick"></span>`}
+        ${m.open&&!nr?`<button class="l-open" data-open="${l.id}">`:`<div>`}
+          <div class="l-title">${l.id} ${l.t}${tag}${m.open&&!sk&&c.id===l.id&&!done.has(l.id)?'<span class="badge-now">сейчас</span>':''}</div>
+          <div class="l-thing">${sk?'Пропускаете: продукт у Вас уже есть. Открыть можно в любой момент':nr?'Урок готовится, откроется здесь же':'На выходе: '+l.thing}${l.pass&&!sk?' <span class="badge-pass">паспорт '+l.pass.join(', ')+'</span>':''}</div>
+        ${m.open&&!nr?`</button>`:`</div>`}
+        <div class="l-time">${l.min&&!sk?(l.minNote||l.min+" мин"):""}</div>
+      </li>`}).join("")}</ul>`;
+  document.querySelectorAll("[data-tick]").forEach(b=>b.onclick=()=>toggle(b.dataset.tick));
+  document.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>openLesson(b.dataset.open));
+  document.querySelectorAll("[data-intro]").forEach(b=>b.onclick=()=>openIntro(+b.dataset.intro));
+}
+
+function passDone(k){const ls=ALL.filter(l=>l.pass&&l.pass.includes(k));return ls.length>0&&ls.every(l=>done.has(l.id));}
+function renderPass(){
+  const n=PASS.filter((_,i)=>passDone(i+1)).length;
+  $("passBar").innerHTML=PASS.map((_,i)=>`<i class="${passDone(i+1)?'on':''}"></i>`).join("");
+  const list=passOpen?PASS:PASS.slice(0,4);
+  $("passList").innerHTML=list.map((p,i)=>{const w=ALL.find(l=>l.pass&&l.pass.includes(i+1));return `<li class="${passDone(i+1)?'pdone':''}"><span>${i+1}</span><div>${p}<small>${w?'урок '+w.id:''}</small></div></li>`}).join("");
+  $("passToggle").textContent=passOpen?"Свернуть":"Показать все 10";
+}
+
+function toggle(id){
+  if(done.has(id)) done.delete(id); else {done.add(id); goal("sis_"+id.replace(".","_")); toast("Шаг "+id+" закрыт");}
+  save(); renderAll();
+}
+
+let reading=null; const checks={};
+function openIntro(n){
+  goal("sis_intro_"+n);
+  const m=M[n]; reading=null; document.body.classList.add("intro-mode");
+  $("crumbMod").textContent="Блок "+m.n+". "+m.name;
+  $("lNum").textContent="Вводное видео · "+m.intro.min+" минуты";
+  $("lTitle").textContent=m.intro.t;
+  $("lWhy").textContent=m.sub;
+  $("lVideo").textContent="Запись экрана, "+m.intro.min+" минуты";
+  $("lMain").innerHTML=m.intro.main.map(x=>`<li>${x}</li>`).join("");
+  $("rhythm").innerHTML="";
+  const f=m.lessons.find(l=>!skipped(l)&&ready(l));
+  $("nextTitle").textContent=f?f.id+" "+f.t:"Уроки блока готовятся";
+  $("nextBtn").style.display=f?"":"none"; $("nextBtn").onclick=()=>f&&openLesson(f.id);
+  $("lMats").innerHTML='<p class="note" style="margin-top:0">У вводного видео нет задания. Посмотрите и переходите к первому уроку блока</p>';
+  document.body.classList.add("reading"); window.scrollTo({top:0}); try{tg&&tg.BackButton.show()}catch(e){}
+}
+function openLesson(id){
+  document.body.classList.remove("intro-mode");
+  const l=ALL.find(x=>x.id===id); if(!l||!l.mod.open) return;
+  reading=l;
+  $("crumbMod").textContent="Блок "+l.mod.n+". "+l.mod.name;
+  $("lNum").textContent="Урок "+l.id+" · "+l.min+" минут";
+  $("lTitle").textContent=l.t;
+  $("lWhy").textContent=l.why;
+  $("lVideo").textContent="Запись экрана, "+Math.round(l.min/3)+" минут";
+  $("lMain").innerHTML=l.main.map(x=>`<li>${x}</li>`).join("");
+  $("lWords").innerHTML=l.words.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join("");
+  $("lTask").textContent=l.task;
+  $("lThing").textContent=l.thing;
+  $("lMats").innerHTML=l.mats.map(x=>`<button class="m"><span class="ic">PDF</span><span>${x}</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg></button>`).join("");
+  const steps=[["Зачем","понять смысл шага"],["Работа","по одному вопросу"],["Выбор","решаете Вы"],["Критик","проверка черновика"],["Вещь","готовый артефакт"],["Закрыто","отметка в кабинете"]];
+  const isDone=done.has(l.id);
+  $("rhythm").innerHTML=steps.map(([a,b],i)=>`<div class="${isDone?'past':(i===0?'on':'')}"><b>${i+1}. ${a}</b>${b}</div>`).join("");
+  $("closeBtn").textContent=isDone?"Шаг закрыт ✓":"Шаг закрыт";
+  if(!checks[l.id]) checks[l.id]=new Set(isDone?l.check.map((_,i)=>i):[]);
+  const drawChecks=()=>{const c=checks[l.id], all=c.size===l.check.length;
+    $("lCheck").innerHTML=l.check.map((t,i)=>`<button class="ck ${c.has(i)?'on':''}" data-ck="${i}"><span class="bx">${CHECK}</span><span>${t}</span></button>`).join("");
+    $("lCheck").querySelectorAll("[data-ck]").forEach(b=>b.onclick=()=>{const i=+b.dataset.ck; c.has(i)?c.delete(i):c.add(i); drawChecks();});
+    $("closeBtn").disabled=!isDone&&!all;
+    $("closeHint").textContent=isDone?"Шаг закрыт. Можно вернуться к нему в любой момент":all?"Всё отмечено. Закрывайте шаг":"Отмечено "+c.size+" из "+l.check.length+". Отметьте все пункты, и шаг закроется";};
+  drawChecks();
+  const ol=openLessons(); const ix=ol.findIndex(x=>x.id===id); const nx=ix<0?ol.find(x=>!done.has(x.id)):ol[ix+1];
+  $("nextTitle").textContent = nx? nx.id+" "+nx.t : "Блок 2 откроется через 2 недели";
+  $("nextBtn").style.display = nx?"":"none";
+  $("nextBtn").onclick=()=>nx&&openLesson(nx.id);
+  document.body.classList.add("reading"); window.scrollTo({top:0}); try{tg&&tg.BackButton.show()}catch(e){}
+}
+$("closeBtn").onclick=()=>{ if(reading&&!done.has(reading.id)){done.add(reading.id);save();goal("sis_"+reading.id.replace(".","_"));toast("Шаг "+reading.id+" закрыт. Вещь у Вас");renderAll();openLesson(reading.id);} };
+$("backBtn").onclick=()=>{try{tg&&tg.BackButton.hide()}catch(e){}document.body.classList.remove("reading");renderAll();window.scrollTo({top:0});};
+$("continueBtn").onclick=()=>openLesson(current().id);
+$("passToggle").onclick=()=>{passOpen=!passOpen;renderPass();};
+
+let tt;
+function toast(t){$("toastTxt").textContent=t;$("toast").classList.add("show");clearTimeout(tt);tt=setTimeout(()=>$("toast").classList.remove("show"),2200);}
+
+function renderAll(){computeOpen();renderRing();renderRoute();renderShelf();renderModule();renderPass();}
+if(TARIFF==="os"){$("tariffLabel").hidden=false;$("annaRow").hidden=false;}
+if(tg){try{tg.ready();tg.expand();tg.BackButton.onClick(()=>{document.body.classList.remove("reading");renderAll();window.scrollTo({top:0});});}catch(e){}}
+function boot(){greet(); renderAll();}
+if(cloud){cloud.getItems(["hk-done","hk-route"],(err,v)=>{try{if(v){if(v["hk-done"]){JSON.parse(v["hk-done"]).forEach(x=>done.add(x));} if(v["hk-route"]&&!route) route=v["hk-route"];}}catch(e){} boot();});}
+else boot();
+</script>
+</body>
+</html>
