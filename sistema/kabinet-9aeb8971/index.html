@@ -183,7 +183,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .iplay svg{width:12px;height:12px;margin-left:2px}
 .itxt b{display:block;font-size:15px}
 .itxt small{font-size:13px;color:var(--ink2)}
-body.intro-mode .words,body.intro-mode .task,body.intro-mode .rhythm{display:none}
+body.intro-mode .words,body.intro-mode .task{display:none}
 .side{display:flex;flex-direction:column;gap:18px}
 .side h4{font-weight:800;font-size:17px;letter-spacing:-.01em;margin-bottom:4px}
 .side p.s{font-size:14px;color:var(--ink2)}
@@ -215,12 +215,6 @@ body.reading #lessonView{display:block}
 .l-hero .script{font-family:'Marck Script',cursive;font-size:26px;color:var(--gold)}
 .l-hero h1{font-weight:800;font-size:clamp(30px,4.4vw,48px);line-height:1.05;letter-spacing:-.03em;margin-top:6px}
 .l-hero p{font-size:17px;color:var(--ink2);margin-top:14px;max-width:58ch}
-.rhythm{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:8px 0 26px}
-.rhythm div{position:relative;padding:12px 12px 12px;border-radius:14px;background:var(--paper);border:1px solid var(--line);font-size:13px;color:var(--muted)}
-.rhythm div b{display:block;font-size:14px;color:var(--ink);font-weight:600}
-.rhythm div.on{background:var(--ink);border-color:var(--ink);color:#c9c3b8}
-.rhythm div.on b{color:#faf7f0}
-.rhythm div.past{background:var(--teal-soft);border-color:transparent;color:#3d7e77}
 .l-grid{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
 .video{position:relative;aspect-ratio:16/9;border-radius:22px;overflow:hidden;background:
   radial-gradient(500px 280px at 20% 10%, rgba(232,180,95,.55), transparent 60%),
@@ -231,6 +225,17 @@ body.reading #lessonView{display:block}
 .video .cap{position:absolute;left:22px;bottom:18px;color:#faf7f0;font-size:14px;opacity:.85}
 .block{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:24px 26px;margin-bottom:18px}
 .block h3{font-weight:800;font-size:19px;letter-spacing:-.01em;margin-bottom:12px}
+.watch{display:flex;align-items:center;gap:14px;margin:4px 0 16px 6px;font-size:15.5px;color:var(--ink2)}
+.watch b{color:var(--ink);font-weight:700}.watch em{font-style:normal}
+.watch .wdot{flex:none;width:34px;height:34px;border-radius:50%;background:var(--gold);color:#14171a;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 6px rgba(232,180,95,.18)}
+.watch .wdot svg{width:13px;height:13px;margin-left:2px}
+.khead{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.khead h3{margin-bottom:0}
+.pdfbtn{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:var(--ink);color:#faf7f0;font-size:14px;font-weight:600;text-decoration:none}
+.pdfbtn svg{width:15px;height:15px}
+.knote{font-size:13px;color:var(--muted);margin-top:10px}
+body.intro-mode .pdfbtn,body.intro-mode .knote{display:none}
+.mats a.m{color:inherit;text-decoration:none}
 .block ul.main{list-style:none}
 .block ul.main li{position:relative;padding:8px 0 8px 26px;font-size:16px}
 .block ul.main li::before{content:"";position:absolute;left:4px;top:17px;width:9px;height:9px;border-radius:3px;background:var(--gold);transform:rotate(45deg)}
@@ -287,7 +292,6 @@ body.reading #lessonView{display:block}
   .ring-center .big{font-size:50px}
   .grid,.l-grid{grid-template-columns:1fr}
   .shelf{grid-template-columns:repeat(3,1fr);row-gap:64px}
-  .rhythm{grid-template-columns:repeat(3,1fr)}
 }
 @media (max-width:560px){
   .wrap{padding:0 16px 60px}
@@ -296,7 +300,6 @@ body.reading #lessonView{display:block}
   .panel,.block{padding:20px}
   .words dl{grid-template-columns:1fr;gap:2px}
   .words dd{margin-bottom:10px}
-  .rhythm{grid-template-columns:repeat(2,1fr)}
   .lesson{grid-template-columns:28px 1fr}
   .l-time{display:none}
 }
@@ -395,11 +398,11 @@ body.reading #lessonView{display:block}
       <h1 id="lTitle"></h1>
       <p id="lWhy"></p>
     </section>
-    <div class="rhythm" id="rhythm"></div>
+    <div class="watch" id="lWatch"><span class="wdot"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span><span><b>Начните с видео.</b> <em id="lWatchTxt"></em></span></div>
     <div class="l-grid">
       <div>
         <div class="video"><div class="play"><svg viewBox="0 0 24 24" fill="#14171a"><path d="M5 3v18l15-9z"/></svg></div><div class="cap" id="lVideo"></div></div>
-        <div class="block"><h3>Главное из урока</h3><ul class="main" id="lMain"></ul></div>
+        <div class="block konspekt"><div class="khead"><h3 id="lMainH">Конспект урока</h3><a class="pdfbtn" id="lPdf" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg>Скачать PDF</a></div><ul class="main" id="lMain"></ul><p class="knote" id="lPdfNote">В PDF всё главное, слова урока, задание и проверка. Сохраните себе, он останется у Вас</p></div>
         <div class="block words"><h3>Слова урока</h3><dl id="lWords"></dl></div>
         <div class="block task">
           <h3>Задание</h3>
@@ -438,7 +441,7 @@ const M = [
   sub:"Ставим Claude, проводник и базу знаний. Бесплатного тарифа Claude для этого хватает",
   intro:{min:2,t:"Зачем подготовка",main:["Модель у всех одна, разница в том, что Claude знает о Вашем деле","К концу блока у Вас кабинет в Claude, проводник и база знаний","Четыре урока, около двух часов, можно за один вечер"]},
   lessons:[
-   {id:"0.0",t:"Маршрут: как здесь всё устроено",min:8,thing:"Вы выбрали дорожку и знаете первый шаг",
+   {id:"0.0",t:"Маршрут: как здесь всё устроено",min:8,vmin:8,thing:"Вы выбрали дорожку и знаете первый шаг",
     why:"Восемь минут о том, как устроен кабинет, что понадобится и как идти, чтобы не потеряться",
     main:["Цель одна: первая воронка, которая работает по паспорту из 10 пунктов","Папки открываются по мере прохождения, сроков нет","Каждый шаг: зачем, работа, Ваш выбор, проверка, готовая вещь","Claude и Notion бесплатно, ChatPlace платный, он нужен с блока 3"],
     words:[["Паспорт","10 пунктов, по которым видно, что воронка работает"],["Проводник","Скилл в Claude, который ведёт по шагам и помогает, если застряли"],["Дорожка","Есть у Вас продукт или нет. От этого зависит начало блока 1"]],
@@ -674,6 +677,9 @@ function toggle(id){
 }
 
 let reading=null; const checks={};
+function plural(n,a,b,c){const m10=n%10,m100=n%100;return m10==1&&m100!=11?a:(m10>=2&&m10<=4&&(m100<10||m100>=20))?b:c}
+function dl(e,href,id){goal("sis_pdf_"+id.replace(".","_"));
+  if(tg&&tg.openLink){e.preventDefault();try{tg.openLink(new URL(href,location.href).href)}catch(x){location.href=href}}}
 function openIntro(n){
   goal("sis_intro_"+n);
   const m=M[n]; reading=null; document.body.classList.add("intro-mode");
@@ -681,9 +687,10 @@ function openIntro(n){
   $("lNum").textContent="Вводное видео · "+m.intro.min+" минуты";
   $("lTitle").textContent=m.intro.t;
   $("lWhy").textContent=m.sub;
-  $("lVideo").textContent="Запись экрана, "+m.intro.min+" минуты";
+  $("lVideo").textContent="Видео, "+m.intro.min+" "+plural(m.intro.min,"минута","минуты","минут");
+  $("lWatchTxt").textContent="Вводное к блоку, "+m.intro.min+" "+plural(m.intro.min,"минута","минуты","минут");
+  $("lMainH").textContent="Главное из видео";
   $("lMain").innerHTML=m.intro.main.map(x=>`<li>${x}</li>`).join("");
-  $("rhythm").innerHTML="";
   const f=m.lessons.find(l=>!skipped(l)&&ready(l));
   $("nextTitle").textContent=f?f.id+" "+f.t:"Уроки блока готовятся";
   $("nextBtn").style.display=f?"":"none"; $("nextBtn").onclick=()=>f&&openLesson(f.id);
@@ -698,15 +705,19 @@ function openLesson(id){
   $("lNum").textContent="Урок "+l.id+" · "+l.min+" минут";
   $("lTitle").textContent=l.t;
   $("lWhy").textContent=l.why;
-  $("lVideo").textContent="Запись экрана, "+Math.round(l.min/3)+" минут";
+  const vm=l.vmin||Math.max(3,Math.round(l.min/3));
+  $("lVideo").textContent="Видео, "+vm+" "+plural(vm,"минута","минуты","минут");
+  $("lWatchTxt").textContent="Потом конспект и задание, они ниже";
+  $("lMainH").textContent="Конспект урока";
+  const pdf="konspekt/"+l.id.replace(".","-")+".pdf";
+  $("lPdf").href=pdf; $("lPdf").onclick=e=>dl(e,pdf,l.id);
   $("lMain").innerHTML=l.main.map(x=>`<li>${x}</li>`).join("");
   $("lWords").innerHTML=l.words.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join("");
   $("lTask").textContent=l.task;
   $("lThing").textContent=l.thing;
-  $("lMats").innerHTML=l.mats.map(x=>`<button class="m"><span class="ic">PDF</span><span>${x}</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg></button>`).join("");
-  const steps=[["Зачем","понять смысл шага"],["Работа","по одному вопросу"],["Выбор","решаете Вы"],["Критик","проверка черновика"],["Вещь","готовый артефакт"],["Закрыто","отметка в кабинете"]];
+  $("lMats").innerHTML=`<a class="m" href="${pdf}" target="_blank" rel="noopener" data-pdf><span class="ic">PDF</span><span>Конспект урока ${l.id}</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg></a>`+l.mats.map(x=>`<button class="m"><span class="ic">PDF</span><span>${x}</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg></button>`).join("");
+  $("lMats").querySelector("[data-pdf]").onclick=e=>dl(e,pdf,l.id);
   const isDone=done.has(l.id);
-  $("rhythm").innerHTML=steps.map(([a,b],i)=>`<div class="${isDone?'past':(i===0?'on':'')}"><b>${i+1}. ${a}</b>${b}</div>`).join("");
   $("closeBtn").textContent=isDone?"Шаг закрыт ✓":"Шаг закрыт";
   if(!checks[l.id]) checks[l.id]=new Set(isDone?l.check.map((_,i)=>i):[]);
   const drawChecks=()=>{const c=checks[l.id], all=c.size===l.check.length;
