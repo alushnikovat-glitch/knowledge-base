@@ -253,7 +253,7 @@ body.intro-mode .kcard{display:none}
 .task .done-row .hint{font-size:13.5px;color:#a7a196}
 .mats .m{display:flex;gap:12px;align-items:center;padding:11px 0;border-top:1px solid var(--line);font-size:14.5px;width:100%;text-align:left}
 .mats .m:first-of-type{border-top:0}
-.mats .ic{width:34px;height:40px;border-radius:6px;background:var(--sand);position:relative;flex:none;font-size:9px;font-weight:600;color:var(--ink2);display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px}
+.mats .ic{width:34px;letter-spacing:-.02em;height:40px;border-radius:6px;background:var(--sand);position:relative;flex:none;font-size:9px;font-weight:600;color:var(--ink2);display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px}
 .mats .ic::after{content:"";position:absolute;top:0;right:0;border-width:0 10px 10px 0;border-style:solid;border-color:var(--bg) var(--bg) var(--sand3) var(--sand3);border-radius:0 0 0 3px}
 .mats .m span{flex:1}
 .mats .m .ic{flex:none;width:34px}
@@ -472,7 +472,7 @@ const M = [
     words:[["Проводник","Главный скилл коробки, ведёт Вас по шагам"],["Выполнение кода","Настройка Claude, без которой скиллы не запускаются"]],
     task:"Включите выполнение кода, загрузите проводник и скиллы блоков 0 и 1, напишите в новом чате проекта «Привет»",
     check:["Выполнение кода включено","Проводник и скиллы стоят в списке, переключатели включены","Проводник ответил и спросил про Ваше дело"],
-    mats:["Скачать проводник","Скиллы блоков 0 и 1 одним архивом","Частые сбои"]},
+    mats:[{t:"Проводник, файл .skill",h:"files/sistema-provodnik.skill",ic:"SKILL"},{t:"Скиллы блоков 0 и 1 одним архивом",h:"files/skills-blok-0-1.zip",ic:"ZIP"},"Частые сбои"]},
    {id:"0.4",t:"Notion, база знаний и первый разговор",min:30,thing:"База знаний в Notion",
     why:"База хранит Ваши решения. Claude читает её перед работой, и Вам больше не нужно объяснять всё заново",
     main:["Notion подключается из каталога коннекторов, на бесплатном Claude тоже","Одно решение живёт в одной карточке","Первое сообщение проводнику запускает маршрут"],
@@ -681,8 +681,9 @@ function toggle(id){
 }
 
 let reading=null; const checks={};
+const DLI=`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg>`;
 function plural(n,a,b,c){const m10=n%10,m100=n%100;return m10==1&&m100!=11?a:(m10>=2&&m10<=4&&(m100<10||m100>=20))?b:c}
-function dl(e,href,id){goal("sis_pdf_"+id.replace(".","_"));
+function dl(e,href,id){goal("sis_pdf_"+id.replace(/\./g,"_"));
   if(tg&&tg.openLink){e.preventDefault();try{tg.openLink(new URL(href,location.href).href)}catch(x){location.href=href}}}
 function openIntro(n){
   goal("sis_intro_"+n);
@@ -719,8 +720,9 @@ function openLesson(id){
   $("lWords").innerHTML=l.words.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join("");
   $("lTask").textContent=l.task;
   $("lThing").textContent=l.thing;
-  $("lMats").innerHTML=`<a class="m" href="${pdf}" target="_blank" rel="noopener" data-pdf><span class="ic">PDF</span><span>Конспект урока ${l.id}</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg></a>`+l.mats.map(x=>`<button class="m"><span class="ic">PDF</span><span>${x}</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg></button>`).join("");
+  $("lMats").innerHTML=`<a class="m" href="${pdf}" target="_blank" rel="noopener" data-pdf><span class="ic">PDF</span><span>Конспект урока ${l.id}</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg></a>`+l.mats.map(x=>typeof x==="string"?`<button class="m"><span class="ic">PDF</span><span>${x}</span>${DLI}</button>`:`<a class="m" href="${x.h}" target="_blank" rel="noopener" data-f="${x.h}"><span class="ic">${x.ic||"PDF"}</span><span>${x.t}</span>${DLI}</a>`).join("");
   $("lMats").querySelector("[data-pdf]").onclick=e=>dl(e,pdf,l.id);
+  $("lMats").querySelectorAll("[data-f]").forEach(a=>a.onclick=e=>dl(e,a.dataset.f,l.id+"_file"));
   const isDone=done.has(l.id);
   $("closeBtn").textContent=isDone?"Шаг закрыт ✓":"Шаг закрыт";
   if(!checks[l.id]) checks[l.id]=new Set(isDone?l.check.map((_,i)=>i):[]);
