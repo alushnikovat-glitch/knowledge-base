@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Пример разбора · модуль 1.2</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600;800&family=Marck+Script&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7f0;--paper:#fffdf9;--ink:#14171a;--ink2:#3b3f44;--muted:#948e84;--line:#ebe3d3;--teal:#5fb8ae;--teal-soft:#dff1ee;--gold:#e8b45f;--gold-soft:#f8ead0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Onest',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;
+  background-image:radial-gradient(900px 520px at 85% -10%,rgba(232,180,95,.22),transparent 60%)}
+.wrap{max-width:720px;margin:0 auto;padding:28px 16px 60px}
+.top{font-size:14px;font-weight:600}.top i{font-family:'Marck Script',cursive;font-style:normal;color:#b0894f;font-size:17px;margin-left:6px;font-weight:400}
+.num{font-family:'Marck Script',cursive;color:#c9933e;font-size:22px;margin-top:28px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.lead{font-size:16px;color:var(--ink2);margin-top:10px}
+h2{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:30px 0 10px}
+ol.steps{padding-left:20px;font-size:15.5px}ol.steps li{margin-bottom:6px}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px}
+.box.ex{background:var(--teal-soft);border-color:transparent}
+pre{white-space:pre-wrap;font-family:inherit;font-size:15.5px;line-height:1.6}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.row b{font-size:15px}
+.tag{font-size:12px;font-weight:600;color:#3f7f77;background:#fff;border-radius:999px;padding:2px 9px}
+button{font:inherit;font-weight:600;font-size:14px;border:0;border-radius:12px;padding:9px 14px;background:var(--ink);color:#faf7f0;cursor:pointer;white-space:nowrap}
+button.ok{background:var(--teal)}
+.note{font-size:14px;color:var(--ink2);margin-top:10px}
+ul.ck{list-style:none}ul.ck li{position:relative;padding:6px 0 6px 26px;font-size:15px;border-bottom:1px solid var(--line)}ul.ck li:last-child{border:0}
+ul.ck li:before{content:"";position:absolute;left:2px;top:11px;width:13px;height:13px;border:1.6px solid var(--teal);border-radius:4px}
+.foot{margin-top:36px;font-size:12.5px;color:var(--muted)}
+
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:4px}
+th,td{text-align:left;vertical-align:top;padding:9px 8px;border-bottom:1px solid var(--line)}
+th{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.tw{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:6px 12px}
+.cards{display:grid;gap:10px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px}
+.card b{font-size:16px}.card .m{font-family:'Marck Script',cursive;color:#c9933e;font-size:18px;margin-left:6px}
+.card p{font-size:15px;color:var(--ink2);margin-top:6px}
+.err{display:grid;gap:10px}
+.err .card .row{margin:8px 0 0}
+.err pre{font-size:15px;background:var(--teal-soft);border-radius:12px;padding:10px 12px;flex:1}
+.flow{counter-reset:f;list-style:none}
+.flow li{counter-increment:f;position:relative;padding:8px 0 8px 40px;font-size:15.5px;border-bottom:1px solid var(--line)}
+.flow li:last-child{border:0}
+.flow li:before{content:counter(f);position:absolute;left:0;top:7px;width:26px;height:26px;border-radius:50%;background:var(--gold);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+p.t{font-size:15.5px;margin-bottom:8px}
+@media (max-width:560px){.err .row{flex-direction:column;align-items:stretch}.err .row button{align-self:flex-start}}
+</style></head>
+<body><div class="wrap">
+<div class="top">Хочу как у Анастасии<i>материал модуля</i></div>
+<div class="num">Модуль 1.2 · Разбор аудитории</div>
+<h1>Пример готового разбора</h1>
+<p class="lead">Так выглядит разбор, по которому понятно, что писать завтра. Каждая строка словами аудитории, рядом смысловой перевод и образ из жизни.</p>
+<h2>Карта поверхности, по одной строке из каждого раздела</h2><div class="tw"><table><thead><tr><th>Раздел</th><th>Словами аудитории</th><th>Смысловой перевод</th><th>Метафора</th></tr></thead><tbody><tr><td>1. Сегмент</td><td>Эксперт 30–45 лет с реальным опытом, но без системного онлайн-дохода</td><td>Знает много, зарабатывает мало</td><td>Шеф-повар, который готовит гениально дома, а ресторана всё нет</td></tr><tr><td>2. Вопросы в 3 ночи</td><td>С чего начать: с блога, продукта, упаковки, трафика?</td><td>Паралич от выбора</td><td>Стоит перед шведским столом голодная и не может выбрать тарелку</td></tr><tr><td>3. Боли</td><td>Их бесит, что пишут посты каждый день, а продаж нет</td><td>Контент без смыслов работает вхолостую</td><td>Кричит в лес: эхо есть, заказов нет</td></tr><tr><td>4. Страхи</td><td>«Вложу деньги, опять не получится, и окажется, что я неспособна»</td><td>Страх потерять веру в себя</td><td>Боится убедиться, что не умеет летать</td></tr><tr><td>5. Ошибки</td><td>Сначала делают продукт, потом думают, кому продать</td><td>Влюбляются в идею вместо клиента</td><td>Строят дом, потом ищут, где поставить</td></tr><tr><td>6. Возражения</td><td>«Есть YouTube»</td><td>Не видит разницы между информацией и системой</td><td>YouTube научит разбирать двигатель. А Вы хотите ехать</td></tr><tr><td>7. Мечты</td><td>Быть экспертом, к которому приходят сами</td><td>Репутация работает вместо холодного трафика</td><td>Не искать клиентов, чтобы находили её</td></tr><tr><td>8. Сарказм</td><td>«Прошла 14 курсов. Теперь знаю всё и продаю на 0»</td><td>Самоирония про информационное переедание</td><td>После смеха готовы слушать решение</td></tr><tr><td>9. Магниты</td><td>«Как продавать без блога-миллионника»</td><td>Снимает барьер «нет аудитории, нет продаж»</td><td>Главное точность попадания в смысл</td></tr><tr><td>10. Ценности</td><td>Честность: без розовых очков</td><td>Устали от обещаний и хайпа</td><td>«Скажи правду, даже если неудобная»</td></tr></tbody></table></div><h2>Что Вы получите в своём разборе сверх этого</h2><ul class="ck">
+<li>Словарь из Ваших живых фраз, дословно</li><li>День первой мысли и первый запрос в поиске</li>
+<li>Четыре силы: что толкает, что тянет, что держит, что мешает, и главная из них</li>
+<li>Убеждение, которое должно рухнуть, и стадия осознанности</li>
+<li>Идентичность в формате «Я человек, который…»</li><li>Итоговая карта на один экран и три темы для контента</li></ul><p class="note">Это сокращённый разбор аудитории моего продукта для экспертов. Полный разбор по десяти разделам содержит по десять строк в каждом.</p>
+<div class="foot">Анастасия Лушникова · @target_school</div>
+</div>
+<script>
+document.querySelectorAll("[data-copy]").forEach(b=>b.onclick=async()=>{
+  const t=document.getElementById(b.dataset.copy).innerText, txt=b.textContent;
+  try{await navigator.clipboard.writeText(t);}catch(e){
+    const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(x){}a.remove();}
+  b.textContent="Скопировано";b.classList.add("ok");setTimeout(()=>{b.textContent=txt;b.classList.remove("ok")},1800);
+});
+</script>
+</body></html>
