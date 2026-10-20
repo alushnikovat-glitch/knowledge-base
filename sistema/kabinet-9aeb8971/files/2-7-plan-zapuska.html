@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>План запуска · модуль 2.7</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600;800&family=Marck+Script&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7f0;--paper:#fffdf9;--ink:#14171a;--ink2:#3b3f44;--muted:#948e84;--line:#ebe3d3;--teal:#5fb8ae;--teal-soft:#dff1ee;--gold:#e8b45f;--gold-soft:#f8ead0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Onest',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;
+  background-image:radial-gradient(900px 520px at 85% -10%,rgba(232,180,95,.22),transparent 60%)}
+.wrap{max-width:720px;margin:0 auto;padding:28px 16px 60px}
+.top{font-size:14px;font-weight:600}.top i{font-family:'Marck Script',cursive;font-style:normal;color:#b0894f;font-size:17px;margin-left:6px;font-weight:400}
+.num{font-family:'Marck Script',cursive;color:#c9933e;font-size:22px;margin-top:28px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.lead{font-size:16px;color:var(--ink2);margin-top:10px}
+h2{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:30px 0 10px}
+ol.steps{padding-left:20px;font-size:15.5px}ol.steps li{margin-bottom:6px}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px}
+.box.ex{background:var(--teal-soft);border-color:transparent}
+pre{white-space:pre-wrap;font-family:inherit;font-size:15.5px;line-height:1.6}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.row b{font-size:15px}
+.tag{font-size:12px;font-weight:600;color:#3f7f77;background:#fff;border-radius:999px;padding:2px 9px}
+button{font:inherit;font-weight:600;font-size:14px;border:0;border-radius:12px;padding:9px 14px;background:var(--ink);color:#faf7f0;cursor:pointer;white-space:nowrap}
+button.ok{background:var(--teal)}
+.note{font-size:14px;color:var(--ink2);margin-top:10px}
+ul.ck{list-style:none}ul.ck li{position:relative;padding:6px 0 6px 26px;font-size:15px;border-bottom:1px solid var(--line)}ul.ck li:last-child{border:0}
+ul.ck li:before{content:"";position:absolute;left:2px;top:11px;width:13px;height:13px;border:1.6px solid var(--teal);border-radius:4px}
+.foot{margin-top:36px;font-size:12.5px;color:var(--muted)}
+
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:4px}
+th,td{text-align:left;vertical-align:top;padding:9px 8px;border-bottom:1px solid var(--line)}
+th{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.tw{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:6px 12px}
+.cards{display:grid;gap:10px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px}
+.card b{font-size:16px}.card .m{font-family:'Marck Script',cursive;color:#c9933e;font-size:18px;margin-left:6px}
+.card p{font-size:15px;color:var(--ink2);margin-top:6px}
+.err{display:grid;gap:10px}
+.err .card .row{margin:8px 0 0}
+.err pre{font-size:15px;background:var(--teal-soft);border-radius:12px;padding:10px 12px;flex:1}
+.flow{counter-reset:f;list-style:none}
+.flow li{counter-increment:f;position:relative;padding:8px 0 8px 40px;font-size:15.5px;border-bottom:1px solid var(--line)}
+.flow li:last-child{border:0}
+.flow li:before{content:counter(f);position:absolute;left:0;top:7px;width:26px;height:26px;border-radius:50%;background:var(--gold);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+p.t{font-size:15.5px;margin-bottom:8px}
+@media (max-width:560px){.err .row{flex-direction:column;align-items:stretch}.err .row button{align-self:flex-start}}
+</style></head>
+<body><div class="wrap">
+<div class="top">Хочу как у Анастасии<i>материал модуля</i></div>
+<div class="num">Модуль 2.7 · План запуска</div>
+<h1>План запуска: 43 задачи</h1>
+<p class="lead">Шаблон, по которому я запускаю свои продукты: без вебинаров и без команды. Вы, Claude и автоматизация.</p>
+<h2>Как читать</h2><p class="t">Д это день открытия продаж. Д-14 значит за 14 дней до него. «Вместе» значит: решаете Вы, делает Claude. Последняя колонка: шаг системы, где задача делается.</p><div class="tw"><table><thead><tr><th>№</th><th>Когда</th><th>Задача</th><th>Кто</th><th>Шаг</th></tr></thead><tbody><tr><td>1</td><td>Д-14</td><td>Разбор аудитории: боли, страхи, возражения, мечты</td><td>вместе</td><td>1.2</td></tr><tr><td>2</td><td>Д-14</td><td>Разведка конкурентов: что залетает, какие боли они не закрывают</td><td>Claude</td><td>1.4</td></tr><tr><td>3</td><td>Д-13</td><td>Выбрать 5 смысловых связок для контента и оффера</td><td>Вы</td><td>1.3</td></tr><tr><td>4</td><td>Д-12</td><td>Описание продукта: что это, для кого, что внутри</td><td>вместе</td><td>2.1</td></tr><tr><td>5</td><td>Д-12</td><td>Наполнение продукта: состав, модули, что человек получит на выходе</td><td>Вы</td><td>2.3</td></tr><tr><td>6</td><td>Д-11</td><td>Возражения и ответ на каждое</td><td>Claude</td><td>2.5</td></tr><tr><td>7</td><td>Д-11</td><td>Тарифы и цены, дедлайн цены до старта</td><td>Вы</td><td>2.4</td></tr><tr><td>8</td><td>Д-10</td><td>Маркетинговое описание и оффер</td><td>Claude</td><td>2.5</td></tr><tr><td>9</td><td>Д-10</td><td>Текст продающей страницы: оффер, ценность, кейсы, вопросы</td><td>Claude</td><td>2.6</td></tr><tr><td>10</td><td>Д-9</td><td>Страница на своём сайте или закреп в канале со статьёй Telegraph</td><td>Claude</td><td>2.6</td></tr><tr><td>11</td><td>Д-8</td><td>Статья-выдача под кодовое слово с продающими перебивками</td><td>Claude</td><td>3.2</td></tr><tr><td>12</td><td>Д-8</td><td>Продукт в шапке профиля и в закрепе канала</td><td>Claude</td><td>2.6</td></tr><tr><td>13</td><td>Д-7</td><td>Смысловые визуалы: обложки, картинки для сторис и каруселей</td><td>Claude</td><td>4.1</td></tr><tr><td>14</td><td>Д-7</td><td>Создать продукт в сервисе оплаты по каждому тарифу</td><td>Вы</td><td>3.7</td></tr><tr><td>15</td><td>Д-7</td><td>Ссылки на оплату с метками</td><td>Claude</td><td>3.7</td></tr><tr><td>16</td><td>Д-6</td><td>Страница выдачи после оплаты</td><td>Claude</td><td>3.7</td></tr><tr><td>17</td><td>Д-6</td><td>Цель «Покупка» в Метрике на странице выдачи</td><td>Claude</td><td>5.1</td></tr><tr><td>18</td><td>Д-6</td><td>Тестовая оплата: доступ приходит, цель срабатывает</td><td>Вы</td><td>3.7</td></tr><tr><td>19</td><td>Д-6</td><td>Кодовое слово: из постоянных или новая воронка под продукт</td><td>Вы</td><td>3.3</td></tr><tr><td>20</td><td>Д-5</td><td>Воронка в ChatPlace: соцсеть → Telegram, одна кнопка</td><td>Claude</td><td>3.4</td></tr><tr><td>21</td><td>Д-5</td><td>Теги на каждом шаге, чтобы видеть цифры в дашборде</td><td>Claude</td><td>3.4</td></tr><tr><td>22</td><td>Д-5</td><td>Ответы под комментариями</td><td>Claude</td><td>3.4</td></tr><tr><td>23</td><td>Д-5</td><td>Напоминание тем, кто не открыл, и сообщение с продуктом через сутки</td><td>Claude</td><td>3.5</td></tr><tr><td>24</td><td>Д-4</td><td>Предзапись или лист ожидания для тех, кто не готов купить сразу</td><td>Claude</td><td>3.6</td></tr><tr><td>25</td><td>Д-4</td><td>Пройти воронку самому с чистого аккаунта</td><td>Вы</td><td>3.10</td></tr><tr><td>26</td><td>Д-7</td><td>Контент-план запуска: карусели по кодовому слову и Motion-рилс</td><td>вместе</td><td>4.6</td></tr><tr><td>27</td><td>Д-6 … Д-1</td><td>Карусели по утверждённой структуре</td><td>Claude</td><td>4.3</td></tr><tr><td>28</td><td>Д-6 … Д</td><td>Motion-рилс с показом неподписчикам, 1–2 в день</td><td>вместе</td><td>4.4</td></tr><tr><td>29</td><td>Д-5 … Д</td><td>Прогрев в сторис с четверга по вторник, каждый день закрывает одно возражение</td><td>вместе</td><td>4.5</td></tr><tr><td>30</td><td>Д-1</td><td>Анонс в 4 сторис: вовлечение, личный момент, демонстрация, одна кнопка</td><td>Claude</td><td>4.5</td></tr><tr><td>31</td><td>Д-1</td><td>Пост в канале Telegram с кнопкой на страницу продукта</td><td>Claude</td><td>2.6</td></tr><tr><td>32</td><td>Д</td><td>Открыть продажи во вторник: сторис, пост, рассылка в боте</td><td>Вы</td><td>3.5</td></tr><tr><td>33</td><td>Д</td><td>Рассылка в боте только по нужным тегам, аудитории не смешиваем</td><td>Claude</td><td>3.6</td></tr><tr><td>34</td><td>Д … Д+3</td><td>Отвечать в директе и в боте</td><td>Вы</td><td>3.9</td></tr><tr><td>35</td><td>Д+2</td><td>Дожим в четверг: кейсы, ответы на возражения, дедлайн цены</td><td>вместе</td><td>3.9</td></tr><tr><td>36</td><td>Д+3</td><td>Закрыть цену до старта, поднять до основной</td><td>Вы</td><td>2.4</td></tr><tr><td>37</td><td>Д-1</td><td>Шапка запуска в дашборде: что считаем и откуда берём</td><td>Claude</td><td>5.2</td></tr><tr><td>38</td><td>Д+3</td><td>Срез через 3 дня после старта: воронка, клики, оплаты</td><td>Claude</td><td>5.2</td></tr><tr><td>39</td><td>Д+7</td><td>Итог окна продаж: сколько вошло, дошло, купило, где потеряли</td><td>вместе</td><td>5.2</td></tr><tr><td>40</td><td>Д+7</td><td>Выводы в журнал решений в базе знаний</td><td>Claude</td><td>5.2</td></tr><tr><td>41</td><td>Д+7 … Д+21</td><td>Собрать отзывы и первые кейсы</td><td>Вы</td><td>5.4</td></tr><tr><td>42</td><td>Д+21</td><td>Обновить продающую страницу: кейсы вместо обещаний</td><td>Claude</td><td>5.4</td></tr><tr><td>43</td><td>по графику</td><td>Обратная связь первым покупателям</td><td>Вы</td><td>5.3</td></tr></tbody></table></div><h2>Скопировать в заметки</h2><div class="box"><div class="row"><b>План целиком</b><button data-copy="plan">Скопировать</button></div><pre id="plan">План запуска · Д = [дата]
+
+1. Д-14 · Разбор аудитории: боли, страхи, возражения, мечты · вместе · шаг 1.2 · [ ]
+2. Д-14 · Разведка конкурентов: что залетает, какие боли они не закрывают · Claude · шаг 1.4 · [ ]
+3. Д-13 · Выбрать 5 смысловых связок для контента и оффера · Вы · шаг 1.3 · [ ]
+4. Д-12 · Описание продукта: что это, для кого, что внутри · вместе · шаг 2.1 · [ ]
+5. Д-12 · Наполнение продукта: состав, модули, что человек получит на выходе · Вы · шаг 2.3 · [ ]
+6. Д-11 · Возражения и ответ на каждое · Claude · шаг 2.5 · [ ]
+7. Д-11 · Тарифы и цены, дедлайн цены до старта · Вы · шаг 2.4 · [ ]
+8. Д-10 · Маркетинговое описание и оффер · Claude · шаг 2.5 · [ ]
+9. Д-10 · Текст продающей страницы: оффер, ценность, кейсы, вопросы · Claude · шаг 2.6 · [ ]
+10. Д-9 · Страница на своём сайте или закреп в канале со статьёй Telegraph · Claude · шаг 2.6 · [ ]
+11. Д-8 · Статья-выдача под кодовое слово с продающими перебивками · Claude · шаг 3.2 · [ ]
+12. Д-8 · Продукт в шапке профиля и в закрепе канала · Claude · шаг 2.6 · [ ]
+13. Д-7 · Смысловые визуалы: обложки, картинки для сторис и каруселей · Claude · шаг 4.1 · [ ]
+14. Д-7 · Создать продукт в сервисе оплаты по каждому тарифу · Вы · шаг 3.7 · [ ]
+15. Д-7 · Ссылки на оплату с метками · Claude · шаг 3.7 · [ ]
+16. Д-6 · Страница выдачи после оплаты · Claude · шаг 3.7 · [ ]
+17. Д-6 · Цель «Покупка» в Метрике на странице выдачи · Claude · шаг 5.1 · [ ]
+18. Д-6 · Тестовая оплата: доступ приходит, цель срабатывает · Вы · шаг 3.7 · [ ]
+19. Д-6 · Кодовое слово: из постоянных или новая воронка под продукт · Вы · шаг 3.3 · [ ]
+20. Д-5 · Воронка в ChatPlace: соцсеть → Telegram, одна кнопка · Claude · шаг 3.4 · [ ]
+21. Д-5 · Теги на каждом шаге, чтобы видеть цифры в дашборде · Claude · шаг 3.4 · [ ]
+22. Д-5 · Ответы под комментариями · Claude · шаг 3.4 · [ ]
+23. Д-5 · Напоминание тем, кто не открыл, и сообщение с продуктом через сутки · Claude · шаг 3.5 · [ ]
+24. Д-4 · Предзапись или лист ожидания для тех, кто не готов купить сразу · Claude · шаг 3.6 · [ ]
+25. Д-4 · Пройти воронку самому с чистого аккаунта · Вы · шаг 3.10 · [ ]
+26. Д-7 · Контент-план запуска: карусели по кодовому слову и Motion-рилс · вместе · шаг 4.6 · [ ]
+27. Д-6 … Д-1 · Карусели по утверждённой структуре · Claude · шаг 4.3 · [ ]
+28. Д-6 … Д · Motion-рилс с показом неподписчикам, 1–2 в день · вместе · шаг 4.4 · [ ]
+29. Д-5 … Д · Прогрев в сторис с четверга по вторник, каждый день закрывает одно возражение · вместе · шаг 4.5 · [ ]
+30. Д-1 · Анонс в 4 сторис: вовлечение, личный момент, демонстрация, одна кнопка · Claude · шаг 4.5 · [ ]
+31. Д-1 · Пост в канале Telegram с кнопкой на страницу продукта · Claude · шаг 2.6 · [ ]
+32. Д · Открыть продажи во вторник: сторис, пост, рассылка в боте · Вы · шаг 3.5 · [ ]
+33. Д · Рассылка в боте только по нужным тегам, аудитории не смешиваем · Claude · шаг 3.6 · [ ]
+34. Д … Д+3 · Отвечать в директе и в боте · Вы · шаг 3.9 · [ ]
+35. Д+2 · Дожим в четверг: кейсы, ответы на возражения, дедлайн цены · вместе · шаг 3.9 · [ ]
+36. Д+3 · Закрыть цену до старта, поднять до основной · Вы · шаг 2.4 · [ ]
+37. Д-1 · Шапка запуска в дашборде: что считаем и откуда берём · Claude · шаг 5.2 · [ ]
+38. Д+3 · Срез через 3 дня после старта: воронка, клики, оплаты · Claude · шаг 5.2 · [ ]
+39. Д+7 · Итог окна продаж: сколько вошло, дошло, купило, где потеряли · вместе · шаг 5.2 · [ ]
+40. Д+7 · Выводы в журнал решений в базе знаний · Claude · шаг 5.2 · [ ]
+41. Д+7 … Д+21 · Собрать отзывы и первые кейсы · Вы · шаг 5.4 · [ ]
+42. Д+21 · Обновить продающую страницу: кейсы вместо обещаний · Claude · шаг 5.4 · [ ]
+43. по графику · Обратная связь первым покупателям · Вы · шаг 5.3 · [ ]</pre><p class=note>Проводник разложит задачи по датам сам, когда Вы напишете «Делаем шаг 2.7». Копия нужна, если хотите вести план в заметках.</p></div>
+<div class="foot">Анастасия Лушникова · @target_school</div>
+</div>
+<script>
+document.querySelectorAll("[data-copy]").forEach(b=>b.onclick=async()=>{
+  const t=document.getElementById(b.dataset.copy).innerText, txt=b.textContent;
+  try{await navigator.clipboard.writeText(t);}catch(e){
+    const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(x){}a.remove();}
+  b.textContent="Скопировано";b.classList.add("ok");setTimeout(()=>{b.textContent=txt;b.classList.remove("ok")},1800);
+});
+</script>
+</body></html>
