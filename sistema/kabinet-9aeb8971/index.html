@@ -223,6 +223,8 @@ body.reading #lessonView{display:block}
 .video .play{width:78px;height:78px;border-radius:50%;background:#faf7f0;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(0,0,0,.35)}
 .video .play svg{width:26px;height:26px;margin-left:4px}
 .video .cap{position:absolute;left:22px;bottom:18px;color:#faf7f0;font-size:14px;opacity:.85}
+.video video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;border-radius:inherit}
+.video.has-video .play,.video.has-video .cap{display:none}
 .block{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:24px 26px;margin-bottom:18px}
 .block h3{font-weight:800;font-size:19px;letter-spacing:-.01em;margin-bottom:12px}
 .watch{display:flex;align-items:center;gap:14px;margin:4px 0 16px 6px;font-size:15.5px;color:var(--ink2)}
@@ -445,7 +447,7 @@ const M = [
   sub:"Ставим Claude, проводник и базу знаний. Бесплатного тарифа Claude для этого хватает",
   intro:{min:2,t:"Зачем подготовка",main:["Модель у всех одна, разница в том, что Claude знает о Вашем деле","К концу блока у Вас кабинет в Claude, проводник и база знаний","Четыре модуля, около двух часов, можно за один вечер"]},
   lessons:[
-   {id:"0.0",t:"Маршрут: как здесь всё устроено",min:8,vmin:8,thing:"Вы выбрали дорожку и знаете первый шаг",
+   {id:"0.0",t:"Маршрут: как здесь всё устроено",min:8,vmin:8,video:"video/0-0.mp4",poster:"video/0-0.jpg",thing:"Вы выбрали дорожку и знаете первый шаг",
     why:"Восемь минут о том, как устроен кабинет, что понадобится и как идти, чтобы не потеряться",
     main:["Цель одна: первая воронка, которая работает по паспорту из 10 пунктов","Папки открываются по мере прохождения, сроков нет","Каждый шаг: зачем, работа, Ваш выбор, проверка, готовая вещь","Claude и Notion бесплатно, ChatPlace платный, он нужен с блока 3"],
     words:[["Паспорт","10 пунктов, по которым видно, что воронка работает"],["Проводник","Скилл в Claude, который ведёт по шагам и помогает, если застряли"],["Дорожка","Есть у Вас продукт или нет. От этого зависит начало блока 1"]],
@@ -685,6 +687,21 @@ const DLI=`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-wid
 function plural(n,a,b,c){const m10=n%10,m100=n%100;return m10==1&&m100!=11?a:(m10>=2&&m10<=4&&(m100<10||m100>=20))?b:c}
 function dl(e,href,id){goal("sis_pdf_"+id.replace(/\./g,"_"));
   if(tg&&tg.openLink){e.preventDefault();try{tg.openLink(new URL(href,location.href).href)}catch(x){location.href=href}}}
+// видео модуля или вводного: есть поле video, ставим плеер, нет, оставляем заглушку
+const videoGoals=new Set();
+function setVideo(src,poster,g){
+  const box=$("lVideo").parentElement, old=box.querySelector("video");
+  if(old){old.pause();old.remove()}
+  box.classList.toggle("has-video",!!src);
+  if(!src) return;
+  const v=document.createElement("video");
+  v.controls=true; v.playsInline=true; v.setAttribute("playsinline",""); v.setAttribute("webkit-playsinline",""); v.preload="metadata";
+  if(poster) v.poster=poster;
+  v.src=src;
+  v.addEventListener("play",()=>{if(!videoGoals.has(g)){videoGoals.add(g);goal(g)}});
+  box.appendChild(v);
+}
+$("backBtn").addEventListener("click",()=>{const v=$("lVideo").parentElement.querySelector("video");if(v)v.pause()});
 function openIntro(n){
   goal("sis_intro_"+n);
   const m=M[n]; reading=null; document.body.classList.add("intro-mode");
@@ -693,6 +710,7 @@ function openIntro(n){
   $("lTitle").textContent=m.intro.t;
   $("lWhy").textContent=m.sub;
   $("lVideo").textContent="Видео, "+m.intro.min+" "+plural(m.intro.min,"минута","минуты","минут");
+  setVideo(m.intro.video,m.intro.poster,"sis_video_intro_"+n);
   $("lWatchTxt").textContent="Вводное к блоку, "+m.intro.min+" "+plural(m.intro.min,"минута","минуты","минут");
   $("lMainH").textContent="Главное из видео";
   $("lMain").innerHTML=m.intro.main.map(x=>`<li>${x}</li>`).join("");
@@ -712,6 +730,7 @@ function openLesson(id){
   $("lWhy").textContent=l.why;
   const vm=l.vmin||Math.max(3,Math.round(l.min/3));
   $("lVideo").textContent="Видео, "+vm+" "+plural(vm,"минута","минуты","минут");
+  setVideo(l.video,l.poster,"sis_video_"+l.id.replace(/\./g,"_"));
   $("lWatchTxt").textContent="Главное и задание ждут ниже";
   $("lMainH").textContent="Главное из модуля";
   const pdf="konspekt/"+l.id.replace(".","-")+".pdf";
