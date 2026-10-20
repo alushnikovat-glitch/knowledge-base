@@ -225,6 +225,40 @@ body.reading #lessonView{display:block}
 .video .cap{position:absolute;left:22px;bottom:18px;color:#faf7f0;font-size:14px;opacity:.85}
 .video video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;border-radius:inherit}
 .video.has-video .play,.video.has-video .cap{display:none}
+/* анкета «Точка старта», урок 0.0 */
+body.intro-mode .start{display:none}
+.start .st-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:6px}
+.start .st-head h3{margin-bottom:4px}
+.start .st-sub{color:var(--ink2);font-size:15px;max-width:52ch}
+.start .st-mark{font-family:'Marck Script',cursive;font-size:22px;color:var(--teal);white-space:nowrap;line-height:1.1}
+.start .st-mark.ex{color:#c9933e}
+.st-q{display:grid;grid-template-columns:30px 1fr;gap:4px 12px;padding:16px 0;border-top:1px solid var(--line)}
+.st-q:first-child{border-top:0}
+.st-q .n{grid-row:span 3;width:30px;height:30px;border-radius:50%;background:var(--gold-soft);color:#b5802f;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
+.st-q label{font-weight:600;font-size:16px;line-height:1.4}
+.st-q small{color:var(--muted);font-size:13.5px}
+.st-q input,.st-q textarea{font:inherit;font-size:15.5px;color:var(--ink);width:100%;margin-top:6px;padding:11px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);transition:border-color .2s,background .2s}
+.st-q textarea{min-height:72px;resize:vertical;line-height:1.45}
+.st-q input:focus,.st-q textarea:focus{outline:0;border-color:var(--teal);background:var(--paper)}
+.st-q input::placeholder,.st-q textarea::placeholder{color:#b8b0a2}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);font-size:14.5px;transition:all .2s}
+.chip:hover{border-color:var(--sand3)}
+.chip.on{background:var(--teal-soft);border-color:var(--teal);color:#2e7d76;font-weight:600}
+.st-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px;padding-top:16px;border-top:1px solid var(--line)}
+.btn.ghost{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.st-row .hint{font-size:13.5px;color:var(--ink2);flex-basis:100%}
+@media (max-width:560px){.start .st-head{flex-direction:column;gap:2px}.st-q{grid-template-columns:28px 1fr;gap:4px 10px}.st-q .n{grid-row:auto;width:28px;height:28px;font-size:13px}.st-q small,.st-q input,.st-q textarea,.st-q .chips{grid-column:1/-1}.st-row .btn{width:100%;justify-content:center}}
+/* модуль 0.0: карточка дорожки и «Найдите в кабинете» рядом с видео */
+body.intro-mode .l-route,body.intro-mode .tour{display:none}
+.tour .tb{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 0;border-top:1px solid var(--line);font-size:15px;color:var(--ink)}
+.tour .tb:first-of-type{border-top:0}
+.tour .tb i{font-style:normal;width:26px;height:26px;border-radius:50%;background:var(--gold-soft);color:#b5802f;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none}
+.tour .tb span{flex:1}
+.tour .tb svg{width:14px;height:14px;color:var(--muted)}
+.flash{animation:flash 2.4s ease-out}
+@keyframes flash{0%,60%{box-shadow:0 0 0 4px var(--gold),0 0 0 14px rgba(232,180,95,.25)}100%{box-shadow:0 0 0 0 rgba(232,180,95,0)}}
+.ck.auto{cursor:default}
 .block{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:24px 26px;margin-bottom:18px}
 .block h3{font-weight:800;font-size:19px;letter-spacing:-.01em;margin-bottom:12px}
 .watch{display:flex;align-items:center;gap:14px;margin:4px 0 16px 6px;font-size:15.5px;color:var(--ink2)}
@@ -407,6 +441,18 @@ body.intro-mode .kcard{display:none}
     <div class="l-grid">
       <div>
         <div class="video"><div class="play"><svg viewBox="0 0 24 24" fill="#14171a"><path d="M5 3v18l15-9z"/></svg></div><div class="cap" id="lVideo"></div></div>
+        <div class="block start" id="startCard" hidden>
+          <div class="st-head">
+            <div><h3>Точка старта</h3><p class="st-sub">Семь вопросов, минут на пять. Ответы видите только Вы и проводник. В конце пути вернёмся к ним и посмотрим, какой путь Вы прошли</p></div>
+            <span class="st-mark" id="stMark"></span>
+          </div>
+          <div id="stForm"></div>
+          <div class="st-row">
+            <button class="btn gold" id="stSave" type="button">Сохранить ответы</button>
+            <button class="btn ghost" id="stCopy" type="button">Скопировать для проводника</button>
+            <span class="hint" id="stHint">Ответы сохраняются в кабинете. Скопируйте их и отправьте проводнику в Claude, он положит их в Вашу базу</span>
+          </div>
+        </div>
         <div class="block"><h3 id="lMainH">Главное из модуля</h3><ul class="main" id="lMain"></ul></div>
         <div class="block words"><h3>Слова модуля</h3><dl id="lWords"></dl></div>
         <div class="block task">
@@ -422,6 +468,8 @@ body.intro-mode .kcard{display:none}
         <div class="kcard"><span class="ic">PDF</span><div><b>Конспект модуля</b><small>Одна страница, сохраните себе</small></div><a class="pdfbtn" id="lPdf" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg>Скачать</a></div>
       </div>
       <aside class="side">
+        <div class="panel route l-route" id="lRoute" hidden></div>
+        <div class="panel tour" id="lTour" hidden><h4>Найдите в кабинете</h4><p class="s">То, о чём говорится в видео. Нажмите, и кабинет покажет, где это</p><div id="tourList"></div></div>
         <div class="panel mats"><h4>Материалы модуля</h4><div id="lMats"></div><p class="note">Скачанные файлы остаются у Вас и после окончания доступа</p></div>
         <div class="panel next"><div><small>Следующий модуль</small><b id="nextTitle"></b></div><button class="btn" id="nextBtn" aria-label="Открыть следующий модуль"><svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5v11l9-5.5z"/></svg></button></div>
       </aside>
@@ -447,12 +495,12 @@ const M = [
   sub:"Ставим Claude, проводник и базу знаний. Бесплатного тарифа Claude для этого хватает",
   intro:{min:2,t:"Зачем подготовка",main:["Модель у всех одна, разница в том, что Claude знает о Вашем деле","К концу блока у Вас кабинет в Claude, проводник и база знаний","Четыре модуля, около двух часов, можно за один вечер"]},
   lessons:[
-   {id:"0.0",t:"Маршрут: как здесь всё устроено",min:8,vmin:8,video:"video/0-0.mp4",poster:"video/0-0.jpg",thing:"Вы выбрали дорожку и знаете первый шаг",
+   {id:"0.0",t:"Маршрут: как здесь всё устроено",min:8,vmin:8,video:"video/0-0.mp4",poster:"video/0-0.jpg",thing:"Анкета «Точка старта» заполнена, дорожка выбрана, первый шаг понятен",
     why:"Восемь минут о том, как устроен кабинет, что понадобится и как идти, чтобы не потеряться",
-    main:["Цель одна: первая воронка, которая работает по паспорту из 10 пунктов","Папки открываются по мере прохождения, сроков нет","Каждый шаг: зачем, работа, Ваш выбор, проверка, готовая вещь","Claude и Notion бесплатно, ChatPlace платный, он нужен с блока 3"],
-    words:[["Паспорт","10 пунктов, по которым видно, что воронка работает"],["Проводник","Скилл в Claude, который ведёт по шагам и помогает, если застряли"],["Дорожка","Есть у Вас продукт или нет. От этого зависит начало блока 1"]],
-    task:"Выберите дорожку в карточке «У Вас уже есть продукт?» и откройте модуль 0.1",
-    check:["Выбрала дорожку: продукт есть или нет","Знаю, где кнопка «Продолжить» и блок «Если застряли»"],
+    main:["Воронка с ботом это верхушка айсберга. Под водой фундамент: что Вы продаёте, кому, какими словами и почему у Вас","Порядок такой: смыслы и продукт, потом воронка, контент, аналитика и автоматизация","Цель одна: первая воронка, которая работает по паспорту из 10 пунктов","Папки открываются по мере прохождения, сроков нет","Claude и Notion бесплатно, ChatPlace платный, он нужен с блока 3"],
+    words:[["Фундамент","Что Вы продаёте, кому, какими словами и почему у Вас. С него начинается система"],["Точка старта","Анкета из 7 вопросов о том, с чего Вы начинаете. В конце пути сравним"],["Паспорт","10 пунктов, по которым видно, что воронка работает"],["Проводник","Скилл в Claude, который ведёт по шагам и помогает, если застряли"],["Дорожка","Есть у Вас продукт или нет. От этого зависит начало блока 1"]],
+    task:"Три дела. Заполните анкету «Точка старта» под видео. Выберите дорожку в карточке «У Вас уже есть продукт?». Найдите в кабинете кнопку «Продолжить» и блок «Если застряли». Потом откройте модуль 0.1",
+    check:["Заполнил(а) анкету «Точка старта»","Выбрал(а) дорожку: продукт есть или пока нет","Знаю, где кнопка «Продолжить» и блок «Если застряли»"],
     mats:["Карта всех модулей","Что понадобится: список сервисов"]},
    {id:"0.1",t:"Как устроен Claude",min:25,vmin:6,thing:"Проект в Claude с инструкцией",
     why:"Пять понятий, на которых держится вся система. Разберёте их один раз и перестанете начинать каждый раз с чистого чата",
@@ -609,8 +657,8 @@ function renderRing(){
   const c=current(); $("hereTitle").textContent=c.id+" "+c.t;
 }
 
-function renderRoute(){
-  const el=$("routeCard");
+function renderRoute(){ ["routeCard","lRoute"].forEach(id=>renderRouteIn($(id))); }
+function renderRouteIn(el){
   if(!route){
     el.innerHTML=`<h4>У Вас уже есть продукт?</h4>
       <p class="s">От ответа зависит, с какого шага начнётся блок 1. Поменять можно в любой момент</p>
@@ -623,7 +671,8 @@ function renderRoute(){
       <div class="route-now"><span class="route-dot ${route}"></span><div><b>${route==="has"?"Продукт уже есть":"Продукта пока нет"}</b><small>${route==="has"?"Блок 1 начинается с разбора аудитории":"Блок 1 начинается с шага 1.0, продукт соберём из Вашего опыта"}</small></div></div>
       <button class="toggle" data-route="${route==="has"?"none":"has"}">${route==="has"?"Продукта пока нет":"Продукт уже есть"}? Сменить дорожку</button>`;
   }
-  el.querySelectorAll("[data-route]").forEach(b=>b.onclick=()=>{route=b.dataset.route;save();goal("sis_route_"+route);toast(route==="has"?"Дорожка: продукт уже есть":"Дорожка: начинаем с продукта");renderAll();});
+  el.querySelectorAll("[data-route]").forEach(b=>b.onclick=()=>{route=b.dataset.route;save();goal("sis_route_"+route);toast(route==="has"?"Дорожка: продукт уже есть":"Дорожка: начинаем с продукта");renderAll();
+    if(reading&&reading.id==="0.0"){const y=scrollY; openLesson("0.0"); scrollTo({top:y});}});
 }
 
 function renderShelf(){
@@ -731,6 +780,7 @@ function openLesson(id){
   const vm=l.vmin||Math.max(3,Math.round(l.min/3));
   $("lVideo").textContent="Видео, "+vm+" "+plural(vm,"минута","минуты","минут");
   setVideo(l.video,l.poster,"sis_video_"+l.id.replace(/\./g,"_"));
+  const z=l.id==="0.0"; $("startCard").hidden=!z; $("lRoute").hidden=!z; $("lTour").hidden=!z; if(z){drawStart(); renderRouteIn($("lRoute")); drawTour();}
   $("lWatchTxt").textContent="Главное и задание ждут ниже";
   $("lMainH").textContent="Главное из модуля";
   const pdf="konspekt/"+l.id.replace(".","-")+".pdf";
@@ -745,9 +795,12 @@ function openLesson(id){
   const isDone=done.has(l.id);
   $("closeBtn").textContent=isDone?"Шаг закрыт ✓":"Шаг закрыт";
   if(!checks[l.id]) checks[l.id]=new Set(isDone?l.check.map((_,i)=>i):[]);
-  const drawChecks=()=>{const c=checks[l.id], all=c.size===l.check.length;
-    $("lCheck").innerHTML=l.check.map((t,i)=>`<button class="ck ${c.has(i)?'on':''}" data-ck="${i}"><span class="bx">${CHECK}</span><span>${t}</span></button>`).join("");
-    $("lCheck").querySelectorAll("[data-ck]").forEach(b=>b.onclick=()=>{const i=+b.dataset.ck; c.has(i)?c.delete(i):c.add(i); drawChecks();});
+  const AUTO=l.id==="0.0"?{0:[()=>!!start.at,"Отметится сам, когда сохраните анкету на 7 из 7"],1:[()=>!!route,"Отметится сам, когда выберете дорожку"]}:{};
+  const drawChecks=()=>{const c=checks[l.id];
+    for(const i in AUTO){if(AUTO[i][0]()) c.add(+i); else if(!isDone) c.delete(+i);}
+    const all=c.size===l.check.length;
+    $("lCheck").innerHTML=l.check.map((t,i)=>`<button class="ck ${c.has(i)?'on':''} ${AUTO[i]?'auto':''}" data-ck="${i}"><span class="bx">${CHECK}</span><span>${t}</span></button>`).join("");
+    $("lCheck").querySelectorAll("[data-ck]").forEach(b=>b.onclick=()=>{const i=+b.dataset.ck; if(AUTO[i]){toast(AUTO[i][1]);return;} c.has(i)?c.delete(i):c.add(i); drawChecks();});
     $("closeBtn").disabled=!isDone&&!all;
     $("closeHint").textContent=isDone?"Шаг закрыт. Можно вернуться к нему в любой момент":all?"Всё отмечено. Закрывайте шаг":"Отмечено "+c.size+" из "+l.check.length+". Отметьте все пункты, и шаг закроется";};
   drawChecks();
@@ -762,6 +815,72 @@ $("backBtn").onclick=()=>{try{tg&&tg.BackButton.hide()}catch(e){}document.body.c
 $("continueBtn").onclick=()=>openLesson(current().id);
 $("passToggle").onclick=()=>{passOpen=!passOpen;renderPass();};
 
+/* анкета «Точка старта»: хранится у ученика (localStorage + Telegram CloudStorage), ключ hk-start */
+const SQ=[
+ {k:"delo",q:"Чем Вы занимаетесь и что продаёте или хотите продавать?",ph:"Например: психолог, консультации по тревоге",area:1,short:"Чем занимаюсь"},
+ {k:"product",q:"Есть продукт, который уже покупали?",one:["Да","Пока нет","Не уверен(а)"],short:"Продукт, который покупали"},
+ {k:"blog",q:"Где Ваш блог и сколько в нём подписчиков сейчас?",ph:"Например: Telegram-канал, 800 подписчиков",short:"Блог сейчас"},
+ {k:"leads",q:"Сколько заявок из блога приходит за месяц сейчас?",hint:"Ноль тоже ответ",ph:"Например: 0",short:"Заявок в месяц сейчас"},
+ {k:"tried",q:"Что уже пробовали?",many:["Таргет","Гивы","Рилсы","Кодовые слова и боты","Нейросети","Ничего"],short:"Уже пробовал(а)"},
+ {k:"hours",q:"Сколько часов в неделю готовы уделять системе?",ph:"Например: 5 часов",short:"Часов в неделю"},
+ {k:"goal",q:"Что для Вас будет результатом этого пути?",hint:"Своими словами",ph:"Например: 10 заявок в месяц из блога без рекламы",area:1,short:"Мой результат"}];
+let start={a:{},at:null}, stDemo=false;
+try{const s=JSON.parse(localStorage.getItem("hk-start")||"null"); if(s&&s.a) start=s;}catch(e){}
+const saveStart=()=>{ if(stDemo) return; const v=JSON.stringify(start);
+  try{localStorage.setItem("hk-start",v);}catch(e){}
+  if(cloud){try{cloud.setItem("hk-start",v,()=>{});}catch(e){}}};
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmtDate=iso=>{const d=new Date(iso);return String(d.getDate()).padStart(2,"0")+"."+String(d.getMonth()+1).padStart(2,"0")+"."+d.getFullYear();};
+function drawStart(){
+  const a=start.a;
+  $("stForm").innerHTML=SQ.map((q,i)=>{
+    let f;
+    if(q.one||q.many){const opts=q.one||q.many, cur=a[q.k]||(q.many?[]:"");
+      f=`<div class="chips" role="group" aria-label="${esc(q.q)}">`+opts.map(o=>`<button type="button" class="chip ${(q.many?cur.includes(o):cur===o)?"on":""}" data-k="${q.k}" data-v="${esc(o)}">${o}</button>`).join("")+`</div>`;}
+    else f=q.area?`<textarea id="st_${q.k}" data-k="${q.k}" maxlength="400" placeholder="${esc(q.ph)}">${esc(a[q.k]||"")}</textarea>`
+                 :`<input id="st_${q.k}" data-k="${q.k}" maxlength="120" placeholder="${esc(q.ph)}" value="${esc(a[q.k]||"")}">`;
+    return `<div class="st-q"><span class="n">${i+1}</span><label for="st_${q.k}">${q.q}</label>${q.hint?`<small>${q.hint}</small>`:""}${f}</div>`;
+  }).join("");
+  $("stForm").querySelectorAll("input,textarea").forEach(el=>el.oninput=()=>{start.a[el.dataset.k]=el.value; saveStart(); drawStartMark();});
+  $("stForm").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{const q=SQ.find(x=>x.k===b.dataset.k), v=b.dataset.v;
+    if(q.one) start.a[q.k]=start.a[q.k]===v?"":v;
+    else{let c=(start.a[q.k]||[]).slice(); if(c.includes(v)) c=c.filter(x=>x!==v); else c=v==="Ничего"?["Ничего"]:c.filter(x=>x!=="Ничего").concat(v); start.a[q.k]=c;}
+    saveStart(); drawStart();});
+  drawStartMark();
+}
+const stFilled=()=>SQ.filter(q=>{const v=start.a[q.k];return Array.isArray(v)?v.length:v&&String(v).trim();}).length;
+function drawStartMark(){
+  const n=stFilled();
+  $("stMark").className="st-mark"+(stDemo&&n?" ex":"");
+  $("stMark").textContent=stDemo&&n?"пример":start.at?"сохранено "+fmtDate(start.at):n?"заполнено "+n+" из 7":"";
+}
+function startText(){
+  const lines=SQ.map((q,i)=>{const v=start.a[q.k];const t=Array.isArray(v)?v.join(", "):(v||"").trim();return (i+1)+". "+q.short+": "+(t||"нет ответа");});
+  return "Проводник, это моя точка старта. Сохрани её в базу знаний, в конце пути вернёмся к ней.\n\nТочка старта · "+fmtDate(start.at||new Date().toISOString())+"\n"+lines.join("\n");
+}
+$("stSave").onclick=()=>{
+  const n=stFilled(); if(n<7){toast("Ответьте на все 7 вопросов, сейчас "+n+" из 7");return;}
+  start.at=new Date().toISOString(); saveStart(); drawStartMark(); goal("sis_start_form");
+  if(reading&&reading.id==="0.0"&&checks["0.0"]&&!checks["0.0"].has(0)){checks["0.0"].add(0); const y=scrollY; openLesson("0.0"); scrollTo({top:y});}
+  toast("Точка старта сохранена");
+};
+$("stCopy").onclick=()=>{
+  const t=startText();
+  const ok=()=>toast("Скопировано. Вставьте в чат с проводником в Claude");
+  try{navigator.clipboard.writeText(t).then(ok,()=>fallbackCopy(t,ok));}catch(e){fallbackCopy(t,ok);}
+};
+function fallbackCopy(t,ok){const ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");ok();}catch(e){toast("Не получилось скопировать");}ta.remove();}
+
+// «Найдите в кабинете»: кнопка ведёт на главную и подсвечивает то, о чём говорится в видео
+const TOUR=[["passport","Паспорт первой воронки",()=>$("passBar").closest(".panel")],["shelf","Шесть папок «Ваш путь»",()=>$("shelf")],["continue","«Вы сейчас здесь» и «Продолжить»",()=>$("continueBtn")],["ring","Кольцо: сколько пройдено",()=>$("ringArc").closest("svg")||$("ringArc")],["help","«Если застряли»",()=>$("annaRow").closest(".panel")]];
+const ARR=`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 3l5 5-5 5"/></svg>`;
+function drawTour(){
+  $("tourList").innerHTML=TOUR.map(([k,t],i)=>`<button class="tb" type="button" data-tour="${k}"><i>${i+1}</i><span>${t}</span>${ARR}</button>`).join("");
+  $("tourList").querySelectorAll("[data-tour]").forEach(b=>b.onclick=()=>{const it=TOUR.find(x=>x[0]===b.dataset.tour); goal("sis_tour_"+it[0]);
+    $("backBtn").click();
+    setTimeout(()=>{const el=it[2](); if(!el) return; el.scrollIntoView({behavior:"smooth",block:"center"}); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash"); setTimeout(()=>el.classList.remove("flash"),2600);},350);});
+}
+
 let tt;
 function toast(t){$("toastTxt").textContent=t;$("toast").classList.add("show");clearTimeout(tt);tt=setTimeout(()=>$("toast").classList.remove("show"),2200);}
 
@@ -769,7 +888,7 @@ function renderAll(){computeOpen();renderRing();renderRoute();renderShelf();rend
 if(TARIFF==="os"){$("tariffLabel").hidden=false;$("annaRow").hidden=false;}
 if(tg){try{tg.ready();tg.expand();tg.BackButton.onClick(()=>{document.body.classList.remove("reading");renderAll();window.scrollTo({top:0});});}catch(e){}}
 function boot(){greet(); renderAll();}
-if(cloud){cloud.getItems(["hk-done","hk-route"],(err,v)=>{try{if(v){if(v["hk-done"]){JSON.parse(v["hk-done"]).forEach(x=>done.add(x));} if(v["hk-route"]&&!route) route=v["hk-route"];}}catch(e){} boot();});}
+if(cloud){cloud.getItems(["hk-done","hk-route","hk-start"],(err,v)=>{try{if(v){if(v["hk-start"]&&!start.at){const s=JSON.parse(v["hk-start"]); if(s&&s.a) start=s;} if(v["hk-done"]){JSON.parse(v["hk-done"]).forEach(x=>done.add(x));} if(v["hk-route"]&&!route) route=v["hk-route"];}}catch(e){} boot();});}
 else boot();
 </script>
 </body>
