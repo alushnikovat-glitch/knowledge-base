@@ -342,6 +342,54 @@ body.intro-mode .kcard{display:none}
   .lesson{grid-template-columns:28px 1fr}
   .l-time{display:none}
 }
+
+/* дорожная карта: строится из M, остановки = блоки, точки = модули */
+#mapView{display:none}
+body.mapping #homeView,body.mapping #lessonView{display:none}
+body.mapping #mapView{display:block}
+.map-hero{padding:22px 0 8px}
+.map-hero h1{font-weight:800;font-size:34px;letter-spacing:-.02em}
+.map-hero p{color:var(--ink2);font-size:16px;margin-top:8px;max-width:560px}
+.road{list-style:none;position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:0 10px;margin:56px 0 10px}
+.road:before{content:"";position:absolute;left:8%;right:8%;top:27px;height:4px;border-radius:4px;background:var(--line)}
+.road .fill{position:absolute;left:8%;top:27px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--teal),var(--gold));transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.stop{position:relative;text-align:center;padding:0 4px}
+.stop .pin{position:absolute;left:50%;top:-36px;transform:translateX(-50%);white-space:nowrap;font-family:'Marck Script',cursive;font-size:20px;color:#c9933e}
+.stop .st{position:relative;z-index:1;width:58px;height:58px;margin:0 auto;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:20px;background:var(--paper);border:3px solid var(--sand2);color:var(--muted);cursor:pointer;transition:transform .15s}
+.stop .st:hover{transform:scale(1.06)}
+.stop.open .st{border-color:var(--teal);color:var(--ink)}
+.stop.now .st{border-color:var(--gold);background:var(--gold);color:var(--ink);box-shadow:0 0 0 7px var(--gold-soft)}
+.stop.done .st{border-color:var(--teal);background:var(--teal);color:#fff}
+.stop .st svg{width:20px;height:20px}
+.stop .st svg.lock{position:static;width:20px;height:20px}
+.stop b{display:block;font-size:15px;font-weight:700;margin-top:14px;line-height:1.25}
+.stop .out{font-size:13px;color:var(--ink2);margin-top:5px;line-height:1.4}
+.stop .dts{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-top:12px}
+.stop .dts i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.stop .dts i.d{background:var(--teal)}
+.stop .dts i.c{background:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+.stop .cnt{font-size:12px;color:var(--muted);margin-top:6px}
+.stop .flag{display:inline-block;margin-top:9px;font-size:11.5px;font-weight:600;color:#9c7330;background:var(--gold-soft);border-radius:999px;padding:3px 9px}
+.map-now{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:34px}
+.map-now small{display:block;font-size:13px;color:var(--muted)}
+.map-now b{font-size:17px}
+.map-note{font-size:13.5px;color:var(--muted);margin-top:18px}
+.road-link{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:8px 14px;color:var(--ink);white-space:nowrap}
+.road-link svg{width:16px;height:16px}
+.mats .m .ic svg{width:18px;height:18px;color:var(--teal)}
+@media (max-width:860px){
+  .road{grid-template-columns:1fr;gap:0;margin:24px 0 0}
+  .road:before,.road .fill{left:27px;right:auto;width:4px;top:30px;bottom:30px;height:auto}
+  .road .fill{bottom:auto;background:linear-gradient(180deg,var(--teal),var(--gold))}
+  .stop{display:grid;grid-template-columns:58px 1fr;gap:0 16px;text-align:left;padding:0 0 26px}
+  .stop>*:not(.st){grid-column:2}
+  .stop .st{grid-column:1;grid-row:1/span 6;margin:0}
+  .stop b{margin-top:4px}
+  .stop .dts{justify-content:flex-start}
+  .stop .flag{justify-self:start}
+  .stop .pin{position:static;transform:none;font-size:18px;line-height:1}
+  .map-hero h1{font-size:27px}
+}
 </style>
 <meta name="robots" content="noindex, nofollow">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -395,8 +443,9 @@ body.intro-mode .kcard{display:none}
     </section>
 
     <div class="shelf-head">
-      <h2>Ваш путь</h2>
-      <p>Шесть блоков снизу вверх. Каждый шаг заканчивается готовой вещью</p>
+      <div><h2>Ваш путь</h2>
+      <p>Шесть блоков снизу вверх. Каждый шаг заканчивается готовой вещью</p></div>
+      <button class="road-link" data-map><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="3" cy="12" r="1.6"/><circle cx="13" cy="4" r="1.6"/><path d="M4.5 11.5C9 10 6 6 11.5 4.5"/></svg>Дорожная карта</button>
     </div>
     <nav class="shelf" id="shelf"></nav>
 
@@ -475,6 +524,24 @@ body.intro-mode .kcard{display:none}
       </aside>
     </div>
   </main>
+
+  <!-- ДОРОЖНАЯ КАРТА -->
+  <main id="mapView">
+    <div class="crumbs">
+      <button id="mapBack"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 2L4 7l5 5"/></svg>В кабинет</button>
+      <span>Дорожная карта</span>
+    </div>
+    <section class="map-hero">
+      <h1>Дорожная карта</h1>
+      <p id="mapSub"></p>
+    </section>
+    <ol class="road" id="road"></ol>
+    <div class="panel map-now">
+      <div><small>Вы сейчас здесь</small><b id="mapHere"></b></div>
+      <button class="btn" id="mapGo"><svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5v11l9-5.5z"/></svg>Продолжить модуль</button>
+    </div>
+    <p class="map-note">Нажмите на остановку, и откроется список модулей этого блока</p>
+  </main>
 </div>
 <div class="toast" id="toast"><i></i><span id="toastTxt"></span></div>
 
@@ -491,7 +558,7 @@ const LOCK = `<svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentC
 const CHECK = `<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg>`;
 
 const M = [
- {n:0,name:"Подготовка",sticker:"key",
+ {n:0,name:"Подготовка",out:"Claude знает Ваше дело",sticker:"key",
   sub:"Ставим Claude, проводник и базу знаний. Бесплатного тарифа Claude для этого хватает",
   intro:{min:2,t:"Зачем подготовка",main:["Модель у всех одна, разница в том, что Claude знает о Вашем деле","К концу блока у Вас кабинет в Claude, проводник и база знаний","Четыре модуля, около двух часов, можно за один вечер"]},
   lessons:[
@@ -501,7 +568,7 @@ const M = [
     words:[["Фундамент","Что Вы продаёте, кому, какими словами и почему у Вас. С него начинается система"],["Точка старта","Анкета из 7 вопросов о том, с чего Вы начинаете. В конце пути сравним"],["Паспорт","10 пунктов, по которым видно, что воронка работает"],["Проводник","Скилл в Claude, который ведёт по шагам и помогает, если застряли"],["Дорожка","Есть у Вас продукт или нет. От этого зависит начало блока 1"]],
     task:"Три дела. Заполните анкету «Точка старта» под видео. Выберите дорожку в карточке «У Вас уже есть продукт?». Найдите в кабинете кнопку «Продолжить» и блок «Если застряли». Потом откройте модуль 0.1",
     check:["Заполнил(а) анкету «Точка старта»","Выбрал(а) дорожку: продукт есть или пока нет","Знаю, где кнопка «Продолжить» и блок «Если застряли»"],
-    mats:["Карта всех модулей","Что понадобится: список сервисов"]},
+    mats:[{t:"Дорожная карта всех модулей",map:1},{t:"Что понадобится: список сервисов",h:"files/chto-ponadobitsya.pdf"}]},
    {id:"0.1",t:"Как устроен Claude",min:25,vmin:6,thing:"Проект в Claude с инструкцией",
     why:"Пять понятий, на которых держится вся система. Разберёте их один раз и перестанете начинать каждый раз с чистого чата",
     main:["Claude работает лучше, когда у него есть проект с инструкцией","Скилл даёт ему мою схему, коннектор даёт доступ к сервисам","Чистый чат каждый раз означает потерянный контекст"],
@@ -531,7 +598,7 @@ const M = [
     check:["Claude показывает Ваши страницы в Notion","Шаблон базы лежит у Вас в Notion","Проводник завёл первые карточки и назвал следующий шаг"],
     mats:["Шаблон базы знаний","Первое сообщение проводнику"]}
   ]},
- {n:1,name:"Продукт и смыслы",sticker:"crystal",
+ {n:1,name:"Продукт и смыслы",out:"Смыслы: кому, что болит, почему Вы",sticker:"crystal",
   sub:"Что Вы продаёте, кому, что у клиента болит и почему он выбирает Вас. Продукта пока нет? Начнёте с шага 1.0. На второй день у Вас первый пост",
   intro:{min:3,t:"Почему продукт и смыслы первыми",main:["Пишете много, а никто не видит: дело в том, для кого Вы пишете","Соберёте слова клиентов, их карту и пять связок, на второй день первый пост","Шаг 1.1 займёт 15 минут сегодня и два дня сбора фраз в фоне"]},
   lessons:[
@@ -571,7 +638,7 @@ const M = [
     check:["Человек, видящий Вас впервые, понимает фразу за 5 секунд","Ясно, вместо чего Вас выбирают","Есть строка, кому Вы не подходите"],
     mats:["Эталон: система вместо инструментов"]}
   ]},
- {n:2,name:"Запуск продукта",sticker:"ticket",
+ {n:2,name:"Запуск продукта",out:"Продукт с первыми «да»",sticker:"ticket",
   sub:"Что продаёте, кому и по какой цене. Продаёте раньше, чем создали",
   intro:{min:3,t:"Продать раньше, чем создали",main:["Самая дорогая ошибка: полгода делать продукт, который не покупают","Опишете продукт и соберёте первые «да» до того, как он готов","В конце блока закроется первый пункт паспорта"]},
   lessons:[
@@ -582,7 +649,7 @@ const M = [
    {id:"2.5",t:"Продающая страница",thing:"Страница продукта"},
    {id:"2.6",t:"План запуска",thing:"43 задачи по дням"}
   ]},
- {n:3,name:"Система заявок",sticker:"magnet",
+ {n:3,name:"Система заявок",out:"Первая воронка по паспорту",sticker:"magnet",
   sub:"Путь от поста до заявки: кодовое слово, бот, прогрев, заявка у Вас в Telegram. ChatPlace для автоматизаций платный",
   intro:{min:3,t:"Путь от поста до заявки",main:["Человек пишет слово ночью, бот отдаёт материал, утром у Вас заявка","Десять модулей, каждый зажигает свой пункт паспорта","Понадобится ChatPlace, он платный, подключим первым модулем"]},
   lessons:[
@@ -597,7 +664,7 @@ const M = [
    {id:"3.9",t:"Скрипты в переписке",thing:"Ответы на вопросы и возражения"},
    {id:"3.10",t:"Проверка по паспорту",thing:"Первая воронка запущена",pass:[9,10]}
   ]},
- {n:4,name:"Контент-завод",sticker:"cards",
+ {n:4,name:"Контент-завод",out:"Контент Вашим голосом",sticker:"cards",
   sub:"Контент Вашим голосом из болей Ваших клиентов. Вы выбираете и публикуете",
   lessons:[
    {id:"4.1",t:"Брендбук",thing:"Цвета, шрифты, правила"},
@@ -606,7 +673,7 @@ const M = [
    {id:"4.4",t:"Motion-рилс без съёмки",thing:"Первый рилс"},
    {id:"4.5",t:"Прогрев в сторис",thing:"Серия сторис под продажу"}
   ]},
- {n:5,name:"Цифры и повторные продажи",short:"Цифры и продажи",sticker:"chart",
+ {n:5,name:"Цифры и повторные продажи",out:"Цифры и повторная продажа",short:"Цифры и продажи",sticker:"chart",
   sub:"Видно, сколько людей пришло, откуда и сколько купило. И следующая продажа тем, кто уже купил",
   lessons:[
    {id:"5.1",t:"Метки и цели",thing:"Видно, откуда пришла заявка"},
@@ -789,7 +856,7 @@ function openLesson(id){
   $("lWords").innerHTML=l.words.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join("");
   $("lTask").textContent=l.task;
   $("lThing").textContent=l.thing;
-  $("lMats").innerHTML=`<a class="m" href="${pdf}" target="_blank" rel="noopener" data-pdf><span class="ic">PDF</span><span>Конспект модуля ${l.id}</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg></a>`+l.mats.map(x=>typeof x==="string"?`<button class="m"><span class="ic">PDF</span><span>${x}</span>${DLI}</button>`:`<a class="m" href="${x.h}" target="_blank" rel="noopener" data-f="${x.h}"><span class="ic">${x.ic||"PDF"}</span><span>${x.t}</span>${DLI}</a>`).join("");
+  $("lMats").innerHTML=`<a class="m" href="${pdf}" target="_blank" rel="noopener" data-pdf><span class="ic">PDF</span><span>Конспект модуля ${l.id}</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg></a>`+l.mats.map(x=>x.map?`<button class="m" data-map><span class="ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="3" cy="12" r="1.6"/><circle cx="13" cy="4" r="1.6"/><path d="M4.5 11.5C9 10 6 6 11.5 4.5"/></svg></span><span>${x.t}</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 3l5 5-5 5"/></svg></button>`:typeof x==="string"?`<button class="m"><span class="ic">PDF</span><span>${x}</span>${DLI}</button>`:`<a class="m" href="${x.h}" target="_blank" rel="noopener" data-f="${x.h}"><span class="ic">${x.ic||"PDF"}</span><span>${x.t}</span>${DLI}</a>`).join("");
   $("lMats").querySelector("[data-pdf]").onclick=e=>dl(e,pdf,l.id);
   $("lMats").querySelectorAll("[data-f]").forEach(a=>a.onclick=e=>dl(e,a.dataset.f,l.id+"_file"));
   const isDone=done.has(l.id);
@@ -884,9 +951,38 @@ function drawTour(){
 let tt;
 function toast(t){$("toastTxt").textContent=t;$("toast").classList.add("show");clearTimeout(tt);tt=setTimeout(()=>$("toast").classList.remove("show"),2200);}
 
+/* дорожная карта: всё берётся из M, поменяли программу, карта поменялась сама */
+function renderMap(){
+  const c=current(), list=routeAll(), n=list.filter(l=>done.has(l.id)).length, hereIx=M.indexOf(c.mod);
+  $("mapSub").textContent="Шесть остановок, "+list.length+" "+plural(list.length,"модуль","модуля","модулей")+". Пройдено "+n+". Каждая остановка заканчивается готовой вещью";
+  $("road").innerHTML=`<span class="fill"></span>`+M.map((m,i)=>{
+    const ls=m.lessons.filter(l=>!skipped(l)), d=ls.filter(l=>done.has(l.id)).length;
+    const st=m.open&&d===ls.length?"done":i===hereIx?"now":m.open?"open":"";
+    const pas=m.lessons.some(l=>l.pass&&l.pass.includes(10));
+    return `<li class="stop ${st}">
+      ${st==="now"?'<span class="pin">Вы здесь</span>':''}
+      <button class="st" data-stop="${i}" aria-label="Блок ${m.n}. ${m.name}">${st==="done"?CHECK:m.open?m.n:LOCK}</button>
+      <b>${m.short||m.name}</b>
+      <div class="out">${m.out||ls.at(-1).thing}</div>
+      <div class="dts">${ls.map(l=>`<i class="${done.has(l.id)?'d':l.id===c.id?'c':''}" title="${l.id} ${l.t}"></i>`).join("")}</div>
+      <div class="cnt">${m.open?d+" из "+ls.length:ls.length+" "+plural(ls.length,"модуль","модуля","модулей")}</div>
+      ${pas?'<span class="flag">Паспорт 10 из 10</span>':''}
+    </li>`}).join("");
+  const cl=c.mod.lessons.filter(l=>!skipped(l)), k=Math.min(1,(hereIx+cl.filter(l=>done.has(l.id)).length/Math.max(1,cl.length))/(M.length-1));
+  const f=$("road").querySelector(".fill");
+  if(matchMedia("(min-width:861px)").matches){f.style.width=(84*k)+"%";} else {f.style.height="calc((100% - 60px)*"+k+")";}
+  $("mapHere").textContent=c.id+" "+c.t;
+  $("road").querySelectorAll("[data-stop]").forEach(b=>b.onclick=()=>{activeMod=+b.dataset.stop;closeMap();setTimeout(()=>$("modulePanel").scrollIntoView({behavior:"smooth",block:"start"}),50);});
+}
+function openMap(){goal("sis_map");document.body.classList.remove("reading");document.body.classList.add("mapping");renderMap();window.scrollTo({top:0});try{tg&&tg.BackButton.show()}catch(e){}}
+function closeMap(){document.body.classList.remove("mapping");try{tg&&tg.BackButton.hide()}catch(e){}renderAll();window.scrollTo({top:0});}
+document.addEventListener("click",e=>{if(e.target.closest("[data-map]")){e.preventDefault();openMap();}});
+$("mapBack").onclick=closeMap;
+$("mapGo").onclick=()=>{document.body.classList.remove("mapping");openLesson(current().id);};
+addEventListener("resize",()=>{if(document.body.classList.contains("mapping"))renderMap();});
 function renderAll(){computeOpen();renderRing();renderRoute();renderShelf();renderModule();renderPass();}
 if(TARIFF==="os"){$("tariffLabel").hidden=false;$("annaRow").hidden=false;}
-if(tg){try{tg.ready();tg.expand();tg.BackButton.onClick(()=>{document.body.classList.remove("reading");renderAll();window.scrollTo({top:0});});}catch(e){}}
+if(tg){try{tg.ready();tg.expand();tg.BackButton.onClick(()=>{document.body.classList.remove("reading","mapping");renderAll();window.scrollTo({top:0});});}catch(e){}}
 function boot(){greet(); renderAll();}
 if(cloud){cloud.getItems(["hk-done","hk-route","hk-start"],(err,v)=>{try{if(v){if(v["hk-start"]&&!start.at){const s=JSON.parse(v["hk-start"]); if(s&&s.a) start=s;} if(v["hk-done"]){JSON.parse(v["hk-done"]).forEach(x=>done.add(x));} if(v["hk-route"]&&!route) route=v["hk-route"];}}catch(e){} boot();});}
 else boot();
