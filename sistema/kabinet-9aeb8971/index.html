@@ -626,7 +626,7 @@ const M = [
    {id:"1.3",t:"Смысловой кристалл",min:45,thing:"Пять связок и первый пост",
     why:"Пять связок боли, смысла и продукта. Из них дальше собирается весь контент и все офферы",
     main:["Из первой связки сегодня же собирается пост","Каждая связка проходит критика по шести пунктам","Слабую связку переделываем до публикации"],
-    words:[["Связка","Боль клиента, смысл и Ваш продукт в одной фразе"],["Критик","Проверка черновика: язык, конкретность, честность, попадание"]],
+    words:[["Связка","Сегмент, боль словами человека, смысл-лекарство и артефакт в одной строке"],["Критик","Проверка черновика: язык, конкретность, честность, попадание"]],
     task:"Соберите кристалл и опубликуйте пост из первой связки",
     check:["5 связок, у каждой доказательство или пометка, что его собрать","Ни одна связка не подойдёт любой нише","Пост из первой связки опубликован"],
     mats:[{t:"Пример кристалла",h:"files/1-3-kristall.html#primer",ic:"ТЕКСТ"},{t:"Рубрика критика",h:"files/1-3-kristall.html#rubrika",ic:"ТЕКСТ"}]},
@@ -863,7 +863,7 @@ const cloud=tg&&tg.CloudStorage&&tg.isVersionAtLeast&&tg.isVersionAtLeast('6.9')
 const goal=g=>{try{ym(108790481,'reachGoal',g)}catch(e){}};
 try{const s=JSON.parse(localStorage.getItem("hk-done")||"null"); if(s) done=new Set(s);}catch(e){}
 try{route=localStorage.getItem("hk-route")||null;}catch(e){}
-const save=()=>{const d=JSON.stringify([...done]);
+const save=()=>{if(typeof PROSMOTR!=="undefined"&&PROSMOTR)return;const d=JSON.stringify([...done]);
   try{localStorage.setItem("hk-done",d); if(route) localStorage.setItem("hk-route",route);}catch(e){}
   if(cloud){try{cloud.setItem("hk-done",d,()=>{}); if(route) cloud.setItem("hk-route",route,()=>{});}catch(e){}}};
 /* тариф: ссылка с ?t=os открывает кабинет тарифа с обратной связью */
@@ -874,7 +874,10 @@ const $=id=>document.getElementById(id);
 const skipped=l=>l.route==="none" && route==="has";
 const routeAll=()=>ALL.filter(l=>!skipped(l));
 const blockDone=m=>m.lessons.filter(l=>!skipped(l)).every(l=>done.has(l.id));
-function computeOpen(){M.forEach((m,i)=>{m.open = i===0 || (M[i-1].open && blockDone(M[i-1]));});}
+/* режим просмотра для автора: ?prosmotr=9aeb открывает все блоки, прогресс не сохраняется */
+const PROSMOTR=(()=>{try{return new URLSearchParams(location.search).get("prosmotr")==="9aeb";}catch(e){return false;}})();
+if(PROSMOTR) (document.body?(f=>f()):(f=>document.addEventListener("DOMContentLoaded",f)))(()=>document.body.insertAdjacentHTML("afterbegin",'<div style="position:sticky;top:0;z-index:50;background:#14171a;color:#faf7f0;font-size:13px;text-align:center;padding:8px 16px">Режим просмотра: открыты все блоки, отметки не сохраняются</div>'));
+function computeOpen(){M.forEach((m,i)=>{m.open = PROSMOTR || i===0 || (M[i-1].open && blockDone(M[i-1]));});}
 const ready=l=>!!l.why;
 const openLessons=()=>routeAll().filter(l=>l.mod.open&&ready(l));
 const current=()=>openLessons().find(l=>!done.has(l.id)) || openLessons().at(-1);
