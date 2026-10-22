@@ -176,6 +176,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .passport li small{display:block;font-size:12px;color:var(--muted)}
 .passport li.pdone{color:#2e7d76}
 .passport li.pdone span{color:#2e7d76}
+.start-sec{margin:6px 0 0}
+.start-row{display:flex;gap:16px;align-items:center;width:100%;text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:16px 18px;cursor:pointer;font:inherit;color:inherit;transition:transform .15s}
+.start-row:hover{transform:translateY(-1px)}
+.start-row .iplay{width:46px;height:46px;border-radius:50%;background:var(--gold);display:grid;place-items:center;flex:none}
+.start-row .iplay svg{width:16px;height:16px}
+.start-row b{display:block;font-size:17px}
+.start-row small{display:block;color:var(--muted);font-size:14px;margin-top:3px}
+.start-row .st-done{margin-left:auto;color:var(--teal-d,#3d8f86);font-weight:700;font-size:14px;white-space:nowrap}
 .intro-row{display:flex;gap:14px;align-items:center;width:100%;text-align:left;background:var(--gold-soft);border-radius:16px;padding:12px 14px;margin:2px 0 12px;transition:transform .15s}
 .intro-row:not([disabled]):hover{transform:translateY(-1px)}
 .intro-row[disabled]{opacity:.55;cursor:default}
@@ -442,6 +450,8 @@ body.mapping #mapView{display:block}
       </div>
     </section>
 
+    <section class="start-sec" id="startSec"></section>
+
     <div class="shelf-head">
       <div><h2>Ваш путь</h2>
       <p>Шесть блоков снизу вверх. Каждый шаг заканчивается готовой вещью</p></div>
@@ -560,37 +570,37 @@ const CHECK = `<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke
 const M = [
  {n:0,name:"Подготовка",out:"Claude знает Вас и Ваше дело",sticker:"key",
   sub:"Ставим Claude, проводник и базу знаний, распаковываем Вас как эксперта. Бесплатного тарифа Claude для этого хватает",
-  intro:{min:2,t:"Зачем подготовка",main:["Модель у всех одна, разница в том, что Claude знает о Вашем деле","К концу блока у Вас кабинет в Claude, проводник, база знаний и карточка распаковки","Пять модулей: подготовка за один вечер, распаковку личности продолжаете в фоне"]},
+  intro:{min:1,t:"Зачем подготовка",video:"video/0-intro.mp4",poster:"video/0-intro.jpg",main:["Модель у всех одна, разница в том, что Claude знает о Вашем деле","К концу блока у Вас кабинет в Claude, проводник, база знаний и карточка распаковки","Пять модулей: подготовка около часа, распаковку личности продолжаете в фоне"]},
   lessons:[
-   {id:"0.0",t:"Маршрут: как здесь всё устроено",min:8,vmin:8,video:"video/0-0.mp4",poster:"video/0-0.jpg",thing:"Анкета «Точка старта» заполнена, дорожка выбрана, первый шаг понятен",
+   {id:"0.0",start:1,t:"Маршрут: как здесь всё устроено",min:8,vmin:8,video:"video/0-0.mp4",poster:"video/0-0.jpg",thing:"Анкета «Точка старта» заполнена, дорожка выбрана, первый шаг понятен",
     why:"Восемь минут о том, как устроен кабинет, что понадобится и как идти, чтобы не потеряться",
     main:["Воронка с ботом это верхушка айсберга. Под водой фундамент: что Вы продаёте, кому, какими словами и почему у Вас","Порядок такой: смыслы и продукт, потом воронка, контент, аналитика и автоматизация","Цель одна: первая воронка, которая работает по паспорту из 10 пунктов","Папки открываются по мере прохождения, сроков нет","Claude и Notion бесплатно, ChatPlace платный, он нужен с блока 3"],
     words:[["Фундамент","Что Вы продаёте, кому, какими словами и почему у Вас. С него начинается система"],["Точка старта","Анкета из 7 вопросов о том, с чего Вы начинаете. В конце пути сравним"],["Паспорт","10 пунктов, по которым видно, что воронка работает"],["Проводник","Скилл в Claude, который ведёт по шагам и помогает, если застряли"],["Дорожка","Есть у Вас продукт или нет. От этого зависит начало блока 1"]],
     task:"Три дела. Заполните анкету «Точка старта» под видео. Выберите дорожку в карточке «У Вас уже есть продукт?». Найдите в кабинете кнопку «Продолжить» и блок «Если застряли». Потом откройте модуль 0.1",
     check:["Заполнил(а) анкету «Точка старта»","Выбрал(а) дорожку: продукт есть или пока нет","Знаю, где кнопка «Продолжить» и блок «Если застряли»"],
     mats:[{t:"Дорожная карта всех модулей",map:1},{t:"Что понадобится: список сервисов",h:"files/chto-ponadobitsya.pdf"}]},
-   {id:"0.1",t:"Как устроен Claude",min:25,vmin:6,thing:"Проект в Claude с инструкцией",
+   {id:"0.1",t:"Как устроен Claude",min:15,vmin:6,thing:"Проект в Claude с инструкцией",
     why:"Пять понятий, на которых держится вся система. Разберёте их один раз и перестанете начинать каждый раз с чистого чата",
     main:["Claude работает лучше, когда у него есть проект с инструкцией","Скилл даёт ему мою схему, коннектор даёт доступ к сервисам","Чистый чат каждый раз означает потерянный контекст"],
     words:[["Чат","Один разговор с Claude"],["Проект","Папка с инструкцией и файлами. Claude читает их в каждом чате проекта"],["Память","То, что Claude помнит о Вас между чатами"],["Скилл","Папка с инструкцией, по которой Claude работает по моей схеме"],["Коннектор","Мост между Claude и сервисом, например Notion или ChatPlace"]],
     task:"Заведите свой кабинет. Создайте проект и вставьте в него шаблон инструкции из материалов",
     check:["Проект создан и назван по делу","Инструкция заполнена Вашими словами","На вопрос «Что ты обо мне знаешь?» Claude ответил Вашими строками"],
     mats:[{t:"Схема «Как устроен Claude»",h:"files/0-1-shema.html",ic:"СХЕМА"},{t:"Шаблон инструкции проекта",h:"files/0-1-shablon-instrukcii.html",ic:"ТЕКСТ"},{t:"Частые сбои",h:"files/chastye-sboi.html#0-1",ic:"ТЕКСТ"}]},
-   {id:"0.2",t:"Как ставить задачи Claude",min:30,vmin:6,thing:"Первая задача по формуле",
+   {id:"0.2",t:"Как ставить задачи Claude",min:20,vmin:6,thing:"Первая задача по формуле",
     why:"Одна формула из пяти частей. С ней Claude пишет с первого раза, и правок становится в разы меньше",
     main:["Формула: что, для кого, из чего, когда готово, сначала спроси","Одна правка за раз, точечно","Если Claude ошибся, фраза на исправление уже готова"],
     words:[["Формула запроса","Пять частей, из которых собирается любая задача"],["Точечная правка","Одно изменение в одном месте, без переписывания всего"],["Сначала спроси","Просьба к Claude задать вопросы до работы"]],
     task:"Допишите две строки в инструкцию проекта и поставьте первую настоящую задачу по формуле",
     check:["В инструкции проекта есть две новые строки","В задаче есть все пять частей формулы","Версия после точечной правки ближе к Вашему голосу"],
     mats:[{t:"Формула запроса",h:"files/0-2-formula.html#formula",ic:"ТЕКСТ"},{t:"Шесть ошибок и фраза на каждую",h:"files/0-2-formula.html#oshibki",ic:"ТЕКСТ"}]},
-   {id:"0.3",t:"Установка, проводник и скиллы",min:30,vmin:6,thing:"Проводник поздоровался и спросил про Ваше дело",
+   {id:"0.3",t:"Установка, проводник и скиллы",min:15,vmin:6,thing:"Проводник поздоровался и спросил про Ваше дело",
     why:"Проводник ставится первым. Он держит порядок шагов, чтобы Вам не решать, что за чем",
     main:["Скиллы запускаются, когда в настройках Claude включено выполнение кода","Скиллы открытых блоков загружаете сразу, одним заходом","Проводник проверяет, готов ли предыдущий шаг, и ведёт дальше"],
     words:[["Проводник","Главный скилл коробки, ведёт Вас по шагам"],["Выполнение кода","Настройка Claude, без которой скиллы не запускаются"]],
     task:"Включите выполнение кода, загрузите проводник и скиллы блоков 0 и 1, напишите в новом чате проекта «Привет»",
     check:["Выполнение кода включено","Проводник и скиллы стоят в списке, переключатели включены","Проводник ответил и спросил про Ваше дело"],
     mats:[{t:"Проводник, файл .skill",h:"files/sistema-provodnik.skill",ic:"SKILL"},{t:"Скиллы блоков 0 и 1 одним архивом",h:"files/skills-blok-0-1.zip",ic:"ZIP"},{t:"Частые сбои",h:"files/chastye-sboi.html#0-3",ic:"ТЕКСТ"}]},
-   {id:"0.4",t:"Notion, база знаний и первый разговор",min:30,vmin:7,thing:"База знаний в Notion",
+   {id:"0.4",t:"Notion, база знаний и первый разговор",min:20,vmin:7,thing:"База знаний в Notion",
     why:"База хранит Ваши решения. Claude читает её перед работой, и Вам больше не нужно объяснять всё заново",
     main:["Notion подключается из каталога коннекторов, на бесплатном Claude тоже","Одно решение живёт в одной карточке","Первое сообщение проводнику запускает маршрут"],
     words:[["База знаний","Страницы в Notion, где лежат решения по Вашему делу"],["Карточка","Одна страница под одно решение"]],
@@ -902,7 +912,7 @@ function renderRing(){
   $("ringPct").textContent=pct+"%";
   $("ringCount").textContent=n+" из "+total+" "+plural(total,"модуля","модулей","модулей");
   $("ringScript").textContent = n===0?"начнём сегодня": n<4?"первые шаги сделаны": n<7?"фундамент почти готов":"смыслы собраны";
-  const c=current(); $("hereTitle").textContent=c.id+" "+c.t;
+  const c=current(); $("hereTitle").textContent=(c.start?"Старт · ":c.id+" ")+c.t;
 }
 
 function renderRoute(){ ["routeCard","lRoute"].forEach(id=>renderRouteIn($(id))); }
@@ -925,7 +935,7 @@ function renderRouteIn(el){
 
 function renderShelf(){
   $("shelf").innerHTML = M.map((m,i)=>{
-    const ls=m.lessons.filter(l=>!skipped(l));
+    const ls=m.lessons.filter(l=>!skipped(l)&&!l.start);
     const complete = m.open && ls.every(l=>done.has(l.id));
     return `<button class="folder ${i===activeMod?'active':''} ${m.open?'':'locked'} ${complete?'complete':''}" data-i="${i}" aria-pressed="${i===activeMod}" aria-label="Блок ${m.n}. ${m.name}">
       <div class="back"></div><div class="sheet"></div>
@@ -940,16 +950,22 @@ function renderShelf(){
   document.querySelectorAll(".folder").forEach(f=>f.onclick=()=>{activeMod=+f.dataset.i;renderShelf();renderModule();});
 }
 
+function renderStart(){
+  const l=ALL.find(x=>x.start); if(!l){$("startSec").innerHTML="";return;}
+  const d=done.has(l.id);
+  $("startSec").innerHTML=`<button class="start-row" id="startOpen"><span class="iplay"><svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5v11l9-5.5z"/></svg></span><span><b>Старт · ${l.t}</b><small>${l.vmin} минут · смотреть первым: знакомство, весь путь и анкета «Точка старта»</small></span>${d?'<span class="st-done">✓ просмотрено</span>':''}</button>`;
+  $("startOpen").onclick=()=>openLesson(l.id);
+}
 function renderModule(){
   const m=M[activeMod], c=current();
-  const ls=m.lessons.filter(l=>!skipped(l));
+  const ls=m.lessons.filter(l=>!skipped(l)&&!l.start);
   const cnt=ls.filter(l=>done.has(l.id)).length;
   $("modulePanel").innerHTML = `
     <div class="mod-head"><h3>Блок ${m.n}. ${m.name}</h3><div class="count">${m.open?cnt+" из "+ls.length:ls.length+" "+plural(ls.length,"модуль","модуля","модулей")}</div></div>
     <p class="mod-sub">${m.sub}</p>
     ${m.open?'':`<div class="lock-note"><svg viewBox="0 0 24 24" fill="none" stroke="#b98431" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg><span>Откроется, когда закроете блок ${m.n-1}. Ссылка придёт в бот</span></div>`}
     ${m.intro?`<button class="intro-row" data-intro="${m.n}" ${m.open?"":"disabled"}><span class="iplay"><svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5v11l9-5.5z"/></svg></span><span class="itxt"><b>Вводное видео · ${m.intro.t}</b><small>${m.intro.min} мин · смотреть первым, в прогресс не входит</small></span></button>`:""}
-    <ul class="lessons">${m.lessons.map(l=>{
+    <ul class="lessons">${m.lessons.filter(l=>!l.start).map(l=>{
       const nr=m.open&&!ready(l), sk=skipped(l), tag=l.route==="none"&&!sk?'<span class="badge-route">если продукта нет</span>':'';
       return `
       <li class="lesson ${done.has(l.id)?'done':''} ${m.open&&!sk&&c.id===l.id?'current':''} ${m.open?'':'locked'} ${sk?'skipped':''}">
@@ -1003,7 +1019,7 @@ function openIntro(n){
   goal("sis_intro_"+n);
   const m=M[n]; reading=null; document.body.classList.add("intro-mode");
   $("crumbMod").textContent="Блок "+m.n+". "+m.name;
-  $("lNum").textContent="Вводное видео · "+m.intro.min+" минуты";
+  $("lNum").textContent="Вводное видео · "+m.intro.min+" "+plural(m.intro.min,"минута","минуты","минут");
   $("lTitle").textContent=m.intro.t;
   $("lWhy").textContent=m.sub;
   $("lVideo").textContent="Видео, "+m.intro.min+" "+plural(m.intro.min,"минута","минуты","минут");
@@ -1011,7 +1027,7 @@ function openIntro(n){
   $("lWatchTxt").textContent="Вводное к блоку, "+m.intro.min+" "+plural(m.intro.min,"минута","минуты","минут");
   $("lMainH").textContent="Главное из видео";
   $("lMain").innerHTML=m.intro.main.map(x=>`<li>${x}</li>`).join("");
-  const f=m.lessons.find(l=>!skipped(l)&&ready(l));
+  const f=m.lessons.find(l=>!skipped(l)&&!l.start&&ready(l));
   $("nextTitle").textContent=f?f.id+" "+f.t:"Модули блока готовятся";
   $("nextBtn").style.display=f?"":"none"; $("nextBtn").onclick=()=>f&&openLesson(f.id);
   $("lMats").innerHTML='<p class="note" style="margin-top:0">У вводного видео нет задания. Посмотрите и переходите к первому модулю блока</p>';
@@ -1021,8 +1037,8 @@ function openLesson(id){
   document.body.classList.remove("intro-mode");
   const l=ALL.find(x=>x.id===id); if(!l||!l.mod.open) return;
   reading=l;
-  $("crumbMod").textContent="Блок "+l.mod.n+". "+l.mod.name;
-  $("lNum").textContent="Модуль "+l.id+" · "+l.min+" минут";
+  $("crumbMod").textContent=l.start?"Старт":"Блок "+l.mod.n+". "+l.mod.name;
+  $("lNum").textContent=(l.start?"Старт":"Модуль "+l.id)+" · "+l.min+" минут";
   $("lTitle").textContent=l.t;
   $("lWhy").textContent=l.why;
   const vm=l.vmin||Math.max(3,Math.round(l.min/3));
@@ -1056,6 +1072,7 @@ function openLesson(id){
   $("nextTitle").textContent = nx? nx.id+" "+nx.t : (ALL.some(x=>x.mod.open&&!ready(x))?"Следующие модули готовятся, ссылка придёт в бот":(M.find(m=>!m.open)?"Блок "+M.find(m=>!m.open).n+" откроется, когда закроете блок "+(M.find(m=>!m.open).n-1):"Путь пройден"));
   $("nextBtn").style.display = nx?"":"none";
   $("nextBtn").onclick=()=>nx&&openLesson(nx.id);
+  if(l.start&&l.mod.intro){$("nextTitle").textContent="Блок "+l.mod.n+" · вводное видео «"+l.mod.intro.t+"»";$("nextBtn").style.display="";$("nextBtn").onclick=()=>openIntro(l.mod.n);}
   document.body.classList.add("reading"); window.scrollTo({top:0}); try{tg&&tg.BackButton.show()}catch(e){}
 }
 $("closeBtn").onclick=()=>{ if(reading&&!done.has(reading.id)){done.add(reading.id);save();goal("sis_"+reading.id.replace(".","_"));toast("Шаг "+reading.id+" закрыт. Вещь у Вас");renderAll();openLesson(reading.id);} };
@@ -1161,7 +1178,7 @@ document.addEventListener("click",e=>{if(e.target.closest("[data-map]")){e.preve
 $("mapBack").onclick=closeMap;
 $("mapGo").onclick=()=>{document.body.classList.remove("mapping");openLesson(current().id);};
 addEventListener("resize",()=>{if(document.body.classList.contains("mapping"))renderMap();});
-function renderAll(){computeOpen();renderRing();renderRoute();renderShelf();renderModule();renderPass();}
+function renderAll(){computeOpen();renderStart();renderRing();renderRoute();renderShelf();renderModule();renderPass();}
 if(TARIFF==="os"){$("tariffLabel").hidden=false;$("annaRow").hidden=false;}
 if(tg){try{tg.ready();tg.expand();tg.BackButton.onClick(()=>{document.body.classList.remove("reading","mapping");renderAll();window.scrollTo({top:0});});}catch(e){}}
 function boot(){greet(); renderAll();}
