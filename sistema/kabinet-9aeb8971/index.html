@@ -183,6 +183,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .start-row .iplay svg{width:16px;height:16px}
 .start-row b{display:block;font-size:17px}
 .start-row small{display:block;color:var(--muted);font-size:14px;margin-top:3px}
+.start-pre{margin:10px 2px 0;font-size:14px;line-height:1.55;color:var(--muted)}
+.start-pre b{color:var(--ink,#14171a);font-weight:700}
 .start-row .st-done{margin-left:auto;color:var(--teal-d,#3d8f86);font-weight:700;font-size:14px;white-space:nowrap}
 .intro-row{display:flex;gap:14px;align-items:center;width:100%;text-align:left;background:var(--gold-soft);border-radius:16px;padding:12px 14px;margin:2px 0 12px;transition:transform .15s}
 .intro-row:not([disabled]):hover{transform:translateY(-1px)}
@@ -579,7 +581,7 @@ const M = [
     task:"Три дела. Заполните анкету «Точка старта» под видео. Выберите дорожку в карточке «У Вас уже есть продукт?». Найдите в кабинете кнопку «Продолжить» и блок «Если застряли». Потом откройте модуль 0.1",
     check:["Заполнил(а) анкету «Точка старта»","Выбрал(а) дорожку: продукт есть или пока нет","Знаю, где кнопка «Продолжить» и блок «Если застряли»"],
     mats:[{t:"Дорожная карта всех модулей",map:1},{t:"Что понадобится: список сервисов",h:"files/chto-ponadobitsya.pdf"}]},
-   {id:"0.1",t:"Как устроен Claude",min:15,vmin:6,thing:"Проект в Claude с инструкцией",
+   {id:"0.1",t:"Как устроен Claude",min:15,vmin:4,video:"video/0-1.mp4",poster:"video/0-1.jpg",thing:"Проект в Claude с инструкцией",
     why:"Пять понятий, на которых держится вся система. Разберёте их один раз и перестанете начинать каждый раз с чистого чата",
     main:["Claude работает лучше, когда у него есть проект с инструкцией","Скилл даёт ему мою схему, коннектор даёт доступ к сервисам","Чистый чат каждый раз означает потерянный контекст"],
     words:[["Чат","Один разговор с Claude"],["Проект","Папка с инструкцией и файлами. Claude читает их в каждом чате проекта"],["Память","То, что Claude помнит о Вас между чатами"],["Скилл","Папка с инструкцией, по которой Claude работает по моей схеме"],["Коннектор","Мост между Claude и сервисом, например Notion или ChatPlace"]],
@@ -953,7 +955,7 @@ function renderShelf(){
 function renderStart(){
   const l=ALL.find(x=>x.start); if(!l){$("startSec").innerHTML="";return;}
   const d=done.has(l.id);
-  $("startSec").innerHTML=`<button class="start-row" id="startOpen"><span class="iplay"><svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5v11l9-5.5z"/></svg></span><span><b>Старт · ${l.t}</b><small>${l.vmin} минут · смотреть первым: знакомство, весь путь и анкета «Точка старта»</small></span>${d?'<span class="st-done">✓ просмотрено</span>':''}</button>`;
+  $("startSec").innerHTML=`<button class="start-row" id="startOpen"><span class="iplay"><svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5v11l9-5.5z"/></svg></span><span><b>Старт · ${l.t}</b><small>${l.vmin} минут · смотреть первым: знакомство, весь путь и анкета «Точка старта»</small></span>${d?'<span class="st-done">✓ просмотрено</span>':''}</button><p class="start-pre"><b>Перед стартом: аккаунт Claude.</b> Заведите его на claude.ai и войдите через Google или Apple, отдельный пароль не нужен. Claude может попросить номер телефона для подтверждения. Claude работает не во всех странах: проверьте, что он доступен там, где Вы находитесь.</p>`;
   $("startOpen").onclick=()=>openLesson(l.id);
 }
 function renderModule(){
