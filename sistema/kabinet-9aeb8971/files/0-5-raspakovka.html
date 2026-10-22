@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Распаковка личности · модуль 0.5</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600;800&family=Marck+Script&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7f0;--paper:#fffdf9;--ink:#14171a;--ink2:#3b3f44;--muted:#948e84;--line:#ebe3d3;--teal:#5fb8ae;--teal-soft:#dff1ee;--gold:#e8b45f;--gold-soft:#f8ead0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Onest',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;
+  background-image:radial-gradient(900px 520px at 85% -10%,rgba(232,180,95,.22),transparent 60%)}
+.wrap{max-width:720px;margin:0 auto;padding:28px 16px 60px}
+.top{font-size:14px;font-weight:600}.top i{font-family:'Marck Script',cursive;font-style:normal;color:#b0894f;font-size:17px;margin-left:6px;font-weight:400}
+.num{font-family:'Marck Script',cursive;color:#c9933e;font-size:22px;margin-top:28px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.lead{font-size:16px;color:var(--ink2);margin-top:10px}
+h2{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:30px 0 10px}
+ol.steps{padding-left:20px;font-size:15.5px}ol.steps li{margin-bottom:6px}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px}
+.box.ex{background:var(--teal-soft);border-color:transparent}
+pre{white-space:pre-wrap;font-family:inherit;font-size:15.5px;line-height:1.6}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.row b{font-size:15px}
+.tag{font-size:12px;font-weight:600;color:#3f7f77;background:#fff;border-radius:999px;padding:2px 9px}
+button{font:inherit;font-weight:600;font-size:14px;border:0;border-radius:12px;padding:9px 14px;background:var(--ink);color:#faf7f0;cursor:pointer;white-space:nowrap}
+button.ok{background:var(--teal)}
+.note{font-size:14px;color:var(--ink2);margin-top:10px}
+ul.ck{list-style:none}ul.ck li{position:relative;padding:6px 0 6px 26px;font-size:15px;border-bottom:1px solid var(--line)}ul.ck li:last-child{border:0}
+ul.ck li:before{content:"";position:absolute;left:2px;top:11px;width:13px;height:13px;border:1.6px solid var(--teal);border-radius:4px}
+.foot{margin-top:36px;font-size:12.5px;color:var(--muted)}
+
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:4px}
+th,td{text-align:left;vertical-align:top;padding:9px 8px;border-bottom:1px solid var(--line)}
+th{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.tw{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:6px 12px}
+.cards{display:grid;gap:10px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px}
+.card b{font-size:16px}.card .m{font-family:'Marck Script',cursive;color:#c9933e;font-size:18px;margin-left:6px}
+.card p{font-size:15px;color:var(--ink2);margin-top:6px}
+.err{display:grid;gap:10px}
+.err .card .row{margin:8px 0 0}
+.err pre{font-size:15px;background:var(--teal-soft);border-radius:12px;padding:10px 12px;flex:1}
+.flow{counter-reset:f;list-style:none}
+.flow li{counter-increment:f;position:relative;padding:8px 0 8px 40px;font-size:15.5px;border-bottom:1px solid var(--line)}
+.flow li:last-child{border:0}
+.flow li:before{content:counter(f);position:absolute;left:0;top:7px;width:26px;height:26px;border-radius:50%;background:var(--gold);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+p.t{font-size:15.5px;margin-bottom:8px}
+@media (max-width:560px){.err .row{flex-direction:column;align-items:stretch}.err .row button{align-self:flex-start}}
+</style></head>
+<body><div class="wrap">
+<div class="top">Хочу как у Анастасии<i>материал модуля</i></div>
+<div class="num">Модуль 0.5 · Распаковка личности</div>
+<h1>Вопросы распаковки</h1>
+<p class="lead">Что внутри Вас есть нераскрытого. Из этого дальше собираются продукт, позиционирование, голос и истории для контента.</p>
+<h2>Как отвечать</h2><ul class="ck"><li>Удобнее голосом: надиктуйте ответ и пришлите проводнику</li><li>Отвечайте развёрнуто: факты, истории, эмоции</li><li>Ответы остаются у Вас: в Вашем Claude и Вашей базе знаний</li><li>Личные блоки необязательные, решаете Вы</li></ul><h2>Ядро: 18 вопросов на сегодня</h2><div class="box"><div class="row"><b>Ядро</b><button data-copy="core">Скопировать</button></div><pre id="core">1. Какой я человек? Опишите себя как личность, без внешности, возраста и профессии.
+2. Сильные стороны Вашей личности.
+3. Ваши ключевые ценности и приоритеты.
+4. Ваши убеждения: в чём Вы хотели бы убедить весь мир?
+5. Анти-убеждения: против чего Вы выступаете?
+6. Что у Вас получается лучше, чем у всех, кого Вы знаете?
+7. Чем Вы можете вдохновлять людей?
+8. В чём Вы чувствуете себя особенной или особенным, но боитесь признаться?
+9. Точка старта в профессии.
+10. Где Вы сейчас?
+11. Ваши компетенции и экспертность.
+12. Ваши клиенты.
+13. Чему Вы можете научить?
+14. Переломный момент, провал, серьёзное препятствие.
+15. Момент прозрения или внезапной удачи.
+16. Ваши профессиональные достижения.
+17. Что Вы хотите донести своим проектом?
+18. В чём конкретно выиграет клиент, обратившись к Вам?</pre><p class=note>Проводник задаёт их по одному и уточняет по подсказкам из полной анкеты.</p></div><h2>Полная анкета: 64 вопроса</h2><p class="t">Проводник ведёт её в фоне, по блоку в день. Пишите ему «продолжим распаковку».</p><div class="cards"><div class="card"><b>Личность</b><p>Какой я человек? Опишите себя, как личность<br>Сильные стороны вашей личности<br>Ваши зоны роста<br>Как вы радуетесь?<br>Как вы грустите?<br>Как справляетесь со стрессом?<br>Ваши ключевые ценности, приоритеты<br>Ваши убеждения<br>Анти убеждения<br>Ваши цели, стремления, миссия, предназначение<br>Как вы можете вдохновлять людей? Чем можете вдохновлять?<br>В чём вы чувствуете себя особенной/ным, но боитесь признаться в этом даже самой/му себе?<br>Есть ли у вас по-настоящему Большая Идея?<br>Что у вас получается лучше, чем у всех, кого вы знаете?</p></div><div class="card"><b>В сложных ситуациях и с людьми (рабочее название, утвердить у анастасии)</b><p>Как вы ведете себя в сложных ситуациях?<br>Как вы считаете, есть ли у вас синдром самозванца? Если есть, то какие случившиеся/не случившиеся события его сформировали?<br>Как вы считаете, что должно произойти в вашей жизни, чтобы он исчез?<br>Вы легко находите общий язык с людьми, входите в комьюнити?<br>Как вам комфортнее всего передавать какую-либо информацию людям?</p></div><div class="card"><b>Здоровье / внешность (необязательный блок)</b><p>Как вы относитесь к своей внешности?<br>Ваши комплексы в связи с внешностью<br>Как вы менялись?<br>Как вы относитесь к внешности окружающих?<br>Фитнес и спорт</p></div><div class="card"><b>Работа / бизнес</b><p>Точка старта в профессии.<br>Где вы сейчас?<br>Куда вы идете? Что для вас успешный успех?<br>Ваши учебные достижения и главные учителя<br>Ваши компетенции и экспертность<br>Ваши клиенты<br>Чему вы можете научить?<br>Был ли в вашей карьере переломный момент, истории провала, серьезные препятствия?<br>Был ли в вашей карьере момент прозрения? Внезапной удачи?<br>Ваши профессиональные достижения<br>Готовы ли вы выходить из “зоны комфорта”, чтобы расти в профессиональном смысле?<br>Что вы хотите донести своим проектом?<br>Какой результат вы должен/а показать людям своим проектом?<br>В чём конкретно выиграет клиент, обратившись именно к вам?<br>Какие качества вашего будущего продукта будут уникальными и непохожими ни на что на рынке? Как вы это видите?</p></div><div class="card"><b>Окружение (необязательный блок)</b><p>Кого вы считаете своей семьей?<br>Ваше отношение к браку / партнеру<br>Ваше отношение к детям<br>Ваши отношения к родителям<br>Ваши друзья<br>Какой вы друг?<br>Сколько кругов общения у вас сейчас?<br>Люди, которые вас вдохновляют<br>Люди, которые тяготят<br>Люди, которые повлияли на вас<br>Кого вы бы хотели видеть в своем окружении?</p></div><div class="card"><b>Увлечения / события</b><p>Что вас зажигает?<br>Выберите ваше главное хобби / увлечение<br>Увлечение, которое приносит или может приносить деньги<br>Увлечение, которое вызывает страх, стыд, неловкость<br>Как вы относитесь к путешествиям?<br>Что делает жизнь яркой?<br>Книги, подкасты, форумы<br>Расскажите про ваш обычный день<br>А теперь опишите ваш идеальный день</p></div><div class="card"><b>Позиция</b><p>Ваше отношение к деньгам<br>Ваше отношение к...<br>Какой суммы в месяц вам было бы достаточно для комфортной жизни?<br>О какой сумме вы мечтаете?<br>Сколько часов в день вы готовы уделять работе и карьерному росту, если будете точно знать, что это приведет к поставленной цели?</p></div></div>
+<div class="foot">Анастасия Лушникова · @target_school</div>
+</div>
+<script>
+document.querySelectorAll("[data-copy]").forEach(b=>b.onclick=async()=>{
+  const t=document.getElementById(b.dataset.copy).innerText, txt=b.textContent;
+  try{await navigator.clipboard.writeText(t);}catch(e){
+    const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(x){}a.remove();}
+  b.textContent="Скопировано";b.classList.add("ok");setTimeout(()=>{b.textContent=txt;b.classList.remove("ok")},1800);
+});
+</script>
+</body></html>
