@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Дашборд: живой пример · модуль 5.2</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600;800&family=Marck+Script&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7f0;--paper:#fffdf9;--ink:#14171a;--ink2:#3b3f44;--muted:#948e84;--line:#ebe3d3;--sand:#efe5d2;--teal:#5fb8ae;--teal-soft:#dff1ee;--gold:#e8b45f;--gold-soft:#f8ead0;--red:#e05b4b;--red-soft:#fbe4e0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Onest',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;
+  background-image:radial-gradient(900px 520px at 85% -10%,rgba(232,180,95,.22),transparent 60%)}
+.wrap{max-width:760px;margin:0 auto;padding:28px 16px 60px}
+.top{font-size:14px;font-weight:600}.top i{font-family:'Marck Script',cursive;font-style:normal;color:#b0894f;font-size:17px;margin-left:6px;font-weight:400}
+.num{font-family:'Marck Script',cursive;color:#c9933e;font-size:22px;margin-top:28px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.lead{font-size:16px;color:var(--ink2);margin-top:10px}
+.ex{display:inline-block;margin-top:12px;font-size:13px;font-weight:600;color:#a8762c;background:var(--gold-soft);border-radius:999px;padding:4px 12px}
+h2{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:30px 0 10px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tab{font:inherit;font-size:14.5px;font-weight:600;padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;transition:all .2s}
+.tab.on{background:var(--ink);color:#faf7f0;border-color:var(--ink)}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:14px}
+.meta{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.step{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;width:100%;text-align:left;font:inherit;background:none;border:0;padding:10px 8px;border-radius:12px;cursor:pointer;color:inherit}
+.step:hover{background:var(--bg)}
+.step.sel{background:var(--teal-soft)}
+.step .nm{font-size:15px;font-weight:600}
+.step .val{font-size:18px;font-weight:800;text-align:right}
+.step .val.nd{font-size:14px;font-weight:600;color:var(--muted)}
+.bar{grid-column:1/-1;height:12px;border-radius:6px;background:var(--sand);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:6px;background:var(--teal);width:0;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.step .src{grid-column:1/-1;font-size:12.5px;color:var(--muted)}
+.drop{margin:2px 8px 2px 8px;font-size:13px;font-weight:600;color:var(--muted)}
+.drop.big{color:var(--red);background:var(--red-soft);border-radius:8px;padding:4px 10px;display:inline-block}
+.why{border-radius:18px;padding:18px;margin-top:14px;background:var(--gold-soft)}
+.why b{display:block;font-size:16px;margin-bottom:6px}
+.why p{font-size:15px;color:var(--ink2)}
+.tom{margin-top:14px}
+.opt{display:block;width:100%;text-align:left;font:inherit;font-size:15px;padding:12px 14px;margin-top:8px;border-radius:12px;border:1px solid var(--line);background:var(--paper);cursor:pointer;color:inherit}
+.opt.on{border-color:var(--teal);background:var(--teal-soft);font-weight:600}
+.opt small{display:block;font-size:13px;color:var(--muted);font-weight:400}
+.note{font-size:14px;color:var(--ink2);margin-top:10px}
+.rules{display:grid;gap:10px}
+.rule{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:15px}
+.rule b{display:block}
+.foot{margin-top:36px;font-size:12.5px;color:var(--muted)}
+</style></head><body><div class="wrap">
+<div class="top">Хочу как у Анастасии<i>модуль 5.2 · Дашборд</i></div>
+<div class="num">живой пример</div>
+<h1>Где теряются люди</h1>
+<p class="lead">Выберите воронку и нажимайте на шаги. Самая большая потеря подсвечена красным, ниже совет проводника и выбор касания на завтра.</p>
+<span class="ex">Пример. Цифры условные, для тренировки</span>
+
+<h2>Воронка</h2>
+<div class="tabs" id="tabs"></div>
+<div class="box"><div class="meta" id="meta"></div><div id="steps"></div></div>
+<div class="why" id="why"></div>
+
+<h2>Что отправляем базе завтра</h2>
+<p class="note">Каждый срез заканчивается одним действием. Проводник предлагает три варианта, выбираете Вы. Отправка по тегам, сначала тест.</p>
+<div class="tom" id="tom"></div>
+<p class="note" id="tomHint"></p>
+
+<h2>Когда смотреть цифры</h2>
+<div class="rules">
+  <div class="rule"><b>Через 2–3 часа после публикации</b>Проверить, что ничего не сломалось: бот отвечает, материал открывается</div>
+  <div class="rule"><b>Каждый день</b>Короткий срез и одно действие на завтра</div>
+  <div class="rule"><b>Через 3 дня</b>Сравнить воронки между собой: какая тема приводит к оплатам</div>
+</div>
+
+<h2>Откуда цифры</h2>
+<p class="note">Только ChatPlace, Метрика и сервис оплаты. Нет цифры, проводник пишет «нет данных» и ничего не досчитывает. В примере такая строка тоже есть.</p>
+
+<p class="foot">Свой дашборд проводник заведёт в Вашей базе знаний. Напишите ему «Делаем модуль «Дашборд»» и попросите первый срез.</p>
+</div>
+<script>
+const SRC={cp:"ChatPlace",ym:"Метрика: цель",pay:"сервис оплаты"};
+const F=[
+ {k:"a",t:"Рилс «нейросеть-аватар»",w:"АВАТАР",d:"срез за 3 дня",
+  s:[["Написали слово",412,"cp"],["Дошли до материала",64,"ym"],["Нажали на продукт",22,"ym"],["Оплатили",5,"pay"]],
+  why:["Пишут слово, а до материала не доходят","Чаще всего мешает текст в директе или кнопка. Сократите первое сообщение бота до одной строки и одной кнопки или поставьте кнопку-посредник: человек сам нажимает «Получить», и ссылка открывается"],
+  tom:[["Материал по теме","Тем, кто написал слово и не открыл: «Положила материал ещё раз, тут на одну минуту»"],["Мост к продукту","Тем, кто открыл: короткий разбор, как этим пользоваться на практике"],["Кейс или живой ответ","Вопрос в директ: «Что помешало открыть?» Ответы покажут, что чинить"]]},
+ {k:"b",t:"Карусель «смыслы в рилс»",w:"СМЫСЛ",d:"срез за 3 дня",
+  s:[["Написали слово",180,"cp"],["Дошли до материала",142,"ym"],["Нажали на продукт",6,"ym"],["Оплатили",null,"pay"]],
+  why:["Доходят до материала, а продукт не нажимают","Продукт не про ту тему, что материал. Человек пришёл за одним, а в конце ему предлагают другое. Подберите ступень линейки, которая продолжает тему материала, или перепишите переход к продукту"],
+  tom:[["Материал по теме","Продолжение материала: следующий шаг по той же теме"],["Мост к продукту","Тем, кто дочитал: как продукт продолжает именно этот материал"],["Кейс или живой ответ","Кейс человека, который начинал с этой же темы"]]},
+ {k:"c",t:"Сторис «кодовое слово»",w:"СЛОВО",d:"срез за 3 дня",
+  s:[["Написали слово",95,"cp"],["Дошли до материала",71,"ym"],["Получили сообщение с продуктом",9,"cp"],["Нажали на продукт",5,"ym"],["Оплатили",2,"pay"]],
+  why:["Отложенное сообщение получили единицы","Задержка вылезла за окно соцсети: после последнего сообщения человека бот может писать только ограниченное время. Сдвиньте сообщение с продуктом раньше или попросите человека нажать кнопку, чтобы окно открылось снова"],
+  tom:[["Материал по теме","Тем, кто открыл материал: коротко, что делать дальше"],["Мост к продукту","Сообщение с продуктом тем, кому оно не дошло, после теста"],["Кейс или живой ответ","Живой ответ в директе тем, кто дочитал"]]}
+];
+let cur=F[0], sel=null, pick={};
+const $=id=>document.getElementById(id);
+function biggest(s){let b=-1,ix=-1;for(let i=1;i<s.length;i++){const a=s[i-1][1],c=s[i][1];if(a==null||c==null)continue;const l=1-c/a;if(l>b){b=l;ix=i;}}return ix;}
+function draw(){
+  $("tabs").innerHTML=F.map(f=>`<button class="tab ${f===cur?"on":""}" data-k="${f.k}">${f.t}</button>`).join("");
+  document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{cur=F.find(f=>f.k===b.dataset.k);sel=null;draw();});
+  $("meta").textContent="Кодовое слово «"+cur.w+"» · "+cur.d;
+  const top=cur.s[0][1], bx=biggest(cur.s);
+  $("steps").innerHTML=cur.s.map((s,i)=>{
+    let drop="";
+    if(i>0){const a=cur.s[i-1][1],c=s[1];
+      drop=(a!=null&&c!=null)?`<div class="drop ${i===bx?"big":""}">↓ дошли ${Math.round(c/a*100)}%${i===bx?" · самая большая потеря":""}</div>`:`<div class="drop">↓ нет данных для расчёта</div>`;}
+    return drop+`<button class="step ${sel===i?"sel":""}" data-i="${i}"><span class="nm">${s[0]}</span><span class="val ${s[1]==null?"nd":""}">${s[1]==null?"нет данных":s[1]}</span><span class="bar"><i data-w="${s[1]==null?0:s[1]/top*100}"></i></span>${sel===i?`<span class="src">Источник: ${SRC[s[2]]}</span>`:""}</button>`;
+  }).join("");
+  requestAnimationFrame(()=>document.querySelectorAll(".bar i").forEach(i=>i.style.width=i.dataset.w+"%"));
+  document.querySelectorAll(".step").forEach(b=>b.onclick=()=>{sel=sel===+b.dataset.i?null:+b.dataset.i;draw();});
+  $("why").innerHTML=`<b>${cur.why[0]}</b><p>${cur.why[1]}</p>`;
+  $("tom").innerHTML=cur.tom.map((t,i)=>`<button class="opt ${pick[cur.k]===i?"on":""}" data-i="${i}">${t[0]}<small>${t[1]}</small></button>`).join("");
+  document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{pick[cur.k]=+b.dataset.i;draw();});
+  $("tomHint").textContent=pick[cur.k]==null?"Выберите один вариант.":"Выбрано. Проводник подготовит текст и покажет Вам. Рассылка уходит только после Вашего «да».";
+}
+draw();
+</script>
+</body></html>
