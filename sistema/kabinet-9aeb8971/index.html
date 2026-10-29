@@ -1077,7 +1077,11 @@ function openLesson(id){
   if(l.start&&l.mod.intro){$("nextTitle").textContent="Блок "+l.mod.n+" · вводное видео «"+l.mod.intro.t+"»";$("nextBtn").style.display="";$("nextBtn").onclick=()=>openIntro(l.mod.n);}
   document.body.classList.add("reading"); window.scrollTo({top:0}); try{tg&&tg.BackButton.show()}catch(e){}
 }
-$("closeBtn").onclick=()=>{ if(reading&&!done.has(reading.id)){done.add(reading.id);save();goal("sis_"+reading.id.replace(".","_"));toast("Шаг "+reading.id+" закрыт. Вещь у Вас");renderAll();openLesson(reading.id);} };
+$("closeBtn").onclick=()=>{ if(!reading) return; const id=reading.id, y=scrollY, was=done.has(id);
+  if(!was){done.add(id);save();goal("sis_"+id.replace(".","_"));renderAll();openLesson(id);}
+  const nb=$("nextBtn"); /* после закрытия ведём на следующий модуль, а не наверх этого */
+  if(nb.style.display!=="none"){ if(!was) toast("Модуль "+id+" закрыт. Открываю следующий"); nb.onclick(); }
+  else { scrollTo({top:y}); if(!was) toast("Модуль "+id+" закрыт. Вещь у Вас"); } };
 $("backBtn").onclick=()=>{try{tg&&tg.BackButton.hide()}catch(e){}document.body.classList.remove("reading");renderAll();window.scrollTo({top:0});};
 $("continueBtn").onclick=()=>openLesson(current().id);
 $("passToggle").onclick=()=>{passOpen=!passOpen;renderPass();};
