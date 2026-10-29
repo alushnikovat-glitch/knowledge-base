@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как сделать экспертный мотион-рилс с помощью AI. Без дизайнера и монтажёра | Анастасия Лушникова</title>
+<meta name="description" content="Пошаговая инструкция: как собрать анимированный Reels для Instagram с помощью Claude Code. Без дизайнера, монтажёра и бюджета на подрядчиков.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Marck+Script&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Golos Text',sans-serif;background:linear-gradient(165deg,#f4efe4 0%,#efe8d8 40%,#e2e9e6 100%);background-attachment:fixed;color:#23211c;line-height:1.7;font-size:17px}
+a{color:#2e7d76;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;background:rgba(244,239,228,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #e3dcc9}
+.nav-inner{max-width:760px;margin:0 auto;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-weight:600;font-size:16px;color:#23211c}
+.nav-links{display:flex;gap:18px;font-size:14px;font-weight:600}
+.nav-links a{color:#948e84}
+.nav-links a:hover{color:#23211c}
+.wrap{max-width:760px;margin:0 auto;padding:40px 20px 0}
+.meta{font-size:14px;color:#948e84;margin-bottom:16px}
+h1{font-size:clamp(28px,5vw,42px);font-weight:600;line-height:1.2;letter-spacing:-.02em;margin-bottom:8px}
+.h1-pen{font-family:'Marck Script',cursive;font-weight:400;color:#2e7d76;font-size:clamp(24px,4vw,34px);margin-bottom:20px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.tag{background:#ece6d8;border-radius:100px;padding:6px 14px;font-size:13px;font-weight:600;color:#6f6a5e}
+.card{background:#fffdf8;border:1px solid #e3dcc9;border-radius:18px;padding:28px;margin-bottom:24px;box-shadow:0 4px 24px rgba(0,0,0,0.05)}
+.hint{background:#e9f2f0;border:1px solid #bcd8d3;border-radius:18px;padding:22px 28px;margin-bottom:40px;font-size:15px}
+.hint b{color:#2e7d76}
+h2{font-size:26px;font-weight:600;letter-spacing:-.01em;margin:48px 0 16px}
+h3{font-size:19px;font-weight:600;margin:28px 0 10px}
+p{margin-bottom:16px}
+ul,ol{margin:0 0 16px 22px}
+li{margin-bottom:8px}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:#2e7d76;color:#fff;border-radius:10px;font-weight:600;font-size:16px;margin-right:12px;vertical-align:middle}
+.prompt-block{background:#14171a;border-radius:16px;padding:22px;margin:18px 0 24px;position:relative;background-image:radial-gradient(ellipse 85% 55% at 15% 5%,rgba(190,130,55,0.22),transparent 60%)}
+.prompt-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#f5f2ec;white-space:pre-wrap;word-break:break-word}
+.prompt-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#e8b45f;margin-bottom:12px}
+.copy-btn{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.12);color:#f5f2ec;border:1px solid rgba(255,255,255,0.16);border-radius:8px;padding:7px 14px;font-family:'Golos Text',sans-serif;font-size:13px;font-weight:600;cursor:pointer}
+.copy-btn:hover{background:rgba(255,255,255,0.2)}
+.note{background:#fffdf8;border-left:3px solid #2e7d76;border-radius:0 12px 12px 0;padding:16px 22px;margin:20px 0;font-size:15px;color:#3d3b35}
+.viz{margin:10px 0 30px}
+.viz svg{display:block;width:100%;height:auto}
+.viz-cap{font-size:13px;color:#948e84;text-align:center;margin-top:8px}
+.product{background:#14171a;background-image:radial-gradient(ellipse 85% 55% at 15% 5%,rgba(190,130,55,0.38),transparent 60%);border-radius:20px;padding:36px 32px;margin:56px 0 24px;color:#f5f2ec}
+.product h2{margin-top:0;font-size:28px;color:#ffffff}
+.product .pen{font-family:'Marck Script',cursive;font-weight:400;color:#e8b45f;font-size:26px;margin-bottom:14px}
+.product p{color:rgba(255,255,255,0.82)}
+.product li{color:rgba(255,255,255,0.82)}
+.product li::marker{color:#e8b45f}
+.price-row{display:flex;align-items:baseline;gap:16px;margin:14px 0 2px;flex-wrap:wrap}
+.price-old{font-size:22px;font-weight:500;color:rgba(255,255,255,0.55);position:relative;white-space:nowrap}
+.price-old::after{content:"";position:absolute;left:0;top:52%;height:2.5px;width:0;background:#e05252;transform:rotate(-6deg);border-radius:2px;animation:strike 0.6s ease-out 0.9s forwards}
+@keyframes strike{to{width:100%}}
+.price-new{font-size:38px;font-weight:600;color:#e8b45f;white-space:nowrap}
+.price-note{font-size:15px;color:rgba(255,255,255,0.65);margin-bottom:6px}
+.product .btn{position:relative;overflow:hidden}
+.product .btn::before{content:"";position:absolute;top:-60%;left:-80%;width:50%;height:220%;background:linear-gradient(105deg,transparent,rgba(255,255,255,0.55),transparent);transform:rotate(12deg);animation:shine 3.2s ease-in-out 1.4s infinite}
+@keyframes shine{0%{left:-80%}18%{left:130%}100%{left:130%}}
+@media (prefers-reduced-motion: reduce){.price-old::after{animation:none;width:100%}.product .btn::before{animation:none;display:none}}
+.btn{display:inline-block;background:#2e7d76;color:#fff;border-radius:12px;padding:16px 32px;font-weight:600;font-size:17px;margin-top:20px;transition:opacity .15s}
+.btn:hover{opacity:.85}
+.product .btn{background:#e8b45f;color:#14171a}
+.footer{margin-top:72px;border-top:1px solid #e3dcc9;background:#fffdf8}
+.footer-inner{max-width:760px;margin:0 auto;padding:56px 20px 32px}
+.footer h2{margin-top:0;font-size:26px}
+.footer-sub{color:#948e84;margin-bottom:28px}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:28px}
+.footer-card{border:1px solid #e3dcc9;border-radius:14px;padding:20px;display:block}
+.footer-card b{display:block;color:#23211c;margin-bottom:4px}
+.footer-card span{font-size:14px;color:#948e84}
+.footer-banner{background:#ece6d8;border-radius:14px;padding:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.footer-banner b{font-size:18px}
+.copyright{font-size:13px;color:#948e84;text-align:center;padding-top:20px;border-top:1px solid #e3dcc9}
+.viz svg{max-width:460px;margin:0 auto}
+@media(max-width:600px){
+body{font-size:16px}
+.card,.product{padding:22px}
+.nav{position:static;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+.nav-links{gap:12px}
+h1{font-size:28px}
+.h1-pen{font-size:22px}
+h2{font-size:22px}
+.product h2{font-size:24px}
+.btn{display:block;text-align:center}
+.footer-banner .btn{display:inline-block}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="../">Анастасия Лушникова</a>
+    <div class="nav-links">
+      <a href="https://t.me/target_school1">Telegram</a>
+      <a href="https://www.instagram.com/target_school">Instagram</a>
+      <a href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0">Написать</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<div class="meta">Материал к модулю «Motion-рилс без съёмки» · 12 минут чтения · Анастасия Лушникова</div>
+
+<h1>Как сделать экспертный мотион-рилс с помощью AI</h1>
+<div class="h1-pen">без дизайнера, монтажёра и бюджета</div>
+
+<div class="tags">
+  <span class="tag">AI-маркетинг</span>
+  <span class="tag">Инструменты</span>
+  <span class="tag">Контент</span>
+</div>
+
+<div class="card">
+  <p>Вы пришли сюда с ролика в Instagram*, где анимация показывает рекламный кабинет, схемы и графики. Так вот, этот ролик от первой сцены до последней собрал искусственный интеллект. Я написала сценарий, записала голос на диктофон в телефоне и поставила задачу. Всё остальное сделала нейросеть: нарисовала кабинет кодом, анимировала схемы, положила субтитры, свела с голосом.</p>
+  <p>Дизайнера у меня нет. Монтажёра нет. After Effects я не открывала ни разу в жизни. Бюджет на подрядчиков: ноль. Времени ушёл один вечер.</p>
+  <p>Ниже полная инструкция, как повторить. Я написала её так, чтобы справился человек, который никогда не программировал. Потому что я сама не программирую. Вот честно.</p>
+</div>
+
+<div class="viz">
+<svg viewBox="0 0 360 380" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <rect x="40" y="8" width="280" height="64" rx="14" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <circle cx="90" cy="40" r="13" fill="none" stroke="#23211c" stroke-width="2"/>
+  <rect x="86" y="33" width="8" height="11" rx="4" fill="#23211c"/>
+  <text x="120" y="46" font-size="16" font-weight="600" fill="#23211c">Ваш голос</text>
+  <text x="180" y="94" text-anchor="middle" font-size="18" fill="#948e84">↓</text>
+  <rect x="40" y="106" width="280" height="76" rx="14" fill="#14171a"/>
+  <text x="180" y="138" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">Нейросеть</text>
+  <text x="180" y="162" text-anchor="middle" font-size="13" fill="#c9c5be">код · анимация · субтитры</text>
+  <text x="180" y="204" text-anchor="middle" font-size="18" fill="#948e84">↓</text>
+  <rect x="40" y="216" width="280" height="64" rx="14" fill="#fffdf8" stroke="#2e7d76" stroke-width="2"/>
+  <polygon points="86,236 86,260 106,248" fill="#2e7d76"/>
+  <text x="126" y="254" font-size="16" font-weight="600" fill="#23211c">Готовый Reels</text>
+  <rect x="40" y="304" width="280" height="52" rx="26" fill="#ece6d8"/>
+  <text x="180" y="336" text-anchor="middle" font-size="15" font-weight="600" fill="#23211c">1 вечер · 0 ₽ подрядчикам</text>
+</svg>
+</div>
+
+<div class="hint">
+  <b>Как пользоваться этой статьёй.</b> Идите по шагам сверху вниз, ничего не пропуская. Тёмные блоки копируются кнопкой целиком, их не нужно перепечатывать. Один шаг за раз, и через вечер у вас будет первый ролик.
+</div>
+
+<h2><span class="step-num">0</span>Что понадобится</h2>
+<ul>
+  <li>Компьютер, Mac или Windows.</li>
+  <li>Подписка Claude от Anthropic. Ролики собирает инструмент Claude Code, он входит в подписку.</li>
+  <li>Телефон с диктофоном, чтобы записать голос.</li>
+  <li>Один вечер времени.</li>
+</ul>
+<p>Это весь список. Камера не нужна, лицо показывать не нужно, платные программы для монтажа не нужны.</p>
+
+<h2><span class="step-num">1</span>Установите приложение Claude</h2>
+<p>Скачайте настольное приложение Claude с официального сайта claude.ai и войдите в аккаунт. Внутри приложения есть режим Claude Code: вы даёте ему папку на компьютере, и он работает с файлами в ней сам. Создаёт, пишет код, запускает программы. Ваша роль: ставить задачу и отвечать «да», когда он спрашивает разрешение.</p>
+<div class="note">Если при выборе папки появится надпись «Git is required», система попросит установить служебные инструменты. Нажмите «Установить» в появившемся окне и подождите минут десять. Это делается один раз.</div>
+
+<h2><span class="step-num">2</span>Создайте проект одной командой</h2>
+<p>Руками ничего создавать не будем. Создайте на рабочем столе одну пустую папку с названием <b>reels-factory</b>, откройте её в Claude Code и вставьте этот текст целиком:</p>
+
+<div class="prompt-block">
+  <div class="prompt-label">Промпт · создание проекта</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>Создай в этой папке структуру проекта для производства анимированных Reels: папки resources, scripts, public, а в resources четыре файла с правилами.
+
+Файл style.md: вертикаль 1080x1920, 30 fps. Безопасные зоны: 250px сверху, 350px снизу, 120px справа, там интерфейс Instagram*. Мой бренд: [впиши свой основной цвет фона], акцентный цвет [впиши], цвет ошибок красный. Шрифт [впиши свой, если нет, возьми Golos Text]. Субтитры внизу над безопасной зоной, слова появляются группами по 2-3 с fade и лёгким подъёмом, максимум две строки, ключевые слова акцентным цветом. Разрешённые анимации: fade с подъёмом 20-30px, перечёркивание линией, поблочная сборка схем, рост числа счётчиком, движение линии графика, медленный наезд. Запрещено: пружины, глитчи, 3D, тряска, побуквенная анимация, эмодзи.
+
+Файл scene-rules.md: переводить смысл в визуал, без буквальных иллюстраций. Интерфейсы программ рисовать вёрсткой, без скриншотов. Цифры в кадре крупно. Одна сцена равна одной мысли.
+
+Файл versioning.md: любая правка сцены создаёт новую версию, оригинал не трогать. Scene1 превращается в Scene1v2.
+
+Файл tokens.md: работать партиями до 5 сцен, ответы короткие, инструкции по-русски по одному шагу.
+
+Когда закончишь, покажи структуру и жди сценарий.</pre>
+</div>
+
+<p>Claude Code создаст всё сам за минуту. В квадратных скобках впишите свои цвета до отправки. Если своего фирменного стиля пока нет, удалите скобки и напишите «подбери сдержанную палитру: тёмный фон, один тёплый акцент».</p>
+
+<h2><span class="step-num">3</span>Напишите сценарий по скелету</h2>
+<p>Формат, который работает в экспертных нишах, устроен просто. Я называю его скелетом «Показываю»:</p>
+
+<div class="viz">
+<svg viewBox="0 0 360 330" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <text x="8" y="20" font-size="12" fill="#948e84">0 с</text>
+  <text x="352" y="20" text-anchor="end" font-size="12" fill="#948e84">45 с</text>
+  <rect x="8" y="30" width="344" height="42" rx="12" fill="#14171a"/>
+  <text x="24" y="56" font-size="15" font-weight="600" fill="#ffffff">Хук-глагол</text>
+  <text x="344" y="56" text-anchor="end" font-size="12" fill="#c9c5be">«показываю, как…»</text>
+  <rect x="8" y="80" width="344" height="42" rx="12" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <text x="24" y="106" font-size="15" font-weight="600" fill="#23211c">Приём 1</text>
+  <text x="344" y="106" text-anchor="end" font-size="11.5" fill="#948e84">ошибка → почему → как надо</text>
+  <rect x="8" y="130" width="344" height="42" rx="12" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <text x="24" y="156" font-size="15" font-weight="600" fill="#23211c">Приём 2</text>
+  <rect x="8" y="180" width="344" height="42" rx="12" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <text x="24" y="206" font-size="15" font-weight="600" fill="#23211c">Приём 3</text>
+  <rect x="8" y="230" width="344" height="42" rx="12" fill="#fffdf8" stroke="#2e7d76" stroke-width="1.5"/>
+  <text x="24" y="256" font-size="15" font-weight="600" fill="#23211c">Обещание владения</text>
+  <rect x="8" y="280" width="344" height="42" rx="12" fill="#2e7d76"/>
+  <text x="24" y="306" font-size="15" font-weight="600" fill="#ffffff">Кодовое слово</text>
+  <text x="344" y="306" text-anchor="end" font-size="12" fill="#d8ebe8">→ лид-магнит</text>
+</svg>
+</div>
+<ol>
+  <li><b>Хук-глагол.</b> Первая фраза: «показываю, как…». Без приветствий, сразу в тему.</li>
+  <li><b>Три приёма.</b> Каждый строится по формуле: ошибка, почему это плохо, как надо. Запрет цепляет сильнее совета.</li>
+  <li><b>Обещание владения.</b> «Исправь эти три вещи, и…». Что человек получит, когда применит.</li>
+  <li><b>Кодовое слово.</b> «Напиши слово X в комментариях, пришлю…». Слово должно писаться без вариантов ошибок.</li>
+</ol>
+<p>Хронометраж 30-45 секунд. Тема берётся из вашей экспертности: ошибки, которые вы видите у клиентов каждый день. Сценарий сохраните в папку scripts как текстовый файл, на каждый смысловой блок отдельный абзац и короткое описание, что показать на экране.</p>
+<div class="note">Главный принцип визуала: показывать смысл, без буквальных картинок. Фраза «алгоритм не успевает обучиться» это график, который обрывается в начале. Чем точнее вы опишете картинку словами, тем меньше будет правок.</div>
+
+<h2><span class="step-num">4</span>Запишите голос на телефон</h2>
+<p>Откройте Диктофон, найдите комнату с мягкой мебелью или шторами, держите телефон в 15-20 сантиметрах ото рта и чуть сбоку. Читайте сценарий по блокам, после каждого блока пауза две секунды. По этим паузам нейросеть поймёт, где заканчивается сцена. Запишите два дубля, выберите лучший, перекиньте файл на компьютер и положите в папку public.</p>
+
+<div class="viz">
+<svg viewBox="0 0 360 110" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <g fill="#23211c">
+    <rect x="16" y="34" width="6" height="28" rx="3"/><rect x="27" y="24" width="6" height="48" rx="3"/><rect x="38" y="30" width="6" height="36" rx="3"/><rect x="49" y="20" width="6" height="56" rx="3"/><rect x="60" y="34" width="6" height="28" rx="3"/><rect x="71" y="26" width="6" height="44" rx="3"/><rect x="82" y="36" width="6" height="24" rx="3"/><rect x="93" y="28" width="6" height="40" rx="3"/>
+  </g>
+  <g fill="#c9c5be">
+    <rect x="116" y="46" width="5" height="5" rx="2.5"/><rect x="128" y="46" width="5" height="5" rx="2.5"/><rect x="140" y="46" width="5" height="5" rx="2.5"/>
+  </g>
+  <g fill="#23211c">
+    <rect x="162" y="28" width="6" height="40" rx="3"/><rect x="173" y="22" width="6" height="52" rx="3"/><rect x="184" y="34" width="6" height="28" rx="3"/><rect x="195" y="26" width="6" height="44" rx="3"/><rect x="206" y="36" width="6" height="24" rx="3"/><rect x="217" y="24" width="6" height="48" rx="3"/><rect x="228" y="32" width="6" height="32" rx="3"/>
+  </g>
+  <g fill="#c9c5be">
+    <rect x="251" y="46" width="5" height="5" rx="2.5"/><rect x="263" y="46" width="5" height="5" rx="2.5"/><rect x="275" y="46" width="5" height="5" rx="2.5"/>
+  </g>
+  <g fill="#23211c">
+    <rect x="297" y="30" width="6" height="36" rx="3"/><rect x="308" y="24" width="6" height="48" rx="3"/><rect x="319" y="34" width="6" height="28" rx="3"/><rect x="330" y="28" width="6" height="40" rx="3"/><rect x="341" y="38" width="6" height="20" rx="3"/>
+  </g>
+  <text x="58" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#23211c">блок 1</text>
+  <text x="130" y="96" text-anchor="middle" font-size="12" fill="#2e7d76">2 с</text>
+  <text x="198" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#23211c">блок 2</text>
+  <text x="265" y="96" text-anchor="middle" font-size="12" fill="#2e7d76">2 с</text>
+  <text x="322" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#23211c">блок 3</text>
+</svg>
+<div class="viz-cap">Пауза две секунды = граница сцены</div>
+</div>
+<p>Свой голос в записи не нравится никому. Слушателя это не смущает, он ваш голос слышит впервые.</p>
+
+<h2><span class="step-num">5</span>Соберите сцены</h2>
+<p>Вернитесь в Claude Code и вставьте:</p>
+<div class="prompt-block">
+  <div class="prompt-label">Промпт · сборка</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>Прочитай все файлы в папке resources и запомни правила. Установи Remotion в этот проект. В public лежит запись голоса, сконвертируй её в voice.mp3 через ffmpeg. Определи по паузам таймкоды блоков и выведи их списком. Потом открой сценарий в scripts и собери первые три сцены. Покажи, как запустить предпросмотр в Remotion Studio. Инструкции по-русски, по одному шагу.</pre>
+</div>
+<p>Remotion это инструмент, который превращает код в видео. Ставится он сам, вам нажимать «да» на вопросы. Через несколько минут Claude Code даст команду для предпросмотра, и в браузере откроется студия с вашими сценами.</p>
+
+<h2><span class="step-num">6</span>Правьте скриншотами</h2>
+<p>Смотрите сцены в предпросмотре. Что-то будет мимо, это нормально. Делаете скриншот, обводите проблемное место, кидаете в Claude Code и пишете обычными словами: «цифра мелкая, сделай крупнее», «этот блок появляется слишком рано». Он создаст новую версию сцены, оригинал останется на месте. Так вы ничего не сломаете.</p>
+
+<div class="viz">
+<svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, sans-serif">
+  <rect x="60" y="8" width="220" height="76" rx="14" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <rect x="88" y="22" width="164" height="30" rx="6" fill="#ece6d8"/>
+  <text x="170" y="72" text-anchor="middle" font-size="14" font-weight="600" fill="#23211c">предпросмотр</text>
+  <text x="170" y="106" text-anchor="middle" font-size="18" fill="#948e84">↓</text>
+  <rect x="60" y="118" width="220" height="76" rx="14" fill="#fffdf8" stroke="#d9d2bf" stroke-width="1.5"/>
+  <rect x="88" y="132" width="164" height="30" rx="6" fill="#ece6d8"/>
+  <ellipse cx="214" cy="147" rx="30" ry="15" fill="none" stroke="#b0483b" stroke-width="2.5" transform="rotate(-5 214 147)"/>
+  <text x="170" y="182" text-anchor="middle" font-size="14" font-weight="600" fill="#23211c">скриншот с обводкой</text>
+  <text x="170" y="216" text-anchor="middle" font-size="18" fill="#948e84">↓</text>
+  <rect x="60" y="228" width="220" height="76" rx="14" fill="#fffdf8" stroke="#2e7d76" stroke-width="2"/>
+  <rect x="88" y="242" width="164" height="30" rx="6" fill="#e9f2f0"/>
+  <text x="170" y="292" text-anchor="middle" font-size="14" font-weight="600" fill="#23211c">версия v2</text>
+  <text x="264" y="250" text-anchor="middle" font-size="12" font-weight="600" fill="#2e7d76">v2</text>
+  <path d="M 292 266 Q 340 170 296 52" fill="none" stroke="#948e84" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <polygon points="292,46 304,52 296,60" fill="#948e84"/>
+  <text x="336" y="168" text-anchor="middle" font-size="11" fill="#948e84" transform="rotate(90 336 168)">снова смотрим</text>
+</svg>
+<div class="viz-cap">Оригинал сцены не трогается. Не понравилась правка, вернулись назад.</div>
+</div>
+<p>Когда первые три сцены нравятся, пишете «собери остальные сцены». Потом финальная команда:</p>
+<div class="prompt-block">
+  <div class="prompt-label">Промпт · рендер</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>Отрендери все финальные версии сцен в mp4 1080p в папку out, потом склей их в один вертикальный ролик с озвучкой voice.mp3. Готовый файл назови final.mp4.</pre>
+</div>
+<p>Файл final.mp4 загружаете в Instagram* как обычный Reels. Всё.</p>
+
+<h2>Почему этот формат работает</h2>
+<p>Ролик, собранный по этой схеме, доказывает свою пользу до того, как что-то пообещал. Зритель видит аккуратную анимацию, точные схемы, профессиональные субтитры. И понимает без слов: человек разбирается. Экспертность показана, без рассказов о ней.</p>
+<p>И второе. Пока конкуренты записывают говорящую голову с кольцевой лампой, у вас мотион-дизайн уровня студии. Вечер работы против недель согласований с подрядчиками.</p>
+
+<h2>Если что-то непонятно</h2>
+<p>Застряли на каком-то шаге, это нормально. И тут я покажу приём, который важнее самой инструкции. Скопируйте текст этой статьи целиком, вставьте в свой Claude или другую нейросеть и напишите:</p>
+<div class="prompt-block">
+  <div class="prompt-label">Промпт · разбор статьи</div>
+  <button class="copy-btn" onclick="copyBlock(this)">Скопировать</button>
+  <pre>У меня есть инструкция, текст ниже. Я застряла на шаге [напиши номер шага]. Вот что у меня происходит: [опиши своими словами, что видишь на экране]. Разбери этот шаг ещё подробнее, веди меня по одному действию за раз и жди моего подтверждения после каждого. Покажи, где я что-то упускаю.
+
+[сюда вставь текст статьи]</pre>
+</div>
+<p>Нейросеть разберёт мою инструкцию по косточкам и поведёт вас по шагам, под вашу ситуацию и ваш компьютер. Так работает любая инструкция в интернете: берёте текст, отдаёте нейросети, она превращает его в личного проводника. Освойте этот приём один раз, и слово «непонятно» перестанет вас останавливать где-либо вообще.</p>
+<p>А если всё равно не получается, напишите мне в директ, контакты ниже. Сориентирую.</p>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <h2>Понравился материал?</h2>
+    <p class="footer-sub">Подписывайтесь на каналы — там ещё больше про AI-маркетинг, смыслы и продажи без выгорания</p>
+    <div class="footer-grid">
+      <a class="footer-card" href="https://t.me/target_school1"><b>Telegram канал</b><span>Промпты и кейсы каждый день</span></a>
+      <a class="footer-card" href="https://www.instagram.com/target_school"><b>Instagram</b><span>Визуальные гайды и stories</span></a>
+      <a class="footer-card" href="https://api.whatsapp.com/message/M7AG2O2FU4RQN1?autoload=1&app_absent=0"><b>Написать Анастасии</b><span>Личное сообщение в WhatsApp</span></a>
+      <a class="footer-card" href="https://t.me/ailav_bot"><b>Служба заботы</b><span>Техподдержка и вопросы</span></a>
+    </div>
+    <div class="footer-banner">
+      <b>Хотите больше материалов?</b>
+      <a class="btn" href="https://t.me/target_school1" style="margin-top:0">Подписаться на Telegram</a>
+    </div>
+    <div class="copyright" style="border-top:none;padding-top:0;margin-bottom:10px">*Instagram и Facebook принадлежат компании Meta Platforms Inc., признанной экстремистской организацией, её деятельность запрещена на территории Российской Федерации.</div>
+    <div class="copyright">© 2026 Анастасия Лушникова. Все права защищены.</div>
+  </div>
+</footer>
+
+<script>
+function copyBlock(btn){
+  const text = btn.parentElement.querySelector('pre').innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const old = btn.textContent;
+    btn.textContent = 'Скопировано';
+    setTimeout(()=>{btn.textContent = old;}, 1600);
+  });
+}
+</script>
+
+</body>
+</html>
