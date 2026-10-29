@@ -235,6 +235,20 @@ body.reading #lessonView{display:block}
 .video .cap{position:absolute;left:22px;bottom:18px;color:#faf7f0;font-size:14px;opacity:.85}
 .video video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;border-radius:inherit}
 .video.has-video .play,.video.has-video .cap{display:none}
+/* блок 5: пример дашборда, ритм недели, финиш */
+.demo iframe{width:100%;height:760px;border:1px solid var(--line);border-radius:16px;background:var(--bg);margin-top:12px}
+.rt{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.rt:first-child{border-top:0}
+.rt b{font-weight:600;font-size:15.5px}
+.rt .who{font-size:12.5px;font-weight:600;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.rt .who.s{background:var(--teal-soft);color:#2e7d76}.rt .who.c{background:var(--sand);color:#7a6440}.rt .who.y{background:var(--gold-soft);color:#a8762c}
+.rt .h{grid-column:1/-1;display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink2)}
+.rt .h input{font:inherit;font-size:15.5px;width:90px;padding:8px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.rt .h input:focus{outline:0;border-color:var(--teal);background:var(--paper)}
+.rt-sum{margin-top:14px;padding:16px 18px;border-radius:16px;background:var(--gold-soft);font-size:15.5px}
+.rt-sum b{font-size:22px;font-weight:800;margin-right:6px}
+.st-was{font-size:13.5px;color:var(--ink2);background:var(--bg);border-radius:10px;padding:6px 10px;margin-top:4px}
+.st-was i{font-style:normal;color:var(--muted)}
 /* анкета «Точка старта», урок 0.0 */
 body.intro-mode .start{display:none}
 .start .st-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:6px}
@@ -512,6 +526,31 @@ body.mapping #mapView{display:block}
             <button class="btn gold" id="stSave" type="button">Сохранить ответы</button>
             <button class="btn ghost" id="stCopy" type="button">Скопировать для проводника</button>
             <span class="hint" id="stHint">Ответы сохраняются в кабинете. Проводника Вы поставите в модуле 0.3: тогда скопируйте ответы этой кнопкой и отправьте ему, он положит их в Вашу базу</span>
+          </div>
+        </div>
+                <div class="block demo" id="demoCard" hidden>
+          <h3>Попробуйте: живой пример дашборда</h3>
+          <p class="st-sub">Нажимайте на воронки и шаги. Цифры условные, для тренировки</p>
+          <iframe src="files/5-2-dashbord-primer.html" title="Живой пример дашборда" loading="lazy"></iframe>
+        </div>
+        <div class="block start" id="ritmCard" hidden>
+          <div class="st-head">
+            <div><h3>Ритм недели</h3><p class="st-sub">Что делается само, что делает Claude и что остаётся Вам. Впишите, сколько часов в неделю уходит на каждую Вашу задачу, по факту</p></div>
+            <span class="st-mark" id="rtMark"></span>
+          </div>
+          <div id="rtForm"></div>
+          <div class="rt-sum" id="rtSum"></div>
+        </div>
+        <div class="block start" id="finishCard" hidden>
+          <div class="st-head">
+            <div><h3>Финиш</h3><p class="st-sub">Те же семь вопросов, что в «Точке старта». Под каждым вопросом Ваш ответ из начала пути</p></div>
+            <span class="st-mark" id="fnMark"></span>
+          </div>
+          <div id="fnForm"></div>
+          <div class="st-row">
+            <button class="btn gold" id="fnSave" type="button">Сохранить финиш</button>
+            <button class="btn ghost" id="fnCopy" type="button">Скопировать для проводника</button>
+            <span class="hint">Скопируйте и вставьте в чат с проводником: он положит «Финиш» в базу рядом со «Стартом» и вместе с ритмом недели</span>
           </div>
         </div>
         <div class="block"><h3 id="lMainH">Главное из модуля</h3><ul class="main" id="lMain"></ul></div>
@@ -849,40 +888,33 @@ const M = [
  {n:5,name:"Цифры и повторные продажи",out:"Цифры и повторная продажа",short:"Цифры и продажи",sticker:"chart",
   sub:"Видно, сколько людей пришло, откуда и сколько купило. И следующая продажа тем, кто уже купил",
   lessons:[
-   {id:"5.1",t:"Метки и цели",min:40,vmin:6,thing:"Видно, откуда пришла заявка",
-    why:"Метки и цели показывают, откуда пришёл человек и что он сделал: открыл материал, кликнул по продукту, оплатил",
+   {id:"5.1",t:"Метки и цели",min:30,vmin:2,thing:"Видно, откуда пришла заявка",
+    why:"Метки и цели показывают, откуда пришёл человек и что он сделал: открыл материал, нажал на продукт, оплатил",
     main:["У каждой ссылки метка источника", "У каждой продающей кнопки своя цель в Метрике", "Код целей ставит Claude, цели в Метрике заводите Вы по списку"],
-    words:[["Метка", "Пометка в ссылке, по которой видно источник"], ["Цель", "Действие на странице, которое считает Метрика"]],
-    task:"Загрузите скиллы блока 5 из материалов. Напишите проводнику «Делаем шаг 5.1» и заведите цели по списку",
+    words:[["Метка", "Хвостик в ссылке, по которому видно источник"], ["Цель", "Действие на странице, которое считает Метрика"]],
+    task:"Загрузите скиллы блока 5 из материалов. Напишите проводнику «Делаем модуль «Метки и цели»», заведите цели по его списку и проверьте на тесте",
     check:["У всех ссылок есть метки", "Цели заведены в Метрике", "Цели срабатывают на тесте"],
     mats:[{t:"Скиллы блока 5 одним архивом",h:"files/skills-blok-5.zip",ic:"ZIP"}]},
-   {id:"5.2",t:"Дашборд",min:40,vmin:6,thing:"Все цифры на одной странице",
+   {id:"5.2",t:"Дашборд",min:30,vmin:2,thing:"Все цифры на одной странице",
     why:"Одна страница, где видно, сколько людей вошло в воронку, сколько дошло, сколько купило и где они теряются",
     main:["Цифры только из ChatPlace, Метрики и сервиса оплаты", "Срезы: через 2–3 часа после публикации, каждый день, через 3 дня", "Каждый срез заканчивается одним действием на завтра"],
     words:[["Дашборд", "Страница с цифрами по каждой воронке"], ["Срез", "Цифры за период и вывод, что делать"]],
-    task:"Напишите проводнику «Делаем шаг 5.2» и попросите первый срез",
+    task:"Понажимайте живой пример под видео. Потом напишите проводнику «Делаем модуль «Дашборд»» и попросите первый срез",
     check:["Дашборд заведён в базе", "У каждой цифры есть источник", "Срез заканчивается действием на завтра"],
+    mats:[{t:"Живой пример дашборда",h:"files/5-2-dashbord-primer.html",ic:"ДЕМО"}]},
+   {id:"5.3",t:"После покупки",min:45,vmin:3,thing:"Путь клиента после покупки, кейс и следующая ступень",
+    why:"Купивший, который не дошёл до первого результата, не вернётся и не порекомендует. Первый результат даёт кейс, а результат и кейс открывают следующую продажу",
+    main:["Сообщения после оплаты: что делать сейчас, через день, напоминание тем, кто не начал, первый результат", "Кейс: было, что сделали, стало. Цифры по факту, с согласия клиента", "Следующую ступень предлагаем после первого результата, без давления"],
+    words:[["Онбординг", "Путь клиента от оплаты до первого результата"], ["Кейс", "История клиента: было, что сделали, стало"], ["Следующая ступень", "Продукт линейки для того, кто уже купил и дошёл до результата"]],
+    task:"Напишите проводнику «Делаем модуль «После покупки»». Подтвердите тексты сообщений, спросите у клиента согласие на кейс и заберите предложение следующей ступени",
+    check:["Сообщения после оплаты включены, есть напоминание тем, кто не начал", "Вопросы для кейса отправлены клиенту, согласие спрошено", "Предложение следующей ступени готово и приходит после первого результата"],
     mats:[]},
-   {id:"5.3",t:"Онбординг и первый результат",min:40,vmin:6,thing:"Путь клиента после покупки",
-    why:"Купивший, который не дошёл до первого результата, не вернётся и не порекомендует. Путь после покупки доводит его до первой вещи",
-    main:["Первое сообщение после оплаты говорит, что делать сейчас", "Напоминание тем, кто не начал", "Первый результат клиента видите и Вы"],
-    words:[["Онбординг", "Путь клиента от оплаты до первого результата"], ["Первый результат", "Вещь, которую клиент получает в первую неделю"]],
-    task:"Напишите проводнику «Делаем шаг 5.3» и включите сообщения после оплаты",
-    check:["Есть сообщение сразу после оплаты", "Есть напоминание тем, кто не начал", "Путь ведёт к первому результату из программы"],
-    mats:[]},
-   {id:"5.4",t:"Кейс и следующая продажа",min:40,vmin:6,thing:"Кейс и второй продукт",
-    why:"Кейс показывает новым людям, что у таких же получилось. Следующая ступень даёт купившему, куда идти дальше. Это самые дешёвые продажи",
-    main:["Кейс: было, что сделали, стало, с согласия клиента", "Кейс встаёт на страницу вместо обещаний", "Следующую ступень предлагаем после первого результата"],
-    words:[["Кейс", "История клиента: было, что сделали, стало"], ["Повторная продажа", "Следующая ступень линейки для того, кто уже купил"]],
-    task:"Напишите проводнику «Делаем шаг 5.4», соберите первый кейс и предложение следующей ступени",
-    check:["Кейс собран с согласия клиента", "Цифры в кейсе реальные", "Предложение следующей ступени готово"],
-    mats:[]},
-   {id:"5.5",t:"Ритм системы и точка финиша",min:30,vmin:6,thing:"Неделя по ритму и точка финиша по 7 вопросам анкеты",
+   {id:"5.4",t:"Ритм и финиш",min:30,vmin:2,thing:"Неделя по ритму и «Финиш» рядом со «Стартом»",
     why:"Видно, что система делает сама, что делаете Вы и сколько часов это занимает. И как всё изменилось с «Точки старта»",
-    main:["У каждой задачи недели стоит «система» или «Вы» и время", "Часы считаем с Ваших слов", "«Финиш» по тем же семи вопросам, что «Точка старта»"],
+    main:["У каждой задачи недели стоит «система», «Claude» или «Вы»", "Часы считаем с Ваших слов", "«Финиш» по тем же семи вопросам, что «Точка старта»"],
     words:[["Ритм", "Неделя по системе: что делается само, что делаете Вы"], ["Финиш", "Ответы на семь вопросов анкеты в конце пути"]],
-    task:"Напишите проводнику «Делаем шаг 5.5», назовите, сколько времени уходит на Ваши задачи, и соберите «Финиш»",
-    check:["Ритм недели заполнен", "Часы в неделю посчитаны", "«Финиш» лежит в базе рядом со «Стартом»"],
+    task:"Напишите проводнику «Делаем модуль «Ритм и финиш»». Заполните ритм недели и анкету «Финиш» под видео и выберите следующий шаг",
+    check:["Ритм недели заполнен, часы посчитаны", "Анкета «Финиш» заполнена и отправлена проводнику", "Следующий шаг выбран: запуск, новые слова или следующая ступень"],
     mats:[]}
   ]}
 ];
@@ -1061,6 +1093,7 @@ function openLesson(id){
   $("lVideo").textContent="Видео, "+vm+" "+plural(vm,"минута","минуты","минут");
   setVideo(l.video,l.poster,"sis_video_"+l.id.replace(/\./g,"_"));
   const z=l.id==="0.0"; $("startCard").hidden=!z; $("lRoute").hidden=!z; $("lTour").hidden=!z; if(z){drawStart(); renderRouteIn($("lRoute")); drawTour();}
+  $("demoCard").hidden=l.id!=="5.2"; const fz=l.id==="5.4"; $("ritmCard").hidden=!fz; $("finishCard").hidden=!fz; if(fz){drawRitm(); drawFinish();}
   $("lWatchTxt").textContent="Главное и задание ждут ниже";
   $("lMainH").textContent="Главное из модуля";
   const pdf="konspekt/"+l.id.replace(".","-")+".pdf";
@@ -1075,7 +1108,8 @@ function openLesson(id){
   const isDone=done.has(l.id);
   $("closeBtn").textContent=isDone?"Шаг закрыт ✓":"Шаг закрыт";
   if(!checks[l.id]) checks[l.id]=new Set(isDone?l.check.map((_,i)=>i):[]);
-  const AUTO=l.id==="0.0"?{0:[()=>!!start.at,"Отметится сам, когда сохраните анкету на 7 из 7"],1:[()=>!!route,"Отметится сам, когда выберете дорожку"]}:{};
+  const AUTO=l.id==="0.0"?{0:[()=>!!start.at,"Отметится сам, когда сохраните анкету на 7 из 7"],1:[()=>!!route,"Отметится сам, когда выберете дорожку"]}
+    :l.id==="5.4"?{0:[()=>rtFilled()===rtMine().length,"Отметится сам, когда впишете часы у всех Ваших задач"],1:[()=>!!finish.at,"Отметится сам, когда сохраните «Финиш» на 7 из 7"]}:{};
   const drawChecks=()=>{const c=checks[l.id];
     for(const i in AUTO){if(AUTO[i][0]()) c.add(+i); else if(!isDone) c.delete(+i);}
     const all=c.size===l.check.length;
@@ -1083,7 +1117,7 @@ function openLesson(id){
     $("lCheck").querySelectorAll("[data-ck]").forEach(b=>b.onclick=()=>{const i=+b.dataset.ck; if(AUTO[i]){toast(AUTO[i][1]);return;} c.has(i)?c.delete(i):c.add(i); drawChecks();});
     $("closeBtn").disabled=!isDone&&!all;
     $("closeHint").textContent=isDone?"Шаг закрыт. Можно вернуться к нему в любой момент":all?"Всё отмечено. Закрывайте шаг":"Отмечено "+c.size+" из "+l.check.length+". Отметьте все пункты, и шаг закроется";};
-  drawChecks();
+  drawChecks(); l._redraw=drawChecks;
   const ol=openLessons(); const ix=ol.findIndex(x=>x.id===id); const nx=ix<0?ol.find(x=>!done.has(x.id)):ol[ix+1];
   $("nextTitle").textContent = nx? nx.id+" "+nx.t : (ALL.some(x=>x.mod.open&&!ready(x))?"Следующие модули готовятся, ссылка придёт в бот":(M.find(m=>!m.open)?"Блок "+M.find(m=>!m.open).n+" откроется, когда закроете блок "+(M.find(m=>!m.open).n-1):"Путь пройден"));
   $("nextBtn").style.display = nx?"":"none";
@@ -1156,6 +1190,63 @@ $("stCopy").onclick=()=>{
 };
 function fallbackCopy(t,ok){const ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");ok();}catch(e){toast("Не получилось скопировать");}ta.remove();}
 
+/* блок 5: ритм недели (ключ hk-ritm) и финиш (ключ hk-finish), хранятся у ученика, как «Точка старта» */
+const RT=[
+ ["Выбор тем на неделю по сводке","y"],["Тексты, карусели, сценарии по плану","c"],["Съёмка или голос, публикация","y"],
+ ["Выдача по кодовому слову, прогрев, приём заявок","s"],["Ответы на заявки и в директе","y"],["Оплата и выдача доступа","s"],
+ ["Срез цифр и что отправляем завтра","c"],["Решение, что отправить базе","y"]];
+const WHO={s:"система",c:"Claude",y:"Вы"};
+const loadKV=(k,d)=>{try{const s=JSON.parse(localStorage.getItem(k)||"null"); return s||d;}catch(e){return d;}};
+const saveKV=(k,v)=>{const s=JSON.stringify(v); try{localStorage.setItem(k,s);}catch(e){} if(cloud){try{cloud.setItem(k,s,()=>{});}catch(e){}}};
+let ritm=loadKV("hk-ritm",{h:{}}), finish=loadKV("hk-finish",{a:{},at:null});
+if(cloud){try{cloud.getItems(["hk-ritm","hk-finish"],(e,v)=>{if(e||!v)return;
+  try{if(v["hk-ritm"]) ritm=JSON.parse(v["hk-ritm"]);}catch(x){} try{if(v["hk-finish"]) finish=JSON.parse(v["hk-finish"]);}catch(x){}
+  if(reading&&reading.id==="5.4"){drawRitm();drawFinish();}});}catch(e){}}
+const rtMine=()=>RT.map((r,i)=>[r,i]).filter(([r])=>r[1]==="y");
+const rtFilled=()=>rtMine().filter(([,i])=>String(ritm.h[i]??"").trim()!=="").length;
+const rtTotal=()=>rtMine().reduce((s,[,i])=>s+(parseFloat(String(ritm.h[i]||"").replace(",","."))||0),0);
+function drawRitm(){
+  $("rtForm").innerHTML=RT.map((r,i)=>`<div class="rt"><b>${r[0]}</b><span class="who ${r[1]}">${WHO[r[1]]}</span>${r[1]==="y"?`<label class="h">часов в неделю <input inputmode="decimal" maxlength="5" data-i="${i}" value="${esc(ritm.h[i]??"")}" placeholder="0"></label>`:""}</div>`).join("");
+  $("rtForm").querySelectorAll("input").forEach(el=>el.oninput=()=>{ritm.h[el.dataset.i]=el.value.replace(/[^\d.,]/g,""); saveKV("hk-ritm",ritm); drawRitmSum();});
+  drawRitmSum();
+}
+function drawRitmSum(){
+  const n=rtFilled(), all=rtMine().length, t=Math.round(rtTotal()*10)/10, was=(start.a.hours||"").trim();
+  $("rtMark").textContent=n?"заполнено "+n+" из "+all:"";
+  $("rtSum").innerHTML=`<b>${String(t).replace(".",",")} ч</b>в неделю на Ваши задачи`+(was?`<div class="st-was"><i>На старте Вы ответили, сколько часов готовы уделять системе:</i> ${esc(was)}</div>`:"");
+  if(reading&&reading.id==="5.4"&&reading._redraw) reading._redraw();
+}
+const fnFilled=()=>SQ.filter(q=>{const v=finish.a[q.k];return Array.isArray(v)?v.length:v&&String(v).trim();}).length;
+const ansText=v=>Array.isArray(v)?v.join(", "):(v||"").trim();
+function drawFinish(){
+  const a=finish.a;
+  $("fnForm").innerHTML=SQ.map((q,i)=>{
+    let f;
+    if(q.one||q.many){const opts=q.one||q.many, cur=a[q.k]||(q.many?[]:"");
+      f=`<div class="chips" role="group" aria-label="${esc(q.q)}">`+opts.map(o=>`<button type="button" class="chip ${(q.many?cur.includes(o):cur===o)?"on":""}" data-k="${q.k}" data-v="${esc(o)}">${o}</button>`).join("")+`</div>`;}
+    else f=q.area?`<textarea id="fn_${q.k}" data-k="${q.k}" maxlength="400" placeholder="${esc(q.ph)}">${esc(a[q.k]||"")}</textarea>`
+                 :`<input id="fn_${q.k}" data-k="${q.k}" maxlength="120" placeholder="${esc(q.ph)}" value="${esc(a[q.k]||"")}">`;
+    const was=ansText(start.a[q.k]);
+    return `<div class="st-q"><span class="n">${i+1}</span><label for="fn_${q.k}">${q.q}</label><div class="st-was"><i>На старте:</i> ${was?esc(was):"не заполнено"}</div>${f}</div>`;
+  }).join("");
+  $("fnForm").querySelectorAll("input,textarea").forEach(el=>el.oninput=()=>{finish.a[el.dataset.k]=el.value; saveKV("hk-finish",finish); drawFinishMark();});
+  $("fnForm").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{const q=SQ.find(x=>x.k===b.dataset.k), v=b.dataset.v;
+    if(q.one) finish.a[q.k]=finish.a[q.k]===v?"":v;
+    else{let c=(finish.a[q.k]||[]).slice(); if(c.includes(v)) c=c.filter(x=>x!==v); else c=v==="Ничего"?["Ничего"]:c.filter(x=>x!=="Ничего").concat(v); finish.a[q.k]=c;}
+    saveKV("hk-finish",finish); drawFinish();});
+  drawFinishMark();
+}
+function drawFinishMark(){const n=fnFilled(); $("fnMark").textContent=finish.at?"сохранено "+fmtDate(finish.at):n?"заполнено "+n+" из 7":"";}
+function finishText(){
+  const rows=SQ.map((q,i)=>(i+1)+". "+q.short+"\n   Старт: "+(ansText(start.a[q.k])||"нет ответа")+"\n   Финиш: "+(ansText(finish.a[q.k])||"нет ответа"));
+  const rt=rtMine().map(([r,i])=>"- "+r[0]+": "+(String(ritm.h[i]??"").trim()||"не указано")+" ч");
+  return "Проводник, это мой финиш. Сохрани его в базу знаний рядом с «Точкой старта», вместе с ритмом недели.\n\nФиниш · "+fmtDate(finish.at||new Date().toISOString())+"\n"+rows.join("\n")+"\n\nРитм недели, мои задачи:\n"+rt.join("\n")+"\nИтого: "+String(Math.round(rtTotal()*10)/10).replace(".",",")+" ч в неделю";
+}
+$("fnSave").onclick=()=>{const n=fnFilled(); if(n<7){toast("Ответьте на все 7 вопросов, сейчас "+n+" из 7");return;}
+  finish.at=new Date().toISOString(); saveKV("hk-finish",finish); drawFinishMark(); goal("sis_finish_form");
+  if(reading&&reading.id==="5.4"&&reading._redraw) reading._redraw(); toast("Финиш сохранён");};
+$("fnCopy").onclick=()=>{const t=finishText(), ok=()=>toast("Скопировано. Вставьте в чат с проводником в Claude");
+  try{navigator.clipboard.writeText(t).then(ok,()=>fallbackCopy(t,ok));}catch(e){fallbackCopy(t,ok);}};
 // «Найдите в кабинете»: кнопка ведёт на главную и подсвечивает то, о чём говорится в видео
 const TOUR=[["passport","Паспорт первой воронки",()=>$("passBar").closest(".panel")],["shelf","Шесть папок «Ваш путь»",()=>$("shelf")],["continue","«Вы сейчас здесь» и «Продолжить»",()=>$("continueBtn")],["ring","Кольцо: сколько пройдено",()=>$("ringArc").closest("svg")||$("ringArc")],["help","«Если застряли»",()=>$("annaRow").closest(".panel")]];
 const ARR=`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 3l5 5-5 5"/></svg>`;
