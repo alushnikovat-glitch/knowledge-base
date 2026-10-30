@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Инструкция · модуль 3.1</title><meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600;800&family=Marck+Script&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7f0;--paper:#fffdf9;--ink:#14171a;--ink2:#3b3f44;--muted:#948e84;--line:#ebe3d3;--teal:#5fb8ae;--teal-soft:#dff1ee;--gold:#e8b45f;--gold-soft:#f8ead0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Onest',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;background-image:radial-gradient(900px 520px at 85% -10%,rgba(232,180,95,.22),transparent 60%)}
+.wrap{max-width:760px;margin:0 auto;padding:28px 16px 60px}
+.top{font-size:14px;font-weight:600}.top i{font-family:'Marck Script',cursive;font-style:normal;color:#b0894f;font-size:17px;margin-left:6px;font-weight:400}
+.num{font-family:'Marck Script',cursive;color:#c9933e;font-size:22px;margin-top:28px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.lead{font-size:16px;color:var(--ink2);margin-top:10px}
+.need{margin-top:18px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:14px 18px;font-size:15px}
+.need b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.step{margin-top:26px;background:var(--paper);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.step .h{display:flex;gap:14px;align-items:flex-start;padding:18px 20px 12px}
+.step .n{flex:0 0 34px;height:34px;border-radius:50%;background:var(--gold);color:var(--ink);font-weight:800;display:grid;place-items:center}
+.step h2{font-size:18px;font-weight:800;line-height:1.3}
+.step .t{font-size:15.5px;color:var(--ink2);margin-top:4px}
+.step img{display:block;width:100%;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
+.step .ok,.step .no{padding:10px 20px;font-size:14.5px}
+.step .ok{background:var(--teal-soft)}.step .ok b{color:#2f6f68}
+.step .no{background:#fbf3e4}.step .no b{color:#9a6a1f}
+.razdel{margin-top:40px;font-size:22px;font-weight:800;letter-spacing:-.01em}
+.rt{font-size:15.5px;color:var(--ink2);margin-top:6px}
+.pr{margin:4px 20px 16px;padding:14px 16px;background:#f6f1e6;border:1px solid var(--line);border-radius:14px;font-family:'Onest',system-ui,sans-serif;font-size:14.5px;line-height:1.5;white-space:pre-wrap;color:var(--ink)}
+.foot{margin-top:36px;font-size:12.5px;color:var(--muted)}
+@media print{.step{break-inside:avoid}}
+</style></head><body><div class="wrap">
+<div class="top">Хочу как у Анастасии<i>инструкция</i></div>
+<div class="num">Модуль 3.1</div>
+<h1>Подключаем ChatPlace: по шагам</h1>
+<p class="lead">Всё, что в видео показано быстро, здесь по шагам и со скринами. Идите сверху вниз, на каждом шаге сверяйтесь с картинкой.</p>
+<div class="need"><b>Понадобится</b>Аккаунт в ChatPlace, своя соцсеть, Telegram-бот (его создают в @BotFather, ChatPlace подскажет) и проект в Claude с проводником.</div>
+<div class="step"><div class="h"><div class="n">1</div><div><h2>Выберите тариф ChatPlace</h2><div class="t">ChatPlace платный, для начала хватает тарифа Pro (1). Выберите его и нажмите «Продолжить с Pro» (2). Цену проверьте на сайте сервиса в день оплаты.</div></div></div><img src="3-1-instrukciya-chatplace/shag-01.jpg" alt="Выберите тариф ChatPlace" loading="lazy"><div class="ok"><b>Должны увидеть:</b> тариф активен, в настройках нет плашки «Подписка закончилась».</div></div><div class="step"><div class="h"><div class="n">2</div><div><h2>Подключите соцсеть и Telegram-бот</h2><div class="t">Слева внизу откройте «Настройки», значок шестерёнки. В блоке «Аккаунты» нажмите плюс (1) и подключите по очереди свою соцсеть и Telegram-бот, ChatPlace проведёт по шагам. Подключённые аккаунты появятся в списке (2).</div></div></div><img src="3-1-instrukciya-chatplace/shag-02.jpg" alt="Подключите соцсеть и Telegram-бот" loading="lazy"><div class="ok"><b>Должны увидеть:</b> в блоке «Аккаунты» стоят Ваша соцсеть и Ваш бот.</div></div><div class="step"><div class="h"><div class="n">3</div><div><h2>Скопируйте адрес коннектора и создайте ключ</h2><div class="t">В тех же настройках откройте «MCP-коннектор» (1). Скопируйте адрес коннектора кнопкой рядом с ним (2). Ниже нажмите «Создать API-ключ» (3) и сохраните ключ: он понадобится на шаге 5.</div></div></div><img src="3-1-instrukciya-chatplace/shag-03.jpg" alt="Скопируйте адрес коннектора и создайте ключ" loading="lazy"><div class="ok"><b>Должны увидеть:</b> адрес https://mcp.chatplace.io/mcp скопирован, ключ сохранён у Вас.</div><div class="no"><b>Не получилось:</b> ключ никому не пересылайте и не вставляйте в чат. Он нужен только в окне коннектора в Claude.</div></div><div class="step"><div class="h"><div class="n">4</div><div><h2>Откройте коннекторы в Claude</h2><div class="t">В Claude нажмите на своё имя внизу слева и откройте «Настройки», затем «Коннекторы» (1). Справа сверху нажмите «Добавить» (2) и выберите «Добавить пользовательский коннектор» (3).</div></div></div><img src="3-1-instrukciya-chatplace/shag-04.jpg" alt="Откройте коннекторы в Claude" loading="lazy"><div class="ok"><b>Должны увидеть:</b> открылось окно «Добавить пользовательский коннектор».</div></div><div class="step"><div class="h"><div class="n">5</div><div><h2>Впишите имя и адрес</h2><div class="t">В поле «Имя» напишите ChatPlace (1). В поле адреса вставьте скопированный адрес коннектора (2). Нажмите «Продолжить» (3). Откроется окно ChatPlace: вставьте туда API-ключ из шага 3 и подтвердите.</div></div></div><img src="3-1-instrukciya-chatplace/shag-05.jpg" alt="Впишите имя и адрес" loading="lazy"><div class="ok"><b>Должны увидеть:</b> ChatPlace появился в списке коннекторов с галочкой.</div><div class="no"><b>Не получилось:</b> на бесплатном тарифе Claude свой коннектор один. Если место занято, удалите лишний коннектор в том же списке.</div></div><div class="step"><div class="h"><div class="n">6</div><div><h2>Проверьте связь через проводника</h2><div class="t">В чате проекта напишите проводнику «Делаем модуль «Подключаем ChatPlace»». Он попросит Claude показать список Ваших автоматизаций.</div></div></div><div class="ok"><b>Должны увидеть:</b> Claude показал список автоматизаций. Пустой список тоже подходит: связь есть, воронки соберём дальше.</div><div class="no"><b>Не получилось:</b> Claude пишет, что не видит ChatPlace? Под полем ввода нажмите плюс, «Коннекторы» и включите ChatPlace для этого чата.</div></div>
+<div class="foot">Скрины сняты в октябре 2026 года. Если интерфейс ChatPlace или Claude поменялся и кнопка называется иначе, напишите проводнику «я застрял» и пришлите скрин.</div>
+</div></body></html>
